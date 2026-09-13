@@ -292,6 +292,13 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self.last_fps_calc = time.perf_counter()
         self.current_fps = 0.0
 
+        # Frecuencia de muestreo (Sample Rate)
+        self.last_fs_calc_time = time.perf_counter()
+        self.last_fs_sample_count = 0
+        self.current_fs_hz = 0.0
+        self.current_dt_us = 0.0
+        self.current_fs_text = "-- S/s"
+
         # Construir Interfaz
         self._build_ui()
         self.refresh_ports()
@@ -501,6 +508,40 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         """)
         top_layout.addWidget(self.status_label, 1)
 
+        fs_card = QtWidgets.QFrame()
+        fs_card.setFixedWidth(190)
+        fs_card.setStyleSheet("""
+            QFrame {
+                background-color: #21252f;
+                border: 1px solid #2e3543;
+                border-radius: 6px;
+                padding: 2px 6px;
+            }
+        """)
+        fs_card_layout = QtWidgets.QHBoxLayout(fs_card)
+        fs_card_layout.setContentsMargins(6, 2, 6, 2)
+        fs_card_layout.setSpacing(6)
+
+        lbl_fs = QtWidgets.QLabel("FS MUESTREO")
+        lbl_fs.setStyleSheet("font-weight: 700; font-size: 10px; color: #8f98a8; background: transparent;")
+        fs_card_layout.addWidget(lbl_fs)
+
+        self.lbl_top_fs = QtWidgets.QLabel("-- S/s")
+        self.lbl_top_fs.setFixedWidth(90)
+        self.lbl_top_fs.setAlignment(QtCore.Qt.AlignCenter)
+        self.lbl_top_fs.setToolTip("Frecuencia de muestreo en tiempo real")
+        self.lbl_top_fs.setStyleSheet("""
+            background-color: #171920;
+            border: 1px solid #00e5ff;
+            border-radius: 4px;
+            padding: 2px 4px;
+            font-weight: bold;
+            font-size: 11px;
+            color: #00e5ff;
+        """)
+        fs_card_layout.addWidget(self.lbl_top_fs)
+        top_layout.addWidget(fs_card)
+
         left_layout.addWidget(top_group)
 
         # 2. Pantalla de Osciloscopio (PyQtGraph)
@@ -579,7 +620,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         card_vpp, self.val_vpp = self._create_meas_card("V P-P", "#ffd600")
         card_vrms, self.val_vrms = self._create_meas_card("V RMS", "#00e5ff")
         card_vavg, self.val_vavg = self._create_meas_card("V MEDIA", "#b388ff")
-        card_freq, self.val_freq = self._create_meas_card("FRECUENCIA", "#ff9100")
+        card_freq, self.val_freq = self._create_meas_card("F SEÑAL", "#ff9100")
 
         meas_layout.addWidget(card_vmax)
         meas_layout.addWidget(card_vmin)
@@ -1487,6 +1528,61 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self.trigger_edge_armed = False
         self.trigger_initialized = False
         self.frozen_frame = None
+        self.last_fs_calc_time = time.perf_counter()
+        self.last_fs_sample_count = 0
+        self.current_fs_hz = 0.0
+        self.current_dt_us = 0.0
+        self.lbl_top_fs.setText("-- S/s")
+
+    def _calculate_sample_rate(self) -> Tuple[float, float, str]:
+        """Calcula la frecuencia de muestreo Fs y el periodo medio entre muestras (dt_us)."""
+        tiempo_deque = self.series.get("Tiempo (us)")
+        n = len(tiempo_deque) if tiempo_deque else 0
+
+        now = time.perf_counter()
+        fs_hz = 0.0
+        dt_us = 0.0
+
+        # Método 1: A partir de los timestamps físicos de microsegundos enviados por hardware
+        if tiempo_deque and n >= 10:
+            N = min(500, n)
+            t_start = tiempo_deque[-N]
+            t_end = tiempo_deque[-1]
+            delta_t = t_end - t_start
+            if delta_t > 0:
+                dt_us = delta_t / (N - 1)
+                if dt_us > 0:
+                    fs_hz = 1_000_000.0 / dt_us
+                    self.current_fs_hz = fs_hz
+                    self.current_dt_us = dt_us
+
+        # Método 2: Fallback por tasa de llegada de muestras en el PC
+        if fs_hz <= 0.0:
+            dt_pc = now - self.last_fs_calc_time
+            if dt_pc >= 0.5:
+                delta_samples = self.sample_counter - self.last_fs_sample_count
+                if delta_samples > 0:
+                    fs_hz = delta_samples / dt_pc
+                    dt_us = (1_000_000.0 / fs_hz) if fs_hz > 0 else 0.0
+                    self.current_fs_hz = fs_hz
+                    self.current_dt_us = dt_us
+                self.last_fs_calc_time = now
+                self.last_fs_sample_count = self.sample_counter
+            else:
+                fs_hz = self.current_fs_hz
+                dt_us = self.current_dt_us
+
+        if fs_hz > 0.0:
+            if fs_hz >= 1_000_000.0:
+                text = f"{fs_hz / 1_000_000.0:.2f} MS/s"
+            elif fs_hz >= 1000.0:
+                text = f"{fs_hz / 1000.0:.2f} kS/s"
+            else:
+                text = f"{fs_hz:.1f} S/s"
+        else:
+            text = "-- S/s"
+
+        return fs_hz, dt_us, text
 
     @QtCore.pyqtSlot(list)
     def handle_batch(self, batch: List[Dict[str, float]]):
@@ -1745,6 +1841,18 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
 
             self.val_freq.setText(freq_text)
 
+        # ---------------------------------------------------------
+        # ACTUALIZACIÓN DE FRECUENCIA DE MUESTREO (Fs y dt)
+        # ---------------------------------------------------------
+        fs_hz, dt_us, fs_text = self._calculate_sample_rate()
+        self.lbl_top_fs.setText(fs_text)
+        if dt_us > 0:
+            if dt_us < 1000.0:
+                tip = f"Frecuencia de Muestreo: {fs_hz:.1f} Hz\nPeriodo entre muestras: {dt_us:.1f} µs"
+            else:
+                tip = f"Frecuencia de Muestreo: {fs_hz:.1f} Hz\nPeriodo entre muestras: {dt_us/1000.0:.2f} ms"
+            self.lbl_top_fs.setToolTip(tip)
+
         # Medición de FPS
         self.render_count += 1
         now_calc = time.perf_counter()
@@ -1755,7 +1863,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             mode_str = "RUN" if self.is_running else "STOP"
             self.plot_widget.setTitle(
                 f"OSCILOSCOPIO DIGITAL [{mode_str}] | Muestras: {self.sample_counter} | "
-                f"Ventana: {self.h_scale} | FPS: {self.current_fps:.1f}"
+                f"Ventana: {self.h_scale} | Fs: {fs_text} | FPS: {self.current_fps:.1f}"
             )
 
     def _update_curve_items(self, active_columns: List[str]):

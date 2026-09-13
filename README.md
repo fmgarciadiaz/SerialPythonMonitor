@@ -34,7 +34,12 @@ Un osciloscopio digital y monitor serial de alto rendimiento en tiempo real desa
     - **$V_{\text{P-P}}$**: Tensión pico a pico ($V_{max} - V_{min}$).
     - **$V_{\text{RMS}}$**: Valor eficaz cuadrático medio real ($V_{rms} = \sqrt{\frac{1}{N} \sum V_i^2}$).
     - **$V_{\text{MEDIA}}$**: Valor medio / componente continua ($V_{avg} = \frac{1}{N} \sum V_i$).
-    - **$\text{FRECUENCIA}$**: Estimación física de frecuencia en $\text{Hz}$ / $\text{kHz}$ utilizando timestamps reales en microsegundos o cruces por cero.
+    - **$F_{\text{SEÑAL}}$**: Frecuencia de la forma de onda en $\text{Hz}$ / $\text{kHz}$.
+
+- ⏱️ **Monitor de Frecuencia de Muestreo ($F_s$) en Barra Superior**:
+  - Medición instantánea en tarjeta fija de la barra superior con cálculo de período inter-muestras ($\Delta t$ en $\mu\text{s}$ o $\text{ms}$).
+  - Ancho rígido de display para prevenir oscilaciones de layout o desplazamientos visuales durante la actualización de dígitos.
+  - Compatible con timestamps de microsegundos de Arduino (`micros()`) y con fallback por tasa de transferencia serial en el host.
 
 - 🔌 **Conectividad Inteligente**:
   - Detección y filtrado automático de puertos seriales USB (`Arduino Uno WiFi R4`, `CH340`, `FTDI`, `CP210x`, etc.).
