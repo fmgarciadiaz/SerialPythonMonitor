@@ -54,7 +54,8 @@ Un osciloscopio digital y monitor serial de alto rendimiento en tiempo real desa
 
 ```text
 .
-├── SerialMonitorAppQt.py   # Aplicación principal GUI (Osciloscopio PyQt5 + PyQtGraph)
+├── SerialMonitorAppQt_V2.py# Aplicación V2 Dual-Channel (V_IN, V_OUT, ADC_IN, ADC_OUT)
+├── SerialMonitorAppQt.py   # Aplicación principal monocanal (Osciloscopio PyQt5 + PyQtGraph)
 ├── SerialMonitorApp.py     # Versión alternativa liviana con Tkinter / Matplotlib
 ├── SerialMonitor.py        # Script en consola para captura y exportación a pandas
 ├── SerialMonitor.ipynb     # Jupyter Notebook interactivo para análisis de datos
@@ -109,25 +110,34 @@ python SerialMonitorAppQt.py
 
 El parser interpreta automáticamente flujos CSV con diferentes estructuras:
 
-1. **4 Columnas (Estándar de Laboratorio con Estado y Tiempo)**:
+1. **7 Columnas (V2 - Dual Channel Entrada / Salida con Estado y Tiempos)**:
+   ```text
+   estado,muestra,tiempo_us,ADC_IN,V_IN,ADC_OUT,V_OUT
+   ON,1,1024,1023,1.25,2048,2.50
+   ON,2,1540,1030,1.26,2060,2.51
+   OFF,3,2050,0,0.00,1024,1.25
+   ```
+   > 💡 *Soporta visualización simultánea de entrada y salida (`V_IN` y `V_OUT`), selección de fuente de trigger por cualquiera de los canales y selector de mediciones.*
+
+2. **4 Columnas (V1 - Estándar Monocanal con Estado y Tiempo)**:
    ```text
    estado,muestra,tiempo_us,adc
    ON,1,1024,3100
    ON,2,1540,3250
    OFF,3,2050,1200
    ```
-2. **3 Columnas (Muestra, Tiempo, ADC)**:
+3. **3 Columnas (Muestra, Tiempo, ADC)**:
    ```text
    100,50200,2048
    101,50700,2080
    ```
-3. **1 Columna (Valor directo de ADC o Tensión)**:
+4. **1 Columna (Valor directo de ADC o Tensión)**:
    ```text
    2048
    2100
    1950
    ```
-4. **N Columnas (Multi-canal)**:
+5. **N Columnas (Multi-canal)**:
    Cualquier cantidad de columnas numéricas separadas por coma son asignadas dinámicamente como canales activables en la interfaz.
 
 ---
