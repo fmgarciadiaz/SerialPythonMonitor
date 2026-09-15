@@ -15,7 +15,7 @@ pg.setConfigOption("background", "#121418")  # Fondo oscuro elegante de laborato
 pg.setConfigOption("foreground", "#ffffff")  # Texto y números en blanco puro
 pg.setConfigOption("antialias", False)
 
-BAUD_DEFAULT = 921600
+BAUD_DEFAULT = 2000000
 VISIBLE_SAMPLES_DEFAULT = 9000
 VISIBLE_SAMPLES_MIN = 50
 VISIBLE_SAMPLES_MAX = 20000
@@ -278,7 +278,7 @@ class SerialWorker(QtCore.QObject):
 class SerialMonitorWindow(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Serial Monitor V2 - Osciloscopio Digital Doble Canal (Qt)")
+        self.setWindowTitle("Serial Monitor V3 - Osciloscopio Digital Doble Canal + Eje Tiempo (Qt)")
         self.resize(1320, 820)
 
         # Buffers circulares
@@ -352,6 +352,9 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self.current_fs_hz = 0.0
         self.current_dt_us = 0.0
         self.current_fs_text = "-- S/s"
+
+        # Modo de eje X: False = índice de muestra (defecto), True = tiempo real (µs)
+        self.x_axis_time_mode = False
 
         # Construir Interfaz
         self._build_ui()
@@ -609,6 +612,35 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         fs_card_layout.addWidget(self.lbl_top_fs)
         top_layout.addWidget(fs_card)
 
+        # Botón toggle Eje X: Muestras ↔ Tiempo µs (ancho fijo para no desplazar layout)
+        self.btn_xaxis_toggle = QtWidgets.QPushButton("⧖ EJE: MUESTRAS")
+        self.btn_xaxis_toggle.setCheckable(True)
+        self.btn_xaxis_toggle.setChecked(False)
+        self.btn_xaxis_toggle.setFixedWidth(140)
+        self.btn_xaxis_toggle.setToolTip(
+            "Alterna el eje X entre índice de muestra y tiempo real (µs)\n"
+            "Requiere datos en la columna 'Tiempo (us)'"
+        )
+        self.btn_xaxis_toggle.setStyleSheet("""
+            QPushButton {
+                background-color: #21252f;
+                border: 1px solid #323946;
+                border-radius: 6px;
+                padding: 5px 8px;
+                color: #8f98a8;
+                font-weight: bold;
+                font-size: 11px;
+            }
+            QPushButton:checked {
+                background-color: rgba(0, 229, 255, 0.12);
+                border: 1px solid #00e5ff;
+                color: #00e5ff;
+            }
+            QPushButton:hover { background-color: #2a2f3c; }
+        """)
+        self.btn_xaxis_toggle.toggled.connect(self._on_xaxis_toggle)
+        top_layout.addWidget(self.btn_xaxis_toggle)
+
         left_layout.addWidget(top_group)
 
         # 2. Pantalla de Osciloscopio (PyQtGraph)
@@ -616,7 +648,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self.plot_widget.setMenuEnabled(False)
         self.plot_widget.setMouseEnabled(x=True, y=True)
         self.plot_widget.showGrid(x=True, y=True, alpha=0.35)
-        self.plot_widget.setTitle("OSCILOSCOPIO DIGITAL V2 - DOBLE TRAZA [V_IN / V_OUT]")
+        self.plot_widget.setTitle("OSCILOSCOPIO DIGITAL V3 - DOBLE TRAZA [V_IN / V_OUT]")
         self.plot_widget.getAxis("bottom").setTextPen("#ffffff")
         self.plot_widget.getAxis("left").setTextPen("#ffffff")
         self.plot_widget.setLabel("bottom", "Muestras en ventana", color="#ffffff")
@@ -1191,6 +1223,14 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             }}
         """)
 
+    def _on_xaxis_toggle(self, checked: bool):
+        """Alterna el eje X entre índice de muestra y tiempo real (µs)."""
+        self.x_axis_time_mode = checked
+        if checked:
+            self.btn_xaxis_toggle.setText("⧗ EJE: TIEMPO µs")
+        else:
+            self.btn_xaxis_toggle.setText("⧖ EJE: MUESTRAS")
+
     def on_headers_detected(self, headers: List[str]):
         new_cols = [h for h in headers if h not in self.known_columns]
         if not new_cols:
@@ -1656,6 +1696,45 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self.current_dt_us = 0.0
         self.lbl_top_fs.setText("-- S/s")
 
+    @staticmethod
+    def _apply_step_hold(
+        x_arr: List[float],
+        y_arr: List[float],
+        gap_factor: float = 3.0,
+    ) -> Tuple[List[float], List[float]]:
+        """
+        Zero-Order Hold: ante un hueco de tiempo > gap_factor * dt_mediano,
+        inserta un punto 'hold' con el último valor Y justo antes del siguiente
+        punto para que la línea se mantenga horizontal en vez de trazar diagonal.
+        """
+        n = len(x_arr)
+        if n < 2:
+            return list(x_arr), list(y_arr)
+
+        # Calcular dt mediano (robusto contra outliers)
+        dts = [x_arr[i + 1] - x_arr[i] for i in range(n - 1)]
+        sorted_dts = sorted(dts)
+        median_dt = sorted_dts[len(sorted_dts) // 2]
+        threshold = median_dt * gap_factor
+
+        if threshold <= 0:
+            return list(x_arr), list(y_arr)
+
+        new_x: List[float] = [x_arr[0]]
+        new_y: List[float] = [y_arr[0]]
+
+        for i in range(1, n):
+            gap = x_arr[i] - x_arr[i - 1]
+            if gap > threshold:
+                # Insertar punto hold: tiempo justo antes del siguiente sample
+                eps = min(gap * 0.001, median_dt * 0.1)
+                new_x.append(x_arr[i] - eps)
+                new_y.append(y_arr[i - 1])   # sostener el último valor
+            new_x.append(x_arr[i])
+            new_y.append(y_arr[i])
+
+        return new_x, new_y
+
     def _calculate_sample_rate(self) -> Tuple[float, float, str]:
         """Calcula la frecuencia de muestreo Fs y el periodo medio entre muestras (dt_us)."""
         tiempo_deque = self.series.get("Tiempo (us)")
@@ -1753,7 +1832,27 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             start_pos = max(0, end_pos - w)
 
             count = end_pos - start_pos
-            x_plot = list(range(count))
+
+            # ---- EJE X: MUESTRAS o TIEMPO REAL (µs) ----
+            if self.x_axis_time_mode:
+                t_deque = self.series.get("Tiempo (us)")
+                if t_deque and len(t_deque) >= end_pos and count > 0:
+                    t_slice = list(itertools.islice(t_deque, start_pos, end_pos))
+                    t0 = t_slice[0]
+                    x_plot = [t - t0 for t in t_slice]
+                    x_end = x_plot[-1] if x_plot else w
+                    self.plot_widget.setXRange(0, x_end, padding=0.02)
+                    self.plot_widget.setLabel("bottom", "Tiempo relativo en ventana (µs)", color="#ffffff")
+                else:
+                    # Sin timestamps: fallback a muestras silenciosamente
+                    x_plot = list(range(count))
+                    self.plot_widget.setXRange(0, w, padding=0.0)
+                    self.plot_widget.setLabel("bottom", "Muestras en ventana (sin timestamps)", color="#ffffff")
+            else:
+                x_plot = list(range(count))
+                self.plot_widget.setXRange(0, w, padding=0.0)
+                self.plot_widget.setLabel("bottom", "Muestras en ventana", color="#ffffff")
+
             y_slices = {}
             for col in active_columns:
                 series_deque = self.series.get(col)
@@ -1762,8 +1861,6 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
                 else:
                     y_slices[col] = []
 
-            self.plot_widget.setXRange(0, w, padding=0.0)
-            self.plot_widget.setLabel("bottom", "Muestras en ventana", color="#ffffff")
             self.trigger_t_marker.setVisible(False)
 
         else:
@@ -1772,8 +1869,15 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             pre_samples = max(0, min(w - 1, int(w * 0.10) - shift))
             post_samples = w - pre_samples
 
-            x_plot = list(range(-pre_samples, post_samples))
-            self.plot_widget.setXRange(-pre_samples, post_samples, padding=0.0)
+            # ---- EJE X en modo TRIGGER: Muestras relativas o µs relativos al T=0 ----
+            if self.x_axis_time_mode and self.current_dt_us > 0:
+                dt = self.current_dt_us
+                x_plot = [i * dt for i in range(-pre_samples, post_samples)]
+                self.plot_widget.setXRange(x_plot[0], x_plot[-1], padding=0.0)
+            else:
+                x_plot = list(range(-pre_samples, post_samples))
+                self.plot_widget.setXRange(-pre_samples, post_samples, padding=0.0)
+
             self.trigger_t_marker.setValue(0)
             self.trigger_t_marker.setVisible(True)
 
@@ -1844,7 +1948,10 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
                         color: #00e676;
                     }
                 """)
-                self.plot_widget.setLabel("bottom", "Muestras relativas al Trigger (T=0)", color="#ffffff")
+                if self.x_axis_time_mode and self.current_dt_us > 0:
+                    self.plot_widget.setLabel("bottom", "Tiempo relativo al Trigger (µs, T=0)", color="#ffffff")
+                else:
+                    self.plot_widget.setLabel("bottom", "Muestras relativas al Trigger (T=0)", color="#ffffff")
 
                 if self.single_shot_armed:
                     self.single_shot_armed = False
@@ -1900,7 +2007,10 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
                         color: #ffd600;
                     }
                 """)
-                self.plot_widget.setLabel("bottom", "Muestras en ventana (Buscando Trigger)", color="#ffffff")
+                if self.x_axis_time_mode:
+                    self.plot_widget.setLabel("bottom", "Tiempo en ventana (µs, Buscando Trigger)", color="#ffffff")
+                else:
+                    self.plot_widget.setLabel("bottom", "Muestras en ventana (Buscando Trigger)", color="#ffffff")
 
         # Dibujar curvas en el gráfico
         if x_plot:
