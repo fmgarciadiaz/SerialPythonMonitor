@@ -410,6 +410,10 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         # Modo de eje X: False = índice de muestra (defecto), True = tiempo real (µs)
         self.x_axis_time_mode = False
 
+        # Configuración de representación de trazo y corte automático por pausas/gaps
+        self.trace_mode = "Escalón"  # "Escalón" o "Línea"
+        self.auto_gap_cut = True     # Si True, corta el trazo cuando hay pausas o silencios
+
         # Construir Interfaz
         self._build_ui()
         self.refresh_ports()
@@ -694,6 +698,66 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         """)
         self.btn_xaxis_toggle.toggled.connect(self._on_xaxis_toggle)
         top_layout.addWidget(self.btn_xaxis_toggle)
+
+        # Tarjeta Trazo (Línea / Escalón) y Corte Automático de Silencios
+        trace_card = QtWidgets.QFrame()
+        trace_card.setStyleSheet("""
+            QFrame {
+                background-color: #21252f;
+                border: 1px solid #2e3543;
+                border-radius: 6px;
+                padding: 2px 6px;
+            }
+        """)
+        trace_card_layout = QtWidgets.QHBoxLayout(trace_card)
+        trace_card_layout.setContentsMargins(6, 2, 6, 2)
+        trace_card_layout.setSpacing(6)
+
+        lbl_trace = QtWidgets.QLabel("TRAZO")
+        lbl_trace.setStyleSheet("font-weight: 700; font-size: 10px; color: #8f98a8; background: transparent;")
+        trace_card_layout.addWidget(lbl_trace)
+
+        self.trace_mode_combo = QtWidgets.QComboBox()
+        self.trace_mode_combo.addItems(["Escalón (Step)", "Línea (Linear)"])
+        self.trace_mode_combo.setCurrentText("Escalón (Step)")
+        self.trace_mode_combo.setToolTip(
+            "Tipo de representación del trazo:\n"
+            "• Escalón (Step / ZOH): Mantiene el nivel y evita diagonales falsas\n"
+            "• Línea (Linear): Conexión directa punto a punto"
+        )
+        self.trace_mode_combo.setStyleSheet("""
+            QComboBox {
+                background-color: #171920;
+                border: 1px solid #3a4150;
+                color: #00e5ff;
+                font-weight: bold;
+                font-size: 11px;
+                padding: 2px 4px;
+            }
+        """)
+        self.trace_mode_combo.currentTextChanged.connect(self._on_trace_mode_changed)
+        trace_card_layout.addWidget(self.trace_mode_combo)
+
+        self.chk_auto_gap = QtWidgets.QCheckBox("Corte Auto")
+        self.chk_auto_gap.setChecked(True)
+        self.chk_auto_gap.setToolTip(
+            "Corte automático de silencios:\n"
+            "Interrumpe la traza si se detecta un salto o pausa en el tiempo\n"
+            "para no unir eventos desconectados con diagonales o líneas continuas."
+        )
+        self.chk_auto_gap.setStyleSheet("""
+            QCheckBox {
+                font-size: 10px;
+                font-weight: bold;
+                color: #ffd600;
+                background: transparent;
+                spacing: 4px;
+            }
+        """)
+        self.chk_auto_gap.stateChanged.connect(self._on_auto_gap_changed)
+        trace_card_layout.addWidget(self.chk_auto_gap)
+
+        top_layout.addWidget(trace_card)
 
         left_layout.addWidget(top_group)
 
@@ -1284,6 +1348,84 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             self.btn_xaxis_toggle.setText("⧗ EJE: TIEMPO µs")
         else:
             self.btn_xaxis_toggle.setText("⧖ EJE: MUESTRAS")
+
+    def _on_trace_mode_changed(self, text: str):
+        """Cambia el modo de trazo entre Escalón (Step) y Línea (Linear)."""
+        if "Línea" in text:
+            self.trace_mode = "Línea"
+        else:
+            self.trace_mode = "Escalón"
+
+    def _on_auto_gap_changed(self, state: int):
+        """Activa o desactiva el corte automático por silencios/gaps temporales."""
+        self.auto_gap_cut = bool(state == QtCore.Qt.Checked)
+
+    def _prepare_trace_data(self, x_data: List[float], y_data: List[float]) -> Tuple[List[float], List[float]]:
+        """Prepara las coordenadas X e Y según el modo de trazo (Escalón/Línea) y corte por silencios."""
+        n = len(x_data)
+        if n < 2 or len(y_data) != n:
+            return x_data, y_data
+
+        is_step = (self.trace_mode == "Escalón")
+        cut_gaps = self.auto_gap_cut
+
+        # Umbral para detección de silencios/pausas (gaps temporales)
+        if self.x_axis_time_mode and self.current_dt_us > 0:
+            gap_threshold = max(3.0 * self.current_dt_us, 1500.0)
+            nominal_dt = self.current_dt_us
+        elif self.x_axis_time_mode:
+            gap_threshold = 2000.0
+            nominal_dt = 0.0
+        else:
+            gap_threshold = 2.0  # en modo índice de muestra, si salta más de 1 muestra
+            nominal_dt = 1.0
+
+        if not is_step and not cut_gaps:
+            return x_data, y_data
+
+        x_out = [x_data[0]]
+        y_out = [y_data[0]]
+        nan_val = float("nan")
+
+        if is_step:
+            for i in range(1, n):
+                x_prev = x_data[i - 1]
+                x_curr = x_data[i]
+                y_prev = y_data[i - 1]
+                y_curr = y_data[i]
+                dx = x_curr - x_prev
+
+                if cut_gaps and dx > gap_threshold:
+                    # Corte por silencio: sostenemos el nivel anterior por 1 período nominal
+                    # y luego interrumpimos con NaN para no cruzar el silencio con falsas diagonales
+                    hold_end = x_prev + (nominal_dt if nominal_dt > 0 else 0.0)
+                    if hold_end < x_curr:
+                        x_out.append(hold_end)
+                        y_out.append(y_prev)
+                    x_out.append(hold_end)
+                    y_out.append(nan_val)
+                    x_out.append(x_curr)
+                    y_out.append(y_curr)
+                else:
+                    # Escalón estándar (Zero-Order Hold):
+                    # El valor anterior se sostiene hasta x_curr, donde salta al nuevo valor
+                    x_out.extend((x_curr, x_curr))
+                    y_out.extend((y_prev, y_curr))
+        else:
+            # Modo Línea con corte automático por gaps
+            for i in range(1, n):
+                x_prev = x_data[i - 1]
+                x_curr = x_data[i]
+                y_curr = y_data[i]
+                dx = x_curr - x_prev
+
+                if cut_gaps and dx > gap_threshold:
+                    x_out.append(x_prev)
+                    y_out.append(nan_val)
+                x_out.append(x_curr)
+                y_out.append(y_curr)
+
+        return x_out, y_out
 
     def on_headers_detected(self, headers: List[str]):
         new_cols = [h for h in headers if h not in self.known_columns]
@@ -2072,7 +2214,8 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
                 if col in active_columns:
                     y_vals = y_slices.get(col, [])
                     if len(y_vals) == len(x_plot):
-                        line.setData(x_plot, y_vals)
+                        xp, yp = self._prepare_trace_data(x_plot, y_vals)
+                        line.setData(xp, yp, connect="finite")
                         line.setVisible(True)
                     else:
                         line.setVisible(False)

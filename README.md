@@ -4,31 +4,40 @@
 [![GUI PyQt5](https://img.shields.io/badge/GUI-PyQt5%20%2B%20PyQtGraph-green.svg)](https://www.riverbankcomputing.com/software/pyqt/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Un osciloscopio digital y monitor serial de alto rendimiento en tiempo real desarrollado en **Python**, **PyQt5** y **PyQtGraph**. Diseñado para adquirir, visualizar y analizar señales analógicas y digitales provenientes de microcontroladores (**Arduino, ESP32, STM32, Raspberry Pi Pico**) a velocidades de hasta **921.600+ baudios** sin pérdida de paquetes ni retraso de acumulación.
+Un osciloscopio digital y monitor serial de alto rendimiento en tiempo real desarrollado en **Python**, **PyQt5** y **PyQtGraph**. Diseñado para adquirir, visualizar y analizar señales analógicas y digitales provenientes de microcontroladores (**Arduino, ESP32, STM32, Raspberry Pi Pico**) a velocidades de hasta **2.000.000+ baudios** sin pérdida de paquetes ni retraso de acumulación.
+
+<p align="center">
+  <img src="assets/demo_screenshot.png" alt="Serial Python Monitor & Digital Oscilloscope Demo" width="100%" />
+</p>
 
 ---
 
 ## 🌟 Características Principales
 
-- 🚀 **Adquisición Serial de Cero Latencia**:
-  - Lectura en bloques binarios directos (`read(in_waiting)`) desacoplada en un hilo de trabajo (`QThread`).
-  - Capaz de procesar más de **500.000 líneas por segundo** sin congelar la interfaz ni acumular retardo en el buffer del sistema operativo.
+- 🚀 **Adquisición Serial de Cero Latencia y Protocolo Binario**:
+  - Lectura directa en bloques de alta velocidad desacoplada en un hilo de trabajo (`QThread`).
+  - Soporte de protocolo binario empaquetado (`DATA` frame con timestamps en $\mu\text{s}$ y canales ADC de 10/12 bits) y compatibilidad con flujos de texto/CSV.
+
+- 📈 **Control de Trazo y Anti-Diagonales Falsas**:
+  - **Modo Escalón (`Step / ZOH`)**: Retención de orden cero para visualizar con fidelidad el muestreo digital sin generar pendientes diagonales artificiales.
+  - **Modo Línea (`Linear`)**: Conexión lineal clásica punto a punto.
+  - **Corte Automático por Silencios (`Corte Auto`)**: Interrumpe limpiamente el trazo si el microcontrolador entra en pausa o hay saltos temporales, evitando unir eventos desconectados.
 
 - 🎛️ **Panel Frontal de Osciloscopio Digital**:
   - **Controles Rotativos (`QDial`)**:
-    - **Horizontal**: Escala de tiempo / muestras visibles (50 a 20.000 muestras, por defecto 9.000 smp) y desplazamiento de posición ($H\text{-}Pos$).
+    - **Horizontal**: Escala de tiempo / muestras visibles (50 a 20.000 muestras) y desplazamiento de posición ($H\text{-}Pos$).
     - **Vertical**: Escala de amplitud de tensión ($V/div$) y desplazamiento de offset ($V\text{-}Pos$).
-    - **Trigger**: Nivel de disparo con perilla y arrastre directo de la línea indicadora en el gráfico.
+    - **Trigger**: Nivel de disparo con perilla interactiva y arrastre directo en pantalla.
   - **Botón Auto-Set**: Restablece instantáneamente las escalas a los valores estándar de visualización.
 
 - 🔒 **Motor de Trigger de Precisión**:
-  - **Modos de Adquisición**: `Auto`, `Normal` y `⚡ SINGLE SHOT` (captura única con parada automática `STOP`).
+  - **Modos de Adquisición**: `Auto`, `Normal` y `⚡ SINGLE SHOT` (captura única con congelamiento automático `STOP`).
   - **Tipos de Flanco**: Ascendente (↑) y Descendente (↓) con histéresis anti-ruido (*Schmitt Trigger*).
   - **Fase Fija y Estable ($T=0$)**: La señal se ancla en el punto de disparo relativo para mantener la onda completamente estática y congelada en pantalla como un osciloscopio de laboratorio.
   - **Botón `50% (Auto)`**: Calcula en tiempo real el punto medio de la señal ($V_{mid} = \frac{V_{max} + V_{min}}{2}$) y sitúa el nivel de disparo con un solo clic.
 
 - 📊 **Barra de Mediciones en Vivo**:
-  - Cálculo automático en tiempo real sobre la ventana visible:
+  - Cálculo automático en tiempo real sobre la ventana visible con selector de canal activo:
     - **$V_{\text{MAX}}$**: Tensión máxima observada.
     - **$V_{\text{MIN}}$**: Tensión mínima observada.
     - **$V_{\text{P-P}}$**: Tensión pico a pico ($V_{max} - V_{min}$).
@@ -37,16 +46,15 @@ Un osciloscopio digital y monitor serial de alto rendimiento en tiempo real desa
     - **$F_{\text{SEÑAL}}$**: Frecuencia de la forma de onda en $\text{Hz}$ / $\text{kHz}$.
 
 - ⏱️ **Monitor de Frecuencia de Muestreo ($F_s$) en Barra Superior**:
-  - Medición instantánea en tarjeta fija de la barra superior con cálculo de período inter-muestras ($\Delta t$ en $\mu\text{s}$ o $\text{ms}$).
-  - Ancho rígido de display para prevenir oscilaciones de layout o desplazamientos visuales durante la actualización de dígitos.
-  - Compatible con timestamps de microsegundos de Arduino (`micros()`) y con fallback por tasa de transferencia serial en el host.
+  - Medición instantánea en tarjeta fija con cálculo de período inter-muestras ($\Delta t$ en $\mu\text{s}$ o $\text{ms}$).
+  - Conmutador de visualización del eje horizontal: **Muestras** $\leftrightarrow$ **Tiempo real ($\mu\text{s}$)**.
 
 - 🔌 **Conectividad Inteligente**:
   - Detección y filtrado automático de puertos seriales USB (`Arduino Uno WiFi R4`, `CH340`, `FTDI`, `CP210x`, etc.).
-  - Soporte de baudrates configurables (`9600`, `115200`, `921600`, etc.).
+  - Soporte de baudrates configurables hasta **2.000.000 baudios**.
 
 - 🧪 **Modo Demo Integrado**:
-  - Generador de señal de carga y descarga $RC$ incorporado para probar todas las funciones (escalas, trigger, mediciones) sin necesidad de conectar hardware físico.
+  - Generador de señal de 2 canales ($V_{IN}$ cuadrada y $V_{OUT}$ respuesta transitoria de circuito $RC$) para probar todas las funciones sin hardware físico.
 
 ---
 
@@ -54,13 +62,17 @@ Un osciloscopio digital y monitor serial de alto rendimiento en tiempo real desa
 
 ```text
 .
-├── SerialMonitorAppQt_V2.py# Aplicación V2 Dual-Channel (V_IN, V_OUT, ADC_IN, ADC_OUT)
-├── SerialMonitorAppQt.py   # Aplicación principal monocanal (Osciloscopio PyQt5 + PyQtGraph)
-├── SerialMonitorApp.py     # Versión alternativa liviana con Tkinter / Matplotlib
-├── SerialMonitor.py        # Script en consola para captura y exportación a pandas
-├── SerialMonitor.ipynb     # Jupyter Notebook interactivo para análisis de datos
-├── requirements.txt        # Dependencias de Python necesarias
-└── README.md               # Documentación del proyecto
+├── SerialMonitorAppQt_V4.py  # Versión más avanzada con protocolo binario y control de trazo Step/Linear
+├── SerialMonitorAppQt_V3.py  # Versión con parser CSV dinámico y detección de encabezados
+├── SerialMonitorAppQt_V2.py  # Versión Dual-Channel (V_IN, V_OUT, ADC_IN, ADC_OUT)
+├── SerialMonitorAppQt.py     # Versión base monocanal
+├── SerialMonitorApp.py       # Versión liviana con Tkinter / Matplotlib
+├── SerialMonitor.py          # Script en consola para captura y exportación a pandas
+├── SerialMonitor.ipynb       # Jupyter Notebook interactivo para análisis de datos
+├── assets/
+│   └── demo_screenshot.png   # Captura de pantalla de la aplicación en modo demo
+├── requirements.txt          # Dependencias de Python necesarias
+└── README.md                 # Documentación del proyecto
 ```
 
 ---
