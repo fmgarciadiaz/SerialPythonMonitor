@@ -489,15 +489,18 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
                 color: #e0e0e0;
             }
             QCheckBox::indicator {
-                width: 16px;
-                height: 16px;
-                border-radius: 4px;
+                width: 14px;
+                height: 14px;
+                border-radius: 3px;
                 border: 1px solid #3a4252;
                 background-color: #171920;
             }
+            QCheckBox::indicator:hover {
+                border: 1px solid #4f586c;
+            }
             QCheckBox::indicator:checked {
                 background-color: #00e5ff;
-                border-color: #00e5ff;
+                border: 1px solid #3a4252;
             }
         """)
 
@@ -752,6 +755,20 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
                 color: #ffd600;
                 background: transparent;
                 spacing: 4px;
+            }
+            QCheckBox::indicator {
+                width: 13px;
+                height: 13px;
+                border-radius: 3px;
+                border: 1px solid #3a4252;
+                background-color: #171920;
+            }
+            QCheckBox::indicator:hover {
+                border: 1px solid #4f586c;
+            }
+            QCheckBox::indicator:checked {
+                background-color: #ffd600;
+                border: 1px solid #3a4252;
             }
         """)
         self.chk_auto_gap.stateChanged.connect(self._on_auto_gap_changed)
@@ -1072,7 +1089,29 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         act_layout.setSpacing(8)
 
         self.trigger_checkbox = QtWidgets.QCheckBox("ACTIVAR TRIGGER")
-        self.trigger_checkbox.setStyleSheet("font-weight: 800; font-size: 11px; color: #ff9100; background: transparent;")
+        self.trigger_checkbox.setStyleSheet("""
+            QCheckBox {
+                font-weight: 800;
+                font-size: 11px;
+                color: #ff9100;
+                background: transparent;
+                spacing: 6px;
+            }
+            QCheckBox::indicator {
+                width: 14px;
+                height: 14px;
+                border-radius: 3px;
+                border: 1px solid #3a4252;
+                background-color: #171920;
+            }
+            QCheckBox::indicator:hover {
+                border: 1px solid #4f586c;
+            }
+            QCheckBox::indicator:checked {
+                background-color: #ff9100;
+                border: 1px solid #3a4252;
+            }
+        """)
         self.trigger_checkbox.stateChanged.connect(self.configure_trigger)
         act_layout.addWidget(self.trigger_checkbox)
 
@@ -1277,7 +1316,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             checkbox.setStyleSheet(f"""
                 QCheckBox {{
                     background-color: #21252f;
-                    border: 1px solid {color if is_checked else '#323946'};
+                    border: 1px solid #323946;
                     border-radius: 6px;
                     padding: 6px 12px;
                     color: {color};
@@ -1286,18 +1325,21 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
                 }}
                 QCheckBox:hover {{
                     background-color: #2a2f3c;
-                    border-color: {color};
+                    border-color: #4f586c;
                 }}
                 QCheckBox::indicator {{
                     width: 14px;
                     height: 14px;
                     border-radius: 3px;
-                    border: 1px solid {'#323946' if not is_checked else color};
+                    border: 1px solid #3a4252;
                     background-color: #171920;
+                }}
+                QCheckBox::indicator:hover {{
+                    border: 1px solid #4f586c;
                 }}
                 QCheckBox::indicator:checked {{
                     background-color: {color};
-                    border-color: {color};
+                    border: 1px solid #3a4252;
                 }}
             """)
             checkbox.stateChanged.connect(self._on_column_toggled)
@@ -1317,7 +1359,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         checkbox.setStyleSheet(f"""
             QCheckBox {{
                 background-color: #21252f;
-                border: 1px solid {color if is_checked else '#323946'};
+                border: 1px solid #323946;
                 border-radius: 6px;
                 padding: 6px 12px;
                 color: {color};
@@ -1326,18 +1368,21 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             }}
             QCheckBox:hover {{
                 background-color: #2a2f3c;
-                border-color: {color};
+                border-color: #4f586c;
             }}
             QCheckBox::indicator {{
                 width: 14px;
                 height: 14px;
                 border-radius: 3px;
-                border: 1px solid {color if is_checked else '#323946'};
+                border: 1px solid #3a4252;
                 background-color: #171920;
+            }}
+            QCheckBox::indicator:hover {{
+                border: 1px solid #4f586c;
             }}
             QCheckBox::indicator:checked {{
                 background-color: {color};
-                border-color: {color};
+                border: 1px solid #3a4252;
             }}
         """)
 
