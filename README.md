@@ -1,5 +1,13 @@
 # ⚡ Serial Python Monitor & Digital Oscilloscope
 
+Estado actual y descripción de archivos: [INVENTARIO.md](INVENTARIO.md).
+La aplicación de uso actual es `SerialMonitorAppQt_V5.py`; guarda sus CSV en
+`capturas/`. Las herramientas de investigación están en `diagnosticos/` y sus
+resultados en `capturas/diagnosticos/`. Las rutas de salida no dependen del
+directorio desde el que se ejecute el programa.
+
+El resto de este README conserva documentación de versiones anteriores.
+
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![GUI PyQt5](https://img.shields.io/badge/GUI-PyQt5%20%2B%20PyQtGraph-green.svg)](https://www.riverbankcomputing.com/software/pyqt/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -186,4 +194,3 @@ void loop() {
 ## 📄 Licencia
 
 Este proyecto está bajo la Licencia **MIT**. Consulta el archivo `LICENSE` para más detalles.
-

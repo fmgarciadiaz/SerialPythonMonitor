@@ -1,8 +1,11 @@
+import csv
 import itertools
 import math
 import time
+from datetime import datetime
+from pathlib import Path
 from collections import deque
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, TextIO, Tuple
 
 import serial
 from serial.tools import list_ports
@@ -26,6 +29,8 @@ VISIBLE_SAMPLES_MIN = 50
 VISIBLE_SAMPLES_MAX = 20000
 MAX_BUFFER_SAMPLES = 110000  # Buffer de 100.000 muestras en memoria
 RENDER_INTERVAL_MS = 20      # ~40 FPS
+RECORD_MAX_SECONDS = 30.0
+RECORD_FLUSH_SECONDS = 1.0
 
 
 
@@ -344,7 +349,7 @@ class SerialWorker(QtCore.QObject):
 class SerialMonitorWindow(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Serial Monitor V3 - Osciloscopio Digital Doble Canal + Eje Tiempo (Qt)")
+        self.setWindowTitle("Serial Monitor V5 - Osciloscopio Digital Doble Canal + Grabación CSV (Qt)")
         self.resize(1320, 820)
 
         # Buffers circulares
@@ -406,6 +411,18 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self.demo_timer: Optional[QtCore.QTimer] = None
         self.start_time = time.perf_counter()
         self.demo_v_out_prev = 0.0
+
+        # Grabación CSV por lotes para minimizar el coste de E/S.
+        self.recording = False
+        self.record_start_time = 0.0
+        self.record_last_flush_time = 0.0
+        self.record_file: Optional[TextIO] = None
+        self.record_writer = None
+        self.record_filename = ""
+        self.record_rows = 0
+        self.record_timer = QtCore.QTimer(self)
+        self.record_timer.setInterval(100)
+        self.record_timer.timeout.connect(self._update_recording_status)
 
         # Rendimiento y FPS
         self.render_count = 0
@@ -842,7 +859,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self.plot_widget.setMenuEnabled(False)
         self.plot_widget.setMouseEnabled(x=True, y=True)
         self.plot_widget.showGrid(x=True, y=True, alpha=0.35)
-        self.plot_widget.setTitle("OSCILOSCOPIO DIGITAL V3 - DOBLE TRAZA [V_IN / V_OUT]")
+        self.plot_widget.setTitle("OSCILOSCOPIO DIGITAL V5 - DOBLE TRAZA [V_IN / V_OUT]")
         self.plot_widget.getAxis("bottom").setTextPen("#ffffff")
         self.plot_widget.getAxis("left").setTextPen("#ffffff")
         self.plot_widget.setLabel("bottom", "Muestras en ventana", color="#ffffff")
@@ -1000,6 +1017,26 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self.single_btn.clicked.connect(self.arm_single_shot)
         btn_row.addWidget(self.single_btn)
         acq_layout.addLayout(btn_row)
+
+        record_row = QtWidgets.QHBoxLayout()
+        self.record_btn = QtWidgets.QPushButton("● RECORD")
+        self.record_btn.setFixedHeight(36)
+        self.record_btn.setToolTip("Iniciar grabación CSV, máximo 30 segundos")
+        self.record_btn.setStyleSheet("QPushButton {background:#7f0000;border:1px solid #ff5252;color:white;font-weight:bold;} QPushButton:hover {background:#b71c1c;} QPushButton:disabled {background:#1e222b;color:#555e6d;}")
+        self.record_btn.clicked.connect(self.start_recording)
+        record_row.addWidget(self.record_btn)
+        self.stop_record_btn = QtWidgets.QPushButton("■ STOP REC")
+        self.stop_record_btn.setFixedHeight(36)
+        self.stop_record_btn.setEnabled(False)
+        self.stop_record_btn.setToolTip("Detener y cerrar el archivo CSV")
+        self.stop_record_btn.setStyleSheet("QPushButton:enabled {background:#b71c1c;border:1px solid #ff5252;color:white;font-weight:bold;} QPushButton:disabled {background:#1e222b;color:#555e6d;}")
+        self.stop_record_btn.clicked.connect(self.stop_recording)
+        record_row.addWidget(self.stop_record_btn)
+        acq_layout.addLayout(record_row)
+        self.record_status_label = QtWidgets.QLabel("CSV: listo | máximo 30.0 s")
+        self.record_status_label.setAlignment(QtCore.Qt.AlignCenter)
+        self.record_status_label.setStyleSheet("background:#171920;border:1px solid #323946;padding:4px;color:#8f98a8;font-weight:bold;")
+        acq_layout.addWidget(self.record_status_label)
 
         mode_row = QtWidgets.QHBoxLayout()
         mode_label = QtWidgets.QLabel("Modo:")
@@ -1790,6 +1827,99 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             """)
 
     # -------------------------------------------------------------
+    # GRABACIÓN CSV
+    # -------------------------------------------------------------
+    def _create_log_filename(self) -> Path:
+        capture_dir = Path(__file__).resolve().parent / "capturas"
+        capture_dir.mkdir(parents=True, exist_ok=True)
+        base = datetime.now().strftime("log_%Y%m%d_%H%M%S")
+        number = 1
+        while True:
+            candidate = capture_dir / f"{base}_{number:03d}.csv"
+            if not candidate.exists():
+                return candidate
+            number += 1
+
+    def start_recording(self):
+        if self.recording:
+            return
+        if self.serial_worker is None and not self.demo_mode:
+            QtWidgets.QMessageBox.warning(self, "Grabación CSV", "Conecta el puerto serial o inicia Demo antes de grabar.")
+            return
+        try:
+            path = self._create_log_filename()
+            self.record_file = path.open("w", encoding="utf-8", newline="", buffering=1024 * 1024)
+            self.record_writer = csv.writer(self.record_file, delimiter="\t")
+            self.record_writer.writerow(["Muestra", "Tiempo_us", "ADC_IN", "V_IN", "ADC_OUT", "V_OUT"])
+            self.record_filename = str(path)
+            self.record_rows = 0
+            self.record_start_time = time.perf_counter()
+            self.record_last_flush_time = self.record_start_time
+            self.recording = True
+            self.record_btn.setEnabled(False)
+            self.stop_record_btn.setEnabled(True)
+            self.record_timer.start()
+            self._update_recording_status()
+        except Exception as exc:
+            self._close_record_file()
+            QtWidgets.QMessageBox.critical(self, "Error de grabación", f"No se pudo crear el CSV:\n{exc}")
+
+    def _write_record_batch(self, batch: List[Dict[str, float]]):
+        if not self.recording or self.record_writer is None:
+            return
+        if time.perf_counter() - self.record_start_time >= RECORD_MAX_SECONDS:
+            self.stop_recording(auto=True)
+            return
+        try:
+            rows = [[s.get("Muestra", ""), s.get("Tiempo (us)", ""), s.get("ADC_IN", ""),
+                     s.get("V_IN", ""), s.get("ADC_OUT", ""), s.get("V_OUT", "")] for s in batch]
+            self.record_writer.writerows(rows)
+            self.record_rows += len(rows)
+            now = time.perf_counter()
+            if now - self.record_last_flush_time >= RECORD_FLUSH_SECONDS:
+                self.record_file.flush()
+                self.record_last_flush_time = now
+        except Exception as exc:
+            self.stop_recording(error_message=str(exc))
+
+    def _update_recording_status(self):
+        if not self.recording:
+            return
+        elapsed = min(time.perf_counter() - self.record_start_time, RECORD_MAX_SECONDS)
+        self.record_status_label.setText(f"● REC {elapsed:04.1f}/30.0 s | {self.record_rows:,} filas")
+        self.record_status_label.setStyleSheet("background:rgba(255,82,82,0.15);border:1px solid #ff5252;padding:4px;color:#ff5252;font-weight:bold;")
+        if elapsed >= RECORD_MAX_SECONDS:
+            self.stop_recording(auto=True)
+
+    def _close_record_file(self):
+        if self.record_file is not None:
+            try:
+                self.record_file.flush()
+                self.record_file.close()
+            except Exception:
+                pass
+        self.record_file = None
+        self.record_writer = None
+
+    def stop_recording(self, checked=False, auto=False, error_message=None):
+        was_recording = self.recording
+        self.recording = False
+        self.record_timer.stop()
+        self._close_record_file()
+        self.record_btn.setEnabled(True)
+        self.stop_record_btn.setEnabled(False)
+        filename = Path(self.record_filename).name if self.record_filename else ""
+        if error_message:
+            self.record_status_label.setText(f"Error CSV: {error_message}")
+            self.record_status_label.setStyleSheet("color:#ff5252;font-weight:bold;")
+            if was_recording:
+                QtWidgets.QMessageBox.critical(self, "Error de grabación", f"La grabación se detuvo:\n{error_message}")
+        elif was_recording:
+            reason = "límite de 30 s" if auto else "detenida por usuario"
+            self.record_status_label.setText(f"CSV guardado: {filename} | {self.record_rows:,} filas | {reason}")
+            self.record_status_label.setStyleSheet("color:#00e676;font-weight:bold;")
+
+    # -------------------------------------------------------------
     # CONEXIÓN SERIAL Y MODO DEMO
     # -------------------------------------------------------------
     def refresh_ports(self):
@@ -1976,6 +2106,8 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self.handle_batch(batch)
 
     def stop_input(self):
+        if self.recording:
+            self.stop_recording()
         self.demo_mode = False
         if self.demo_timer is not None and self.demo_timer.isActive():
             self.demo_timer.stop()
@@ -2115,6 +2247,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         if not batch:
             return
 
+        self._write_record_batch(batch)
         for sample in batch:
             self.sample_counter += 1
             idx = self.sample_counter
@@ -2424,7 +2557,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             self.last_fps_calc = now_calc
             mode_str = "RUN" if self.is_running else "STOP"
             self.plot_widget.setTitle(
-                f"OSCILOSCOPIO DIGITAL V2 [{mode_str}] | Muestras: {self.sample_counter} | "
+                f"OSCILOSCOPIO DIGITAL V5 [{mode_str}] | Muestras: {self.sample_counter} | "
                 f"Ventana: {self.h_scale} | Fs: {fs_text} | FPS: {self.current_fps:.1f}"
             )
 
@@ -2440,6 +2573,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self.selection_dirty = False
 
     def closeEvent(self, event):
+        self.stop_recording()
         self.render_timer.stop()
         self.stop_input()
         event.accept()
@@ -2455,4 +2589,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
