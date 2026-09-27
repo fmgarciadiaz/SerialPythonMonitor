@@ -5,12 +5,13 @@ Actualizado: 26 de septiembre de 2026.
 ## Qué usar actualmente
 
 - **Firmware Q:** `sketch.ino`, con sincronización inicial DMA corregida.
-- **Monitor PC:** `SerialMonitorAppQt_V5.py`, con recepción binaria y grabación CSV.
+- **Monitor PC para probar:** `SerialMonitorAppQt_V6.py`, con desplazamiento suavizado y objetivo de unos 60 FPS. Validación visual con hardware pendiente.
+- **Monitor PC estable anterior:** `SerialMonitorAppQt_V5.py`, conservado sin cambios.
 - **Capturas normales:** `capturas/`.
 - **Herramientas de diagnóstico:** `diagnosticos/`.
 - **Resultados de diagnóstico:** `capturas/diagnosticos/`.
 
-Los números V2–V5 son los nombres históricos de los programas, no versiones
+Los números V2–V6 son los nombres históricos de los programas, no versiones
 publicadas con un esquema semántico. Las versiones anteriores se conservan en la
 raíz. No ejecutar varias aplicaciones sobre el mismo puerto serial.
 
@@ -19,7 +20,10 @@ raíz. No ejecutar varias aplicaciones sobre el mismo puerto serial.
 | Ruta | Contenido y estado |
 |---|---|
 | `sketch.ino` | Firmware normal UNO Q. ADC dual de 14 bits a 10 kHz; UART a 1 Mbaud; paquetes de 512 pares; dos nodos DMA de 2048 pares. Espera la transición real nodo 0 → nodo 1 antes de la primera entrega. Sin parada de diagnóstico. |
-| `SerialMonitorAppQt_V5.py` | Monitor vigente PyQt5/PyQtGraph. Parser binario dinámico, dos canales, trigger, ejes muestras/tiempo y grabación tabulada de hasta 30 segundos. Crea `capturas/` automáticamente y guarda allí. |
+| `SerialMonitorAppQt_V6.py` | Basado en V5: temporizador preciso de 16 ms y posición visual suavizada en Roll en vivo (H-Pos = 0), con constante de 100 ms. Bordes suavizados, reducción visual por píxel conservando extremos y cortes, y barra superior en grilla con botones iguales. Conserva la adquisición; las capturas CSV nuevas usan comas y punto decimal. |
+| `tests/test_v6_roll.py` | Pruebas sin Qt del desplazamiento, límites del buffer y conservación de adquisición, grabación y preparación de trazos respecto de V5. |
+| `tests/test_v6_display.py` | Pruebas con NumPy de conservación de picos, orden, escalones y cortes durante la reducción visual. |
+| `SerialMonitorAppQt_V5.py` | Monitor estable anterior PyQt5/PyQtGraph. Parser binario dinámico, dos canales, trigger, ejes muestras/tiempo y grabación tabulada de hasta 30 segundos. Crea `capturas/` automáticamente y guarda allí. |
 | `SerialMonitorAppQt_V4.py` | Versión anterior con parser binario y control de trazo. Conservada como referencia; usar V5 para las capturas actuales. |
 | `SerialMonitorAppQt_V3.py` | Versión histórica con recepción textual/CSV y columnas dinámicas. No usar para el flujo binario actual. |
 | `SerialMonitorAppQt_V2.py` | Versión histórica de dos canales sobre texto/CSV. |
@@ -27,7 +31,7 @@ raíz. No ejecutar varias aplicaciones sobre el mismo puerto serial.
 | `SerialMonitorApp.py` | Monitor histórico con Tkinter y Matplotlib, recepción textual. |
 | `SerialMonitor.py` | Script histórico por celdas para adquisición, análisis y exportación con pandas. No es el receptor binario vigente. |
 | `SerialMonitor.ipynb` | Notebook histórico de adquisición y análisis interactivo. |
-| `diagnosticos/analizar_captura.py` | Analiza seis columnas: índices, timestamps y posibles outliers ADC. Ver limitaciones debajo. Recibe la ruta del archivo por argumento. |
+| `diagnosticos/analizar_captura.py` | Analiza seis columnas separadas por comas, tabs o espacios: índices, timestamps y posibles outliers ADC. Ver limitaciones debajo. Recibe la ruta del archivo por argumento. |
 | `diagnosticos/recibir_diagnostico.py` | Recibe el stream del R4, guarda `.bin` y extrae el informe `.txt` del sketch de diagnóstico. Crea `capturas/diagnosticos/` automáticamente. |
 | `diagnosticos/DebugRTRXread.py` | Receptor experimental histórico, fijado en 1000 muestras por paquete y ADC de 12 bits. No sirve tal cual para la configuración actual de 512 muestras y 14 bits. |
 | `diagnosticos/diagnostico_dma/diagnostico_dma.ino` | Firmware instrumentado `startup_sync_v2`. Registra destinos/contadores DMA y tiempos de copia/envío; detiene adquisición ante anomalía temporal, escritura corta o plazo de unos 15 segundos. |

@@ -1,7 +1,40 @@
 # ⚡ Serial Python Monitor & Digital Oscilloscope
 
 Estado actual y descripción de archivos: [INVENTARIO.md](INVENTARIO.md).
-La aplicación de uso actual es `SerialMonitorAppQt_V5.py`; guarda sus CSV en
+La nueva versión para probar es `SerialMonitorAppQt_V6.py`, con desplazamiento
+suavizado en modo continuo y refresco objetivo de unos 60 FPS. Ejecutar con
+`python SerialMonitorAppQt_V6.py` en el entorno con las dependencias instaladas.
+El suavizado agrega un pequeño retraso visual (constante de 100 ms) al seguir
+los lotes recibidos; no cambia las muestras ni el CSV. Se aplica al seguimiento
+en vivo con H-Pos en cero; el trigger y la consulta del historial conservan su
+comportamiento. La fluidez real queda pendiente de comprobar con hardware.
+
+La V6 también suaviza los bordes del trazo y, cuando hay muchos puntos por
+píxel, dibuja el primero, el último, el mínimo y el máximo de cada grupo,
+respetando el orden y los cortes por silencios. Al ampliar se recupera todo el
+detalle. Esta reducción afecta sólo al dibujo; las mediciones y capturas usan
+las muestras completas. Ayuda con la saturación visual, pero no corrige un
+eventual aliasing ya presente en la adquisición. Los botones superiores tienen
+igual ancho y alto y los controles se distribuyen en una grilla.
+RECORD y STOP REC tienen la misma altura que RUN y SINGLE. El selector serial
+muestra el nombre de hardware informado por USB junto al puerto (por ejemplo,
+UNO WiFi R4 o UNO Q), con el texto completo en el desplegable y al pasar el
+puntero. Si no hay identificación disponible, lo indica sin inferir el modelo.
+Al actualizar la lista se conserva el puerto seleccionado si sigue disponible.
+
+Validación: diez pruebas automatizadas (`python -m unittest discover -s tests`),
+apertura y renderizado Qt sin pantalla, buffer lleno, modos muestras/tiempo,
+trigger, STOP y anchos de botones al redimensionar. Para las pruebas se requiere
+NumPy, ya incluido en `requirements.txt`. La apariencia en movimiento con el
+equipo conectado sigue requiriendo comprobación visual.
+
+La versión estable anterior se conserva intacta en `SerialMonitorAppQt_V5.py`.
+Las capturas nuevas de V6 usan comas como separador y punto decimal.
+`diagnosticos/analizar_captura.py` acepta tanto ese formato como los tabs o
+espacios de capturas anteriores. `recibir_diagnostico.py` conserva el stream
+binario y el informe de firmware originales; no procesa CSV.
+
+Ambas versiones guardan sus CSV en
 `capturas/`. Las herramientas de investigación están en `diagnosticos/` y sus
 resultados en `capturas/diagnosticos/`. Las rutas de salida no dependen del
 directorio desde el que se ejecute el programa.

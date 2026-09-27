@@ -2,6 +2,7 @@
 """
 Analiza una captura de muestras del UNO Q / R4.
 
+Acepta CSV separado por comas y capturas anteriores con tabs o espacios.
 Formato esperado por línea:
     sample_index  timestamp_us  adc_in  volts_in  adc_out  volts_out
 
@@ -18,6 +19,7 @@ Opcional:
 """
 
 import argparse
+import csv
 import math
 import statistics
 from collections import Counter
@@ -28,13 +30,20 @@ def read_file(path):
     rows = []
     bad_lines = []
 
-    with open(path, "r", encoding="utf-8", errors="replace") as f:
+    with open(path, "r", encoding="utf-8-sig", errors="replace") as f:
         for lineno, line in enumerate(f, 1):
             s = line.strip()
             if not s or s.startswith("#"):
                 continue
 
-            parts = s.replace(",", ".").split()
+            # Tabs/espacios antiguos también admitían coma decimal.
+            if "\t" in s or ("," not in s) or (len(s.split()) >= 6 and not any(value.endswith(",") for value in s.split())):
+                parts = [value.replace(",", ".") for value in s.split()]
+            else:
+                parts = next(csv.reader([s], skipinitialspace=True))
+            if [value.strip() for value in parts] == [
+                    "Muestra", "Tiempo_us", "ADC_IN", "V_IN", "ADC_OUT", "V_OUT"]:
+                continue
             if len(parts) < 6:
                 bad_lines.append((lineno, line.rstrip(), "menos de 6 columnas"))
                 continue

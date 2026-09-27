@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Recibe el volcado del sketch diagnostico_dma a traves del R4."""
+"""Recibe el volcado del sketch diagnostico_dma a traves del R4.
+
+Conserva el stream original en .bin y el informe del firmware en .txt.
+No interpreta CSV ni cambia sus separadores. Para analizar capturas CSV
+(comas en V6 o tabs en versiones anteriores), usar analizar_captura.py.
+"""
 import argparse
 from datetime import datetime
 from pathlib import Path
