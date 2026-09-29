@@ -1,6 +1,6 @@
 # Prueba de nodos DMA
 
-El firmware normal esta en `../../sketch.ino`; esta prueba usa una copia separada. Cargar `diagnostico_dma.ino` en el Q.
+El firmware normal esta en `../../arduino/oscilloscope/sketch/sketch.ino`; esta prueba usa una copia separada. Cargar `diagnostico_dma.ino` en el Q.
 Mantener el puente R4 y el cableado actuales. UART Q–R4: 1 Mbaud.
 La copia toma la firma de LL_DMA_CreateLinkNode del header instalado: admite
 el parametro mutable de Zephyr 0.90.0 y el parametro const de 1.0.0.

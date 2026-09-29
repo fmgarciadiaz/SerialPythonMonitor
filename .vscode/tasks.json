@@ -1,0 +1,10 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {"label": "UNO Q: Estado", "type": "process", "command": "python3", "args": ["${workspaceFolder}/tools/unoq.py", "status"], "problemMatcher": []},
+    {"label": "UNO Q: Compilar sin cargar", "type": "process", "command": "python3", "args": ["${workspaceFolder}/tools/unoq.py", "compile"], "group": {"kind": "build", "isDefault": true}, "problemMatcher": ["$gcc"]},
+    {"label": "UNO Q: Desplegar e iniciar", "type": "process", "command": "python3", "args": ["${workspaceFolder}/tools/unoq.py", "deploy"], "problemMatcher": ["$gcc"]},
+    {"label": "UNO Q: Logs", "type": "process", "command": "python3", "args": ["${workspaceFolder}/tools/unoq.py", "logs", "--follow"], "problemMatcher": []},
+    {"label": "UNO Q: Detener", "type": "process", "command": "python3", "args": ["${workspaceFolder}/tools/unoq.py", "stop"], "problemMatcher": []}
+  ]
+}

@@ -1,10 +1,10 @@
 # Inventario y versiones del proyecto
 
-Actualizado: 26 de septiembre de 2026.
+Actualizado: 28 de septiembre de 2026.
 
 ## Qué usar actualmente
 
-- **Firmware Q:** `sketch.ino`, con sincronización inicial DMA corregida.
+- **Firmware Q para desarrollo y despliegue:** `arduino/oscilloscope/sketch/sketch.ino`, copiado de la aplicación `Osciloscopio DMA_TXRX V2` por USB; conserva la sincronización DMA corregida y usa 1.100.000 baudios. La copia anterior se conserva en `respaldos/sketch_pre_applab.ino.bak`.
 - **Monitor PC para probar:** `SerialMonitorAppQt_V6.py`, con desplazamiento suavizado y objetivo de unos 60 FPS. Validación visual con hardware pendiente.
 - **Monitor PC estable anterior:** `SerialMonitorAppQt_V5.py`, conservado sin cambios.
 - **Capturas normales:** `capturas/`.
@@ -19,7 +19,9 @@ raíz. No ejecutar varias aplicaciones sobre el mismo puerto serial.
 
 | Ruta | Contenido y estado |
 |---|---|
-| `sketch.ino` | Firmware normal UNO Q. ADC dual de 14 bits a 10 kHz; UART a 1 Mbaud; paquetes de 512 pares; dos nodos DMA de 2048 pares. Espera la transición real nodo 0 → nodo 1 antes de la primera entrega. Sin parada de diagnóstico. |
+| `arduino/` | Fuentes de App Lab, configuración USB e instrucciones del entorno de desarrollo; ver `arduino/README.md`. |
+| `tools/unoq.py` | Estado, compilación sin carga, respaldo, despliegue y logs del Q mediante ADB. |
+| `respaldos/sketch_pre_applab.ino.bak` | Copia anterior del firmware normal UNO Q. ADC dual de 14 bits a 10 kHz; UART a 1 Mbaud; paquetes de 512 pares; dos nodos DMA de 2048 pares. Espera la transición real nodo 0 → nodo 1 antes de la primera entrega. Sin parada de diagnóstico. |
 | `SerialMonitorAppQt_V6.py` | Basado en V5: temporizador preciso de 16 ms y posición visual suavizada en Roll en vivo (H-Pos = 0), con constante de 100 ms. Bordes suavizados, reducción visual por píxel conservando extremos y cortes, y barra superior en grilla con botones iguales. Conserva la adquisición; las capturas CSV nuevas usan comas y punto decimal. |
 | `tests/test_v6_roll.py` | Pruebas sin Qt del desplazamiento, límites del buffer y conservación de adquisición, grabación y preparación de trazos respecto de V5. |
 | `tests/test_v6_display.py` | Pruebas con NumPy de conservación de picos, orden, escalones y cortes durante la reducción visual. |
@@ -102,6 +104,6 @@ fronteras de nodo puede ser engañoso. Tampoco sus outliers estadísticos distin
 automáticamente transiciones reales de la señal cuadrada. No inferir pérdidas
 ni corrupción solo de esas dos secciones.
 
-Para cargar el firmware normal en el Q, copiar `sketch.ino` al proyecto Arduino
-habitual. Para el diagnóstico, usar la carpeta `diagnosticos/diagnostico_dma/`.
+Para cargar el firmware normal en el Q, usar `python3 tools/unoq.py deploy`;
+el código vigente está en `arduino/oscilloscope/sketch/sketch.ino`. Para el diagnóstico, usar la carpeta `diagnosticos/diagnostico_dma/`.
 No poner los dos sketches en una misma carpeta Arduino: sus funciones se duplican.
