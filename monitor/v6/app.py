@@ -27,7 +27,7 @@ ADC_BITS_DEFAULT = 14        # Resolución ADC por defecto (12 bits = 4095, 10 b
 V_REF_VOLTS = 3.3            # Tensión de referencia del ADC en voltios
 VISIBLE_SAMPLES_DEFAULT = 9000
 VISIBLE_SAMPLES_MIN = 50
-VISIBLE_SAMPLES_MAX = 20000
+VISIBLE_SAMPLES_MAX = 50000
 MAX_BUFFER_SAMPLES = 110000  # Buffer de 100.000 muestras en memoria
 RENDER_INTERVAL_MS = 16      # Objetivo ~60 FPS (según carga de CPU/pantalla)
 ROLL_SMOOTH_SECONDS = 0.10   # Suavizado visual; no modifica adquisición ni CSV
@@ -1548,72 +1548,52 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         """Activa o desactiva el corte automático por silencios/gaps temporales."""
         self.auto_gap_cut = bool(state == QtCore.Qt.Checked)
 
-    def _prepare_trace_data(self, x_data: List[float], y_data: List[float]) -> Tuple[List[float], List[float]]:
-        """Prepara las coordenadas X e Y según el modo de trazo (Escalón/Línea) y corte por silencios."""
+    def _prepare_trace_data(self, x_data, y_data):
+        """Escalones y cortes vectorizados; conserva todas las muestras del trazo."""
         n = len(x_data)
         if n < 2 or len(y_data) != n:
             return x_data, y_data
-
-        is_step = (self.trace_mode == "Escalón")
-        cut_gaps = self.auto_gap_cut
-
-        # Umbral para detección de silencios/pausas (gaps temporales)
+        is_step = self.trace_mode == "Escalón"
+        if not is_step and not self.auto_gap_cut:
+            return x_data, y_data
         if self.x_axis_time_mode and self.current_dt_us > 0:
-            gap_threshold = max(3.0 * self.current_dt_us, 1500.0)
+            threshold = max(3.0 * self.current_dt_us, 1500.0)
             nominal_dt = self.current_dt_us
         elif self.x_axis_time_mode:
-            gap_threshold = 2000.0
-            nominal_dt = 0.0
+            threshold, nominal_dt = 2000.0, 0.0
         else:
-            gap_threshold = 2.0  # en modo índice de muestra, si salta más de 1 muestra
-            nominal_dt = 1.0
+            threshold, nominal_dt = 2.0, 1.0
 
-        if not is_step and not cut_gaps:
-            return x_data, y_data
+        x = np.asarray(x_data, dtype=float)
+        y = np.asarray(y_data, dtype=float)
+        gaps = (np.diff(x) > threshold) if self.auto_gap_cut else np.zeros(n - 1, dtype=bool)
+        if is_step and not np.any(gaps):
+            # Ruta habitual: dos vértices por escalón, sin listas intermedias.
+            xo = np.empty(2 * n - 1)
+            yo = np.empty(2 * n - 1)
+            xo[0], yo[0] = x[0], y[0]
+            xo[1::2] = xo[2::2] = x[1:]
+            yo[1::2], yo[2::2] = y[:-1], y[1:]
+            return xo, yo
+        if not is_step and not np.any(gaps):
+            return x, y
 
-        x_out = [x_data[0]]
-        y_out = [y_data[0]]
-        nan_val = float("nan")
-
+        hold = x[:-1] + nominal_dt
+        extra = gaps & (hold < x[1:]) if is_step else gaps
+        sizes = (2 if is_step else 1) + extra.astype(np.intp)
+        ends = np.cumsum(sizes)
+        starts = ends - sizes + 1
+        xo, yo = np.empty(int(ends[-1]) + 1), np.empty(int(ends[-1]) + 1)
+        xo[0], yo[0] = x[0], y[0]
+        xo[ends], yo[ends] = x[1:], y[1:]
         if is_step:
-            for i in range(1, n):
-                x_prev = x_data[i - 1]
-                x_curr = x_data[i]
-                y_prev = y_data[i - 1]
-                y_curr = y_data[i]
-                dx = x_curr - x_prev
-
-                if cut_gaps and dx > gap_threshold:
-                    # Corte por silencio: sostenemos el nivel anterior por 1 período nominal
-                    # y luego interrumpimos con NaN para no cruzar el silencio con falsas diagonales
-                    hold_end = x_prev + (nominal_dt if nominal_dt > 0 else 0.0)
-                    if hold_end < x_curr:
-                        x_out.append(hold_end)
-                        y_out.append(y_prev)
-                    x_out.append(hold_end)
-                    y_out.append(nan_val)
-                    x_out.append(x_curr)
-                    y_out.append(y_curr)
-                else:
-                    # Escalón estándar (Zero-Order Hold):
-                    # El valor anterior se sostiene hasta x_curr, donde salta al nuevo valor
-                    x_out.extend((x_curr, x_curr))
-                    y_out.extend((y_prev, y_curr))
+            xo[starts] = np.where(gaps, hold, x[1:])
+            yo[starts] = np.where(gaps & ~extra, np.nan, y[:-1])
+            xo[starts[extra] + 1] = hold[extra]
+            yo[starts[extra] + 1] = np.nan
         else:
-            # Modo Línea con corte automático por gaps
-            for i in range(1, n):
-                x_prev = x_data[i - 1]
-                x_curr = x_data[i]
-                y_curr = y_data[i]
-                dx = x_curr - x_prev
-
-                if cut_gaps and dx > gap_threshold:
-                    x_out.append(x_prev)
-                    y_out.append(nan_val)
-                x_out.append(x_curr)
-                y_out.append(y_curr)
-
-        return x_out, y_out
+            xo[starts[gaps]], yo[starts[gaps]] = x[:-1][gaps], np.nan
+        return xo, yo
 
     @staticmethod
     def _reduce_trace_for_display(x_data, y_data, xmin, xmax, pixels):
@@ -2406,20 +2386,20 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
                 if t_deque and len(t_deque) >= end_pos and count > 0:
                     t_slice = list(itertools.islice(t_deque, start_pos, end_pos))
                     t0 = t_slice[0]
-                    x_plot = [t - t0 for t in t_slice]
-                    x_end = x_plot[-1] if x_plot else w
+                    x_plot = np.asarray(t_slice, dtype=float) - t0
+                    x_end = x_plot[-1] if len(x_plot) else w
                     # Trasladar también fracciones de muestra, sin interpolar Y.
                     dt_visual = (t_slice[1] - t0) if count > 1 else 0.0
-                    x_plot = [x - fraction * dt_visual for x in x_plot]
+                    x_plot -= fraction * dt_visual
                     self.plot_widget.setXRange(0, x_end, padding=0.02)
                     self.plot_widget.setLabel("bottom", "Tiempo relativo en ventana (µs)", color="#ffffff")
                 else:
                     # Sin timestamps: fallback a muestras silenciosamente
-                    x_plot = [i - fraction for i in range(count)]
+                    x_plot = np.arange(count, dtype=float) - fraction
                     self.plot_widget.setXRange(0, w, padding=0.0)
                     self.plot_widget.setLabel("bottom", "Muestras en ventana (sin timestamps)", color="#ffffff")
             else:
-                x_plot = [i - fraction for i in range(count)]
+                x_plot = np.arange(count, dtype=float) - fraction
                 self.plot_widget.setXRange(0, w, padding=0.0)
                 self.plot_widget.setLabel("bottom", "Muestras en ventana", color="#ffffff")
 
@@ -2427,7 +2407,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             for col in active_columns:
                 series_deque = self.series.get(col)
                 if series_deque and len(series_deque) >= end_pos:
-                    y_slices[col] = list(itertools.islice(series_deque, start_pos, end_pos))
+                    y_slices[col] = np.fromiter(itertools.islice(series_deque, start_pos, end_pos), dtype=float)
                 else:
                     y_slices[col] = []
 
@@ -2443,10 +2423,10 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             # ---- EJE X en modo TRIGGER: Muestras relativas o µs relativos al T=0 ----
             if self.x_axis_time_mode and self.current_dt_us > 0:
                 dt = self.current_dt_us
-                x_plot = [i * dt for i in range(-pre_samples, post_samples)]
+                x_plot = np.arange(-pre_samples, post_samples, dtype=float) * dt
                 self.plot_widget.setXRange(x_plot[0], x_plot[-1], padding=0.0)
             else:
-                x_plot = list(range(-pre_samples, post_samples))
+                x_plot = np.arange(-pre_samples, post_samples, dtype=float)
                 self.plot_widget.setXRange(-pre_samples, post_samples, padding=0.0)
 
             self.trigger_t_marker.setValue(0)
@@ -2495,7 +2475,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
                 for col in active_columns:
                     col_deque = self.series.get(col)
                     if col_deque and len(col_deque) >= slice_end:
-                        y_slices[col] = list(itertools.islice(col_deque, slice_start, slice_end))
+                        y_slices[col] = np.fromiter(itertools.islice(col_deque, slice_start, slice_end), dtype=float)
                     else:
                         y_slices[col] = []
 
@@ -2563,7 +2543,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
                 end_pos = min(end_pos, total_samples)
                 start_pos = max(0, end_pos - w)
                 y_slices = {
-                    col: list(itertools.islice(self.series[col], start_pos, end_pos))
+                    col: np.fromiter(itertools.islice(self.series[col], start_pos, end_pos), dtype=float)
                     for col in active_columns if col in self.series
                 }
                 self.trigger_status_label.setText("● AUTO (Buscando disparo... ajusta Nivel con 50% Auto)")
@@ -2584,7 +2564,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
                     self.plot_widget.setLabel("bottom", "Muestras en ventana (Buscando Trigger)", color="#ffffff")
 
         # Dibujar curvas en el gráfico
-        if x_plot:
+        if len(x_plot):
             for col, line in self.line_items.items():
                 if col in active_columns:
                     y_vals = y_slices.get(col, [])
@@ -2609,12 +2589,13 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             meas_col = active_columns[0]
 
         meas_vals = y_slices.get(meas_col, [])
-        if meas_vals and len(meas_vals) >= 10:
-            v_max = max(meas_vals)
-            v_min = min(meas_vals)
+        if len(meas_vals) >= 10:
+            values = np.asarray(meas_vals, dtype=float)
+            v_max = float(np.max(values))
+            v_min = float(np.min(values))
             v_pp = v_max - v_min
-            v_avg = sum(meas_vals) / len(meas_vals)
-            v_rms = math.sqrt(sum(v * v for v in meas_vals) / len(meas_vals))
+            v_avg = float(np.mean(values))
+            v_rms = float(np.sqrt(np.mean(values * values)))
 
             is_adc = "ADC" in meas_col
             unit = "" if is_adc else "V"
@@ -2629,10 +2610,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             # Estimación de frecuencia física basada en timestamps o cruces
             freq_text = "--"
             if len(meas_vals) >= 50 and v_pp > (0.1 if unit == "V" else 50):
-                cross_indices = []
-                for i in range(1, len(meas_vals)):
-                    if meas_vals[i - 1] < v_avg <= meas_vals[i]:
-                        cross_indices.append(i)
+                cross_indices = np.flatnonzero((values[:-1] < v_avg) & (values[1:] >= v_avg)) + 1
 
                 if len(cross_indices) >= 2:
                     delta_samples = (cross_indices[-1] - cross_indices[0]) / (len(cross_indices) - 1)

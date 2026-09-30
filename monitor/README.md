@@ -41,6 +41,8 @@ El monitor conecta al R4 a **2.000.000 baudios**. La preparación V5/V7 utiliza
 
 - Doble traza, selección de canales y canal activo para las mediciones.
 - Escala y posición horizontal; eje en muestras o tiempo en microsegundos.
+- Ventana horizontal ajustable de **50 a 50.000 muestras**: hasta 2 segundos
+  a 25 kHz, o 2,5 segundos a 20 kHz. Apertura inicial: 9.000 muestras.
 - Escala y posición vertical, con controles de ajuste y Auto-Set.
 - Trazo **Step/ZOH** (retención de cada valor) o **Linear**.
 - Corte automático por silencios para evitar unir datos separados por huecos.
@@ -52,6 +54,13 @@ El monitor conecta al R4 a **2.000.000 baudios**. La preparación V5/V7 utiliza
 El suavizado introduce un pequeño retraso visual de seguimiento. La reducción
 de puntos afecta al dibujo; las mediciones y el CSV usan las muestras completas.
 El antialiasing del trazo no elimina el aliasing de una señal ya muestreada.
+
+V6 y V7 preparan los escalones, coordenadas y mediciones con operaciones NumPy
+para reducir el costo de las ventanas grandes. En una prueba local con Qt fuera
+de pantalla, dos trazas y una ventana de 50.000 muestras, el tiempo por cuadro
+bajó de unos 66 ms a 16 ms. Es una comparación de renderizado con datos sintéticos;
+los FPS durante adquisición dependen también de la carga del equipo. Se conservan
+los vértices del trazado, los picos y los cortes, y no se reducen los datos del CSV.
 
 ### Trigger y controles de adquisición
 

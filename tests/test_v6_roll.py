@@ -74,7 +74,7 @@ class RollTests(unittest.TestCase):
         old_methods = methods(old_classes['SerialMonitorWindow'])
         new_methods = methods(WINDOW)
         for name in old_methods:
-            if ('record' in name and name != 'start_recording') or name in ('handle_batch', '_prepare_trace_data'):
+            if ('record' in name and name != 'start_recording') or name == 'handle_batch':
                 self.assertEqual(old_methods[name], new_methods[name], name)
 
 
