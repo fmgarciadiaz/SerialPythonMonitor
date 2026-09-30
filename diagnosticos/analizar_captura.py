@@ -104,8 +104,8 @@ def print_section(title):
 def main():
     ap = argparse.ArgumentParser(description="Analiza problemas de timestamp, bloques y ADC.")
     ap.add_argument("file", help="archivo de datos")
-    ap.add_argument("--sample-rate", type=float, default=10000.0,
-                    help="frecuencia esperada en Hz (default: 10000)")
+    ap.add_argument("--sample-rate", type=float, default=20000.0,
+                    help="frecuencia esperada en Hz (default: 20000; para V3 usar 10000)")
     ap.add_argument("--block-size", type=int, default=512,
                     help="muestras por bloque serial (default: 512)")
     ap.add_argument("--node-size", type=int, default=2048,

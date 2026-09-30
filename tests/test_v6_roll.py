@@ -6,7 +6,7 @@ from types import SimpleNamespace
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
-TREE = ast.parse((ROOT / 'SerialMonitorAppQt_V6.py').read_text())
+TREE = ast.parse((ROOT / 'monitor/v6/app.py').read_text())
 WINDOW = next(n for n in TREE.body if isinstance(n, ast.ClassDef) and n.name == 'SerialMonitorWindow')
 METHOD = next(n for n in WINDOW.body if isinstance(n, ast.FunctionDef) and n.name == '_roll_end_position')
 CONSTANT = next(n.value.value for n in TREE.body if isinstance(n, ast.Assign)
@@ -66,7 +66,7 @@ class RollTests(unittest.TestCase):
         self.assertEqual(advance(w, 20000, .032), 20000)
 
     def test_acquisition_recording_and_trace_processing_unchanged(self):
-        old = ast.parse((ROOT / 'SerialMonitorAppQt_V5.py').read_text())
+        old = ast.parse((ROOT / 'monitor/historico/SerialMonitorAppQt_V5.py').read_text())
         old_classes = {n.name: n for n in old.body if isinstance(n, ast.ClassDef)}
         new_classes = {n.name: n for n in TREE.body if isinstance(n, ast.ClassDef)}
         self.assertEqual(ast.dump(old_classes['SerialWorker']), ast.dump(new_classes['SerialWorker']))

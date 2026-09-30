@@ -7,10 +7,21 @@ import unittest
 from unittest.mock import Mock, patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from tools.unoq import Board, source_files
+from tools.unoq import Board, source_files, main
 
 
 class UnoQTests(unittest.TestCase):
+    def test_default_and_experimental_targets_are_separate(self):
+        for version in ('v4', 'v5'):
+            args = ['unoq.py', 'compile'] + (['--version', version] if version == 'v5' else [])
+            with self.subTest(version=version), patch('sys.argv', args), patch('tools.unoq.Board') as board:
+                self.assertEqual(main(), 0)
+                config = board.call_args.args[0]
+                self.assertEqual(config['local_app'], f'arduino/{version}/oscilloscope')
+                self.assertTrue(config['remote_app'].endswith('-' + version))
+                board.return_value.compile.assert_called_once()
+                board.return_value.deploy.assert_not_called()
+
     def test_deploy_does_not_touch_app_when_compile_fails(self):
         board = Board.__new__(Board)
         board.compile = Mock(side_effect=RuntimeError('compile failed'))

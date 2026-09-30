@@ -1,3 +1,5 @@
+> Documento histórico. Sus rutas y estados describen versiones anteriores; usar el README de la raíz para trabajar.
+
 # CONTEXTO DEL PROYECTO — UNO Q → UNO R4 → PC
 
 > Documento de transferencia a Codex / VS Code. Estado confirmado en la conversación hasta el 26/09/2026. **Leé también el código actual del repositorio**: algunas modificaciones confirmadas durante las pruebas son posteriores al sketch compartido y pueden no estar reflejadas en aquella copia.

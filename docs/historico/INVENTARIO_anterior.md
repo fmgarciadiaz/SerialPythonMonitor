@@ -1,10 +1,12 @@
+> Documento histórico. Sus rutas y estados describen versiones anteriores; usar el README de la raíz para trabajar.
+
 # Inventario y versiones del proyecto
 
-Actualizado: 28 de septiembre de 2026.
+Actualizado: 29 de septiembre de 2026.
 
 ## Qué usar actualmente
 
-- **Firmware Q para desarrollo y despliegue:** `arduino/oscilloscope/sketch/sketch.ino`, copiado de la aplicación `Osciloscopio DMA_TXRX V2` por USB; conserva la sincronización DMA corregida y usa 1.100.000 baudios. La copia anterior se conserva en `respaldos/sketch_pre_applab.ino.bak`.
+- **Firmware Q para desarrollo y despliegue:** `arduino/oscilloscope/sketch/sketch.ino`, revisión V4 a 20 kHz para Arduino Core Zephyr 1.0.0, aplicación independiente `Osciloscopio DMA_TXRX V4`, basada en V3; conserva la sincronización DMA corregida y usa 3.000.000 baudios hacia R4 (USB/monitor: 2.000.000). La copia anterior se conserva en `respaldos/sketch_pre_applab.ino.bak`.
 - **Monitor PC para probar:** `SerialMonitorAppQt_V6.py`, con desplazamiento suavizado y objetivo de unos 60 FPS. Validación visual con hardware pendiente.
 - **Monitor PC estable anterior:** `SerialMonitorAppQt_V5.py`, conservado sin cambios.
 - **Capturas normales:** `capturas/`.
@@ -107,3 +109,6 @@ ni corrupción solo de esas dos secciones.
 Para cargar el firmware normal en el Q, usar `python3 tools/unoq.py deploy`;
 el código vigente está en `arduino/oscilloscope/sketch/sketch.ino`. Para el diagnóstico, usar la carpeta `diagnosticos/diagnostico_dma/`.
 No poner los dos sketches en una misma carpeta Arduino: sus funciones se duplican.
+
+- `arduino/r4_bridge_v4/r4_bridge_v4.ino`: puente R4 WiFi coordinado con V4, cola 8 KiB, RX SCI2 con ISR propia y TX SCI9 sin interrupción por byte; entrada 3 Mbps, salida 2 Mbps.
+- `diagnosticos/verificar_enlace.py`: caudal y continuidad DATA sin gráficos, 20 kHz por defecto; `--sample-rate 10000` para V3.

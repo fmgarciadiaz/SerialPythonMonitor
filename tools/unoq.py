@@ -10,10 +10,12 @@ import shlex
 import shutil
 import subprocess
 import sys
+import tempfile
 import uuid
+import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-CONFIG = ROOT / 'arduino' / 'unoq.json'
+CONFIG = ROOT / 'arduino' / 'v4' / 'unoq.json'
 
 
 def source_files(folder):
@@ -109,14 +111,35 @@ class Board:
         self.cli('app', 'start', self.remote)
         print('Código transferido y aplicación iniciada con App CLI.')
 
+    def create(self):
+        """Importa una aplicación independiente sin arrancar ni cargar firmware."""
+        files = self.check_sources()
+        app_folder = self.remote.rsplit('/', 1)[-1]
+        remote_zip = '/tmp/serialmonitor-import-' + uuid.uuid4().hex + '.zip'
+        with tempfile.TemporaryDirectory() as folder:
+            archive = Path(folder) / 'app.zip'
+            with zipfile.ZipFile(archive, 'w', zipfile.ZIP_DEFLATED) as out:
+                for path in files:
+                    out.write(path, app_folder + '/' + path.relative_to(self.local).as_posix())
+            try:
+                self.run('push', str(archive), remote_zip)
+                self.cli('app', 'import', remote_zip)
+            finally:
+                self.shell('python3', '-c',
+                           'import pathlib,sys; pathlib.Path(sys.argv[1]).unlink(missing_ok=True)', remote_zip)
+        print('Aplicación importada. No se inició ni se cargó firmware.')
+
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('command', choices=('status', 'compile', 'backup', 'deploy', 'start', 'stop', 'logs'))
+    parser.add_argument('command', choices=('status', 'compile', 'backup', 'deploy', 'start', 'stop', 'logs', 'create'))
+    parser.add_argument('--version', choices=('v4', 'v5'), default='v4', help='v4 estable (default) o v5 experimental')
     parser.add_argument('--follow', action='store_true', help='Seguir logs hasta Ctrl+C')
     args = parser.parse_args()
     try:
-        board = Board(json.loads(CONFIG.read_text()))
+        config_path = ROOT / 'arduino' / args.version / 'unoq.json'
+        board = Board(json.loads(config_path.read_text()))
+        print(f"Destino: {board.config['name']} ({board.local})", flush=True)
         if args.command == 'logs':
             opts = ['--follow'] if args.follow else ['--tail', '50']
             board.cli('app', 'logs', board.remote, *opts)

@@ -17,7 +17,7 @@ import pyqtgraph as pg
 # Configuración de pyqtgraph para alto rendimiento y estética de osciloscopio
 pg.setConfigOption("background", "#121418")  # Fondo oscuro elegante de laboratorio
 pg.setConfigOption("foreground", "#ffffff")  # Texto y números en blanco puro
-pg.setConfigOption("antialias", False)
+pg.setConfigOption("antialias", True)
 
 # =============================================================================
 # CONFIGURACIÓN GENERAL Y VALORES POR DEFECTO
@@ -1884,7 +1884,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
     # GRABACIÓN CSV
     # -------------------------------------------------------------
     def _create_log_filename(self) -> Path:
-        capture_dir = Path(__file__).resolve().parent / "capturas"
+        capture_dir = Path(__file__).resolve().parents[2] / "capturas"
         capture_dir.mkdir(parents=True, exist_ok=True)
         base = datetime.now().strftime("log_%Y%m%d_%H%M%S")
         number = 1
@@ -2647,8 +2647,8 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
                                 freq_text = f"{freq_hz/1000.0:.2f} kHz"
 
                     # Fallback si no hay timestamps
-                    if freq_text == "--" and delta_samples > 0:
-                        freq_est = 2500.0 / delta_samples
+                    if freq_text == "--" and delta_samples > 0 and self.current_fs_hz > 0:
+                        freq_est = self.current_fs_hz / delta_samples
                         freq_text = f"~{freq_est:.1f} Hz"
 
             self.val_freq.setText(freq_text)
