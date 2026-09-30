@@ -15,7 +15,7 @@ como referencia de las versiones anteriores. Esta guía describe V6 y la base de
 
 - **V6 estable**: `v6/app.py`, compatible con firmware V4; baud USB 2 Mbps.
 - **V7 experimental**: `v7/app.py`, punto de partida para firmware V5; baud USB 3 Mbps.
-  Mantiene el protocolo DATA y la visualización de V6; aún no probada físicamente a 25 kHz.
+  Mantiene DATA; probada físicamente a 31,25 kHz con Q V5 y puente R4 V5.
 - `historico/`: archivos anteriores conservados, sin convertirlos ni modificar su contenido.
 
 Usar `python iniciar_monitor.py` desde la raíz, o agregar `--version v7`.
@@ -34,15 +34,16 @@ cambios no modifican V6.
 - Modo Demo de dos canales para explorar los controles sin conectar una placa.
 
 La combinación estable Q V4 + R4 V4 + monitor V6 se probó a **20 kHz por canal**.
-El monitor conecta al R4 a **2.000.000 baudios**. La preparación V5/V7 utiliza
-3.000.000 hacia el PC y apunta a 25 kHz; esa combinación aún necesita prueba física.
+El monitor conecta al R4 a **2.000.000 baudios**. V5/V7 utiliza
+3.000.000 hacia el PC y fue probada a 31,25 kHz por canal con TX directo en el Q.
+Ver [resultados y alcance de la prueba](../diagnosticos/VALIDACION_V5.md).
 
 ### Visualización
 
 - Doble traza, selección de canales y canal activo para las mediciones.
 - Escala y posición horizontal; eje en muestras o tiempo en microsegundos.
-- Ventana horizontal ajustable de **50 a 50.000 muestras**: hasta 2 segundos
-  a 25 kHz, o 2,5 segundos a 20 kHz. Apertura inicial: 9.000 muestras.
+- Ventana horizontal ajustable de **50 a 50.000 muestras**: hasta 1,6 segundos
+  a 31,25 kHz, o 2,5 segundos a 20 kHz. Apertura inicial: 9.000 muestras.
 - Escala y posición vertical, con controles de ajuste y Auto-Set.
 - Trazo **Step/ZOH** (retención de cada valor) o **Linear**.
 - Corte automático por silencios para evitar unir datos separados por huecos.
@@ -54,6 +55,12 @@ El monitor conecta al R4 a **2.000.000 baudios**. La preparación V5/V7 utiliza
 El suavizado introduce un pequeño retraso visual de seguimiento. La reducción
 de puntos afecta al dibujo; las mediciones y el CSV usan las muestras completas.
 El antialiasing del trazo no elimina el aliasing de una señal ya muestreada.
+
+V7 permite elegir el aspecto junto a **TRAZO**: **Rápido** (predeterminado,
+1 píxel sin antialiasing), **Intenso** (2 píxeles sin antialiasing, mayor
+visibilidad con mayor costo de dibujo) y **Suave** (1 píxel con antialiasing,
+aspecto anterior). Se puede cambiar también en STOP sin mover la captura.
+Estos ajustes afectan únicamente al dibujo.
 
 V6 y V7 preparan los escalones, coordenadas y mediciones con operaciones NumPy
 para reducir el costo de las ventanas grandes. En una prueba local con Qt fuera
@@ -117,5 +124,5 @@ a versiones históricas; el CSV actual es el formato de salida de las capturas.
 
 - [Organización del proyecto](../README.md).
 - [Validación física a 20 kHz](../diagnosticos/VALIDACION_V4.md).
-- [Preparación experimental de 25 kHz](../arduino/v5/README.md).
+- [Preparación experimental de 31,25 kHz](../arduino/v5/README.md).
 - [README anterior con las características históricas](../docs/historico/README_anterior.md).

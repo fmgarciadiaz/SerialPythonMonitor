@@ -17,12 +17,12 @@ import pyqtgraph as pg
 # Configuración de pyqtgraph para alto rendimiento y estética de osciloscopio
 pg.setConfigOption("background", "#121418")  # Fondo oscuro elegante de laboratorio
 pg.setConfigOption("foreground", "#ffffff")  # Texto y números en blanco puro
-pg.setConfigOption("antialias", True)
+pg.setConfigOption("antialias", False)
 
 # =============================================================================
 # CONFIGURACIÓN GENERAL Y VALORES POR DEFECTO
 # =============================================================================
-BAUD_DEFAULT = 3000000
+BAUD_DEFAULT = 3000000      # V5: 31.250 pares/s; Fs se obtiene de timestamps.
 ADC_BITS_DEFAULT = 14        # Resolución ADC por defecto (12 bits = 4095, 10 bits = 1023, etc.)
 V_REF_VOLTS = 3.3            # Tensión de referencia del ADC en voltios
 VISIBLE_SAMPLES_DEFAULT = 9000
@@ -823,6 +823,17 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self.trace_mode_combo.currentTextChanged.connect(self._on_trace_mode_changed)
         trace_card_layout.addWidget(self.trace_mode_combo)
 
+        self.trace_style_combo = QtWidgets.QComboBox()
+        self.trace_style_combo.addItems(["Rápido", "Intenso", "Suave"])
+        self.trace_style_combo.setStyleSheet(self.trace_mode_combo.styleSheet())
+        self.trace_style_combo.setToolTip(
+            "Rápido: trazo fino sin suavizado, menor costo de dibujo.\n"
+            "Intenso: trazo de 2 píxeles para mayor visibilidad; puede reducir FPS.\n"
+            "Suave: trazo fino con suavizado, como en la versión anterior."
+        )
+        self.trace_style_combo.currentTextChanged.connect(self._on_trace_style_changed)
+        trace_card_layout.addWidget(self.trace_style_combo)
+
         self.chk_auto_gap = QtWidgets.QCheckBox("Corte Auto")
         self.chk_auto_gap.setChecked(True)
         self.chk_auto_gap.setToolTip(
@@ -1543,6 +1554,19 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             self.trace_mode = "Línea"
         else:
             self.trace_mode = "Escalón"
+
+    def _on_trace_style_changed(self, text: str):
+        # También actualiza las curvas congeladas en STOP sin mover la captura.
+        for idx, col in enumerate(self.known_columns):
+            curve = self.line_items.get(col)
+            if curve is not None:
+                color = CHANNEL_COLORS.get(col, PALETTE[idx % len(PALETTE)])
+                curve.setPen(pg.mkPen(color, width=2 if text == "Intenso" else 1))
+                x, y = curve.getData()
+                if x is not None:
+                    curve.setData(x, y, connect="finite", antialias=text == "Suave")
+                else:
+                    curve.setData([], [], antialias=text == "Suave")
 
     def _on_auto_gap_changed(self, state: int):
         """Activa o desactiva el corte automático por silencios/gaps temporales."""
@@ -2660,8 +2684,10 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         for idx, col in enumerate(self.known_columns):
             color = CHANNEL_COLORS.get(col, PALETTE[idx % len(PALETTE)])
             if col not in self.line_items:
-                pen = pg.mkPen(color, width=1)
-                curve = self.plot_widget.plot([], [], pen=pen, name=col, antialias=True)
+                style = self.trace_style_combo.currentText()
+                pen = pg.mkPen(color, width=2 if style == "Intenso" else 1)
+                curve = self.plot_widget.plot([], [], pen=pen, name=col,
+                                              antialias=style == "Suave")
                 self.line_items[col] = curve
             self.line_items[col].setVisible(col in active_columns)
 

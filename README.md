@@ -1,76 +1,131 @@
-# Osciloscopio UNO Q + R4 / SerialMonitor
+# Osciloscopio UNO Q + R4 · Serial Python Monitor
 
-[Características y uso del SerialMonitor](monitor/README.md) ·
-[README anterior completo](docs/historico/README_anterior.md).
+Sistema de adquisición y visualización de señales de **dos canales**, formado
+por un **Arduino UNO Q que toma las muestras**, un **UNO R4 WiFi que las
+transporta** y un **receptor Python que las dibuja, mide y guarda**.
 
-## Qué usar
+El conjunto V5/V7 fue probado a **31,25 kHz por canal**, con ADC de **14 bits**
+y una muestra de cada canal cada **32 µs**. Los enlaces Q–R4 y R4–PC trabajan
+a **3.000.000 baudios**.
 
-| Conjunto | Firmware Q + R4 | Monitor | Muestreo | Q → R4 | R4 → PC | Estado |
-|---|---|---|---|---|---|---|
-| **Estable** | **V4** | **V6** | 20 kHz por canal | 3 Mbps | **2 Mbps** | Probado en las placas y CSV |
-| Experimental | V5 | V7 | 25 kHz por canal | 3 Mbps | **3 Mbps** | Preparado para pruebas; sin validación física |
-
-La versión experimental se elige explícitamente. Las placas conservan la V4.
-Los números del firmware y del monitor son independientes: V4 se usa con V6.
-
-## Abrir el monitor
-
-```sh
-python iniciar_monitor.py                      # V6 estable
-python iniciar_monitor.py --version v7         # V7 experimental
-python iniciar_monitor.py --list               # ver versiones sin abrir ventanas
+```mermaid
+flowchart LR
+    S["Señales analógicas · A0 y A1"] --> Q["1. UNO Q · adquisición ADC + DMA"]
+    Q -->|"UART · paquetes DATA · 3 Mbps"| R["2. UNO R4 WiFi · puente"]
+    R -->|"USB serial · 3 Mbps"| P["3. Python · gráfico, mediciones y CSV"]
 ```
 
-Seleccionar el puerto **R4**. La V6 usa 2.000.000 baudios; V7 usa 3.000.000.
-Instalar dependencias en el entorno elegido con `python -m pip install -r requirements.txt`.
-En VS Code también están las tareas **Monitor V6: Abrir estable** y
-**Monitor V7: Abrir experimental**, y las mismas opciones para ejecutar con F5.
+## 1. Emisor: Arduino UNO Q
 
-## Dónde está cada cosa
+El UNO Q se encarga de la adquisición. Su microcontrolador STM32U585 toma las
+señales de **A0 (V_IN)** y **A1 (V_OUT)** con resolución de 14 bits. Cada disparo
+del temporizador inicia una secuencia de conversión de los dos canales; las
+conversiones se realizan una después de la otra.
+
+- **Muestreo por hardware:** TIM2 dispara la adquisición cada 32 µs en V5.
+- **DMA y doble buffer:** las conversiones se guardan en memoria mientras el
+  programa transmite el bloque anterior.
+- **Timestamps de hardware:** otro canal DMA captura el contador TIM5 en
+  microsegundos en cada disparo, para conservar el tiempo de adquisición.
+- **Paquetes binarios:** cada paquete DATA contiene 512 pares de muestras.
+- **Transmisión separada:** un hilo envía los paquetes al R4. En V5 utiliza
+  polling directo de UART a 3 Mbps; la adquisición continúa por hardware.
+
+El sketch también conmuta **A2 cada 200 ms** como salida digital de prueba.
+La app del Q contiene el sketch y un programa Python auxiliar de App Lab;
+**el muestreo lo realiza el microcontrolador**, no ese programa Python.
+
+Código: [emisor Q V5](arduino/v5/oscilloscope/sketch/sketch.ino) ·
+[configuración de muestreo y enlace](arduino/v5/oscilloscope/sketch/scope_config.h) ·
+[guía de firmware y despliegue](arduino/README.md).
+
+## 2. Puente: Arduino UNO R4 WiFi
+
+El R4 une el emisor con la computadora. Recibe por **Serial1 (RX en D0)** los
+bytes enviados por el Q y los reenvía hacia el enlace USB del R4 WiFi.
+Conserva los paquetes tal como llegan, incluidos los timestamps y valores ADC.
+
+- Recepción UART a **3 Mbps** mediante una rutina de interrupción propia.
+- Cola de **8 KiB** para absorber diferencias momentáneas entre recepción y envío.
+- Transmisión hacia el ESP32/USB consultando la disponibilidad del registro TX,
+  evitando una interrupción adicional por cada byte enviado.
+- LED de diagnóstico ante desborde de la cola o fallo al instalar la ruta RX.
+
+La computadora debe abrir **el puerto USB del R4** para recibir las muestras.
+El USB del Q se utiliza para trabajar con App Lab, compilar y cargar su aplicación.
+
+Código: [puente R4 V5](arduino/v5/r4_bridge_v5/r4_bridge_v5.ino) ·
+[configuración y compilación del puente](arduino/v5/r4_bridge_v5/README.md).
+
+## 3. Receptor: Python / SerialMonitor
+
+La aplicación de escritorio está desarrollada con **Python, PyQt5, PyQtGraph
+y NumPy**. Un hilo recibe y decodifica los paquetes binarios; la interfaz
+presenta los canales como un osciloscopio y permite guardar las muestras.
+
+![SerialMonitor en modo demo](assets/demo_screenshot.png)
+
+*Imagen de referencia del proyecto; la apariencia puede variar entre versiones.*
+
+### Visualización y controles
+
+- Dos trazas, selección de canales y escalas horizontal y vertical.
+- Ventana de **50 a 50.000 muestras** y eje en muestras o microsegundos.
+- Desplazamiento continuo, consulta del historial y controles **RUN/STOP**.
+- Representación **Escalón (Step/ZOH)** o **Línea (Linear)**, con corte de huecos.
+- En V7, estilos **Rápido**, **Intenso** y **Suave** para ajustar la visibilidad.
+- Trigger **Auto/Normal**, flancos ascendente/descendente, nivel al **50 %**
+  y captura única **SINGLE**.
+
+### Mediciones y capturas
+
+El canal seleccionado muestra **máximo, mínimo, pico a pico, RMS, media y
+estimación de frecuencia**. La frecuencia de muestreo y el período entre muestras
+se calculan a partir de los timestamps recibidos.
+
+**RECORD / STOP REC** guarda CSV con parada automática a los 30 segundos:
 
 ```text
-iniciar_monitor.py              Entrada única para abrir el monitor
-monitor/
-  v6/app.py                   Monitor estable
-  v7/app.py                   Monitor experimental
-  historico/                  V1–V5, Tkinter, consola y notebook originales
-arduino/
-  v4/oscilloscope/            App Lab Q estable (sketch + Python + perfil)
-  v4/r4_bridge_v4/            Sketch R4 estable
-  v4/unoq.json                Destino de las tareas V4
-  v5/oscilloscope/            App Lab Q experimental
-  v5/r4_bridge_v5/            Sketch R4 experimental
-  v5/unoq.json                Destino independiente V5
-capturas/                     Capturas existentes y nuevas de V6
-  experimental_v7/            Capturas nuevas de V7
-respaldos/                    Respaldo de firmware y exportaciones de App Lab
-  unoq/                       Incluye la V3 original
-diagnosticos/                Herramientas y resultados de validación
-tests/                       Pruebas automatizadas
-tools/                       Operaciones sobre el Q
-docs/historico/              Documentación anterior, sólo referencia
+Muestra,Tiempo_us,ADC_IN,V_IN,ADC_OUT,V_OUT
 ```
 
-## Firmware y versiones
+V7 guarda en `capturas/experimental_v7/`. La reducción de puntos para dibujar
+conserva extremos y cortes; las mediciones y el CSV usan las muestras completas.
+El **modo Demo** permite explorar los controles sin conectar las placas.
 
-[Guía Arduino y comandos](arduino/README.md) ·
-[Detalle V4 estable](arduino/v4/oscilloscope/README.md) ·
-[Preparación V5](arduino/v5/README.md) ·
-[Validación física V4](diagnosticos/VALIDACION_V4.md).
+Código: [receptor V7](monitor/v7/app.py) ·
+[guía completa del monitor](monitor/README.md).
+
+## Puesta en marcha
+
+Con los firmwares **Q V5 y R4 V5** cargados, desde la raíz del repositorio:
 
 ```sh
-python3 tools/unoq.py status                  # por defecto, V4 estable
-python3 tools/unoq.py compile --version v5    # compilar V5 sin cargar
+python -m pip install -r requirements.txt
+python iniciar_monitor.py --version v7
 ```
 
-Arduino IDE: los sketches del Sketchbook se llaman `r4_bridge_v4` y
-`r4_bridge_v5`. Son copias de las carpetas versionadas del repositorio.
-El código de referencia está aquí: después de editar en el IDE, incorporar
-esos cambios a la carpeta de la versión correspondiente antes de desplegar.
-El antiguo `DebuggerRtRx` se conserva como histórico a 1,1 Mbps.
+1. Seleccionar el puerto del **UNO R4 WiFi** y **3.000.000 baudios**.
+2. Pulsar **Conectar**; la indicación de muestreo debe quedar cerca de **31,25 kS/s**.
+3. Ajustar escalas y trigger, o usar RUN/STOP y SINGLE para observar una captura.
+4. Pulsar RECORD para guardar los datos. Sin hardware, usar **Demo (2 CH)**.
 
-Cada nueva revisión experimental usa otra carpeta y otro destino de App Lab.
-Sólo se marca estable tras compilar, medir continuidad y comprobar captura.
-No promover una versión únicamente porque el gráfico se vea bien.
+Abrir el monitor no carga firmware en las placas. Para compilar, respaldar o
+cambiar de conjunto, seguir la [guía Arduino](arduino/README.md).
 
-Pruebas: `python -m unittest discover -s tests`.
+`python iniciar_monitor.py` sin argumentos abre **V6**, que corresponde al
+conjunto estable **V4 a 20 kHz** y usa **2.000.000 baudios** hacia el PC.
+Para el conjunto V5 descrito arriba, elegir explícitamente `--version v7`.
+
+## Historia, versiones y validación
+
+La **[historia del proyecto](docs/HISTORIA.md)** reúne la evolución desde los
+primeros monitores, las versiones de firmware y receptor, el mapa del repositorio,
+los comandos de desarrollo y todos los detalles del README principal anterior.
+También enlaza el README original y los documentos históricos conservados.
+
+La configuración V5/V7 pasó una prueba física de 30 s sin saltos de timestamp
+ni pérdidas de sincronización, además de una grabación de 608.768 muestras en V7.
+El [informe de validación](diagnosticos/VALIDACION_V5.md) detalla las condiciones,
+el rendimiento observado y los límites: todavía falta una prueba prolongada y
+una comparación de precisión analógica con una señal conocida.

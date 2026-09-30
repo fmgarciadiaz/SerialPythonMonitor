@@ -5,6 +5,10 @@
 #endif
 // Serial: UART al ESP32/USB. Serial1: SCI2, RX D0/P301, TX D1/P302.
 constexpr uint32_t LINK_BAUD = 3000000;
+// 31.25 kpares/s, DATA/512: ~2.503 Mbps 8N1. Ambos UART deben usar 3 Mbps.
+constexpr uint32_t SAMPLE_RATE_CEILING_HZ = 31250;
+static_assert(uint64_t(SAMPLE_RATE_CEILING_HZ) * 4103U * 10U <
+              uint64_t(LINK_BAUD) * 512U, "Caudal insuficiente para DATA/512");
 constexpr uint32_t QUEUE_SIZE = 8192;
 constexpr uint32_t QUEUE_MASK = QUEUE_SIZE - 1;
 static volatile uint8_t queue[QUEUE_SIZE];
@@ -27,7 +31,7 @@ static void fast_receive() {
 
 void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
-  Serial.begin(3000000); // UART hacia ESP32/USB; baud del monitor.
+  Serial.begin(LINK_BAUD); // UART hacia ESP32/USB; baud del monitor.
   Serial1.begin(LINK_BAUD);
   R_SCI9->SCR_b.TIE = 0;
   R_SCI9->SCR_b.TEIE = 0;

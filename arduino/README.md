@@ -3,7 +3,7 @@
 | Versión | Carpeta Q | Carpeta R4 | Monitor | Estado |
 |---|---|---|---|---|
 | V4 | `v4/oscilloscope/` | `v4/r4_bridge_v4/` | V6, USB 2 Mbps | Estable, 20 kHz |
-| V5 | `v5/oscilloscope/` | `v5/r4_bridge_v5/` | V7, USB 3 Mbps | Experimental, 25 kHz |
+| V5 | `v5/oscilloscope/` | `v5/r4_bridge_v5/` | V7, USB 3 Mbps | Experimental, 31,25 kHz; validado en ensayo corto |
 
 Cada versión tiene su propio `unoq.json` con una aplicación remota independiente.
 V4 se llama **Osciloscopio DMA_TXRX V4**; V5, **Osciloscopio DMA_TXRX V5 Experimental**.
@@ -36,4 +36,4 @@ El repositorio es la copia de referencia; las ediciones de App Lab o Arduino IDE
 no se descargan automáticamente. `respaldos/unoq/` conserva exportaciones anteriores.
 Los perfiles Q fijan Core Zephyr 1.0.0 y sus bibliotecas. El R4 usa renesas_uno 1.6.0.
 
-[Validación V4](../diagnosticos/VALIDACION_V4.md) · [Plan V5](v5/README.md).
+[Validación V4](../diagnosticos/VALIDACION_V4.md) · [Configuración V5](v5/README.md) · [Validación V5](../diagnosticos/VALIDACION_V5.md).

@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <Arduino_RouterBridge.h>
 #include <zephyr/kernel.h>
+#include <zephyr/drivers/uart.h>
 #include <string.h>
 #include "scope_config.h"
 #include "scope_protocol.h"
@@ -24,7 +25,7 @@ extern "C" {
 //
 // Acquisition path (entirely hardware timed):
 //
-//   TIM2 TRGO 25 kHz (experimental)
+//   TIM2 TRGO 31.25 kHz (32 us, experimental)
 //          |
 //          v
 //       ADC1 sequence
@@ -38,7 +39,7 @@ extern "C" {
 //          v
 //          RAM
 //          |
-//       Serial1 3 Mbps
+//       UART 3 Mbps (polling TX)
 //
 // The CPU never calls analogRead() while acquiring.
 // ============================================================
@@ -162,8 +163,9 @@ static void adc_init(void)
     LL_ADC_REG_SetSequencerRanks(
         ADC1, LL_ADC_REG_RANK_2, LL_ADC_CHANNEL_10);
 
-    // At the UNO Q ADC clock this is easily fast enough for 10 kHz,
-    // while giving comfortable acquisition time for normal source impedance.
+    // Conservar el tiempo de adquisición de V4/V5 a 25 kHz.
+    // Core 1.0.0: ADC kernel HCLK=160 MHz /4 =40 MHz.
+    // Validar amplitud y continuidad físicamente al subir a 31.25 kHz.
     LL_ADC_SetChannelSamplingTime(
         ADC1, LL_ADC_CHANNEL_9, LL_ADC_SAMPLINGTIME_391CYCLES_5);
     LL_ADC_SetChannelSamplingTime(
@@ -207,13 +209,12 @@ static void adc_init(void)
 
 static void timestamp_timer_init(void)
 {
-    // TIM5 is a free-running 32-bit counter.  Use the same prescaler as TIM2
-    // so that, with the UNO Q 160 MHz timer clock, TIM5 runs at exactly 1 MHz.
+    // TIM5 conserva 1 MHz, independiente de TIM2: protocolo en microsegundos.
     RCC->APB1ENR1 |= RCC_APB1ENR1_TIM5EN;
     (void)RCC->APB1ENR1;
 
     TIM5->CR1 = 0;
-    TIM5->PSC = TIM2_PRESCALER;
+    TIM5->PSC = TIM5_PRESCALER;
     TIM5->ARR = 0xFFFFFFFFU;
     TIM5->CNT = 0;
     TIM5->EGR = TIM_EGR_UG;
@@ -278,7 +279,7 @@ static void dma_init(void)
 }
 
 // ------------------------------------------------------------
-// TIM2 -> TRGO @ 10 kHz
+// TIM2 -> TRGO @ 31.25 kHz, 32 ticks de 1 us
 // ------------------------------------------------------------
 
 static void timer_init(void)
@@ -323,22 +324,23 @@ static void toggle_thread(void *, void *, void *)
 // Serial consumer
 //
 // IMPORTANT: this thread is completely outside the acquisition timing path.
-// Serial1.write() may block; ADC + TIM2 + GPDMA continue in hardware.
+// TX por polling desde este hilo; ADC + TIM2 + GPDMA continúan en hardware.
+// No mezclar con Serial1.write(): evita la cola y las ISR TX del core.
 // ------------------------------------------------------------
 
 static Packet tx = {{'D', 'A', 'T', 'A'}, 1U, SERIAL_BLOCK_PAIRS, {}};
 
+// El mismo dispositivo que usa Serial1 en el core UNO Q 1.0.0.
+static const struct device *const scope_uart =
+    DEVICE_DT_GET(DT_PHANDLE_BY_IDX(DT_PATH(zephyr_user), serials, 0));
+
 static void write_packet()
 {
-    // Una llamada por paquete normalmente; completar si el driver escribe parcialmente.
+    // Un único productor TX; sin cola ni ISR por byte. Las interrupciones siguen
+    // habilitadas y el hilo cede al esperar el siguiente nodo DMA.
     const auto *data = reinterpret_cast<const uint8_t *>(&tx);
-    size_t sent = 0;
-    while (sent < sizeof(tx)) {
-        const size_t written = Serial1.write(data + sent, sizeof(tx) - sent);
-        sent += written;
-        if (written == 0U) {
-            k_sleep(K_MSEC(1));
-        }
+    for (size_t i = 0; i < sizeof(tx); ++i) {
+        uart_poll_out(scope_uart, data[i]);
     }
 }
 
@@ -451,6 +453,8 @@ void setup()
     digitalWrite(WRITE_PIN, LOW);
 
     Serial1.begin(SERIAL_BAUD);
+    uart_irq_tx_disable(scope_uart);
+    uart_irq_rx_disable(scope_uart); // Enlace unidireccional Q -> R4.
 
     // Configure the hardware path before starting the trigger.
     timer_init();
