@@ -7,6 +7,62 @@ organización y operación que antes estaban en el README principal. Los documen
 originales se conservan como referencia; sus rutas, velocidades y estados pueden
 corresponder a etapas anteriores.
 
+## Versiones actuales y catálogo completo · 3 de octubre de 2026
+
+La entrada actual es **Python V10 + UNO Q V8 config**. Las secciones de
+operación antiguas más abajo son historia, no instrucciones para el conjunto
+actual. [Arranque actual](../README.md#empezar).
+
+| Monitor | Firmware / destino de referencia | Evolución |
+|---|---|---|
+| Consola, notebook, Tkinter | Serial | Primeros registros y visualización |
+| Qt V1–V5 | UART | Interfaz de osciloscopio y dos canales |
+| [V6](../monitor/historico/v6/) | Q V4 + R4 V4 | Conjunto UART a 20 kHz |
+| [V7](../monitor/historico/v7/) | Q V5 + R4 V5 | 31,25 kHz, estilos y reducción visual |
+| [V8](../monitor/historico/v8/README.md) | Q V6 ADC | USB directo por SPI al Linux del Q |
+| [V9](../monitor/historico/v9/README.md) | Q V7 dual | Control Q permanente y selección SPI/UART |
+| [V10](../monitor/v10/README.md) | [Q V8 config](../arduino/v8_config/README.md) | ADC configurable, generador, FFT, heatmap y Bode |
+
+### Firmware conservado
+
+| Versión | Objetivo |
+|---|---|
+| [V4](../arduino/historico/v4/) | Adquisición Q y puente R4 a 20 kHz |
+| [V5](../arduino/historico/v5/README.md) | UART de 31,25 kHz |
+| [V6](../arduino/historico/v6/README.md) | SPI con datos sintéticos |
+| [V6 polling](../arduino/historico/v6_polling/README.md) | Acceso a registros SPI |
+| [V6 DMA](../arduino/historico/v6_dma/README.md) | DMA SPI con espera por polling |
+| [V6 IRQ](../arduino/historico/v6_irq/README.md) | Interrupciones y READY |
+| [V6 ADC](../arduino/historico/v6_adc/README.md) | Integración de adquisición real y SPI |
+| [V7 dual](../arduino/historico/v7_dual/README.md) | Selección de salida y control permanente |
+| [V8 config](../arduino/v8_config/README.md) | Perfil ADC configurable y generador DAC por DMA |
+
+### Evolución reciente de V10
+
+Configuración aplicada automáticamente en la franja principal, color por canal,
+escalas editables y ajuste detalle/FPS. Generador en columna propia con dial,
+formas de onda e intervalos de sweep/chirp; DAC A0, ADC A2/A3. FFT y heatmap
+con hasta dos canales, log frecuencia, escalas enlazadas y margen estable.
+Bode por pasos con asentamiento independiente, ciclos de medida, puntos por
+década, hasta cinco curvas, relleno de área y referencia instrumental.
+
+La referencia inicial fue invalidada por cableado incorrecto. La vigente es
+el ensayo `20261003_123522_633848`: 20 Hz–20 kHz, ADC 16 bits / 50 kHz,
+31/31 puntos, CSV continuo y restauración exacta. [Detalle](../diagnosticos/BODE_V10.md).
+El panel WAV sigue pendiente. Los números Python y firmware son independientes.
+
+### Archivos originales y documentación de época
+
+[Inventario de monitores](../monitor/historico/README.md) ·
+[Scripts Qt V1–V5 y programas iniciales](../monitor/historico/) ·
+[Inventario Arduino](../arduino/historico/README.md) ·
+[README UART anterior](historico/README_uart_v5_v7.md) ·
+[README original](historico/README_anterior.md).
+
+---
+
+## Historia anterior (instrucciones de época)
+
 ## De monitor serial a osciloscopio de dos canales
 
 Los primeros receptores incluían una consola Python, un notebook y una interfaz

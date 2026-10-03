@@ -44,6 +44,16 @@ int main(void) {
         // Require a fresh READY edge, not the high level formerly used by the loader.
         int ok=ready_event(&ready,now()+1,previous_io);
         if (ok<0) { if (running) perror("READY wait"); goto done; }
+        if (!checker.have_sequence) {
+            // PG13 is also the loader handoff. A queued startup rise can
+            // precede SPI setup. Settle only the first credit, then verify
+            // that READY is still asserted; packet validation stays strict.
+            struct timespec settle={.tv_sec=0,.tv_nsec=20000000};
+            while (nanosleep(&settle,&settle)<0 && errno==EINTR && running) {}
+            struct gpio_v2_line_values level={.mask=1};
+            if (ioctl(ready.fd,GPIO_V2_LINE_GET_VALUES_IOCTL,&level)<0) { perror("READY level");goto done; }
+            if (!(level.bits&1)) continue;
+        }
         previous_io=now();
         if (ioctl(fd,SPI_IOC_MESSAGE(1),&transfer)!=BLOCK) { perror("SPI transfer"); goto done; }
         DualChecker before=checker;

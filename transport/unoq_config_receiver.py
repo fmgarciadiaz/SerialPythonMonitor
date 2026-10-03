@@ -6,6 +6,7 @@ import threading
 import time
 
 from transport.unoq_config_decoder import ConfigurationDecoder
+from transport.unoq_generator import generator_request
 from transport.unoq_acquisition import Configuration, acquisition_request
 from transport.unoq_switch import Mode, Phase, switch_request
 from transport.unoq_control import status_request
@@ -102,6 +103,10 @@ class OutputReceiver:
         self.config_pending = None
         self.config_applied = None
         self.on_configuration = lambda config: None
+        self.on_generator = lambda reply: None
+        self.generator_pending = None
+        self.generator_applied = None
+        self.last_generator_poll = time.monotonic()
         self.r4 = None
         self.mode = None
         self.next_index = None
@@ -189,7 +194,19 @@ class OutputReceiver:
         self._uart()
         self.decoder.feed(self.connection.read())
         for kind, value in self.decoder.events:
-            if kind == 'configuration':
+            if kind == 'generator':
+                if self.generator_pending and value.request_id == self.generator_pending[0]:
+                    wanted = self.generator_pending[1]
+                    if value.phase == Phase.REJECTED:
+                        self.generator_applied = value
+                    elif value.phase == Phase.APPLIED:
+                        if wanted is not None and value.active != wanted:
+                            raise ProtocolError('ACK de otro generador')
+                        self.generator_applied = value
+                    self.on_generator(value)
+                elif value.phase == Phase.APPLIED:
+                    self.on_generator(value)
+            elif kind == 'configuration':
                 if self.config_pending and value.request_id == self.config_pending[0]:
                     if value.requested_bits != self.config_pending[1].bits or value.requested_period != self.config_pending[1].period:
                         raise ProtocolError('ACK de otra configuración')
@@ -219,7 +236,7 @@ class OutputReceiver:
                 self.last_ping = current
             elif current-self.ping[1] > 2:
                 raise TimeoutError('El Q dejó de confirmar el control')
-        if self.pending is None and self.config_pending is None and self.ping is None and current-self.last_ping >= 1:
+        if self.pending is None and self.config_pending is None and self.generator_pending is None and self.ping is None and current-self.last_ping >= 1:
             rid = self._id()
             self.connection.socket.sendall(status_request(rid))
             self.ping = (rid, current)
@@ -295,6 +312,24 @@ class OutputReceiver:
             raise TimeoutError('El Q no confirmó la configuración aplicada')
         finally:
             self.config_pending = None
+
+    def generator(self, config=None):
+        self.ping = None
+        self.last_ping = time.monotonic()
+        rid = self._id()
+        self.generator_pending = (rid, config)
+        self.generator_applied = None
+        self.connection.socket.sendall(generator_request(rid, config))
+        deadline = time.monotonic()+3
+        try:
+            while time.monotonic() < deadline:
+                self.pump()
+                if self.generator_applied is not None:
+                    return self.generator_applied
+            raise TimeoutError('El Q no confirmó el generador; estado incierto')
+        finally:
+            self.generator_pending = None
+            self.last_generator_poll = time.monotonic()
 
     def close(self):
         if self.r4 is not None:

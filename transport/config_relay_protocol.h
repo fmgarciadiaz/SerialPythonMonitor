@@ -18,6 +18,23 @@ static bool dual_feed(DualChecker *d,const uint8_t *p) {
     if(d->have_sequence && seq-d->sequence!=1) return false;
     d->sequence=seq; d->have_sequence=true;
     unsigned kind=get16(p+6);
+    if(kind==9) {
+        uint32_t rid=get32(p+16);
+        unsigned phase=p[20],reason=p[21];
+        if(rid<UINT32_C(0x80000000) || rid==UINT32_MAX || phase<1 || phase>3 || reason>4 ||
+            ((phase==3)!=(reason!=0)) || p[22]>1 || p[23]) return false;
+        for(unsigned base=24;base<=44;base+=20) {
+            if(base==44 && phase==3) break;
+            const uint8_t *c=p+base;
+            if(c[0]>4 || c[1]>1 || c[2]>2 || c[3] || get32(c+4)<100 || get32(c+4)>20000000 ||
+                get32(c+8)<100 || get32(c+8)>20000000 || get16(c+12)>get16(c+14) || get16(c+14)>4095 ||
+                !get32(c+16) || get32(c+16)>600000 || (c[0]==4 && c[2])) return false;
+        }
+        if(p[22] && !p[25]) return false;
+        if(phase==2 && memcmp(p+24,p+44,20)) return false;
+        for(unsigned i=64;i<508;++i) if(p[i]) return false;
+        return true;
+    }
     if(kind==5 || kind==7) {
         unsigned target=p[20],active=p[21],phase=p[22],reason=p[23];
         uint32_t rid=get32(p+16),boundary=get32(p+24);
@@ -70,9 +87,12 @@ static bool dual_command(const uint8_t *p) {
     if(id<UINT32_C(0x80000000) || id==UINT32_MAX) return false;
     unsigned kind=get16(p+6);
     if(kind==2) { uint8_t expected[BLOCK]; ping(expected,id); return !memcmp(p,expected,BLOCK); }
-    if(memcmp(p,"SCP1",4) || get16(p+4)!=2 || (kind!=4 && kind!=6) ||
+    if(memcmp(p,"SCP1",4) || get16(p+4)!=2 || (kind!=4 && kind!=6 && kind!=8 && kind!=10) ||
        get32(p+12)!=492 || get32(p+508)!=crc32(p,508)) return false;
-    if(kind==6) {
+    if(kind==8 || kind==10) {
+        if(kind==8 && p[19]) return false;
+        for(unsigned i=kind==10?16:36;i<508;++i) if(p[i]) return false;
+    } else if(kind==6) {
         if(p[17] || p[18] || p[19]) return false;
         for(unsigned i=24;i<508;++i) if(p[i]) return false;
     } else for(unsigned i=17;i<508;++i) if(p[i]) return false;

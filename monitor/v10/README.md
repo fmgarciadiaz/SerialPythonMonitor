@@ -1,9 +1,11 @@
-# V10: configuración de adquisición desde la pantalla principal
+# Monitor V10 · osciloscopio, generador y análisis
 
-Paso tres del [plan](../../Plan%20de%20trabajo.md). Mantiene las funciones de
-V9 y agrega control real de resolución y tasa del ADC del Q.
+Interfaz actual del proyecto: adquisición configurable, generador DAC, FFT,
+heatmap y comparación Bode. [Proyecto](../../README.md) ·
+[Arquitectura y diagramas](../../docs/MONITOR_TECNICO.md) ·
+[Historia completa](../../docs/HISTORIA.md).
 
-![Panel principal de V10](../../assets/monitor_v10.png)
+![Panel principal de V10](../../assets/monitor_v10_actual.png)
 
 ## Uso
 
@@ -28,7 +30,8 @@ UART espera a que se seleccione un R4 válido.
 El resumen muestra la configuración confirmada; los selectores permanecen visibles en la pantalla principal. La resolución ajusta la escala
 ADC, voltios y trigger. La frecuencia se sigue calculando de los timestamps.
 
-![Configuración desplegada](../../assets/monitor_v10_config.png)
+Los controles de adquisición están en la franja superior; la imagen principal
+es una demostración de la interfaz actual.
 
 Cambiar **bits o tasa** termina el CSV actual y empieza una captura nueva:
 ADC, DMA y timestamps se reinician de forma controlada. No se unen muestras
@@ -109,7 +112,7 @@ Una captura no mezcla resoluciones/tasas; puede contener cambios de salida.
 [Validación física, Qt y CSV](../../diagnosticos/ADQUISICION_V10.md).
 [Contrato de adquisición](../../docs/CONFIGURACION_ADQUISICION.md).
 
-El generador permanece cuadrado y fijo. Su panel corresponde al paso cuatro.
+La columna izquierda **GENERADOR · A0**, con selector de ondas dibujadas y dial logarítmico de 0,1 Hz–20 kHz, permite cuadrada, seno, triángulo, rampa, sweep, chirp y pulso. [Uso y límites](../../docs/GENERADOR_PASO4.md).
 
 ## Zoom horizontal y render
 
@@ -141,7 +144,7 @@ atenuado cuando está oculto. Los colores elegidos se mantienen durante la
 sesión, incluso al cambiar el estilo del trazo.
 
 Los selectores de Q, bits, tasa, salida SPI/UART y R4 están siempre visibles.
-El panel plegable y el botón Aplicar se retiraron. Las elecciones se aplican
+El columna a la izquierda y el botón Aplicar se retiraron. Las elecciones se aplican
 automáticamente con confirmación del Q; el slider de detalle es inmediato.
 
 Los controles están integrados en las tarjetas superiores: **CONTROL Q** elige
@@ -158,12 +161,39 @@ el tiempo total del par.
 
 ## Pines actuales del UNO Q
 
-- **A0 / DAC0 / PA4:** salida DAC de 12 bits. La cuadrada de prueba alterna
-  códigos 0 y 4095 cada 200 ms (2,5 Hz nominales, temporización por hilo).
+- **A0 / DAC0 / PA4:** salida DAC de 12 bits. Generador temporizado en MCU
+  con TIM6 + GPDMA1 canal 4, rango 0,1 Hz–20 kHz; arranca con cuadrada de 2,5 Hz entre códigos 0 y 4095.
 - **A2 / PA6 / ADC1_IN11:** V_IN / ADC_IN, primer canal adquirido.
 - **A3 / PA7 / ADC1_IN12:** V_OUT / ADC_OUT, segundo canal adquirido.
 
 Trasladar las señales de medida a A2/A3. Para medir el generador, conectar A0
 con A2; la salida del circuito bajo prueba se conecta a A3, con masa común.
 La resolución del DAC (12 bits) es independiente de la resolución/oversampling
-seleccionados para el ADC. El panel de generador completo sigue pendiente.
+seleccionados para el ADC. [Uso y límites del generador](../../docs/GENERADOR_PASO4.md).
+
+El generador permite ajustar la frecuencia con el dial: el número cambia al
+girarlo y la configuración se aplica al soltarlo. La lectura usa Hz hasta 1000 Hz y luego kHz, sin ceros decimales de relleno.
+Las frecuencias fraccionarias conservan su precisión. Al escribir
+se aceptan Hz, kHz o un número en Hz; Enter confirma el valor.
+Las lecturas de escala horizontal (muestras) y vertical (V) también son
+editables y se sincronizan con sus diales.
+
+Modos **V / t**, **FFT** y **Heatmap** disponibles debajo del generador, con
+uno o dos canales apilados y opciones de análisis. [Uso y validación](../../docs/FFT_V10.md).
+
+**Bode** inicia un barrido senoidal por pasos con el Q en RUN y grafica
+ganancia/fase V_OUT/V_IN. **Frecuencia logarítmica** cambia X en FFT e Y en
+Heatmap. [Operación y límites](../../docs/FFT_V10.md#frecuencias-logarítmicas-y-bode).
+
+Bode permite separar **Asentamiento** (ms) y **Ciclos a medir**, y muestra el
+tiempo mínimo estimado del barrido más comunicación. Valores iniciales: 200 ms
+y tres ciclos; ya no se esperan tres períodos adicionales por punto.
+
+## Bode, relleno y referencia vigente
+
+Agregar conserva hasta cinco barridos; Repetir limpia la comparación. Ganancia
+y fase de cada barrido comparten color y relleno tenue bajo la curva. FFT usa
+también relleno de área con el color elegido para cada canal.
+La referencia vigente se carga al abrir el monitor: ADC 16 bits / 50 kHz,
+20 Hz–20 kHz. Corregir con calibración sólo actúa dentro de ese perfil/rango.
+[Uso del análisis](../../docs/FFT_V10.md) · [Calibración](../../diagnosticos/BODE_V10.md).

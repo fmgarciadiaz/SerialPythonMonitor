@@ -114,19 +114,19 @@ static inline void cache_invalidate(void *addr, size_t len)
 
 // Canales 2/3 dedicados al ensayo; 0/1 quedan libres para futura adquisición.
 // DMA mueve los bytes; IRQ de fin/error despierta al hilo mediante semáforo.
-static bool reset_dma(DMA_Channel_TypeDef *channel) {
+static bool reset_dma(DMA_Channel_TypeDef *channel, uint32_t timeout_us = ACTIVE_TIMEOUT_US) {
     if (channel->CCR & DMA_CCR_EN) {
         channel->CCR |= DMA_CCR_SUSP;
         const uint32_t started = k_cycle_get_32();
         while (!(channel->CSR & (DMA_CSR_SUSPF | DMA_CSR_IDLEF))) {
-            if (elapsed_us(started) >= ACTIVE_TIMEOUT_US) return false;
+            if (elapsed_us(started) >= timeout_us) return false;
         }
     }
     channel->CCR = DMA_CCR_RESET;
     __DSB();
     const uint32_t started = k_cycle_get_32();
     while (channel->CCR & (DMA_CCR_RESET | DMA_CCR_EN)) {
-        if (elapsed_us(started) >= ACTIVE_TIMEOUT_US) return false;
+        if (elapsed_us(started) >= timeout_us) return false;
     }
     channel->CFCR = DMA_CFCR_TCF | DMA_CFCR_HTF | DMA_CFCR_DTEF |
         DMA_CFCR_ULEF | DMA_CFCR_USEF | DMA_CFCR_SUSPF | DMA_CFCR_TOF;
@@ -232,6 +232,7 @@ static uint8_t sample_frame[BLOCK_BYTES];
 K_MSGQ_DEFINE(control_replies, sizeof(scope_control::Reply), 8, 4);
 static scope_control::Switch output_switch;
 static scope_acq::Settings settings;
+K_MSGQ_DEFINE(generator_replies, sizeof(scope_gen::Reply), 8, 4);
 K_MSGQ_DEFINE(settings_replies, sizeof(scope_acq::Reply), 8, 4);
 static uint8_t output_mode = scope_control::SPI;
 static bool reply_reserved = false;
@@ -363,12 +364,15 @@ void loop() {
     if (!ready) { k_sleep(K_MSEC(100)); return; }
     scope_control::Reply reply{};
     scope_acq::Reply config_reply{};
+    scope_gen::Reply generator_reply{};
     k_mutex_lock(&output_lock, K_FOREVER);
-    const bool have_config = k_msgq_get(&settings_replies, &config_reply, K_NO_WAIT) == 0;
-    const bool have_reply = !have_config && k_msgq_get(&control_replies, &reply, K_NO_WAIT) == 0;
-    const bool have_samples = !have_config && !have_reply && k_sem_take(&frame_available, K_NO_WAIT) == 0;
+    const bool have_generator = k_msgq_get(&generator_replies, &generator_reply, K_NO_WAIT) == 0;
+    const bool have_config = !have_generator && k_msgq_get(&settings_replies, &config_reply, K_NO_WAIT) == 0;
+    const bool have_reply = !have_generator && !have_config && k_msgq_get(&control_replies, &reply, K_NO_WAIT) == 0;
+    const bool have_samples = !have_generator && !have_config && !have_reply && k_sem_take(&frame_available, K_NO_WAIT) == 0;
     uint32_t started = k_cycle_get_32();
-    if (have_config) scope_acq::encode(tx, sequence, config_reply);
+    if (have_generator) scope_gen::encode(tx, sequence, generator_reply);
+    else if (have_config) scope_acq::encode(tx, sequence, config_reply);
     else if (have_reply) scope_control::encode(tx, sequence, reply);
     else {
         data_frame(tx, sequence, last_ping, spi_errors, bad_ping, short_transfers,
@@ -399,7 +403,13 @@ void loop() {
     else {
         scope_control::Request request{};
         scope_acq::Request config_request{};
-        if (scope_acq::decode(rx, BLOCK_BYTES, config_request)) {
+        scope_gen::Request generator_request{};
+        if (scope_gen::decode(rx, BLOCK_BYTES, generator_request)) {
+            if (k_msgq_num_free_get(&generator_replies)) {
+                const auto result=generator::submit(generator_request);
+                if(k_msgq_put(&generator_replies,&result,K_NO_WAIT)!=0) { acquisition::fail();ready=false; }
+            } else { acquisition::fail();ready=false; }
+        } else if (scope_acq::decode(rx, BLOCK_BYTES, config_request)) {
             k_mutex_lock(&output_lock, K_FOREVER);
             if (k_msgq_num_free_get(&settings_replies) >= 3U) {
                 const auto accepted = settings.submit(config_request,
@@ -428,5 +438,5 @@ void loop() {
     ++sequence;
     if (have_samples && ready) k_sem_give(&frame_sent);
     // Idle status traffic is bounded; SPI remains available during UART output.
-    if (!have_config && !have_reply && !have_samples) k_sleep(K_MSEC(1));
+    if (!have_generator && !have_config && !have_reply && !have_samples) k_sleep(K_MSEC(1));
 }

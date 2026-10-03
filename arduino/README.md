@@ -14,3 +14,5 @@ Estos comandos seleccionan V8 config por defecto. Las aplicaciones anteriores
 están en [historico](historico/README.md) y se pueden seleccionar explícitamente
 con `--version` o `--firmware`. Ver [catálogo](apps_catalogo.json).
 Para UART al R4 se conserva el [puente R4 V5](historico/v5/r4_bridge_v5/README.md).
+
+[MCU y cableado](../docs/UNO_Q_TECNICO.md) · [Relay](../docs/TRANSPORTE_TECNICO.md) · [Historia completa](../docs/HISTORIA.md).

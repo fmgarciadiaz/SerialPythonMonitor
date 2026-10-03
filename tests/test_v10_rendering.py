@@ -89,6 +89,7 @@ class WorkerStartupTests(unittest.TestCase):
     self.collect([(16,16383,0,100)]) # profile left active by the previous client
     self.config=config;self.on_configuration(config)
    def select(self,*args):pass
+   def generator(self,*args):self.last_generator_poll=__import__("time").monotonic()
    def pump(self):self.collect([(1000,1023,0,0)]);worker.stop()
    def close(self):pass
   import itertools

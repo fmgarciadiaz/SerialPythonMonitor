@@ -94,3 +94,7 @@ es 65535. Volver a 8–14 bits deshabilita el oversampling. Esta opción promedi
 ruido y señales dentro de la ventana; no promete 16 bits de precisión efectiva.
 
 Referencia: [ST RM0456](https://www.st.com/resource/en/reference_manual/rm0456-stm32u5-series-armbased-32bit-mcus-stmicroelectronics.pdf).
+
+## Captura física del timestamp
+
+TIM5 conserva su contador de 1 MHz. Su canal 1 captura TIM2 TRGO mediante TRC/ITR1 y DMA0 lee CCR1 usando TIM5_CH1. La captura precede la petición DMA, por lo que los tiempos no dependen de la demora de lectura de CNT en el bus. Se verifica CC1OF además de los errores DMA/ADC y de los intervalos exactos del productor. [Causa y prueba de 40 perfiles](../diagnosticos/CIERRE_16BITS_20261002.md).

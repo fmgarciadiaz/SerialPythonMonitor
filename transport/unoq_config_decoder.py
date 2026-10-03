@@ -4,6 +4,7 @@ import struct
 import time
 import zlib
 from transport.unoq_usb import BLOCK, MASK, SAMPLE, ProtocolError
+from transport.unoq_generator import generator_reply
 from transport.unoq_acquisition import Configuration, acquisition_reply
 from transport.unoq_switch import Mode, Phase, switch_request, switch_reply
 
@@ -39,6 +40,9 @@ class ConfigurationDecoder:
             if self.sequence is not None and (seq-self.sequence)&MASK != 1:
                 raise ProtocolError('Secuencia dual discontinua')
             self.sequence = seq
+            if kind == 9:
+                self.events.append(('generator', generator_reply(p)))
+                continue
             if kind == 7:
                 reply = acquisition_reply(p)
                 if reply.phase == Phase.APPLIED and reply.epoch == self.epoch and reply.active != self.config:

@@ -92,6 +92,7 @@ class ConfigurationUITests(unittest.TestCase):
             status_changed=QtCore.pyqtSignal(str)
             output_confirmed=QtCore.pyqtSignal(int,str)
             acquisition_confirmed=QtCore.pyqtSignal(int,int)
+            generator_confirmed=QtCore.pyqtSignal(object)
             switching=QtCore.pyqtSignal(bool)
             error_occurred=QtCore.pyqtSignal(str)
             finished=QtCore.pyqtSignal()

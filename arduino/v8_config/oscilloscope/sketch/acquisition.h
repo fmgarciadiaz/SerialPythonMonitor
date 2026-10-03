@@ -1,6 +1,7 @@
 #pragma once
 #include "scope_config.h"
 #include "scope_protocol.h"
+#include "generator.h"
 #include <stm32u5xx_ll_adc.h>
 #include <stm32u5xx_ll_tim.h>
 #include <stm32u5xx_ll_gpio.h>
@@ -10,13 +11,12 @@ namespace acquisition {
 static uint8_t bits = 14;
 static uint32_t period = 32, epoch = 0;
 static bool threads_started = false;
-static struct k_thread toggle_thread_data, producer_thread_data;
-K_THREAD_STACK_DEFINE(toggle_stack, 1024);
+static struct k_thread producer_thread_data;
 K_THREAD_STACK_DEFINE(producer_stack, 4096);
 static uint16_t dmaBuffer[DMA_BUFFER_RESULTS]
     __attribute__((aligned(CONFIG_DCACHE_LINE_SIZE)));
 
-// Hardware timestamps captured on every TIM2 update.
+// Hardware timestamps latched by TIM5 CH1/TRC on every TIM2 update (ITR1).
 // TIM5 is a free-running 1 MHz counter, so one tick = 1 us.
 static uint32_t timestampBuffer[DMA_NODE_PAIRS * DMA_NODE_COUNT]
     __attribute__((aligned(CONFIG_DCACHE_LINE_SIZE)));
@@ -137,11 +137,17 @@ static void timestamp_timer_init(void)
     (void)RCC->APB1ENR1;
 
     TIM5->CR1 = 0;
+    TIM5->DIER = 0;
+    TIM5->CCER = 0;
+    TIM5->SMCR = LL_TIM_TS_ITR1; // TIM2 TRGO; verified on this U585 by SWD/CC1IF.
+    TIM5->CCMR1 = TIM_CCMR1_CC1S; // CH1 captures internal trigger TRC, no external pin.
+    TIM5->CCMR2 = 0;
     TIM5->PSC = TIM5_PRESCALER;
     TIM5->ARR = 0xFFFFFFFFU;
     TIM5->CNT = 0;
     TIM5->EGR = TIM_EGR_UG;
     TIM5->SR = 0;
+    TIM5->CCER = TIM_CCER_CC1E;
     TIM5->CR1 = TIM_CR1_CEN;
 }
 
@@ -172,6 +178,18 @@ static void configure_dma_ring(uint32_t channel, LL_DMA_LinkNodeTypeDef *nodes,
         r[6] = r[7] = 0;
     }
 
+    // CCR.RESET flushes the FIFO/internal state, not this register file.
+    // As in ST's DMA_List_Init, force a zero-length initial block so the
+    // head node is loaded before any peripheral word is transferred.
+    // Otherwise a warm restart can finish an old partial (odd-rank) block.
+    auto *registers = channel == LL_DMA_CHANNEL_1 ? GPDMA1_Channel1 : GPDMA1_Channel0;
+    registers->CTR1 = 0;
+    registers->CTR2 = 0;
+    registers->CBR1 = 0;
+    registers->CSAR = 0;
+    registers->CDAR = 0;
+    registers->CLLR = 0;
+    __DSB();
     LL_DMA_ConfigControl(GPDMA1, channel,
         LL_DMA_HIGH_PRIORITY | LL_DMA_LINK_ALLOCATED_PORT1 | LL_DMA_LSM_FULL_EXECUTION);
     LL_DMA_SetTransferEventMode(GPDMA1, channel, LL_DMA_TCEM_EACH_LLITEM_TRANSFER);
@@ -196,8 +214,8 @@ static void dma_init(void)
     configure_dma_ring(LL_DMA_CHANNEL_1, dmaNode, LL_GPDMA1_REQUEST_ADC1,
         LL_ADC_DMA_GetRegAddr(ADC1, LL_ADC_DMA_REG_REGULAR_DATA), dmaBuffer,
         DMA_NODE_BYTES, DMA_NODE_RESULTS * sizeof(uint32_t), LL_DMA_DEST_DATAWIDTH_HALFWORD);
-    configure_dma_ring(LL_DMA_CHANNEL_0, timestampNode, LL_GPDMA1_REQUEST_TIM2_UP,
-        reinterpret_cast<uint32_t>(&TIM5->CNT), timestampBuffer,
+    configure_dma_ring(LL_DMA_CHANNEL_0, timestampNode, LL_GPDMA1_REQUEST_TIM5_CH1,
+        reinterpret_cast<uint32_t>(&TIM5->CCR1), timestampBuffer,
         DMA_TIMESTAMP_NODE_BYTES, DMA_TIMESTAMP_NODE_BYTES, LL_DMA_DEST_DATAWIDTH_WORD);
 }
 
@@ -210,37 +228,25 @@ static void timer_init(void)
     RCC->APB1ENR1 |= RCC_APB1ENR1_TIM2EN;
     (void)RCC->APB1ENR1;
 
+    // Reconfiguration reuses CR2/DIER. A software UG must not request a
+    // timestamp DMA transfer or an ADC sequence before both rings are armed.
+    LL_TIM_DisableDMAReq_UPDATE(TIM2);
+    LL_TIM_SetTriggerOutput(TIM2, LL_TIM_TRGO_RESET);
     LL_TIM_SetCounterMode(TIM2, LL_TIM_COUNTERMODE_UP);
     LL_TIM_SetClockDivision(TIM2, LL_TIM_CLOCKDIVISION_DIV1);
     LL_TIM_SetPrescaler(TIM2, TIM2_PRESCALER);
     LL_TIM_SetAutoReload(TIM2, (period - 1U));
     LL_TIM_GenerateEvent_UPDATE(TIM2);
+    LL_TIM_ClearFlag_UPDATE(TIM2);
+    LL_TIM_SetCounter(TIM2, 0);
     LL_TIM_DisableARRPreload(TIM2);
     LL_TIM_SetClockSource(TIM2, LL_TIM_CLOCKSOURCE_INTERNAL);
     LL_TIM_SetTriggerOutput(TIM2, LL_TIM_TRGO_UPDATE);
     LL_TIM_DisableMasterSlaveMode(TIM2);
 
-    // TIM2 UPDATE must also generate a GPDMA request for the hardware
-    // timestamp channel.  Without UDE, the timestamp DMA never advances.
-    LL_TIM_EnableDMAReq_UPDATE(TIM2);
+    // UDE is enabled in start(), after the DMA rings and ADC are armed.
 
     LL_TIM_SetCounter(TIM2, 0);
-}
-
-// ------------------------------------------------------------
-// Toggle thread
-// ------------------------------------------------------------
-
-static void toggle_thread(void *, void *, void *)
-{
-    bool state = false;
-
-    while (1)
-    {
-        state = !state;
-        analogWrite(DAC_OUTPUT, state ? DAC_MAXIMUM : 0);
-        k_sleep(K_MSEC(TOGGLE_PERIOD_MS));
-    }
 }
 
 static bool dma_in_node(uint32_t channel, uint32_t bufferStart,
@@ -276,7 +282,7 @@ static void fail() {
 static bool hardware_error() {
     return ((GPDMA1_Channel0->CSR | GPDMA1_Channel1->CSR) &
             (DMA_CSR_DTEF | DMA_CSR_ULEF | DMA_CSR_USEF | DMA_CSR_TOF)) ||
-           (ADC1->ISR & ADC_ISR_OVR);
+           (ADC1->ISR & ADC_ISR_OVR) || (TIM5->SR & TIM_SR_CC1OF);
 }
 static void producer(void *, void *, void *) {
     uint32_t last_poll = k_cycle_get_32(), node_index = 0;
@@ -346,23 +352,29 @@ static void release() {
 static bool start() {
     if ((GPDMA1_Channel0->CCR | GPDMA1_Channel1->CCR) & DMA_CCR_EN) return false;
     pinMode(ADC_IN_PIN, INPUT); pinMode(ADC_OUT_PIN, INPUT);
-    if (!threads_started) {
-        analogWriteResolution(12);
-        analogWrite(DAC_OUTPUT, 0);
-    }
+    if (!threads_started && !generator::start()) return false;
     timer_init(); timestamp_timer_init(); adc_init(); dma_init();
     producer_slot = consumer_slot = 0;
     dropped_nodes = fatal_errors = 0;
     k_sem_init(&empty_slots, QUEUE_SLOTS, QUEUE_SLOTS);
     k_sem_init(&full_slots, 0, QUEUE_SLOTS);
+    // A previous rank-2 result must not become the first word of the new
+    // rank-1/rank-2 ring. Drain DR and clear its flags before enabling DMA.
+    LL_ADC_REG_SetDataTransferMode(ADC1, LL_ADC_REG_DMA_TRANSFER_NONE);
+    (void)ADC1->DR;
+    LL_ADC_ClearFlag_EOC(ADC1);
+    LL_ADC_ClearFlag_EOS(ADC1);
+    LL_ADC_ClearFlag_OVR(ADC1);
+    LL_ADC_REG_SetDataTransferMode(ADC1, LL_ADC_REG_DMA_TRANSFER_UNLIMITED);
     LL_DMA_EnableChannel(GPDMA1, LL_DMA_CHANNEL_0);
     LL_DMA_EnableChannel(GPDMA1, LL_DMA_CHANNEL_1);
     LL_ADC_REG_StartConversion(ADC1);
+    // The request follows the capture latch, rather than reading CNT at a
+    // variable bus-service time. Detect overcapture instead of hiding jitter.
+    LL_TIM_EnableDMAReq_CC1(TIM5);
     LL_TIM_EnableCounter(TIM2);
     k_thread_create(&producer_thread_data, producer_stack, K_THREAD_STACK_SIZEOF(producer_stack),
                     producer, nullptr, nullptr, nullptr, PRIORITY_SERIAL, 0, K_NO_WAIT);
-    if (!threads_started) k_thread_create(&toggle_thread_data, toggle_stack, K_THREAD_STACK_SIZEOF(toggle_stack),
-                    toggle_thread, nullptr, nullptr, nullptr, PRIORITY_TOGGLE, 0, K_NO_WAIT);
     threads_started = true;
     return true;
 }

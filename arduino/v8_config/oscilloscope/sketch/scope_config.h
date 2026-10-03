@@ -3,7 +3,7 @@
 #include <zephyr/kernel.h>
 
 // Firmware V8 configurable: Arduino Core Zephyr 1.0.0, UNO Q / STM32U585.
-// Recursos exclusivos: ADC1, TIM2, TIM5, GPDMA1 canales 0 y 1, A2/A3 (ADC), A0 (DAC0), DAC1 canal 1, Serial1.
+// Recursos exclusivos: ADC1, TIM2, TIM5, GPDMA1 canales 0/1 (ADC), 4 (DAC), TIM6, A2/A3 (ADC), A0 (DAC0), DAC1 canal 1, Serial1.
 // No usar analogRead() ni otros drivers sobre esos periféricos durante adquisición.
 #if !defined(CONFIG_SOC_STM32U585XX)
 #error "Este firmware requiere el STM32U585 del UNO Q"
