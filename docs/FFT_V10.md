@@ -88,7 +88,8 @@ anteriores e inicia un nuevo barrido. Durante la medición este botón permite
 cancelar; Agregar se habilita al terminar si queda espacio.
 Cada curva tiene un relleno translúcido bajo la línea, del mismo color. FFT
 también rellena el área bajo el espectro. El relleno tiene opacidad tenue
-y no modifica las mediciones.
+y no modifica las mediciones. Cada tramo válido se cierra verticalmente;
+no se rellena ni se une el área a través de huecos sin lectura.
 
 La calibración instrumental usa un barrido de referencia con A0 conectado
 directamente a A2 y A3. El ensayo `verificar_bode_qt_v10.py --calibration`

@@ -143,10 +143,10 @@ class BodeUITests(unittest.TestCase):
 
     def test_fft_fill_tracks_units_color_and_mode(self):
         self.s.set_mode(1); self.feed()
-        self.assertLess(self.s.curves[0].opts['fillLevel'],0)
-        self.assertEqual(self.s.curves[0].opts['fillBrush'].color().alpha(),38)
+        self.assertLess(float(np.nanmin(self.s.fft_fills[0].yData)),0)
+        self.assertEqual(self.s.fft_fills[0].opts['fillBrush'].color().alpha(),38)
         self.s.scale.setCurrentIndex(1); self.feed()
-        self.assertEqual(self.s.curves[0].opts['fillLevel'],0)
+        self.assertEqual(float(np.nanmin(self.s.fft_fills[0].yData)),0)
         self.s.set_mode(3)
         self.assertIsNone(self.s.curves[0].opts['fillLevel'])
 
@@ -399,10 +399,11 @@ class BodeUITests(unittest.TestCase):
         b.result=[(100,-1,-10),(1000,-10,-45)]
         b.draw()
         for curve,shadow in zip(b.curve_sets[0],b.shadows[0]):
-            np.testing.assert_array_equal(curve.xData,shadow.xData)
-            np.testing.assert_array_equal(curve.yData,shadow.yData)
+            np.testing.assert_array_equal(curve.xData,shadow.xData[1:3])
+            np.testing.assert_array_equal(curve.yData,shadow.yData[1:3])
             brush=shadow.opts['fillBrush']
             self.assertEqual(brush.color().name(),self.w.channel_palette[0])
             self.assertEqual(brush.color().alpha(),38)
-            self.assertLess(shadow.opts['fillLevel'],float(np.min(shadow.yData)))
+            self.assertEqual(shadow.opts['fillLevel'],'enclosed')
+            self.assertLess(shadow.yData[0],float(np.min(curve.yData)))
             self.assertLess(shadow.zValue(),curve.zValue())

@@ -5,6 +5,7 @@ import time
 from PyQt5 import QtCore, QtWidgets
 import pyqtgraph as pg
 from monitor.v10.bode import BodeSweep
+from monitor.v10.plot_fill import area_polygons
 
 
 WINDOWS = {'Hann': np.hanning, 'Hamming': np.hamming,
@@ -56,11 +57,15 @@ class SpectralDisplay:
         stack.addWidget(self.widget)
         self.plots, self.curves, self.images, self.bars = [], [], [], []
         self.attached = {0, 1}
+        self.fft_fills = []
         for row in range(2):
             plot = self.widget.addPlot(row=row, col=0, axisItems={
                 'bottom':FrequencyAxis('bottom'), 'left':FrequencyAxis('left')})
             plot.showGrid(x=True, y=True, alpha=.2)
             curve = plot.plot(pen=pg.mkPen('#00e5ff', width=1))
+            fill = plot.plot(pen=None)
+            fill.setZValue(-5)
+            self.fft_fills.append(fill)
             image = pg.ImageItem(axisOrder='row-major')
             image.setLookupTable(pg.colormap.get('viridis').getLookupTable())
             plot.addItem(image)
@@ -142,6 +147,7 @@ class SpectralDisplay:
         self.shrink_since = {}
         for curve, image in zip(self.curves, self.images):
             curve.setData([], []); image.clear()
+        for fill in self.fft_fills: fill.setData([], [])
 
     def set_mode(self, mode):
         if self.bode.active: self.bode.cancel('Cambio de modo')
@@ -157,6 +163,7 @@ class SpectralDisplay:
 
     def configure_plots(self):
         heat = self.mode == 2
+        for fill in self.fft_fills: fill.setVisible(self.mode == 1)
         for curves in self.bode.curve_sets[1:] + self.bode.shadows:
             for curve in curves: curve.setVisible(self.mode == 3)
         for i, plot in enumerate(self.plots):
@@ -291,6 +298,7 @@ class SpectralDisplay:
             values = latest_values[i]
             if values is None:
                 self.curves[i].setData([], [])
+                self.fft_fills[i].setData([], [])
                 if self.mode == 1: continue
             color = owner.channel_colors.get(channel, '#00e5ff')
             self.curves[i].setPen(pg.mkPen(color, width=1))
@@ -301,8 +309,11 @@ class SpectralDisplay:
                 yrange = shared_range or self.stable_range(i, [values[1:] if log else values])
                 if yrange is not None:
                     fill = pg.mkColor(color); fill.setAlpha(38)
-                    self.curves[i].setBrush(pg.mkBrush(fill))
-                    self.curves[i].setFillLevel(yrange[0] if self.scale.currentIndex() == 0 else 0)
+                    baseline = yrange[0] if self.scale.currentIndex() == 0 else 0
+                    xfill, yfill = area_polygons(frequencies[1:] if log else frequencies,
+                                               values[1:] if log else values, baseline)
+                    self.fft_fills[i].setData(xfill, yfill, pen=None, fillLevel='enclosed',
+                                            fillBrush=pg.mkBrush(fill), connect='finite')
                 if yrange is not None and not (i == 1 and self.lock_axes.isChecked() and self.attached == {0, 1}):
                     self.plots[i].setYRange(*yrange, padding=0)
                 self.plots[i].setXRange(np.log10(fs/n) if log else 0,

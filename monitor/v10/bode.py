@@ -6,6 +6,7 @@ import pyqtgraph as pg
 from transport.unoq_generator import GeneratorConfig
 from transport.unoq_switch import Phase
 from monitor.v10.bode_calibration import load_reference, correct_transfer
+from monitor.v10.plot_fill import area_polygons
 
 
 def tone_transfer(t, vin, vout, frequency):
@@ -298,8 +299,9 @@ class BodeSweep:
             shadow.setAlpha(38)
             finite = values[np.isfinite(values)]
             bottom = float(finite.min()-max(3, np.ptp(finite)*.1)) if len(finite) else -160
-            self.shadows[index][i].setData(data[:,0], values,
-                pen=None, fillLevel=bottom, fillBrush=pg.mkBrush(shadow), connect='finite')
+            xfill, yfill = area_polygons(data[:,0], values, bottom)
+            self.shadows[index][i].setData(xfill, yfill,
+                pen=None, fillLevel='enclosed', fillBrush=pg.mkBrush(shadow), connect='finite')
 
     def tick(self):
         if self.active and (not self.owner.is_running or self.owner.serial_worker is None):
