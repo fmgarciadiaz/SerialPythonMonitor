@@ -7,7 +7,7 @@ import tempfile
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
-SKETCH = ROOT / 'arduino/v4/oscilloscope/sketch'
+SKETCH = ROOT / 'arduino/historico/v4/oscilloscope/sketch'
 
 
 class ProtocolTests(unittest.TestCase):

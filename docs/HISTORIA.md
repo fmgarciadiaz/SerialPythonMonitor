@@ -15,7 +15,7 @@ lectura de formatos de texto/CSV, controles de osciloscopio, trigger y medicione
 La adquisición actual utiliza paquetes binarios DATA con timestamps y dos ADC;
 el CSV se genera en el receptor para guardar las capturas.
 
-Se conservan los [programas anteriores](../monitor/historico/), el
+Se conservan los [programas anteriores](../monitor/historico), el
 [README original completo](historico/README_anterior.md), el
 [inventario anterior](historico/INVENTARIO_anterior.md) y las
 [notas de contexto del UNO Q](historico/CONTEXTO_UNO_Q_Codex.md).
@@ -60,7 +60,7 @@ Qt fuera de pantalla. Pasaron 30 pruebas automatizadas.
 
 Los [resultados completos de V5](../diagnosticos/VALIDACION_V5.md) incluyen los
 ensayos descartados, el respaldo anterior y los límites de la comprobación.
-La [guía de V5](../arduino/v5/README.md) describe configuración y restauración.
+La [guía de V5](../arduino/historico/v5/README.md) describe configuración y restauración.
 
 ---
 
@@ -70,7 +70,7 @@ Los siguientes apartados conservan la información del README principal anterior
 con enlaces ajustados y el estado de las placas actualizado al último ensayo.
 
 [Características y uso del SerialMonitor](../monitor/README.md) ·
-[README anterior completo](../docs/historico/README_anterior.md).
+[README anterior completo](historico/README_anterior.md).
 
 ## Qué usar
 
@@ -87,9 +87,9 @@ Los números del firmware y del monitor son independientes: V4 se usa con V6.
 ## Abrir el monitor
 
 ```sh
-python iniciar_monitor.py                      # V6 estable
-python iniciar_monitor.py --version v7         # V7 experimental
-python iniciar_monitor.py --list               # ver versiones sin abrir ventanas
+python monitor/historico/v6/app.py                      # V6 estable
+python monitor/historico/v7/app.py         # V7 experimental
+python monitor/historico/v8/app.py         # USB directo del Q
 ```
 
 Seleccionar el puerto **R4**. La V6 usa 2.000.000 baudios; V7 usa 3.000.000.
@@ -100,18 +100,19 @@ En VS Code también están las tareas **Monitor V6: Abrir estable** y
 ## Dónde está cada cosa
 
 ```text
-iniciar_monitor.py              Entrada única para abrir el monitor
 monitor/
   v6/app.py                   Monitor estable
-  v7/app.py                   Monitor experimental
+  v7/app.py                   Monitor UART experimental
+  v8/app.py                   Monitor USB directo, independiente
   historico/                  V1–V5, Tkinter, consola y notebook originales
 arduino/
-  v4/oscilloscope/            App Lab Q estable (sketch + Python + perfil)
-  v4/r4_bridge_v4/            Sketch R4 estable
-  v4/unoq.json                Destino de las tareas V4
-  v5/oscilloscope/            App Lab Q experimental
-  v5/r4_bridge_v5/            Sketch R4 experimental
-  v5/unoq.json                Destino independiente V5
+  v6_adc/                    Adquisición actual SPI y USB directo
+  historico/v4/oscilloscope/            App Lab Q estable (sketch + Python + perfil)
+  historico/v4/r4_bridge_v4/            Sketch R4 estable
+  historico/v4/unoq.json                Destino de las tareas V4
+  historico/v5/oscilloscope/            App Lab Q experimental
+  historico/v5/r4_bridge_v5/            Sketch R4 experimental
+  historico/v5/unoq.json                Destino independiente V5
 capturas/                     Capturas existentes y nuevas de V6
   experimental_v7/            Capturas nuevas de V7
 respaldos/                    Respaldo de firmware y exportaciones de App Lab
@@ -125,8 +126,8 @@ docs/historico/              Documentación anterior, sólo referencia
 ## Firmware y versiones
 
 [Guía Arduino y comandos](../arduino/README.md) ·
-[Detalle V4 estable](../arduino/v4/oscilloscope/README.md) ·
-[Configuración V5](../arduino/v5/README.md) ·
+[Detalle V4 estable](../arduino/historico/v4/oscilloscope/README.md) ·
+[Configuración V5](../arduino/historico/v5/README.md) ·
 [Validación física V4](../diagnosticos/VALIDACION_V4.md) ·
 [Validación física V5](../diagnosticos/VALIDACION_V5.md).
 
@@ -146,3 +147,25 @@ Sólo se marca estable tras compilar, medir continuidad y comprobar captura.
 No promover una versión únicamente porque el gráfico se vea bien.
 
 Pruebas: `python -m unittest discover -s tests`.
+
+## 2 de octubre de 2026: monitor V9 con control Q y destino SPI/R4
+
+Se completó el paso dos del plan con una versión independiente del monitor:
+CONTROL Q por USB/ADB, DESTINO SPI/UART y PUERTO R4. El Q conserva control
+y estado en ambos modos. Aplicar destino espera confirmación del MCU y
+completa las muestras de la frontera antes de avanzar en gráfico y CSV.
+La prueba física incluyó cambios en vivo y reconexiones en ambos modos:
+712.192 pares recibidos y 475.136 filas CSV sin huecos.
+[Guía de V9](../monitor/historico/v9/README.md) y [validación](../diagnosticos/MONITOR_V9.md).
+
+## 2 de octubre de 2026: adquisición configurable V10
+
+Se completó el paso tres con panel plegable para control Q, bits, tasa y salida SPI/UART. La vista principal refleja valores confirmados por el MCU. La app independiente V8 config mantiene DMA y admite 8/10/12/14 bits y once períodos enteros de 32 a 1000 µs. Cambiar bits/tasa reinicia captura y cierra CSV; cambiar sólo salida conserva continuidad. Pasaron 99 pruebas locales, 20 perfiles físicos y cinco CSV sin huecos ni errores de escala. [Guía](../monitor/v10/README.md) y [validación](../diagnosticos/ADQUISICION_V10.md).
+
+## 2 de octubre de 2026: tasas SPI superiores en V10
+
+Se agregan 40, 50 y 62,5 kHz por canal exclusivamente por SPI. 40 kHz mantiene la ventana ADC larga; las otras dos usan 68 ciclos (1,7 µs). UART sigue limitado a 31,25 kHz tanto en interfaz como en MCU. El barrido a 100 kHz falló integridad y esa opción se retiró. [Ensayo físico y límites analógicos](../diagnosticos/TASAS_SPI_V10.md).
+
+## 2 de octubre de 2026: zoom y render de V10
+
+Se amplía el horizontal a 250.000 muestras (4 s a 62,5 kHz). Historial NumPy por lotes, reducción visual antes de escalones, preservación de extremos/cortes y transferencia de objetos Python entre hilos. Mediciones completas a 10 Hz. Ensayos físicos con CSV: 58,5 FPS de render a 9.000 muestras y 48,2 a 250.000, con Qt offscreen. [Evidencia y alcance](../diagnosticos/RENDER_V10.md).

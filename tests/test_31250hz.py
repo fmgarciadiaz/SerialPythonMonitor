@@ -28,7 +28,7 @@ def packet(first):
 
 class ThirtyOneKhzTests(unittest.TestCase):
     def test_polling_transmitter_keeps_wire_packet(self):
-        sketch = ROOT / 'arduino/v5/oscilloscope/sketch'
+        sketch = ROOT / 'arduino/historico/v5/oscilloscope/sketch'
         source = (sketch / 'sketch.ino').read_text()
         transport = source[source.index('static Packet tx ='):source.index('// Validar el destino')]
         program = '''#include <cstdint>
@@ -70,7 +70,7 @@ int main() {
             subprocess.run([str(exe)], check=True)
 
     def test_timer_configuration_and_transport_budget(self):
-        config = (ROOT / 'arduino/v5/oscilloscope/sketch/scope_config.h').read_text()
+        config = (ROOT / 'arduino/historico/v5/oscilloscope/sketch/scope_config.h').read_text()
         config = '\n'.join(line for line in config.splitlines()
                            if not line.startswith(('#include', '#pragma')))
         source = '''#include <cstdint>
@@ -92,9 +92,9 @@ int main() {}
             subprocess.run(['c++', '-std=c++11', '-Wall', '-Werror', '-Wno-unused-const-variable', '-fsyntax-only', str(cpp)], check=True)
 
     def test_bridge_and_monitor_use_same_baud(self):
-        bridge = (ROOT / 'arduino/v5/r4_bridge_v5/r4_bridge_v5.ino').read_text()
+        bridge = (ROOT / 'arduino/historico/v5/r4_bridge_v5/r4_bridge_v5.ino').read_text()
         baud = int(re.search(r'LINK_BAUD = (\d+)', bridge).group(1))
-        tree = ast.parse((ROOT / 'monitor/v7/app.py').read_text())
+        tree = ast.parse((ROOT / 'monitor/historico/v7/app.py').read_text())
         monitor_baud = next(n.value.value for n in tree.body if isinstance(n, ast.Assign)
                             and any(isinstance(t, ast.Name) and t.id == 'BAUD_DEFAULT' for t in n.targets))
         self.assertEqual(baud, 3000000)
@@ -114,7 +114,7 @@ int main() {}
         self.assertEqual(checker.bad_dt, 1)
 
     def test_monitor_reports_31250hz_from_timestamps(self):
-        tree = ast.parse((ROOT / 'monitor/v7/app.py').read_text())
+        tree = ast.parse((ROOT / 'monitor/historico/v7/app.py').read_text())
         window = next(n for n in tree.body if isinstance(n, ast.ClassDef) and n.name == 'SerialMonitorWindow')
         method = next(n for n in window.body if isinstance(n, ast.FunctionDef) and n.name == '_calculate_sample_rate')
         ns = {'Tuple': Tuple, 'time': time}

@@ -27,7 +27,7 @@ class TraceTests(unittest.TestCase):
                   ([0, 4000, 3000, 3000, 9000], [1, 2, 3, 4, 5]),
                   (np.cumsum(rng.choice([1, 40, 2500, 9000], 500)).tolist(), rng.normal(size=500).tolist())]
         for version in ('v6', 'v7'):
-            actual = prepare(ROOT / 'monitor' / version / 'app.py')
+            actual = prepare(ROOT / 'monitor' / 'historico' / version / 'app.py')
             for step in ('Escalón', 'Línea'):
                 for cut in (False, True):
                     for time_mode, dt in ((False, 0), (True, 0), (True, 40), (True, 5000)):

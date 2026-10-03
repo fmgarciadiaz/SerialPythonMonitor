@@ -6,7 +6,7 @@ Configuración final cargada:
 - Q–R4: 3.000.000 baudios, DATA/512, timestamps uint32 + dos ADC uint16.
 - R4 WiFi: renesas_uno 1.6.0; RX SCI2 con ISR propia, cola 8 KiB;
   TX SCI9 por TDRE sin interrupción TX por byte.
-- USB/monitor: 2.000.000 baudios, monitor/v6/app.py.
+- USB/monitor: 2.000.000 baudios, monitor/historico/v6/app.py.
 
 ## Resultados
 

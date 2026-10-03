@@ -6,7 +6,7 @@ from types import SimpleNamespace
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
-TREE = ast.parse((ROOT / 'monitor/v6/app.py').read_text())
+TREE = ast.parse((ROOT / 'monitor/historico/v6/app.py').read_text())
 WINDOW = next(n for n in TREE.body if isinstance(n, ast.ClassDef) and n.name == 'SerialMonitorWindow')
 METHOD = next(n for n in WINDOW.body if isinstance(n, ast.FunctionDef) and n.name == '_roll_end_position')
 CONSTANT = next(n.value.value for n in TREE.body if isinstance(n, ast.Assign)

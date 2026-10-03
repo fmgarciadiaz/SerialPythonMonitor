@@ -2,13 +2,11 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Monitor V6: Abrir estable",
+      "label": "Monitor V10: Abrir adquisición configurable",
       "type": "process",
       "command": "${command:python.interpreterPath}",
       "args": [
-        "${workspaceFolder}/iniciar_monitor.py",
-        "--version",
-        "v6"
+        "${workspaceFolder}/monitor/v10/app.py"
       ],
       "options": {
         "cwd": "${workspaceFolder}"
@@ -16,13 +14,14 @@
       "problemMatcher": []
     },
     {
-      "label": "Monitor V7: Abrir experimental",
+      "label": "Monitor V10: Iniciar relay configurable del Q",
       "type": "process",
-      "command": "${command:python.interpreterPath}",
+      "command": "python3",
       "args": [
-        "${workspaceFolder}/iniciar_monitor.py",
-        "--version",
-        "v7"
+        "${workspaceFolder}/tools/usb_stream.py",
+        "start",
+        "--firmware",
+        "v8_config"
       ],
       "options": {
         "cwd": "${workspaceFolder}"
@@ -30,137 +29,55 @@
       "problemMatcher": []
     },
     {
-      "label": "UNO Q V4 (estable): Estado",
+      "label": "UNO Q actual (V8 config): Estado",
       "type": "process",
       "command": "python3",
       "args": [
         "${workspaceFolder}/tools/unoq.py",
-        "status",
-        "--version",
-        "v4"
+        "status"
       ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
       "problemMatcher": []
     },
     {
-      "label": "UNO Q V4 (estable): Compilar sin cargar",
+      "label": "UNO Q actual (V8 config): Compilar",
       "type": "process",
       "command": "python3",
       "args": [
         "${workspaceFolder}/tools/unoq.py",
-        "compile",
-        "--version",
-        "v4"
+        "compile"
       ],
-      "problemMatcher": [
-        "$gcc"
-      ],
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      }
-    },
-    {
-      "label": "UNO Q V4 (estable): Desplegar e iniciar",
-      "type": "process",
-      "command": "python3",
-      "args": [
-        "${workspaceFolder}/tools/unoq.py",
-        "deploy",
-        "--version",
-        "v4"
-      ],
-      "problemMatcher": [
-        "$gcc"
-      ]
-    },
-    {
-      "label": "UNO Q V4 (estable): Logs",
-      "type": "process",
-      "command": "python3",
-      "args": [
-        "${workspaceFolder}/tools/unoq.py",
-        "logs",
-        "--version",
-        "v4",
-        "--follow"
-      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
       "problemMatcher": []
     },
     {
-      "label": "UNO Q V4 (estable): Detener",
+      "label": "UNO Q actual (V8 config): Desplegar e iniciar",
       "type": "process",
       "command": "python3",
       "args": [
         "${workspaceFolder}/tools/unoq.py",
-        "stop",
-        "--version",
-        "v4"
+        "deploy"
       ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
       "problemMatcher": []
     },
     {
-      "label": "UNO Q V5 (experimental): Estado",
+      "label": "UNO Q actual (V8 config): Logs",
       "type": "process",
       "command": "python3",
       "args": [
         "${workspaceFolder}/tools/unoq.py",
-        "status",
-        "--version",
-        "v5"
+        "logs"
       ],
-      "problemMatcher": []
-    },
-    {
-      "label": "UNO Q V5 (experimental): Compilar sin cargar",
-      "type": "process",
-      "command": "python3",
-      "args": [
-        "${workspaceFolder}/tools/unoq.py",
-        "compile",
-        "--version",
-        "v5"
-      ],
-      "problemMatcher": [
-        "$gcc"
-      ]
-    },
-    {
-      "label": "UNO Q V5 (experimental): Desplegar e iniciar",
-      "type": "process",
-      "command": "python3",
-      "args": [
-        "${workspaceFolder}/tools/unoq.py",
-        "deploy",
-        "--version",
-        "v5"
-      ],
-      "problemMatcher": [
-        "$gcc"
-      ]
-    },
-    {
-      "label": "UNO Q V5 (experimental): Logs",
-      "type": "process",
-      "command": "python3",
-      "args": [
-        "${workspaceFolder}/tools/unoq.py",
-        "logs",
-        "--version",
-        "v5",
-        "--follow"
-      ],
-      "problemMatcher": []
-    },
-    {
-      "label": "UNO Q V5 (experimental): Detener",
-      "type": "process",
-      "command": "python3",
-      "args": [
-        "${workspaceFolder}/tools/unoq.py",
-        "stop",
-        "--version",
-        "v5"
-      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
       "problemMatcher": []
     }
   ]

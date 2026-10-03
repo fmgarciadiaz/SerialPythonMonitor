@@ -1,0 +1,265 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Monitor V10: Abrir adquisición configurable",
+      "type": "process",
+      "command": "${command:python.interpreterPath}",
+      "args": [
+        "${workspaceFolder}/monitor/v10/app.py"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Monitor V10: Iniciar relay configurable del Q",
+      "type": "process",
+      "command": "python3",
+      "args": [
+        "${workspaceFolder}/tools/usb_stream.py",
+        "start",
+        "--firmware",
+        "v8_config"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Monitor V9: Abrir Q de control / SPI-R4",
+      "type": "process",
+      "command": "${command:python.interpreterPath}",
+      "args": [
+        "${workspaceFolder}/monitor/historico/v9/app.py"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Monitor V9: Iniciar relay dual del Q",
+      "type": "process",
+      "command": "python3",
+      "args": [
+        "${workspaceFolder}/tools/usb_stream.py",
+        "start",
+        "--firmware",
+        "v7_dual"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Monitor V8: Abrir UNO Q USB",
+      "type": "process",
+      "command": "${command:python.interpreterPath}",
+      "args": [
+        "${workspaceFolder}/monitor/historico/v8/app.py"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Monitor V6: Abrir estable",
+      "type": "process",
+      "command": "${command:python.interpreterPath}",
+      "args": [
+        "${workspaceFolder}/monitor/historico/v6/app.py"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Monitor V7: Abrir experimental",
+      "type": "process",
+      "command": "${command:python.interpreterPath}",
+      "args": [
+        "${workspaceFolder}/monitor/historico/v7/app.py"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "UNO Q V4 (histórico): Estado",
+      "type": "process",
+      "command": "python3",
+      "args": [
+        "${workspaceFolder}/tools/unoq.py",
+        "status",
+        "--version",
+        "v4"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "UNO Q V4 (histórico): Compilar sin cargar",
+      "type": "process",
+      "command": "python3",
+      "args": [
+        "${workspaceFolder}/tools/unoq.py",
+        "compile",
+        "--version",
+        "v4"
+      ],
+      "problemMatcher": [
+        "$gcc"
+      ]
+    },
+    {
+      "label": "UNO Q V4 (histórico): Desplegar e iniciar",
+      "type": "process",
+      "command": "python3",
+      "args": [
+        "${workspaceFolder}/tools/unoq.py",
+        "deploy",
+        "--version",
+        "v4"
+      ],
+      "problemMatcher": [
+        "$gcc"
+      ]
+    },
+    {
+      "label": "UNO Q V4 (histórico): Logs",
+      "type": "process",
+      "command": "python3",
+      "args": [
+        "${workspaceFolder}/tools/unoq.py",
+        "logs",
+        "--version",
+        "v4",
+        "--follow"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "UNO Q V4 (histórico): Detener",
+      "type": "process",
+      "command": "python3",
+      "args": [
+        "${workspaceFolder}/tools/unoq.py",
+        "stop",
+        "--version",
+        "v4"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "UNO Q V5 (respaldo UART): Estado",
+      "type": "process",
+      "command": "python3",
+      "args": [
+        "${workspaceFolder}/tools/unoq.py",
+        "status",
+        "--version",
+        "v5"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "UNO Q V5 (respaldo UART): Compilar sin cargar",
+      "type": "process",
+      "command": "python3",
+      "args": [
+        "${workspaceFolder}/tools/unoq.py",
+        "compile",
+        "--version",
+        "v5"
+      ],
+      "problemMatcher": [
+        "$gcc"
+      ]
+    },
+    {
+      "label": "UNO Q V5 (respaldo UART): Desplegar e iniciar",
+      "type": "process",
+      "command": "python3",
+      "args": [
+        "${workspaceFolder}/tools/unoq.py",
+        "deploy",
+        "--version",
+        "v5"
+      ],
+      "problemMatcher": [
+        "$gcc"
+      ]
+    },
+    {
+      "label": "UNO Q V5 (respaldo UART): Logs",
+      "type": "process",
+      "command": "python3",
+      "args": [
+        "${workspaceFolder}/tools/unoq.py",
+        "logs",
+        "--version",
+        "v5",
+        "--follow"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "UNO Q V5 (respaldo UART): Detener",
+      "type": "process",
+      "command": "python3",
+      "args": [
+        "${workspaceFolder}/tools/unoq.py",
+        "stop",
+        "--version",
+        "v5"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "UNO Q histórico (V6 ADC / monitor V8): Estado",
+      "type": "process",
+      "command": "python3",
+      "args": [
+        "${workspaceFolder}/tools/unoq.py",
+        "status",
+        "--version",
+        "v6_adc"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "UNO Q histórico (V6 ADC / monitor V8): Compilar sin cargar",
+      "type": "process",
+      "command": "python3",
+      "args": [
+        "${workspaceFolder}/tools/unoq.py",
+        "compile",
+        "--version",
+        "v6_adc"
+      ],
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "UNO Q histórico (V6 ADC / monitor V8): Logs",
+      "type": "process",
+      "command": "python3",
+      "args": [
+        "${workspaceFolder}/tools/unoq.py",
+        "logs",
+        "--version",
+        "v6_adc"
+      ],
+      "problemMatcher": []
+    }
+  ]
+}

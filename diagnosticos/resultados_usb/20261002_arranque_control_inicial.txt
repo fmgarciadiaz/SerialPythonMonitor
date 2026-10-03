@@ -1,0 +1,10 @@
+Primer arranque del relay con recepción de consultas PC, 2026-10-02.
+La herramienta detectó que el contenedor terminó durante la comprobación de inicio.
+Salida observada:
+UNO Q stream: 127.0.0.1:8765, SPI 20 MHz, SCP1 ADC
+Acquisition integrity failure: seq=0 gaps=0 dropped=0 fatal=0
+
+No había una consulta del PC en curso. Este diagnóstico inicial no imprimía
+CRC/cabecera/contadores completos, por lo que no permite atribuir una causa.
+Se conserva como fallo de arranque, no como ensayo válido. Se agregó un informe
+completo de Checker para los fallos posteriores.

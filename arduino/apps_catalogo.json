@@ -1,0 +1,115 @@
+[
+  {
+    "version": "v8_config",
+    "name": "Scope Acquisition Config V8",
+    "remote_app": "/home/arduino/ArduinoApps/scope-acquisition-config-v8",
+    "local_manifest": "arduino/v8_config/oscilloscope/app.yaml",
+    "description": "ACTUAL | Monitor V10: ADC 8/10/12/14 bits o 16 bits oversampling ×16; hasta 62,5 kHz nativo SPI, 50 kHz a 16 bits SPI y 31,25 kHz UART."
+  },
+  {
+    "version": "v6_adc",
+    "name": "Scope ADC SPI V6",
+    "remote_app": "/home/arduino/ArduinoApps/scope-adc-spi-v6",
+    "local_manifest": "arduino/historico/v6_adc/oscilloscope/app.yaml",
+    "description": "HISTORICO | Monitor V8 por USB del Q, sin R4. ADC 2 canales, 14 bits, 31,25 kHz. Iniciar con tools/usb_stream.py; relay externo."
+  },
+  {
+    "version": "v7_dual",
+    "name": "Scope Output Select V7",
+    "remote_app": "/home/arduino/ArduinoApps/scope-output-select-v7",
+    "local_manifest": "arduino/historico/v7_dual/oscilloscope/app.yaml",
+    "description": "HISTORICO | EXPERIMENTAL PASO 2 | Q siempre en control por USB/SPI. Salida ADC seleccionable Q directo o UART al R4 V5, 31,25 kHz y 14 bits. Monitor V9 o verificador dual; no usar Monitor V8."
+  },
+  {
+    "version": "v5",
+    "name": "Osciloscopio DMA_TXRX V5 Experimental",
+    "remote_app": "/home/arduino/ArduinoApps/osciloscopio-dma_txrx-v5",
+    "local_manifest": "arduino/historico/v5/oscilloscope/app.yaml",
+    "description": "RESPALDO UART | Monitor V7 con puente R4 V5. ADC 2 canales, 14 bits, 31,25 kHz; UART 3 Mbps. No usa SPI."
+  },
+  {
+    "version": "v4",
+    "name": "Osciloscopio DMA_TXRX V4",
+    "remote_app": "/home/arduino/ArduinoApps/osciloscopio-dma_txrx-v4",
+    "local_manifest": "arduino/historico/v4/oscilloscope/app.yaml",
+    "description": "HISTORICO UART | Monitor V6 con puente R4 V4. ADC 2 canales, 14 bits, 20 kHz; UART 2 Mbps. Referencia anterior."
+  },
+  {
+    "version": "v6",
+    "name": "Scope SPI Benchmark V6",
+    "remote_app": "/home/arduino/ArduinoApps/scope-spi-benchmark-v6",
+    "local_manifest": "arduino/historico/v6/spi_benchmark/app.yaml",
+    "description": "ENSAYO HISTORICO 1 | SPI por driver/IRQ, datos sinteticos y CRC. Sin ADC ni monitor. Primer benchmark MCU-MPU."
+  },
+  {
+    "version": "v6_polling",
+    "name": "Scope SPI Polling V6",
+    "remote_app": "/home/arduino/ArduinoApps/scope-spi-polling-v6",
+    "local_manifest": "arduino/historico/v6_polling/spi_benchmark/app.yaml",
+    "description": "ENSAYO HISTORICO 2 | SPI por registros TXDR/RXDR y polling, datos sinteticos. Sin ADC ni monitor."
+  },
+  {
+    "version": "v6_dma",
+    "name": "Scope SPI DMA V6",
+    "remote_app": "/home/arduino/ArduinoApps/scope-spi-dma-v6",
+    "local_manifest": "arduino/historico/v6_dma/spi_benchmark/app.yaml",
+    "description": "ENSAYO HISTORICO 3 | SPI con DMA TX/RX y espera por polling. Datos sinteticos; sin ADC ni monitor."
+  },
+  {
+    "version": "v6_irq",
+    "name": "Scope SPI IRQ READY V6",
+    "remote_app": "/home/arduino/ArduinoApps/scope-spi-irq-ready-v6",
+    "local_manifest": "arduino/historico/v6_irq/spi_benchmark/app.yaml",
+    "description": "ENSAYO HISTORICO 4 | SPI DMA con IRQ y READY, sin pausa fija. Datos sinteticos; sin ADC. Base de la version actual."
+  },
+  {
+    "name": "Osciloscopio DMA_TXRX V3",
+    "remote_app": "/home/arduino/ArduinoApps/osciloscopio-dma_txrx-v3",
+    "description": "HISTORICO V3 | ADC y timestamps por DMA, 2 canales a 10 kHz. Salida DATA por Serial1 a 1 Mbps. Anterior a V4."
+  },
+  {
+    "name": "Osciloscopio DMA_TXRX V2",
+    "remote_app": "/home/arduino/ArduinoApps/osciloscopio-dma_txrx-v2",
+    "description": "HISTORICO V2 | ADC por DMA, 2 canales a 10 kHz. Salida DATA por Serial1 a 1,1 Mbps; compatibilidad Core Zephyr 0.90."
+  },
+  {
+    "name": "Debugger Rx Rt",
+    "remote_app": "/home/arduino/ArduinoApps/debugger-rx-rt",
+    "description": "DIAGNOSTICO | Emite DATA sintetico por Serial1 a 1 Mbps: senoidales de 100 y 200 Hz con timestamps de 10 kHz. Sin ADC."
+  },
+  {
+    "name": "Generador",
+    "remote_app": "/home/arduino/ArduinoApps/generador",
+    "description": "GENERADOR HISTORICO | Seno por DAC0 con tabla de 32 puntos y analogWrite de 12 bits; temporizacion por micros. Sin adquisicion."
+  },
+  {
+    "name": "Osciloscopio",
+    "remote_app": "/home/arduino/ArduinoApps/osciloscopio",
+    "description": "HISTORICO | Lee A0/A1 con analogRead de 12 bits en hilo Zephyr; envia bloques binarios por Serial a 2 Mbps. Sin DMA ADC."
+  },
+  {
+    "name": "Osciloscopio debug",
+    "remote_app": "/home/arduino/ArduinoApps/osciloscopio-debug",
+    "description": "DEBUG HISTORICO | Lee A0/A1 con analogRead de 12 bits; imprime timestamp y dos ADC en texto CSV por Serial a 2 Mbps."
+  },
+  {
+    "name": "Osciloscopio DMA",
+    "remote_app": "/home/arduino/ArduinoApps/osciloscopio-dma",
+    "description": "HISTORICO DMA | ADC y timestamps por hardware a 5 kHz; salida DATA por Serial a 2 Mbps. Anterior a la variante TX/RX."
+  },
+  {
+    "name": "Osciloscopio DMA_TXRX",
+    "remote_app": "/home/arduino/ArduinoApps/osciloscopio-dma_txrx",
+    "description": "HISTORICO DMA TX/RX | ADC y timestamps por hardware a 5 kHz; salida DATA por Serial1 a 1 Mbps. Anterior a V2/V3."
+  },
+  {
+    "name": "Osciloscopio Test",
+    "remote_app": "/home/arduino/ArduinoApps/osciloscopio-test",
+    "description": "DIAGNOSTICO DMA | Adquisicion a 10 kHz y Serial1 a 1 Mbps; registra arranque, nodos DMA y discontinuidades. No es el monitor actual."
+  },
+  {
+    "name": "Potentiometer",
+    "remote_app": "/home/arduino/ArduinoApps/potentiometer",
+    "description": "EJEMPLO ADC | Lee potenciometro en A0 a 14 bits e imprime el valor por Serial a 9600 baudios, con pausa de 50 ms."
+  }
+]

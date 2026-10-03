@@ -1,0 +1,1364 @@
+{
+  "apps": [
+    {
+      "id": "dXNlcjpzY29wZS1zcGktaXJxLXJlYWR5LXY2",
+      "name": "Scope SPI IRQ READY V6",
+      "description": "ENSAYO HISTORICO 4 | SPI DMA con IRQ y READY, sin pausa fija. Datos sinteticos; sin ADC. Base de la version actual.",
+      "icon": "",
+      "status": "stopped",
+      "example": false,
+      "default": false
+    },
+    {
+      "id": "dXNlcjpzY29wZS1zcGktZG1hLXY2",
+      "name": "Scope SPI DMA V6",
+      "description": "ENSAYO HISTORICO 3 | SPI con DMA TX/RX y espera por polling. Datos sinteticos; sin ADC ni monitor.",
+      "icon": "",
+      "status": "stopped",
+      "example": false,
+      "default": false
+    },
+    {
+      "id": "dXNlcjpzY29wZS1zcGktcG9sbGluZy12Ng",
+      "name": "Scope SPI Polling V6",
+      "description": "ENSAYO HISTORICO 2 | SPI por registros TXDR/RXDR y polling, datos sinteticos. Sin ADC ni monitor.",
+      "icon": "",
+      "status": "stopped",
+      "example": false,
+      "default": false
+    },
+    {
+      "id": "dXNlcjpvc2NpbG9zY29waW8tZG1hX3R4cngtdjU",
+      "name": "Osciloscopio DMA_TXRX V5 Experimental",
+      "description": "RESPALDO UART | Monitor V7 con puente R4 V5. ADC 2 canales, 14 bits, 31,25 kHz; UART 3 Mbps. No usa SPI.",
+      "icon": "😀",
+      "status": "stopped",
+      "example": false,
+      "default": false
+    },
+    {
+      "id": "dXNlcjpvc2NpbG9zY29waW8tZG1hX3R4cngtdjM",
+      "name": "Osciloscopio DMA_TXRX V3",
+      "description": "HISTORICO V3 | ADC y timestamps por DMA, 2 canales a 10 kHz. Salida DATA por Serial1 a 1 Mbps. Anterior a V4.",
+      "icon": "😀",
+      "status": "stopped",
+      "example": false,
+      "default": false
+    },
+    {
+      "id": "dXNlcjpzY29wZS1hZGMtc3BpLXY2",
+      "name": "Scope ADC SPI V6",
+      "description": "ACTUAL | Monitor V8 por USB del Q, sin R4. ADC 2 canales, 14 bits, 31,25 kHz. Iniciar con tools/usb_stream.py; relay externo.",
+      "icon": "",
+      "status": "stopped",
+      "example": false,
+      "default": false
+    },
+    {
+      "id": "dXNlcjpzY29wZS1zcGktYmVuY2htYXJrLXY2",
+      "name": "Scope SPI Benchmark V6",
+      "description": "ENSAYO HISTORICO 1 | SPI por driver/IRQ, datos sinteticos y CRC. Sin ADC ni monitor. Primer benchmark MCU-MPU.",
+      "icon": "",
+      "status": "stopped",
+      "example": false,
+      "default": false
+    },
+    {
+      "id": "dXNlcjpvc2NpbG9zY29waW8tZG1hX3R4cngtdjQ",
+      "name": "Osciloscopio DMA_TXRX V4",
+      "description": "HISTORICO UART | Monitor V6 con puente R4 V4. ADC 2 canales, 14 bits, 20 kHz; UART 2 Mbps. Referencia anterior.",
+      "icon": "😀",
+      "status": "stopped",
+      "example": false,
+      "default": false
+    },
+    {
+      "id": "dXNlcjpvc2NpbG9zY29waW8tZG1hX3R4cngtdjI",
+      "name": "Osciloscopio DMA_TXRX V2",
+      "description": "HISTORICO V2 | ADC por DMA, 2 canales a 10 kHz. Salida DATA por Serial1 a 1,1 Mbps; compatibilidad Core Zephyr 0.90.",
+      "icon": "😀",
+      "status": "stopped",
+      "example": false,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6aW5zcGlyYXRpb25hbC9jb2xvci15b3VyLWxlZHM",
+      "name": "Color your LEDs",
+      "description": "Control the color of your LEDs from a web interface.",
+      "icon": "🎨",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6aW5zcGlyYXRpb25hbC9lZGdlLWFpLWFzc2lzdGFudA",
+      "name": "Edge AI Assistant",
+      "description": "Chatbot powered by a local LLM",
+      "icon": "💬",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6aW5zcGlyYXRpb25hbC91bm9xLXBpbi10b2dnbGU",
+      "name": "UNO Q Pin Toggle",
+      "description": "Control each Arduino UNO Q pin through a visual UI",
+      "icon": "📌",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6aW5zcGlyYXRpb25hbC92aWRlby1mYWNlLWRldGVjdGlvbg",
+      "name": "Face Detector on Camera",
+      "description": "This example showcases face detection within a live feed from a USB camera.",
+      "icon": "☺️",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6aW5zcGlyYXRpb25hbC9haXItcXVhbGl0eS1tb25pdG9yaW5n",
+      "name": "Air Quality Monitoring App",
+      "description": "An Air Quality Monitoring System that uses air quality AQI API data to show the air quality state on the LED matrix.",
+      "icon": "🍃",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6aW5zcGlyYXRpb25hbC9hbm9tYWx5LWRldGVjdGlvbg",
+      "name": "Concrete Crack Detector",
+      "description": "Detect anomalies (cracks, defects on concrete walls) in images",
+      "icon": "🧱",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6aW5zcGlyYXRpb25hbC9hdWRpby1jbGFzc2lmaWNhdGlvbg",
+      "name": "Glass Breaking Sensor",
+      "description": "Use a pre-trained model to classify audio files in the browser.",
+      "icon": "🪟",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6aW5zcGlyYXRpb25hbC9iZWR0aW1lLXN0b3J5LXRlbGxlcg",
+      "name": "Bedtime Story Teller",
+      "description": "This example shows how to create a bedtime story teller with an Arduino board. It uses a cloud-based language model to generate a story based on user input and shows the story on a web interface.",
+      "icon": "🏰",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6aW5zcGlyYXRpb25hbC9ibGluaw",
+      "name": "Blink LED from Python",
+      "description": "This example shows how to make the LED blink alternately from Python.",
+      "icon": "🔴",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6aW5zcGlyYXRpb25hbC9ibGluay13aXRoLXVp",
+      "name": "Blink LED with UI",
+      "description": "Blink an LED via microcontroller using RPC calls",
+      "icon": "💡",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6aW5zcGlyYXRpb25hbC9jaGF0Ym90LWNsb3VkLWxsbQ",
+      "name": "Cloud AI Assistant",
+      "description": "Simple chatbot with Cloud LLM",
+      "icon": "✨",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6aW5zcGlyYXRpb25hbC9jbG91ZC1ibGluaw",
+      "name": "Blinking LED from Arduino Cloud",
+      "description": "Control the LED from the Arduino IoT Cloud using RPC calls",
+      "icon": "☁️",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6aW5zcGlyYXRpb25hbC9jb2RlLWRldGVjdG9y",
+      "name": "QR and Barcode Scanner",
+      "description": "This example showcases how to use the Camera Code Detector Brick to detect barcodes and QR codes and display the results in a web application as well as saving the results to an SQL database.\n",
+      "icon": "📦",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6aW5zcGlyYXRpb25hbC9ob21lLWNsaW1hdGUtbW9uaXRvcmluZy1hbmQtc3RvcmFnZQ",
+      "name": "Home Climate Monitoring",
+      "description": "A simple data logger that gets temperature and humidity from the board via Modulino Thermo and stores them in a database.",
+      "icon": "🎛️",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6aW5zcGlyYXRpb25hbC9pbWFnZS1jbGFzc2lmaWNhdGlvbg",
+      "name": "Image Classification",
+      "description": "Image classification in the browser using a web-based interface.",
+      "icon": "📊",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6aW5zcGlyYXRpb25hbC9rZXl3b3JkLXNwb3R0aW5n",
+      "name": "Hey Arduino!",
+      "description": "When \"Hey Arduino!\" keyword is detected by the microphone, the led matrix will react",
+      "icon": "❤️",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6aW5zcGlyYXRpb25hbC9sZWQtbWF0cml4LXBhaW50ZXI",
+      "name": "Led Matrix Painter",
+      "description": "This example shows how to create a tool to design frames for an LED matrix using Arduino boards. It provides a web interface where users can design frames and animations and export them as C/C++ code.",
+      "icon": "🟦",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6aW5zcGlyYXRpb25hbC9tYXNjb3QtanVtcC1nYW1l",
+      "name": "Mascot Jump Game",
+      "description": "An endless runner game where you jump over electronic components with an LED character",
+      "icon": "🏃",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6aW5zcGlyYXRpb25hbC9tb2JpbGUtdmlkZW8tZ2VuZXJpYy1vYmplY3QtZGV0ZWN0aW9u",
+      "name": "Detect Objects on Smartphone Camera",
+      "description": "This example showcases object detection within a live feed from a smartphone's camera.",
+      "icon": "📽️",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6aW5zcGlyYXRpb25hbC9tdXNpYy1jb21wb3Nlcg",
+      "name": "Music Composer",
+      "description": "A music composer app that lets you create melodies by composing notes and play them using sound generator brick.",
+      "icon": "🎵",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6aW5zcGlyYXRpb25hbC9vYmplY3QtZGV0ZWN0aW9u",
+      "name": "Detect objects on images",
+      "description": "Object detection in the browser",
+      "icon": "🏞️",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6aW5zcGlyYXRpb25hbC9vYmplY3QtaHVudGluZw",
+      "name": "Object Hunting",
+      "description": "Detect a list of object to win the game",
+      "icon": "🔍",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6aW5zcGlyYXRpb25hbC9yZWFsLXRpbWUtYWNjZWxlcm9tZXRlcg",
+      "name": "Real-time Accelerometer Data",
+      "description": "Real-time Accelerometer data visualization and movement detection using Modulino Movement sensor",
+      "icon": "🐍",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6aW5zcGlyYXRpb25hbC9zeXN0ZW0tcmVzb3VyY2VzLWxvZ2dlcg",
+      "name": "System Resources Logger",
+      "description": "A simple data logger that gets system resources usage from the board and stores them in a database.",
+      "icon": "📈",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6aW5zcGlyYXRpb25hbC90ZWxlZ3JhbS1ib3Q",
+      "name": "Telegram Bot",
+      "description": "Control your board through a Telegram bot",
+      "icon": "🤖",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6aW5zcGlyYXRpb25hbC90aGVyZW1pbg",
+      "name": "Theremin Simulator",
+      "description": "A simple theremin simulator that generates audio based on user input.",
+      "icon": "🎼",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6aW5zcGlyYXRpb25hbC92aWJyYXRpb24tYW5vbWFseS1kZXRlY3Rpb24",
+      "name": "Vibration Anomaly Detection",
+      "description": "Monitor fan vibrations and detect anomalies",
+      "icon": "🌀",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6aW5zcGlyYXRpb25hbC92aWRlby1nZW5lcmljLW9iamVjdC1kZXRlY3Rpb24",
+      "name": "Detect Objects on Camera",
+      "description": "This example showcases object detection within a live feed from a USB camera.",
+      "icon": "📽️",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6aW5zcGlyYXRpb25hbC92aWRlby1wZXJzb24tY2xhc3NpZmljYXRpb24",
+      "name": "Person Classifier on Camera",
+      "description": "This example showcases person classification on camera, using a camera stream from USB camera",
+      "icon": "🚶‍♂️",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6aW5zcGlyYXRpb25hbC93ZWF0aGVyLWZvcmVjYXN0",
+      "name": "Weather Forecast on LED Matrix",
+      "description": "A weather forecast system that get the current weather and display it on LED matrix.",
+      "icon": "☀️",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6Y29yZS1hbmQtZm91bmRhdGlvbmFsLzAxLWxlZC1ibGluay8wMS1ibGlua2luZy1hbi1MRUQtbWN1",
+      "name": "Blinking an LED",
+      "description": "Simple example to blink an LED mounted on the board surface and controlled by the microcontroller.",
+      "icon": "🔴",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6Y29yZS1hbmQtZm91bmRhdGlvbmFsLzAxLWxlZC1ibGluay8wMi1ibGlua2luZy1hbi1MRUQtTVBV",
+      "name": "Blinking an LED from MPU",
+      "description": "Simple example to blink an LED mounted on the board surface and controlled by the microprocessor.",
+      "icon": "🔴",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6Y29yZS1hbmQtZm91bmRhdGlvbmFsLzAxLWxlZC1ibGluay8wMy1ibGlua2luZy1hbi1sZWQtZnJvbS1weXRob24",
+      "name": "Blink LED from Python",
+      "description": "This example shows how to make the LED blink alternately from Python.",
+      "icon": "🔴",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6Y29yZS1hbmQtZm91bmRhdGlvbmFsLzAxLWxlZC1ibGluay8wNC1ibGlua2luZy1hbi1sZWQtd2l0aC11aQ",
+      "name": "Blink LED with UI",
+      "description": "Blink an LED via microcontroller using RPC calls",
+      "icon": "💡",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6Y29yZS1hbmQtZm91bmRhdGlvbmFsLzAyLWxlZC1tYXRyaXgvMDEtbGVkLW1hdHJpeC1mcmFtZS1tY3U",
+      "name": "LED Matrix Frame with MCU",
+      "description": "A basic example that uses a MCU sketch to display frames on an LED matrix.",
+      "icon": "🟦",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6Y29yZS1hbmQtZm91bmRhdGlvbmFsLzAyLWxlZC1tYXRyaXgvMDItbGVkLW1hdHJpeC1mcmFtZQ",
+      "name": "LED Matrix Frame",
+      "description": "A basic example that displays frames using the Python Frame class and sends them to the sketch via Bridge.",
+      "icon": "🟦",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6Y29yZS1hbmQtZm91bmRhdGlvbmFsLzAyLWxlZC1tYXRyaXgvMDMtbGVkLW1hdHJpeC1hbmltYXRpb24tbWN1",
+      "name": "LED Matrix Animation with MCU",
+      "description": "A basic example that displays animations on an LED matrix using the MCU.",
+      "icon": "🟦",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6Y29yZS1hbmQtZm91bmRhdGlvbmFsLzAzLWJyaWRnZS1iYXNpY3MvMDEtY2FsbC1za2V0Y2gtZnVuY3Rpb24tZnJvbS1weXRob24",
+      "name": "Call a sketch function from Python",
+      "description": "Python calls a function exposed by the sketch which logs over Serial.",
+      "icon": "📞",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6Y29yZS1hbmQtZm91bmRhdGlvbmFsLzAzLWJyaWRnZS1iYXNpY3MvMDItc2VuZC1kYXRhLXRvLXB5dGhvbg",
+      "name": "Send data to Python",
+      "description": "The sketch pushes a periodic counter value to Python over the Bridge.",
+      "icon": "📤",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6Y29yZS1hbmQtZm91bmRhdGlvbmFsLzAzLWJyaWRnZS1iYXNpY3MvMDMtdXNpbmctc3RydWN0dXJlZC1kYXRh",
+      "name": "Using structured data",
+      "description": "Python sends a list of values that the sketch receives as a vector.",
+      "icon": "🧱",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6Y29yZS1hbmQtZm91bmRhdGlvbmFsLzA0LWxvZ2dpbmcvMDEtbG9nZ2Vy",
+      "name": "Logger",
+      "description": "Simple example to log messages with different levels (ERROR, WARNING, INFO, DEBUG).",
+      "icon": "📃",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6Y29yZS1hbmQtZm91bmRhdGlvbmFsLzA0LWxvZ2dpbmcvMDItbWN1LW1vbml0b3I",
+      "name": "MCU Monitor",
+      "description": "This example demonstrates how to use the Monitor class to send log messages from the microcontroller to the Arduino App Lab Serial Monitor.",
+      "icon": "📃",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6Y29yZS1hbmQtZm91bmRhdGlvbmFsLzA1LWFwcHMtYmFzaWNzLzAxLWFwcC1yZWdpc3Rlci1hbmQtc3RhcnQtYnJpY2tz",
+      "name": "App register and start bricks",
+      "description": "A custom brick is auto-registered on instantiation and started by App.run().",
+      "icon": "🧱",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6Y29yZS1hbmQtZm91bmRhdGlvbmFsLzA1LWFwcHMtYmFzaWNzLzAyLWFwcC1ydW4",
+      "name": "App Run",
+      "description": "App.run() keeps the Python app alive so background handlers can run.",
+      "icon": "▶️",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6Y29yZS1hbmQtZm91bmRhdGlvbmFsLzA1LWFwcHMtYmFzaWNzLzAzLWFwcC11c2VyLWxvb3A",
+      "name": "App user loop",
+      "description": "App.run(user_loop=...) runs a user function repeatedly on the main thread.",
+      "icon": "🔁",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6Y29yZS1hbmQtZm91bmRhdGlvbmFsLzA2LWNhbWVyYS1iYXNpY3MvMDEtc2ltcGxlLWNhbWVyYQ",
+      "name": "Simple Camera",
+      "description": "Simple example to capture an image from the camera and store it to the local storage.",
+      "icon": "📷",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6Y29yZS1hbmQtZm91bmRhdGlvbmFsLzA2LWNhbWVyYS1iYXNpY3MvMDItY2FtZXJhLWZyb20tc291cmNlcw",
+      "name": "Camera from different sources",
+      "description": "Simple example to capture an image from different camera sources and store it to the local storage.",
+      "icon": "📷",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6Y29yZS1hbmQtZm91bmRhdGlvbmFsLzA2LWNhbWVyYS1iYXNpY3MvMDMtY2FtZXJhLWFkanVzdG1lbnRz",
+      "name": "Camera Adjustments",
+      "description": "Simple example to capture an image from the camera with basic adjustments and store it to the local storage.",
+      "icon": "📷",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6Y29yZS1hbmQtZm91bmRhdGlvbmFsLzA2LWNhbWVyYS1iYXNpY3MvMDQtcmVjb3JkLWNhbWVyYS1zdHJlYW0",
+      "name": "Record Camera Stream",
+      "description": "Simple example to capture an AVI video from the camera and store it to the local storage.",
+      "icon": "📷",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6Y29yZS1hbmQtZm91bmRhdGlvbmFsLzA2LWNhbWVyYS1iYXNpY3MvMDUtd2Vic29ja2V0LWNhbWVyYQ",
+      "name": "WebSocket Camera",
+      "description": "Capture an image from a camera that streams frames over WebSocket.",
+      "icon": "📷",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6Y29yZS1hbmQtZm91bmRhdGlvbmFsLzA3LW1pY3JvcGhvbmUtYmFzaWNzLzAxLXJlY29yZGluZy1mcm9tLW1pY3JvcGhvbmUtYW5kLWZpbGUtc2F2ZQ",
+      "name": "Recording from Microphone and File Save",
+      "description": "Record audio from a microphone with record_wav(duration) and save it to a WAV file.",
+      "icon": "🎙️",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6Y29yZS1hbmQtZm91bmRhdGlvbmFsLzA3LW1pY3JvcGhvbmUtYmFzaWNzLzAyLW1pY3JvcGhvbmUtY2FwdHVyZS1hbmQtc3RyZWFt",
+      "name": "Microphone Capture and Stream",
+      "description": "Read one audio chunk with capture() and then continue with stream() in Python.",
+      "icon": "🎙️",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6Y29yZS1hbmQtZm91bmRhdGlvbmFsLzA3LW1pY3JvcGhvbmUtYmFzaWNzLzAzLW1pY3JvcGhvbmUtYW5kLXByb3BlcnRpZXM",
+      "name": "Microphone and Properties",
+      "description": "Compare default, custom, and context manager microphone access patterns from Python.",
+      "icon": "🎙️",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6Y29yZS1hbmQtZm91bmRhdGlvbmFsLzA4LXdlYi11aS1iYXNpY3MvMDEtc3RhdGljLXBhZ2U",
+      "name": "Simple web page",
+      "description": "A simple web page served using the WebUI brick",
+      "icon": "💡",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6Y29yZS1hbmQtZm91bmRhdGlvbmFsLzA4LXdlYi11aS1iYXNpY3MvMDItZGF0YS10cmFuc21pc3Npb24",
+      "name": "Data transmission to Web UI",
+      "description": "A simple example that demonstrates how to transmit data from the Python code to the Web UI.",
+      "icon": "💡",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6Y29yZS1hbmQtZm91bmRhdGlvbmFsLzA4LXdlYi11aS1iYXNpY3MvMDMtYnV0dG9uLWFjdGlvbg",
+      "name": "Button Action",
+      "description": "A simple example that demonstrates how to handle button actions in the Web UI.",
+      "icon": "💡",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6Y29yZS1hbmQtZm91bmRhdGlvbmFsLzA4LXdlYi11aS1iYXNpY3MvMDQtaHR0cHMtd2ViLXVp",
+      "name": "HTTPS Web UI",
+      "description": "A simple example that demonstrates how to serve the Web UI over HTTPS.",
+      "icon": "💡",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6Y29yZS1hbmQtZm91bmRhdGlvbmFsLzA4LXdlYi11aS1iYXNpY3MvMDUtd2ViLXVpLWNhbWVyYS1zdHJlYW0",
+      "name": "Web UI Camera Stream",
+      "description": "A simple example that demonstrates how to stream the camera video feed to the Web UI.",
+      "icon": "💡",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6Y29yZS1hbmQtZm91bmRhdGlvbmFsLzA5LWNvbXB1dGVyLXZpc2lvbi8wMS1zaW1wbGUtb2JqZWN0LWRldGVjdGlvbg",
+      "name": "Simple Object Detection",
+      "description": "Detect objects in an image, log the results, and display them in a new output image with bounding boxes.",
+      "icon": "🏞️",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6Y29yZS1hbmQtZm91bmRhdGlvbmFsLzA5LWNvbXB1dGVyLXZpc2lvbi8wMi12aWRlby1vYmplY3QtZGV0ZWN0aW9u",
+      "name": "Video Object Detection",
+      "description": "This example showcases object detection within a live feed from a camera.",
+      "icon": "📽️",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6Y29yZS1hbmQtZm91bmRhdGlvbmFsLzA5LWNvbXB1dGVyLXZpc2lvbi8wMy1pbWFnZS1jbGFzc2lmaWNhdGlvbi10cmlnZ2Vy",
+      "name": "Person classifier on camera with trigger",
+      "description": "This example showcases person classification on camera, using a camera stream and triggering an LED matrix animation when a person is detected.",
+      "icon": "🚶‍♂️",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6Y29yZS1hbmQtZm91bmRhdGlvbmFsLzA5LWNvbXB1dGVyLXZpc2lvbi8wNC1vYmplY3QtZGV0ZWN0aW9uLXdpdGgtdWk",
+      "name": "Object Detection",
+      "description": "Object detection in images in the browser",
+      "icon": "🏞️",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vYWlyX3F1YWxpdHlfbW9uaXRvcmluZy8wMV9nZXRfYWlyX3F1YWxpdHlfYnlfY2l0eQ",
+      "name": "Get air quality by city",
+      "description": "Get air quality by city. Requires an AQICN API token (https://aqicn.org/data-platform/token/).",
+      "icon": "🌬️",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vYXJkdWlub19jbG91ZC8wMV9sZWRfYmxpbms",
+      "name": "Arduino Cloud LED Blink Example",
+      "description": "Arduino Cloud LED Blink Example. It requires a valid ARDUINO CLOUD token to work.",
+      "icon": "☁️",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vYXJkdWlub19jbG91ZC8wMl9saWdodF93aXRoX2NvbG9yc19tb25pdG9y",
+      "name": "Monitor a colored light from Arduino Cloud",
+      "description": "Monitor a colored light from Arduino Cloud. It requires a valid ARDUINO CLOUD token to work.",
+      "icon": "☁️",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vYXJkdWlub19jbG91ZC8wM19saWdodF93aXRoX2NvbG9yc19jb21tYW5k",
+      "name": "Command a colored light from Arduino Cloud",
+      "description": "Command a colored light from Arduino Cloud. It requires a valid ARDUINO CLOUD token to work.",
+      "icon": "☁️",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vYXVkaW9fY2xhc3NpZmljYXRpb24vMDFfZ2xhc3NfYnJlYWtpbmdfZnJvbV9maWxl",
+      "name": "Detect the glass breaking sound from audio file",
+      "description": "Detect the glass breaking sound from audio file. Requires an audio file with the glass breaking sound.",
+      "icon": "🔊",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vY2FtZXJhX2NvZGVfZGV0ZWN0aW9uLzAxX2RldGVjdGlvbg",
+      "name": "Code detection",
+      "description": "Code detection. Requires an USB webcam connected to the Arduino board.",
+      "icon": "📷",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vY2FtZXJhX2NvZGVfZGV0ZWN0aW9uLzAyX2RldGVjdGlvbl9saXN0",
+      "name": "Code detection (aggregated result)",
+      "description": "Code detection (aggregated result). Requires an USB webcam connected to the Arduino board.",
+      "icon": "📷",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vY2FtZXJhX2NvZGVfZGV0ZWN0aW9uLzAzX2RldGVjdGlvbl93aXRoX292ZXJyaWRlcw",
+      "name": "Code detection with camera overrides",
+      "description": "Code detection with camera overrides. Requires an USB webcam connected to the Arduino board.",
+      "icon": "📷",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vY2xvdWRfYXNyLzAxX2Fzcg",
+      "name": "Detect speech from microphone",
+      "description": "Detect speech from microphone. Requires an USB microphone connected to the Arduino board.",
+      "icon": "🎙️",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vY2xvdWRfYXNyLzAyX211bHRpbGluZ3VhbF9hc3I",
+      "name": "Detect speech from microphone in Italian",
+      "description": "Detect speech from microphone in Italian. Requires an USB microphone connected to the Arduino board.",
+      "icon": "🎙️",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vY2xvdWRfYXNyLzAzX2V2ZW50X3N0cmVhbQ",
+      "name": "Detect speech from microphone, event stream",
+      "description": "Detect speech from microphone, event stream. Requires an USB microphone connected to the Arduino board.",
+      "icon": "🎙️",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vY2xvdWRfYXNyLzA0X2RpZmZlcmVudF9wcm92aWRlcnM",
+      "name": "Detect speech from microphone, different providers",
+      "description": "Detect speech from microphone, different providers. Requires an USB microphone connected to the Arduino board.",
+      "icon": "🎙️",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vY2xvdWRfbGxtLzAxX3NpbXBsZV9wcm9tcHQ",
+      "name": "Chat with an LLM",
+      "description": "Chat with an LLM. Requires a valid API key to a cloud LLM service.",
+      "icon": "✨",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vY2xvdWRfbGxtLzAyX3N0cmVhbWluZ19yZXNwb25zZXM",
+      "name": "Streaming responses from an LLM",
+      "description": "Streaming responses from an LLM. Requires a valid API key to a cloud LLM service.",
+      "icon": "✨",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vY2xvdWRfbGxtLzAzX25vX21lbW9yeQ",
+      "name": "Conversation without memory",
+      "description": "Conversation without memory. Requires a valid API key to a cloud LLM service.",
+      "icon": "✨",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vY2xvdWRfbGxtLzA0X21vZGVsX3NlbGVjdGlvbg",
+      "name": "LLM Model Selection",
+      "description": "LLM Model Selection. Requires a valid API key to a cloud LLM service.",
+      "icon": "✨",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vY2xvdWRfbGxtLzA1X3Rvb2xfY2FsbGluZw",
+      "name": "Chat with an LLM using Tool Calling",
+      "description": "Chat with an LLM using Tool Calling. Requires a valid API key to a cloud LLM service.",
+      "icon": "✨",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vY2xvdWRfbGxtLzA2X211bHRpbW9kYWw",
+      "name": "Chat with an Multimodal LLM",
+      "description": "Chat with an Multimodal LLM. Requires a valid API key to a cloud LLM service.",
+      "icon": "✨",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vY2xvdWRfbGxtLzA3X2V4dGVybmFsX3Byb3ZpZGVy",
+      "name": "Chat with an Ollama model",
+      "description": "Chat with an Ollama model",
+      "icon": "✨",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vY2xvdWRfbGxtLzA4X3BlcnNpc3RlbnRfbWVtb3J5",
+      "name": "Conversation with persistent memory",
+      "description": "Conversation with persistent memory. Requires a valid API key to a cloud LLM service and the dbstorage_sqlstore brick.",
+      "icon": "✨",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vZGJzdG9yYWdlX3NxbHN0b3JlLzAxX3N0b3JlX2FuZF9yZWFkX2V4YW1wbGU",
+      "name": "Store and read data using SQLStore",
+      "description": "Store and read data using SQLStore",
+      "icon": "🗄️",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vZGJzdG9yYWdlX3Rzc3RvcmUvMDFfd3JpdGVfcmVhZA",
+      "name": "Store and read data using TimeSeriesStore",
+      "description": "Store and read data using TimeSeriesStore",
+      "icon": "📊",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vZGJzdG9yYWdlX3Rzc3RvcmUvMDJfcmVhZF9hbGxfc2FtcGxlcw",
+      "name": "Read all samples from database in a given time range",
+      "description": "Read all samples from database in a given time range",
+      "icon": "📊",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vaW1hZ2VfY2xhc3NpZmljYXRpb24vMDFfaW1hZ2VfY2xhc3NpZmljYXRpb25fZXhhbXBsZQ",
+      "name": "Image classification",
+      "description": "Image classification",
+      "icon": "🖼️",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8va2V5d29yZF9zcG90dGluZy8wMV9oZWxsb193b3JsZA",
+      "name": "Detect the 'hey arduino' keyword",
+      "description": "Detect the 'hey arduino' keyword. Requires an USB microphone connected to the Arduino board.",
+      "icon": "🗣️",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vbGxtLzAxX3NpbXBsZV9jaGF0",
+      "name": "Chat with a Local LLM",
+      "description": "Chat with a Local LLM. Models must be downloaded and available locally.",
+      "icon": "🤖",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vbGxtLzAyX3NpbXBsZV9zdHJlYW1pbmdfY2hhdA",
+      "name": "Stream responses from a Local LLM",
+      "description": "Stream responses from a Local LLM. Models must be downloaded and available locally.",
+      "icon": "🤖",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vbGxtLzAzX3NlbGVjdF9tb2RlbF9zdHJlYW1pbmdfY2hhdA",
+      "name": "Chat with a Local LLM using a specific model",
+      "description": "Chat with a Local LLM using a specific model. Models must be downloaded and available locally.",
+      "icon": "🤖",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vbGxtLzA0X3Rvb2xfY2FsbGluZw",
+      "name": "Chat with an LLM using Tool Calling",
+      "description": "Chat with an LLM using Tool Calling. Models must be downloaded and available locally.",
+      "icon": "🤖",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vbGxtLzA1X3N0cmVhbWluZ193aXRoX3Rvb2xz",
+      "name": "Chat with tools and streaming",
+      "description": "Chat with tools and streaming. Models must be downloaded and available locally.",
+      "icon": "🤖",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vbGxtLzA2X3BlcnNpc3RlbnRfbWVtb3J5",
+      "name": "Chat with persistent memory",
+      "description": "Chat with persistent memory. Requires local LLM models and the dbstorage_sqlstore brick.",
+      "icon": "🤖",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vbW9vZF9kZXRlY3Rvci8wMV9iYXNpY191c2FnZQ",
+      "name": "Basic usage of the Mood Detector",
+      "description": "Basic usage of the Mood Detector",
+      "icon": "😊",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vbW90aW9uX2RldGVjdGlvbi8wMV9iYXNpY191c2FnZQ",
+      "name": "Basic usage of the Motion Detection Brick",
+      "description": "Basic usage of the Motion Detection Brick",
+      "icon": "🏃",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vb2JqZWN0X2RldGVjdGlvbi8wMV9vYmplY3RfZGV0ZWN0aW9uX2V4YW1wbGU",
+      "name": "Object Detection",
+      "description": "Object Detection",
+      "icon": "🔍",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vc291bmRfZ2VuZXJhdG9yLzAxX3BsYXlfc2VxdWVuY2U",
+      "name": "Play a sequence of notes (Fur Elise)",
+      "description": "Play a sequence of notes (Fur Elise)",
+      "icon": "🎵",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vc291bmRfZ2VuZXJhdG9yLzAyX3N0cmVhbV9zZXF1ZW5jZQ",
+      "name": "Stream a sequence of notes over websocket via WebUI",
+      "description": "Stream a sequence of notes over websocket via WebUI",
+      "icon": "🎵",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vc291bmRfZ2VuZXJhdG9yLzAzX3BsYXlfYWJjX25vdGF0aW9u",
+      "name": "Play music in ABC notation",
+      "description": "Play music in ABC notation",
+      "icon": "🎵",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vc291bmRfZ2VuZXJhdG9yLzA0X2VmZmVjdHM",
+      "name": "Play a sequence using effects",
+      "description": "Play a sequence using effects",
+      "icon": "🎵",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vc291bmRfZ2VuZXJhdG9yLzA1X3BsYXlfY2hvcmRz",
+      "name": "Play chords",
+      "description": "Play chords",
+      "icon": "🎵",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vc291bmRfZ2VuZXJhdG9yLzA2X3BsYXlfcG9seXBob25pYw",
+      "name": "Play polyphonic multi-track music",
+      "description": "Play polyphonic multi-track music",
+      "icon": "🎵",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vc291bmRfZ2VuZXJhdG9yLzA3X3BsYXlfc3RlcF9zZXF1ZW5jZQ",
+      "name": "Play a step sequence with loop and callback",
+      "description": "Play a step sequence with loop and callback",
+      "icon": "🎵",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vc291bmRfZ2VuZXJhdG9yLzA4X3BsYXlfY29tcG9zaXRpb24",
+      "name": "Play a MusicComposition",
+      "description": "Play a MusicComposition",
+      "icon": "🎵",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vc291bmRfZ2VuZXJhdG9yLzA5X3BsYXlfd2F2",
+      "name": "Play a WAV file",
+      "description": "Play a WAV file",
+      "icon": "🎵",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vc3RyZWFtbGl0X3VpLzAxX2Jhc2ljX3VzYWdl",
+      "name": "Basic usage of the Streamlit UI Brick",
+      "description": "Basic usage of the Streamlit UI Brick",
+      "icon": "🖥️",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vc3RyZWFtbGl0X3VpLzAyX3VzaW5nX290aGVyX2JyaWNrcw",
+      "name": "Using Streamlit UI with other bricks",
+      "description": "Using Streamlit UI with other bricks",
+      "icon": "🖥️",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vdGVsZWdyYW1fYm90LzAxX3RleHRfZWNobw",
+      "name": "Echo text messages",
+      "description": "Echo text messages. Requires TELEGRAM_BOT_TOKEN environment variable.",
+      "icon": "📱",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vdGVsZWdyYW1fYm90LzAyX2NvbW1hbmRfaGFuZGxlcg",
+      "name": "Register and handle commands",
+      "description": "Register and handle commands. Requires TELEGRAM_BOT_TOKEN environment variable.",
+      "icon": "📱",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vdGVsZWdyYW1fYm90LzAzX3doaXRlbGlzdF9hdXRo",
+      "name": "Bot with user ID whitelist",
+      "description": "Bot with user ID whitelist. Requires TELEGRAM_BOT_TOKEN environment variable and authorized user IDs.",
+      "icon": "📱",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vdGVsZWdyYW1fYm90LzA0X3NjaGVkdWxlZF9tZXNzYWdlcw",
+      "name": "Schedule recurring messages",
+      "description": "Schedule recurring messages. Requires TELEGRAM_BOT_TOKEN environment variable and target chat ID.",
+      "icon": "📱",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vdGVsZWdyYW1fYm90LzA1X3Bob3RvX2VjaG8",
+      "name": "Echo photo messages",
+      "description": "Echo photo messages. Requires TELEGRAM_BOT_TOKEN environment variable.",
+      "icon": "📱",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vdGVsZWdyYW1fYm90LzA2X2F1ZGlvX2VjaG8",
+      "name": "Echo audio messages",
+      "description": "Echo audio messages. Requires TELEGRAM_BOT_TOKEN environment variable.",
+      "icon": "📱",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vdGVsZWdyYW1fYm90LzA3X3ZpZGVvX2VjaG8",
+      "name": "Echo video messages",
+      "description": "Echo video messages. Requires TELEGRAM_BOT_TOKEN environment variable.",
+      "icon": "📱",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vdGVsZWdyYW1fYm90LzA4X2RvY3VtZW50X2VjaG8",
+      "name": "Echo document messages",
+      "description": "Echo document messages. Requires TELEGRAM_BOT_TOKEN environment variable.",
+      "icon": "📱",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vdmlicmF0aW9uX2Fub21hbHlfZGV0ZWN0aW9uLzAxX2Jhc2ljX3VzYWdl",
+      "name": "Basic usage of the Vibration Anomaly Detection Brick",
+      "description": "Basic usage of the Vibration Anomaly Detection Brick",
+      "icon": "📳",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vdmlkZW9faW1hZ2VjbGFzc2lmaWNhdGlvbi8wMV9iYXNpY191c2FnZQ",
+      "name": "Basic usage of the Video Image Classification Brick",
+      "description": "Basic usage of the Video Image Classification Brick",
+      "icon": "🎥",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vdmlkZW9fb2JqZWN0ZGV0ZWN0aW9uLzAxX2Jhc2ljX3VzYWdl",
+      "name": "Basic usage of the Video Object Detection Brick",
+      "description": "Basic usage of the Video Object Detection Brick",
+      "icon": "🎬",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vdmlkZW9fb2JqZWN0ZGV0ZWN0aW9uLzAyX2NvdW50X29iamVjdHM",
+      "name": "Count detected objects",
+      "description": "Count detected objects",
+      "icon": "🎬",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vdmlkZW9fb2JqZWN0ZGV0ZWN0aW9uLzAzX2dldF9pbWFnZQ",
+      "name": "Get camera preview frame and design bounding boxes on it",
+      "description": "Get camera preview frame and design bounding boxes on it",
+      "icon": "🎬",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vdmlzdWFsX2Fub21hbHlfZGV0ZWN0aW9uLzAxX3Zpc3VhbF9hbm9tYWx5X2V4YW1wbGU",
+      "name": "Visual Anomaly Detection",
+      "description": "Visual Anomaly Detection",
+      "icon": "👁️",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vd2F2ZV9nZW5lcmF0b3IvMDFfYmFzaWNfdG9uZQ",
+      "name": "Basic Tone",
+      "description": "Basic Tone",
+      "icon": "🎶",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vd2F2ZV9nZW5lcmF0b3IvMDJfd2F2ZWZvcm1fdHlwZXM",
+      "name": "Cycle through different waveform types.",
+      "description": "Cycle through different waveform types.",
+      "icon": "🎶",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vd2F2ZV9nZW5lcmF0b3IvMDNfZnJlcXVlbmN5X3N3ZWVw",
+      "name": "Sweep through frequency ranges.",
+      "description": "Sweep through frequency ranges.",
+      "icon": "🎶",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vd2F2ZV9nZW5lcmF0b3IvMDRfZW52ZWxvcGVfY29udHJvbA",
+      "name": "Demonstrate different envelope settings.",
+      "description": "Demonstrate different envelope settings.",
+      "icon": "🎶",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vd2F2ZV9nZW5lcmF0b3IvMDVfY3VzdG9tX3NwZWFrZXI",
+      "name": "Play a simple frequency sequence (C4 to C5).",
+      "description": "Play a simple frequency sequence (C4 to C5).",
+      "icon": "🎶",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vd2VhdGhlcl9mb3JlY2FzdC8wMV93ZWF0aGVyX2ZvcmVjYXN0X2J5X2NpdHlfZXhhbXBsZQ",
+      "name": "Weather Forecast by city name",
+      "description": "Weather Forecast by city name",
+      "icon": "☀️",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vd2VhdGhlcl9mb3JlY2FzdC8wMl93ZWF0aGVyX2ZvcmVjYXN0X2J5X2Nvb3Jkc19leGFtcGxl",
+      "name": "Weather Forecast by coordinates",
+      "description": "Weather Forecast by coordinates",
+      "icon": "☀️",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vd2ViX3VpLzAxX3NlcnZlX3dlYmFwcA",
+      "name": "Serve a web application",
+      "description": "Serve a web application. Requires an 'assets' directory in the app's root folder with an index.html file.",
+      "icon": "🌐",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vd2ViX3VpLzAyX3NlcnZlX3dlYmFwcF9hbmRfYXBp",
+      "name": "Serve a web application and its API",
+      "description": "Serve a web application and its API",
+      "icon": "🌐",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vd2ViX3VpLzAzX2Nvbm5lY3RfZGlzY29ubmVjdA",
+      "name": "Print connections and disconnections",
+      "description": "Print connections and disconnections",
+      "icon": "🌐",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vd2ViX3VpLzA0X29uX21lc3NhZ2U",
+      "name": "Listen for messages from connected clients",
+      "description": "Listen for messages from connected clients",
+      "icon": "🌐",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "ZXhhbXBsZXM6YnJpY2tzL2FyZHVpbm8vd2ViX3VpLzA1X3NlbmRfbWVzc2FnZQ",
+      "name": "Send a message to a client that connects",
+      "description": "Send a message to a client that connects",
+      "icon": "🌐",
+      "status": "uninitialized",
+      "example": true,
+      "default": false
+    },
+    {
+      "id": "dXNlcjpjb3B5LW9mLWJsaW5raW5nLWFuLWxlZA",
+      "name": "Copy of Blinking an LED",
+      "description": "Simple example to blink an LED mounted on the board surface and controlled by the microcontroller.",
+      "icon": "🔴",
+      "status": "uninitialized",
+      "example": false,
+      "default": false
+    },
+    {
+      "id": "dXNlcjpkZWJ1Z2dlci1yeC1ydA",
+      "name": "Debugger Rx Rt",
+      "description": "DIAGNOSTICO | Emite DATA sintetico por Serial1 a 1 Mbps: senoidales de 100 y 200 Hz con timestamps de 10 kHz. Sin ADC.",
+      "icon": "😀",
+      "status": "uninitialized",
+      "example": false,
+      "default": false
+    },
+    {
+      "id": "dXNlcjpnZW5lcmFkb3I",
+      "name": "Generador",
+      "description": "GENERADOR HISTORICO | Seno por DAC0 con tabla de 32 puntos y analogWrite de 12 bits; temporizacion por micros. Sin adquisicion.",
+      "icon": "😀",
+      "status": "uninitialized",
+      "example": false,
+      "default": false
+    },
+    {
+      "id": "dXNlcjpvc2NpbG9zY29waW8",
+      "name": "Osciloscopio",
+      "description": "HISTORICO | Lee A0/A1 con analogRead de 12 bits en hilo Zephyr; envia bloques binarios por Serial a 2 Mbps. Sin DMA ADC.",
+      "icon": "😀",
+      "status": "uninitialized",
+      "example": false,
+      "default": false
+    },
+    {
+      "id": "dXNlcjpvc2NpbG9zY29waW8tZGVidWc",
+      "name": "Osciloscopio debug",
+      "description": "DEBUG HISTORICO | Lee A0/A1 con analogRead de 12 bits; imprime timestamp y dos ADC en texto CSV por Serial a 2 Mbps.",
+      "icon": "😀",
+      "status": "uninitialized",
+      "example": false,
+      "default": false
+    },
+    {
+      "id": "dXNlcjpvc2NpbG9zY29waW8tZG1h",
+      "name": "Osciloscopio DMA",
+      "description": "HISTORICO DMA | ADC y timestamps por hardware a 5 kHz; salida DATA por Serial a 2 Mbps. Anterior a la variante TX/RX.",
+      "icon": "😀",
+      "status": "uninitialized",
+      "example": false,
+      "default": false
+    },
+    {
+      "id": "dXNlcjpvc2NpbG9zY29waW8tZG1hX3R4cng",
+      "name": "Osciloscopio DMA_TXRX",
+      "description": "HISTORICO DMA TX/RX | ADC y timestamps por hardware a 5 kHz; salida DATA por Serial1 a 1 Mbps. Anterior a V2/V3.",
+      "icon": "😀",
+      "status": "uninitialized",
+      "example": false,
+      "default": false
+    },
+    {
+      "id": "dXNlcjpvc2NpbG9zY29waW8tdGVzdA",
+      "name": "Osciloscopio Test",
+      "description": "DIAGNOSTICO DMA | Adquisicion a 10 kHz y Serial1 a 1 Mbps; registra arranque, nodos DMA y discontinuidades. No es el monitor actual.",
+      "icon": "😀",
+      "status": "uninitialized",
+      "example": false,
+      "default": false
+    },
+    {
+      "id": "dXNlcjpwb3RlbnRpb21ldGVy",
+      "name": "Potentiometer",
+      "description": "EJEMPLO ADC | Lee potenciometro en A0 a 14 bits e imprime el valor por Serial a 9600 baudios, con pausa de 50 ms.",
+      "icon": "😀",
+      "status": "uninitialized",
+      "example": false,
+      "default": false
+    }
+  ],
+  "brokenApps": []
+}

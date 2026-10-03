@@ -15,7 +15,15 @@ import uuid
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-CONFIG = ROOT / 'arduino' / 'v4' / 'unoq.json'
+CONFIG = ROOT / 'arduino' / 'v8_config' / 'unoq.json'
+
+
+def config_path(version):
+    for folder in (ROOT / 'arduino' / version, ROOT / 'arduino' / 'historico' / version):
+        path = folder / 'unoq.json'
+        if path.is_file():
+            return path
+    raise FileNotFoundError(f'Versión Arduino desconocida: {version}')
 
 
 def source_files(folder):
@@ -103,12 +111,29 @@ class Board:
         print(f'Respaldo: {folder / name}')
         return folder / name
 
+    def stop(self):
+        self.cli('app', 'stop', self.remote)
+        boot = self.config.get('ready_boot')
+        if boot:
+            # PG13/MPU70 primero habilita el loader y luego pasa a READY SPI.
+            # Mantener MCU en reset al cambiar la dirección del GPIO del MPU.
+            self.shell('gpioset', '-c', boot['chip'], '-t0', f"{boot['reset_line']}=0")
+            try:
+                self.shell('gpioset', '-c', boot['chip'], '-t0', f"{boot['ready_line']}=1")
+            finally:
+                self.shell('gpioset', '-c', boot['chip'], '-t0', f"{boot['reset_line']}=1")
+
+    def start(self):
+        if self.config.get('ready_boot'):
+            self.stop()
+        self.cli('app', 'start', self.remote)
+
     def deploy(self):
         self.compile()
         self.backup()
-        self.cli('app', 'stop', self.remote)
+        self.stop()
         self.push_sources(self.check_sources(), self.remote)
-        self.cli('app', 'start', self.remote)
+        self.start()
         print('Código transferido y aplicación iniciada con App CLI.')
 
     def create(self):
@@ -133,18 +158,16 @@ class Board:
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('command', choices=('status', 'compile', 'backup', 'deploy', 'start', 'stop', 'logs', 'create'))
-    parser.add_argument('--version', choices=('v4', 'v5'), default='v4', help='v4 estable (default) o v5 experimental')
+    parser.add_argument('--version', choices=('v4', 'v5', 'v6', 'v6_polling', 'v6_dma', 'v6_irq', 'v6_adc', 'v7_dual', 'v8_config'), default='v8_config',
+                        help='v8_config actual (default); las demás versiones están en arduino/historico')
     parser.add_argument('--follow', action='store_true', help='Seguir logs hasta Ctrl+C')
     args = parser.parse_args()
     try:
-        config_path = ROOT / 'arduino' / args.version / 'unoq.json'
-        board = Board(json.loads(config_path.read_text()))
+        board = Board(json.loads(config_path(args.version).read_text()))
         print(f"Destino: {board.config['name']} ({board.local})", flush=True)
         if args.command == 'logs':
             opts = ['--follow'] if args.follow else ['--tail', '50']
             board.cli('app', 'logs', board.remote, *opts)
-        elif args.command in ('start', 'stop'):
-            board.cli('app', args.command, board.remote)
         else:
             getattr(board, args.command)()
     except (OSError, RuntimeError, SyntaxError, subprocess.CalledProcessError) as exc:

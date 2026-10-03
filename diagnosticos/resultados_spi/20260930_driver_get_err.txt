@@ -1,0 +1,39 @@
+Arduino Zephyr 1.0.0 / UNO Q STM32U585
+ELF SHA256: 39d4a4fd47241663323f6e04f94dd8f5a9f9ad6582cf1df37f9709b74026adcd
+
+/Users/fmgarciadiaz/Library/Arduino15/packages/arduino/hardware/zephyr/1.0.0/firmwares/zephyr-arduino_uno_q_stm32u585xx.elf:     file format elf32-littlearm
+
+
+Disassembly of section text:
+
+0800f6f8 <spi_stm32_get_err>:
+ 800f6f8:	b510      	push	{r4, lr}
+ 800f6fa:	4604      	mov	r4, r0
+ 800f6fc:	6940      	ldr	r0, [r0, #20]
+ 800f6fe:	b086      	sub	sp, #24
+ 800f700:	f410 7078 	ands.w	r0, r0, #992	; 0x3e0
+ 800f704:	d015      	beq.n	800f732 <spi_stm32_get_err+0x3a>
+ 800f706:	4b0c      	ldr	r3, [pc, #48]	; (800f738 <spi_stm32_get_err+0x40>)
+ 800f708:	9004      	str	r0, [sp, #16]
+ 800f70a:	9303      	str	r3, [sp, #12]
+ 800f70c:	4b0b      	ldr	r3, [pc, #44]	; (800f73c <spi_stm32_get_err+0x44>)
+ 800f70e:	2201      	movs	r2, #1
+ 800f710:	9302      	str	r3, [sp, #8]
+ 800f712:	2300      	movs	r3, #0
+ 800f714:	490a      	ldr	r1, [pc, #40]	; (800f740 <spi_stm32_get_err+0x48>)
+ 800f716:	4618      	mov	r0, r3
+ 800f718:	e9cd 3300 	strd	r3, r3, [sp]
+ 800f71c:	f00a fb08 	bl	8019d30 <z_log_msg_runtime_create.constprop.0>
+ 800f720:	f06f 0004 	mvn.w	r0, #4
+ 800f724:	6963      	ldr	r3, [r4, #20]
+ 800f726:	065b      	lsls	r3, r3, #25
+ 800f728:	bf42      	ittt	mi
+ 800f72a:	69a3      	ldrmi	r3, [r4, #24]
+ 800f72c:	f043 0340 	orrmi.w	r3, r3, #64	; 0x40
+ 800f730:	61a3      	strmi	r3, [r4, #24]
+ 800f732:	b006      	add	sp, #24
+ 800f734:	bd10      	pop	{r4, pc}
+ 800f736:	bf00      	nop
+ 800f738:	0803f424 	.word	0x0803f424
+ 800f73c:	080242ec 	.word	0x080242ec
+ 800f740:	0801c8b4 	.word	0x0801c8b4
