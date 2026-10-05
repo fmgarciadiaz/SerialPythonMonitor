@@ -1,5 +1,10 @@
 # Paso dos: canal de control y selección del transmisor
 
+La pareja actual es V12 / V11 P992 con SCP1 V3/992; ver
+[transporte actual](TRANSPORTE_TECNICO.md). El contrato y las capturas V2/512
+de este documento se conservan como antecedentes; sus offsets CRC y
+longitudes no se aplican a V3.
+
 Este documento desglosa el paso dos del [Plan de trabajo](../Plan%20de%20trabajo.md).
 El paso uno conserva su monitor V8 y su adquisición fija a 31,25 kHz / 14 bits.
 

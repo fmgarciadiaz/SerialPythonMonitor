@@ -40,7 +40,7 @@ de espectro y medidor de respuesta en frecuencia.
 - **Analiza frecuencias:** FFT instantánea, heatmap temporal y Bode de ganancia
   y fase, con ejes logarítmicos y comparación de hasta cinco barridos.
 - **Configura la adquisición:** 8/10/12/14 bits nativos o 16 bits por oversampling;
-  hasta 62,5 kHz por SPI, 50 kHz en 16 bits y 31,25 kHz por UART.
+  hasta 125 kHz por SPI, 62,5 kHz en 16 bits y 31,25 kHz por UART.
 - **Guarda mediciones:** CSV con muestras y timestamps originales, independiente
   del nivel de detalle usado para dibujar.
 
@@ -56,7 +56,7 @@ FFT y Bode muestran un relleno translúcido bajo cada curva. Bode permite añadi
 mediciones de distintos colores y aplicar una referencia instrumental compatible
 con el perfil ADC. Los huecos sin lectura interrumpen el área rellenada.
 
-[Uso y controles](monitor/v10/README.md) ·
+[Uso y controles](monitor/v12/README.md) ·
 [Funcionamiento técnico y esquemas](docs/MONITOR_TECNICO.md) ·
 [FFT, heatmap y Bode](docs/FFT_V10.md)
 
@@ -75,19 +75,19 @@ como puente; el Q permanece conectado para controlar el instrumento.
 | **A3 / V_OUT** | Lectura de la salida del circuito |
 | **GND** | Masa común |
 
-[Instalación del firmware](arduino/v8_config/README.md) ·
+[Instalación del firmware](arduino/v11_p992/README.md) ·
 [Cableado, temporizadores y DMA](docs/UNO_Q_TECNICO.md) ·
 [Relay y protocolos](docs/TRANSPORTE_TECNICO.md)
 
 ## Probar el proyecto
 
-Versión actual: **monitor V10 + firmware UNO Q V8 config**. Con el firmware y
+Versión actual: **monitor V12 + firmware UNO Q V11 P992**. Con el firmware y
 relay instalados, ejecutar desde la raíz:
 
 ```sh
 python -m pip install -r requirements.txt
-python3 tools/usb_stream.py start
-python monitor/v10/app.py
+python3 tools/usb_stream.py start --firmware v11_p992
+python monitor/v12/app.py
 ```
 
 Elegir CONTROL Q, ENLACE y Conectar, o pulsar Demo (2 CH) para usar señales
@@ -104,7 +104,9 @@ sintéticas. La captura de portada muestra esa demostración.
 | [Validación Bode](diagnosticos/BODE_V10.md) | Ensayos físicos, referencia vigente y límites |
 | [Plan de trabajo](Plan%20de%20trabajo.md) | Estado del proyecto y próximos pasos |
 
-La referencia vigente cubre 20 Hz–20 kHz con ADC de 16 bits / 50 kHz.
+La referencia Bode histórica cubre 20 Hz–20 kHz con ADC de 16 bits /
+50 kHz y reloj ADC anterior de 40 MHz; requiere nueva comprobación con el
+reloj actual de 50 MHz.
 Las ventanas ADC cortas requieren menor impedancia de fuente; la salida de
 16 bits por oversampling no cambia la resolución de 12 bits del DAC.
 [Detalles de adquisición](docs/CONFIGURACION_ADQUISICION.md) y
@@ -116,5 +118,9 @@ de los módulos activos.
 
 [Ensayo experimental de tasas SPI altas](experimentos/tasas_spi/README.md):
 [monitor V11](monitor/v11/README.md), firmware V9 Fast y receptor separado.
-100 kHz por canal pasó continuidad física durante 120 s; precisión analógica
-de ambos canales pendiente. El conjunto V10/V8 sigue conservado y es el estable.
+100 kHz por canal pasó continuidad física durante 120 s. La comparación
+analógica posterior está documentada en el ensayo P992. V10/V8 y V11/V9 Fast
+se conservan como parejas anteriores.
+
+[Revisión y prueba sostenida ADC16](diagnosticos/ADC16_V12.md): 7.495.680 pares en120s,
+sin discontinuidades y con restauración exacta del perfil y generador.

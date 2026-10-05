@@ -1,16 +1,18 @@
 # Firmware actual del UNO Q
 
-La versión actual es [V8 config](v8_config/README.md), utilizada por el monitor
-Python V10. El sketch está en [sketch.ino](v8_config/oscilloscope/sketch/sketch.ino).
+La pareja actual es [V11 P992](v11_p992/README.md) con el monitor Python V12.
+El sketch MCU está en [sketch.ino](v11_p992/oscilloscope/sketch/sketch.ino)
+y el relay MPU en [relay](v11_p992/relay/).
 
 ```sh
-python3 tools/unoq.py status
-python3 tools/unoq.py compile
-python3 tools/unoq.py deploy
-python3 tools/usb_stream.py start
+python3 tools/unoq.py status --version v11_p992
+python3 tools/unoq.py compile --version v11_p992
+python3 tools/unoq.py deploy --version v11_p992
+python3 tools/usb_stream.py start --firmware v11_p992
 ```
 
-Estos comandos seleccionan V8 config por defecto. Las aplicaciones anteriores
+Los comandos anteriores seleccionan explícitamente V11 P992. Sin estas
+opciones, las herramientas conservan V8 config por defecto. Las aplicaciones anteriores
 están en [historico](historico/README.md) y se pueden seleccionar explícitamente
 con `--version` o `--firmware`. Ver [catálogo](apps_catalogo.json).
 Para UART al R4 se conserva el [puente R4 V5](historico/v5/r4_bridge_v5/README.md).

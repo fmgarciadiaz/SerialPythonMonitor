@@ -7,11 +7,11 @@ organización y operación que antes estaban en el README principal. Los documen
 originales se conservan como referencia; sus rutas, velocidades y estados pueden
 corresponder a etapas anteriores.
 
-## Versiones actuales y catálogo completo · 3 de octubre de 2026
+## Versiones actuales y catálogo completo · 5 de octubre de 2026
 
-La entrada actual es **Python V10 + UNO Q V8 config**. Las secciones de
+La entrada actual es **Python V12 + UNO Q V11 P992**. Las secciones de
 operación antiguas más abajo son historia, no instrucciones para el conjunto
-actual. [Arranque actual](../README.md#empezar).
+actual. [Arranque actual](../README.md#probar-el-proyecto).
 
 | Monitor | Firmware / destino de referencia | Evolución |
 |---|---|---|
@@ -23,6 +23,8 @@ actual. [Arranque actual](../README.md#empezar).
 | [V9](../monitor/historico/v9/README.md) | Q V7 dual | Control Q permanente y selección SPI/UART |
 | [V10](../monitor/v10/README.md) | [Q V8 config](../arduino/v8_config/README.md) | ADC configurable, generador, FFT, heatmap y Bode |
 | [V11 experimental](../monitor/v11/README.md) | [Q V9 Fast](../arduino/v9_fast/README.md) | SPI rápido: 100 kHz por canal, estable conservado |
+
+| [V12](../monitor/v12/README.md) | [Q V11 P992](../arduino/v11_p992/README.md) | SCP1 V3/992, ADC14/125 kHz y ADC16/62,5 kHz |
 
 ### Firmware conservado
 

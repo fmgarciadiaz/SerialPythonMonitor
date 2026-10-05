@@ -32,3 +32,23 @@ Rollback a V11/100 kHz: detener relay, detener app `v11_p992` e iniciar
 `tools/usb_stream.py start --firmware v9_fast`; abrir `monitor/v11/app.py`.
 Las opciones por defecto de las herramientas siguen en V8 config/V10;
 seleccionar explícitamente `v11_p992` para esta nueva pareja.
+
+## ADC de 16 bits a 62,5 kHz
+
+PLL2 toma HSE de 16 MHz, divide por 2, multiplica por 25 y divide por 4:
+ADC a 50 MHz para todos los perfiles. Se conservan 16 subconversiones de
+14 bits por canal y shift derecho de 2 bits. 16 bits/62,5 kHz está permitido
+sólo por SPI; UART conserva 31,25 kHz.
+
+[Ensayo inicial](../../capturas/adc16_rate/test62k5_20261005_002648/informe.json):
+311.409 pares en 5 s, dropped=fatal=0.
+[Regresión ADC14/125 kHz](../../capturas/validacion_v12/20261005_003145_591574/informe.json):
+FFT, heatmap, SINGLE y 507.565 filas CSV continuas. Estos ensayos no
+certifican precisión absoluta, ENOB ni estabilidad prolongada.
+
+El kernel ADC/DAC es compartido; ver [arquitectura MCU/MPU](../../docs/UNO_Q_TECNICO.md)
+y [relay](../../docs/TRANSPORTE_TECNICO.md). Las calibraciones Bode previas
+se obtuvieron con reloj ADC de 40 MHz y requieren nueva comprobación.
+
+[Revisión y prueba sostenida ADC16](../../diagnosticos/ADC16_V12.md): 7.495.680 pares en120s,
+sin discontinuidades y con restauración exacta del perfil y generador.

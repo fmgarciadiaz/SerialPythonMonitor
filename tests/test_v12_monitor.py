@@ -21,7 +21,7 @@ class FastMonitorTests(unittest.TestCase):
     def test_high_rate_to_oversampling_is_one_safe_profile(self):
         w=self.w;w.config_rate_combo.setCurrentIndex(w.config_rate_combo.findData(125000))
         w.serial_worker=MagicMock();w.config_bits_combo.setCurrentIndex(w.config_bits_combo.findData(16));QtTest.QTest.qWait(80)
-        w.serial_worker.request_output.assert_called_once_with(0,w.r4_combo.currentData(),Configuration(16,50000))
+        w.serial_worker.request_output.assert_called_once_with(0,w.r4_combo.currentData(),Configuration(16,62500))
         self.assertFalse(w.config_rate_combo.model().item(w.config_rate_combo.findData(125000)).isEnabled())
     def test_uart_retains_safe_ceiling(self):
         w=self.w;w.config_rate_combo.setCurrentIndex(w.config_rate_combo.findData(125000))

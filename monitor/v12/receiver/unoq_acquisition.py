@@ -16,17 +16,17 @@ class Configuration:
     bits: int = 14
     rate: int = 31250
     def __post_init__(self):
-        if self.bits not in BITS or self.rate not in RATES or (self.bits == 16 and self.rate > 50000):
+        if self.bits not in BITS or self.rate not in RATES or (self.bits == 16 and self.rate > 62500):
             raise ValueError('Bits o tasa no admitidos por la adquisición actual')
     @property
     def period(self): return 1000000//self.rate
     @property
     def sampling_cycles(self):
         if self.bits != 16: return 391 if self.rate <= 40000 else 68 if self.rate <= 200000 else 36
-        for maximum, cycles in ((2000,391),(12500,68),(20000,36),(31250,20),(40000,12),(50000,5)):
+        for maximum, cycles in ((2000,391),(12500,68),(20000,36),(31250,20),(40000,12),(50000,5),(62500,5)):
             if self.rate <= maximum: return cycles
     @property
-    def sampling_us(self): return self.sampling_cycles/40
+    def sampling_us(self): return self.sampling_cycles/50
     @property
     def maximum(self): return (1 << self.bits)-1
     @property

@@ -1,5 +1,9 @@
 # Paso cuatro: generador de ondas
 
+Pareja actual: V12 / V11 P992. El kernel ADC/DAC usa PLL2 a 50 MHz;
+HCLK y TIM6 siguen a 160 MHz. HFSEL permanece en01 por HCLK.
+Ver [revisión de reloj y evidencia](../diagnosticos/ADC16_V12.md).
+
 Decisión física del 2 de octubre de 2026: **DAC0 en A0, V_IN en A2 y V_OUT en A3**.
 El firmware actual adquiere ADC1_IN11 (PA6) y ADC1_IN12 (PA7). El DAC1 canal 1
 usa PA4 y salida de 12 bits; se invoca `analogWrite(DAC0, valor)` del core Zephyr

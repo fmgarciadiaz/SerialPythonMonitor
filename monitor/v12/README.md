@@ -14,7 +14,7 @@ Requiere el entorno Python con PyQt5, pyqtgraph, NumPy y pyserial.
 CSV en `capturas/v12/`, separado de otras versiones.
 
 SPI admite hasta 125 kHz por canal en ADC nativo 8/10/12/14 bits; 16 bits
-con oversampling conserva 50 kHz y UART/R4 31,25 kHz. No se ofrecen
+con oversampling ×16 admite 62,5 kHz y UART/R4 31,25 kHz. No se ofrecen
 200/250 kHz. La validación sostenida y analógica de 125 kHz corresponde
 específicamente a 14 bits: [evidencia P992](../../experimentos/tasas_spi/opt125/README.md).
 El control Q permanece conectado, tanto para salida SPI como UART.
@@ -56,3 +56,23 @@ Fs presenta tasa/período compactos, con detalles en tooltip.
 
 No mezclar con relay de V11/V9 Fast (SCP1 V2/512) ni con otros monitores.
 Detener el monitor y relay activos antes de cambiar de firmware.
+
+## ADC de 16 bits a 62,5 kHz
+
+PLL2 toma HSE de 16 MHz, divide por 2, multiplica por 25 y divide por 4:
+ADC a 50 MHz para todos los perfiles. Se conservan 16 subconversiones de
+14 bits por canal y shift derecho de 2 bits. 16 bits/62,5 kHz está permitido
+sólo por SPI; UART conserva 31,25 kHz.
+
+[Ensayo inicial](../../capturas/adc16_rate/test62k5_20261005_002648/informe.json):
+311.409 pares en 5 s, dropped=fatal=0.
+[Regresión ADC14/125 kHz](../../capturas/validacion_v12/20261005_003145_591574/informe.json):
+FFT, heatmap, SINGLE y 507.565 filas CSV continuas. Estos ensayos no
+certifican precisión absoluta, ENOB ni estabilidad prolongada.
+
+El kernel ADC/DAC es compartido; ver [arquitectura MCU/MPU](../../docs/UNO_Q_TECNICO.md)
+y [relay](../../docs/TRANSPORTE_TECNICO.md). Las calibraciones Bode previas
+se obtuvieron con reloj ADC de 40 MHz y requieren nueva comprobación.
+
+[Revisión y prueba sostenida ADC16](../../diagnosticos/ADC16_V12.md): 7.495.680 pares en120s,
+sin discontinuidades y con restauración exacta del perfil y generador.

@@ -1,4 +1,23 @@
-# Configuración real de adquisición: firmware V8 / monitor V10
+# Configuración de adquisición
+
+## Pareja actual V12 / firmware V11 P992
+
+SPI: hasta 125 kHz por canal en 8/10/12/14 bits, y 62,5 kHz en
+16 bits por oversampling ×16 de conversiones de 14 bits, shift derecho 2.
+UART: hasta 31,25 kHz. Los valores de 16 bits no certifican ENOB de 16 bits.
+ADC a 50 MHz mediante PLL2; la ventana indicada por Python corresponde a
+ciclos/50 MHz. A 62,5 kHz/16 bits se usan 5 ciclos de adquisición.
+Con 17 ciclos de conversión, dos canales ×16 requieren nominalmente
+32×(5+17)/50 = 14,08 µs frente a un período de 16 µs, antes de latencias.
+El aumento acorta también las ventanas de los perfiles anteriores y requiere
+comprobar ruido, asentamiento y referencias Bode compatibles.
+
+SCP1 V3 usa 992 bytes, payload 972 y CRC32 en 988–991; los tipos de
+comando y campos iniciales se conservan. Firmware, relay y receptor deben
+aceptar juntos 16 bits/período 16 µs y rechazar 100/125 kHz en 16 bits.
+
+## Contrato anterior V8 / V10 (V2/512)
+
 
 SCP1/v2 conserva 512 bytes, little-endian, payload de 492 bytes y CRC32 sobre
 0–507 en 508–511. Los nuevos tipos son SET_ACQUISITION=6 y ACQUISITION_STATUS=7.

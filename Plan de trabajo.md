@@ -65,3 +65,15 @@ Este es el plan de la app completa. Pero lo tenemos que ir haciendo paso a paso.
 - 198 pruebas locales aprobadas y firmware/relay ARM compilados. La evidencia sostenida y analógica de P992 corresponde a ADC14/125 kHz con los estímulos documentados; UART físico y calibración absoluta siguen pendientes.
 - Verificación física de integración mediante `diagnosticos/verificar_v12.py`, con seno de 2 kHz, trigger/SINGLE, V(t), FFT, heatmap y CSV, restaurando el generador al terminar.
 - [Integración aprobada con USB real](capturas/validacion_v12/20261004_204139_688307/informe.json): SINGLE con seno de ~2 kHz / 2,46 Vpp, FFT, heatmap y CSV de 511082 filas continuo. Generador restaurado a 2,5 Hz; nueva pareja activa en Q a ADC14/125 kHz. Sigue el paso seis de WAV; no se hizo un nuevo Bode físico ni se validó UART/R4.
+
+### Optimización 16 bits · 5 de octubre de 2026
+
+- Se implementó el **Camino A**: reloj de ADC acelerado a **50 MHz vía PLL2** (HSE 16 MHz / 2 * 25 / 4 = 50.000 MHz, dentro de los 55 MHz nominales del STM32U5).
+- Desbloqueado **16 bits a 62,5 kHz** por canal conservando el oversampling $\times 16$ intacto (período 16 µs, tiempo nominal de conversión 14,08 µs, antes de latencias; margen nominal 12%).
+- Validado físicamente en la placa ([informe](capturas/adc16_rate/test62k5_20261005_002648/informe.json)): 311.409 pares en 5 s a 62.275 pares/s sostenidos, dropped=0, fatal=0.
+- Interfaz gráfica de [Monitor V12](monitor/v12/app.py) actualizada para permitir 62,5 kHz en 16 bits; suite completa de tests aprobada (`OK`).
+
+
+- Revisión posterior: [ADC16 V12](diagnosticos/ADC16_V12.md). Diagnóstico corregido para restaurar el perfil observado; 7.495.680 pares en 120 s sin discontinuidades, dropped ni fatal. Suite de 206 pruebas aprobada. El reloj ADC de 50 MHz afecta todos los perfiles y requiere comprobar las referencias Bode anteriores.
+
+- Correcciones de reloj compiladas y cargadas: [120 s finales](capturas/adc16_rate/test_20261005_011511_251289/informe.json), 7.495.906 pares sin errores. Comparación analógica 50/62,5 kHz a 2/10/20 kHz: amplitud estable (<0,23%), residuo mayor a20 kHz; no certifica ENOB ni reemplaza calibración Bode. Perfil y generador del usuario restaurados.

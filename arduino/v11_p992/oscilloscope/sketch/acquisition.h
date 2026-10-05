@@ -2,6 +2,7 @@
 #include "scope_config.h"
 #include "scope_protocol.h"
 #include "generator.h"
+#include <stm32u5xx_ll_rcc.h>
 #include <stm32u5xx_ll_adc.h>
 #include <stm32u5xx_ll_tim.h>
 #include <stm32u5xx_ll_gpio.h>
@@ -27,6 +28,52 @@ static LL_DMA_LinkNodeTypeDef dmaNode[DMA_NODE_COUNT]
 static LL_DMA_LinkNodeTypeDef timestampNode[DMA_NODE_COUNT]
     __attribute__((aligned(CONFIG_DCACHE_LINE_SIZE)));
 
+// Shared ADC/DAC kernel: prepare once, before generator::start enables DAC.
+// Reconfiguration only verifies this clock; never switch a live DAC clock.
+static bool adc_clock_matches() {
+    const uint32_t mask = RCC_PLL2CFGR_PLL2SRC | RCC_PLL2CFGR_PLL2M |
+        RCC_PLL2CFGR_PLL2RGE | RCC_PLL2CFGR_PLL2FRACEN | RCC_PLL2CFGR_PLL2REN;
+    const uint32_t expected = LL_RCC_PLL2SOURCE_HSE |
+        (1U << RCC_PLL2CFGR_PLL2M_Pos) | RCC_PLL2CFGR_PLL2RGE | RCC_PLL2CFGR_PLL2REN;
+    const uint32_t divmask = RCC_PLL2DIVR_PLL2N | RCC_PLL2DIVR_PLL2R;
+    const uint32_t divisors = (24U << RCC_PLL2DIVR_PLL2N_Pos) | (3U << RCC_PLL2DIVR_PLL2R_Pos);
+    return LL_RCC_HSE_IsReady() && LL_RCC_PLL2_IsReady() &&
+        (RCC->PLL2CFGR & mask) == expected && (RCC->PLL2DIVR & divmask) == divisors;
+}
+static bool adc_clock_prepare() {
+    if (!LL_RCC_HSE_IsReady()) return false;
+    if (threads_started) {
+        return adc_clock_matches() &&
+            LL_RCC_GetADCDACClockSource(LL_RCC_ADCDAC_CLKSOURCE) == LL_RCC_ADCDAC_CLKSOURCE_PLL2;
+    }
+    if ((ADC1->CR & ADC_CR_ADEN) ||
+        (reinterpret_cast<DAC_TypeDef *>(DAC1_BASE)->CR & (DAC_CR_EN1 | DAC_CR_EN2))) return false;
+    if (LL_RCC_PLL2_IsReady()) {
+        // Never commandeer an existing PLL belonging to another peripheral.
+        if (!adc_clock_matches()) return false;
+    } else {
+        LL_RCC_PLL2_Disable();
+        int64_t deadline = k_uptime_get() + 20;
+        while (LL_RCC_PLL2_IsReady()) {
+            if (k_uptime_get() >= deadline) return false;
+            k_busy_wait(10);
+        }
+        LL_RCC_PLL2_SetVCOInputRange(LL_RCC_PLLINPUTRANGE_8_16);
+        LL_RCC_PLL2_ConfigDomain_ADC(LL_RCC_PLL2SOURCE_HSE, 2, 25, 4);
+        CLEAR_BIT(RCC->PLL2CFGR, RCC_PLL2CFGR_PLL2FRACEN);
+        LL_RCC_PLL2_EnableDomain_ADC();
+        LL_RCC_PLL2_Enable();
+        deadline = k_uptime_get() + 20;
+        while (!LL_RCC_PLL2_IsReady()) {
+            if (k_uptime_get() >= deadline) { LL_RCC_PLL2_Disable(); return false; }
+            k_busy_wait(10);
+        }
+        if (!adc_clock_matches()) return false;
+    }
+    LL_RCC_SetADCDACClockSource(LL_RCC_ADCDAC_CLKSOURCE_PLL2);
+    return LL_RCC_GetADCDACClockSource(LL_RCC_ADCDAC_CLKSOURCE) == LL_RCC_ADCDAC_CLKSOURCE_PLL2;
+}
+
 static void adc_init(void)
 {
     // These are the actual STM32U585 RCC gates. The LL clock aliases
@@ -46,8 +93,7 @@ static void adc_init(void)
     LL_GPIO_SetPinMode(GPIOA, LL_GPIO_PIN_7, LL_GPIO_MODE_ANALOG);
     LL_GPIO_SetPinPull(GPIOA, LL_GPIO_PIN_7, LL_GPIO_PULL_NO);
 
-    // ADC clock = existing ADC kernel clock divided by 4.
-    LL_ADC_SetCommonClock(__LL_ADC_COMMON_INSTANCE(ADC1), LL_ADC_CLOCK_ASYNC_DIV4);
+    LL_ADC_SetCommonClock(__LL_ADC_COMMON_INSTANCE(ADC1), LL_ADC_CLOCK_ASYNC_DIV1);
     LL_ADC_SetResolution(ADC1, bits==8?LL_ADC_RESOLUTION_8B:
         bits==10?LL_ADC_RESOLUTION_10B:bits==12?LL_ADC_RESOLUTION_12B:LL_ADC_RESOLUTION_14B);
     LL_ADC_SetLowPowerMode(ADC1, LL_ADC_LP_MODE_NONE);
@@ -81,8 +127,8 @@ static void adc_init(void)
     LL_ADC_REG_SetSequencerRanks(
         ADC1, LL_ADC_REG_RANK_2, LL_ADC_CHANNEL_12);
 
-    // ADC clock 40 MHz. Keep the long window through 40 kHz; faster
-    // SPI profiles use 68 cycles (1.7 us), requiring a lower source impedance.
+    // ADC clock 50 MHz. Keep the long window through 40 kHz; faster
+    // SPI profiles use 68 cycles (1.36 us), requiring a lower source impedance.
     const uint32_t sampling = bits != 16
         ? (period >= 25U ? LL_ADC_SAMPLINGTIME_391CYCLES : period >= 5U ? LL_ADC_SAMPLINGTIME_68CYCLES : LL_ADC_SAMPLINGTIME_36CYCLES)
         : period >= 500U ? LL_ADC_SAMPLINGTIME_391CYCLES
@@ -352,7 +398,10 @@ static void release() {
 static bool start() {
     if ((GPDMA1_Channel0->CCR | GPDMA1_Channel1->CCR) & DMA_CCR_EN) return false;
     pinMode(ADC_IN_PIN, INPUT); pinMode(ADC_OUT_PIN, INPUT);
+    if (!adc_clock_prepare()) return false;
     if (!threads_started && !generator::start()) return false;
+    // analogWrite in generator initialization must not change the shared kernel.
+    if (!adc_clock_matches() || LL_RCC_GetADCDACClockSource(LL_RCC_ADCDAC_CLKSOURCE) != LL_RCC_ADCDAC_CLKSOURCE_PLL2) return false;
     timer_init(); timestamp_timer_init(); adc_init(); dma_init();
     producer_slot = consumer_slot = 0;
     dropped_nodes = fatal_errors = 0;

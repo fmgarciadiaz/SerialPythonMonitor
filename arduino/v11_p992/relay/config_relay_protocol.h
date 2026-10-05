@@ -1,7 +1,7 @@
 #pragma once
 static bool acquisition_valid(unsigned bits,uint32_t period) {
     if(bits!=8 && bits!=10 && bits!=12 && bits!=14 && bits!=16) return false;
-    if (bits==16 && period<20) return false;
+    if (bits==16 && period<16) return false;
     switch(period) { case 4: case 5: case 8: case 10: case 16: case 20: case 25: case 32:case 40:case 50:case 64:case 80:case 100:case 125:
         case 200:case 250:case 500:case 1000:return true; }
     return false;

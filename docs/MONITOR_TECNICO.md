@@ -1,6 +1,6 @@
 # Monitor Python · funcionamiento técnico
 
-[Proyecto](../README.md) · [Uso de V10](../monitor/v10/README.md)
+[Proyecto](../README.md) · [Uso de V12](../monitor/v12/README.md)
 
 ## Flujo de datos
 

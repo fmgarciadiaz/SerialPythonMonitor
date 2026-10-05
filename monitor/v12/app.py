@@ -2477,11 +2477,11 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             uart = self.destination_combo.currentData() == int(Mode.UART)
             for i in range(self.config_rate_combo.count()):
                 rate = self.config_rate_combo.itemData(i)
-                allowed = (not uart or rate in UART_RATES) and (self.config_bits_combo.currentData() != 16 or rate <= 50000)
+                allowed = (not uart or rate in UART_RATES) and (self.config_bits_combo.currentData() != 16 or rate <= 62500)
                 self.config_rate_combo.model().item(i).setEnabled(allowed)
                 bits = self.config_bits_combo.currentData()
                 label = f'{rate/1000:g}'.replace('.', ',') + f' kHz · {1000000//rate} µs'
-                if bits != 16 or rate <= 50000:
+                if bits != 16 or rate <= 62500:
                     profile = Configuration(bits, rate)
                     acquisition = f'{profile.sampling_us:g}'.replace('.', ',')
                     tooltip = (f'Período entre pares: {profile.period} µs.\n'
@@ -2494,8 +2494,8 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
                     tooltip = 'Esta tasa no admite el oversampling ×16 de ambos canales.'
                 self.config_rate_combo.setItemText(i, label)
                 self.config_rate_combo.setItemData(i, tooltip, QtCore.Qt.ToolTipRole)
-            if self.config_bits_combo.currentData() == 16 and self.config_rate_combo.currentData() > 50000:
-                self.config_rate_combo.setCurrentIndex(self.config_rate_combo.findData(50000))
+            if self.config_bits_combo.currentData() == 16 and self.config_rate_combo.currentData() > 62500:
+                self.config_rate_combo.setCurrentIndex(self.config_rate_combo.findData(62500))
             if uart and self.config_rate_combo.currentData() not in UART_RATES:
                 self.config_rate_combo.setCurrentIndex(self.config_rate_combo.findData(31250))
         if hasattr(self, 'r4_combo'):
