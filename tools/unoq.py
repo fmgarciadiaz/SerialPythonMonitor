@@ -158,8 +158,8 @@ class Board:
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('command', choices=('status', 'compile', 'backup', 'deploy', 'start', 'stop', 'logs', 'create'))
-    parser.add_argument('--version', choices=('v4', 'v5', 'v6', 'v6_polling', 'v6_dma', 'v6_irq', 'v6_adc', 'v7_dual', 'v8_config'), default='v8_config',
-                        help='v8_config actual (default); las demás versiones están en arduino/historico')
+    parser.add_argument('--version', choices=('v4', 'v5', 'v6', 'v6_polling', 'v6_dma', 'v6_irq', 'v6_adc', 'v7_dual', 'v8_config', 'v9_fast', 'v10_diag', 'v11_p992'), default='v8_config',
+                        help='v8_config estable (default); v9_fast experimental; versiones anteriores en arduino/historico')
     parser.add_argument('--follow', action='store_true', help='Seguir logs hasta Ctrl+C')
     args = parser.parse_args()
     try:

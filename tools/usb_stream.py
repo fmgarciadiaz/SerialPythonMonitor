@@ -10,10 +10,18 @@ from spi_benchmark import BUILD_IMAGE, IMAGE
 CONTAINER = 'serialmonitor-usb-stream'
 
 
-def binary(board, build=False, dual=False, configurable=False):
-    relay = 'transport/unoq_config_stream.c' if configurable else ('transport/unoq_dual_stream.c' if dual else 'transport/unoq_stream.c')
-    sources = [relay, 'diagnosticos/verificar_spi.c']
-    if configurable:
+def binary(board, build=False, dual=False, configurable=False, experimental=False, diagnostic=False, p992=False):
+    relay = 'experimentos/timing_spi/relay/unoq_config_stream.c' if diagnostic else 'experimentos/tasas_spi/relay/unoq_config_stream.c' if experimental else ('transport/unoq_config_stream.c' if configurable else ('transport/unoq_dual_stream.c' if dual else 'transport/unoq_stream.c'))
+    if p992:
+        relay = 'arduino/v11_p992/relay/unoq_config_stream.c'
+    sources = [relay, 'arduino/v11_p992/relay/base_verifier.c' if p992 else 'diagnosticos/verificar_spi.c']
+    if p992:
+        sources.append('arduino/v11_p992/relay/config_relay_protocol.h')
+    elif diagnostic:
+        sources.append('experimentos/timing_spi/relay/config_relay_protocol.h')
+    elif experimental:
+        sources.append('experimentos/tasas_spi/relay/config_relay_protocol.h')
+    elif configurable:
         sources.append('transport/config_relay_protocol.h')
     elif dual:
         sources.append('transport/dual_protocol.h')
@@ -45,13 +53,13 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('command', choices=('start', 'stop', 'status', 'logs', 'build'))
     parser.add_argument('--build-native', action='store_true')
-    parser.add_argument('--firmware', choices=('v6_adc', 'v7_dual', 'v8_config'), default='v8_config')
+    parser.add_argument('--firmware', choices=('v6_adc', 'v7_dual', 'v8_config', 'v9_fast', 'v10_diag', 'v11_p992'), default='v8_config')
     args = parser.parse_args()
     board = Board(json.loads(config_path(args.firmware).read_text()))
     if args.command == 'build':
-        print(binary(board, build=True, dual=args.firmware == 'v7_dual', configurable=args.firmware == 'v8_config'))
+        print(binary(board, build=True, dual=args.firmware == 'v7_dual', configurable=args.firmware in ('v8_config','v9_fast','v10_diag'), experimental=args.firmware == 'v9_fast', diagnostic=args.firmware == 'v10_diag', p992=args.firmware == 'v11_p992'))
     elif args.command == 'start':
-        target = binary(board, args.build_native, dual=args.firmware == 'v7_dual', configurable=args.firmware == 'v8_config')
+        target = binary(board, args.build_native, dual=args.firmware == 'v7_dual', configurable=args.firmware in ('v8_config','v9_fast','v10_diag'), experimental=args.firmware == 'v9_fast', diagnostic=args.firmware == 'v10_diag', p992=args.firmware == 'v11_p992')
         stop(board)
         # Reset acquisition counters/queue before taking over READY.
         board.start()
@@ -67,7 +75,13 @@ def main():
         if not state.get('Running'):
             board.shell('docker', 'logs', '--tail', '20', CONTAINER)
             raise RuntimeError('El relay no quedó en ejecución.')
-        if args.firmware == 'v8_config':
+        if args.firmware == 'v11_p992':
+            print('Relay P992 iniciado. Abrir: python monitor/v12/app.py (SCP1 V3/992).')
+        elif args.firmware == 'v10_diag':
+            print('Relay de diagnóstico iniciado. Usar experimentos/timing_spi; no abrir V11.')
+        elif args.firmware == 'v9_fast':
+            print('Relay experimental iniciado. Abrir: python monitor/v11/app.py; CLI en experimentos/tasas_spi.')
+        elif args.firmware == 'v8_config':
             print('Relay configurable iniciado. Abrir: python monitor/v10/app.py')
         else:
             print('Relay dual iniciado. Abrir: python monitor/historico/v9/app.py' if args.firmware == 'v7_dual'

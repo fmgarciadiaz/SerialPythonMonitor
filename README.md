@@ -1,5 +1,23 @@
 # fergd · Osciloscopio y generador Arduino UNO Q
 
+## Nueva versión V12 · 125 kHz
+
+[Monitor V12](monitor/v12/README.md) + [firmware V11 P992](arduino/v11_p992/README.md):
+pareja independiente SCP1 V3/992, SPI de 32 MHz y hasta 125 kHz por canal.
+El candidato pasó dos capturas de 120 s a 14 bits, comandos concurrentes,
+transiciones, monitor con USB real y comparación analógica de ambos canales
+con seno de ~2 kHz. [Evidencia](experimentos/tasas_spi/opt125/README.md).
+V10 y V11 permanecen disponibles. Usar explícitamente `--firmware v11_p992`;
+los comandos sin versión conservan V8 config/V10.
+
+```sh
+python3 tools/usb_stream.py start --firmware v11_p992
+python monitor/v12/app.py
+```
+
+Cerrar monitor y detener relay/app anteriores antes de cambiar de pareja.
+
+
 [![GitHub](https://img.shields.io/badge/GitHub-SerialPythonMonitor-181717?logo=github)](https://github.com/fmgarciadiaz/SerialPythonMonitor)
 [![Último commit](https://img.shields.io/github/last-commit/fmgarciadiaz/SerialPythonMonitor?logo=github)](https://github.com/fmgarciadiaz/SerialPythonMonitor/commits)
 [![Stars](https://img.shields.io/github/stars/fmgarciadiaz/SerialPythonMonitor?style=flat&logo=github)](https://github.com/fmgarciadiaz/SerialPythonMonitor/stargazers)
@@ -95,3 +113,8 @@ Las ventanas ADC cortas requieren menor impedancia de fuente; la salida de
 La grabación y reproducción WAV es el próximo paso del plan y todavía no está
 implementada. Fuentes históricas, capturas y diagnósticos se conservan separados
 de los módulos activos.
+
+[Ensayo experimental de tasas SPI altas](experimentos/tasas_spi/README.md):
+[monitor V11](monitor/v11/README.md), firmware V9 Fast y receptor separado.
+100 kHz por canal pasó continuidad física durante 120 s; precisión analógica
+de ambos canales pendiente. El conjunto V10/V8 sigue conservado y es el estable.

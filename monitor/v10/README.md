@@ -197,3 +197,10 @@ también relleno de área con el color elegido para cada canal.
 La referencia vigente se carga al abrir el monitor: ADC 16 bits / 50 kHz,
 20 Hz–20 kHz. Corregir con calibración sólo actúa dentro de ese perfil/rango.
 [Uso del análisis](../../docs/FFT_V10.md) · [Calibración](../../diagnosticos/BODE_V10.md).
+
+## Opciones por modo
+
+FS de muestreo está arriba, junto a Conectar/Demo/Desconectar.
+En Modos · Análisis, V/t muestra eje horizontal, trazo, estilo, Corte auto
+y Detalle/FPS. Muestras, ventana y opciones espectrales sólo aparecen en FFT
+y heatmap; Bode muestra sus propios controles de barrido.

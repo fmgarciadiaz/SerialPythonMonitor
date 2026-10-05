@@ -1,0 +1,81 @@
+{
+  "profiles": [
+    {
+      "bits": 14,
+      "rate": 100000,
+      "period_us": 10,
+      "sampling_cycles": 68,
+      "passed": true,
+      "pairs": 997077,
+      "seconds": 10.002694614988286,
+      "received_pairs_per_second": 99680.83985148913,
+      "gaps": 0,
+      "bad_range": 0,
+      "hardware_status": {
+        "ack": 29490,
+        "rate": 100000,
+        "bits": 14,
+        "dropped": 0,
+        "fatal": 0,
+        "epoch": 1,
+        "prepare_us": 58,
+        "check_us": 71
+      },
+      "binary": "experimentos/tasas_spi/resultados/20261004_191638_423914/14bits_100000Hz.bin",
+      "channels": [
+        {
+          "amplitude_peak_v": 1.2159954283203427,
+          "offset_v": 1.6162549877494625,
+          "residual_rms_v": 0.007870192314920416
+        },
+        {
+          "amplitude_peak_v": 0.0037257632598099496,
+          "offset_v": 1.6100908459262815,
+          "residual_rms_v": 0.009135990590077667
+        }
+      ],
+      "fitted_frequency_hz": 1996.8050078084118,
+      "analog_passed": false
+    },
+    {
+      "bits": 14,
+      "rate": 125000,
+      "period_us": 8,
+      "sampling_cycles": 68,
+      "passed": false,
+      "error": "El Q cerr\u00f3 el flujo. Revisar el relay, la adquisici\u00f3n y el cable USB.",
+      "hardware_status": {
+        "ack": 30678,
+        "rate": 125000,
+        "bits": 14,
+        "dropped": 0,
+        "fatal": 0,
+        "epoch": 2,
+        "prepare_us": 51,
+        "check_us": 71
+      }
+    }
+  ],
+  "passed": false,
+  "errors": [
+    "14/125000: El Q cerr\u00f3 el flujo. Revisar el relay, la adquisici\u00f3n y el cable USB.",
+    "Restauraci\u00f3n: El Q cerr\u00f3 el flujo. Revisar el relay, la adquisici\u00f3n y el cable USB."
+  ],
+  "capture": "experimentos/tasas_spi/resultados/20261004_191638_423914",
+  "before": {
+    "acquisition": {
+      "bits": 14,
+      "rate": 31250
+    },
+    "generator": {
+      "wave": 0,
+      "enabled": 1,
+      "mode": 0,
+      "frequency": 2500,
+      "final_frequency": 2500,
+      "low": 0,
+      "high": 4095,
+      "duration": 1000
+    }
+  }
+}

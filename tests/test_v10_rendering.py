@@ -51,7 +51,7 @@ class DisplayTests(unittest.TestCase):
   self.assertEqual(w.detail_value_label.text(),'Completo')
   self.assertFalse(w.is_running);self.assertEqual(w.sample_counter,123)
   self.assertEqual(y[1234],4)
-  self.assertTrue(w.configuration_panel.isAncestorOf(w.detail_slider))
+  self.assertTrue(w.temporal_settings.isAncestorOf(w.detail_slider))
 
 class HistoryTests(unittest.TestCase):
  def test_wrap_oversize_batches_and_frozen_window(self):

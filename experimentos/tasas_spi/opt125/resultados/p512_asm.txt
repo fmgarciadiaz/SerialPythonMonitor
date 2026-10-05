@@ -1,0 +1,190 @@
+00000178 <build_samples(unsigned char*, acquisition::Node*, unsigned int, unsigned int)>:
+     178:	e92d 41f0 	stmdb	sp!, {r4, r5, r6, r7, r8, lr}
+     17c:	4d2a      	ldr	r5, [pc, #168]	@ (228 <build_samples(unsigned char*, acquisition::Node*, unsigned int, unsigned int)+0xb0>)
+     17e:	460e      	mov	r6, r1
+     180:	4690      	mov	r8, r2
+     182:	2100      	movs	r1, #0
+     184:	f44f 7200 	mov.w	r2, #512	@ 0x200
+     188:	4604      	mov	r4, r0
+     18a:	461f      	mov	r7, r3
+     18c:	47a8      	blx	r5
+     18e:	4b27      	ldr	r3, [pc, #156]	@ (22c <build_samples(unsigned char*, acquisition::Node*, unsigned int, unsigned int)+0xb4>)
+     190:	4d27      	ldr	r5, [pc, #156]	@ (230 <build_samples(unsigned char*, acquisition::Node*, unsigned int, unsigned int)+0xb8>)
+     192:	6818      	ldr	r0, [r3, #0]
+     194:	fbb5 fcf0 	udiv	ip, r5, r0
+     198:	ea4f 231c 	mov.w	r3, ip, lsr #8
+     19c:	f884 c030 	strb.w	ip, [r4, #48]	@ 0x30
+     1a0:	ea4f 4c1c 	mov.w	ip, ip, lsr #16
+     1a4:	f884 3031 	strb.w	r3, [r4, #49]	@ 0x31
+     1a8:	f884 c032 	strb.w	ip, [r4, #50]	@ 0x32
+     1ac:	2e00      	cmp	r6, #0
+     1ae:	d038      	beq.n	222 <build_samples(unsigned char*, acquisition::Node*, unsigned int, unsigned int)+0xaa>
+     1b0:	6833      	ldr	r3, [r6, #0]
+     1b2:	eb08 23c3 	add.w	r3, r8, r3, lsl #11
+     1b6:	6363      	str	r3, [r4, #52]	@ 0x34
+     1b8:	2302      	movs	r3, #2
+     1ba:	f884 3043 	strb.w	r3, [r4, #67]	@ 0x43
+     1be:	4b1d      	ldr	r3, [pc, #116]	@ (234 <build_samples(unsigned char*, acquisition::Node*, unsigned int, unsigned int)+0xbc>)
+     1c0:	4a1d      	ldr	r2, [pc, #116]	@ (238 <build_samples(unsigned char*, acquisition::Node*, unsigned int, unsigned int)+0xc0>)
+     1c2:	681b      	ldr	r3, [r3, #0]
+     1c4:	7812      	ldrb	r2, [r2, #0]
+     1c6:	63a3      	str	r3, [r4, #56]	@ 0x38
+     1c8:	4b1c      	ldr	r3, [pc, #112]	@ (23c <build_samples(unsigned char*, acquisition::Node*, unsigned int, unsigned int)+0xc4>)
+     1ca:	f884 2042 	strb.w	r2, [r4, #66]	@ 0x42
+     1ce:	681a      	ldr	r2, [r3, #0]
+     1d0:	f884 0044 	strb.w	r0, [r4, #68]	@ 0x44
+     1d4:	63e2      	str	r2, [r4, #60]	@ 0x3c
+     1d6:	0a02      	lsrs	r2, r0, #8
+     1d8:	f884 2045 	strb.w	r2, [r4, #69]	@ 0x45
+     1dc:	0c02      	lsrs	r2, r0, #16
+     1de:	0e00      	lsrs	r0, r0, #24
+     1e0:	f884 7040 	strb.w	r7, [r4, #64]	@ 0x40
+     1e4:	f884 2046 	strb.w	r2, [r4, #70]	@ 0x46
+     1e8:	f884 0047 	strb.w	r0, [r4, #71]	@ 0x47
+     1ec:	b1be      	cbz	r6, 21e <build_samples(unsigned char*, acquisition::Node*, unsigned int, unsigned int)+0xa6>
+     1ee:	6832      	ldr	r2, [r6, #0]
+     1f0:	681b      	ldr	r3, [r3, #0]
+     1f2:	64a2      	str	r2, [r4, #72]	@ 0x48
+     1f4:	3b00      	subs	r3, #0
+     1f6:	bf18      	it	ne
+     1f8:	2301      	movne	r3, #1
+     1fa:	4a11      	ldr	r2, [pc, #68]	@ (240 <build_samples(unsigned char*, acquisition::Node*, unsigned int, unsigned int)+0xc8>)
+     1fc:	6812      	ldr	r2, [r2, #0]
+     1fe:	ea43 0342 	orr.w	r3, r3, r2, lsl #1
+     202:	64e3      	str	r3, [r4, #76]	@ 0x4c
+     204:	b90f      	cbnz	r7, 20a <build_samples(unsigned char*, acquisition::Node*, unsigned int, unsigned int)+0x92>
+     206:	e8bd 81f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, pc}
+     20a:	1d31      	adds	r1, r6, #4
+     20c:	00fa      	lsls	r2, r7, #3
+     20e:	eb01 01c8 	add.w	r1, r1, r8, lsl #3
+     212:	f104 0050 	add.w	r0, r4, #80	@ 0x50
+     216:	4b0b      	ldr	r3, [pc, #44]	@ (244 <build_samples(unsigned char*, acquisition::Node*, unsigned int, unsigned int)+0xcc>)
+     218:	e8bd 41f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, lr}
+     21c:	4718      	bx	r3
+     21e:	4632      	mov	r2, r6
+     220:	e7e6      	b.n	1f0 <build_samples(unsigned char*, acquisition::Node*, unsigned int, unsigned int)+0x78>
+     222:	4633      	mov	r3, r6
+     224:	e7c7      	b.n	1b6 <build_samples(unsigned char*, acquisition::Node*, unsigned int, unsigned int)+0x3e>
+     226:	bf00      	nop
+     228:	00000000 	.word	0x00000000
+     22c:	00001020 	.word	0x00001020
+     230:	000f4240 	.word	0x000f4240
+     234:	00000364 	.word	0x00000364
+     238:	00001024 	.word	0x00001024
+     23c:	00000360 	.word	0x00000360
+     240:	00018534 	.word	0x00018534
+     244:	00000000 	.word	0x00000000
+
+000017b4 <scope_bench::valid_ping(unsigned char const*)>:
+    17b4:	7803      	ldrb	r3, [r0, #0]
+    17b6:	2b53      	cmp	r3, #83	@ 0x53
+    17b8:	d102      	bne.n	17c0 <scope_bench::valid_ping(unsigned char const*)+0xc>
+    17ba:	7843      	ldrb	r3, [r0, #1]
+    17bc:	2b43      	cmp	r3, #67	@ 0x43
+    17be:	d001      	beq.n	17c4 <scope_bench::valid_ping(unsigned char const*)+0x10>
+    17c0:	2000      	movs	r0, #0
+    17c2:	4770      	bx	lr
+    17c4:	7883      	ldrb	r3, [r0, #2]
+    17c6:	2b50      	cmp	r3, #80	@ 0x50
+    17c8:	d1fa      	bne.n	17c0 <scope_bench::valid_ping(unsigned char const*)+0xc>
+    17ca:	78c3      	ldrb	r3, [r0, #3]
+    17cc:	2b31      	cmp	r3, #49	@ 0x31
+    17ce:	d1f7      	bne.n	17c0 <scope_bench::valid_ping(unsigned char const*)+0xc>
+    17d0:	8883      	ldrh	r3, [r0, #4]
+    17d2:	2b02      	cmp	r3, #2
+    17d4:	d1f4      	bne.n	17c0 <scope_bench::valid_ping(unsigned char const*)+0xc>
+    17d6:	88c3      	ldrh	r3, [r0, #6]
+    17d8:	2b02      	cmp	r3, #2
+    17da:	d1f1      	bne.n	17c0 <scope_bench::valid_ping(unsigned char const*)+0xc>
+    17dc:	68c3      	ldr	r3, [r0, #12]
+    17de:	f5b3 7ff6 	cmp.w	r3, #492	@ 0x1ec
+    17e2:	d1ed      	bne.n	17c0 <scope_bench::valid_ping(unsigned char const*)+0xc>
+    17e4:	f04f 31ff 	mov.w	r1, #4294967295	@ 0xffffffff
+    17e8:	4602      	mov	r2, r0
+    17ea:	e92d 43f0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, lr}
+    17ee:	4d26      	ldr	r5, [pc, #152]	@ (1888 <scope_bench::valid_ping(unsigned char const*)+0xd4>)
+    17f0:	f8d0 61fc 	ldr.w	r6, [r0, #508]	@ 0x1fc
+    17f4:	eb00 0c01 	add.w	ip, r0, r1
+    17f8:	f200 14fb 	addw	r4, r0, #507	@ 0x1fb
+    17fc:	f81c 3f01 	ldrb.w	r3, [ip, #1]!
+    1800:	404b      	eors	r3, r1
+    1802:	b2db      	uxtb	r3, r3
+    1804:	f855 3023 	ldr.w	r3, [r5, r3, lsl #2]
+    1808:	45a4      	cmp	ip, r4
+    180a:	ea83 2111 	eor.w	r1, r3, r1, lsr #8
+    180e:	d1f5      	bne.n	17fc <scope_bench::valid_ping(unsigned char const*)+0x48>
+    1810:	43c9      	mvns	r1, r1
+    1812:	428e      	cmp	r6, r1
+    1814:	d133      	bne.n	187e <scope_bench::valid_ping(unsigned char const*)+0xca>
+    1816:	6884      	ldr	r4, [r0, #8]
+    1818:	4b1c      	ldr	r3, [pc, #112]	@ (188c <scope_bench::valid_ping(unsigned char const*)+0xd8>)
+    181a:	f500 70f6 	add.w	r0, r0, #492	@ 0x1ec
+    181e:	fb03 f404 	mul.w	r4, r3, r4
+    1822:	235a      	movs	r3, #90	@ 0x5a
+    1824:	b2e5      	uxtb	r5, r4
+    1826:	f3c4 2607 	ubfx	r6, r4, #8, #8
+    182a:	f3c4 4707 	ubfx	r7, r4, #16, #8
+    182e:	0e24      	lsrs	r4, r4, #24
+    1830:	e00e      	b.n	1850 <scope_bench::valid_ping(unsigned char const*)+0x9c>
+    1832:	f892 e011 	ldrb.w	lr, [r2, #17]
+    1836:	45c6      	cmp	lr, r8
+    1838:	d121      	bne.n	187e <scope_bench::valid_ping(unsigned char const*)+0xca>
+    183a:	f892 e012 	ldrb.w	lr, [r2, #18]
+    183e:	45e6      	cmp	lr, ip
+    1840:	d11d      	bne.n	187e <scope_bench::valid_ping(unsigned char const*)+0xca>
+    1842:	f892 c013 	ldrb.w	ip, [r2, #19]
+    1846:	3204      	adds	r2, #4
+    1848:	458c      	cmp	ip, r1
+    184a:	d118      	bne.n	187e <scope_bench::valid_ping(unsigned char const*)+0xca>
+    184c:	4290      	cmp	r0, r2
+    184e:	d019      	beq.n	1884 <scope_bench::valid_ping(unsigned char const*)+0xd0>
+    1850:	f103 0c11 	add.w	ip, r3, #17
+    1854:	f103 0122 	add.w	r1, r3, #34	@ 0x22
+    1858:	ea86 0c0c 	eor.w	ip, r6, ip
+    185c:	4079      	eors	r1, r7
+    185e:	f892 e010 	ldrb.w	lr, [r2, #16]
+    1862:	ea85 0903 	eor.w	r9, r5, r3
+    1866:	fa5f f88c 	uxtb.w	r8, ip
+    186a:	fa5f fc81 	uxtb.w	ip, r1
+    186e:	f103 0133 	add.w	r1, r3, #51	@ 0x33
+    1872:	4061      	eors	r1, r4
+    1874:	3344      	adds	r3, #68	@ 0x44
+    1876:	45ce      	cmp	lr, r9
+    1878:	b2c9      	uxtb	r1, r1
+    187a:	b2db      	uxtb	r3, r3
+    187c:	d0d9      	beq.n	1832 <scope_bench::valid_ping(unsigned char const*)+0x7e>
+    187e:	2000      	movs	r0, #0
+    1880:	e8bd 83f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, pc}
+    1884:	2001      	movs	r0, #1
+    1886:	e7fb      	b.n	1880 <scope_bench::valid_ping(unsigned char const*)+0xcc>
+    1888:	00000000 	.word	0x00000000
+    188c:	9e3779b1 	.word	0x9e3779b1
+
+00001890 <scope_bench::data_frame(unsigned char*, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, int, int, unsigned int, unsigned int)>:
+    1890:	f44f 7cf6 	mov.w	ip, #492	@ 0x1ec
+    1894:	b430      	push	{r4, r5}
+    1896:	6143      	str	r3, [r0, #20]
+    1898:	9b02      	ldr	r3, [sp, #8]
+    189a:	4d0a      	ldr	r5, [pc, #40]	@ (18c4 <scope_bench::data_frame(unsigned char*, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, int, int, unsigned int, unsigned int)+0x34>)
+    189c:	6183      	str	r3, [r0, #24]
+    189e:	9b03      	ldr	r3, [sp, #12]
+    18a0:	4c09      	ldr	r4, [pc, #36]	@ (18c8 <scope_bench::data_frame(unsigned char*, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, int, int, unsigned int, unsigned int)+0x38>)
+    18a2:	61c3      	str	r3, [r0, #28]
+    18a4:	9b04      	ldr	r3, [sp, #16]
+    18a6:	6005      	str	r5, [r0, #0]
+    18a8:	6203      	str	r3, [r0, #32]
+    18aa:	9b05      	ldr	r3, [sp, #20]
+    18ac:	6044      	str	r4, [r0, #4]
+    18ae:	6243      	str	r3, [r0, #36]	@ 0x24
+    18b0:	9b06      	ldr	r3, [sp, #24]
+    18b2:	6081      	str	r1, [r0, #8]
+    18b4:	6283      	str	r3, [r0, #40]	@ 0x28
+    18b6:	9b07      	ldr	r3, [sp, #28]
+    18b8:	f8c0 c00c 	str.w	ip, [r0, #12]
+    18bc:	6102      	str	r2, [r0, #16]
+    18be:	62c3      	str	r3, [r0, #44]	@ 0x2c
+    18c0:	bc30      	pop	{r4, r5}
+    18c2:	4770      	bx	lr
+    18c4:	31504353 	.word	0x31504353
+    18c8:	00010002 	.word	0x00010002
+

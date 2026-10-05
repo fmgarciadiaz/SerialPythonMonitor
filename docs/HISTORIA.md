@@ -22,6 +22,7 @@ actual. [Arranque actual](../README.md#empezar).
 | [V8](../monitor/historico/v8/README.md) | Q V6 ADC | USB directo por SPI al Linux del Q |
 | [V9](../monitor/historico/v9/README.md) | Q V7 dual | Control Q permanente y selección SPI/UART |
 | [V10](../monitor/v10/README.md) | [Q V8 config](../arduino/v8_config/README.md) | ADC configurable, generador, FFT, heatmap y Bode |
+| [V11 experimental](../monitor/v11/README.md) | [Q V9 Fast](../arduino/v9_fast/README.md) | SPI rápido: 100 kHz por canal, estable conservado |
 
 ### Firmware conservado
 
@@ -50,6 +51,16 @@ La referencia inicial fue invalidada por cableado incorrecto. La vigente es
 el ensayo `20261003_123522_633848`: 20 Hz–20 kHz, ADC 16 bits / 50 kHz,
 31/31 puntos, CSV continuo y restauración exacta. [Detalle](../diagnosticos/BODE_V10.md).
 El panel WAV sigue pendiente. Los números Python y firmware son independientes.
+
+### 4 de octubre: V11 + V9 Fast SPI
+
+Nueva versión experimental de firmware, relay, receptor y monitor aislados.
+SPI de 32 MHz, CRC más rápido y un único sellado por trama: 100 kHz por canal
+a 14 bits pasó 120 s, casi 12 millones de pares sin discontinuidades ni errores
+DMA. 125 kHz perdió nodos; 200/250 kHz no se probaron tras ese fallo. V11 ofrece
+sólo 100 kHz como tasa nueva. La exactitud analógica de ambos canales queda
+pendiente. V10 + V8 config siguen siendo el conjunto estable.
+[Estudio y pruebas](../experimentos/tasas_spi/README.md).
 
 ### Archivos originales y documentación de época
 
@@ -225,3 +236,9 @@ Se agregan 40, 50 y 62,5 kHz por canal exclusivamente por SPI. 40 kHz mantiene l
 ## 2 de octubre de 2026: zoom y render de V10
 
 Se amplía el horizontal a 250.000 muestras (4 s a 62,5 kHz). Historial NumPy por lotes, reducción visual antes de escalones, preservación de extremos/cortes y transferencia de objetos Python entre hilos. Mediciones completas a 10 Hz. Ensayos físicos con CSV: 58,5 FPS de render a 9.000 muestras y 48,2 a 250.000, con Qt offscreen. [Evidencia y alcance](../diagnosticos/RENDER_V10.md).
+# 4 de octubre de 2026 · Monitor V12 y firmware V11 P992
+
+Promoción del candidato P992 a una pareja independiente: `monitor/v12`,
+`arduino/v11_p992`, receptor propio y relay SCP1 V3/992. Hasta 125 kHz SPI
+por canal; se conservan V11/100 kHz y V10. [Guía](../monitor/v12/README.md)
+y [evidencia del candidato](../experimentos/tasas_spi/opt125/README.md).

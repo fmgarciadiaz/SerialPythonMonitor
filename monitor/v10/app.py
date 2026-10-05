@@ -124,7 +124,10 @@ class GeneratorComboBox(QtWidgets.QComboBox):
         rect = self.style().subControlRect(QtWidgets.QStyle.CC_ComboBox, option,
                                           QtWidgets.QStyle.SC_ComboBoxEditField, self)
         if not icon.isNull():
-            icon.paint(painter, QtCore.QRect(rect.left() + 4, rect.center().y() - 9, 36, 18))
+            small = self.width() < 150
+            icon.paint(painter, QtCore.QRect(rect.left() + 2, rect.center().y() - (5 if small else 9),
+                                           16 if small else 36, 10 if small else 18))
+            rect.adjust(22 if small else 44, 0, 0, 0)
         painter.setPen(self.palette().color(QtGui.QPalette.Text))
         painter.drawText(rect, QtCore.Qt.AlignCenter, text)
 
@@ -445,6 +448,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             QGroupBox::title {
                 subcontrol-origin: margin;
                 subcontrol-position: top left;
+                top: 3px;
                 padding: 0 6px;
                 left: 10px;
             }
@@ -977,6 +981,29 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self.port_combo.setMinimumWidth(0)
         self.port_combo.setSizePolicy(QtWidgets.QSizePolicy.Ignored, QtWidgets.QSizePolicy.Fixed)
         refresh_btn.setFixedSize(28, 28)
+        # Temporal display controls belong to the V/t mode panel.
+        top_layout.removeWidget(self.btn_xaxis_toggle)
+        top_layout.addWidget(fs_card, 1, 3)
+        top_layout.removeWidget(trace_card)
+        trace_card.hide()
+        top_layout.removeWidget(destination_card)
+        destination_card.hide()
+        destination_layout.removeItem(detail_row)
+        self.temporal_settings = QtWidgets.QWidget()
+        temporal_form = QtWidgets.QFormLayout(self.temporal_settings)
+        temporal_form.setContentsMargins(0,0,0,0)
+        temporal_form.setVerticalSpacing(4)
+        for control in (self.btn_xaxis_toggle,self.trace_mode_combo,self.trace_style_combo):
+            control.setFixedHeight(24)
+        self.btn_xaxis_toggle.setStyleSheet(self.btn_xaxis_toggle.styleSheet().replace('padding: 5px 8px;', 'padding: 2px 6px;'))
+        temporal_form.addRow('Eje horizontal', self.btn_xaxis_toggle)
+        temporal_form.addRow('Trazo', self.trace_mode_combo)
+        temporal_form.addRow('Estilo', self.trace_style_combo)
+        temporal_form.addRow(self.chk_auto_gap)
+        temporal_form.addRow('Detalle / FPS', self.detail_value_label)
+        temporal_form.addRow(self.detail_slider)
+        for widget in (self.btn_xaxis_toggle,self.trace_mode_combo,self.trace_style_combo,
+                       self.chk_auto_gap,self.detail_value_label,self.detail_slider): widget.show()
 
         left_layout.addWidget(top_group)
         self._build_generator_panel(generator_layout)
@@ -1631,9 +1658,6 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             QDial { background:transparent; }
             QCheckBox { color:#d6fff6; padding:6px 0; }
         """)
-        self.generator_toggle = QtWidgets.QLabel('Salida DAC · 12 bits')
-        self.generator_toggle.setAlignment(QtCore.Qt.AlignCenter)
-        layout.addWidget(self.generator_toggle)
         self.generator_panel = QtWidgets.QWidget()
         grid = QtWidgets.QGridLayout(self.generator_panel)
         grid.setContentsMargins(0, 0, 0, 0)
@@ -1643,7 +1667,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         for i, name in enumerate(WAVES):
             self.generator_wave.addItem(generator_wave_icon(i), name)
         self.generator_wave.setIconSize(QtCore.QSize(36,18))
-        self.generator_wave.setMinimumHeight(32)
+        self.generator_wave.setFixedHeight(28)
         self.generator_mode = GeneratorComboBox()
         self.generator_mode.addItems(MODES)
         self.generator_frequency = GeneratorFrequencySpinBox()
@@ -1652,7 +1676,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             spin.setRange(0.1, 20000); spin.setDecimals(3); spin.setValue(2.5)
         self.generator_frequency.setToolTip('0,1 Hz a 20 kHz. Lectura en Hz y kHz (1000 Hz = 1 kHz).\nEscribir en Hz o incluir kHz; confirmar con Enter o al salir.\nPara observar 20 kHz, elegir Fs de 50 o 62,5 kHz.')
         self.generator_frequency.setAlignment(QtCore.Qt.AlignCenter)
-        self.generator_frequency.setStyleSheet('font-size:20px; font-weight:bold; color:#8df3dc;')
+        self.generator_frequency.setStyleSheet('font-size:12px; font-weight:bold; color:#8df3dc;')
         self.generator_amplitude = GeneratorValueSpinBox()
         self.generator_amplitude.setRange(0, 3.3); self.generator_amplitude.setDecimals(3)
         self.generator_amplitude.setSuffix(' Vpp'); self.generator_amplitude.setValue(3.3)
@@ -1667,7 +1691,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self.generator_frequency_dial.setRange(0,1000)
         self.generator_frequency_dial.setNotchesVisible(True)
         self.generator_frequency_dial.setTracking(True)
-        self.generator_frequency_dial.setFixedSize(72,72)
+        self.generator_frequency_dial.setFixedSize(88,88)
         palette=self.generator_frequency_dial.palette()
         palette.setColor(QtGui.QPalette.Button,QtGui.QColor('#55a99e'))
         self.generator_frequency_dial.setPalette(palette)
@@ -1697,24 +1721,31 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
                     ('Amplitud pico a pico',self.generator_amplitude),('Offset',self.generator_offset),
                     ('Duración',self.generator_duration)]
         self._generator_labels = {}
-        row=0
-        for label,control in controls:
+        positions = [(0,0,1),(0,1,1),(2,1,1),(5,0,1),(7,0,1),(7,1,1),(5,1,1)]
+        for (label,control),(row,col,span) in zip(controls,positions):
             self._generator_labels[control] = QtWidgets.QLabel(label)
             self._generator_labels[control].setAlignment(QtCore.Qt.AlignCenter)
+            self._generator_labels[control].setWordWrap(True)
             if isinstance(control, QtWidgets.QDoubleSpinBox):
                 control.setAlignment(QtCore.Qt.AlignCenter)
-            grid.addWidget(self._generator_labels[control],row,0)
-            grid.addWidget(control,row+1,0)
-            row+=2
+            control.setFixedHeight(28)
+            control.setMinimumWidth(0)
+            control.setSizePolicy(QtWidgets.QSizePolicy.Ignored, QtWidgets.QSizePolicy.Fixed)
+            grid.addWidget(self._generator_labels[control],row,col,1,span)
+            grid.addWidget(control,row+1,col,1,span)
             if control is self.generator_frequency:
-                grid.addWidget(self.generator_frequency_dial,row,0,alignment=QtCore.Qt.AlignHCenter)
-                row+=1
-        grid.addWidget(self.generator_enabled,row,0)
-        grid.addWidget(self.generator_restart,row+1,0)
-        self.generator_status = QtWidgets.QLabel('Conectar el Q para consultar la salida. 0,1 Hz–20 kHz.')
+                grid.addWidget(self.generator_frequency_dial,2,0,3,1,alignment=QtCore.Qt.AlignHCenter)
+        grid.setColumnStretch(0,1); grid.setColumnStretch(1,1)
+        self.generator_enabled.setSizePolicy(QtWidgets.QSizePolicy.Ignored, QtWidgets.QSizePolicy.Fixed)
+        self.generator_restart.setSizePolicy(QtWidgets.QSizePolicy.Ignored, QtWidgets.QSizePolicy.Fixed)
+        grid.addWidget(self.generator_enabled,11,0)
+        self.generator_restart.setFixedHeight(34)
+        self.generator_restart.setText('Disparar')
+        grid.addWidget(self.generator_restart,11,1)
+        self.generator_status = QtWidgets.QLabel('Conectar el Q · DAC 12 bits')
         self.generator_status.setWordWrap(True)
         self.generator_status.setAlignment(QtCore.Qt.AlignCenter)
-        grid.addWidget(self.generator_status,row+2,0)
+        grid.addWidget(self.generator_status,13,0,1,2)
         self.generator_scroll = QtWidgets.QScrollArea()
         self.generator_scroll.setWidgetResizable(True)
         self.generator_scroll.setFrameShape(QtWidgets.QFrame.NoFrame)
@@ -1845,8 +1876,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
                 self._generator_syncing=False
             self._generator_availability()
         state='Activo' if reply.running else ('Finalizado' if c.enabled else 'Apagado · A0 a 0 V')
-        self.generator_status.setText(f'{state} · {WAVES[c.wave]} · {c.frequency/1000:g} Hz · DAC por DMA')
-        self.generator_toggle.setText(f'Generador · A0 · {state}')
+        self.generator_status.setText(f'A0 · {state} · {WAVES[c.wave]} · {c.frequency/1000:g} Hz · DAC 12 bits por DMA')
         if self._generator_dirty and not self._generator_timer.isActive(): self._generator_timer.start()
 
     def _on_column_toggled(self):
@@ -2625,7 +2655,6 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self._generator_timer.stop()
         self._generator_requested=None
         self.generator_status.setText("Control Q desconectado")
-        self.generator_toggle.setText("Generador · A0 DAC")
         # ADB setup/cleanup has bounded subprocess timeouts. Never destroy a
         # QThread while its worker is still opening/closing the USB tunnel.
         if self.serial_worker is not None:

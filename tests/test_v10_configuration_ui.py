@@ -13,7 +13,7 @@ class ConfigurationUITests(unittest.TestCase):
     def tearDown(self):self.window.close()
     def test_selectors_are_visible_on_main_screen(self):
         w=self.window;w.show();self.app.processEvents()
-        self.assertTrue(w.configuration_panel.isVisible())
+        self.assertTrue(w.temporal_settings.isVisible())
         for combo in (w.port_combo,w.destination_combo,w.config_bits_combo,w.config_rate_combo):
             self.assertTrue(combo.isVisible())
         self.assertFalse(hasattr(w,'configuration_toggle'))

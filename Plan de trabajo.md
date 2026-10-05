@@ -27,3 +27,41 @@ Este es el plan de la app completa. Pero lo tenemos que ir haciendo paso a paso.
 - **Agregar** conserva hasta cinco barridos con colores de la paleta de entradas; **Repetir** borra la comparación e inicia un nuevo barrido.
 - Sombra translúcida tenue agregada a las curvas y corrección instrumental por referencia de ganancia/fase implementada.
 - Validación física y calibración relativa entre canales completadas entre 20 Hz y 20 kHz, ADC 16 bits / 50 kHz: 31/31 puntos, CSV sin saltos y restauración exacta. Referencia anterior invalidada por cableado incorrecto; reemplazada por el ensayo 20261003_123522_633848, con 581 579 filas CSV sin saltos. La repetibilidad de la nueva referencia aún no fue medida. [Evidencia y límites](diagnosticos/BODE_V10.md). Otros perfiles ADC requieren su propia referencia.
+
+
+### Ensayo de adquisición rápida · 4 de octubre de 2026
+
+- Conjunto estable V10/V8 config respaldado y fuentes conservadas.
+- Nuevos [V11](monitor/v11/README.md) y [V9 Fast](arduino/v9_fast/README.md): SPI a 32 MHz, CRC más rápido y sellado único; 100 kHz por canal en 8/10/12/14 bits. 16 bits sigue hasta 50 kHz, UART hasta 31,25 kHz.
+- 100 kHz / 14 bits pasó 120 s, casi 12 millones de pares sin huecos, rangos inválidos, dropped ni fatal. 18 segmentos verifican resoluciones, ida/vuelta a 16 bits y generador concurrente hasta 20 kHz.
+- V(t), FFT y heatmap con USB real a ~100 000 pares/s; heatmap 30 s, CSV de 734 350 filas sin saltos. V11 limita el pintado FFT/heatmap a 20 Hz a alta Fs, conservando todas las muestras y pasos del análisis.
+- 125 kHz perdió nodos; 200/250 kHz no se ensayaron después del fallo. No se ofrecen en V11.
+- Validación analógica de ambos canales pendiente: A2 recibe una senoide limpia, A3 una señal muy pequeña; confirmar conexión directa para medir precisión. No se alteró la calibración de Bode existente.
+- [Estudio, evidencia, límites y restauración](experimentos/tasas_spi/README.md). Este ensayo no adelanta el paso seis de WAV.
+
+- Diagnóstico posterior de 125 kHz: [mediciones con y sin PC](experimentos/tasas_spi/DIAGNOSTICO_125.md) confirman atraso sostenido del consumidor (473/465 µs por trama frente a 420 µs disponibles). Cola llena, CRC correcto y fatal=0 en ambos; pendiente separar costos MCU/driver Linux. Firmware conservado.
+- Medición MCU aislada de 125 kHz: [instantáneas con/sin DAC](experimentos/tasas_spi/resultados/mcu_20261004/README.md), cola 4/4 y envío de nodo 18,17–18,36 ms frente a 16,384 ms. Armado DMA ~20 µs; copia ADC ~432–434 µs/nodo. No se cambió V9 Fast. Sigue pendiente optimizar y validar la coordinación/preparación por fragmento antes de habilitar 125 kHz.
+
+### Optimización P992 · cierre del 4 de octubre de 2026
+
+- [Candidato P992 aprobado](experimentos/tasas_spi/opt125/README.md) a 14 bits / 125 kHz por canal: tramas SCP1 V3 de 992 bytes, 19 fragmentos por nodo. P512 no alcanzó el margen.
+- Envío medio de 14,118/14,067 ms por nodo sin/con cuadrada de 2,5 Hz: margen medio medido de 13,83/14,14 %, cola máxima 2/4.
+- Dos capturas normales de 120 s, 14989425 pares cada una, sin errores ni pérdidas; 119 comandos concurrentes con DAC activo y nueve etapas de transición aprobadas.
+- Monitor experimental con USB real: V(t), FFT, heatmap, trigger/SINGLE y CSV de 507551 filas sin saltos; Qt offscreen. Precisión analógica de ambos canales y disparo relacionado al generador siguen pendientes.
+- V9 Fast normal restaurado a 14 bits / 100 kHz y cuadrada de 2,5 Hz; 298762 pares verificados sin pérdidas. 38 archivos originales intactos y 185 pruebas locales aprobadas. [Aceptación y restauración](experimentos/tasas_spi/opt125/resultados/aceptacion_p992.json).
+- P992 queda independiente; V11 conserva su límite de 100 kHz hasta una promoción posterior. Este ciclo de optimización queda cerrado.
+
+### Comparación analógica posterior · 4 de octubre de 2026
+
+- [A2/A3 aprobados con señal común directa](experimentos/tasas_spi/opt125/ANALOGICO.md): ADC de 14 bits, seno ~1996,805 Hz, cinco capturas de 10 s entre V9 Fast (62,5/100 kHz) y P992 (62,5/100/125 kHz).
+- Amplitud ~1,216 V pico en ambos canales, diferencia relativa observada <0,02 %, residuo RMS 6,8–7,5 mV, fase relativa ~1,53°; cero saltos, rangos inválidos, dropped o fatal.
+- Esta prueba cierra la comparación pendiente para ese estímulo y resolución; no calibra tensión/reloj ni valida todas las frecuencias o resoluciones. Calibraciones Bode conservadas.
+- P992 aún no se promovió a V11. Firmware, relay y perfil anterior se restauran tras la medición.
+
+### Integración en nueva versión · 4 de octubre de 2026
+
+- Nueva pareja [Monitor V12](monitor/v12/README.md) + [firmware V11 P992](arduino/v11_p992/README.md), independiente de los experimentos. Receptor dentro de V12 y relay propio junto al firmware, SCP1 V3/992 a 32 MHz, hasta 125 kHz por canal.
+- V10/V11 y V8 config/V9 Fast se conservan en sus carpetas. Nuevas entradas de VS Code, catálogo App Lab y selección explícita `--firmware v11_p992`; defaults de herramientas conservados.
+- 198 pruebas locales aprobadas y firmware/relay ARM compilados. La evidencia sostenida y analógica de P992 corresponde a ADC14/125 kHz con los estímulos documentados; UART físico y calibración absoluta siguen pendientes.
+- Verificación física de integración mediante `diagnosticos/verificar_v12.py`, con seno de 2 kHz, trigger/SINGLE, V(t), FFT, heatmap y CSV, restaurando el generador al terminar.
+- [Integración aprobada con USB real](capturas/validacion_v12/20261004_204139_688307/informe.json): SINGLE con seno de ~2 kHz / 2,46 Vpp, FFT, heatmap y CSV de 511082 filas continuo. Generador restaurado a 2,5 Hz; nueva pareja activa en Q a ADC14/125 kHz. Sigue el paso seis de WAV; no se hizo un nuevo Bode físico ni se validó UART/R4.

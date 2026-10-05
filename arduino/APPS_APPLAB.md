@@ -1,5 +1,13 @@
 # Apps de App Lab
 
+## Nueva pareja V12
+
+**Scope Acquisition P992 V11** usa [Monitor V12](../monitor/v12/README.md),
+relay propio SCP1 V3/992 a 32 MHz y TCP 8766. Iniciar con
+`python3 tools/usb_stream.py start --firmware v11_p992`.
+[Guía y manifiesto](v11_p992/README.md). No usar monitor V11/V10 con esta app.
+
+
 Para V10 usar **Scope Acquisition Config V8** con el relay configurable de la
 [guía de V10](../monitor/v10/README.md). Para el monitor V9 usar **Scope Output Select V7** con el relay dual de la
 [guía de V9](../monitor/historico/v9/README.md). Para V8 usar **Scope ADC SPI V6** e iniciar el relay según la
@@ -34,3 +42,13 @@ del código; no implican una nueva validación física.
 
 Catálogo de metadatos: [apps_catalogo.json](apps_catalogo.json).
 Actualizar una descripción no requiere cargar firmware ni reiniciar la app.
+
+## App experimental de tasas altas
+
+**Scope Fast SPI V9 Experimental**, carpeta remota
+`/home/arduino/ArduinoApps/scope-fast-spi-v9-experimental`. App separada, compilada
+y ensayada con SPI a 32 MHz y ADC a 100 kHz por canal. Usa el
+[monitor V11](../monitor/v11/README.md) o receptor CLI de `experimentos/tasas_spi`.
+Continuidad digital de 120 s a 14 bits aprobada; exactitud analógica de ambos
+canales pendiente. V8 config conserva su app y fuentes originales.
+[Estudio y estado](../experimentos/tasas_spi/README.md).

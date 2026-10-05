@@ -2,6 +2,33 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "Monitor V12: Abrir SPI P992 125 kHz",
+      "type": "process",
+      "command": "${command:python.interpreterPath}",
+      "args": [
+        "${workspaceFolder}/monitor/v12/app.py"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Monitor V12: Iniciar relay P992 del Q",
+      "type": "process",
+      "command": "python3",
+      "args": [
+        "${workspaceFolder}/tools/usb_stream.py",
+        "start",
+        "--firmware",
+        "v11_p992"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
       "label": "Monitor V10: Abrir adquisición configurable",
       "type": "process",
       "command": "${command:python.interpreterPath}",
@@ -74,6 +101,18 @@
       "args": [
         "${workspaceFolder}/tools/unoq.py",
         "logs"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Monitor V11: Abrir SPI rápido experimental",
+      "type": "process",
+      "command": "${command:python.interpreterPath}",
+      "args": [
+        "${workspaceFolder}/monitor/v11/app.py"
       ],
       "options": {
         "cwd": "${workspaceFolder}"

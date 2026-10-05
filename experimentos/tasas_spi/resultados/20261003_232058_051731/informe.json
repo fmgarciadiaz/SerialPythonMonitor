@@ -1,0 +1,80 @@
+{
+  "profiles": [
+    {
+      "bits": 14,
+      "rate": 62500,
+      "period_us": 16,
+      "sampling_cycles": 68,
+      "passed": true,
+      "pairs": 622645,
+      "seconds": 10.002078222009004,
+      "received_pairs_per_second": 62251.56274322121,
+      "gaps": 0,
+      "bad_range": 0,
+      "channels": [
+        {
+          "amplitude_peak_v": 0.22600619691516374,
+          "offset_v": 1.6158364883068745,
+          "residual_rms_v": 0.8447972703829036
+        },
+        {
+          "amplitude_peak_v": 0.0008675648712377491,
+          "offset_v": 1.610310936706156,
+          "residual_rms_v": 0.011327498453509383
+        }
+      ],
+      "hardware_status": {
+        "ack": 29373,
+        "rate": 62500,
+        "bits": 14,
+        "dropped": 0,
+        "fatal": 0,
+        "epoch": 1,
+        "prepare_us": 192,
+        "check_us": 119
+      },
+      "binary": "experimentos/tasas_spi/resultados/20261003_232058_051731/14bits_62500Hz.bin",
+      "analog_passed": false
+    },
+    {
+      "bits": 14,
+      "rate": 100000,
+      "period_us": 10,
+      "sampling_cycles": 68,
+      "passed": false,
+      "error": "El Q cerr\u00f3 el flujo. Revisar el relay, la adquisici\u00f3n y el cable USB.",
+      "hardware_status": {
+        "ack": 29731,
+        "rate": 100000,
+        "bits": 14,
+        "dropped": 0,
+        "fatal": 0,
+        "epoch": 2,
+        "prepare_us": 171,
+        "check_us": 105
+      }
+    }
+  ],
+  "passed": false,
+  "errors": [
+    "14/100000: El Q cerr\u00f3 el flujo. Revisar el relay, la adquisici\u00f3n y el cable USB.",
+    "Restauraci\u00f3n: El Q cerr\u00f3 el flujo. Revisar el relay, la adquisici\u00f3n y el cable USB."
+  ],
+  "capture": "experimentos/tasas_spi/resultados/20261003_232058_051731",
+  "before": {
+    "acquisition": {
+      "bits": 14,
+      "rate": 31250
+    },
+    "generator": {
+      "wave": 0,
+      "enabled": 1,
+      "mode": 0,
+      "frequency": 2500,
+      "final_frequency": 2500,
+      "low": 0,
+      "high": 4095,
+      "duration": 1000
+    }
+  }
+}
