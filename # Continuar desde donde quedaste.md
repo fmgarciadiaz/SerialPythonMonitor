@@ -211,3 +211,11 @@ con enlaces al final. Guías activas apuntan a V13/V12 Audio; V12/V11 P992
 continúa disponible y las herramientas de consola conservan sus defaults.
 Cuatro sketches `.bak` agrupados en respaldos/historico, contenido conservado
 y referencias actualizadas. Índices nuevos de diagnósticos y respaldos.
+
+### 2026-10-06 — Presentación e imágenes del README
+
+Portada con badges, especificaciones y capturas actuales de V(t), FFT,
+heatmap y Bode; son demostraciones sintéticas, Bode ilustra filtros RC.
+Secciones independientes Python, relay C/MPU y firmware C/C++ Arduino/MCU,
+con enlaces a guías ampliadas de timers, DMA, IRQ, READY y propiedad de buffers.
+Las versiones siguen al final. Capturas en assets/monitor_{vt,fft,heatmap,bode}.png.

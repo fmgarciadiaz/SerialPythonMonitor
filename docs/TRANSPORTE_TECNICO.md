@@ -54,6 +54,31 @@ espera la confirmación correspondiente antes de iniciar la medición de Bode.
 [Adquisición configurable](CONFIGURACION_ADQUISICION.md) ·
 [Relay actual](../arduino/v12_audio/relay) · [Puente R4](../arduino/historico/v5/r4_bridge_v5/README.md)
 
+## Linux: GPIO READY y transferencia SPI
+
+El relay abre el dispositivo SPI con acceso exclusivo y registra eventos GPIO
+READY mediante la API GPIO v2. Para la primera trama admite READY ya alto,
+espera el asentamiento inicial y verifica el nivel; después requiere un evento
+nuevo posterior a la transferencia anterior. Esto evita consumir eventos viejos
+como autorización de una nueva lectura.
+
+Cada crédito READY habilita un `SPI_IOC_MESSAGE` de 992 bytes: Linux actúa como
+master y SPI3 del MCU como slave. La misma transferencia recibe muestras/respuestas
+y envía un comando pendiente o una consulta de mantenimiento. No hay una ISR C
+del relay en espacio de usuario: el kernel entrega eventos GPIO y realiza SPI;
+las IRQ de los DMA del MCU pertenecen al sketch/driver Zephyr.
+
+El TCP reenviado por ADB es un flujo de bytes, por eso los receptores acumulan
+lecturas parciales hasta completar tramas. La validación comprueba CRC, secuencia,
+perfil y continuidad; una conexión abierta por sí sola no confirma que haya
+muestras. El monitor prueba recepción y puede recuperar app/relay cuando recibe
+EOF o no hay respuesta. El relay admite un único cliente; otros ensayos deben
+liberar primero la conexión del monitor.
+
+[Relay C y bucle de intercambio](../arduino/v12_audio/relay/unoq_config_stream.c) ·
+[Validadores](../arduino/v12_audio/relay/config_relay_protocol.h) ·
+[Conexión y recuperación Python](../monitor/v13/receiver/unoq_autoload.py).
+
 ## Operación
 
 ```sh

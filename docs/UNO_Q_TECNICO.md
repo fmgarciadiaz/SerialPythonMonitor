@@ -58,6 +58,56 @@ enteros en microsegundos. El timestamp procede de captura CCR1, evitando el
 jitter de leer CNT por DMA. ADC y timestamps usan dos nodos de 2048 pares.
 El motor DAC tiene temporizador y DMA independientes de adquisición.
 
+## Temporizadores, DMA e interrupciones
+
+| Recurso | Trabajo concreto |
+|---|---|
+| TIM2 | TRGO inicia una secuencia ADC A2/A3 por período de muestreo |
+| TIM5 CH1 | Captura el instante del disparo en CCR1, con contador de 1 MHz |
+| TIM6 | TRGO alimenta el DAC al ritmo de tabla de onda o audio |
+| GPDMA1 canal 0 | Lleva CCR1 a la memoria de timestamps |
+| GPDMA1 canal 1 | Lleva conversiones ADC a la memoria de ambos canales |
+| GPDMA1 canal 2 | Transmisión SPI3 del MCU al MPU |
+| GPDMA1 canal 3 | Recepción SPI3 de comandos y bloques enviados por el MPU |
+| GPDMA1 canal 4 | Lleva tabla de onda o bloques WAV al registro del DAC |
+
+### ADC: sincronización y propiedad de memoria
+
+Los DMA de ADC y timestamps recorren dos nodos enlazados en ping-pong.
+El hilo comprueba flags de fin de transferencia y que ambos DMA hayan avanzado
+al nodo esperado antes de publicar los datos. No hay una interrupción de
+aplicación por conversión ni una ISR propia de adquisición. Un flag TC aislado
+no demuestra que el bloque siga disponible: se verifica también la posición
+del DMA y se detiene ante sobreescritura, overrun ADC o captura temporal perdida.
+Los nodos publicados se encolan para el transporte sin insertar texto de debug
+en el flujo binario. [Implementación](../arduino/v12_audio/oscilloscope/sketch/acquisition.h).
+
+### SPI: IRQ de fin/error y semáforo
+
+El driver DMA de Zephyr atiende los canales 2/3 y llama a `dma_done` por bloque.
+El callback registra fin/error de cada dirección y libera `transfer_done` cuando
+ambas terminaron o hubo un fallo. El hilo espera ese semáforo y controla plazos;
+DMA mueve los bytes. El sketch evita reemplazar las ISR compartidas del core.
+READY indica al MPU que la siguiente transferencia está preparada; se retira
+al completar la operación. [Servicio SPI](../arduino/v12_audio/oscilloscope/sketch/sketch.ino).
+
+### DAC: tabla periódica y bloques WAV
+
+El generador usa una tabla en RAM, DMA4 circular y TIM6; cambiar frecuencia
+ajusta prescaler/recarga del timer. Un `k_timer` de supervisión a 2 kHz controla
+la progresión de Sweep/Chirp, duración de Pulso y errores; no genera cada
+muestra del DAC. Los cambios de memoria/parámetros se protegen con secciones
+críticas, y DMA se detiene antes de reutilizar la tabla.
+
+WAV reutiliza TIM6/DMA4 con 16 bloques de hasta 480 muestras. La supervisión
+comprueba dirección fuente y bytes restantes para reconocer el bloque actual
+y liberar créditos; no deduce avance únicamente de TC. Descriptores neutrales
+impiden volver a reproducir datos antiguos si faltan muestras. Al finalizar o
+fallar se detiene el DAC y se informa el estado al PC.
+[Motor de ondas](../arduino/v12_audio/oscilloscope/sketch/generator_dma.h) ·
+[Motor WAV](../arduino/v12_audio/oscilloscope/sketch/wav_dma.h) ·
+[Cola y supervisión](../arduino/v12_audio/oscilloscope/sketch/wav.h).
+
 ## Fuentes y responsabilidades
 
 | Archivo | Función |
