@@ -1,4 +1,4 @@
-"""V9 receiver: permanent Q control, confirmed SPI/UART output and one timeline."""
+"""V12 receiver: permanent Q control, configurable ADC/DAC and confirmed SPI/UART output."""
 import queue
 import secrets
 import struct

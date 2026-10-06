@@ -1,23 +1,26 @@
-# Documentación
+# Documentación del instrumento
 
-[Presentación del proyecto](../README.md)
+Guías del monitor, hardware, transporte y audio. [Descripción del proyecto](../README.md).
 
 | Tema | Guía |
 |---|---|
-| Pantalla y controles Python | [Monitor V12](../monitor/v12/README.md) |
+| Pantalla, conexión y controles | [Monitor](../monitor/v13/README.md) |
+| Instalación del Q: MCU y relay MPU | [Firmware](../arduino/v12_audio/README.md) |
 | Flujo, FFT, Bode y registro | [Monitor técnico](MONITOR_TECNICO.md) |
 | Cableado, temporizadores y DMA | [UNO Q técnico](UNO_Q_TECNICO.md) |
-| Instalación de firmware | [V11 P992](../arduino/v11_p992/README.md) |
-| Relay, USB/SPI/UART y comandos | [Transporte técnico](TRANSPORTE_TECNICO.md) |
-| ADC16/62,5 kHz, reloj y pruebas | [Revisión V12](../diagnosticos/ADC16_V12.md) |
+| Relay y USB/SPI/UART | [Transporte](TRANSPORTE_TECNICO.md) |
+| Audio y tasas de reproducción | [WAV](WAV_TASAS.md) |
 | Bits, tasas y ventanas ADC | [Adquisición](CONFIGURACION_ADQUISICION.md) |
-| Formas y límites del DAC | [Generador](GENERADOR_PASO4.md) |
-| Análisis espectral y comparación | [FFT, heatmap y Bode](FFT_V10.md) |
-| Referencia y ensayos físicos | [Validación Bode](../diagnosticos/BODE_V10.md) |
-| Evolución y versiones | [Historia completa](HISTORIA.md) |
+| Formas de onda y DAC | [Generador](GENERADOR_PASO4.md) |
+| FFT, heatmap y Bode | [Análisis espectral](FFT_V10.md) |
+| Evidencia y ensayos | [Diagnósticos](../diagnosticos/README.md) |
 | Trabajo pendiente | [Plan](../Plan%20de%20trabajo.md) |
 
-Los documentos de `docs/historico/`, las versiones archivadas y los informes
-fechados describen su estado de entonces. La entrada actual es Python V12 y
-UNO Q V11 P992. Las capturas de presentación son demostraciones; los CSV y
-resultados de hardware se inventarían en sus carpetas de capturas/diagnósticos.
+Los informes fechados y documentos de `historico/` describen su estado de entonces.
+Las pruebas de interfaz sin hardware y las capturas físicas se documentan por separado.
+
+## Versiones y enlaces
+
+- [Monitor V13 / Q V12 Audio](../monitor/v13/README.md): conjunto usado actualmente.
+- [Monitor V12 / Q V11 P992](../monitor/v12/README.md): pareja anterior conservada.
+- [Historia y catálogo completo](HISTORIA.md).

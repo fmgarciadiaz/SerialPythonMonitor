@@ -2,25 +2,31 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Monitor V13 — WAV A0 (V12 Audio)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/monitor/v13/app.py",
+      "python": "/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/bin/python",
+      "console": "integratedTerminal",
+      "env": {
+        "MONITOR_V13_WAV_FIRMWARE": "v12_audio"
+      }
+    },
+    {
+      "name": "Monitor V13 — PyQt6 SPI P992",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/monitor/v13/app.py",
+      "python": "/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/bin/python",
+      "console": "integratedTerminal"
+    },
+    {
       "name": "Monitor V12 — SPI P992 125 kHz",
       "type": "debugpy",
       "request": "launch",
       "program": "${workspaceFolder}/monitor/v12/app.py",
-      "console": "integratedTerminal"
-    },
-    {
-      "name": "Monitor V10 — configuración de adquisición",
-      "type": "debugpy",
-      "request": "launch",
-      "program": "${workspaceFolder}/monitor/v10/app.py",
-      "console": "integratedTerminal"
-    },
-    {
-      "name": "Monitor V11 — SPI rápido experimental",
-      "type": "debugpy",
-      "request": "launch",
-      "program": "${workspaceFolder}/monitor/v11/app.py",
-      "console": "integratedTerminal"
+      "console": "integratedTerminal",
+      "python": "/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_10_DataScience/bin/python"
     }
   ]
 }

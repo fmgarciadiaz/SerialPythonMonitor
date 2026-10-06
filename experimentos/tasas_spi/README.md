@@ -1,8 +1,8 @@
 # Ensayo de tasas SPI · V9 Fast
 
 **Experimental, separado de Python V10 + UNO Q V8 config.** No cambia las tasas
-ni el decodificador estables. Firmware: [V9 Fast](../../arduino/v9_fast/README.md).
-El monitor estable conserva sus perfiles existentes. El [monitor V11](../../monitor/v11/README.md)
+ni el decodificador estables. Firmware: [V9 Fast](../../arduino/historico/v9_fast/README.md).
+El monitor estable conserva sus perfiles existentes. El [monitor V11](../../monitor/historico/v11/README.md)
 ofrece 100 kHz; los candidatos superiores sólo están disponibles en el CLI.
 
 ## Estudio de viabilidad
@@ -49,9 +49,9 @@ propiedad DMA, fatal ni dropped.
 
 ## Versiones y respaldos
 
-- MCU: `arduino/v9_fast`, app independiente **Scope Fast SPI V9 Experimental**.
+- MCU: `arduino/historico/v9_fast`, app independiente **Scope Fast SPI V9 Experimental**.
 - Relay Linux: `experimentos/tasas_spi/relay`, binario con hash separado.
-- Monitor: `monitor/v11`, copia completa de V10 con imports y assets independientes.
+- Monitor: `monitor/historico/v11`, copia completa de V10 con imports y assets independientes.
 - Receptor Python: `experimentos/tasas_spi/receiver`, copia aislada del contrato
   configurable con los candidatos nuevos.
 - Fuente estable congelada: `respaldos/experimentos/20261003_134709/`.
@@ -164,7 +164,7 @@ python experimentos/tasas_spi/verificar.py --rates 62500 100000 125000 200000 25
 python experimentos/tasas_spi/verificar.py --rates 100000 --seconds 120
 python experimentos/tasas_spi/transiciones.py
 QT_QPA_PLATFORM=offscreen python experimentos/tasas_spi/verificar_monitor.py
-python monitor/v11/app.py
+python monitor/historico/v11/app.py
 ```
 
 El análisis de tono se hace después de cerrar el enlace para evitar contrapresión
@@ -178,7 +178,7 @@ puede hacer falta reiniciar la app antes del siguiente ensayo.
 python3 tools/usb_stream.py stop --firmware v9_fast
 python3 tools/unoq.py stop --version v9_fast
 python3 tools/usb_stream.py start --firmware v8_config
-python monitor/v10/app.py
+python monitor/historico/v10/app.py
 ```
 
 Iniciar la app puede cargar su firmware y restablece su estado inicial; elegir

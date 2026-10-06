@@ -19,7 +19,195 @@ no 12,16 µs. Calibración Bode anterior corresponde al reloj ADC a 40 MHz.
 Cableado directo A0 a A2/A3 confirmado. Comparación a 2/10/20 kHz:
 amplitud cambia menos de 0,23%; residuo crece a 20 kHz (1,6→3,4 mV).
 Ver diagnosticos/ADC16_V12.md para evidencia y límites.
-Audio WAV sigue pendiente; no se inició su implementación.
+Audio WAV: grabación implementada posteriormente en V13 (ver sección abajo); reproducción pendiente.
 
 40 etapas de transición ADC14/125k ↔ ADC16/50k/62,5k aprobadas,
 con consultas concurrentes y restauración exacta.
+
+## Organización posterior
+
+V12 y V11 P992 quedan como únicas versiones visibles en las carpetas
+principales. V10/V11 Python y V8 config/V9 Fast/V10 diagnóstico Arduino
+fueron movidas a sus carpetas histórico. Herramientas por defecto: V11 P992.
+Capturas de prueba pesadas eliminadas; inventario en capturas/limpieza_20261005.json.
+Informes, calibraciones y respaldos conservados. No se operó la placa.
+
+Verificación de consolidación: 206 pruebas aprobadas; configuraciones locales
+resuelven sus nuevas rutas. Limpieza: 87 archivos, aproximadamente 1,75 GiB.
+
+V12: estados uniformados y cuadro de 34 px; etiqueta MUESTREO. Escala
+horizontal temporal editable en ms, convertida internamente a muestras y
+con duración conservada al cambiar Fs. Posición temporal también en ms.
+208 pruebas aprobadas y layout comprobado sin operar la placa.
+
+## V13 experimental · PyQt6
+
+Astra planificó/revisó y Sol6.1 implementó V13 independiente. Arranque:
+`.venv-v13/bin/python monitor/v13/app.py`. Firmware V11 P992 sin cambios.
+V12 queda disponible; no se promovió V13 como reemplazo por rendimiento.
+PyQt6 6.11.0, runtimeQt 6.11.2, pyqtgraph0.13.7, NumPy1.23.3.
+Receptor/assets y copia de referencias Bode dentro de V13; CSV en capturas/v13.
+Dials sin marcas densas. HelpermacOS corrige únicamente UF_HIDDEN de los
+plugins Qt6 cuando ese atributo impide su descubrimiento.
+
+24 pruebas Qt6 aprobadas y 208 pruebas Qt5 pasan en procesos separados.
+Comparación sintética secuencial,40 cuadrosmedidosmás10warmup:
+Qt6 más lento en todos los escenarios offscreen probados. No extrapolar
+FPS reales ni atrasoUSB; probar apariencia/fluidezmanualantespromoción.
+Evidencia: diagnosticos/QT6_V13.md y diagnosticos/resultados_qt/20261005/.
+No se operó la placa ni se modificó firmware en esta migración.
+
+## Entorno Conda V13 · 2026-10-05
+
+Creado `Python_3_13_DataScience`: Python 3.13.5, NumPy 2.3.1, pandas 2.3.1,
+SciPy 1.16.0, Matplotlib 3.10.0, IPykernel y PyQt6 6.11.0 / Qt 6.11.2,
+pyqtgraph 0.14.0, pyserial 3.5. 24 pruebas V13 aprobadas y pip check limpio.
+Reproducible con monitor/v13/environment.yml; requirements-python310.txt
+preserva dependencias del benchmark previo, cuyos resultados no describen
+el nuevo entorno. VS Code: intérprete predeterminado y launch/tarea V13
+apuntan a este Conda; launch/tarea V12 mantienen Python_3_10_DataScience.
+Arranque: `conda activate Python_3_13_DataScience`, luego
+`python monitor/v13/app.py`. Si VS Code conserva una selección vieja,
+Python: Select Interpreter → Python_3_13_DataScience.
+Registro opcional de kernel Jupyter no ejecutado: revisión automática
+indisponible por capacidad del modelo; IPykernel está instalado.
+
+
+## Grabación WAV V13 · 2026-10-05
+
+Selector CSV/WAV en la fila de estado, RECORD/STOP REC existentes y CSV predeterminado.
+WAV PCM16 estéreo graba A2 izquierda y A3 derecha desde muestras crudas,
+Fs confirmada, centro ADC fijo, sin remuestreo/filtro/AGC. Capturas en
+capturas/v13 con misma convención de nombre y contador compartido CSV/WAV.
+Máximo 30 s; STOP visual continúa grabando. Cambios de configuración,
+desconexión, cierre y errores finalizan WAV. Saltos de índice/timestamp
+interrumpen con error sin rellenar huecos; wrap32 permitido. Demo sólo CSV.
+
+Astra no pudo ejecutar la planificación solicitada por límite de uso;
+se continuó con alcance autorizado e implementación/revisión Sol. Pruebas
+locales Qt6 aprobadas; validación física WAV pendiente. No se operó la placa.
+Reproducción: próxima etapa, falta decidir botón y destino de salida.
+
+## Reproducción WAV candidata preparada
+
+V13 agrega modo WAV L/R/Mix, 20 ksps, DC eliminado y Vpp/offset DAC12.
+Firmware y relay aislados en arduino/v12_audio; 51 pruebas locales aprobadas
+y sketch compilado. No cargado: falta autorización y validación A0→A2/A3.
+Respaldo previo: respaldos/unoq/osciloscopio_20261005_160559_272516.zip.
+Ver arduino/v12_audio/README.md para activación y restauración.
+
+### V12 Audio cargado y ensayo físico inicial aprobado
+
+Autorizado y cargado el 5 de octubre: firmware MCU V12 Audio y relay MPU propio
+quedaron activos. WAV estéreo 44,1 kHz→20 ksps, L=997 Hz, R=2003 Hz,
+Mix con ambos tonos comprobados en A2/A3; 40000 muestras por pasada,
+sin underrun ni discontinuidades ADC14/31,25 kHz. Detener→IDLE y
+restauración del generador confirmados. Falta ensayo sostenido y evaluación visual.
+VS Code: «Monitor V13 — WAV A0 (V12 Audio)» habilita el protocolo nuevo.
+Informe: diagnosticos/resultados_wav/20261005_fisico.json.
+
+### Tasas WAV negociadas probadas · 5 de octubre de 2026
+
+V12 Audio MCU/relay actualizados y activos; selector Salida 20/40/50 kHz en V13.
+Ensayos de 120 s aprobados: WAV40/ADC14-40k, WAV50/ADC14-40k y
+WAV50/ADC14-100k. WAV50/ADC125 falló dos veces con integridad ADC;
+Play bloquea ADC mayor de 100 kHz. STOP y restauración confirmados.
+57 pruebas locales y regresiones Qt6 adicionales aprobadas. Respaldo previo
+osciloscopio_20261005_181834_429412.zip y fuentes 20 ksps conservadas.
+Ver docs/WAV_TASAS.md e informes diagnosticos/resultados_wav.
+
+### Autoinicio después de encender Q
+
+Reproducido READY timeout de 1 s. Relay V12 Audio actualizado: primer
+READY admite 10 s; arranque sólo se confirma con primera trama SPI válida.
+Autoload y lector verificados (63488 pares en 2 s, ADC14/31,25 kHz).
+Firmware MCU sin cambios de fuentes. Falta nuevo ciclo físico de alimentación.
+Informe diagnosticos/resultados_autoload/20261005_ready_arranque.json.
+
+### 2026-10-06 — Botón Preparar Q
+
+V13 ahora incluye **Preparar Q** junto al autoinicio. Ejecuta
+`tools/prepare_q.py --serial` sobre el Q seleccionado: compila MCU, respalda la
+app existente o importa una nueva, compila relay y arranca con confirmación SPI.
+El lector permanece en el host; conectar después de la preparación.
+Pruebas locales: 3 de instalación/actualización/protección y 13 de autoload/Qt.
+No se ejecutó una nueva carga física en esta etapa; queda pendiente probar el
+botón en el Q encendido y, especialmente, en una placa nueva.
+
+### 2026-10-06 — Fallo real de Preparar Q y Autoiniciar
+
+El log preparar_q_20261006_091448_711424.log mostró MCU compilado/cargado y app
+iniciada; falló después el relay por READY timeout. Reproducido autoinicio:
+RESET=1, READY=1 después del fallo. Relay corregido para consumir un único
+crédito inicial por nivel, drenar eventos antes de SPI y conservar flancos
+estrictos para todos los intercambios posteriores. Compilado en el Q sin
+modificar MCU. Autoinicio real completó con primera trama validada.
+Pruebas locales: 11 firmware/protocolo/autoinicio. Errores de autoinicio
+persisten ahora en logs. Resultado ADC en
+`diagnosticos/resultados_autoload/20261006_ready_credito_inicial.json`.
+No se repitió un apagado/encendido físico después de instalar esta corrección.
+
+### 2026-10-06 — Persistencia del autoinicio y conexión V13
+
+Autoiniciar ahora persiste inmediatamente con QSettings INI en
+.local/monitor_v13.ini (ignorado por Git); por defecto marcado sin preferencia.
+Verificados ambos valores al recrear ventana. Conexión real desde el propio
+V13 con QThread y casilla marcada: estado Activo SPI 14 bits 40 kHz,
+219.136 muestras por canal en prueba de aproximadamente 6 s, sin error mostrado.
+
+### 2026-10-06 — Conexión unificada
+
+Ya no existe Autoiniciar ni Desconectar independiente. Conectar abre primero
+el enlace disponible y sólo si falla ejecuta ensure_scope y vuelve a abrir.
+connect_scope maneja cierre también ante error. El mismo botón muestra tres
+iconos plug y permite cancelar durante arranque o desconectar al estar activo.
+Preparar Q pasó a la fila Conectar/Demo, en el antiguo espacio de Desconectar.
+La preferencia antigua .local/monitor_v13.ini ya no se lee. 32 pruebas OK.
+
+### 2026-10-06 — EOF del túnel ADB tras desenchufar
+
+Causa reproducida: app/relay Exited(255) tras corte; Connection.open aceptaba
+socket local ADB pero read devolvía EOF, sin ejecutar ensure_scope. connect_scope
+ahora verifica bytes con MSG_PEEK; EOF/silencio inicia recuperación. Nueve
+pruebas OK. Prueba física sobre Q recién vuelto a conectar: fallback inició
+app/relay y entregó 992 bytes válidos. Luego se verificó adquisición desde V13.
+
+### 2026-10-06 — Pico al iniciar Sweep/Chirp
+
+Usuario ubicó el pico al inicio y autorizó corregir. V12 Audio generator.h:
+stop(initial) usa value(wave,phase0,low,high) con salida habilitada, antes de
+reutilizar RAM; antes usaba stop(0). Apagada conserva cero. Firmware compilado
+y cargado; respaldo osciloscopio_20261006_114127_867106.zip. Siete pruebas
+locales OK. Seis arranques físicos (3 Sweep/3 Chirp), A2 14 bits/40 kHz, seno
+2 Vpp/1,65 V, medición primeros ~0,2 s: mínimo global 0,635 V, ninguno <0,5 V.
+El Q quedó con salida apagada. Evidencia resultados_autoload/20261006_sweep_start.json.
+No se midió con osciloscopio externo ni se modificó el comportamiento al final.
+
+### 2026-10-06 — Chirp intermitente: fin prematuro
+
+Reproducido antes de la corrección: el octavo Chirp de 20→2000 Hz/2 s
+quedó detenido a los 0,1 s, con confirmación OK. generator::tick convertía
+la diferencia de ticks directamente a uint64_t: una diferencia negativa
+terminaba inmediatamente el barrido. Ahora conserva la diferencia signed
+y descarta callbacks con tiempo anterior al arranque. Prueba nativa reproduce
+ese caso y verifica también la finalización normal; siete pruebas locales OK.
+La relación exacta entre el callback y el fallo físico es una hipótesis;
+no se instrumentaron los ticks del MCU durante el fallo.
+
+Firmware compilado y cargado, con respaldo
+respaldos/unoq/osciloscopio_20261006_123319_510143.zip. Después: 24 Chirps
+consecutivos, seno 2 Vpp/offset 1,65 V, ADC 14 bits/40 kHz; todos activos
+a los 0,1/0,6/1,2/1,8 s y finalizados a los 2,1 s, sin errores de estado.
+Salida apagada al terminar. Informes:
+diagnosticos/resultados_autoload/20261006_chirp_repeticiones.json (antes) y
+20261006_chirp_timer_corregido.json (después). La repetición sin fallos
+no descarta otros problemas intermitentes.
+
+### 2026-10-06 — Documentación y organización
+
+Usuario confirmó que Chirp funcionó tras la corrección. README principal y
+los índices describen el instrumento, audio y flujo MCU/MPU/relay; versiones
+con enlaces al final. Guías activas apuntan a V13/V12 Audio; V12/V11 P992
+continúa disponible y las herramientas de consola conservan sus defaults.
+Cuatro sketches `.bak` agrupados en respaldos/historico, contenido conservado
+y referencias actualizadas. Índices nuevos de diagnósticos y respaldos.

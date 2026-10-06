@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import patch
 import numpy as np
-from monitor.v10.spectrum import spectrum, WINDOWS
+from monitor.historico.v10.spectrum import spectrum, WINDOWS
 
 
 class SpectrumMathTests(unittest.TestCase):
@@ -28,8 +28,8 @@ class SpectrumUITests(unittest.TestCase):
         cls.app = QtWidgets.QApplication.instance() or QtWidgets.QApplication([])
 
     def setUp(self):
-        from monitor.v10.app import SerialMonitorWindow
-        with patch('monitor.v10.app.usb_devices', return_value=[]):
+        from monitor.historico.v10.app import SerialMonitorWindow
+        with patch('monitor.historico.v10.app.usb_devices', return_value=[]):
             self.w = SerialMonitorWindow()
         self.s = self.w.spectral
         self.s.size.setCurrentText('256')
@@ -86,7 +86,7 @@ class SpectrumUITests(unittest.TestCase):
 
 class BodeMathTests(unittest.TestCase):
     def test_rc_gain_and_phase_with_dc_offsets(self):
-        from monitor.v10.bode import tone_transfer
+        from monitor.historico.v10.bode import tone_transfer
         fs, frequency, cutoff = 31250, 500, 200
         t = np.arange(10000)/fs
         ratio = 1/(1+1j*frequency/cutoff)
@@ -97,7 +97,7 @@ class BodeMathTests(unittest.TestCase):
         self.assertAlmostEqual(phase,np.angle(ratio,deg=True),places=8)
 
     def test_zero_output_is_valid_zero_gain_with_undefined_phase(self):
-        from monitor.v10.bode import tone_transfer
+        from monitor.historico.v10.bode import tone_transfer
         t=np.arange(2048)/31250
         vin=1.65+np.cos(2*np.pi*1000*t)
         for vout in (np.zeros(len(t)), np.full(len(t),1.65)):
@@ -106,7 +106,7 @@ class BodeMathTests(unittest.TestCase):
             self.assertTrue(np.isnan(phase))
 
     def test_tiny_filtered_output_keeps_gain(self):
-        from monitor.v10.bode import tone_transfer
+        from monitor.historico.v10.bode import tone_transfer
         t=np.arange(2048)/31250
         vin=1.65+np.cos(2*np.pi*1000*t)
         vout=1.65+1e-6*np.cos(2*np.pi*1000*t-.4)
@@ -115,7 +115,7 @@ class BodeMathTests(unittest.TestCase):
         self.assertAlmostEqual(phase,np.rad2deg(-.4),places=5)
 
     def test_weak_reference_is_rejected(self):
-        from monitor.v10.bode import tone_transfer
+        from monitor.historico.v10.bode import tone_transfer
         t = np.arange(100)/1000
         with self.assertRaises(ValueError): tone_transfer(t,np.ones(100),np.ones(100),50)
 
@@ -242,7 +242,7 @@ class BodeUITests(unittest.TestCase):
         self.w.serial_worker.request_generator.assert_not_called()
 
     def test_decade_density_and_exact_selected_end(self):
-        from monitor.v10.bode import decade_frequencies
+        from monitor.historico.v10.bode import decade_frequencies
         f = decade_frequencies(2,2000,10)
         self.assertEqual(len(f),31)
         self.assertEqual(f[0],2)
@@ -281,9 +281,9 @@ class BodeUITests(unittest.TestCase):
         self.assertGreater(initial[1],0)
         small=self.s.stable_range(0,[np.array([-49.,-1.])])
         self.assertEqual(initial,small)
-        with patch('monitor.v10.spectrum.time.monotonic',return_value=10):
+        with patch('monitor.historico.v10.spectrum.time.monotonic',return_value=10):
             self.s.stable_range(0,[np.array([-20.,-15.])])
-        with patch('monitor.v10.spectrum.time.monotonic',return_value=14):
+        with patch('monitor.historico.v10.spectrum.time.monotonic',return_value=14):
             reduced=self.s.stable_range(0,[np.array([-20.,-15.])])
         self.assertLess(reduced[1]-reduced[0],initial[1]-initial[0])
 
@@ -325,7 +325,7 @@ class BodeUITests(unittest.TestCase):
         self.assertIn('22.0 s',b.estimate.text())
         self.w.serial_worker=MagicMock();self.s.set_mode(3)
         config=b.config
-        with patch('monitor.v10.bode.time.monotonic',return_value=100):
+        with patch('monitor.historico.v10.bode.time.monotonic',return_value=100):
             b.confirmed(GeneratorReply(0x80000000,Phase.APPLIED,Reason.OK,True,config,config))
         self.assertEqual(b.deadline,130)
         self.assertFalse(b.cycles.isEnabled())
@@ -333,7 +333,7 @@ class BodeUITests(unittest.TestCase):
         self.assertTrue(b.cycles.isEnabled())
 
     def test_equal_point_density_in_low_and_high_decades(self):
-        from monitor.v10.bode import decade_frequencies
+        from monitor.historico.v10.bode import decade_frequencies
         frequencies=decade_frequencies(20,20000,10)
         for low in (20,200,2000):
             selected=frequencies[(frequencies>=low)&(frequencies<10*low)]

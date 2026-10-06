@@ -5,7 +5,7 @@ from pathlib import Path
 from datetime import datetime
 ROOT=Path(__file__).resolve().parents[2];sys.path.insert(0,str(ROOT))
 from PyQt5 import QtCore,QtWidgets
-from monitor.v11.app import SerialMonitorWindow
+from monitor.historico.v11.app import SerialMonitorWindow
 
 def main():
     app=QtWidgets.QApplication([]);w=SerialMonitorWindow();report={'segments':[],'errors':[]}

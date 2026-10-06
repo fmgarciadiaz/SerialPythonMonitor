@@ -1,6 +1,6 @@
 # Monitor Python · funcionamiento técnico
 
-[Proyecto](../README.md) · [Uso de V12](../monitor/v12/README.md)
+[Proyecto](../README.md) · [Uso del monitor](../monitor/v13/README.md)
 
 ## Flujo de datos
 
@@ -31,11 +31,13 @@ La frecuencia real se deriva de timestamps; FPS describe dibujo, no adquisición
 
 | Archivo | Responsabilidad |
 |---|---|
-| [app.py](../monitor/v10/app.py) | Ventana, recepción, historial, trigger, controles, CSV y generador |
-| [spectrum.py](../monitor/v10/spectrum.py) | FFT, heatmap, ejes y escalas estables |
-| [bode.py](../monitor/v10/bode.py) | Barrido, asentamiento, ajuste de tono, comparación y restauración |
-| [bode_calibration.py](../monitor/v10/bode_calibration.py) | Lectura de referencia y corrección sin extrapolar |
-| [transport](../transport/) | Protocolos, decodificadores y conexión |
+| [app.py](../monitor/v13/app.py) | Ventana, recepción, historial, trigger, controles, CSV y generador |
+| [spectrum.py](../monitor/v13/spectrum.py) | FFT, heatmap, ejes y escalas estables |
+| [bode.py](../monitor/v13/bode.py) | Barrido, asentamiento, ajuste de tono, comparación y restauración |
+| [bode_calibration.py](../monitor/v13/bode_calibration.py) | Lectura de referencia y corrección sin extrapolar |
+| [receiver](../monitor/v13/receiver/README.md) | Recepción, protocolos y conexión USB/ADB en el PC |
+| [wav_source.py](../monitor/v13/wav_source.py) | Lectura, selección de canal y remuestreo de audio |
+| [audio_dc.py](../monitor/v13/audio_dc.py) | Eliminación DC continua para grabación WAV |
 
 ## Bode y calibración
 
@@ -71,4 +73,4 @@ huecos. FFT puede enlazar escalas y usa margen e histéresis para evitar saltos.
 El relleno llega al límite inferior de amplitud en dBV o a cero en voltios.
 
 [Opciones y criterios completos](FFT_V10.md) ·
-[Pruebas](../tests/) · [Evidencia de Bode](../diagnosticos/BODE_V10.md)
+[Pruebas](../tests) · [Evidencia de Bode](../diagnosticos/BODE_V10.md)

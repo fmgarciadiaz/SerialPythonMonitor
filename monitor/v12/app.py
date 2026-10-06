@@ -821,9 +821,10 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         fs_card_layout.setContentsMargins(6, 2, 6, 2)
         fs_card_layout.setSpacing(6)
 
-        lbl_fs = QtWidgets.QLabel("FS\nMUESTREO")
+        lbl_fs = QtWidgets.QLabel("MUESTREO")
         lbl_fs.setAlignment(QtCore.Qt.AlignCenter)
-        lbl_fs.setStyleSheet("font-weight: 700; font-size: 10px; color: #8f98a8; background: transparent;")
+        lbl_fs.setFixedWidth(58)
+        lbl_fs.setStyleSheet("font-weight: 700; font-size: 10px; color: #8f98a8; background: transparent; border: none; padding: 0;")
         fs_card_layout.addWidget(lbl_fs)
 
         self.lbl_top_fs = QtWidgets.QLabel("-- S/s")
@@ -995,7 +996,8 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         top_layout.setRowMinimumHeight(0, 34)
         top_layout.setRowMinimumHeight(1, 34)
         self.status_label.setMinimumWidth(0)
-        self.status_label.setWordWrap(True)
+        self.status_label.setWordWrap(False)
+        self.status_label.setFixedHeight(34)
         self.status_label.setSizePolicy(QtWidgets.QSizePolicy.Ignored, QtWidgets.QSizePolicy.Preferred)
         self.port_combo.setMinimumWidth(0)
         self.port_combo.setSizePolicy(QtWidgets.QSizePolicy.Ignored, QtWidgets.QSizePolicy.Fixed)
@@ -1251,14 +1253,15 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self.dial_h_scale.valueChanged.connect(self.on_h_scale_changed)
         horiz_layout.addWidget(self.dial_h_scale, 1, 0, QtCore.Qt.AlignCenter)
 
-        self.lbl_h_scale = QtWidgets.QSpinBox()
+        self.lbl_h_scale = QtWidgets.QDoubleSpinBox()
+        self.lbl_h_scale.setDecimals(0)
         self.lbl_h_scale.setRange(VISIBLE_SAMPLES_MIN, VISIBLE_SAMPLES_MAX)
         self.lbl_h_scale.setValue(VISIBLE_SAMPLES_DEFAULT)
         self.lbl_h_scale.setSuffix(" smp")
         self.lbl_h_scale.setGroupSeparatorShown(True)
         self.lbl_h_scale.setButtonSymbols(QtWidgets.QAbstractSpinBox.NoButtons)
         self.lbl_h_scale.setKeyboardTracking(False)
-        self.lbl_h_scale.valueChanged.connect(self.dial_h_scale.setValue)
+        self.lbl_h_scale.valueChanged.connect(self._on_h_scale_input)
         self.lbl_h_scale.setAlignment(QtCore.Qt.AlignCenter)
         self.lbl_h_scale.setStyleSheet("""
             background-color: #121418;
@@ -1525,7 +1528,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         trig_layout.addWidget(level_card)
 
         # Fila 4: Status label
-        self.trigger_status_label = QtWidgets.QLabel("● Modo Continuo (Free Run)")
+        self.trigger_status_label = QtWidgets.QLabel("● Modo continuo")
         self.trigger_status_label.setWordWrap(True)
         self.trigger_status_label.setStyleSheet("""
             QLabel {
@@ -1935,6 +1938,8 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
     def _on_xaxis_toggle(self, checked: bool):
         """Alterna el eje X entre índice de muestra y tiempo real (µs)."""
         self.x_axis_time_mode = checked
+        self._h_time_ms = self.h_scale * self._horizontal_dt_us() / 1000
+        self._sync_horizontal_controls()
         if checked:
             self.btn_xaxis_toggle.setText("⧗ EJE: TIEMPO µs")
         else:
@@ -2133,7 +2138,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             """)
         else:
             self.run_stop_btn.setText("⏹ STOP")
-            self.status_label.setText("PANTALLA CONGELADA (STOP)")
+            self.status_label.setText("Pantalla congelada (STOP)")
             self.status_label.setStyleSheet("""
                 QLabel {
                     background-color: rgba(255, 82, 82, 0.15);
@@ -2156,7 +2161,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self.is_running = True
         self.run_stop_btn.setChecked(True)
         self.run_stop_btn.setText("▶ RUN")
-        self.trigger_status_label.setText("⚡ SINGLE ARMADO: esperando cruce...")
+        self.trigger_status_label.setText("⚡ SINGLE armado: esperando cruce…")
         self.trigger_status_label.setStyleSheet("""
             QLabel {
                 background-color: rgba(255, 214, 0, 0.12);
@@ -2182,16 +2187,41 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self.run_stop_btn.setChecked(True)
         self.toggle_run_stop()
 
+    def _horizontal_dt_us(self):
+        # Prefer sample timestamps; use the confirmed hardware period before DATA.
+        return self.current_dt_us if self.current_dt_us > 0 else self.applied_configuration.period
+
+    def _sync_horizontal_controls(self):
+        dt = self._horizontal_dt_us()
+        time_mode = self.x_axis_time_mode
+        factor = dt / 1000 if time_mode else 1
+        with QtCore.QSignalBlocker(self.lbl_h_scale):
+            self.lbl_h_scale.setDecimals(1 if time_mode else 0)
+            self.lbl_h_scale.setRange(VISIBLE_SAMPLES_MIN * factor, VISIBLE_SAMPLES_MAX * factor)
+            self.lbl_h_scale.setSingleStep(factor)
+            self.lbl_h_scale.setSuffix(" ms" if time_mode else " smp")
+            self.lbl_h_scale.setValue(self.h_scale * factor)
+        with QtCore.QSignalBlocker(self.dial_h_scale):
+            self.dial_h_scale.setValue(self.h_scale)
+        self.on_h_pos_changed(self.h_pos)
+
+    def _on_h_scale_input(self, value):
+        samples = round(value * 1000 / self._horizontal_dt_us()) if self.x_axis_time_mode else round(value)
+        self.on_h_scale_changed(samples)
+
     def on_h_scale_changed(self, value: int):
-        self.h_scale = max(VISIBLE_SAMPLES_MIN, int(value))
-        self.lbl_h_scale.setValue(self.h_scale)
+        self.h_scale = max(VISIBLE_SAMPLES_MIN, min(VISIBLE_SAMPLES_MAX, int(value)))
+        if self.x_axis_time_mode:
+            self._h_time_ms = self.h_scale * self._horizontal_dt_us() / 1000
+        self._sync_horizontal_controls()
 
     def on_h_pos_changed(self, value: int):
         self.h_pos = int(value)
-        if self.h_pos == 0:
-            self.lbl_h_pos.setText("0 smp (Live)")
+        if self.x_axis_time_mode:
+            text = f"{self.h_pos * self._horizontal_dt_us() / 1000:.1f} ms"
         else:
-            self.lbl_h_pos.setText(f"{self.h_pos} smp")
+            text = f"{self.h_pos} smp"
+        self.lbl_h_pos.setText(text + (" (En vivo)" if self.h_pos == 0 else ""))
 
     def on_v_scale_changed(self, value: int):
         self.v_scale = max(0.2, value / 100.0)
@@ -2305,7 +2335,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             unit = "" if is_adc else "V"
             val_str = f"{int(self.trigger_level)}" if is_adc else f"{self.trigger_level:.2f}"
             self.trigger_status_label.setText(
-                f"● ARMADO: {self.trigger_source} {self.trigger_edge} a {val_str}{unit}"
+                f"● Armado: {self.trigger_source} {self.trigger_edge} a {val_str}{unit}"
             )
             self.trigger_status_label.setStyleSheet("""
                 QLabel {
@@ -2319,7 +2349,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
                 }
             """)
         else:
-            self.trigger_status_label.setText("● Modo Continuo (Free Run)")
+            self.trigger_status_label.setText("● Modo continuo")
             self.trigger_status_label.setStyleSheet("""
                 QLabel {
                     background-color: rgba(0, 229, 255, 0.08);
@@ -2459,6 +2489,10 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             for curve in self.line_items.values(): curve.setData([], [])
             for label in (self.val_vmax,self.val_vmin,self.val_vpp,self.val_vrms,self.val_vavg,self.val_freq): label.setText('--')
         self.applied_configuration = config
+        if self.x_axis_time_mode:
+            duration = getattr(self, '_h_time_ms', self.h_scale * config.period / 1000)
+            self.h_scale = max(VISIBLE_SAMPLES_MIN, min(VISIBLE_SAMPLES_MAX, round(duration * 1000 / config.period)))
+        self._sync_horizontal_controls()
         self.spectral.bode.update_estimate()
         self.adc_combo.setCurrentText(f'{bits} bits ({(1 << bits)-1})')
         self.adc_summary_label.setText(f'{bits} bits')
@@ -2607,7 +2641,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self.demo_mode = True
         self.start_time = time.perf_counter()
         self.demo_v_out_prev = 0.0
-        self.status_label.setText("Modo Demo 2 CH (V_IN cuadrado / V_OUT filtro RC)")
+        self.status_label.setText("Demo activo · V_IN cuadrada / V_OUT filtro RC")
         self.status_label.setStyleSheet("""
             QLabel {
                 background-color: rgba(0, 229, 255, 0.12);
@@ -2827,6 +2861,12 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         else:
             text = "-- S/s"
 
+        if getattr(self, '_horizontal_display_dt', None) != round(self._horizontal_dt_us(), 6):
+            self._horizontal_display_dt = round(self._horizontal_dt_us(), 6)
+            if self.x_axis_time_mode:
+                duration = getattr(self, '_h_time_ms', self.h_scale * self._horizontal_dt_us() / 1000)
+                self.h_scale = max(VISIBLE_SAMPLES_MIN, min(VISIBLE_SAMPLES_MAX, round(duration * 1000 / self._horizontal_dt_us())))
+            self._sync_horizontal_controls()
         return fs_hz, dt_us, text
 
     @QtCore.pyqtSlot(list)
@@ -3023,7 +3063,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
                 unit = "" if is_adc else "V"
                 lvl_str = f"{int(self.trigger_level)}" if is_adc else f"{self.trigger_level:.2f}"
                 self.trigger_status_label.setText(
-                    f"● TRIG'D ({source} {self.trigger_edge} @ {lvl_str}{unit})"
+                    f"● Disparo ({source} {self.trigger_edge} @ {lvl_str}{unit})"
                 )
                 self.trigger_status_label.setStyleSheet("""
                     QLabel {
@@ -3046,7 +3086,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
                     self.is_running = False
                     self.run_stop_btn.setChecked(False)
                     self.run_stop_btn.setText("⏹ STOP")
-                    self.status_label.setText("⚡ SINGLE CAPTURADO Y CONGELADO")
+                    self.status_label.setText("Pantalla congelada (SINGLE capturado)")
                     self.status_label.setStyleSheet("""
                         QLabel {
                             background-color: rgba(255, 214, 0, 0.15);
@@ -3062,7 +3102,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             elif self.frozen_frame is not None and (self.trigger_mode == "Normal" or (now - self.last_trigger_time) < 0.3):
                 _, y_slices = self.frozen_frame
                 if self.trigger_mode == "Normal":
-                    self.trigger_status_label.setText("● ESPERANDO DISPARO (Normal)...")
+                    self.trigger_status_label.setText("● Esperando disparo (Normal)…")
                     self.trigger_status_label.setStyleSheet("""
                         QLabel {
                             background-color: rgba(255, 145, 0, 0.12);
@@ -3083,7 +3123,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
                     col: self._window_values(self.series[col], start_pos, end_pos)
                     for col in active_columns if col in self.series
                 }
-                self.trigger_status_label.setText("● AUTO (Buscando disparo... ajusta Nivel con 50% Auto)")
+                self.trigger_status_label.setText("● Auto: buscando disparo · ajustar nivel")
                 self.trigger_status_label.setStyleSheet("""
                     QLabel {
                         background-color: rgba(255, 214, 0, 0.12);

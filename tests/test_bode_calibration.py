@@ -1,7 +1,7 @@
 import unittest
 from types import SimpleNamespace
 import numpy as np
-from monitor.v10.bode_calibration import correct_transfer
+from monitor.historico.v10.bode_calibration import correct_transfer
 
 
 class CalibrationTests(unittest.TestCase):

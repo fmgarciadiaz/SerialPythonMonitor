@@ -3,14 +3,14 @@ os.environ.setdefault('QT_QPA_PLATFORM','offscreen')
 import unittest
 from unittest.mock import patch,MagicMock
 from PyQt5 import QtWidgets,QtTest
-from monitor.v11.app import SerialMonitorWindow
+from monitor.historico.v11.app import SerialMonitorWindow
 from experimentos.tasas_spi.receiver.unoq_acquisition import Configuration
 
 class FastMonitorTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):cls.app=QtWidgets.QApplication.instance() or QtWidgets.QApplication([])
     def setUp(self):
-        with patch('monitor.v11.app.usb_devices',return_value=[]):self.w=SerialMonitorWindow()
+        with patch('monitor.historico.v11.app.usb_devices',return_value=[]):self.w=SerialMonitorWindow()
     def tearDown(self):self.w.serial_worker=None;self.w.close()
     def test_only_measured_rates_are_offered_and_auto_applied(self):
         w=self.w;combo=w.config_rate_combo
@@ -38,11 +38,11 @@ class FastMonitorTests(unittest.TestCase):
                 history.extend(indices*10 if name=='Tiempo (us)' else np.sin(indices/20))
             w.sample_counter+=count
         append(0,12000)
-        with patch('monitor.v11.spectrum.time.monotonic',return_value=10):display.render()
+        with patch('monitor.historico.v11.spectrum.time.monotonic',return_value=10):display.render()
         first=display.last_end;append(12000,10000)
-        with patch('monitor.v11.spectrum.time.monotonic',return_value=10.02):display.render()
+        with patch('monitor.historico.v11.spectrum.time.monotonic',return_value=10.02):display.render()
         self.assertEqual(display.last_end,first)
-        with patch('monitor.v11.spectrum.time.monotonic',return_value=10.06):display.render()
+        with patch('monitor.historico.v11.spectrum.time.monotonic',return_value=10.06):display.render()
         self.assertGreater(display.last_end,first)
         self.assertGreaterEqual(len(display.frames),3)
         self.assertEqual(w.sample_counter,22000)

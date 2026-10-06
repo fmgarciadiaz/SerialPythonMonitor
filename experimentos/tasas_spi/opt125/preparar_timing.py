@@ -7,8 +7,8 @@ def prepare(variant):
     template=(ROOT/'experimentos/tasas_spi/preparar_firmware_diagnostico.py').read_text()
     template=template.replace('ROOT=Path(__file__).resolve().parents[2]',f'ROOT=Path({str(ROOT)!r})')
     template=template.replace("root=ROOT/'experimentos/tasas_spi/firmware_diagnostico'",f'root=Path({str(target)!r})')
-    template=template.replace("ROOT/'arduino/v9_fast/oscilloscope'",f'Path({str(base/"oscilloscope")!r})')
-    template=template.replace("ROOT/'arduino/v9_fast/unoq.json'",f'Path({str(base/"unoq.json")!r})')
+    template=template.replace("ROOT/'arduino/historico/v9_fast/oscilloscope'",f'Path({str(base/"oscilloscope")!r})')
+    template=template.replace("ROOT/'arduino/historico/v9_fast/unoq.json'",f'Path({str(base/"unoq.json")!r})')
     name='Scope Opt125 '+variant.upper()+' Timing';remote='/home/arduino/ArduinoApps/scope-opt125-'+variant+'-timing'
     template=template.replace('Scope SPI Timing Diagnostic',name).replace('/home/arduino/ArduinoApps/scope-spi-timing-diagnostic',remote)
     exec(compile(template,'diagnostic-template','exec'),{'__file__':str(__file__)})

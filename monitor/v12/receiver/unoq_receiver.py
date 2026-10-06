@@ -1,4 +1,4 @@
-"""V9 receiver: permanent Q control, confirmed SPI/UART output and one timeline."""
+"""V12 fixed-profile compatibility receiver and UART parser; the app uses unoq_config_receiver."""
 import queue
 import secrets
 import struct

@@ -1,4 +1,4 @@
-"""Experimental V7 dual output stream. V8's fixed-SPI decoder stays unchanged."""
+"""V12 SCP1 V3/992 compatibility decoder for fixed-profile dual output; the app uses ConfigurationDecoder."""
 import secrets
 import struct
 import time

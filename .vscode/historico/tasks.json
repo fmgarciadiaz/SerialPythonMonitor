@@ -6,7 +6,7 @@
       "type": "process",
       "command": "${command:python.interpreterPath}",
       "args": [
-        "${workspaceFolder}/monitor/v10/app.py"
+        "${workspaceFolder}/monitor/historico/v10/app.py"
       ],
       "options": {
         "cwd": "${workspaceFolder}"
@@ -259,6 +259,45 @@
         "--version",
         "v6_adc"
       ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Monitor V10: Abrir adquisición configurable",
+      "type": "process",
+      "command": "${command:python.interpreterPath}",
+      "args": [
+        "${workspaceFolder}/monitor/historico/v10/app.py"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Monitor V10: Iniciar relay configurable del Q",
+      "type": "process",
+      "command": "python3",
+      "args": [
+        "${workspaceFolder}/tools/usb_stream.py",
+        "start",
+        "--firmware",
+        "v8_config"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Monitor V11: Abrir SPI rápido experimental",
+      "type": "process",
+      "command": "${command:python.interpreterPath}",
+      "args": [
+        "${workspaceFolder}/monitor/historico/v11/app.py"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
       "problemMatcher": []
     }
   ]

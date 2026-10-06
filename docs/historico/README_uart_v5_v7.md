@@ -1,6 +1,6 @@
 # Osciloscopio UNO Q + R4 · Serial Python Monitor
 
-**V10: adquisición configurable.** El [panel desplegable](../../monitor/v10/README.md) permite elegir Q de control, ADC de 8/10/12/14 bits, tasas de 1 a 31,25 kHz en UART y hasta 62,5 kHz en SPI, y salida SPI o UART con selección del R4. La vista principal muestra la configuración confirmada. Abrir con `python monitor/v10/app.py`; requiere la app independiente [V8 config](../../arduino/v8_config/README.md). [Pruebas físicas](../../diagnosticos/ADQUISICION_V10.md).
+**V10: adquisición configurable.** El [panel desplegable](../../monitor/historico/v10/README.md) permite elegir Q de control, ADC de 8/10/12/14 bits, tasas de 1 a 31,25 kHz en UART y hasta 62,5 kHz en SPI, y salida SPI o UART con selección del R4. La vista principal muestra la configuración confirmada. Abrir con `python monitor/historico/v10/app.py`; requiere la app independiente [V8 config](../../arduino/historico/v8_config/README.md). [Pruebas físicas](../../diagnosticos/ADQUISICION_V10.md).
 
 La descripción siguiente conserva la arquitectura UART de V5/V7 como referencia.
 

@@ -2,9 +2,36 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "Monitor V13: Abrir WAV A0 (V12 Audio)",
+      "type": "process",
+      "command": "/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/bin/python",
+      "args": [
+        "${workspaceFolder}/monitor/v13/app.py"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "MONITOR_V13_WAV_FIRMWARE": "v12_audio"
+        }
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Monitor V13: Abrir PyQt6 SPI P992",
+      "type": "process",
+      "command": "/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/bin/python",
+      "args": [
+        "${workspaceFolder}/monitor/v13/app.py"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
       "label": "Monitor V12: Abrir SPI P992 125 kHz",
       "type": "process",
-      "command": "${command:python.interpreterPath}",
+      "command": "/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_10_DataScience/bin/python",
       "args": [
         "${workspaceFolder}/monitor/v12/app.py"
       ],
@@ -22,33 +49,6 @@
         "start",
         "--firmware",
         "v11_p992"
-      ],
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "problemMatcher": []
-    },
-    {
-      "label": "Monitor V10: Abrir adquisición configurable",
-      "type": "process",
-      "command": "${command:python.interpreterPath}",
-      "args": [
-        "${workspaceFolder}/monitor/v10/app.py"
-      ],
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "problemMatcher": []
-    },
-    {
-      "label": "Monitor V10: Iniciar relay configurable del Q",
-      "type": "process",
-      "command": "python3",
-      "args": [
-        "${workspaceFolder}/tools/usb_stream.py",
-        "start",
-        "--firmware",
-        "v8_config"
       ],
       "options": {
         "cwd": "${workspaceFolder}"
@@ -101,18 +101,6 @@
       "args": [
         "${workspaceFolder}/tools/unoq.py",
         "logs"
-      ],
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "problemMatcher": []
-    },
-    {
-      "label": "Monitor V11: Abrir SPI rápido experimental",
-      "type": "process",
-      "command": "${command:python.interpreterPath}",
-      "args": [
-        "${workspaceFolder}/monitor/v11/app.py"
       ],
       "options": {
         "cwd": "${workspaceFolder}"

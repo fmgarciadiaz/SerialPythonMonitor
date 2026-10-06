@@ -1,126 +1,107 @@
 # fergd · Osciloscopio y generador Arduino UNO Q
 
-## Nueva versión V12 · 125 kHz
-
-[Monitor V12](monitor/v12/README.md) + [firmware V11 P992](arduino/v11_p992/README.md):
-pareja independiente SCP1 V3/992, SPI de 32 MHz y hasta 125 kHz por canal.
-El candidato pasó dos capturas de 120 s a 14 bits, comandos concurrentes,
-transiciones, monitor con USB real y comparación analógica de ambos canales
-con seno de ~2 kHz. [Evidencia](experimentos/tasas_spi/opt125/README.md).
-V10 y V11 permanecen disponibles. Usar explícitamente `--firmware v11_p992`;
-los comandos sin versión conservan V8 config/V10.
-
-```sh
-python3 tools/usb_stream.py start --firmware v11_p992
-python monitor/v12/app.py
-```
-
-Cerrar monitor y detener relay/app anteriores antes de cambiar de pareja.
-
-
-[![GitHub](https://img.shields.io/badge/GitHub-SerialPythonMonitor-181717?logo=github)](https://github.com/fmgarciadiaz/SerialPythonMonitor)
-[![Último commit](https://img.shields.io/github/last-commit/fmgarciadiaz/SerialPythonMonitor?logo=github)](https://github.com/fmgarciadiaz/SerialPythonMonitor/commits)
-[![Stars](https://img.shields.io/github/stars/fmgarciadiaz/SerialPythonMonitor?style=flat&logo=github)](https://github.com/fmgarciadiaz/SerialPythonMonitor/stargazers)
-![Python](https://img.shields.io/badge/Python-PyQt5%20%7C%20NumPy-3776AB?logo=python&logoColor=white)
-![Arduino](https://img.shields.io/badge/Arduino-UNO%20Q-00979D?logo=arduino&logoColor=white)
-
-**Un instrumento para generar señales, observar circuitos y analizar su respuesta.**
-El proyecto combina la adquisición y generación por hardware de Arduino UNO Q
-con un monitor Python que funciona como osciloscopio de dos canales, analizador
-de espectro y medidor de respuesta en frecuencia.
-
-![Interfaz del monitor: demostración de dos canales](assets/monitor_v10_actual.png)
+Un instrumento para generar señales, observar circuitos y analizar su respuesta.
+Combina adquisición y generación por hardware con un monitor Python de dos
+canales, análisis espectral, respuesta en frecuencia y grabación de señales.
 
 ## Qué hace
 
-- **Observa señales:** dos canales, trigger, RUN/STOP y SINGLE, escalas editables
-  y colores independientes.
-- **Genera estímulos:** seno, cuadrada, triángulo, rampa, pulso, sweep y chirp,
-  con amplitud, frecuencia y duración configurables; de 0,1 Hz a 20 kHz.
-- **Analiza frecuencias:** FFT instantánea, heatmap temporal y Bode de ganancia
-  y fase, con ejes logarítmicos y comparación de hasta cinco barridos.
-- **Configura la adquisición:** 8/10/12/14 bits nativos o 16 bits por oversampling;
-  hasta 125 kHz por SPI, 62,5 kHz en 16 bits y 31,25 kHz por UART.
-- **Guarda mediciones:** CSV con muestras y timestamps originales, independiente
-  del nivel de detalle usado para dibujar.
+- Osciloscopio V(t) con trigger, RUN/STOP y captura SINGLE.
+- FFT, heatmap y Bode de ganancia y fase.
+- Generador de seno, cuadrada, triángulo y rampa; modos Sweep, Chirp y Pulso.
+- Grabación CSV o WAV estéreo de A2/A3, con eliminación de DC opcional.
+- Reproducción de archivos WAV por A0: selección L/R/Mix, remuestreo,
+  conversión a 12 bits y ajuste de amplitud/offset entre 0 y 3,3 V.
+- Adquisición configurable: 8/10/12/14 bits o 16 bits por oversampling.
+  SPI hasta 125 kHz por canal; 16 bits hasta 62,5 kHz.
 
-## Módulo monitor · Python
+## Empezar
 
-El monitor reúne los controles y la visualización del instrumento. La columna
-izquierda contiene el generador y los modos V/t, FFT, heatmap y Bode. En el
-centro están conexión, configuración y gráfica; a la derecha, adquisición,
-escalas y trigger. Las selecciones se aplican automáticamente al recibir la
-confirmación del Q. El modo Demo permite explorar la interfaz sin placas.
-
-FFT y Bode muestran un relleno translúcido bajo cada curva. Bode permite añadir
-mediciones de distintos colores y aplicar una referencia instrumental compatible
-con el perfil ADC. Los huecos sin lectura interrumpen el área rellenada.
-
-[Uso y controles](monitor/v12/README.md) ·
-[Funcionamiento técnico y esquemas](docs/MONITOR_TECNICO.md) ·
-[FFT, heatmap y Bode](docs/FFT_V10.md)
-
-## Módulo Arduino UNO Q · adquisición y generación
-
-El MCU del UNO Q adquiere las dos entradas mediante temporizadores y DMA,
-y genera la señal del DAC con un temporizador y DMA independientes. El Linux
-del Q ejecuta un relay que transporta muestras y comandos hasta el PC por USB.
-Puede enviarse la adquisición por SPI directo o por UART a un UNO R4 que actúa
-como puente; el Q permanece conectado para controlar el instrumento.
-
-| Conexión | Función |
-|---|---|
-| **A0 / DAC0** | Salida del generador de 12 bits |
-| **A2 / V_IN** | Entrada de referencia del circuito |
-| **A3 / V_OUT** | Lectura de la salida del circuito |
-| **GND** | Masa común |
-
-[Instalación del firmware](arduino/v11_p992/README.md) ·
-[Cableado, temporizadores y DMA](docs/UNO_Q_TECNICO.md) ·
-[Relay y protocolos](docs/TRANSPORTE_TECNICO.md)
-
-## Probar el proyecto
-
-Versión actual: **monitor V12 + firmware UNO Q V11 P992**. Con el firmware y
-relay instalados, ejecutar desde la raíz:
+Desde la raíz del repositorio:
 
 ```sh
-python -m pip install -r requirements.txt
-python3 tools/usb_stream.py start --firmware v11_p992
-python monitor/v12/app.py
+conda env create -f monitor/v13/environment.yml
+conda activate Python_3_13_DataScience
+python monitor/v13/app.py
 ```
 
-Elegir CONTROL Q, ENLACE y Conectar, o pulsar Demo (2 CH) para usar señales
-sintéticas. La captura de portada muestra esa demostración.
+Si el entorno ya existe, omitir su creación. Demo permite probar la interfaz
+sin placa. Conectar intenta usar el enlace existente y, si no responde,
+comprueba la app instalada y el relay e inicia lo que falte.
+Preparar Q instala o actualiza la app MCU y el relay desde las fuentes del
+proyecto; requiere un UNO Q con Linux, ADB y las herramientas Arduino operativas.
 
-## Versiones, historia y documentación
+Valores iniciales: ADC 14 bits/40 kHz, amplitud 2 Vpp, offset 1,65 V y salida
+apagada. Sweep y Chirp: 20 Hz→2 kHz en 2 s; se lanzan con Disparar.
+Wav usa 50 mil muestras/s por defecto si el firmware lo admite.
+Durante Play se activa la adquisición y se bloquea el cambio de perfil ADC;
+la amplitud se puede ajustar durante la reproducción. Desconectar apaga la salida.
 
-| Recurso | Contenido |
+[Guía del monitor](monitor/v13/README.md) · [Instalación del Q](arduino/v12_audio/README.md)
+
+## Cómo se conectan los componentes
+
+| Componente | Función |
 |---|---|
-| [Historia completa](docs/HISTORIA.md) | Evolución y catálogo de versiones Python y firmware |
-| [Monitores históricos](monitor/historico/README.md) | Programas iniciales y versiones anteriores a V10 |
-| [Arduino histórico](arduino/historico/README.md) | Firmwares y puentes anteriores a V8 config |
-| [Documentación técnica](docs/README.md) | Guías de cada componente, esquemas y protocolos |
-| [Validación Bode](diagnosticos/BODE_V10.md) | Ensayos físicos, referencia vigente y límites |
-| [Plan de trabajo](Plan%20de%20trabajo.md) | Estado del proyecto y próximos pasos |
+| PC / Python | Interfaz, análisis, archivos CSV/WAV y preparación del audio |
+| MPU / Linux del UNO Q | App de App Lab y relay nativo USB/ADB ↔ SPI |
+| MCU / STM32 del UNO Q | ADC A2/A3 y DAC A0, temporizadores y DMA |
+| UNO R4 opcional | Puente UART de adquisición; el Q conserva el control |
 
-La referencia Bode histórica cubre 20 Hz–20 kHz con ADC de 16 bits /
-50 kHz y reloj ADC anterior de 40 MHz; requiere nueva comprobación con el
-reloj actual de 50 MHz.
-Las ventanas ADC cortas requieren menor impedancia de fuente; la salida de
-16 bits por oversampling no cambia la resolución de 12 bits del DAC.
-[Detalles de adquisición](docs/CONFIGURACION_ADQUISICION.md) y
-[límites del generador](docs/GENERADOR_PASO4.md).
+El MCU adquiere A2/A3 y entrega los bloques por SPI al relay del MPU.
+El relay los lleva por USB/ADB al receptor Python. Los comandos y los códigos
+WAV viajan en sentido inverso: PC→relay→SPI→MCU; TIM6 y DMA alimentan el DAC A0.
+El pequeño Python de App Lab mantiene la app; el relay es un proceso separado.
 
-La grabación y reproducción WAV es el próximo paso del plan y todavía no está
-implementada. Fuentes históricas, capturas y diagnósticos se conservan separados
-de los módulos activos.
+| Pin | Uso |
+|---|---|
+| A0 / DAC0 | Salida de 12 bits, 0–3,3 V |
+| A2 / V_IN | Primera entrada / canal izquierdo de grabación |
+| A3 / V_OUT | Segunda entrada / canal derecho de grabación |
+| GND | Masa común |
 
-[Ensayo experimental de tasas SPI altas](experimentos/tasas_spi/README.md):
-[monitor V11](monitor/v11/README.md), firmware V9 Fast y receptor separado.
-100 kHz por canal pasó continuidad física durante 120 s. La comparación
-analógica posterior está documentada en el ensayo P992. V10/V8 y V11/V9 Fast
-se conservan como parejas anteriores.
+[MCU y cableado](docs/UNO_Q_TECNICO.md) · [Relay y protocolos](docs/TRANSPORTE_TECNICO.md)
 
-[Revisión y prueba sostenida ADC16](diagnosticos/ADC16_V12.md): 7.495.680 pares en120s,
-sin discontinuidades y con restauración exacta del perfil y generador.
+## Carpetas
+
+| Carpeta | Contenido |
+|---|---|
+| [monitor](monitor/README.md) | Aplicación Python y receptor del PC |
+| [arduino](arduino/README.md) | Sketch MCU, app MPU y relay de cada pareja |
+| [transport](transport/README.md) | Herramientas y contratos de transporte compartidos |
+| tools | Instalación, compilación y administración del Q |
+| [docs](docs/README.md) | Guías técnicas e historia |
+| [diagnosticos](diagnosticos/README.md) | Ensayos, informes y resultados físicos |
+| [capturas](capturas/README.md) | Grabaciones e inventario de limpieza |
+| audios | Archivos de audio para reproducción |
+| [respaldos](respaldos/README.md) | Copias de fuentes y aplicaciones del Q |
+| experimentos | Variantes aisladas y evidencia de desarrollo |
+
+Las fuentes históricas se conservan en las carpetas `historico` de cada módulo.
+Los entornos locales y cachés no forman parte de las fuentes.
+
+## Documentación y validación
+
+[Índice técnico](docs/README.md) · [Plan de trabajo](Plan%20de%20trabajo.md) ·
+[Continuación](%23%20Continuar%20desde%20donde%20quedaste.md)
+
+WAV a 40/50 ksps pasó ensayos de 120 s; 50 ksps también con ADC14/100 kHz.
+La combinación WAV50/ADC125 está bloqueada por fallos observados.
+[Resultados y límites](docs/WAV_TASAS.md).
+La referencia Bode histórica corresponde al reloj ADC anterior y requiere
+comprobación con el perfil actual. Los ensayos locales y los físicos se
+identifican por separado en los informes.
+
+## Versiones y enlaces
+
+| Conjunto | Estado y documentación |
+|---|---|
+| [Monitor V13 · PyQt6](monitor/v13/README.md) + [Q V12 Audio](arduino/v12_audio/README.md) | Conjunto usado actualmente, con grabación y reproducción WAV |
+| [Monitor V12 · PyQt5](monitor/v12/README.md) + [Q V11 P992](arduino/v11_p992/README.md) | Pareja anterior conservada, sin reproducción WAV |
+| [Monitores históricos](monitor/historico/README.md) | Versiones anteriores archivadas |
+| [Firmware histórico](arduino/historico/README.md) | Sketches y puentes anteriores |
+| [Historia completa](docs/HISTORIA.md) | Evolución y catálogo del proyecto |
+
+Las herramientas de consola conservan V11 P992 como valor predeterminado.
+Para el conjunto de audio usar explícitamente `--version v12_audio` o
+`--firmware v12_audio`. El monitor detecta la app instalada al conectar.

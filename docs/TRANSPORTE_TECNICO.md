@@ -4,8 +4,8 @@
 
 ```mermaid
 flowchart LR
- PC[Monitor Python V12] <-->|USB / ADB: TCP reenviado| RELAY[Relay nativo en Linux del UNO Q]
- RELAY <-->|SPI y READY: datos y control| MCU[MCU UNO Q: V11 P992]
+ PC[Monitor Python] <-->|USB / ADB: TCP reenviado| RELAY[Relay nativo en Linux del UNO Q]
+ RELAY <-->|SPI y READY: datos y control| MCU[MCU UNO Q]
  MCU -->|UART Serial1| R4[UNO R4: puente V5]
  R4 -->|USB serial: muestras| PC
  PC -.->|Selección SPI/UART, ADC y DAC| RELAY
@@ -16,18 +16,18 @@ las muestras llegan por R4; el Q continúa conectado para controlar adquisición
 generador y destino. El relay admite un solo cliente PC: desconectar el monitor
 antes de ejecutar diagnósticos que necesitan el mismo enlace.
 
-El pequeño [main.py de App Lab](../arduino/v11_p992/oscilloscope/python/main.py)
+El pequeño [main.py de App Lab](../arduino/v12_audio/oscilloscope/python/main.py)
 mantiene viva la aplicación; el relay de datos es un proceso nativo separado.
 [tools/usb_stream.py](../tools/usb_stream.py) administra su compilación y estado;
 [tools/unoq.py](../tools/unoq.py) administra las apps y firmware.
 
-## Pareja actual V12 / V11 P992
+## Implementación de adquisición y control
 
-El relay del MPU está en `arduino/v11_p992/relay/unoq_config_stream.c`;
+El relay del MPU está en `arduino/v12_audio/relay/unoq_config_stream.c`;
 se compila para Linux ARM y corre en un contenedor independiente. No es
 el sketch MCU ni el pequeño Python de App Lab. Valida CRC, secuencias y
 estado de adquisición; transmite muestras y canaliza comandos ADC/DAC.
-El PC usa el receptor propio de `monitor/v12/receiver/`.
+El PC usa el receptor propio de `monitor/v13/receiver/`.
 
 SPI funciona a 32 MHz con SCP1 V3: 992 bytes por trama, 113 pares de
 muestras por fragmento y 19 fragmentos por nodo de 2048 pares. TCP escucha
@@ -52,17 +52,31 @@ espera la confirmación correspondiente antes de iniciar la medición de Bode.
 [Selección de salida](CONTROL_TRANSPORTE.md) ·
 [Contrato de cambio](PROTOCOLO_CAMBIO_TRANSPORTE.md) ·
 [Adquisición configurable](CONFIGURACION_ADQUISICION.md) ·
-[Relay actual](../arduino/v11_p992/relay/) · [Puente R4](../arduino/historico/v5/r4_bridge_v5/README.md)
+[Relay actual](../arduino/v12_audio/relay) · [Puente R4](../arduino/historico/v5/r4_bridge_v5/README.md)
 
 ## Operación
 
 ```sh
-python3 tools/unoq.py status --version v11_p992
-python3 tools/usb_stream.py status --firmware v11_p992
-python3 tools/usb_stream.py logs --firmware v11_p992
-python3 tools/usb_stream.py start --firmware v11_p992
+python3 tools/unoq.py status --version v12_audio
+python3 tools/usb_stream.py status --firmware v12_audio
+python3 tools/usb_stream.py logs --firmware v12_audio
+python3 tools/usb_stream.py start --firmware v12_audio
 ```
 
 Para actualizar, cerrar el monitor y detener el relay antes de cargar firmware.
-Usar la [guía V11 P992](../arduino/v11_p992/README.md) para compilar, importar
+Usar la [guía del firmware de audio](../arduino/v12_audio/README.md) para compilar, importar
 la app y desplegarla. No confundir la app de App Lab con el proceso relay.
+
+## Audio por el mismo enlace
+
+Python lee WAV, selecciona L/R/Mix y remuestrea con filtro antialias a la tasa
+negociada. Convierte a códigos de 12 bits ajustados a amplitud y offset; envía
+bloques por USB/ADB al relay MPU, que valida CRC y los pasa por SPI al MCU.
+El MCU mantiene una cola de bloques y TIM6/GPDMA4 alimentan A0. Los créditos
+confirmados limitan el envío. A2/A3 siguen adquiriendo con sus DMA independientes.
+El audio vuelve a las entradas mediante el cableado o circuito externo.
+
+## Versiones y enlaces
+
+- [Relay V12 Audio](../arduino/v12_audio/README.md): incluye control y bloques WAV.
+- [Relay V11 P992](../arduino/v11_p992/README.md): adquisición y generador sin WAV.

@@ -1,6 +1,6 @@
 # Arduino UNO Q · MCU, DMA y circuito
 
-[Proyecto](../README.md) · [Firmware V11 P992](../arduino/v11_p992/README.md)
+[Proyecto](../README.md) · [Firmware de audio](../arduino/v12_audio/README.md)
 
 ## MCU y MPU en la pareja actual
 
@@ -10,7 +10,7 @@ genera la salida DAC de A0. El MPU ejecuta Linux y App Lab; aloja el
 relay nativo que intercambia tramas SPI con el MCU y las entrega al PC
 por TCP reenviado mediante USB/ADB. El monitor Python se ejecuta en el PC.
 
-La pareja V11 P992/V12 usa SCP1 V3 de 992 bytes. El ADC pasó de 40 a
+El conjunto V13/V12 Audio y la pareja anterior V12/V11 P992 usan SCP1 V3 de 992 bytes. El ADC pasó de 40 a
 50 MHz mediante PLL2 para todos los perfiles; admite 16 bits por
 oversampling ×16 hasta 62,5 kHz. El kernel de reloj es compartido con DAC: el
 cambio requiere verificar también su configuración y generación de señal.
@@ -62,14 +62,14 @@ El motor DAC tiene temporizador y DMA independientes de adquisición.
 
 | Archivo | Función |
 |---|---|
-| [sketch.ino](../arduino/v11_p992/oscilloscope/sketch/sketch.ino) | Inicio, servicio de comandos y envío |
-| [scope_config.h](../arduino/v11_p992/oscilloscope/sketch/scope_config.h) | Pines, relojes, recursos y tamaños |
-| [acquisition.h](../arduino/v11_p992/oscilloscope/sketch/acquisition.h) | ADC, timers, DMA y continuidad |
-| [generator.h](../arduino/v11_p992/oscilloscope/sketch/generator.h) | Formas de onda y cambios de generador |
-| [generator_dma.h](../arduino/v11_p992/oscilloscope/sketch/generator_dma.h) | Motor DAC temporizado |
-| [control_protocol.h](../arduino/v11_p992/oscilloscope/sketch/control_protocol.h) | Selección SPI/UART |
-| [acquisition_protocol.h](../arduino/v11_p992/oscilloscope/sketch/acquisition_protocol.h) | Configuración ADC |
-| [generator_protocol.h](../arduino/v11_p992/oscilloscope/sketch/generator_protocol.h) | Comandos del generador |
+| [sketch.ino](../arduino/v12_audio/oscilloscope/sketch/sketch.ino) | Inicio, servicio de comandos y envío |
+| [scope_config.h](../arduino/v12_audio/oscilloscope/sketch/scope_config.h) | Pines, relojes, recursos y tamaños |
+| [acquisition.h](../arduino/v12_audio/oscilloscope/sketch/acquisition.h) | ADC, timers, DMA y continuidad |
+| [generator.h](../arduino/v12_audio/oscilloscope/sketch/generator.h) | Formas de onda y cambios de generador |
+| [generator_dma.h](../arduino/v12_audio/oscilloscope/sketch/generator_dma.h) | Motor DAC temporizado |
+| [control_protocol.h](../arduino/v12_audio/oscilloscope/sketch/control_protocol.h) | Selección SPI/UART |
+| [acquisition_protocol.h](../arduino/v12_audio/oscilloscope/sketch/acquisition_protocol.h) | Configuración ADC |
+| [generator_protocol.h](../arduino/v12_audio/oscilloscope/sketch/generator_protocol.h) | Comandos del generador |
 
 ## Perfiles y transiciones
 

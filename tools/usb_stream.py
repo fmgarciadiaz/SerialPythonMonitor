@@ -10,13 +10,14 @@ from spi_benchmark import BUILD_IMAGE, IMAGE
 CONTAINER = 'serialmonitor-usb-stream'
 
 
-def binary(board, build=False, dual=False, configurable=False, experimental=False, diagnostic=False, p992=False):
+def binary(board, build=False, dual=False, configurable=False, experimental=False, diagnostic=False, p992=False, audio=False):
     relay = 'experimentos/timing_spi/relay/unoq_config_stream.c' if diagnostic else 'experimentos/tasas_spi/relay/unoq_config_stream.c' if experimental else ('transport/unoq_config_stream.c' if configurable else ('transport/unoq_dual_stream.c' if dual else 'transport/unoq_stream.c'))
+    audio_folder = 'v12_audio' if audio else 'v11_p992'
     if p992:
-        relay = 'arduino/v11_p992/relay/unoq_config_stream.c'
-    sources = [relay, 'arduino/v11_p992/relay/base_verifier.c' if p992 else 'diagnosticos/verificar_spi.c']
+        relay = f'arduino/{audio_folder}/relay/unoq_config_stream.c'
+    sources = [relay, f'arduino/{audio_folder}/relay/base_verifier.c' if p992 else 'diagnosticos/verificar_spi.c']
     if p992:
-        sources.append('arduino/v11_p992/relay/config_relay_protocol.h')
+        sources.append(f'arduino/{audio_folder}/relay/config_relay_protocol.h')
     elif diagnostic:
         sources.append('experimentos/timing_spi/relay/config_relay_protocol.h')
     elif experimental:
@@ -53,13 +54,13 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('command', choices=('start', 'stop', 'status', 'logs', 'build'))
     parser.add_argument('--build-native', action='store_true')
-    parser.add_argument('--firmware', choices=('v6_adc', 'v7_dual', 'v8_config', 'v9_fast', 'v10_diag', 'v11_p992'), default='v8_config')
+    parser.add_argument('--firmware', choices=('v6_adc', 'v7_dual', 'v8_config', 'v9_fast', 'v10_diag', 'v11_p992', 'v12_audio'), default='v11_p992')
     args = parser.parse_args()
     board = Board(json.loads(config_path(args.firmware).read_text()))
     if args.command == 'build':
-        print(binary(board, build=True, dual=args.firmware == 'v7_dual', configurable=args.firmware in ('v8_config','v9_fast','v10_diag'), experimental=args.firmware == 'v9_fast', diagnostic=args.firmware == 'v10_diag', p992=args.firmware == 'v11_p992'))
+        print(binary(board, build=True, dual=args.firmware == 'v7_dual', configurable=args.firmware in ('v8_config','v9_fast','v10_diag'), experimental=args.firmware == 'v9_fast', diagnostic=args.firmware == 'v10_diag', p992=args.firmware in ('v11_p992', 'v12_audio'), audio=args.firmware == 'v12_audio'))
     elif args.command == 'start':
-        target = binary(board, args.build_native, dual=args.firmware == 'v7_dual', configurable=args.firmware in ('v8_config','v9_fast','v10_diag'), experimental=args.firmware == 'v9_fast', diagnostic=args.firmware == 'v10_diag', p992=args.firmware == 'v11_p992')
+        target = binary(board, args.build_native, dual=args.firmware == 'v7_dual', configurable=args.firmware in ('v8_config','v9_fast','v10_diag'), experimental=args.firmware == 'v9_fast', diagnostic=args.firmware == 'v10_diag', p992=args.firmware in ('v11_p992', 'v12_audio'), audio=args.firmware == 'v12_audio')
         stop(board)
         # Reset acquisition counters/queue before taking over READY.
         board.start()
@@ -70,19 +71,32 @@ def main():
                     '--device', '/dev/gpiochip1:/dev/gpiochip1:rw',
                     '--mount', f'type=bind,src={target},dst=/work/unoq_stream,readonly',
                     '--entrypoint', '/work/unoq_stream', IMAGE)
-        time.sleep(1)
-        state = json.loads(board.shell('docker', 'inspect', '--format', '{{json .State}}', CONTAINER, capture=True).stdout)
-        if not state.get('Running'):
-            board.shell('docker', 'logs', '--tail', '20', CONTAINER)
-            raise RuntimeError('El relay no quedó en ejecución.')
-        if args.firmware == 'v11_p992':
+        deadline = time.monotonic() + (15 if args.firmware == 'v12_audio' else 1)
+        while True:
+            time.sleep(.2)
+            state = json.loads(board.shell('docker', 'inspect', '--format', '{{json .State}}', CONTAINER, capture=True).stdout)
+            if not state.get('Running'):
+                board.shell('docker', 'logs', '--tail', '20', CONTAINER)
+                raise RuntimeError('El relay no quedó en ejecución.')
+            if args.firmware == 'v12_audio':
+                logs = board.run('shell', 'docker logs '+CONTAINER+' 2>&1', capture=True).stdout
+                # Relay diagnostics use stderr; docker logs merges both only remotely.
+                if 'SPI ready: first verified frame' in logs:
+                    break
+            elif time.monotonic() >= deadline:
+                break
+            if time.monotonic() >= deadline:
+                raise RuntimeError('El Q no confirmó la primera trama SPI; revisar READY y arranque MCU.')
+        if args.firmware == 'v12_audio':
+            print('Relay WAV candidato iniciado. Abrir: python monitor/v13/app.py (requiere MCU V12 Audio).')
+        elif args.firmware == 'v11_p992':
             print('Relay P992 iniciado. Abrir: python monitor/v12/app.py (SCP1 V3/992).')
         elif args.firmware == 'v10_diag':
             print('Relay de diagnóstico iniciado. Usar experimentos/timing_spi; no abrir V11.')
         elif args.firmware == 'v9_fast':
-            print('Relay experimental iniciado. Abrir: python monitor/v11/app.py; CLI en experimentos/tasas_spi.')
+            print('Relay experimental iniciado. Abrir: python monitor/historico/v11/app.py; CLI en experimentos/tasas_spi.')
         elif args.firmware == 'v8_config':
-            print('Relay configurable iniciado. Abrir: python monitor/v10/app.py')
+            print('Relay configurable iniciado. Abrir: python monitor/historico/v10/app.py')
         else:
             print('Relay dual iniciado. Abrir: python monitor/historico/v9/app.py' if args.firmware == 'v7_dual'
               else 'Relay iniciado. Abrir: python monitor/historico/v8/app.py')

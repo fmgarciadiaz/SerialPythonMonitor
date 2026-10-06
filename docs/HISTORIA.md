@@ -9,7 +9,8 @@ corresponder a etapas anteriores.
 
 ## Versiones actuales y catálogo completo · 5 de octubre de 2026
 
-La entrada actual es **Python V12 + UNO Q V11 P992**. Las secciones de
+La entrada usada actualmente es **Python V13 + UNO Q V12 Audio**;
+Python V12 + UNO Q V11 P992 se conserva como pareja anterior. Las secciones de
 operación antiguas más abajo son historia, no instrucciones para el conjunto
 actual. [Arranque actual](../README.md#probar-el-proyecto).
 
@@ -17,12 +18,12 @@ actual. [Arranque actual](../README.md#probar-el-proyecto).
 |---|---|---|
 | Consola, notebook, Tkinter | Serial | Primeros registros y visualización |
 | Qt V1–V5 | UART | Interfaz de osciloscopio y dos canales |
-| [V6](../monitor/historico/v6/) | Q V4 + R4 V4 | Conjunto UART a 20 kHz |
-| [V7](../monitor/historico/v7/) | Q V5 + R4 V5 | 31,25 kHz, estilos y reducción visual |
+| [V6](../monitor/historico/v6) | Q V4 + R4 V4 | Conjunto UART a 20 kHz |
+| [V7](../monitor/historico/v7) | Q V5 + R4 V5 | 31,25 kHz, estilos y reducción visual |
 | [V8](../monitor/historico/v8/README.md) | Q V6 ADC | USB directo por SPI al Linux del Q |
 | [V9](../monitor/historico/v9/README.md) | Q V7 dual | Control Q permanente y selección SPI/UART |
-| [V10](../monitor/v10/README.md) | [Q V8 config](../arduino/v8_config/README.md) | ADC configurable, generador, FFT, heatmap y Bode |
-| [V11 experimental](../monitor/v11/README.md) | [Q V9 Fast](../arduino/v9_fast/README.md) | SPI rápido: 100 kHz por canal, estable conservado |
+| [V10](../monitor/historico/v10/README.md) | [Q V8 config](../arduino/historico/v8_config/README.md) | ADC configurable, generador, FFT, heatmap y Bode |
+| [V11 experimental](../monitor/historico/v11/README.md) | [Q V9 Fast](../arduino/historico/v9_fast/README.md) | SPI rápido: 100 kHz por canal, estable conservado |
 
 | [V12](../monitor/v12/README.md) | [Q V11 P992](../arduino/v11_p992/README.md) | SCP1 V3/992, ADC14/125 kHz y ADC16/62,5 kHz |
 
@@ -30,7 +31,7 @@ actual. [Arranque actual](../README.md#probar-el-proyecto).
 
 | Versión | Objetivo |
 |---|---|
-| [V4](../arduino/historico/v4/) | Adquisición Q y puente R4 a 20 kHz |
+| [V4](../arduino/historico/v4) | Adquisición Q y puente R4 a 20 kHz |
 | [V5](../arduino/historico/v5/README.md) | UART de 31,25 kHz |
 | [V6](../arduino/historico/v6/README.md) | SPI con datos sintéticos |
 | [V6 polling](../arduino/historico/v6_polling/README.md) | Acceso a registros SPI |
@@ -38,7 +39,7 @@ actual. [Arranque actual](../README.md#probar-el-proyecto).
 | [V6 IRQ](../arduino/historico/v6_irq/README.md) | Interrupciones y READY |
 | [V6 ADC](../arduino/historico/v6_adc/README.md) | Integración de adquisición real y SPI |
 | [V7 dual](../arduino/historico/v7_dual/README.md) | Selección de salida y control permanente |
-| [V8 config](../arduino/v8_config/README.md) | Perfil ADC configurable y generador DAC por DMA |
+| [V8 config](../arduino/historico/v8_config/README.md) | Perfil ADC configurable y generador DAC por DMA |
 
 ### Evolución reciente de V10
 
@@ -67,7 +68,7 @@ pendiente. V10 + V8 config siguen siendo el conjunto estable.
 ### Archivos originales y documentación de época
 
 [Inventario de monitores](../monitor/historico/README.md) ·
-[Scripts Qt V1–V5 y programas iniciales](../monitor/historico/) ·
+[Scripts Qt V1–V5 y programas iniciales](../monitor/historico) ·
 [Inventario Arduino](../arduino/historico/README.md) ·
 [README UART anterior](historico/README_uart_v5_v7.md) ·
 [README original](historico/README_anterior.md).
@@ -229,7 +230,7 @@ La prueba física incluyó cambios en vivo y reconexiones en ambos modos:
 
 ## 2 de octubre de 2026: adquisición configurable V10
 
-Se completó el paso tres con panel plegable para control Q, bits, tasa y salida SPI/UART. La vista principal refleja valores confirmados por el MCU. La app independiente V8 config mantiene DMA y admite 8/10/12/14 bits y once períodos enteros de 32 a 1000 µs. Cambiar bits/tasa reinicia captura y cierra CSV; cambiar sólo salida conserva continuidad. Pasaron 99 pruebas locales, 20 perfiles físicos y cinco CSV sin huecos ni errores de escala. [Guía](../monitor/v10/README.md) y [validación](../diagnosticos/ADQUISICION_V10.md).
+Se completó el paso tres con panel plegable para control Q, bits, tasa y salida SPI/UART. La vista principal refleja valores confirmados por el MCU. La app independiente V8 config mantiene DMA y admite 8/10/12/14 bits y once períodos enteros de 32 a 1000 µs. Cambiar bits/tasa reinicia captura y cierra CSV; cambiar sólo salida conserva continuidad. Pasaron 99 pruebas locales, 20 perfiles físicos y cinco CSV sin huecos ni errores de escala. [Guía](../monitor/historico/v10/README.md) y [validación](../diagnosticos/ADQUISICION_V10.md).
 
 ## 2 de octubre de 2026: tasas SPI superiores en V10
 
@@ -244,3 +245,14 @@ Promoción del candidato P992 a una pareja independiente: `monitor/v12`,
 `arduino/v11_p992`, receptor propio y relay SCP1 V3/992. Hasta 125 kHz SPI
 por canal; se conservan V11/100 kHz y V10. [Guía](../monitor/v12/README.md)
 y [evidencia del candidato](../experimentos/tasas_spi/opt125/README.md).
+
+## 6 de octubre de 2026 · Monitor y audio
+
+[Monitor V13](../monitor/v13/README.md), PyQt6/Python 3.13, con grabación WAV
+estéreo de A2/A3 y filtro DC opcional. [Q V12 Audio](../arduino/v12_audio/README.md)
+añade reproducción L/R/Mix por A0 con remuestreo 20/40/50 ksps y amplitud en vivo.
+Conectar recupera app y relay instalados; Preparar Q instala/actualiza el conjunto.
+SINGLE conserva la FFT próxima al trigger de mayor energía y restaura el trigger
+al volver a RUN. Chirp: corregido fin prematuro y 24 disparos físicos completos.
+Portada organizada por funciones; versiones enlazadas al final. Respaldos `.bak`
+agrupados en `respaldos/historico/`, sin modificar su contenido.

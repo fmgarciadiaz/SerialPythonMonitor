@@ -12,6 +12,34 @@ class FastMonitorTests(unittest.TestCase):
     def setUp(self):
         with patch('monitor.v12.app.usb_devices',return_value=[]):self.w=SerialMonitorWindow()
     def tearDown(self):self.w.serial_worker=None;self.w.close()
+    def test_time_scale_converts_duration_and_preserves_it_across_rates(self):
+        w = self.w
+        w._acquisition_confirmed(14, 125000)
+        w._on_xaxis_toggle(True)
+        w.lbl_h_scale.setValue(2.0)
+        self.assertEqual(w.h_scale, 250)  # 2 ms / 8 us
+        self.assertEqual(w.lbl_h_scale.suffix(), ' ms')
+        w.on_h_pos_changed(-125)
+        self.assertEqual(w.lbl_h_pos.text(), '-1.0 ms')
+        w._acquisition_confirmed(16, 62500)
+        self.assertEqual(w.h_scale, 125)  # Same 2 ms / 16 us
+        self.assertAlmostEqual(w.lbl_h_scale.value(), 2.0)
+        w._on_xaxis_toggle(False)
+        self.assertEqual(w.lbl_h_scale.value(), 125)
+        w.lbl_h_scale.setValue(500)
+        self.assertEqual(w.h_scale, 500)
+
+    def test_time_scale_rounds_to_real_sample_period_and_clamps_limits(self):
+        w = self.w
+        w._acquisition_confirmed(14, 125000)
+        w._on_xaxis_toggle(True)
+        w.lbl_h_scale.setValue(1.003)
+        self.assertEqual(w.h_scale, 125)
+        self.assertAlmostEqual(w.lbl_h_scale.value(), 1.0)
+        w.lbl_h_scale.setValue(0)
+        self.assertEqual(w.h_scale, 50)
+        self.assertAlmostEqual(w.lbl_h_scale.value(), .4)
+
     def test_experimental_125k_is_offered_and_auto_applied(self):
         w=self.w;combo=w.config_rate_combo
         self.assertGreaterEqual(combo.findData(125000),0)
@@ -60,7 +88,7 @@ class FastMonitorTests(unittest.TestCase):
         w.trigger_source='V_IN';w.trigger_level=1.6;w.trigger_edge='Ascendente';w.trigger_mode='Normal'
         w.arm_single_shot();w.render_frame()
         self.assertFalse(w.is_running);self.assertFalse(w.single_shot_armed);self.assertIsNotNone(w.frozen_frame)
-        self.assertIn('SINGLE CAPTURADO',w.status_label.text())
+        self.assertIn('SINGLE capturado',w.status_label.text())
         frozen=w.frozen_frame[1]['V_IN'].copy();w.render_frame();np.testing.assert_array_equal(w.frozen_frame[1]['V_IN'],frozen)
     def test_csv_keeps_raw_125k_samples(self):
         import csv,tempfile

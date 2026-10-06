@@ -1,7 +1,11 @@
 # Versiones anteriores de Arduino
 
 Estas carpetas conservan las fuentes anteriores sin cambiar su funcionamiento.
-La adquisición actual está en [V8 config](../v8_config/README.md).
+La adquisición actual está en [V11 P992](../v11_p992/README.md).
+
+- [V8 config](v8_config/README.md): pareja histórica del monitor V10.
+- [V9 Fast](v9_fast/README.md): pareja histórica del monitor V11.
+- [V10 diagnóstico](v10_diag/README.md): instrumentación experimental.
 
 - [V5](v5/README.md): respaldo Q + R4 por UART a 3 Mbps, 31,25 kHz; monitor V7.
 - [Q V4](v4/oscilloscope/README.md) y [R4 V4](v4/r4_bridge_v4/README.md): UART a 2 Mbps, 20 kHz; monitor V6.
@@ -19,5 +23,5 @@ no mueve ni elimina las apps instaladas en el Q.
 - [V7 dual](v7_dual/README.md): firmware del monitor V9.
 - [V6 ADC](v6_adc/README.md): firmware del monitor V8.
 
-El firmware actual es [V8 config](../v8_config/README.md). Las apps del Q
+El firmware actual es [V8 config](v8_config/README.md). Las apps del Q
 conservan sus nombres y destinos remotos; esta consolidación organiza los archivos locales.

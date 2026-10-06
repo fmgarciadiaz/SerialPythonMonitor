@@ -2,7 +2,7 @@
 
 Instrumentación independiente de V9 Fast y V11. No optimiza aún el transporte:
 primero mide para distinguir déficit sostenido de pausas ocasionales.
-App MCU: [V10 diagnóstico](../../arduino/v10_diag/README.md).
+App MCU: [V10 diagnóstico](../../arduino/historico/v10_diag/README.md).
 
 ## Qué se mide
 
@@ -68,5 +68,5 @@ fallar al cerrar el enlace y queda registrada.
 python3 tools/usb_stream.py stop --firmware v10_diag
 python3 tools/unoq.py stop --version v10_diag
 python3 tools/usb_stream.py start --firmware v9_fast
-python monitor/v11/app.py
+python monitor/historico/v11/app.py
 ```

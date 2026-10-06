@@ -14,10 +14,10 @@ os.environ.setdefault('QT_QPA_PLATFORM','offscreen')
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
 from PyQt5 import QtCore, QtWidgets
-from monitor.v10.app import SerialMonitorWindow
+from monitor.historico.v10.app import SerialMonitorWindow
 from transport.unoq_usb import Connection, usb_devices
 from transport.unoq_config_receiver import OutputReceiver
-from monitor.v10.bode_calibration import CALIBRATION_PATH
+from monitor.historico.v10.bode_calibration import CALIBRATION_PATH
 
 
 def main():

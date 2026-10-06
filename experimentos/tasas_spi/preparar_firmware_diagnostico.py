@@ -2,8 +2,8 @@ from pathlib import Path
 import shutil,json
 ROOT=Path(__file__).resolve().parents[2]
 root=ROOT/'experimentos/tasas_spi/firmware_diagnostico';app=root/'oscilloscope'
-shutil.copytree(ROOT/'arduino/v9_fast/oscilloscope',app,dirs_exist_ok=True,ignore=shutil.ignore_patterns('__pycache__'))
-c=json.loads((ROOT/'arduino/v9_fast/unoq.json').read_text());c.update(name='Scope SPI Timing Diagnostic',remote_app='/home/arduino/ArduinoApps/scope-spi-timing-diagnostic',local_app=str(app.relative_to(ROOT)));(root/'unoq.json').write_text(json.dumps(c,indent=2)+'\n')
+shutil.copytree(ROOT/'arduino/historico/v9_fast/oscilloscope',app,dirs_exist_ok=True,ignore=shutil.ignore_patterns('__pycache__'))
+c=json.loads((ROOT/'arduino/historico/v9_fast/unoq.json').read_text());c.update(name='Scope SPI Timing Diagnostic',remote_app='/home/arduino/ArduinoApps/scope-spi-timing-diagnostic',local_app=str(app.relative_to(ROOT)));(root/'unoq.json').write_text(json.dumps(c,indent=2)+'\n')
 (app/'app.yaml').write_text('name: Scope SPI Timing Diagnostic\ndescription: "DIAGNOSTICO AISLADO | Detiene ADC al perder nodo y entrega estadisticas RAM tipo 11. No usar con monitores."\nports: []\nbricks: []\n')
 header='''#pragma once
 namespace timing_diag {

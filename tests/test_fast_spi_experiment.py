@@ -18,7 +18,7 @@ class FastSPITests(unittest.TestCase):
             'if(fread(p,1,512,stdin)!=512||!scope_acq::decode(p,512,r))return 2;'
             'auto a=s.submit(r,true);scope_acq::encode(p,0,a);fwrite(p,1,512,stdout);'
             'if(s.pending()){scope_acq::encode(p,1,s.complete(true));fwrite(p,1,512,stdout);}return 0;}')
-        subprocess.run(['c++','-std=c++11','-Wall','-Wextra','-Werror','-I',str(ROOT/'arduino/v9_fast/oscilloscope/sketch'),str(source),'-o',str(cls.exe)],check=True)
+        subprocess.run(['c++','-std=c++11','-Wall','-Wextra','-Werror','-I',str(ROOT/'arduino/historico/v9_fast/oscilloscope/sketch'),str(source),'-o',str(cls.exe)],check=True)
         source=folder/'relay.c'
         source.write_text('#define main verifier_main\n#include "diagnosticos/verificar_spi.c"\n#undef main\n'
             '#include "experimentos/tasas_spi/relay/config_relay_protocol.h"\n'
@@ -51,7 +51,7 @@ class FastSPITests(unittest.TestCase):
         source.write_text('#include <cstdio>\n#include "benchmark_protocol.h"\n'
             'int main(){uint8_t p[4096];size_t n=fread(p,1,sizeof p,stdin);'
             'printf("%u",scope_bench::crc32(p,n));return 0;}')
-        subprocess.run(['c++','-std=c++11','-Wall','-Wextra','-Werror','-I',str(ROOT/'arduino/v9_fast/oscilloscope/sketch'),str(source),'-o',str(exe)],check=True)
+        subprocess.run(['c++','-std=c++11','-Wall','-Wextra','-Werror','-I',str(ROOT/'arduino/historico/v9_fast/oscilloscope/sketch'),str(source),'-o',str(exe)],check=True)
         for data in (b'',b'123456789',bytes(range(256))*2):
             output=subprocess.run([str(exe)],input=data,capture_output=True,check=True).stdout
             self.assertEqual(int(output),zlib.crc32(data))

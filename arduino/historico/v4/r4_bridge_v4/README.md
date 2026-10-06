@@ -42,5 +42,5 @@ cero ADC fuera de rango y cero bytes perdidos después de sincronizar.
 Los bytes anteriores a la primera cabecera y un fragmento final son esperables.
 
 Para volver a V3: detener V4, restaurar en el R4
-`respaldos/DebuggerRtRx_1100000.ino.bak` como sketch del IDE y arrancar V3.
+`respaldos/historico/DebuggerRtRx_1100000.ino.bak` como sketch del IDE y arrancar V3.
 USB/PC sigue a 2 Mbps; sólo el enlace Q–R4 vuelve a 1,1 Mbps.

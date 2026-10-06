@@ -6,7 +6,7 @@ Actualizado: 29 de septiembre de 2026.
 
 ## Qué usar actualmente
 
-- **Firmware Q para desarrollo y despliegue:** `arduino/oscilloscope/sketch/sketch.ino`, revisión V4 a 20 kHz para Arduino Core Zephyr 1.0.0, aplicación independiente `Osciloscopio DMA_TXRX V4`, basada en V3; conserva la sincronización DMA corregida y usa 3.000.000 baudios hacia R4 (USB/monitor: 2.000.000). La copia anterior se conserva en `respaldos/sketch_pre_applab.ino.bak`.
+- **Firmware Q para desarrollo y despliegue:** `arduino/oscilloscope/sketch/sketch.ino`, revisión V4 a 20 kHz para Arduino Core Zephyr 1.0.0, aplicación independiente `Osciloscopio DMA_TXRX V4`, basada en V3; conserva la sincronización DMA corregida y usa 3.000.000 baudios hacia R4 (USB/monitor: 2.000.000). La copia anterior se conserva en `respaldos/historico/sketch_pre_applab.ino.bak`.
 - **Monitor PC para probar:** `SerialMonitorAppQt_V6.py`, con desplazamiento suavizado y objetivo de unos 60 FPS. Validación visual con hardware pendiente.
 - **Monitor PC estable anterior:** `SerialMonitorAppQt_V5.py`, conservado sin cambios.
 - **Capturas normales:** `capturas/`.
@@ -23,7 +23,7 @@ raíz. No ejecutar varias aplicaciones sobre el mismo puerto serial.
 |---|---|
 | `arduino/` | Fuentes de App Lab, configuración USB e instrucciones del entorno de desarrollo; ver `arduino/README.md`. |
 | `tools/unoq.py` | Estado, compilación sin carga, respaldo, despliegue y logs del Q mediante ADB. |
-| `respaldos/sketch_pre_applab.ino.bak` | Copia anterior del firmware normal UNO Q. ADC dual de 14 bits a 10 kHz; UART a 1 Mbaud; paquetes de 512 pares; dos nodos DMA de 2048 pares. Espera la transición real nodo 0 → nodo 1 antes de la primera entrega. Sin parada de diagnóstico. |
+| `respaldos/historico/sketch_pre_applab.ino.bak` | Copia anterior del firmware normal UNO Q. ADC dual de 14 bits a 10 kHz; UART a 1 Mbaud; paquetes de 512 pares; dos nodos DMA de 2048 pares. Espera la transición real nodo 0 → nodo 1 antes de la primera entrega. Sin parada de diagnóstico. |
 | `SerialMonitorAppQt_V6.py` | Basado en V5: temporizador preciso de 16 ms y posición visual suavizada en Roll en vivo (H-Pos = 0), con constante de 100 ms. Bordes suavizados, reducción visual por píxel conservando extremos y cortes, y barra superior en grilla con botones iguales. Conserva la adquisición; las capturas CSV nuevas usan comas y punto decimal. |
 | `tests/test_v6_roll.py` | Pruebas sin Qt del desplazamiento, límites del buffer y conservación de adquisición, grabación y preparación de trazos respecto de V5. |
 | `tests/test_v6_display.py` | Pruebas con NumPy de conservación de picos, orden, escalones y cortes durante la reducción visual. |
@@ -41,7 +41,7 @@ raíz. No ejecutar varias aplicaciones sobre el mismo puerto serial.
 | `diagnosticos/diagnostico_dma/diagnostico_dma.ino` | Firmware instrumentado `startup_sync_v2`. Registra destinos/contadores DMA y tiempos de copia/envío; detiene adquisición ante anomalía temporal, escritura corta o plazo de unos 15 segundos. |
 | `diagnosticos/diagnostico_dma/LEEME.md` | Pasos de la prueba e interpretación de campos del diagnóstico. |
 | `capturas/` | CSV normales y subcarpeta de resultados de diagnóstico. Detalle de las capturas existentes debajo. |
-| `respaldos/sketch_antes_sync.ino.bak` | Copia del firmware anterior a la corrección de sincronización inicial. Conservar para comparación; no cargar como versión actual. |
+| `respaldos/historico/sketch_antes_sync.ino.bak` | Copia del firmware anterior a la corrección de sincronización inicial. Conservar para comparación; no cargar como versión actual. |
 | `CONTEXTO_UNO_Q_Codex.md` | Transferencia histórica de las conversaciones y estado previo a esta investigación. Sus rutas y conclusiones pendientes reflejan aquel momento; consultar este inventario para el estado actual. Incluye el código del puente R4; no hay un sketch R4 separado en el proyecto. |
 | `README.md` | Presentación, instalación y documentación histórica de la aplicación; enlaza a este inventario. |
 | `requirements.txt` | Dependencias Python declaradas para el monitor. Los scripts históricos pueden requerir dependencias adicionales. |

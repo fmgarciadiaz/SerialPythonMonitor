@@ -51,7 +51,7 @@ del relay agotó la espera de READY; el segundo arrancó correctamente.
 La [captura física](resultados_usb/20261002_210722_466805_dac_a2_a3.json)
 registró 156.867 pares sin discontinuidades, con 2,499 Hz en A2 y 2,498 Hz en A3.
 El [gráfico](../capturas/diagnosticos_dac_a2_a3/20261002_210722_466805.png)
-muestra ambos puntos; el [CSV completo](../capturas/diagnosticos_dac_a2_a3/20261002_210722_466805.csv)
+muestra ambos puntos; el [CSV completo] — captura pesada eliminada; ver inventario de limpieza
 conserva todas las muestras. Los voltajes usan la referencia nominal de 3,3 V,
 sin calibración de amplitud.
 

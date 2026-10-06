@@ -3,13 +3,13 @@ os.environ.setdefault('QT_QPA_PLATFORM','offscreen')
 import unittest
 from unittest.mock import patch
 from PyQt5 import QtWidgets
-from monitor.v10.app import SerialMonitorWindow
+from monitor.historico.v10.app import SerialMonitorWindow
 
 class ConfigurationUITests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):cls.app=QtWidgets.QApplication.instance() or QtWidgets.QApplication([])
     def setUp(self):
-        with patch('monitor.v10.app.usb_devices',return_value=['test-q']): self.window=SerialMonitorWindow()
+        with patch('monitor.historico.v10.app.usb_devices',return_value=['test-q']): self.window=SerialMonitorWindow()
     def tearDown(self):self.window.close()
     def test_selectors_are_visible_on_main_screen(self):
         w=self.window;w.show();self.app.processEvents()
@@ -100,7 +100,7 @@ class ConfigurationUITests(unittest.TestCase):
             def run(self):self.finished.emit()
             def stop(self):pass
         w=self.window
-        with patch('monitor.v10.app.OutputWorker',FinishedWorker):
+        with patch('monitor.historico.v10.app.OutputWorker',FinishedWorker):
             w.connect_serial()
             QtTest.QTest.qWait(100)
             self.assertFalse(w.serial_thread.isRunning())

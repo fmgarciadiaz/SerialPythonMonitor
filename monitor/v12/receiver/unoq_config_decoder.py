@@ -1,4 +1,4 @@
-"""Experimental V7 dual output stream. V8's fixed-SPI decoder stays unchanged."""
+"""V12 SCP1 V3/992 decoder: acquisition profiles, generator and SPI/UART timeline."""
 import secrets
 import struct
 import time

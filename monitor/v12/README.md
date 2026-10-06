@@ -1,6 +1,6 @@
-# Monitor V12 · SPI P992, hasta 125 kHz
+# Monitor de adquisición SPI
 
-Nueva versión independiente basada en el candidato P992 validado. Usa
+Pareja anterior conservada con PyQt5, basada en P992 validado. Usa
 exclusivamente [firmware V11 P992](../../arduino/v11_p992/README.md) y su
 relay SCP1 V3/992. V11 y V10 se conservan en sus carpetas.
 
@@ -76,3 +76,22 @@ se obtuvieron con reloj ADC de 40 MHz y requieren nueva comprobación.
 
 [Revisión y prueba sostenida ADC16](../../diagnosticos/ADC16_V12.md): 7.495.680 pares en120s,
 sin discontinuidades y con restauración exacta del perfil y generador.
+
+## Escala temporal y estados
+
+En eje de muestras la escala horizontal se edita en muestras. En eje de
+tiempo se edita en milisegundos y se convierte al número de muestras usando
+el período medido o el perfil confirmado antes de recibir datos. Se redondea
+al período real y se respetan los límites de 50–250.000 muestras. La duración
+se conserva al cambiar Fs mientras esos límites lo permitan; la posición
+se muestra también en tiempo. La gráfica conserva su eje en microsegundos.
+
+Mensajes de estado en capitalización normal: adquisición en vivo, pantalla
+congelada por STOP o SINGLE. El cuadro de estado mide 34 px y el selector
+se identifica como MUESTREO.
+
+## Versiones y enlaces
+
+- Esta carpeta: [Monitor V12](app.py), con [firmware V11 P992](../../arduino/v11_p992/README.md).
+- [Monitor V13](../v13/README.md): aplicación usada actualmente, con PyQt6 y audio.
+- [Histórico](../historico/README.md).

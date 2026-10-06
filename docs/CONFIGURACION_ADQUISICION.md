@@ -1,6 +1,6 @@
 # Configuración de adquisición
 
-## Pareja actual V12 / firmware V11 P992
+## Perfiles de adquisición
 
 SPI: hasta 125 kHz por canal en 8/10/12/14 bits, y 62,5 kHz en
 16 bits por oversampling ×16 de conversiones de 14 bits, shift derecho 2.
@@ -69,7 +69,7 @@ tramas toma el mismo mutex: metadata nueva no puede adelantarse a APPLIED.
 [relay C](../transport/config_relay_protocol.h) y [pruebas cruzadas](../tests/test_acquisition_config.py).
 La tabla de bits y períodos coincide entre los tres lenguajes.
 
-[Opciones, límites y uso de V10](../monitor/v10/README.md).
+[Opciones, límites y uso de V10](../monitor/historico/v10/README.md).
 
 ## Perfiles rápidos SPI
 

@@ -50,7 +50,7 @@ int main(){generator::start();uint8_t p[512];scope_gen::Request r{};uint32_t seq
 while(fread(p,1,512,stdin)==512){if(!scope_gen::decode(p,512,r))return 2;
 const auto reply=generator::submit(r);scope_gen::encode(p,seq++,reply);fwrite(p,1,512,stdout);}return 0;}
 ''')
-        subprocess.run(['c++','-std=c++11','-Wall','-Wextra','-Werror','-I',str(ROOT/'arduino/v8_config/oscilloscope/sketch'),str(source),'-o',str(cls.exe)],check=True)
+        subprocess.run(['c++','-std=c++11','-Wall','-Wextra','-Werror','-I',str(ROOT/'arduino/historico/v8_config/oscilloscope/sketch'),str(source),'-o',str(cls.exe)],check=True)
         relay=cls.folder/'relay.c';cls.relay=cls.folder/'relay'
         relay.write_text('#define main verifier_main\n#include "diagnosticos/verificar_spi.c"\n#undef main\n'
             '#include "transport/config_relay_protocol.h"\n'
@@ -121,7 +121,7 @@ for(unsigned mode=1;mode<=2;++mode){c.wave=1;c.mode=mode;c.duration=100;c.freque
 assert(generator::timings[128].reload<generator::timings[0].reload);now+=1000;generator::tick(nullptr);assert(!generator::running);}
 c.mode=0;c.enabled=0;generator::apply(c);assert(!generator::running && regs.DHR12R1==0);return 0;}
 ''')
-        subprocess.run(['c++','-std=c++11','-Wall','-Wextra','-Werror','-I',str(ROOT/'arduino/v8_config/oscilloscope/sketch'),str(source),'-o',str(exe)],check=True)
+        subprocess.run(['c++','-std=c++11','-Wall','-Wextra','-Werror','-I',str(ROOT/'arduino/historico/v8_config/oscilloscope/sketch'),str(source),'-o',str(exe)],check=True)
         subprocess.run([str(exe)],check=True)
     def test_timer_range_accuracy_and_dac_failure_are_reported(self):
         source=self.folder/'timing.cpp';exe=self.folder/'timing'
@@ -141,7 +141,7 @@ scope_gen::Request set{0x80000002,c,false};r=generator::submit(set);
 assert(r.phase==scope_control::REJECTED && r.reason==scope_control::HARDWARE);
 r=generator::submit(set);assert(r.phase==scope_control::REJECTED);return 0;}
 ''')
-        subprocess.run(['c++','-std=c++11','-Wall','-Wextra','-Werror','-I',str(ROOT/'arduino/v8_config/oscilloscope/sketch'),str(source),'-o',str(exe)],check=True)
+        subprocess.run(['c++','-std=c++11','-Wall','-Wextra','-Werror','-I',str(ROOT/'arduino/historico/v8_config/oscilloscope/sketch'),str(source),'-o',str(exe)],check=True)
         subprocess.run([str(exe)],check=True)
     def test_generator_event_keeps_sample_timeline_and_capture(self):
         from transport.unoq_config_receiver import OutputReceiver
@@ -159,9 +159,9 @@ class GeneratorUITests(unittest.TestCase):
         from PyQt5 import QtWidgets
         cls.app=QtWidgets.QApplication.instance() or QtWidgets.QApplication([])
     def test_frequency_typing_commits_on_enter_without_padding(self):
-        from monitor.v10.app import SerialMonitorWindow
+        from monitor.historico.v10.app import SerialMonitorWindow
         from PyQt5 import QtCore, QtTest
-        with patch('monitor.v10.app.usb_devices',return_value=[]):w=SerialMonitorWindow()
+        with patch('monitor.historico.v10.app.usb_devices',return_value=[]):w=SerialMonitorWindow()
         try:
             w.show()
             w.serial_worker=MagicMock()
@@ -183,9 +183,9 @@ class GeneratorUITests(unittest.TestCase):
             self.assertEqual(spin.valueFromText('12 kHz'), 12000)
         finally:w.close()
     def test_dial_updates_display_during_drag_and_applies_on_release(self):
-        from monitor.v10.app import SerialMonitorWindow
+        from monitor.historico.v10.app import SerialMonitorWindow
         from PyQt5 import QtTest
-        with patch('monitor.v10.app.usb_devices', return_value=[]):
+        with patch('monitor.historico.v10.app.usb_devices', return_value=[]):
             w = SerialMonitorWindow()
         try:
             w.serial_worker = MagicMock()
@@ -202,9 +202,9 @@ class GeneratorUITests(unittest.TestCase):
             w.close()
 
     def test_generator_selectors_open_from_center_and_change_selection(self):
-        from monitor.v10.app import SerialMonitorWindow
+        from monitor.historico.v10.app import SerialMonitorWindow
         from PyQt5 import QtCore, QtTest
-        with patch('monitor.v10.app.usb_devices', return_value=[]):
+        with patch('monitor.historico.v10.app.usb_devices', return_value=[]):
             w = SerialMonitorWindow()
         try:
             w.show()
@@ -221,9 +221,9 @@ class GeneratorUITests(unittest.TestCase):
             w.close()
 
     def test_scale_editors_commit_and_follow_dials(self):
-        from monitor.v10.app import SerialMonitorWindow
+        from monitor.historico.v10.app import SerialMonitorWindow
         from PyQt5 import QtCore, QtTest
-        with patch('monitor.v10.app.usb_devices', return_value=[]):
+        with patch('monitor.historico.v10.app.usb_devices', return_value=[]):
             w = SerialMonitorWindow()
         try:
             w.show()
@@ -245,8 +245,8 @@ class GeneratorUITests(unittest.TestCase):
             w.close()
 
     def test_pulse_units_preserve_duration_when_switching_modes(self):
-        from monitor.v10.app import SerialMonitorWindow
-        with patch('monitor.v10.app.usb_devices',return_value=[]):w=SerialMonitorWindow()
+        from monitor.historico.v10.app import SerialMonitorWindow
+        with patch('monitor.historico.v10.app.usb_devices',return_value=[]):w=SerialMonitorWindow()
         try:
             w.generator_mode.setCurrentIndex(1)
             w.generator_duration.setValue(0.2)
@@ -264,9 +264,9 @@ class GeneratorUITests(unittest.TestCase):
             self.assertEqual(w._generator_labels[w.generator_frequency].text(), 'Frecuencia inicial')
         finally:w.close()
     def test_generator_column_auto_apply_and_voltage_validation(self):
-        from monitor.v10.app import SerialMonitorWindow
+        from monitor.historico.v10.app import SerialMonitorWindow
         from PyQt5 import QtTest
-        with patch('monitor.v10.app.usb_devices',return_value=[]):w=SerialMonitorWindow()
+        with patch('monitor.historico.v10.app.usb_devices',return_value=[]):w=SerialMonitorWindow()
         try:
             w.show();self.app.processEvents();self.assertTrue(w.generator_panel.isVisible())
             self.assertLess(w.generator_column.x(), w.plot_widget.mapTo(w.centralWidget(), w.plot_widget.rect().topLeft()).x())
@@ -283,8 +283,8 @@ class GeneratorUITests(unittest.TestCase):
             self.assertEqual(w.serial_worker.request_generator.call_args.args[0].enabled,0)
         finally:w.close()
     def test_frequency_dial_and_numeric_input_stay_in_sync(self):
-        from monitor.v10.app import SerialMonitorWindow
-        with patch('monitor.v10.app.usb_devices',return_value=[]):w=SerialMonitorWindow()
+        from monitor.historico.v10.app import SerialMonitorWindow
+        with patch('monitor.historico.v10.app.usb_devices',return_value=[]):w=SerialMonitorWindow()
         try:
             w.generator_frequency_dial.setValue(1000)
             self.assertEqual(w.generator_frequency.value(),20000)

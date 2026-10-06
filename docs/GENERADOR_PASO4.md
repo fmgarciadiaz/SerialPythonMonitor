@@ -1,6 +1,6 @@
 # Paso cuatro: generador de ondas
 
-Pareja actual: V12 / V11 P992. El kernel ADC/DAC usa PLL2 a 50 MHz;
+El conjunto V13 / V12 Audio conserva la base ADC de V12 / V11 P992. El kernel ADC/DAC usa PLL2 a 50 MHz;
 HCLK y TIM6 siguen a 160 MHz. HFSEL permanece en01 por HCLK.
 Ver [revisión de reloj y evidencia](../diagnosticos/ADC16_V12.md).
 

@@ -22,11 +22,11 @@ como referencia de las versiones anteriores. Esta guía describe V6 y la base de
 - **[V9: Q de control y SPI/R4](v9/README.md)**: paso dos, salida seleccionable
   sin desconectar el Q; cambios en vivo y CSV continuo. Capturas en
   `capturas/experimental_v9/`.
-- **[V10: adquisición configurable](../v10/README.md)**: bits, tasa, Q y salida dentro de un panel plegable; resumen confirmado en la vista principal. Capturas en `capturas/experimental_v10/`.
+- **[V10: adquisición configurable](v10/README.md)**: bits, tasa, Q y salida dentro de un panel plegable; resumen confirmado en la vista principal. Capturas en `capturas/experimental_v10/`.
 - `historico/`: archivos anteriores conservados, sin convertirlos ni modificar su contenido.
 
 Cada versión se abre directamente desde la raíz: `python monitor/historico/v6/app.py`,
-`python monitor/historico/v7/app.py`, `python monitor/historico/v8/app.py` o `python monitor/historico/v9/app.py`. Para adquisición configurable: `python monitor/v10/app.py`.
+`python monitor/historico/v7/app.py`, `python monitor/historico/v8/app.py` o `python monitor/historico/v9/app.py`. Para adquisición configurable: `python monitor/historico/v10/app.py`.
 V6 guarda en `capturas/`; V7 en `capturas/experimental_v7/`, independientemente
 del directorio actual. La V7 es una copia de desarrollo separada: sus futuros
 cambios no modifican V6.

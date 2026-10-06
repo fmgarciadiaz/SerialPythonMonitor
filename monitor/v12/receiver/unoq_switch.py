@@ -1,4 +1,4 @@
-"""Transport-switch wire contract used by experimental V7 DualSession."""
+"""V12 SCP1 V3/992: commands and replies for selecting SPI/UART output."""
 from dataclasses import dataclass
 from enum import IntEnum
 import struct

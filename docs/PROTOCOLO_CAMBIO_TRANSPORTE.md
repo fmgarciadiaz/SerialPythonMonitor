@@ -1,6 +1,6 @@
 # Contrato experimental para seleccionar SPI/UART
 
-La pareja actual es V12 / V11 P992 con SCP1 V3/992; ver
+V13 / V12 Audio y la pareja anterior V12 / V11 P992 usan SCP1 V3/992; ver
 [transporte actual](TRANSPORTE_TECNICO.md). El contrato y las capturas V2/512
 de este documento se conservan como antecedentes; sus offsets CRC y
 longitudes no se aplican a V3.

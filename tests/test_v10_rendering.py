@@ -5,13 +5,13 @@ from collections import deque
 from unittest.mock import patch
 import numpy as np
 from PyQt5 import QtWidgets
-from monitor.v10.app import SerialMonitorWindow,VISIBLE_SAMPLES_MAX,MAX_BUFFER_SAMPLES
+from monitor.historico.v10.app import SerialMonitorWindow,VISIBLE_SAMPLES_MAX,MAX_BUFFER_SAMPLES
 
 class DisplayTests(unittest.TestCase):
  @classmethod
  def setUpClass(cls):cls.app=QtWidgets.QApplication.instance() or QtWidgets.QApplication([])
  def setUp(self):
-  with patch('monitor.v10.app.usb_devices',return_value=[]):self.w=SerialMonitorWindow()
+  with patch('monitor.historico.v10.app.usb_devices',return_value=[]):self.w=SerialMonitorWindow()
  def tearDown(self):self.w.close()
  def test_recent_and_historical_windows_match(self):
   values=deque(range(1000))
@@ -55,7 +55,7 @@ class DisplayTests(unittest.TestCase):
 
 class HistoryTests(unittest.TestCase):
  def test_wrap_oversize_batches_and_frozen_window(self):
-  from monitor.v10.history import SampleHistory
+  from monitor.historico.v10.history import SampleHistory
   h=SampleHistory(7);reference=deque(maxlen=7)
   for batch in ([1,2,3],[4,5,6,7,8],list(range(20)),[30,31]):
    h.extend(batch);reference.extend(batch)
@@ -67,7 +67,7 @@ class HistoryTests(unittest.TestCase):
   h.clear();self.assertEqual(len(h),0)
  def test_batch_ingestion_retains_all_samples_and_missing_columns(self):
   app=QtWidgets.QApplication.instance() or QtWidgets.QApplication([])
-  with patch('monitor.v10.app.usb_devices',return_value=[]):w=SerialMonitorWindow()
+  with patch('monitor.historico.v10.app.usb_devices',return_value=[]):w=SerialMonitorWindow()
   try:
    w.handle_batch([{'V_IN':1,'Tiempo (us)':16},{'V_IN':2,'Tiempo (us)':32,'extra':5}])
    self.assertEqual(w.sample_counter,2)
@@ -78,7 +78,7 @@ class HistoryTests(unittest.TestCase):
 
 class WorkerStartupTests(unittest.TestCase):
  def test_previous_hardware_profile_is_not_published_during_connection(self):
-  from monitor.v10.app import OutputWorker
+  from monitor.historico.v10.app import OutputWorker
   from transport.unoq_acquisition import Configuration
   from unittest.mock import MagicMock
   worker=OutputWorker('q',0,config=Configuration(10,1000));batches=[]
@@ -93,7 +93,7 @@ class WorkerStartupTests(unittest.TestCase):
    def pump(self):self.collect([(1000,1023,0,0)]);worker.stop()
    def close(self):pass
   import itertools
-  with patch('monitor.v10.app.Connection',return_value=MagicMock()),patch('monitor.v10.app.OutputReceiver',Receiver),patch('monitor.v10.app.time.monotonic',side_effect=itertools.count(step=.1).__next__):worker.run()
+  with patch('monitor.historico.v10.app.Connection',return_value=MagicMock()),patch('monitor.historico.v10.app.OutputReceiver',Receiver),patch('monitor.historico.v10.app.time.monotonic',side_effect=itertools.count(step=.1).__next__):worker.run()
   self.assertEqual(len(batches),1);self.assertEqual(len(batches[0]),1)
   self.assertEqual(batches[0][0]['Tiempo (us)'],1000)
   self.assertEqual(batches[0][0]['V_IN'],3.3)

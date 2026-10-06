@@ -80,7 +80,7 @@ V3 permanece como aplicación independiente detenida.
 
 Cargar `arduino/historico/v4/r4_bridge_v4/r4_bridge_v4.ino` en el **UNO R4 WiFi**.
 El sketch original del IDE queda intacto y respaldado como
-`respaldos/DebuggerRtRx_1100000.ino.bak`. **Q–R4 usa 3.000.000 baudios**.
+`respaldos/historico/DebuggerRtRx_1100000.ino.bak`. **Q–R4 usa 3.000.000 baudios**.
 En este R4, `Serial` usa otro UART hacia el ESP32/USB: el baud del monitor
 **sigue en 2.000.000** (predeterminado de V6). No poner 3 Mbps en Python.
 
@@ -123,7 +123,7 @@ pertenecen al firmware de diagnóstico histórico, que sigue siendo de 10 kHz.
 `DebugRTRXread.py` y las versiones antiguas del monitor son históricos.
 
 El respaldo exacto anterior está en
-`respaldos/sketch_dma_txrx_v2_antes_zephyr1.ino.bak` en la raíz del repositorio.
+`respaldos/historico/sketch_dma_txrx_v2_antes_zephyr1.ino.bak` en la raíz del repositorio.
 Para recuperar V2, restaurar ese contenido en `sketch/sketch.ino` y recompilar;
 los nuevos headers no se usan desde el sketch V2.
 

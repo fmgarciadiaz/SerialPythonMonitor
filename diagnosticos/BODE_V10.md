@@ -24,7 +24,7 @@ sin alterar el firmware ni reiniciar el relay.
 ## Evidencia
 
 - [Informe JSON](resultados_usb/20261003_021228_178271_bode_qt_v10.json).
-- [Muestras originales](../capturas/bode_v10/20261003_021228_178271/muestras.csv).
+- [Muestras originales] — captura pesada eliminada; ver inventario de limpieza.
 - [Puntos Bode](../capturas/bode_v10/20261003_021228_178271/bode.csv).
 - [Captura del monitor](../capturas/bode_v10/20261003_021228_178271/bode.png).
 
