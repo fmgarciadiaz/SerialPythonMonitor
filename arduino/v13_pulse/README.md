@@ -57,5 +57,5 @@ python tools/usb_stream.py start --firmware v12_audio
 
 ## Versiones
 
-- Esta carpeta: V13 Pulse, experimento para [Monitor V13](../../monitor/v13/README.md).
+- Esta carpeta: V13 Pulse, experimento para [Monitor V13](../../monitor/historico/v13/README.md).
 - [V12 Audio](../v12_audio/README.md): pareja conservada.

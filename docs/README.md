@@ -4,7 +4,7 @@ Guías del monitor, hardware, transporte y audio. [Descripción del proyecto](..
 
 | Tema | Guía |
 |---|---|
-| Pantalla, conexión y controles | [Monitor](../monitor/v13/README.md) |
+| Pantalla, conexión y controles | [Monitor](../monitor/historico/v13/README.md) |
 | Instalación del Q: MCU y relay MPU | [Firmware](../arduino/v12_audio/README.md) |
 | Flujo, FFT, Bode y registro | [Monitor técnico](MONITOR_TECNICO.md) |
 | Cableado, temporizadores y DMA | [UNO Q técnico](UNO_Q_TECNICO.md) |
@@ -21,8 +21,8 @@ Las pruebas de interfaz sin hardware y las capturas físicas se documentan por s
 
 ## Versiones y enlaces
 
-- [Monitor V13 / Q V12 Audio](../monitor/v13/README.md): conjunto usado actualmente.
-- [Monitor V12 / Q V11 P992](../monitor/v12/README.md): pareja anterior conservada.
+- [Monitor V13 / Q V12 Audio](../monitor/historico/v13/README.md): conjunto usado actualmente.
+- [Monitor V12 / Q V11 P992](../monitor/historico/v12/README.md): pareja anterior conservada.
 - [Historia y catálogo completo](HISTORIA.md).
 
 ## Audio y sintetizador
@@ -30,3 +30,5 @@ Las pruebas de interfaz sin hardware y las capturas físicas se documentan por s
 [Wav: grabación y reproducción](../README.md#wav--grabación-y-reproducción) ·
 [Synth: FM y modelos físicos](SYNTH.md) ·
 [Guía actual del monitor](../monitor/v15/README.md).
+
+[Organización y versiones archivadas](ORGANIZACION.md).

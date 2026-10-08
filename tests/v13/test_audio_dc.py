@@ -1,6 +1,6 @@
 import unittest
 import numpy as np
-from monitor.v13.audio_dc import DCBlocker
+from monitor.historico.v13.audio_dc import DCBlocker
 
 class DCBlockerTests(unittest.TestCase):
     def test_constant_dc_removed_independently(self):

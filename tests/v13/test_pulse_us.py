@@ -1,6 +1,6 @@
 import ast,struct,subprocess,tempfile,unittest
 from pathlib import Path
-from monitor.v13.receiver.unoq_generator import GeneratorConfig
+from monitor.historico.v13.receiver.unoq_generator import GeneratorConfig
 ROOT=Path(__file__).resolve().parents[2]
 class PulseUsTests(unittest.TestCase):
  def test_protocol_limits_and_units(self):

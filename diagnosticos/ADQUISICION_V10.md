@@ -41,7 +41,7 @@ y su continuidad. Bits/tasa abrieron capturas separadas. Se verificaron panel
 plegado/desplegado, resúmenes confirmados, rango raw y normalización a 3,3 V.
 Las capturas temporales se leyeron antes de eliminarlas; se conserva el informe.
 
-[Vista principal](../assets/monitor_v10.png) y [panel desplegado](../assets/monitor_v10_config.png),
+[Vista principal](../assets/historico/monitor_v10.png) y [panel desplegado](../assets/historico/monitor_v10_config.png),
 obtenidos durante la prueba con UART, 8 bits y 10 kHz.
 
 ## Verificación local y alcance

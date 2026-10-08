@@ -25,7 +25,7 @@ actual. [Arranque actual](../README.md#probar-el-proyecto).
 | [V10](../monitor/historico/v10/README.md) | [Q V8 config](../arduino/historico/v8_config/README.md) | ADC configurable, generador, FFT, heatmap y Bode |
 | [V11 experimental](../monitor/historico/v11/README.md) | [Q V9 Fast](../arduino/historico/v9_fast/README.md) | SPI rápido: 100 kHz por canal, estable conservado |
 
-| [V12](../monitor/v12/README.md) | [Q V11 P992](../arduino/v11_p992/README.md) | SCP1 V3/992, ADC14/125 kHz y ADC16/62,5 kHz |
+| [V12](../monitor/historico/v12/README.md) | [Q V11 P992](../arduino/historico/v11_p992/README.md) | SCP1 V3/992, ADC14/125 kHz y ADC16/62,5 kHz |
 
 ### Firmware conservado
 
@@ -241,14 +241,14 @@ Se agregan 40, 50 y 62,5 kHz por canal exclusivamente por SPI. 40 kHz mantiene l
 Se amplía el horizontal a 250.000 muestras (4 s a 62,5 kHz). Historial NumPy por lotes, reducción visual antes de escalones, preservación de extremos/cortes y transferencia de objetos Python entre hilos. Mediciones completas a 10 Hz. Ensayos físicos con CSV: 58,5 FPS de render a 9.000 muestras y 48,2 a 250.000, con Qt offscreen. [Evidencia y alcance](../diagnosticos/RENDER_V10.md).
 # 4 de octubre de 2026 · Monitor V12 y firmware V11 P992
 
-Promoción del candidato P992 a una pareja independiente: `monitor/v12`,
-`arduino/v11_p992`, receptor propio y relay SCP1 V3/992. Hasta 125 kHz SPI
-por canal; se conservan V11/100 kHz y V10. [Guía](../monitor/v12/README.md)
+Promoción del candidato P992 a una pareja independiente: `monitor/historico/v12`,
+`arduino/historico/v11_p992`, receptor propio y relay SCP1 V3/992. Hasta 125 kHz SPI
+por canal; se conservan V11/100 kHz y V10. [Guía](../monitor/historico/v12/README.md)
 y [evidencia del candidato](../experimentos/tasas_spi/opt125/README.md).
 
 ## 6 de octubre de 2026 · Monitor y audio
 
-[Monitor V13](../monitor/v13/README.md), PyQt6/Python 3.13, con grabación WAV
+[Monitor V13](../monitor/historico/v13/README.md), PyQt6/Python 3.13, con grabación WAV
 estéreo de A2/A3 y filtro DC opcional. [Q V12 Audio](../arduino/v12_audio/README.md)
 añade reproducción L/R/Mix por A0 con remuestreo 20/40/50 ksps y amplitud en vivo.
 Conectar recupera app y relay instalados; Preparar Q instala/actualiza el conjunto.

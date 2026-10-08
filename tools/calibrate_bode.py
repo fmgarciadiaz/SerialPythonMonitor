@@ -12,11 +12,11 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 os.environ.setdefault('QT_QPA_PLATFORM', 'offscreen')
 import numpy as np
-from monitor.v13.app import SerialMonitorWindow, OutputWorker, QtWidgets, QtCore
-from monitor.v13.receiver.unoq_acquisition import BITS, RATES, Configuration
-from monitor.v13.receiver.unoq_switch import Mode
-from monitor.v13.receiver.unoq_usb import adb
-from monitor.v13.bode_calibration import instrument_identity, correct_transfer, CALIBRATION_DIR
+from monitor.v15.app import SerialMonitorWindow, OutputWorker, QtWidgets, QtCore
+from monitor.v15.receiver.unoq_acquisition import BITS, RATES, Configuration
+from monitor.v15.receiver.unoq_switch import Mode
+from monitor.v15.receiver.unoq_usb import adb
+from monitor.v15.bode_calibration import instrument_identity, correct_transfer, CALIBRATION_DIR
 
 LIMITS = dict(coverage_min=.9, gain_p95_db=.5, phase_p95_deg=2,
               gain_max_db=1, phase_max_deg=5)
@@ -99,7 +99,7 @@ def main():
         output = args.resume_report
     output.parent.mkdir(parents=True, exist_ok=True)
     app = QtWidgets.QApplication([])
-    with patch('monitor.v13.app.usb_devices',return_value=[]):w = SerialMonitorWindow()
+    with patch('monitor.v15.app.usb_devices',return_value=[]):w = SerialMonitorWindow()
     worker = OutputWorker(args.serial, Mode.SPI, config=Configuration(14,40000),
                           autoload=True, initial_generator=w._generator_config())
     w.serial_worker = worker; errors = []; rows = previous['results'] if previous else []

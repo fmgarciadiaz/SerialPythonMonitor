@@ -1,6 +1,6 @@
 import unittest
 import numpy as np
-from monitor.v13.receiver.unoq_config_receiver import OutputReceiver
+from monitor.historico.v13.receiver.unoq_config_receiver import OutputReceiver
 
 class LiveWavLevelsTests(unittest.TestCase):
     def test_level_update_preserves_source_and_zero_can_be_raised(self):
@@ -26,7 +26,7 @@ class LiveWavLevelsTests(unittest.TestCase):
     def test_reconnection_stops_failed_session_before_reusing_dac(self):
         from unittest.mock import Mock
         from types import SimpleNamespace
-        from monitor.v13.receiver import unoq_wav as wav
+        from monitor.historico.v13.receiver import unoq_wav as wav
         receiver = OutputReceiver(None, lambda batch: None)
         requests = []
         def request(op=0):
@@ -45,7 +45,7 @@ class LiveWavLevelsTests(unittest.TestCase):
     def test_disconnect_stops_wav_before_disabling_generator(self):
         from unittest.mock import Mock
         from types import SimpleNamespace
-        from monitor.v13.receiver.unoq_switch import Phase
+        from monitor.historico.v13.receiver.unoq_switch import Phase
         receiver = OutputReceiver(None, lambda batch: None, running=lambda: False)
         receiver.wav_candidate = True
         history = []

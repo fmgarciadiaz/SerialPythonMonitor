@@ -10,9 +10,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from monitor.v12.receiver.unoq_usb import Connection
-from monitor.v12.receiver.unoq_config_receiver import OutputReceiver
-from monitor.v12.receiver.unoq_acquisition import Configuration
+from monitor.historico.v12.receiver.unoq_usb import Connection
+from monitor.historico.v12.receiver.unoq_config_receiver import OutputReceiver
+from monitor.historico.v12.receiver.unoq_acquisition import Configuration
 
 
 def wait_configuration(receiver, expected=None, timeout=5):

@@ -13,6 +13,8 @@ CONTAINER = 'serialmonitor-usb-stream'
 def binary(board, build=False, dual=False, configurable=False, experimental=False, diagnostic=False, p992=False, audio=False):
     relay = 'experimentos/timing_spi/relay/unoq_config_stream.c' if diagnostic else 'experimentos/tasas_spi/relay/unoq_config_stream.c' if experimental else ('transport/unoq_config_stream.c' if configurable else ('transport/unoq_dual_stream.c' if dual else 'transport/unoq_stream.c'))
     audio_folder = 'v13_pulse' if 'v13_pulse' in board.config['local_app'] else ('v12_audio' if audio else 'v11_p992')
+    if audio_folder == 'v11_p992':
+        audio_folder = 'historico/v11_p992'
     if p992:
         relay = f'arduino/{audio_folder}/relay/unoq_config_stream.c'
     sources = [relay, f'arduino/{audio_folder}/relay/base_verifier.c' if p992 else 'diagnosticos/verificar_spi.c']
@@ -88,9 +90,9 @@ def main():
             if time.monotonic() >= deadline:
                 raise RuntimeError('El Q no confirmó la primera trama SPI; revisar READY y arranque MCU.')
         if args.firmware in ('v12_audio','v13_pulse'):
-            print('Relay WAV candidato iniciado. Abrir: python monitor/v13/app.py (requiere MCU y relay de la misma variante).')
+            print('Relay WAV candidato iniciado. Abrir: python monitor/v15/app.py (requiere MCU y relay de la misma variante).')
         elif args.firmware == 'v11_p992':
-            print('Relay P992 iniciado. Abrir: python monitor/v12/app.py (SCP1 V3/992).')
+            print('Relay P992 iniciado. Abrir: python monitor/historico/v12/app.py (SCP1 V3/992).')
         elif args.firmware == 'v10_diag':
             print('Relay de diagnóstico iniciado. Usar experimentos/timing_spi; no abrir V11.')
         elif args.firmware == 'v9_fast':

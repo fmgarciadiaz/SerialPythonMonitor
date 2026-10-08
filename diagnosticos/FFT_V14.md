@@ -1,6 +1,6 @@
 # Verificación del análisis FFT · 7 de octubre de 2026
 
-[Uso](../monitor/v14/README.md) · [Algoritmos y límites](../docs/FFT_ANALISIS.md)
+[Uso](../monitor/historico/v14/README.md) · [Algoritmos y límites](../docs/FFT_ANALISIS.md)
 
 Astra planificó y revisó los estimadores; Sol 6.1 implementó la variante
 independiente. No se operó el Q ni se cambió firmware.

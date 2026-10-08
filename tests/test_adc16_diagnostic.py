@@ -4,7 +4,7 @@ from unittest import TestCase
 from unittest.mock import patch
 
 from diagnosticos.verificar_adc16_62k5 import wait_configuration
-from monitor.v12.receiver.unoq_acquisition import Configuration
+from monitor.historico.v12.receiver.unoq_acquisition import Configuration
 
 
 class ObservedConfigurationTests(TestCase):

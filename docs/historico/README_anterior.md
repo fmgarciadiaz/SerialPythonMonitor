@@ -2,9 +2,9 @@
 
 # ⚡ Serial Python Monitor & Digital Oscilloscope
 
-Entorno de desarrollo y despliegue al UNO Q por USB: [arduino/README.md](arduino/README.md).
+Entorno de desarrollo y despliegue al UNO Q por USB: [arduino/README.md](../../arduino/README.md).
 
-Estado actual y descripción de archivos: [INVENTARIO.md](INVENTARIO.md).
+Estado actual y descripción de archivos: [INVENTARIO.md](INVENTARIO_anterior.md).
 La nueva versión para probar es `SerialMonitorAppQt_V6.py`, con desplazamiento
 suavizado en modo continuo y refresco objetivo de unos 60 FPS. Ejecutar con
 `python SerialMonitorAppQt_V6.py` en el entorno con las dependencias instaladas.

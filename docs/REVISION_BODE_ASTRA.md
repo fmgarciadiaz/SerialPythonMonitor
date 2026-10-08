@@ -14,9 +14,9 @@ las otras afectan inicio, cancelación, timeout y recuperación de resultados.
 
 ### 1. P1 · La referencia antigua puede corregir un perfil instrumental distinto
 
-Ubicación: `monitor/v13/bode_calibration.py:24–33`,
-`monitor/v13/bode.py:105–108`,
-`monitor/v13/calibraciones/bode_v10.json`.
+Ubicación: `monitor/historico/v13/bode_calibration.py:24–33`,
+`monitor/historico/v13/bode.py:105–108`,
+`monitor/historico/v13/calibraciones/bode_v10.json`.
 
 La compatibilidad sólo comprueba `bits` y `rate`; la casilla de corrección se
 activa por defecto si existe el JSON. La referencia es ADC16/50 kHz creada el
@@ -40,7 +40,7 @@ ni extrapolar la antigua calibración a otras tasas.
 
 ### 2. P1 · El descarte de muestras en Tonos introduce aliasing en el ajuste
 
-Ubicación: `monitor/v13/bode.py:201`, `monitor/v13/bode.py:237–248`.
+Ubicación: `monitor/historico/v13/bode.py:201`, `monitor/historico/v13/bode.py:237–248`.
 
 Para ahorrar muestras se conserva una cada `stride`, sin filtro previo. La
 validación de ruido también se hace después del descarte, cuando una señal
@@ -62,8 +62,8 @@ La prueba anterior debe convertirse en regresión.
 
 ### 3. P2 · Las consultas periódicas impiden que venza el timeout de captura
 
-Ubicación: `monitor/v13/bode.py:216–220`,
-`monitor/v13/bode_pulse.py:119–121`, `monitor/v13/app.py:508–509`.
+Ubicación: `monitor/historico/v13/bode.py:216–220`,
+`monitor/historico/v13/bode_pulse.py:119–121`, `monitor/historico/v13/app.py:508–509`.
 
 El worker consulta el estado del generador cada segundo. Una respuesta
 `APPLIED` con la configuración activa vuelve a establecer `deadline` aunque
@@ -85,8 +85,8 @@ control vivo con datos detenidos.
 
 ### 4. P2 · Tonos ignora el rechazo real de una orden
 
-Ubicación: `monitor/v13/bode.py:212`,
-`monitor/v13/receiver/unoq_generator.py:67–68`.
+Ubicación: `monitor/historico/v13/bode.py:212`,
+`monitor/historico/v13/receiver/unoq_generator.py:67–68`.
 
 El decodificador devuelve `requested=None` cuando la respuesta es `REJECTED`,
 para admitir campos inválidos que el MCU puede devolver literalmente. Tonos
@@ -110,8 +110,8 @@ en el flujo normal: el receptor filtra esos rechazos antes de emitirlos.
 
 ### 5. P2 · Volver a Bode borra visualmente la curva actual
 
-Ubicación: `monitor/v13/spectrum.py:202–220`,
-`monitor/v13/bode_pulse.py:261–267`.
+Ubicación: `monitor/historico/v13/spectrum.py:202–220`,
+`monitor/historico/v13/bode_pulse.py:261–267`.
 
 Al seleccionar otro método, `changed()` dibuja sus datos; después
 `select_bode()` llama a `set_mode(3)`, cuyo `reset()` vacía la curva compartida.
@@ -134,8 +134,8 @@ con una y varias curvas.
 
 ### 6. P2 · Pulso y Sweep/Chirp pueden comenzar con un cambio de ADC pendiente
 
-Ubicación: `monitor/v13/bode_pulse.py:79–80`, frente a
-`monitor/v13/bode.py:154`; `monitor/v13/app.py:3351–3380`.
+Ubicación: `monitor/historico/v13/bode_pulse.py:79–80`, frente a
+`monitor/historico/v13/bode.py:154`; `monitor/historico/v13/app.py:3351–3380`.
 
 Tonos rechaza el inicio si `_auto_apply_timer` está activo. Pulso y Sweep/Chirp
 omiten esa condición. Durante los 50 ms previos a aplicar una selección de

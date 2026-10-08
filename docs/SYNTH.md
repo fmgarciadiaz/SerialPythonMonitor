@@ -51,14 +51,15 @@ voces y conserva sus colas. Posición afecta el próximo pellizco.
 ## Virtual: piano
 
 Un martillo de masa efectiva comprime fieltro no lineal contra una impedancia
-de cuerda. El pulso de fuerza se calcula a 80 kHz, con pérdida dependiente
-de velocidad. Brillo define dureza del próximo golpe; velocidad MIDI cambia
+de cuerda. El pulso de fuerza se calcula a 80 kHz. Brillo define dureza del próximo golpe; velocidad MIDI cambia
 su forma y duración. La fuerza excita modos inicialmente en reposo.
 
 Las frecuencias de la cuerda rígida siguen
 `f_n = n f_1 sqrt((1+B n²)/(1+B))`, normalizando la fundamental. Rigidez
-ajusta B entre 0 y 0,002. Hay hasta 64 parciales en banda por cuerda: una
-cuerda en graves, dos en el registro intermedio y tres desde La3. Dos planos
+escala el B de referencia por registro (15 % = referencia). Masa, posición,
+contacto e impedancia usan [tablas publicadas e interpolaciones](PIANO_PARAMETROS.md).
+Hay hasta 64 parciales en banda por cuerda: una debajo de C3, dos desde C3
+y tres desde C4. Dos planos
 con diferentes pérdidas dan una caída rápida y una cola lenta. Un acoplamiento
 contractivo entre cuerdas aproxima intercambio de energía vía puente.
 
@@ -76,13 +77,14 @@ vectoriales y filtros. Las fases, pérdidas, envolventes y resonadores conservan
 estado entre bloques. El volumen se aplica antes de la compresión y del
 limitador de extremos; no se normaliza según la cantidad de teclas.
 
-Última revisión: 103 pruebas locales pasan. Una ejecución con nueve notas
-y 3 s de audio tomó 0,311/0,462 s para guitarra y 0,204/0,529 s para piano
+Última revisión: 105 pruebas de la suite completa y una prueba adicional de afinación pasan. Una ejecución con nueve notas
+y 3 s de audio tomó 0,301/0,459 s para guitarra y 0,197/0,510 s para piano
 a 20/40 kHz. Excluye adquisición, interfaz y transporte. La estabilidad a
 40 kHz y el realismo por escucha requieren validación física.
 
-Las resonancias y parámetros mecánicos son sintéticos, sin respuesta medida
-de un instrumento real. El martillo usa una impedancia efectiva; no resuelve
+Las resonancias de caja siguen siendo sintéticas, sin respuesta medida
+de un instrumento real. Las tablas mecánicas del piano proceden de un Broadwood,
+con interpolaciones y aproximaciones propias; no identifican una caja real. El martillo usa una impedancia efectiva; no resuelve
 el contacto con toda la velocidad del banco modal. El acoplamiento es reducido,
 no la admitancia matricial completa caja–puente–cuerdas. La simpatía no modela
 cada cuerda de un piano completo. La púa usa un modelo de señal. Estos límites
@@ -95,7 +97,7 @@ siguen siendo importantes para el parecido sonoro.
 - [Feedback y ADSR compilados](../monitor/v15/fm_feedback.py).
 - [Guía de onda](../monitor/v15/virtual_string.py).
 - [Piano, martillo, puente y caja](../monitor/v15/virtual_instruments.py).
-- [Pruebas](../tests/v15/).
+- [Pruebas](../tests/v15).
 
 Referencias: [modelado de caja](https://www.dsprelated.com/freebooks/pasp/Body_Modeling.html),
 [síntesis conmutada de piano](https://www.dsprelated.com/freebooks/pasp/Commuted_Piano_Synthesis.html),

@@ -4,7 +4,7 @@ from unittest.mock import Mock, patch
 import numpy as np
 from PyQt6.QtCore import QLocale
 from monitor.number_format import number
-from monitor.v13.wav_source import seek_playback
+from monitor.historico.v13.wav_source import seek_playback
 
 class LocaleSeekTests(unittest.TestCase):
     def test_locale_decimal_and_grouping(self):

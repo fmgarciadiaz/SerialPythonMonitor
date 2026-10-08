@@ -36,8 +36,8 @@ timestamps del bloque; sin timestamps se usa la tasa estimada por el monitor.
 Validación local: tonos sintéticos de amplitud y frecuencia conocidas con las
 cuatro ventanas; DC/Nyquist; dos canales; STOP; cambio de modo; reciclado de
 historia; discontinuidades; Demo. Capturas de interfaz sintéticas:
-[FFT actual con relleno](../assets/monitor_v10_fft_actual.png) y
-[Heatmap](../assets/monitor_v10_heatmap.png).
+[FFT actual con relleno](../assets/historico/monitor_v10_fft_actual.png) y
+[Heatmap](../assets/historico/monitor_v10_heatmap.png).
 La validación física específica de FFT/heatmap sigue pendiente. Bode cuenta
 con los ensayos físicos y referencia descritos en su sección y en
 [el informe de calibración](../diagnosticos/BODE_V10.md).
@@ -109,8 +109,8 @@ calibrarlo con A2/A3 conectadas al mismo nodo. No es una medición calibrada.
 Validación local ampliada: RC simulado (ganancia/fase), rechazo por señal débil,
 espera de confirmación, secuencia de tonos, restauración al terminar/cancelar,
 timeout y discontinuidades, más coordenadas FFT/heatmap logarítmicas. Capturas
-sintéticas: [Bode](../assets/monitor_v10_bode.png) y
-[Heatmap log](../assets/monitor_v10_heatmap_log.png). Validación física pendiente.
+sintéticas: [Bode](../assets/historico/monitor_v10_bode.png) y
+[Heatmap log](../assets/historico/monitor_v10_heatmap_log.png). Validación física pendiente.
 
 Referencia para la representación de ganancia y fase:
 [SciPy Bode](https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.bode.html).

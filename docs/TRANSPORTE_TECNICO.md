@@ -27,7 +27,7 @@ El relay del MPU está en `arduino/v12_audio/relay/unoq_config_stream.c`;
 se compila para Linux ARM y corre en un contenedor independiente. No es
 el sketch MCU ni el pequeño Python de App Lab. Valida CRC, secuencias y
 estado de adquisición; transmite muestras y canaliza comandos ADC/DAC.
-El PC usa el receptor propio de `monitor/v13/receiver/`.
+El PC usa el receptor propio de `monitor/historico/v13/receiver/`.
 
 SPI funciona a 32 MHz con SCP1 V3: 992 bytes por trama, 113 pares de
 muestras por fragmento y 19 fragmentos por nodo de 2048 pares. TCP escucha
@@ -77,7 +77,7 @@ liberar primero la conexión del monitor.
 
 [Relay C y bucle de intercambio](../arduino/v12_audio/relay/unoq_config_stream.c) ·
 [Validadores](../arduino/v12_audio/relay/config_relay_protocol.h) ·
-[Conexión y recuperación Python](../monitor/v13/receiver/unoq_autoload.py).
+[Conexión y recuperación Python](../monitor/historico/v13/receiver/unoq_autoload.py).
 
 ## Operación
 
@@ -104,4 +104,4 @@ El audio vuelve a las entradas mediante el cableado o circuito externo.
 ## Versiones y enlaces
 
 - [Relay V12 Audio](../arduino/v12_audio/README.md): incluye control y bloques WAV.
-- [Relay V11 P992](../arduino/v11_p992/README.md): adquisición y generador sin WAV.
+- [Relay V11 P992](../arduino/historico/v11_p992/README.md): adquisición y generador sin WAV.

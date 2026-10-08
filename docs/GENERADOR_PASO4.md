@@ -92,7 +92,7 @@ los registros que conservaban un bloque parcial, antes de cargar la cabeza.
 Los pines siguen A2/V_IN y A3/V_OUT. No se retiró ningún validador de integridad.
 
 [Informes, capturas, límites y diagnóstico](../diagnosticos/GENERADOR_V10.md).
-[Panel con señal real](../assets/monitor_v10_generador.png).
+[Panel con señal real](../assets/historico/monitor_v10_generador.png).
 
 SPI está validado en estos ensayos. El control del generador respondió en UART,
 pero el R4 no entregó muestras; la captura UART con este cableado queda pendiente.
@@ -133,7 +133,7 @@ validación exacta y también detecta overcapture CC1OF.
 
 - [40 perfiles de 14/16 bits](../diagnosticos/resultados_usb/20261002_231937_033811_generator_channels.json): 1.142.746 pares en los intervalos comparados, sin discontinuidades ni intercambio de canales.
 - [Audio final](../diagnosticos/resultados_usb/20261002_232028_292878_generador_audio.json): 18 casos, 1.226.165 pares, cuatro formas hasta 20 kHz, sweep/chirp y pulso de 5 ms medido en 5,26 ms; minuto adicional con ADC 16 bits / 50 kHz y DAC seno 20 kHz, sin fallos.
-- [Interfaz final](../diagnosticos/resultados_usb/20261002_232217_882337_generador_qt_v10.json): CSV de 381.545 filas, cero discontinuidades, controles, STOP y SINGLE correctos. [Captura del aparato](../assets/monitor_v10_generador.png).
+- [Interfaz final](../diagnosticos/resultados_usb/20261002_232217_882337_generador_qt_v10.json): CSV de 381.545 filas, cero discontinuidades, controles, STOP y SINGLE correctos. [Captura del aparato](../assets/historico/monitor_v10_generador.png).
 - Respaldo final: `respaldos/unoq/osciloscopio_20261002_232326_092996.zip`.
 
 El primer cierre histórico solo tenía el contador fatal, sin RAM, por lo que la

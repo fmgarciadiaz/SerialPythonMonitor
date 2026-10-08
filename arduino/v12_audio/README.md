@@ -2,7 +2,7 @@
 
 Aplicación independiente **Scope WAV V12 Audio**, carpeta remota
 `/home/arduino/ArduinoApps/scope-wav-v12-audio`. No reemplaza las fuentes
-ni los valores predeterminados de [V11 P992](../v11_p992/README.md).
+ni los valores predeterminados de [V11 P992](../historico/v11_p992/README.md).
 La MCU del Q ejecuta una sola aplicación de adquisición a la vez.
 
 Reutiliza adquisición ADC A2/A3 y transporte P992 SCP1 V3/992, SPI 32 MHz.
@@ -41,7 +41,7 @@ Cargar y arrancar mediante App Lab o
 ```sh
 python tools/usb_stream.py start --firmware v12_audio --build-native
 conda activate Python_3_13_DataScience
-MONITOR_V13_WAV_FIRMWARE=v12_audio python monitor/v13/app.py
+MONITOR_V13_WAV_FIRMWARE=v12_audio python monitor/historico/v13/app.py
 ```
 
 El monitor actual negocia la capacidad WAV con el MCU. La variable permite
@@ -94,6 +94,6 @@ Firmware cargado el 6 de octubre; 24 Chirps seno completos de 2 s tras la correc
 
 ## Versiones y enlaces
 
-- Esta carpeta: V12 Audio, con [Monitor V13](../../monitor/v13/README.md).
-- [V11 P992](../v11_p992/README.md): pareja anterior sin comandos WAV.
+- Esta carpeta: V12 Audio, con [Monitor V13](../../monitor/historico/v13/README.md).
+- [V11 P992](../historico/v11_p992/README.md): pareja anterior sin comandos WAV.
 - [Firmware histórico](../historico/README.md) · [Catálogo](../apps_catalogo.json).

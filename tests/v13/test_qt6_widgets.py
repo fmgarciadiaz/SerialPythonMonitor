@@ -7,8 +7,8 @@ import unittest
 from unittest.mock import patch
 from PyQt6 import QtWidgets, QtGui, QtCore, QtTest
 import pyqtgraph as pg
-from monitor.v13.app import SerialMonitorWindow, OutputWorker, TimedBatch
-from monitor.v13.qt_environment import prepare_platform_plugins
+from monitor.historico.v13.app import SerialMonitorWindow, OutputWorker, TimedBatch
+from monitor.historico.v13.qt_environment import prepare_platform_plugins
 
 class Qt6WidgetsTests(unittest.TestCase):
     @classmethod
@@ -18,7 +18,7 @@ class Qt6WidgetsTests(unittest.TestCase):
         cls.app.setStyle('Fusion')
 
     def setUp(self):
-        with patch('monitor.v13.app.usb_devices', return_value=[]):
+        with patch('monitor.historico.v13.app.usb_devices', return_value=[]):
             self.window = SerialMonitorWindow()
 
     def tearDown(self):
@@ -143,7 +143,7 @@ class Qt6WidgetsTests(unittest.TestCase):
         self.assertEqual(int(rows[-1]['ADC_IN']), 212)
 
     def test_wav_buttons_follow_confirmed_playback(self):
-        from monitor.v13.receiver.unoq_wav import Status,State
+        from monitor.historico.v13.receiver.unoq_wav import Status,State
         w=self.window;w.generator_mode.setCurrentIndex(4)
         self.assertEqual(w.wav_play.width(),34)
         self.assertFalse(w.wav_play.icon().isNull())
@@ -164,14 +164,14 @@ class Qt6WidgetsTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / 'stereo.wav'
             wavfile.write(path,44100,np.zeros((4410,2),dtype=np.int16))
-            with patch('monitor.v13.app.QtWidgets.QFileDialog.getOpenFileName',return_value=(str(path),'WAV')):
+            with patch('monitor.historico.v13.app.QtWidgets.QFileDialog.getOpenFileName',return_value=(str(path),'WAV')):
                 w._choose_wav()
             self.assertTrue(w.wav_play.isEnabled())
             self.assertIn(number(44.1) + ' kHz',w.generator_status.text())
             self.assertIn('16 bits',w.generator_status.text())
             self.assertIn('2 canales',w.generator_status.text())
             path.write_bytes(b'not a wav')
-            with patch('monitor.v13.app.QtWidgets.QFileDialog.getOpenFileName',return_value=(str(path),'WAV')):
+            with patch('monitor.historico.v13.app.QtWidgets.QFileDialog.getOpenFileName',return_value=(str(path),'WAV')):
                 w._choose_wav()
             self.assertFalse(w.wav_play.isEnabled())
             self.assertIn('WAV inválido',w.generator_status.text())
@@ -204,7 +204,7 @@ class Qt6WidgetsTests(unittest.TestCase):
         w.serial_worker=None
 
     def test_wav_rate_selector_tracks_firmware_capability_and_locks(self):
-        from monitor.v13.receiver.unoq_wav import Status,State
+        from monitor.historico.v13.receiver.unoq_wav import Status,State
         w=self.window
         w._wav_confirmed(Status(0x80000001,0,State.IDLE,0,16,0,0,0,20000,7))
         self.assertTrue(w.wav_rate.model().item(2).isEnabled())
@@ -219,7 +219,7 @@ class Qt6WidgetsTests(unittest.TestCase):
 
     def test_wav_rejects_unvalidated_adc125_combination(self):
         from unittest.mock import Mock
-        from monitor.v13.receiver.unoq_acquisition import Configuration
+        from monitor.historico.v13.receiver.unoq_acquisition import Configuration
         w=self.window
         w.wav_path='source.wav'
         w.serial_worker=Mock()

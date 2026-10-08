@@ -31,6 +31,6 @@ Al repetir perfiles apareció el cierre ADC previo, en 16 bits / 31,25 kHz. [Ens
 ## Resultado final con captura TIM5
 
 - [Audio final](resultados_usb/20261002_232028_292878_generador_audio.json): PASS, 18 casos / 1.226.165 pares en sus intervalos, pulso 5 ms observado en 5,26 ms, 60 segundos adicionales ADC 16 bits / 50 kHz + DAC 20 kHz.
-- [Interfaz final](resultados_usb/20261002_232217_882337_generador_qt_v10.json): PASS, 381.545 filas CSV, cero gaps, STOP/SINGLE y cambios de forma sin cerrar CSV. [Captura](../assets/monitor_v10_generador.png).
+- [Interfaz final](resultados_usb/20261002_232217_882337_generador_qt_v10.json): PASS, 381.545 filas CSV, cero gaps, STOP/SINGLE y cambios de forma sin cerrar CSV. [Captura](../assets/historico/monitor_v10_generador.png).
 - Respaldo final: `respaldos/unoq/osciloscopio_20261002_232326_092996.zip`.
 - Restaurados ADC 14 bits / 31,25 kHz, cuadrada 2,5 Hz, SPI. El fallo de timestamps reproducido se corrigió y pasó los 40 cambios de perfil; no se atribuye con certeza retrospectiva todo cierre histórico que solo tiene fatal=1.

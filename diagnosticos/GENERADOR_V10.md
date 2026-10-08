@@ -27,7 +27,7 @@ La captura UART con R4 queda sin validar: el Q confirmó el generador, pero el
 R4 no entregó muestras. Se requiere comprobar su enlace físico. La validación
 SPI no demuestra estabilidad indefinida ni calibración de amplitud.
 
-[Panel en uso](../assets/monitor_v10_generador.png).
+[Panel en uso](../assets/historico/monitor_v10_generador.png).
 
 ## Evidencia y pruebas intermedias
 

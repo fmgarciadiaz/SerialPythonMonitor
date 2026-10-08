@@ -4,7 +4,7 @@ import unittest
 from unittest.mock import patch
 import numpy as np
 from scipy.signal import lfilter,chirp
-from monitor.v13.bode_pulse import pulse_transfer
+from monitor.historico.v13.bode_pulse import pulse_transfer
 
 class TransientTransferTests(unittest.TestCase):
  def test_long_chirp_checks_only_post_stimulus_tail(self):
@@ -72,8 +72,8 @@ class BodePanelTests(unittest.TestCase):
   from PyQt6 import QtWidgets
   cls.app=QtWidgets.QApplication.instance() or QtWidgets.QApplication([])
  def test_three_independent_panels_and_manual_start(self):
-  from monitor.v13.app import SerialMonitorWindow
-  with patch('monitor.v13.app.usb_devices',return_value=[]):w=SerialMonitorWindow()
+  from monitor.historico.v13.app import SerialMonitorWindow
+  with patch('monitor.historico.v13.app.usb_devices',return_value=[]):w=SerialMonitorWindow()
   try:
    b=w.spectral.bode;self.assertEqual([a.text() for a in w.spectral.bode_actions],['Bode tono','Bode pulso','Bode sweep'])
    from PyQt6 import QtWidgets
@@ -91,8 +91,8 @@ class BodePanelTests(unittest.TestCase):
   finally:w.close()
  def test_sweep_controls_unlock_after_capture_cancel_and_send_failure(self):
   from unittest.mock import Mock
-  from monitor.v13.app import SerialMonitorWindow
-  with patch('monitor.v13.app.usb_devices',return_value=[]):w=SerialMonitorWindow()
+  from monitor.historico.v13.app import SerialMonitorWindow
+  with patch('monitor.historico.v13.app.usb_devices',return_value=[]):w=SerialMonitorWindow()
   try:
    w.serial_worker=Mock();w.is_running=True;w._generator_state_known=True
    w._auto_apply_timer.stop();w.spectral.select_bode(2)
@@ -124,8 +124,8 @@ class BodePanelTests(unittest.TestCase):
   finally:
    w.serial_worker=None;w.close()
  def test_analysis_selector_matches_generator_and_selects_all_modes(self):
-  from monitor.v13.app import SerialMonitorWindow
-  with patch('monitor.v13.app.usb_devices',return_value=[]):w=SerialMonitorWindow()
+  from monitor.historico.v13.app import SerialMonitorWindow
+  with patch('monitor.historico.v13.app.usb_devices',return_value=[]):w=SerialMonitorWindow()
   try:
    s=w.spectral
    self.assertEqual(s.group.title(),'ANÁLISIS')
@@ -144,7 +144,7 @@ class BodePanelTests(unittest.TestCase):
 
 class BodeRenderingTests(unittest.TestCase):
  def test_dense_envelope_keeps_extrema_and_missing_bands(self):
-  from monitor.v13.bode import render_envelope
+  from monitor.historico.v13.bode import render_envelope
   x=np.arange(100000);y=np.zeros(len(x));y[12345]=42;y[45678]=-30;y[70000]=np.nan
   xx,yy=render_envelope(x,y)
   self.assertLessEqual(len(xx),4096)
@@ -152,7 +152,7 @@ class BodeRenderingTests(unittest.TestCase):
   self.assertTrue(np.isnan(yy).any());self.assertTrue(np.all(np.diff(xx)>0))
   self.assertEqual(y[12345],42);self.assertTrue(np.isnan(y[70000]))
  def test_sparse_tone_points_are_unchanged(self):
-  from monitor.v13.bode import render_envelope
+  from monitor.historico.v13.bode import render_envelope
   x=np.arange(25);y=np.sin(x);xx,yy=render_envelope(x,y)
   np.testing.assert_array_equal(xx,x);np.testing.assert_array_equal(yy,y)
 
@@ -163,8 +163,8 @@ class WavToBodeTests(unittest.TestCase):
   cls.app=QtWidgets.QApplication.instance() or QtWidgets.QApplication([])
  def test_all_bode_methods_can_start_with_idle_wav_selected(self):
   from unittest.mock import Mock
-  from monitor.v13.app import SerialMonitorWindow
-  with patch('monitor.v13.app.usb_devices',return_value=[]):w=SerialMonitorWindow()
+  from monitor.historico.v13.app import SerialMonitorWindow
+  with patch('monitor.historico.v13.app.usb_devices',return_value=[]):w=SerialMonitorWindow()
   try:
    w.generator_mode.setCurrentIndex(4)
    w.serial_worker=Mock();w.is_running=True;w._generator_state_known=True
@@ -180,8 +180,8 @@ class WavToBodeTests(unittest.TestCase):
   finally:w.serial_worker=None;w.close()
  def test_active_or_preparing_audio_is_not_mistaken_for_pending_acquisition(self):
   from unittest.mock import Mock
-  from monitor.v13.app import SerialMonitorWindow
-  with patch('monitor.v13.app.usb_devices',return_value=[]):w=SerialMonitorWindow()
+  from monitor.historico.v13.app import SerialMonitorWindow
+  with patch('monitor.historico.v13.app.usb_devices',return_value=[]):w=SerialMonitorWindow()
   try:
    w.generator_mode.setCurrentIndex(4);w.serial_worker=Mock();w._generator_state_known=True
    for state in ('_wav_active','_wav_preparing'):

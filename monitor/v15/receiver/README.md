@@ -13,4 +13,4 @@ definen los comandos y respuestas.
 para recepción con perfil fijo; no constituyen el camino de recepción de la
 aplicación. La prueba de compatibilidad UART importa el parser del primero.
 No confundirlos con versiones completas V7/V9 ni con el relay del MPU, ubicado
-en `arduino/v12_audio/relay/` para audio o `arduino/v11_p992/relay/` para la pareja anterior desde la raíz del proyecto.
+en `arduino/v12_audio/relay/` para audio o `arduino/historico/v11_p992/relay/` para la pareja anterior desde la raíz del proyecto.

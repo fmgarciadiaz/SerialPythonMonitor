@@ -3,13 +3,13 @@ os.environ.setdefault('QT_QPA_PLATFORM','offscreen')
 import unittest
 from unittest.mock import patch
 from PyQt6 import QtWidgets
-from monitor.v13.app import SerialMonitorWindow
+from monitor.historico.v13.app import SerialMonitorWindow
 
 class StatusBoxTests(unittest.TestCase):
  @classmethod
  def setUpClass(cls):cls.app=QtWidgets.QApplication.instance() or QtWidgets.QApplication([])
  def setUp(self):
-  with patch('monitor.v13.app.usb_devices',return_value=[]):self.w=SerialMonitorWindow()
+  with patch('monitor.historico.v13.app.usb_devices',return_value=[]):self.w=SerialMonitorWindow()
  def tearDown(self):self.w.close()
  def test_connection_and_generator_messages_reach_uniform_top_boxes(self):
   w=self.w;w.status_label.setText('Activo · SPI · 14 bits · 40 kHz')

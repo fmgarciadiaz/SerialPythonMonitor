@@ -7,9 +7,9 @@ from pathlib import Path
 from unittest.mock import patch
 import numpy as np
 from scipy.io import wavfile
-from monitor.v13.wav_source import prepare_wav
-from monitor.v13.receiver import unoq_wav as wav
-from monitor.v13.receiver.unoq_config_receiver import OutputReceiver
+from monitor.historico.v13.wav_source import prepare_wav
+from monitor.historico.v13.receiver import unoq_wav as wav
+from monitor.historico.v13.receiver.unoq_config_receiver import OutputReceiver
 
 
 def reply(rid, session=0, state=0, free=16, accepted=0, played=0, total=0):
@@ -56,7 +56,7 @@ class WavConversionTests(unittest.TestCase):
         with self.assertRaises(ValueError): wav.chunk(0x80000001,1,0,[4096])
         self.assertEqual(reply(0x80000001).rate,20000)
     def test_decoder_interleaves_wav_without_changing_adc(self):
-        from monitor.v13.receiver.unoq_config_decoder import ConfigurationDecoder
+        from monitor.historico.v13.receiver.unoq_config_decoder import ConfigurationDecoder
         decoder=ConfigurationDecoder()
         p=bytearray(992)
         struct.pack_into('<4sHHII',p,0,b'SCP1',3,12,10,972)
@@ -68,7 +68,7 @@ class WavConversionTests(unittest.TestCase):
         self.assertEqual(decoder.events[0][1].session,123)
         self.assertIsNone(decoder.config)
         p[28] ^= 1
-        from monitor.v13.receiver.unoq_usb import ProtocolError
+        from monitor.historico.v13.receiver.unoq_usb import ProtocolError
         with self.assertRaises(ProtocolError): decoder.feed(p)
 
     def test_candidate_gate_and_credit(self):
@@ -114,7 +114,7 @@ class WavConversionTests(unittest.TestCase):
         self.assertEqual(receiver.wav_pending[0],0x80000001)
 
     def test_invalid_credit_is_rejected(self):
-        from monitor.v13.receiver.unoq_usb import ProtocolError
+        from monitor.historico.v13.receiver.unoq_usb import ProtocolError
         with self.assertRaises(ProtocolError):reply(0x80000001,free=17)
 
 

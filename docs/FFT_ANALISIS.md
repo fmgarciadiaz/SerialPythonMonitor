@@ -1,6 +1,6 @@
 # Análisis espectral de dos entradas
 
-[Proyecto](../README.md) · [Monitor](../monitor/v14/README.md)
+[Proyecto](../README.md) · [Monitor](../monitor/historico/v14/README.md)
 
 Los cuatro análisis utilizan muestras de A2/V_IN y A3/V_OUT. No generan señales
 por sí solos: para Transfer se necesita excitar el circuito con una señal que
@@ -138,6 +138,6 @@ como referencia para comparar el comportamiento con la placa.
 
 ## Versiones
 
-Implementación: [motor numérico](../monitor/v14/spectral_analysis.py) ·
-[controles y gráficos](../monitor/v14/spectrum.py) ·
+Implementación: [motor numérico](../monitor/historico/v14/spectral_analysis.py) ·
+[controles y gráficos](../monitor/historico/v14/spectrum.py) ·
 [pruebas](../tests/v14).

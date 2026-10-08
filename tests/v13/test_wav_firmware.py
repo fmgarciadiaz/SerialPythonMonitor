@@ -5,7 +5,7 @@ import tempfile
 import unittest
 from pathlib import Path
 import numpy as np
-from monitor.v13.receiver import unoq_wav as wav
+from monitor.historico.v13.receiver import unoq_wav as wav
 
 ROOT=Path(__file__).resolve().parents[2]
 SKETCH=ROOT/'arduino/v12_audio/oscilloscope/sketch'

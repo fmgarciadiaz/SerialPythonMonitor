@@ -1,8 +1,9 @@
 # Versiones anteriores de Arduino
 
 Estas carpetas conservan las fuentes anteriores sin cambiar su funcionamiento.
-La adquisición actual está en [V11 P992](../v11_p992/README.md).
+La adquisición actual está en [V12 Audio](../v12_audio/README.md) y [V13 Pulse](../v13_pulse/README.md).
 
+- [V11 P992](v11_p992/README.md): adquisición sin WAV, pareja del monitor V12 archivado.
 - [V8 config](v8_config/README.md): pareja histórica del monitor V10.
 - [V9 Fast](v9_fast/README.md): pareja histórica del monitor V11.
 - [V10 diagnóstico](v10_diag/README.md): instrumentación experimental.

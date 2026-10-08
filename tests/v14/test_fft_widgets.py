@@ -6,7 +6,7 @@ import unittest
 from unittest.mock import patch
 import numpy as np
 from PyQt6 import QtWidgets
-from monitor.v14.app import SerialMonitorWindow
+from monitor.historico.v14.app import SerialMonitorWindow
 
 
 class FftWidgetsTests(unittest.TestCase):
@@ -16,7 +16,7 @@ class FftWidgetsTests(unittest.TestCase):
         cls.app.setStyle('Fusion')
 
     def setUp(self):
-        with patch('monitor.v14.app.usb_devices',return_value=[]): self.w = SerialMonitorWindow()
+        with patch('monitor.historico.v14.app.usb_devices',return_value=[]): self.w = SerialMonitorWindow()
         self.w.current_fs_hz = 40000
         self.s = self.w.spectral
         self.s.size.setCurrentText('1024')
@@ -26,19 +26,19 @@ class FftWidgetsTests(unittest.TestCase):
 
     def test_preparation_disconnect_retries_without_blocking_gui(self):
         self.w._preparing_disconnect = True
-        with patch.object(self.w,'stop_input',return_value=False) as stop,patch('monitor.v14.app.QtCore.QTimer.singleShot') as timer,patch('monitor.v14.app.QPreparationThread') as factory:
+        with patch.object(self.w,'stop_input',return_value=False) as stop,patch('monitor.historico.v14.app.QtCore.QTimer.singleShot') as timer,patch('monitor.historico.v14.app.QPreparationThread') as factory:
             self.w._begin_q_preparation('q')
             stop.assert_called_once_with(wait=False)
             self.assertEqual(timer.call_args.args[0],100)
             factory.assert_not_called()
-        with patch.object(self.w,'stop_input',return_value=None),patch('monitor.v14.app.QPreparationThread') as factory:
+        with patch.object(self.w,'stop_input',return_value=None),patch('monitor.historico.v14.app.QPreparationThread') as factory:
             self.w._begin_q_preparation('q')
             factory.return_value.start.assert_called_once()
             self.assertFalse(self.w._preparing_disconnect)
         self.w._q_preparation = None
 
     def test_cancel_preparation_warning_keeps_acquisition_untouched(self):
-        with patch.object(self.w.port_combo,'currentData',return_value='q'),patch('monitor.v14.app.QtWidgets.QMessageBox.warning',return_value=QtWidgets.QMessageBox.StandardButton.Cancel) as warning,patch.object(self.w,'stop_input') as stop:
+        with patch.object(self.w.port_combo,'currentData',return_value='q'),patch('monitor.historico.v14.app.QtWidgets.QMessageBox.warning',return_value=QtWidgets.QMessageBox.StandardButton.Cancel) as warning,patch.object(self.w,'stop_input') as stop:
             self.w.prepare_q()
             warning.assert_called_once()
             self.assertIn('varios minutos',warning.call_args.args[2])
@@ -259,13 +259,13 @@ class FftWidgetsTests(unittest.TestCase):
 
     def test_distortion_plot_refreshes_without_waiting_for_fit(self):
         self.feed();self.s.fft_mode.setCurrentIndex(2)
-        with patch('monitor.v14.spectrum.time.monotonic',return_value=10):self.s.render()
+        with patch('monitor.historico.v14.spectrum.time.monotonic',return_value=10):self.s.render()
         end = self.s.last_end
         self.feed(100,start=10000)
-        with patch('monitor.v14.spectrum.time.monotonic',return_value=10.1):self.s.render()
+        with patch('monitor.historico.v14.spectrum.time.monotonic',return_value=10.1):self.s.render()
         self.assertEqual(self.s.last_end,10100)
         self.assertEqual(self.s._distortion_submitted,10)
-        with patch('monitor.v14.spectrum.time.monotonic',return_value=10.21):self.s.render()
+        with patch('monitor.historico.v14.spectrum.time.monotonic',return_value=10.21):self.s.render()
         self.assertEqual(self.s.last_end,10100)
 
     def test_distortion_pending_job_does_not_block_or_queue_more_fits(self):
@@ -276,7 +276,7 @@ class FftWidgetsTests(unittest.TestCase):
         self.s._distortion_job_generation = self.s._distortion_generation
         self.s._distortion_submitted = 0
         self.feed(100,start=10000)
-        with patch('monitor.v14.spectrum.analysis.distortion',side_effect=AssertionError('Fit on UI thread')):
+        with patch('monitor.historico.v14.spectrum.analysis.distortion',side_effect=AssertionError('Fit on UI thread')):
             self.s.last_fast_render=0;self.s.render()
         self.assertEqual(self.s.last_end,10100)
         self.assertIs(self.s._distortion_future,pending)

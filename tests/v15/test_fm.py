@@ -560,11 +560,15 @@ class FMPanelTests(unittest.TestCase):
         self.assertEqual(panel.envelope_controls[1].value(),2800)
         from PyQt6 import QtCore
         self.w.generator_mode.setCurrentIndex(5);self.w.show();self.app.processEvents()
+        reserved=self.w.generator_scroll.height()
         for tab in range(panel.tabs.count()):
             panel.tabs.setCurrentIndex(tab);self.app.processEvents()
+            self.w.generator_scroll.ensureWidgetVisible(panel.info,0,0)
+            self.app.processEvents()
             viewport=panel.parentWidget().parentWidget()
             bottom=panel.info.mapTo(viewport,QtCore.QPoint(0,panel.info.height())).y()
             self.assertLessEqual(bottom,viewport.height())
+            self.assertEqual(self.w.generator_scroll.height(),reserved)
 
     def test_midi_chord_and_manual_high_notes(self):
         from types import SimpleNamespace

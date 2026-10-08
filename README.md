@@ -90,9 +90,11 @@ o Agregar. Los pulsos de 100 µs requieren el firmware experimental.
 Estas capturas usan señales sintéticas; FFT muestra la nueva variante
 y las otras vistas muestran la versión conservada;
 Bode ilustra tres filtros RC, sin representar una medición física.
-[Controles del monitor](monitor/v14/README.md) · [Análisis y Bode](docs/MONITOR_TECNICO.md).
+[Controles del monitor](monitor/v15/README.md) · [Análisis y Bode](docs/MONITOR_TECNICO.md).
 
 ## Wav · grabación y reproducción
+
+![Monitor con controles Wav y señales de demostración](assets/monitor_wav.png)
 
 Graba las entradas **A2 como L** y **A3 como R** en WAV estéreo PCM16,
 con el mismo botón de registro que CSV. El selector permite elegir el formato;
@@ -114,6 +116,8 @@ Es reproducción de archivos; no crea una salida de audio del sistema operativo.
 
 ## Synth · FM, ondas y modelos físicos
 
+![Monitor con controles Synth y señales de demostración](assets/monitor_synth.png)
+
 Mini sintetizador **mono de salida y polifónico de nueve voces**, controlado
 por MIDI o Play. Ofrece **Osc 1, Osc 2 y Osc 3**, FM con feedback, seno,
 cuadrada, triángulo y rampa; ADSR por oscilador, mezcla, detune y filtros
@@ -127,7 +131,8 @@ y Pluck. Son presets editables, no emulaciones exactas de instrumentos comercial
 dos planos de vibración, puente y caja; y **Piano Virtual**, con martillo no
 lineal, cuerdas rígidas, unísonos acoplados y resonancias simpáticas con pedal.
 Permite ajustar posición, brillo, vibración, caja, puente y rigidez del piano.
-Sus parámetros y resonancias son sintéticos, pendientes de ajuste por escucha.
+El piano usa parámetros mecánicos publicados por registro; las resonancias
+de caja siguen siendo sintéticas, pendientes de ajuste por escucha.
 
 La salida A0 es de 12 bits, **20 kHz por defecto** o 40 kHz. Velocidad MIDI,
 pedal CC64 y volumen CC7 funcionan durante reproducción. Numba compila feedback,
@@ -208,7 +213,7 @@ la cantidad de puntos dibujados a la pantalla. Python prepara WAV, remuestrea
 con filtro antialias y ajusta códigos de salida; el hardware mantiene su ritmo.
 
 [Arquitectura, historial, FFT y Bode](docs/MONITOR_TECNICO.md) ·
-[Receptor y comandos del PC](monitor/v13/receiver/README.md).
+[Receptor y comandos del PC](monitor/v15/receiver/README.md).
 
 ## Relay C · Linux del MPU
 
@@ -267,10 +272,10 @@ identifican por separado en los informes.
 | Conjunto | Estado y documentación |
 |---|---|
 | [Monitor V15 · Synth](monitor/v15/README.md) | Synth: tres osciladores, feedback, FM/ondas/Virtual, guitarra y piano físicos, nueve voces y MIDI; estabilidad de cada perfil pendiente de validación física |
-| [Monitor V14 · PyQt6](monitor/v14/README.md) | Nueva variante con cuatro modos FFT; firmware existente |
-| [Monitor V13 · PyQt6](monitor/v13/README.md) + [Q V12 Audio](arduino/v12_audio/README.md) | Pareja principal conservada, con grabación y reproducción WAV |
-| [Q V13 Pulse experimental](arduino/v13_pulse/README.md) + [Monitor V13](monitor/v13/README.md) | Variante actualmente en prueba: pulso desde 100 µs |
-| [Monitor V12 · PyQt5](monitor/v12/README.md) + [Q V11 P992](arduino/v11_p992/README.md) | Pareja anterior conservada, sin reproducción WAV |
+| [Monitor V14 · PyQt6](monitor/historico/v14/README.md) | Archivado: cuatro modos FFT; firmware existente |
+| [Monitor V13 · PyQt6](monitor/historico/v13/README.md) + [Q V12 Audio](arduino/v12_audio/README.md) | Archivado: grabación y reproducción WAV |
+| [Q V13 Pulse experimental](arduino/v13_pulse/README.md) + [Monitor V15](monitor/v15/README.md) | Firmware compatible con la versión actual: pulso desde 100 µs |
+| [Monitor V12 · PyQt5](monitor/historico/v12/README.md) + [Q V11 P992](arduino/historico/v11_p992/README.md) | Archivado: sin reproducción WAV |
 | [Monitores históricos](monitor/historico/README.md) | Versiones anteriores archivadas |
 | [Firmware histórico](arduino/historico/README.md) | Sketches y puentes anteriores |
 | [Historia completa](docs/HISTORIA.md) | Evolución y catálogo del proyecto |

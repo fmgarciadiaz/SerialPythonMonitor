@@ -5,10 +5,10 @@ from unittest.mock import Mock, patch
 import numpy as np
 from scipy.signal import lfilter
 from PyQt6 import QtWidgets
-from monitor.v13.bode_pulse import PulseAverage
-from monitor.v13.app import SerialMonitorWindow
-from monitor.v13.receiver.unoq_generator import GeneratorReply
-from monitor.v13.receiver.unoq_switch import Phase, Reason
+from monitor.historico.v13.bode_pulse import PulseAverage
+from monitor.historico.v13.app import SerialMonitorWindow
+from monitor.historico.v13.receiver.unoq_generator import GeneratorReply
+from monitor.historico.v13.receiver.unoq_switch import Phase, Reason
 
 class PulseAverageTests(unittest.TestCase):
  def test_cross_spectra_preserve_rc_transfer_with_common_timing_shifts(self):
@@ -56,7 +56,7 @@ class PulseSequenceTests(unittest.TestCase):
  @classmethod
  def setUpClass(cls):cls.app=QtWidgets.QApplication.instance() or QtWidgets.QApplication([])
  def setUp(self):
-  with patch('monitor.v13.app.usb_devices',return_value=[]):self.w=SerialMonitorWindow()
+  with patch('monitor.historico.v13.app.usb_devices',return_value=[]):self.w=SerialMonitorWindow()
   self.w.serial_worker=Mock();self.w.is_running=True;self.w._generator_state_known=True
   self.w._generator_requested=None;self.w._pulse_us_capable=True;self.w._auto_apply_timer.stop()
   self.w.spectral.select_bode(1);self.p=self.w.spectral.bode.panels[1]

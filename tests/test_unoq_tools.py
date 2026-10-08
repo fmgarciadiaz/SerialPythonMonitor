@@ -106,7 +106,7 @@ class UnoQTests(unittest.TestCase):
             with self.subTest(version=version), patch('sys.argv', args), patch('tools.unoq.Board') as board:
                 self.assertEqual(main(), 0)
                 config = board.call_args.args[0]
-                self.assertEqual(config['local_app'], f'arduino/{"historico/" if version != "v11_p992" else ""}{version}/oscilloscope')
+                self.assertEqual(config['local_app'], f'arduino/historico/{version}/oscilloscope')
                 self.assertTrue(config['remote_app'].endswith({'v11_p992':'-v11','v6_adc':'-v6','v8_config':'-v8'}.get(version, '-' + version)))
                 board.return_value.compile.assert_called_once()
                 board.return_value.deploy.assert_not_called()

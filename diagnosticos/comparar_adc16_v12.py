@@ -12,10 +12,10 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from diagnosticos.verificar_adc16_62k5 import wait_configuration
-from monitor.v12.receiver.unoq_acquisition import Configuration
-from monitor.v12.receiver.unoq_config_receiver import OutputReceiver
-from monitor.v12.receiver.unoq_generator import GeneratorConfig
-from monitor.v12.receiver.unoq_usb import Connection
+from monitor.historico.v12.receiver.unoq_acquisition import Configuration
+from monitor.historico.v12.receiver.unoq_config_receiver import OutputReceiver
+from monitor.historico.v12.receiver.unoq_generator import GeneratorConfig
+from monitor.historico.v12.receiver.unoq_usb import Connection
 
 DTYPE = np.dtype([('timestamp_us', '<u4'), ('adc_in', '<u2'), ('adc_out', '<u2'), ('index', '<u4')])
 

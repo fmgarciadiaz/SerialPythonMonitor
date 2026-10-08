@@ -2,6 +2,7 @@
 import numpy as np
 from scipy.signal import iirpeak
 from monitor.v15.fm_feedback import njit
+from monitor.v15.piano_profile import piano_profile
 
 def _modes(state, rotation, amplitudes, force, age, count, strings, coupling):
     output=np.zeros(count)
@@ -30,16 +31,14 @@ def _modes(state, rotation, amplitudes, force, age, count, strings, coupling):
         output[i]=value
     return output
 
-def _hammer(rate, velocity, hardness, frequency):
+def _hammer(rate, velocity, hardness, mass, impedance, stiffness, exponent):
     # Felt spring hitting a passive characteristic string impedance.
-    mass=.009*(220/max(frequency,30.0))**.12
-    impedance=12.0+18.0*(220/max(frequency,30.0))**.2
-    stiffness=(1.5+5.0*hardness)*1e9
+    stiffness*=2**(4*(hardness-.78))
     speed=.45+3.5*velocity
     compression=0.0
     force=np.zeros(int(rate*.012))
     for i in range(len(force)):
-        contact=stiffness*max(0.0,compression)**2.4*max(.5,min(1.5,1+.035*speed))
+        contact=stiffness*max(0.0,compression)**exponent
         speed-=contact/(mass*rate)
         compression+=(speed-contact/impedance)/rate
         force[i]=contact
@@ -60,7 +59,11 @@ def _resonate(signal, coefficients, state, weights):
     return output
 
 modal_kernel=njit(cache=True,nogil=True)(_modes) if njit else None
-hammer_kernel=njit(cache=True,nogil=True)(_hammer) if njit else None
+_hammer_kernel=njit(cache=True,nogil=True)(_hammer) if njit else None
+def hammer_kernel(rate, velocity, hardness, frequency):
+    profile=piano_profile(frequency)
+    if _hammer_kernel is None:raise RuntimeError('Virtual requiere Numba')
+    return _hammer_kernel(rate,velocity,hardness,profile['mass'],profile['impedance'],profile['contact_k'],profile['exponent'])
 body_kernel=njit(cache=True,nogil=True)(_resonate) if njit else None
 
 def warmup():
@@ -75,21 +78,24 @@ class PianoStrings:
         self.velocity=velocity;self.bandlimit=bandlimit or rate*.42
         self.key=None;self.state=None;self.age=0
         self.force=None
+        self.profile=piano_profile(frequency)
     def render(self,count,brightness=.75,decay=4.,stiffness=.0003,bridge=.2):
         if modal_kernel is None:raise RuntimeError('Virtual requiere Numba')
         key=(brightness,decay,stiffness,bridge)
         if key!=self.key:
             # Normal modes of a pinned stiff string, fundamental normalized.
             n=np.arange(1,min(64,max(1,int(self.bandlimit/self.frequency)))+1,dtype=float)
-            base=self.frequency*n*np.sqrt((1+stiffness*n*n)/(1+stiffness))
+            effective_stiffness=self.profile['stiffness']*stiffness/.0003
+            base=self.frequency*n*np.sqrt((1+effective_stiffness*n*n)/(1+effective_stiffness))
             # Fixed mode count permits phase-continuous live stiffness changes.
-            offsets=(0.,) if self.frequency<110 else (-1.5,1.5) if self.frequency<220 else (-2.,0.,2.)
+            offsets=((0.,),(-1.5,1.5),(-2.,0.,2.))[self.profile['strings']-1]
             self.strings=len(offsets)
             frequencies=np.concatenate([base*2**(c/1200) for c in offsets])
             order=np.tile(n,len(offsets))
             # Bridge force scales with modal slope; felt pulse supplies the
             # actual time-varying excitation instead of a prefilled sine bank.
-            amplitudes=np.sin(np.pi*order*self.position)/order**.55
+            position=np.clip(self.profile['position']*self.position/.12,.01,.95)
+            amplitudes=np.sin(np.pi*order*position)/order**.55
             amplitudes*=np.clip((self.bandlimit-frequencies)/(self.bandlimit*.1),0,1)
             amplitudes*=1.4/max(np.sum(abs(amplitudes)),1e-12)
             register=np.clip((220/self.frequency)**.22,.45,1.8)

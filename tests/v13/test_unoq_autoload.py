@@ -2,7 +2,7 @@ import hashlib
 import json
 import unittest
 from unittest.mock import patch
-from monitor.v13.receiver.unoq_autoload import ensure_scope,ROOT,run_command
+from monitor.historico.v13.receiver.unoq_autoload import ensure_scope,ROOT,run_command
 
 class AutoloadTests(unittest.TestCase):
     def runner(self,active=True,other=False,relay=True):
@@ -21,12 +21,12 @@ class AutoloadTests(unittest.TestCase):
         return run,commands
     def test_active_pair_is_reused(self):
         run,calls=self.runner()
-        with patch('monitor.v13.receiver.unoq_autoload.adb_path',return_value='adb'):
+        with patch('monitor.historico.v13.receiver.unoq_autoload.adb_path',return_value='adb'):
             self.assertEqual(ensure_scope('selected',runner=run),'v12_audio')
         self.assertFalse(any('-c' in args for args in calls))
     def test_stopped_pair_starts_selected_device_without_build(self):
         run,calls=self.runner(active=False,relay=False)
-        with patch('monitor.v13.receiver.unoq_autoload.adb_path',return_value='adb'):
+        with patch('monitor.historico.v13.receiver.unoq_autoload.adb_path',return_value='adb'):
             ensure_scope('selected',runner=run)
         launch=calls[-1]
         self.assertIn('selected',launch)
@@ -37,14 +37,14 @@ class AutoloadTests(unittest.TestCase):
         self.assertIn('start',output)
     def test_other_application_is_not_stopped(self):
         run,calls=self.runner(other=True)
-        with patch('monitor.v13.receiver.unoq_autoload.adb_path',return_value='adb'):
+        with patch('monitor.historico.v13.receiver.unoq_autoload.adb_path',return_value='adb'):
             with self.assertRaisesRegex(RuntimeError,'otra aplicación'):ensure_scope('selected',runner=run)
         self.assertEqual(len(calls),1)
     def test_ready_failure_reports_cause_and_keeps_log(self):
         import sys
         import tempfile
         from pathlib import Path
-        with tempfile.TemporaryDirectory() as folder, patch('monitor.v13.receiver.unoq_autoload.ROOT', Path(folder)):
+        with tempfile.TemporaryDirectory() as folder, patch('monitor.historico.v13.receiver.unoq_autoload.ROOT', Path(folder)):
             with self.assertRaisesRegex(RuntimeError, 'MCU no entrega READY'):
                 run_command([sys.executable, '-c',
                              "import sys; print('READY wait: Connection timed out'); print('RuntimeError: El relay no quedó en ejecución.'); sys.exit(1)"])
@@ -58,8 +58,8 @@ class AutoloadTests(unittest.TestCase):
 
 class ConnectScopeTests(unittest.TestCase):
     def test_live_connection_does_not_start_app(self):
-        from monitor.v13.receiver.unoq_autoload import connect_scope
-        with patch('monitor.v13.receiver.unoq_autoload.Connection') as factory, patch('monitor.v13.receiver.unoq_autoload.ensure_scope') as start:
+        from monitor.historico.v13.receiver.unoq_autoload import connect_scope
+        with patch('monitor.historico.v13.receiver.unoq_autoload.Connection') as factory, patch('monitor.historico.v13.receiver.unoq_autoload.ensure_scope') as start:
             with connect_scope('q') as connection:
                 self.assertIs(connection, factory.return_value)
             start.assert_not_called()
@@ -67,8 +67,8 @@ class ConnectScopeTests(unittest.TestCase):
             factory.return_value.close.assert_called_once()
 
     def test_missing_transport_starts_and_retries(self):
-        from monitor.v13.receiver.unoq_autoload import connect_scope
-        with patch('monitor.v13.receiver.unoq_autoload.Connection') as factory, patch('monitor.v13.receiver.unoq_autoload.ensure_scope') as start:
+        from monitor.historico.v13.receiver.unoq_autoload import connect_scope
+        with patch('monitor.historico.v13.receiver.unoq_autoload.Connection') as factory, patch('monitor.historico.v13.receiver.unoq_autoload.ensure_scope') as start:
             factory.return_value.open.side_effect = [ConnectionRefusedError(), None]
             with connect_scope('selected'): pass
             self.assertEqual(start.call_args.args[0], 'selected')
@@ -76,8 +76,8 @@ class ConnectScopeTests(unittest.TestCase):
             self.assertEqual(factory.return_value.close.call_count, 2)
 
     def test_failed_start_closes_transport(self):
-        from monitor.v13.receiver.unoq_autoload import connect_scope
-        with patch('monitor.v13.receiver.unoq_autoload.Connection') as factory, patch('monitor.v13.receiver.unoq_autoload.ensure_scope', side_effect=RuntimeError('READY')):
+        from monitor.historico.v13.receiver.unoq_autoload import connect_scope
+        with patch('monitor.historico.v13.receiver.unoq_autoload.Connection') as factory, patch('monitor.historico.v13.receiver.unoq_autoload.ensure_scope', side_effect=RuntimeError('READY')):
             factory.return_value.open.side_effect = ConnectionRefusedError()
             with self.assertRaisesRegex(RuntimeError, 'READY'):
                 with connect_scope('q'): pass
@@ -85,8 +85,8 @@ class ConnectScopeTests(unittest.TestCase):
             self.assertEqual(factory.return_value.close.call_count, 2)
 
     def test_adb_tunnel_opens_but_remote_relay_is_down(self):
-        from monitor.v13.receiver.unoq_autoload import connect_scope
-        with patch('monitor.v13.receiver.unoq_autoload.Connection') as factory, patch('monitor.v13.receiver.unoq_autoload.ensure_scope') as start:
+        from monitor.historico.v13.receiver.unoq_autoload import connect_scope
+        with patch('monitor.historico.v13.receiver.unoq_autoload.Connection') as factory, patch('monitor.historico.v13.receiver.unoq_autoload.ensure_scope') as start:
             factory.return_value.socket.recv.side_effect = [b'', b'S']
             with connect_scope('q'): pass
             start.assert_called_once()

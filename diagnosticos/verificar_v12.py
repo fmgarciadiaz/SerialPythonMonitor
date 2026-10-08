@@ -7,10 +7,10 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
 HERE=ROOT/'capturas/validacion_v12';HERE.mkdir(parents=True,exist_ok=True)
 from PyQt5 import QtWidgets,QtTest
-from monitor.v12.app import SerialMonitorWindow
-from monitor.v12.receiver.unoq_usb import Connection
-from monitor.v12.receiver.unoq_config_receiver import OutputReceiver
-from monitor.v12.receiver.unoq_generator import GeneratorConfig
+from monitor.historico.v12.app import SerialMonitorWindow
+from monitor.historico.v12.receiver.unoq_usb import Connection
+from monitor.historico.v12.receiver.unoq_config_receiver import OutputReceiver
+from monitor.historico.v12.receiver.unoq_generator import GeneratorConfig
 folder=HERE/datetime.now().strftime('%Y%m%d_%H%M%S_%f');folder.mkdir()
 parser=argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--fft-size',type=int,choices=(256,512,1024,2048,4096,8192),default=2048)

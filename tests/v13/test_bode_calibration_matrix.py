@@ -1,7 +1,7 @@
 import unittest
 import numpy as np
 from tools.calibrate_bode import profiles, reference_from
-from monitor.v13.receiver.unoq_acquisition import Configuration
+from monitor.historico.v13.receiver.unoq_acquisition import Configuration
 
 class CalibrationMatrixTests(unittest.TestCase):
     def setUp(self):

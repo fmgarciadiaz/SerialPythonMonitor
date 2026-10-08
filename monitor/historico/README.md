@@ -1,9 +1,12 @@
 # Monitores históricos
 
-La versión actual se encuentra en [V12](../v12/README.md).
+La versión actual se encuentra en [V15](../v15/README.md).
 
 | Carpeta | Firmware de referencia |
 |---|---|
+| `v14/` | PyQt6, cuatro modos FFT; firmware V12 Audio/V13 Pulse |
+| `v13/` | PyQt6, Wav y Bode; firmware V12 Audio/V13 Pulse |
+| `v12/` | PyQt5; firmware V11 P992 |
 | `v11/` | UNO Q V9 Fast, SPI hasta 100 kHz |
 | `v10/` | UNO Q V8 config, generador/FFT/Bode |
 | `v9/` | UNO Q V7 dual, salida SPI/UART |

@@ -4,11 +4,11 @@ from collections import deque
 from dataclasses import asdict
 from pathlib import Path
 import numpy as np
-from monitor.v13.receiver.unoq_usb import Connection
-from monitor.v13.receiver.unoq_config_receiver import OutputReceiver
-from monitor.v13.receiver.unoq_acquisition import Configuration
-from monitor.v13.receiver.unoq_switch import Mode
-from monitor.v13.receiver.unoq_wav import State
+from monitor.historico.v13.receiver.unoq_usb import Connection
+from monitor.historico.v13.receiver.unoq_config_receiver import OutputReceiver
+from monitor.historico.v13.receiver.unoq_acquisition import Configuration
+from monitor.historico.v13.receiver.unoq_switch import Mode
+from monitor.historico.v13.receiver.unoq_wav import State
 
 
 def main():

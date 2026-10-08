@@ -2,14 +2,14 @@
 from pathlib import Path
 import struct,subprocess,tempfile,unittest,zlib,sys
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
-from monitor.v12.receiver.unoq_config_decoder import ConfigurationDecoder
-from monitor.v12.receiver.unoq_usb import ProtocolError
-from monitor.v12.receiver.unoq_control import status_request
-from monitor.v12.receiver.unoq_switch import switch_request
-from monitor.v12.receiver.unoq_acquisition import acquisition_request,Configuration
-from monitor.v12.receiver.unoq_generator import generator_request,GeneratorConfig
+from monitor.historico.v12.receiver.unoq_config_decoder import ConfigurationDecoder
+from monitor.historico.v12.receiver.unoq_usb import ProtocolError
+from monitor.historico.v12.receiver.unoq_control import status_request
+from monitor.historico.v12.receiver.unoq_switch import switch_request
+from monitor.historico.v12.receiver.unoq_acquisition import acquisition_request,Configuration
+from monitor.historico.v12.receiver.unoq_generator import generator_request,GeneratorConfig
 ROOT=Path(__file__).resolve().parents[1]
-BASE=ROOT/'arduino/v11_p992'
+BASE=ROOT/'arduino/historico/v11_p992'
 def seal(p):
     p=bytearray(p);struct.pack_into('<I',p,988,zlib.crc32(p[:988]));return bytes(p)
 class P992Tests(unittest.TestCase):
@@ -49,8 +49,8 @@ class P992Tests(unittest.TestCase):
             p=bytearray(commands[0]);p[pos]^=1;ping.append(seal(p))
         self.assertFalse(any(accepted(ping)))
     def test_uart_contract_stays_512_pairs(self):
-        from monitor.v12.receiver.unoq_receiver import LegacyDecoder
-        from monitor.v12.receiver.unoq_config_receiver import LegacyDecoder as ConfigLegacyDecoder
+        from monitor.historico.v12.receiver.unoq_receiver import LegacyDecoder
+        from monitor.historico.v12.receiver.unoq_config_receiver import LegacyDecoder as ConfigLegacyDecoder
         packet=struct.pack('<4sBH',b'DATA',1,512)+b''.join(struct.pack('<IHH',i*32,123,456) for i in range(512))
         for cls in (LegacyDecoder,ConfigLegacyDecoder):
             d=cls();self.assertEqual(d.feed(packet[:100]),[])

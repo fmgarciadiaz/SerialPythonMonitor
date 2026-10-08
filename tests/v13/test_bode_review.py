@@ -9,16 +9,16 @@ from unittest.mock import patch, Mock
 from types import SimpleNamespace
 import numpy as np
 from PyQt6 import QtWidgets
-from monitor.v13.app import SerialMonitorWindow
-from monitor.v13.receiver.unoq_generator import GeneratorReply
-from monitor.v13.receiver.unoq_switch import Phase, Reason
-from monitor.v13.bode_calibration import load_reference, correct_transfer
+from monitor.historico.v13.app import SerialMonitorWindow
+from monitor.historico.v13.receiver.unoq_generator import GeneratorReply
+from monitor.historico.v13.receiver.unoq_switch import Phase, Reason
+from monitor.historico.v13.bode_calibration import load_reference, correct_transfer
 
 class BodeReviewTests(unittest.TestCase):
  @classmethod
  def setUpClass(cls):cls.app=QtWidgets.QApplication.instance() or QtWidgets.QApplication([])
  def setUp(self):
-  with patch('monitor.v13.app.usb_devices',return_value=[]):self.w=SerialMonitorWindow()
+  with patch('monitor.historico.v13.app.usb_devices',return_value=[]):self.w=SerialMonitorWindow()
  def tearDown(self):
   for p in self.w.spectral.bode.panels:p.active=False
   self.w.serial_worker=None;self.w.close()
@@ -39,7 +39,7 @@ class BodeReviewTests(unittest.TestCase):
        'points':[[20,.1,2],[5000,.1,2]]}
   with tempfile.TemporaryDirectory() as root:
    path=Path(root)/'bode_reference_test.json';path.write_text(json.dumps(ref))
-   with patch('monitor.v13.bode_calibration.CALIBRATION_DIR',Path(root)):
+   with patch('monitor.historico.v13.bode_calibration.CALIBRATION_DIR',Path(root)):
     self.w.spectral.bode.set_instrument(identity)
     p=self.w.spectral.bode.panels[0]
     self.assertTrue(p.calibrated.isEnabled());self.assertTrue(p.calibrated.isChecked())

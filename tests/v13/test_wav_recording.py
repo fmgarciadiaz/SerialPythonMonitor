@@ -8,9 +8,9 @@ from pathlib import Path
 from unittest.mock import patch, MagicMock
 import numpy as np
 from PyQt6 import QtWidgets
-from monitor.v13.app import SerialMonitorWindow
-from monitor.v13.qt_environment import prepare_platform_plugins
-from monitor.v13.receiver.unoq_acquisition import Configuration
+from monitor.historico.v13.app import SerialMonitorWindow
+from monitor.historico.v13.qt_environment import prepare_platform_plugins
+from monitor.historico.v13.receiver.unoq_acquisition import Configuration
 
 
 class WaveRecordingTests(unittest.TestCase):
@@ -20,7 +20,7 @@ class WaveRecordingTests(unittest.TestCase):
         cls.app = QtWidgets.QApplication.instance() or QtWidgets.QApplication([])
 
     def setUp(self):
-        with patch('monitor.v13.app.usb_devices', return_value=[]):
+        with patch('monitor.historico.v13.app.usb_devices', return_value=[]):
             self.w = SerialMonitorWindow()
         self.temp = tempfile.TemporaryDirectory()
         self.path = Path(self.temp.name) / 'capture.wav'
@@ -90,7 +90,7 @@ class WaveRecordingTests(unittest.TestCase):
 
     def test_record_limit_finalizes_header(self):
         self.w.handle_batch(self.batch(0, 2))
-        with patch('monitor.v13.app.time.perf_counter', return_value=self.w.record_start_time+30):
+        with patch('monitor.historico.v13.app.time.perf_counter', return_value=self.w.record_start_time+30):
             self.w.handle_batch(self.batch(2, 2))
         self.assertFalse(self.w.recording)
         self.assertEqual(self.read()[0].nframes, 2)
@@ -124,7 +124,7 @@ class WaveRecordingTests(unittest.TestCase):
         self.w.record_format_combo.setCurrentText('CSV')
         self.w.record_format_combo.setCurrentText('WAV')
         self.assertEqual(self.w.record_status_label.text(), 'WAV: listo | máximo 30.0 s')
-        with patch('monitor.v13.app.ROOT', Path(self.temp.name)):
+        with patch('monitor.historico.v13.app.ROOT', Path(self.temp.name)):
             first = self.w._create_log_filename()
             self.assertTrue(first.name.endswith('_14bit_125kHz.wav'))
             self.assertNotIn('_001', first.name)

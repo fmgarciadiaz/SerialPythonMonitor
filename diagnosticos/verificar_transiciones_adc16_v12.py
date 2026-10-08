@@ -5,9 +5,9 @@ from datetime import datetime
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
 from diagnosticos.verificar_adc16_62k5 import wait_configuration
-from monitor.v12.receiver.unoq_usb import Connection
-from monitor.v12.receiver.unoq_config_receiver import OutputReceiver
-from monitor.v12.receiver.unoq_acquisition import Configuration
+from monitor.historico.v12.receiver.unoq_usb import Connection
+from monitor.historico.v12.receiver.unoq_config_receiver import OutputReceiver
+from monitor.historico.v12.receiver.unoq_acquisition import Configuration
 folder=(ROOT/'capturas/adc16_rate')/('transitions_'+datetime.now().strftime('%Y%m%d_%H%M%S'));folder.mkdir(parents=True);report={'passed':False,'profiles':[],'errors':[]}
 with Connection('1060031107') as c,(folder/'stream.scp').open('wb') as raw:
  c.socket.settimeout(.05);read=c.read

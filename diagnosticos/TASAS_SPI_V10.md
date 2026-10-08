@@ -59,7 +59,7 @@ El [barrido final](resultados_usb/20261002_113938_239458_spi_rates.json) pasó l
 
 La [prueba Qt con las placas](resultados_usb/20261002_114026_782023_monitor_v10.json) recibió **849.920 pares**, recorrió las tres tasas SPI nuevas y volvió a 31,25 kHz en SPI → UART → SPI. Cinco CSV sumaron **806,310 filas**, sin huecos de índices/timestamps ni errores de conversión a voltios. Las estimaciones de tasa fueron exactamente 40.000, 50.000 y 62.500 Hz. Las capturas temporales se verificaron antes de eliminarlas.
 
-[Panel rápido](../assets/monitor_v10_fast_config.png). El ensayo usa Qt offscreen; los render calls no miden FPS de una pantalla real.
+[Panel rápido](../assets/historico/monitor_v10_fast_config.png). El ensayo usa Qt offscreen; los render calls no miden FPS de una pantalla real.
 
 Durante la instalación final, un primer arranque del relay recibió un frame inválido (secuencia 0xffffffff) y se detuvo. Se reinició la app/relay antes de los ensayos finales; no se omitió el frame ni se relajaron los controles de integridad.
 

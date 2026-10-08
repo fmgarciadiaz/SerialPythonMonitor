@@ -273,6 +273,9 @@ class FMPanel(QtWidgets.QWidget):
     def _virtual_model_changed(self,*args):
         piano=self.virtual_model.currentData()=='piano'
         self.string_controls[5].parentWidget().setEnabled(piano)
+        self.string_controls[5].setToolTip('Piano: 15 % reproduce la rigidez publicada por registro; los demás valores la escalan proporcionalmente.')
+        self.string_controls[1].setToolTip('Piano: 12 % reproduce la posición publicada por registro; los demás valores la escalan proporcionalmente.' if piano else 'Posición del pellizco como porcentaje de la longitud de cuerda.')
+        self.string_controls[2].setToolTip('Piano: 78 % reproduce el contacto de referencia; cambia la dureza del fieltro en el próximo golpe.' if piano else 'Brillo de la cuerda.')
         self.update_source()
 
     def _waveform_changed(self,*args):

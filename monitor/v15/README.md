@@ -31,6 +31,8 @@ se mantiene por compatibilidad con las herramientas de audio.
 
 ## Wav · archivos y grabación
 
+![Controles Wav con señales de demostración](../../assets/monitor_wav.png)
+
 En el generador, Wav reproduce L/R/Mix del archivo por A0, con salida de
 40 kHz inicial y opciones 20/40/50 kHz según firmware. Incluye Play/Stop,
 flechas para saltar 10 s y amplitud ajustable. Play inicia adquisición y
@@ -47,6 +49,8 @@ pero el archivo conserva esos datos.
 [Presentación de Wav y Synth](../../README.md#wav--grabación-y-reproducción).
 
 ## Generador Synth
+
+![Controles Synth con señales de demostración](../../assets/monitor_synth.png)
 
 Elegir **Synth** en el generador. En Osc 1, Sonido permite FM, ondas clásicas
 y Virtual; Preset carga el instrumento. **DX Piano** es inicial; el nivel de
@@ -269,7 +273,7 @@ están en esta carpeta. Las referencias copiadas conservan identidad instrumenta
 perfil y método originales; no son una nueva calibración física ni se aplican
 automáticamente al modo FFT Transfer.
 
-[Uso de los controles conservados](../v13/README.md) ·
+[Uso de los controles conservados](../historico/v13/README.md) ·
 [Arquitectura del monitor](../../docs/MONITOR_TECNICO.md) ·
 [Relay y MCU](../../arduino/README.md).
 
@@ -285,7 +289,7 @@ validación del instrumento y de su ruido/distorsión con hardware.
 ## Versiones
 
 - [Monitor V15](app.py): cuatro modos de análisis FFT.
-- [Monitor V13](../v13/README.md): referencia conservada.
+- [Monitor V13](../historico/v13/README.md): referencia conservada.
 - [Histórico](../historico/README.md).
 
 El generador usa columnas de igual ancho para Modo/Editar y Sonido/Preset,
@@ -717,3 +721,10 @@ La primera implementación del piano ampliado a tasa interna tomó 2,184 s
 para 3 s de audio a 40 kHz; se descartó esa configuración. Las cifras finales
 excluyen adquisición, interfaz y transporte. No demuestran ausencia de cortes
 en el Q y no cambian el buffer ni la latencia de cola.
+
+### Referencia mecánica del Piano Virtual
+
+El piano usa [parámetros publicados por registro](../../docs/PIANO_PARAMETROS.md)
+para martillo, posición, inarmonicidad e impedancia. Posición 12 %, Rigidez
+15 % y Brillo 78 % son los ajustes de referencia; siguen editables. La caja
+y los decaimientos aún requieren comparación con un instrumento real.

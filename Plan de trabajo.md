@@ -60,7 +60,7 @@ Este es el plan de la app completa. Pero lo tenemos que ir haciendo paso a paso.
 
 ### Integración en nueva versión · 4 de octubre de 2026
 
-- Nueva pareja [Monitor V12](monitor/v12/README.md) + [firmware V11 P992](arduino/v11_p992/README.md), independiente de los experimentos. Receptor dentro de V12 y relay propio junto al firmware, SCP1 V3/992 a 32 MHz, hasta 125 kHz por canal.
+- Nueva pareja [Monitor V12](monitor/historico/v12/README.md) + [firmware V11 P992](arduino/historico/v11_p992/README.md), independiente de los experimentos. Receptor dentro de V12 y relay propio junto al firmware, SCP1 V3/992 a 32 MHz, hasta 125 kHz por canal.
 - V10/V11 y V8 config/V9 Fast se conservan en sus carpetas. Nuevas entradas de VS Code, catálogo App Lab y selección explícita `--firmware v11_p992`; defaults de herramientas conservados.
 - 198 pruebas locales aprobadas y firmware/relay ARM compilados. La evidencia sostenida y analógica de P992 corresponde a ADC14/125 kHz con los estímulos documentados; UART físico y calibración absoluta siguen pendientes.
 - Verificación física de integración mediante `diagnosticos/verificar_v12.py`, con seno de 2 kHz, trigger/SINGLE, V(t), FFT, heatmap y CSV, restaurando el generador al terminar.
@@ -71,7 +71,7 @@ Este es el plan de la app completa. Pero lo tenemos que ir haciendo paso a paso.
 - Se implementó el **Camino A**: reloj de ADC acelerado a **50 MHz vía PLL2** (HSE 16 MHz / 2 * 25 / 4 = 50.000 MHz, dentro de los 55 MHz nominales del STM32U5).
 - Desbloqueado **16 bits a 62,5 kHz** por canal conservando el oversampling $\times 16$ intacto (período 16 µs, tiempo nominal de conversión 14,08 µs, antes de latencias; margen nominal 12%).
 - Validado físicamente en la placa ([informe](capturas/adc16_rate/test62k5_20261005_002648/informe.json)): 311.409 pares en 5 s a 62.275 pares/s sostenidos, dropped=0, fatal=0.
-- Interfaz gráfica de [Monitor V12](monitor/v12/app.py) actualizada para permitir 62,5 kHz en 16 bits; suite completa de tests aprobada (`OK`).
+- Interfaz gráfica de [Monitor V12](monitor/historico/v12/app.py) actualizada para permitir 62,5 kHz en 16 bits; suite completa de tests aprobada (`OK`).
 
 
 - Revisión posterior: [ADC16 V12](diagnosticos/ADC16_V12.md). Diagnóstico corregido para restaurar el perfil observado; 7.495.680 pares en 120 s sin discontinuidades, dropped ni fatal. Suite de 206 pruebas aprobada. El reloj ADC de 50 MHz afecta todos los perfiles y requiere comprobar las referencias Bode anteriores.
@@ -84,7 +84,7 @@ Este es el plan de la app completa. Pero lo tenemos que ir haciendo paso a paso.
 Bode; requiere PyQt6 en entorno separado. Firmware V11 P992 sin cambios.
 - V12 sigue disponible con PyQt5. Backend pyqtgraph seleccionado explícitamente;
 pruebas Qt5 y Qt6 en procesos distintos.
-- Ver [uso y evaluación](monitor/v13/README.md). No se inició WAV ni se alteró
+- Ver [uso y evaluación](monitor/historico/v13/README.md). No se inició WAV ni se alteró
 la adquisición; la mejora de rendimiento se evalúa por escenario.
 
 - Validación V13:24 pruebas Qt6 y208 Qt5 aprobadas. [Comparación](diagnosticos/QT6_V13.md) con40 cuadros medidos por escenario: Qt6 más lento en el ensayo offscreen; V12 se conserva como referencia. Prueba manual de pantalla pendiente.
@@ -102,7 +102,7 @@ la adquisición; la mejora de rendimiento se evalúa por escenario.
 - Modo WAV en V13: archivo local, L/R/Mix, Reproducir y Detener; conversión antialias a 20 ksps, eliminación de media y ajuste Vpp/offset a códigos DAC12.
 - Firmware aislado V12 Audio y relay MPU propio con créditos, buffers acotados y parada neutral ante falta de datos. V11 P992 sigue predeterminado.
 - 51 pruebas locales Qt6/protocolo/firmware aprobadas; sketch compilado (107000 bytes flash, 192524 RAM). Respaldo V11 conservado. Carga y ensayo A0→A2/A3 pendientes de autorización.
-- Ver [activación y restauración](arduino/v12_audio/README.md) y [uso](monitor/v13/README.md).
+- Ver [activación y restauración](arduino/v12_audio/README.md) y [uso](monitor/historico/v13/README.md).
 
 ### V12 Audio cargado y ensayo físico inicial aprobado
 
@@ -429,11 +429,11 @@ Finalización confirmada: ADC14/40 kHz, salida apagada.
 
 ## Monitor con cuatro análisis FFT · 2026-10-07
 
-Nueva variante independiente en `monitor/v14/app.py`: Spectrum, Power,
+Nueva variante independiente en `monitor/historico/v14/app.py`: Spectrum, Power,
 Distortion y Transfer seleccionables junto a Modo. Astra diseñó/revisó y Sol6.1
 implementó. V13 se conserva. No cambia firmware ni se operó el Q.
 22 pruebas nuevas y 121 regresiones adaptadas pasan. SINGLE conserva su bloque
 al cambiar las vistas; coherencia/retardo N/A con un solo segmento.
-Inicio: `conda activate Python_3_13_DataScience`, `python monitor/v14/app.py`.
-Documentación: `monitor/v14/README.md`, `docs/FFT_ANALISIS.md` y
+Inicio: `conda activate Python_3_13_DataScience`, `python monitor/historico/v14/app.py`.
+Documentación: `monitor/historico/v14/README.md`, `docs/FFT_ANALISIS.md` y
 `diagnosticos/FFT_V14.md`. Pendiente: validación manual con hardware.

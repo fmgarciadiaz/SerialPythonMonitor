@@ -2,10 +2,10 @@
 
 ## Nueva pareja V12
 
-**Scope Acquisition P992 V11** usa [Monitor V12](../monitor/v12/README.md),
+**Scope Acquisition P992 V11** usa [Monitor V12](../monitor/historico/v12/README.md),
 relay propio SCP1 V3/992 a 32 MHz y TCP 8766. Iniciar con
 `python3 tools/usb_stream.py start --firmware v11_p992`.
-[Guía y manifiesto](v11_p992/README.md). No usar monitor V11/V10 con esta app.
+[Guía y manifiesto](historico/v11_p992/README.md). No usar monitor V11/V10 con esta app.
 
 
 Para V10 usar **Scope Acquisition Config V8** con el relay configurable de la

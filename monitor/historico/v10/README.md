@@ -5,7 +5,7 @@ heatmap y comparación Bode. [Proyecto](../../../README.md) ·
 [Arquitectura y diagramas](../../../docs/MONITOR_TECNICO.md) ·
 [Historia completa](../../../docs/HISTORIA.md).
 
-![Panel principal de V10](../../../assets/monitor_v10_actual.png)
+![Panel principal de V10](../../../assets/historico/monitor_v10_actual.png)
 
 ## Uso
 

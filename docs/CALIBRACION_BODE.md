@@ -71,7 +71,7 @@ python tools/calibrate_bode.py --loopback-confirmed --list
 Un reporte interrumpido se puede continuar con `--resume-report RUTA`.
 `--bits` y `--rates` permiten limitar la tanda. Los resultados se guardan
 después de cada método en `diagnosticos/resultados_bode/`, y las referencias
-aceptadas en `monitor/v13/calibraciones/`. Al finalizar se solicita restaurar
+aceptadas en `monitor/historico/v13/calibraciones/`. Al finalizar se solicita restaurar
 ADC14/40 kHz y se confirma la salida apagada durante el cierre del receptor.
 
 [calibrate_bode_matrix.py](../tools/calibrate_bode_matrix.py) continúa un

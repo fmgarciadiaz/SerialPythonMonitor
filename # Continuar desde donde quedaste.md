@@ -1,3 +1,13 @@
+# Estado de carpetas · 8 de octubre de 2026
+
+Monitor visible: `monitor/v15/app.py`. V12, V13 y V14 están en
+`monitor/historico/`; V11 P992 en `arduino/historico/`. V12 Audio y V13 Pulse
+siguen visibles porque V15 los usa. Documentación, imports, herramientas y
+VS Code ajustados. Datos, calibraciones y respaldos conservados.
+[Mapa actual](docs/ORGANIZACION.md).
+
+El registro siguiente conserva la evolución anterior del proyecto.
+
 # Punto de continuación · 5 de octubre de 2026
 
 Pareja actual: Monitor V12 y firmware V11 P992, SCP1 V3/992, SPI 32 MHz.
@@ -43,7 +53,7 @@ con duración conservada al cambiar Fs. Posición temporal también en ms.
 ## V13 experimental · PyQt6
 
 Astra planificó/revisó y Sol6.1 implementó V13 independiente. Arranque:
-`.venv-v13/bin/python monitor/v13/app.py`. Firmware V11 P992 sin cambios.
+`.venv-v13/bin/python monitor/historico/v13/app.py`. Firmware V11 P992 sin cambios.
 V12 queda disponible; no se promovió V13 como reemplazo por rendimiento.
 PyQt6 6.11.0, runtimeQt 6.11.2, pyqtgraph0.13.7, NumPy1.23.3.
 Receptor/assets y copia de referencias Bode dentro de V13; CSV en capturas/v13.
@@ -62,12 +72,12 @@ No se operó la placa ni se modificó firmware en esta migración.
 Creado `Python_3_13_DataScience`: Python 3.13.5, NumPy 2.3.1, pandas 2.3.1,
 SciPy 1.16.0, Matplotlib 3.10.0, IPykernel y PyQt6 6.11.0 / Qt 6.11.2,
 pyqtgraph 0.14.0, pyserial 3.5. 24 pruebas V13 aprobadas y pip check limpio.
-Reproducible con monitor/v13/environment.yml; requirements-python310.txt
+Reproducible con monitor/historico/v13/environment.yml; requirements-python310.txt
 preserva dependencias del benchmark previo, cuyos resultados no describen
 el nuevo entorno. VS Code: intérprete predeterminado y launch/tarea V13
 apuntan a este Conda; launch/tarea V12 mantienen Python_3_10_DataScience.
 Arranque: `conda activate Python_3_13_DataScience`, luego
-`python monitor/v13/app.py`. Si VS Code conserva una selección vieja,
+`python monitor/historico/v13/app.py`. Si VS Code conserva una selección vieja,
 Python: Select Interpreter → Python_3_13_DataScience.
 Registro opcional de kernel Jupyter no ejecutado: revisión automática
 indisponible por capacidad del modelo; IPykernel está instalado.
@@ -399,11 +409,11 @@ Finalización confirmada: ADC14/40 kHz, salida apagada.
 
 ## Monitor con cuatro análisis FFT · 2026-10-07
 
-Nueva variante independiente en `monitor/v14/app.py`: Spectrum, Power,
+Nueva variante independiente en `monitor/historico/v14/app.py`: Spectrum, Power,
 Distortion y Transfer seleccionables junto a Modo. Astra diseñó/revisó y Sol6.1
 implementó. V13 se conserva. No cambia firmware ni se operó el Q.
 22 pruebas nuevas y 121 regresiones adaptadas pasan. SINGLE conserva su bloque
 al cambiar las vistas; coherencia/retardo N/A con un solo segmento.
-Inicio: `conda activate Python_3_13_DataScience`, `python monitor/v14/app.py`.
-Documentación: `monitor/v14/README.md`, `docs/FFT_ANALISIS.md` y
+Inicio: `conda activate Python_3_13_DataScience`, `python monitor/historico/v14/app.py`.
+Documentación: `monitor/historico/v14/README.md`, `docs/FFT_ANALISIS.md` y
 `diagnosticos/FFT_V14.md`. Pendiente: validación manual con hardware.

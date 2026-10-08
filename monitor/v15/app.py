@@ -2286,7 +2286,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self.generator_scroll.setWidgetResizable(True)
         self.generator_scroll.setFrameShape(QtWidgets.QFrame.Shape.NoFrame)
         self.generator_scroll.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
-        self.generator_scroll.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.generator_scroll.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAsNeeded)
         self.generator_scroll.setWidget(self.generator_panel)
         layout.addWidget(self.generator_scroll,1)
         self._generator_timer = QtCore.QTimer(self)
@@ -2614,8 +2614,8 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
                 if widget is not self.generator_mode: widget.hide()
             self._generator_labels[self.generator_mode].show()
         self.generator_panel.layout().activate()
-        self.generator_scroll.setMinimumHeight(getattr(self, '_generator_reserved_height',
-                                                       self.generator_panel.sizeHint().height()))
+        if hasattr(self, '_generator_reserved_height'):
+            self.generator_scroll.setFixedHeight(self._generator_reserved_height)
 
     def _reserve_generator_height(self):
         """Measure every local layout once, without emitting generator commands."""
@@ -2627,13 +2627,14 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         height = 0
         try:
             with QtCore.QSignalBlocker(self.generator_mode), QtCore.QSignalBlocker(self.generator_duration):
-                for index in range(self.generator_mode.count()):
+                # Reserve the compact signal-generator layouts. Synth pages
+                # scroll internally instead of taking space from Analysis.
+                for index in range(min(5, self.generator_mode.count())):
                     self.generator_mode.setCurrentIndex(index)
                     self._generator_availability()
                     self.generator_headroom.show()
                     self.generator_panel.layout().activate()
-                    height = max(height, self.generator_panel.sizeHint().height() +
-                                 (2 if index == 5 else -6))
+                    height = max(height, self.generator_panel.sizeHint().height() - 6)
                 self.generator_mode.setCurrentIndex(mode)
                 self._generator_availability()
                 self.generator_duration.setValue(duration)
@@ -2641,7 +2642,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             self.generator_headroom.setVisible(warning_visible)
             self._generator_syncing = syncing
         self._generator_reserved_height = height
-        self.generator_scroll.setMinimumHeight(height)
+        self.generator_scroll.setFixedHeight(height)
 
     def _arrange_generator_mode(self, wav_mode):
         grid = self.generator_panel.layout()

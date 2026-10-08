@@ -21,8 +21,8 @@ detener la pareja anterior. [Instalación y respaldo](v12_audio/README.md).
 
 ## Versiones
 
-- [V12 Audio](v12_audio/README.md): MCU y relay usados con Monitor V13; añade WAV por A0.
-- [V11 P992](v11_p992/README.md): pareja anterior con Monitor V12; predeterminado de las herramientas de consola.
+- [V12 Audio](v12_audio/README.md): MCU y relay compatibles con Monitor V15; añade WAV por A0.
+- [V11 P992](historico/v11_p992/README.md): archivada con Monitor V12; predeterminado de las herramientas de consola.
 - [Histórico](historico/README.md) y [catálogo de apps](apps_catalogo.json).
 - [Puente R4 V5](historico/v5/r4_bridge_v5/README.md): transporte UART opcional.
 

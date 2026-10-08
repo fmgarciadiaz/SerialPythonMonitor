@@ -15,7 +15,7 @@ import uuid
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-CONFIG = ROOT / 'arduino' / 'v11_p992' / 'unoq.json'
+CONFIG = ROOT / 'arduino' / 'historico' / 'v11_p992' / 'unoq.json'
 
 
 def config_path(version):
@@ -159,7 +159,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('command', choices=('status', 'compile', 'backup', 'deploy', 'start', 'stop', 'logs', 'create'))
     parser.add_argument('--version', choices=('v4', 'v5', 'v6', 'v6_polling', 'v6_dma', 'v6_irq', 'v6_adc', 'v7_dual', 'v8_config', 'v9_fast', 'v10_diag', 'v11_p992', 'v12_audio', 'v13_pulse'), default='v11_p992',
-                        help='v11_p992 actual (default); versiones anteriores en arduino/historico')
+                        help='v11_p992 histórico (default conservado); audio actual: v12_audio o v13_pulse')
     parser.add_argument('--follow', action='store_true', help='Seguir logs hasta Ctrl+C')
     args = parser.parse_args()
     try:

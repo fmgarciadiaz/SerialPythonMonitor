@@ -8,9 +8,9 @@ import sys
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
 from tools.calibrate_bode import profiles
-from monitor.v13.app import RATES as UI_RATES
-from monitor.v13.receiver.unoq_acquisition import BITS
-from monitor.v13.receiver.unoq_usb import adb
+from monitor.v15.app import RATES as UI_RATES
+from monitor.v15.receiver.unoq_acquisition import BITS
+from monitor.v15.receiver.unoq_usb import adb
 
 METHODS=('tone','sweep','chirp','pulse_h1')
 

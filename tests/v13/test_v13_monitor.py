@@ -5,15 +5,15 @@ import unittest
 import numpy as np
 from unittest.mock import patch,MagicMock
 from PyQt6 import QtWidgets,QtTest
-from monitor.v13.app import SerialMonitorWindow
-from monitor.v13.qt_environment import prepare_platform_plugins
-from monitor.v13.receiver.unoq_acquisition import Configuration
+from monitor.historico.v13.app import SerialMonitorWindow
+from monitor.historico.v13.qt_environment import prepare_platform_plugins
+from monitor.historico.v13.receiver.unoq_acquisition import Configuration
 
 class FastMonitorTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):prepare_platform_plugins();cls.app=QtWidgets.QApplication.instance() or QtWidgets.QApplication([]);cls.app.setStyle("Fusion")
     def setUp(self):
-        with patch('monitor.v13.app.usb_devices',return_value=[]):self.w=SerialMonitorWindow()
+        with patch('monitor.historico.v13.app.usb_devices',return_value=[]):self.w=SerialMonitorWindow()
     def tearDown(self):self.w.serial_worker=None;self.w.close()
     def test_time_scale_converts_duration_and_preserves_it_across_rates(self):
         w = self.w
@@ -69,11 +69,11 @@ class FastMonitorTests(unittest.TestCase):
                 history.extend(indices*10 if name=='Tiempo (us)' else np.sin(indices/20))
             w.sample_counter+=count
         append(0,12000)
-        with patch('monitor.v13.spectrum.time.monotonic',return_value=10):display.render()
+        with patch('monitor.historico.v13.spectrum.time.monotonic',return_value=10):display.render()
         first=display.last_end;append(12000,10000)
-        with patch('monitor.v13.spectrum.time.monotonic',return_value=10.02):display.render()
+        with patch('monitor.historico.v13.spectrum.time.monotonic',return_value=10.02):display.render()
         self.assertEqual(display.last_end,first)
-        with patch('monitor.v13.spectrum.time.monotonic',return_value=10.06):display.render()
+        with patch('monitor.historico.v13.spectrum.time.monotonic',return_value=10.06):display.render()
         self.assertGreater(display.last_end,first)
         self.assertGreaterEqual(len(display.frames),3)
         self.assertEqual(w.sample_counter,22000)
@@ -157,10 +157,10 @@ class FastMonitorTests(unittest.TestCase):
         self.assertLess(float(w.spectral.frames[-1][1][0].max()),-200)
 
     def test_queue_delay_is_measured_without_discarding_delayed_samples(self):
-        from monitor.v13.app import TimedBatch
+        from monitor.historico.v13.app import TimedBatch
         w=self.w;data=self._batch_125k(113)
-        with patch('monitor.v13.app.time.monotonic',return_value=10):batch=TimedBatch(data)
-        with patch('monitor.v13.app.time.monotonic',return_value=10.2):w.handle_batch(batch)
+        with patch('monitor.historico.v13.app.time.monotonic',return_value=10):batch=TimedBatch(data)
+        with patch('monitor.historico.v13.app.time.monotonic',return_value=10.2):w.handle_batch(batch)
         self.assertEqual(w.sample_counter,113)
         self.assertAlmostEqual(w.batch_queue_delay_ms,200)
         self.assertEqual(w.timed_batch_count,1)
@@ -186,7 +186,7 @@ class FastMonitorTests(unittest.TestCase):
         w.spectral.set_mode(1);updates=0
         for tick in range(64):
             w.sample_counter+=2000;previous=w.spectral.last_end
-            with patch('monitor.v13.spectrum.time.monotonic',return_value=10+tick*.016):w.spectral.render()
+            with patch('monitor.historico.v13.spectrum.time.monotonic',return_value=10+tick*.016):w.spectral.render()
             updates+=w.spectral.last_end!=previous
         self.assertGreaterEqual(updates,29)
         self.assertLessEqual(updates,32)
