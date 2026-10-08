@@ -18,6 +18,10 @@ para el análisis y audio, Numba para los cálculos recurrentes del sinte, C/C++
 sobre Linux. Los temporizadores fijan los tiempos de ADC/DAC y DMA mueve los
 bloques; USB/ADB conecta el instrumento con la computadora.
 
+**[Arquitectura completa del proyecto](docs/ARQUITECTURA.md)** — recorrido
+ordenado por el monitor, relay Linux, aplicación App Lab y sketch MCU;
+flujos de muestras y órdenes, temporizadores, DMA, IRQ, mutex, colas y carga del Q.
+
 ## V(t) · osciloscopio
 
 ![Monitor en modo V(t): dos canales y respuesta RC](assets/monitor_vt.png)

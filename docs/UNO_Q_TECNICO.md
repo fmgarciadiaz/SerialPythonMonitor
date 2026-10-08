@@ -1,5 +1,7 @@
 # Arduino UNO Q · MCU, DMA y circuito
 
+[Arquitectura completa del sistema](ARQUITECTURA.md)
+
 [Proyecto](../README.md) · [Firmware de audio](../arduino/v12_audio/README.md)
 
 ## MCU y MPU en la pareja actual
@@ -10,7 +12,8 @@ genera la salida DAC de A0. El MPU ejecuta Linux y App Lab; aloja el
 relay nativo que intercambia tramas SPI con el MCU y las entrega al PC
 por TCP reenviado mediante USB/ADB. El monitor Python se ejecuta en el PC.
 
-El conjunto V13/V12 Audio y la pareja anterior V12/V11 P992 usan SCP1 V3 de 992 bytes. El ADC pasó de 40 a
+Monitor V15 con Q V12 Audio o V13 Pulse usa SCP1 V3 de 992 bytes;
+la pareja histórica Monitor V12/Q V11 P992 comparte ese tamaño de trama. El ADC pasó de 40 a
 50 MHz mediante PLL2 para todos los perfiles; admite 16 bits por
 oversampling ×16 hasta 62,5 kHz. El kernel de reloj es compartido con DAC: el
 cambio requiere verificar también su configuración y generación de señal.

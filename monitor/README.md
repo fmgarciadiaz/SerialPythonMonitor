@@ -1,5 +1,7 @@
 # Monitor Python
 
+[Arquitectura completa: partes, flujos y carga del Q](../docs/ARQUITECTURA.md)
+
 Interfaz de osciloscopio, generador, FFT, heatmap, Bode y grabación CSV/WAV.
 El receptor de cada aplicación corre en el PC; el relay corre en Linux del Q.
 

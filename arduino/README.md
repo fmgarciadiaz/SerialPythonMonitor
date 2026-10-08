@@ -1,5 +1,7 @@
 # Adquisición y generación en Arduino UNO Q
 
+[Arquitectura completa: partes, flujos y carga del Q](../docs/ARQUITECTURA.md)
+
 El MCU ejecuta el sketch STM32 que adquiere A2/A3 y genera por A0 con
 temporizadores y DMA. El MPU ejecuta Linux: App Lab mantiene la aplicación
 y un relay nativo separado lleva muestras y comandos por SPI y USB/ADB.

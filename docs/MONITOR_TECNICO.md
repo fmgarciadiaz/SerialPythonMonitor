@@ -1,6 +1,8 @@
 # Monitor Python · funcionamiento técnico
 
-[Proyecto](../README.md) · [Uso del monitor](../monitor/historico/v14/README.md)
+[Arquitectura completa del sistema](ARQUITECTURA.md)
+
+[Proyecto](../README.md) · [Uso del monitor](../monitor/v15/README.md)
 
 ## Flujo de datos
 
@@ -31,13 +33,13 @@ La frecuencia real se deriva de timestamps; FPS describe dibujo, no adquisición
 
 | Archivo | Responsabilidad |
 |---|---|
-| [app.py](../monitor/historico/v13/app.py) | Ventana, recepción, historial, trigger, controles, CSV y generador |
-| [spectrum.py](../monitor/historico/v13/spectrum.py) | FFT, heatmap, ejes y escalas estables |
-| [bode.py](../monitor/historico/v13/bode.py) | Barrido, asentamiento, ajuste de tono, comparación y restauración |
-| [bode_calibration.py](../monitor/historico/v13/bode_calibration.py) | Lectura de referencia y corrección sin extrapolar |
-| [receiver](../monitor/historico/v13/receiver/README.md) | Recepción, protocolos y conexión USB/ADB en el PC |
-| [wav_source.py](../monitor/historico/v13/wav_source.py) | Lectura, selección de canal y remuestreo de audio |
-| [audio_dc.py](../monitor/historico/v13/audio_dc.py) | Eliminación DC continua para grabación WAV |
+| [app.py](../monitor/v15/app.py) | Ventana, recepción, historial, trigger, controles, CSV y generador |
+| [spectrum.py](../monitor/v15/spectrum.py) | FFT, heatmap, ejes y escalas estables |
+| [bode.py](../monitor/v15/bode.py) | Barrido, asentamiento, ajuste de tono, comparación y restauración |
+| [bode_calibration.py](../monitor/v15/bode_calibration.py) | Lectura de referencia y corrección sin extrapolar |
+| [receiver](../monitor/v15/receiver/README.md) | Recepción, protocolos y conexión USB/ADB en el PC |
+| [wav_source.py](../monitor/v15/wav_source.py) | Lectura, selección de canal y remuestreo de audio |
+| [audio_dc.py](../monitor/v15/audio_dc.py) | Eliminación DC continua para grabación WAV |
 
 ## Bode y calibración
 
@@ -66,11 +68,11 @@ visual. Cada curva añadida conserva el perfil con el que fue adquirida.
 
 ## FFT, heatmap y dibujo
 
-La nueva variante añade Spectrum, Power, Distortion y Transfer.
+El monitor actual ofrece Spectrum, Power, Distortion y Transfer.
 [Algoritmos, unidades y límites](FFT_ANALISIS.md) ·
-[Motor numérico](../monitor/historico/v14/spectral_analysis.py).
+[Motor numérico](../monitor/v15/spectral_analysis.py).
 
-Las opciones de la versión conservada se describen a continuación.
+La representación espectral conserva los siguientes criterios.
 
 FFT unilateral con amplitud pico normalizada por ganancia coherente de la
 ventana; DC y Nyquist no se duplican. Se puede mostrar dBV o voltios pico.

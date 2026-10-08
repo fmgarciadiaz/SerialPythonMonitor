@@ -1,5 +1,7 @@
 # Documentación del instrumento
 
+**[Arquitectura completa: componentes, flujos, DMA/IRQ y carga del Q](ARQUITECTURA.md)**
+
 Guías del monitor, hardware, transporte y audio. [Descripción del proyecto](../README.md).
 
 | Tema | Guía |
@@ -21,7 +23,7 @@ Las pruebas de interfaz sin hardware y las capturas físicas se documentan por s
 
 ## Versiones y enlaces
 
-- [Monitor V13 / Q V12 Audio](../monitor/historico/v13/README.md): conjunto usado actualmente.
+- [Monitor V15](../monitor/v15/README.md): conjunto actual, con Q V12 Audio o V13 Pulse.
 - [Monitor V12 / Q V11 P992](../monitor/historico/v12/README.md): pareja anterior conservada.
 - [Historia y catálogo completo](HISTORIA.md).
 
