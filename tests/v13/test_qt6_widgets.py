@@ -1,3 +1,4 @@
+from monitor.number_format import number
 """Qt6-specific regressions that exercise real controls and rendering."""
 import os
 os.environ.setdefault('QT_QPA_PLATFORM', 'offscreen')
@@ -166,7 +167,7 @@ class Qt6WidgetsTests(unittest.TestCase):
             with patch('monitor.v13.app.QtWidgets.QFileDialog.getOpenFileName',return_value=(str(path),'WAV')):
                 w._choose_wav()
             self.assertTrue(w.wav_play.isEnabled())
-            self.assertIn('44.1 kHz',w.generator_status.text())
+            self.assertIn(number(44.1) + ' kHz',w.generator_status.text())
             self.assertIn('16 bits',w.generator_status.text())
             self.assertIn('2 canales',w.generator_status.text())
             path.write_bytes(b'not a wav')

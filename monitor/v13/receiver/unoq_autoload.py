@@ -11,7 +11,7 @@ import time
 from monitor.v13.receiver.unoq_usb import adb_path
 
 ROOT = Path(__file__).resolve().parents[3]
-APPS = {'Scope WAV V12 Audio': 'v12_audio', 'Scope Acquisition P992 V11': 'v11_p992'}
+APPS = {'Scope Pulse US V13 Experimental': 'v13_pulse', 'Scope WAV V12 Audio': 'v12_audio', 'Scope Acquisition P992 V11': 'v11_p992'}
 
 
 def run_command(args, running=lambda: True, timeout=180):
@@ -61,7 +61,7 @@ def ensure_scope(serial, progress=lambda text: None, running=lambda: True, runne
     available=[app for app in apps if app.get('name') in APPS and app.get('status') in ('running','stopped')]
     if active:
         version=APPS[active[0]['name']]
-        if os.environ.get('MONITOR_V13_WAV_FIRMWARE')=='v12_audio' and version!='v12_audio':
+        if os.environ.get('MONITOR_V13_WAV_FIRMWARE')=='v12_audio' and version not in ('v12_audio','v13_pulse'):
             raise RuntimeError('Se seleccionó V12 Audio, pero está activo V11 P992; cambiar la aplicación del Q antes de conectar.')
     else:
         version=next((v for v in ('v12_audio','v11_p992') if any(APPS[a['name']]==v for a in available)),None)

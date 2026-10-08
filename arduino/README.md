@@ -25,3 +25,5 @@ detener la pareja anterior. [Instalación y respaldo](v12_audio/README.md).
 - [V11 P992](v11_p992/README.md): pareja anterior con Monitor V12; predeterminado de las herramientas de consola.
 - [Histórico](historico/README.md) y [catálogo de apps](apps_catalogo.json).
 - [Puente R4 V5](historico/v5/r4_bridge_v5/README.md): transporte UART opcional.
+
+[V13 Pulse experimental](v13_pulse/README.md).

@@ -21,21 +21,22 @@ class GeneratorConfig:
     low: int = 0
     high: int = 4095
     duration: int = 1000
+    duration_us: int = 0
     def __post_init__(self):
         if any(type(v) is not int for v in self.__dict__.values()) or not (
             0 <= self.wave <= 4 and self.enabled in (0,1) and 0 <= self.mode <= 2 and
             100 <= self.frequency <= MAX_FREQUENCY_MHZ and 100 <= self.final_frequency <= MAX_FREQUENCY_MHZ and
-            0 <= self.low <= self.high <= 4095 and 1 <= self.duration <= 600000 and
+            0 <= self.low <= self.high <= 4095 and ((100 <= self.duration <= 65535 and self.wave == 4 and self.mode == 0) if self.duration_us else 1 <= self.duration <= 600000) and self.duration_us in (0,1) and
             (self.wave != 4 or self.mode == 0)):
             raise ValueError('Generador: frecuencia 0,1 Hz–20 kHz, niveles 0–3,3 V y duración 1–600.000 ms')
     def pack(self):
-        return CONFIG.pack(self.wave, self.enabled, self.mode, 0, self.frequency,
+        return CONFIG.pack(self.wave, self.enabled, self.mode, self.duration_us, self.frequency,
                            self.final_frequency, self.low, self.high, self.duration)
 
 def unpack_config(p, offset):
     wave, enabled, mode, reserved, frequency, final, low, high, duration = CONFIG.unpack_from(p,offset)
-    if reserved: raise ValueError('Campo reservado')
-    return GeneratorConfig(wave,enabled,mode,frequency,final,low,high,duration)
+    if reserved not in (0,1): raise ValueError('Unidad de duración inválida')
+    return GeneratorConfig(wave,enabled,mode,frequency,final,low,high,duration,reserved)
 
 def generator_request(rid, config=None):
     if not 0x80000000 <= rid < 0xffffffff: raise ValueError('Identificador inválido')
@@ -53,6 +54,7 @@ class GeneratorReply:
     running: bool
     active: GeneratorConfig
     requested: Optional[GeneratorConfig]
+    pulse_us_capable: bool = False
 
 def generator_reply(p):
     if len(p)!=992 or struct.unpack_from('<4sHH',p)!=(b'SCP1',3,9) or struct.unpack_from('<I',p,12)[0]!=972:
@@ -64,9 +66,9 @@ def generator_reply(p):
         active=unpack_config(p,24)
         # Unsupported request fields are echoed verbatim by the MCU on rejection.
         requested=unpack_config(p,44) if phase!=Phase.REJECTED else None
-        if not 0x80000000<=rid<0xffffffff or p[22]>1 or p[23] or any(p[64:988]): raise ValueError()
+        if not 0x80000000<=rid<0xffffffff or p[22]>1 or p[23]>1 or any(p[64:988]): raise ValueError()
         if (phase==Phase.REJECTED)!=(reason!=Reason.OK): raise ValueError()
         if p[22] and not active.enabled: raise ValueError()
         if phase==Phase.APPLIED and active!=requested: raise ValueError()
     except ValueError as exc: raise ProtocolError('Estado de generador contradictorio') from exc
-    return GeneratorReply(rid,phase,reason,bool(p[22]),active,requested)
+    return GeneratorReply(rid,phase,reason,bool(p[22]),active,requested,bool(p[23]&1))

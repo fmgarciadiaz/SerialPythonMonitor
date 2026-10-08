@@ -1,3 +1,5 @@
+from monitor.number_format import number, formats
+from monitor.locale_axis import LocaleAxis
 """Live one-sided spectra and bounded scrolling spectrograms."""
 from collections import deque
 import numpy as np
@@ -29,7 +31,7 @@ def _amplitudes(values, weights, remove_dc):
     return amplitude
 
 
-class FrequencyAxis(pg.AxisItem):
+class FrequencyAxis(LocaleAxis):
     """Keep logarithmic labels readable while retaining minor grid lines."""
     def __init__(self, orientation):
         super().__init__(orientation)
@@ -46,7 +48,7 @@ class FrequencyAxis(pg.AxisItem):
         return [(1, major), (None, minor)]
 
     def logTickStrings(self, values, scale, spacing):
-        return [f'{10**value*scale:.4g}' for value in values]
+        return [f'{number(10**value*scale, formats.n_4g)}' for value in values]
 
 
 class SpectralDisplay:
@@ -261,7 +263,7 @@ class SpectralDisplay:
             self.last_fast_render = now if elapsed >= 2*interval else self.last_fast_render+interval
         n = int(self.size.currentText())
         if len(owner.sample_numbers) < n:
-            self.info.setText(f'Esperando {n:,} muestras…'); return
+            self.info.setText(f'Esperando {number(n, formats.n_)} muestras…'); return
         timestamps = owner.series.get('Tiempo (us)')
         if timestamps is not None and len(timestamps) >= n:
             dt = np.diff(timestamps[-n:])
@@ -309,7 +311,7 @@ class SpectralDisplay:
                 spectra.append(20 * np.log10(np.maximum(amplitudes, 1e-12)) if self.scale.currentIndex() == 0 else amplitudes)
             self.frames.append((block_end, spectra)); self.last_end = block_end
         if not self.frames: return
-        self.info.setText(f'Fs {fs:,.0f} Hz · Δf {fs/n:.2f} Hz\nVentana {n/fs*1000:.1f} ms · paso {hop/fs*1000:.1f} ms\nColor/amplitud: {self.scale.currentText()}')
+        self.info.setText(f'Fs {number(fs, formats.n__0f)} Hz · Δf {number(fs/n, formats.n_2f)} Hz\nVentana {number(n/fs*1000, formats.n_1f)} ms · paso {number(hop/fs*1000, formats.n_1f)} ms\nColor/amplitud: {self.scale.currentText()}')
         latest_values = self.frames[-1][1]
         shared_range = None
         if self.mode == 1 and self.lock_axes.isChecked():

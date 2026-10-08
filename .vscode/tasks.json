@@ -2,6 +2,48 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "Monitor V15: Synth y análisis",
+      "type": "process",
+      "command": "/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/bin/python",
+      "args": [
+        "${workspaceFolder}/monitor/v15/app.py"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "MONITOR_V13_WAV_FIRMWARE": "v12_audio"
+        }
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Monitor V14: Abrir WAV A0 (V12 Audio)",
+      "type": "process",
+      "command": "/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/bin/python",
+      "args": [
+        "${workspaceFolder}/monitor/v14/app.py"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "MONITOR_V13_WAV_FIRMWARE": "v12_audio"
+        }
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Monitor V14: Abrir PyQt6 SPI P992",
+      "type": "process",
+      "command": "/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/bin/python",
+      "args": [
+        "${workspaceFolder}/monitor/v14/app.py"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
       "label": "Monitor V13: Abrir WAV A0 (V12 Audio)",
       "type": "process",
       "command": "/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/bin/python",

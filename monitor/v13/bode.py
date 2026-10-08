@@ -1,3 +1,4 @@
+from monitor.number_format import number, formats
 """Stepped sine sweep and synchronous two-channel transfer measurement."""
 import os
 os.environ["PYQTGRAPH_QT_LIB"] = "PyQt6"
@@ -6,6 +7,7 @@ import numpy as np
 from monitor.v13.qt_environment import prepare_platform_plugins
 prepare_platform_plugins()
 from PyQt6 import QtWidgets, QtGui
+from monitor.v13.status_widgets import StatusLabel
 import pyqtgraph as pg
 if pg.Qt.QT_LIB != "PyQt6":
     raise RuntimeError("V13 requiere pyqtgraph con PyQt6; iniciar en un proceso separado de V12.")
@@ -13,6 +15,23 @@ from monitor.v13.receiver.unoq_generator import GeneratorConfig
 from monitor.v13.receiver.unoq_switch import Phase
 from monitor.v13.bode_calibration import load_reference, correct_transfer
 from monitor.v13.plot_fill import area_polygons
+
+
+def render_envelope(x, y, bins=1024):
+    """Bound drawing cost; keep extrema and conservatively preserve missing bands."""
+    x, y = np.asarray(x), np.asarray(y)
+    if len(x) <= bins*2:
+        return x, y
+    indices=[];values=[]
+    for chunk in np.array_split(np.arange(len(x)),bins):
+        block=y[chunk]
+        if not np.all(np.isfinite(block)):
+            # Never join across a missing phase/reference in a reduced bucket.
+            indices.append(chunk[0]);values.append(np.nan)
+            continue
+        chosen=sorted(set((0,len(chunk)-1,int(np.argmin(block)),int(np.argmax(block)))))
+        indices.extend(chunk[chosen]);values.extend(block[chosen])
+    return x[indices], np.asarray(values)
 
 
 def tone_transfer(t, vin, vout, frequency):
@@ -68,6 +87,10 @@ class BodeSweep:
         self.result = []
         self.history = []
         self.history_profiles = []
+        self.history_instruments = []
+        self.history_methods = []
+        self.result_instrument = None
+        self.result_method = 'tone'
         self.result_profile = None
         self.reference = load_reference()
         self.curve_sets = [spectral.curves]
@@ -83,7 +106,7 @@ class BodeSweep:
         self.deadline = 0
         self.locked = []
         self.start = BodeFrequencySpinBox(); self.start.setRange(.1,20000); self.start.setValue(20); self.start.setSuffix(' Hz')
-        self.end = BodeFrequencySpinBox(); self.end.setRange(.1,20000); self.end.setValue(10000); self.end.setSuffix(' Hz')
+        self.end = BodeFrequencySpinBox(); self.end.setRange(.1,20000); self.end.setValue(5000); self.end.setSuffix(' Hz')
         self.points = QtWidgets.QSpinBox(); self.points.setRange(1,100); self.points.setValue(10)
         self.points.setToolTip('Puntos espaciados uniformemente en log10(f). Cada década completa tiene la misma densidad; incluye el extremo final.')
         self.settle = QtWidgets.QSpinBox(); self.settle.setRange(0,60000); self.settle.setValue(200); self.settle.setSuffix(' ms')
@@ -98,7 +121,7 @@ class BodeSweep:
             spin.setKeyboardTracking(False)
             spin.valueChanged.connect(self.update_estimate)
         self.update_estimate()
-        self.coverage = QtWidgets.QLabel()
+        self.coverage = StatusLabel()
         self.coverage.setWordWrap(True)
         form.addRow(self.coverage)
         self.curve_labels = QtWidgets.QLabel()
@@ -107,7 +130,7 @@ class BodeSweep:
         self.calibrated = QtWidgets.QCheckBox('Corregir con calibración')
         self.calibrated.setChecked(self.reference is not None)
         self.calibrated.setEnabled(self.reference is not None)
-        self.calibrated.setToolTip('Referencia A0 → A2 y A3. Sólo corrige el mismo perfil ADC y dentro del rango medido.')
+        self.calibrated.setToolTip('Requiere referencia validada para el firmware, reloj ADC y perfil conectados. La referencia histórica no se aplica a la cadena actual.')
         self.calibrated.toggled.connect(self.draw)
         form.addRow(self.calibrated)
         self.log_frequency = QtWidgets.QCheckBox('Eje X logarítmico')
@@ -121,7 +144,7 @@ class BodeSweep:
         buttons = QtWidgets.QHBoxLayout()
         buttons.addWidget(self.add_button); buttons.addWidget(self.button)
         form.addRow(buttons)
-        self.status = QtWidgets.QLabel('A2 = entrada · A3 = salida\nGanancia y fase: V_OUT / V_IN')
+        self.status = StatusLabel('A2 = entrada · A3 = salida\nGanancia y fase: V_OUT / V_IN')
         self.status.setStyleSheet('color:#aeb8c8; background:transparent; border:none;')
         self.status.setWordWrap(True); form.addRow(self.status)
 
@@ -135,8 +158,8 @@ class BodeSweep:
         fs = config.rate if config is not None else 31250
         frequencies = decade_frequencies(self.start.value(),self.end.value(),self.points.value())
         seconds = sum(sum(self.timing(frequency,fs)) for frequency in frequencies)
-        duration = f'{seconds:.1f} s' if seconds < 60 else f'{seconds/60:.1f} min'
-        self.estimate.setText(f'{len(frequencies)} puntos · mínimo {duration}\n+ comunicación y entrega de muestras')
+        duration = f'{number(seconds, formats.n_1f)} s' if seconds < 60 else f'{number(seconds/60, formats.n_1f)} min'
+        self.estimate.setText(f'{len(frequencies)} frecuencias · {duration}')
 
     def change_axis(self):
         if self.spectral.mode == 3:
@@ -150,12 +173,14 @@ class BodeSweep:
         owner = self.owner
         if owner.serial_worker is None or not owner.is_running:
             self.status.setText('Conectar el Q y activar RUN para medir Bode.'); return
+        if owner._wav_active or owner._wav_preparing:
+            self.status.setText('Detener la reproducción Wav antes de medir Bode.'); return
         if owner._auto_apply_timer.isActive() or not owner.config_rate_combo.isEnabled():
             self.status.setText('Esperar la confirmación de adquisición antes de iniciar Bode.'); return
         for spin in (self.start,self.end,self.points,self.settle,self.cycles): spin.interpretText()
         fs = owner.applied_configuration.rate
         if self.start.value() >= self.end.value() or self.end.value() >= .45*fs:
-            self.status.setText(f'Rango inválido: inicio < final < {fs*.45:,.0f} Hz (0,45 Fs).'); return
+            self.status.setText(f'Rango inválido: inicio < final < {number(fs*.45, formats.n__0f)} Hz (0,45 Fs).'); return
         if not owner._generator_state_known or owner._generator_requested is not None:
             self.status.setText('Esperar confirmación del generador antes de iniciar Bode.'); return
         try:
@@ -170,10 +195,15 @@ class BodeSweep:
             if self.result:
                 self.history.append(list(self.result))
                 self.history_profiles.append(self.result_profile)
+                self.history_instruments.append(self.result_instrument)
+                self.history_methods.append(self.result_method)
         else:
             self.history.clear()
             self.history_profiles.clear()
+            self.history_instruments.clear(); self.history_methods.clear()
         self.result_profile = owner.applied_configuration
+        self.result_instrument = self.spectral.bode.instrument
+        self.result_method = 'tone'
         self.index = 0; self.result.clear(); self.invalid_points = []; self.active = True
         self.add_button.setEnabled(False)
         self.coverage.clear()
@@ -196,19 +226,18 @@ class BodeSweep:
         self.frequency = frequency/1000
         self.waiting = True; self.anchor = None; self.buffer.clear()
         self.last_timestamp = None
-        self.seen = 0
-        self.stride = max(1, int(self.owner.applied_configuration.rate / max(500, self.frequency*32)))
         self.deadline = time.monotonic()+10
         self.owner._generator_requested = self.config
         try:
             self.owner.serial_worker.request_generator(self.config)
         except Exception as exc:
             self.cancel(f'No se pudo iniciar el tono: {exc}'); return
-        self.status.setText(f'{self.index+1}/{len(self.frequencies)} · {self.frequency:g} Hz · esperando Q…')
+        self.status.setText(f'{self.index+1}/{len(self.frequencies)} · {number(self.frequency, formats.ng)} Hz · esperando Q…')
 
     def confirmed(self, reply):
-        if not self.active: return
-        if reply.phase == Phase.REJECTED and reply.requested != self.config: return
+        if not self.active or not self.waiting: return
+        # The receiver already correlates REJECTED replies with the pending id.
+        # Their requested payload is intentionally decoded as None.
         if reply.phase == Phase.APPLIED and reply.active != self.config: return
         if reply.phase == Phase.REJECTED:
             self.cancel(f'Q rechazó el tono: {reply.reason.name}')
@@ -216,7 +245,7 @@ class BodeSweep:
             self.waiting = False
             settle, duration = self.timing(self.frequency,self.owner.applied_configuration.rate)
             self.deadline = time.monotonic()+settle+duration+max(10, (settle+duration)*.2)
-            self.status.setText(f'{self.index+1}/{len(self.frequencies)} · {self.frequency:g} Hz · midiendo…')
+            self.status.setText(f'{self.index+1}/{len(self.frequencies)} · {number(self.frequency, formats.ng)} Hz · midiendo…')
 
     def batch(self, batch):
         if not self.active or self.waiting: return
@@ -233,14 +262,12 @@ class BodeSweep:
             self.last_timestamp = t
             if self.anchor is None: self.anchor = t
             if t-self.anchor < settle: continue
-            self.seen += 1
-            if self.seen % self.stride: continue
             self.buffer.append((t,sample['V_IN'],sample['V_OUT']))
             if len(self.buffer) > 2000000:
                 self.cancel('Bloque demasiado grande: aumentar frecuencia inicial.'); return
             if t-self.anchor >= settle+duration:
                 data = np.asarray(self.buffer)
-                dt = np.diff(data[:,0]); nominal = self.stride/self.owner.applied_configuration.rate
+                dt = np.diff(data[:,0]); nominal = 1/self.owner.applied_configuration.rate
                 try:
                     if np.any(dt<=0) or np.any(np.abs(dt-nominal)>max(1.1e-6, nominal*.25)):
                         raise ValueError('Discontinuidad de adquisición')
@@ -255,7 +282,7 @@ class BodeSweep:
                 self.index += 1
                 if self.index == len(self.frequencies):
                     undefined = sum(np.isnan(p) and not np.isnan(g) for _,g,p in self.result)
-                    self.cancel(f'Barrido terminado · {self.frequencies[0]:g}–{self.frequencies[-1]:g} Hz · {len(self.invalid_points)} referencias inválidas · {undefined} fases indeterminadas'); return
+                    self.cancel(f'Barrido terminado · {number(self.frequencies[0], formats.ng)}–{number(self.frequencies[-1], formats.ng)} Hz · {len(self.invalid_points)} referencias inválidas · {undefined} fases indeterminadas'); return
                 self.next_tone()
                 return  # Discard the rest of the batch from the previous tone.
 
@@ -267,6 +294,8 @@ class BodeSweep:
         self.curve_labels.setText(' &nbsp; '.join(
             f'<span style="color:{self.owner.channel_palette[index]}">● {index+1}</span>'
             for index, result in enumerate(self.history + [self.result]) if result))
+        self.curve_labels.setVisible(bool(self.curve_labels.text()))
+        self.coverage.setVisible(bool(self.result) and not getattr(self.owner,'_central_status_ready',False))
         if not self.result: return
         data = np.asarray(self.result)
         target = len(self.frequencies) if hasattr(self, 'frequencies') else len(data)
@@ -274,7 +303,8 @@ class BodeSweep:
         phases = int(np.count_nonzero(np.isfinite(data[:,2])))
         self.coverage.setText(f'Ganancia: {gains}/{target} · Fase: {phases}/{target}')
         if self.calibrated.isChecked() and self.result_profile is not None:
-            _, corrected = correct_transfer(data, self.reference, self.result_profile)
+            reference, instrument = self.reference_for(len(self.history), self.result_profile)
+            _, corrected = correct_transfer(data, reference, self.result_profile, instrument)
             self.coverage.setText(self.coverage.text()+f'\nCalibración: {int(corrected.sum())}/{len(data)} puntos')
         self.coverage.setToolTip('Cada marcador es una frecuencia medida. La fase se omite cuando no se puede resolver, sin descartar la ganancia.')
 
@@ -284,7 +314,8 @@ class BodeSweep:
         profiles = self.history_profiles + [self.result_profile]
         profile = profiles[index] if index < len(profiles) else None
         if self.calibrated.isChecked() and profile is not None:
-            data, _ = correct_transfer(data, self.reference, profile)
+            reference, instrument = self.reference_for(index, profile)
+            data, _ = correct_transfer(data, reference, profile, instrument)
         color = self.owner.channel_palette[index]
         for i in range(2):
             values = data[:,1].copy() if i == 0 else data[:,2].copy()
@@ -293,7 +324,7 @@ class BodeSweep:
                 finite = values[np.isfinite(values)]
                 floor = min(-160, float(finite.min())-20) if len(finite) else -160
                 values[zero] = floor
-                suffix = f' · cero: −∞ dB (piso visual {floor:g} dB)' if np.any(zero) else ''
+                suffix = f' · cero: −∞ dB (piso visual {number(floor, formats.ng)} dB)' if np.any(zero) else ''
                 self.spectral.plots[0].setTitle('Ganancia V_OUT / V_IN'+suffix)
             if i == 1:
                 valid = np.isfinite(values)
@@ -301,14 +332,28 @@ class BodeSweep:
                 ends = np.flatnonzero(valid & ~np.r_[valid[1:], False])+1
                 for start, end in zip(starts, ends):
                     values[start:end] = np.rad2deg(np.unwrap(np.deg2rad(values[start:end])))
-            self.curve_sets[index][i].setData(data[:,0],values, pen=color, symbol='o', symbolSize=4, symbolPen=None, symbolBrush=color)
+            xdraw, ydraw = render_envelope(data[:,0],values)
+            self.curve_sets[index][i].setData(xdraw,ydraw, pen=color,
+                symbol='o' if len(data)<=512 else None, symbolSize=4,
+                symbolPen=None, symbolBrush=color, connect='finite')
             shadow = QtGui.QColor(color)
             shadow.setAlpha(38)
             finite = values[np.isfinite(values)]
             bottom = float(finite.min()-max(3, np.ptp(finite)*.1)) if len(finite) else -160
-            xfill, yfill = area_polygons(data[:,0], values, bottom)
+            xfill, yfill = area_polygons(xdraw, ydraw, bottom)
             self.shadows[index][i].setData(xfill, yfill,
                 pen=None, fillLevel='enclosed', fillBrush=pg.mkBrush(shadow), connect='finite')
+
+    def reference_for(self, index, profile):
+        from monitor.v13.bode_calibration import find_reference
+        if index < len(self.history):
+            instrument = self.history_instruments[index] if index < len(self.history_instruments) else None
+            method = self.history_methods[index] if index < len(self.history_methods) else None
+        else:
+            instrument, method = self.result_instrument, self.result_method
+        if instrument is None or instrument != self.spectral.bode.instrument:
+            return None, None
+        return find_reference(instrument, profile, method), instrument
 
     def tick(self):
         if self.active and (not self.owner.is_running or self.owner.serial_worker is None):

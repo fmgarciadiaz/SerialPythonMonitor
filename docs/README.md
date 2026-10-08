@@ -24,3 +24,9 @@ Las pruebas de interfaz sin hardware y las capturas físicas se documentan por s
 - [Monitor V13 / Q V12 Audio](../monitor/v13/README.md): conjunto usado actualmente.
 - [Monitor V12 / Q V11 P992](../monitor/v12/README.md): pareja anterior conservada.
 - [Historia y catálogo completo](HISTORIA.md).
+
+## Audio y sintetizador
+
+[Wav: grabación y reproducción](../README.md#wav--grabación-y-reproducción) ·
+[Synth: FM y modelos físicos](SYNTH.md) ·
+[Guía actual del monitor](../monitor/v15/README.md).

@@ -50,7 +50,8 @@ Sketch y relay compilados; 51 pruebas locales aprobadas.
 Prueba física inicial aprobada: WAV estéreo 44,1 kHz remuestreado a 20 ksps;
 L 997 Hz, R 2003 Hz y Mix con ambos tonos medidos en A2/A3. Cada pasada
 reprodujo 40000 códigos sin underrun ni discontinuidad ADC14/31,25 kHz.
-Detener confirmó IDLE y el generador previo se restauró. La pareja candidata
+En ese ensayo histórico, Detener confirmó IDLE y restauró el generador previo.
+El comportamiento actual deja el generador apagado al finalizar o detener Wav. La pareja candidata
 quedó activa en el Q. Los ensayos sostenidos posteriores se describen en la sección de tasas.
 Evidencia: [informe físico](../../diagnosticos/resultados_wav/20261005_fisico.json).
 Para volver, detener el monitor, el relay (`python tools/usb_stream.py stop`)

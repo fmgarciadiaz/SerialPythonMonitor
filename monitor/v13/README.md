@@ -107,8 +107,43 @@ recargado y probado el 2026-10-05: UART a 14 bits/31,25 kHz y
 16 bits/25 kHz; retorno a SPI confirmado. Son pruebas breves de 4 segundos.
 [Evidencia](../../diagnosticos/resultados_r4/20261005_puente_v5.json).
 
-Seleccionar Bode prepara el panel; el barrido comienza únicamente con
-los botones Repetir o Agregar.
+El botón Bode abre el menú Bode tono, Bode pulso y Bode sweep.
+Seleccionar una opción muestra su panel, sin pestañas internas. Bode sweep
+permite elegir Sweep o Chirp. La medición empieza con Repetir o Agregar.
+Pulso y Sweep/Chirp capturan A2 (entrada) y A3 (salida) conjuntamente y
+calculan ganancia en dB y fase en grados mediante espectros conjuntos. Sweep/Chirp
+usa FFT(V_OUT)/FFT(V_IN); Pulso promedia espectros cruzados (H1). Se resta
+el nivel previo de cada canal, se incluye la cola de respuesta y se omiten
+los puntos sin referencia suficiente en la entrada. Una salida atenuada
+conserva su ganancia estimada; bajo el ruido se omite la fase y la ganancia
+puede estar limitada por el ruido. Rango inicial de los tres paneles:
+20–5000 Hz. Aumentar Captura/Cola si la respuesta
+no terminó; los nulos espectrales del pulso no permiten medir transferencia.
+El asentamiento se verifica en el tramo final de la cola; su inicio puede
+contener el decaimiento del circuito. La FFT conserva la cola completa.
+La salida se apaga al terminar. Cada panel conserva sus propias curvas.
+Para pulsos de 100 µs, usar adquisición a 100 kHz cuando importe la fase:
+a 40 kHz el pulso ocupa sólo cuatro muestras y puede aparecer un error de
+fase de una muestra entre canales. El nivel y ruido previos excluyen un
+margen anterior al flanco, conservando todas las muestras para la FFT.
+
+**Promedio de pulsos:** el selector Pulsos permite 1–64 disparos, con **8 por
+defecto**. Cada captura utiliza la misma ventana respecto del flanco, con
+50 ms previos y el tiempo de Captura posterior. Se acumula
+`H1 = sum(Y·conj(X)) / sum(|X|²)`, sin promediar dB ni ángulos. Se espera
+el asentamiento antes del siguiente disparo; la curva aparece al completar
+el conjunto. Cancelar descarta el conjunto incompleto y apaga la salida.
+Con varios pulsos, la fase requiere coherencia de al menos 0,8, además de
+señal suficiente. Los nulos de entrada siguen sin ser medibles.
+
+La [comparación física](../../diagnosticos/resultados_bode/20261006_promedio_pulsos_fisico.json)
+con A0 directo a A2 y A3, pulso de 100 µs y Captura de 0,5 s comparó dos
+repeticiones de 1, 4, 8 y 16 pulsos a 40 y 100 kHz. Ocho pulsos tardaron
+6,8–7,0 s. A 100 kHz, el error RMS de ganancia entre 20 y 5000 Hz bajó de
+1,08 dB con uno a 0,44 dB con ocho; dieciséis dieron 0,31 dB en 13,5 s.
+El promedio reduce ruido aleatorio, pero no corrige desfases instrumentales:
+a 40 kHz la fase no mejoró de forma consistente al aumentar N. Estas curvas
+H1 no usan las referencias anteriores del método de un solo pulso.
 
 
 ## Grabación CSV o WAV
@@ -166,7 +201,8 @@ El archivo completo se prepara en memoria del host. No admite WAV comprimido.
 A0 alimenta A2/A3 mediante el cableado externo; la adquisición continúa
 con su propio perfil. El firmware usa créditos y una reserva de 384/192/153,6 ms según la tasa;
 si faltan datos, detiene la salida en el centro y muestra el error.
-El generador previo se restaura al terminar normalmente o pulsar Detener.
+Al terminar normalmente o pulsar Detener, la salida queda apagada;
+no se reactiva la onda del generador anterior.
 
 Requiere el [firmware y relay V12 Audio](../../arduino/v12_audio/README.md)
 V13 detecta automáticamente la aplicación V12 Audio activa en el Q y consulta
@@ -316,6 +352,86 @@ Salida apagada al terminar. Informes:
 diagnosticos/resultados_autoload/20261006_chirp_repeticiones.json (antes) y
 20261006_chirp_timer_corregido.json (después). La repetición sin fallos
 no descarta otros problemas intermitentes.
+
+
+### Formato del sistema y saltos Wav · 6 de octubre de 2026
+
+Los controles, estados y ticks numéricos de los monitores V13/V12 usan
+separadores del locale del sistema. CSV, protocolos y nombres de archivo
+conservan formatos independientes del idioma para mantener compatibilidad.
+En Wav, −10 y +10 junto a Play saltan diez segundos durante reproducción.
+Se usa la posición reproducida confirmada, se limita al inicio/final y se
+confirma Stop antes de comenzar una sesión DAC nueva desde el destino.
+El estado muestra la posición absoluta en el archivo tras cada salto.
+Hay una breve interrupción por parada y recarga de buffers; no es un salto
+continuo sin pausa. Verificado con 34 pruebas locales; saltos en hardware
+pendientes de probar con el Q.
+
+
+### 2026-10-06 — Pulso experimental de microsegundos
+
+Variante independiente arduino/v13_pulse, app Scope Pulse US V13 Experimental.
+TIM6 one-shot devuelve DAC al nivel bajo por hardware; DMA4 no se usa durante
+ese pulso. Protocolo con duración µs y capacidad anunciada; V13 ofrece 100–65535 µs
+sólo si el Q confirma soporte. Ancho inicial sigue equivalente a 1 ms (1000 µs).
+V12 Audio mantiene el contrato ms y sus fuentes/app como respaldo.
+18 disparos físicos ADC14/100 kHz: seis de 100, 200 y 1000 µs, anchos coincidentes
+con resolución de 10 µs. Wav50 completó un segundo; salida final apagada.
+La variante quedó activa, ADC14/40 kHz. Falta comprobar flancos y precisión con
+osciloscopio externo. Detalles y vuelta a V12 Audio: arduino/v13_pulse/README.md.
+Respaldo previo: respaldos/unoq/osciloscopio_20261006_190836_603319.zip.
+
+### Referencias instrumentales de Bode
+
+Con A0 conectado directamente a A2 y A3 se midieron tres capturas por método
+entre 20 y 5000 Hz. La tanda del 7 de octubre priorizó las opciones actuales
+de 14 y 16 bits desde 40 kHz; se aceptaron 16 referencias nuevas y se
+conservaron las anteriores. Referencias disponibles para este Q:
+
+| Bits | Tasa | Referencias disponibles |
+| --- | --- | --- |
+| 14 | 40 kHz | Tonos, Sweep |
+| 14 | 50 kHz | Tonos, Sweep |
+| 14 | 62,5 kHz | Tonos |
+| 14 | 100 kHz | Tonos, Sweep, Chirp (referencia anterior) |
+| 14 | 125 kHz | Tonos |
+| 16 | 40 kHz | Tonos, Sweep, Pulso H1 |
+| 16 | 50 kHz | Tonos, Sweep, Pulso H1 |
+| 16 | 62,5 kHz | Tonos, Sweep |
+
+El monitor comprueba el número de serie, la app activa y el SHA-256 del binario
+MCU instalado en esa app, además del perfil ADC y método. Esta identidad es la
+de la instalación gestionada por App Lab; no es una lectura de la memoria flash
+del MCU. Si se programa el MCU por otra vía, la referencia debe invalidarse y
+medirse nuevamente. Si no puede identificar la app, no habilita la corrección.
+Cada curva conserva su perfil, identidad y método para evitar corregir datos
+de otra sesión. No se extrapola fuera de la banda de la referencia.
+
+La referencia se obtiene de las dos primeras capturas y se valida con la
+tercera. En dos barridos adicionales de tonos de la tanda inicial del 6 de
+octubre, el monitor aplicó la corrección:
+error máximo de ganancia menor de 0,044 dB y fase menor de 0,40° a 40 kHz;
+a 100 kHz, menor de 0,042 dB y 0,16° respectivamente.
+
+Pulso H1 pasó a 16 bits / 40 y 50 kHz, pero no a 62,5 kHz ni en los perfiles
+de 14 bits ensayados. Chirp no generó una referencia nueva en la tanda del 7
+de octubre. Los resúmenes de medianas de pruebas
+anteriores no garantizan precisión de cada frecuencia. La referencia histórica
+bode_v10.json se conserva intacta y no se aplica a la cadena actual.
+
+[Procedimiento de calibración de todos los perfiles y criterios de aceptación](../../docs/CALIBRACION_BODE.md).
+
+[Evidencia de aceptación](../../diagnosticos/resultados_bode/20261006_referencias_validacion.json)
+· [Verificación en el monitor](../../diagnosticos/resultados_bode/20261006_referencia_tonos_validacion_monitor.json)
+· [Revisión de Bode](../../docs/REVISION_BODE_ASTRA.md).
+
+### Estados centralizados
+
+Conexión y visualización reúne tres boxes de igual altura: Adquisición,
+Generador y Análisis. El último sigue el modo seleccionado y muestra progreso,
+captura o error de Bode. Los detalles de muestreo, trigger y cobertura quedan
+completos en el tooltip; los mensajes largos se abrevian sin cambiar el ancho
+del panel. Los estados ya no ocupan filas en los paneles laterales.
 
 ## Versiones y enlaces
 

@@ -1,3 +1,4 @@
+from monitor.number_format import number
 import os
 os.environ.setdefault('QT_QPA_PLATFORM','offscreen')
 import unittest
@@ -22,7 +23,7 @@ class FastMonitorTests(unittest.TestCase):
         self.assertEqual(w.h_scale, 250)  # 2 ms / 8 us
         self.assertEqual(w.lbl_h_scale.suffix(), ' ms')
         w.on_h_pos_changed(-125)
-        self.assertEqual(w.lbl_h_pos.text(), '-1.0 ms')
+        self.assertEqual(w.lbl_h_pos.text(), number(-1, '.1f') + ' ms')
         w._acquisition_confirmed(16, 62500)
         self.assertEqual(w.h_scale, 125)  # Same 2 ms / 16 us
         self.assertAlmostEqual(w.lbl_h_scale.value(), 2.0)

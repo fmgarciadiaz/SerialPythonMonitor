@@ -1,3 +1,4 @@
+from dataclasses import replace
 """Monitor V13: adquisición configurable y generador DAC controlado desde el Q."""
 import os
 os.environ["PYQTGRAPH_QT_LIB"] = "PyQt6"
@@ -17,6 +18,9 @@ import sys
 ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
+from monitor.number_format import number, formats
+from monitor.locale_axis import LocaleAxis
+from monitor.v13.wav_source import seek_playback
 from monitor.v13.qt_environment import prepare_platform_plugins
 prepare_platform_plugins()
 from monitor.v13.wav_source import prepare_wav, inspect_wav
@@ -35,6 +39,7 @@ import queue
 from serial.tools import list_ports
 
 from PyQt6 import QtCore, QtGui, QtWidgets
+from monitor.v13.status_widgets import StatusLabel, StatusBox
 import pyqtgraph as pg
 if pg.Qt.QT_LIB != "PyQt6":
     raise RuntimeError("V13 requiere pyqtgraph con PyQt6; iniciar en un proceso separado de V12.")
@@ -220,6 +225,27 @@ class GeneratorFrequencySpinBox(GeneratorValueSpinBox):
         return state, text, pos
 
 
+class NeutralMeasurementDelegate(QtWidgets.QStyledItemDelegate):
+    def __init__(self, reference, parent):
+        super().__init__(parent)
+        self.reference = reference
+
+    def initStyleOption(self, option, index):
+        super().initStyleOption(option, index)
+        option.displayAlignment = QtCore.Qt.AlignmentFlag.AlignCenter
+        option.backgroundBrush = QtGui.QBrush(QtGui.QColor('#1a1d24'))
+        for role, color in ((QtGui.QPalette.ColorRole.Base, '#1a1d24'),
+                            (QtGui.QPalette.ColorRole.Text, '#ffffff'),
+                            (QtGui.QPalette.ColorRole.Highlight, '#323946'),
+                            (QtGui.QPalette.ColorRole.HighlightedText, '#ffffff')):
+            option.palette.setColor(role, QtGui.QColor(color))
+
+    def sizeHint(self, option, index):
+        size = super().sizeHint(option, index)
+        size.setHeight(max(24, option.fontMetrics.height() + 6))
+        return size
+
+
 class GeneratorComboBox(QtWidgets.QComboBox):
     """Keep the entire closed control clickable, with centered text."""
     def paintEvent(self, event):
@@ -239,7 +265,7 @@ class GeneratorComboBox(QtWidgets.QComboBox):
             icon.paint(painter, QtCore.QRect(rect.left() + 2, rect.center().y() - (5 if small else 9),
                                            16 if small else 36, 10 if small else 18))
             rect.adjust(22 if small else 44, 0, 0, 0)
-        painter.setPen(self.palette().color(QtGui.QPalette.ColorRole.Text))
+        painter.setPen(QtGui.QColor(self.property("selectedTextColor")) if self.property("selectedTextColor") else self.palette().color(QtGui.QPalette.ColorRole.Text))
         painter.drawText(rect, QtCore.Qt.AlignmentFlag.AlignCenter, text)
 
 
@@ -350,6 +376,7 @@ class OutputWorker(QtCore.QObject):
     output_confirmed = QtCore.pyqtSignal(int, str)
     acquisition_confirmed = QtCore.pyqtSignal(int, int)
     generator_confirmed = QtCore.pyqtSignal(object)
+    instrument_confirmed = QtCore.pyqtSignal(object)
     wav_confirmed = QtCore.pyqtSignal(object)
     switching = QtCore.pyqtSignal(bool)
     error_occurred = QtCore.pyqtSignal(str)
@@ -434,11 +461,18 @@ class OutputWorker(QtCore.QObject):
             transport = connect_scope(self.port, progress, lambda: self.running) if self.autoload else Connection(self.port)
             with transport as connection:
                 try:
+                    from monitor.v13.bode_calibration import instrument_identity
+                    self.instrument_confirmed.emit(instrument_identity(self.port))
                     connection.socket.settimeout(0.01)
                     receiver = OutputReceiver(connection, collect, progress, lambda: self.running)
                     receiver.on_configuration = settings_applied
                     receiver.on_generator = self.generator_confirmed.emit
-                    receiver.on_wav = self.wav_confirmed.emit
+                    wav_source_codes = None
+                    wav_origin = 0
+                    def publish_wav(status):
+                        self.wav_confirmed.emit(replace(status, played=status.played + wav_origin,
+                                                       total=status.total + wav_origin))
+                    receiver.on_wav = publish_wav
                     apply(self.mode, self.r4_port, self.config)
                     self.acquisition_confirmed.emit(receiver.config.bits, receiver.config.rate)
                     published = True
@@ -455,7 +489,16 @@ class OutputWorker(QtCore.QObject):
                         except queue.Empty:
                             pass
                         else:
-                            receiver.wav_request(wav_op, wav_codes, wav_rate)
+                            if wav_op == 4:
+                                if wav_source_codes is not None and receiver.wav_status is not None:
+                                    wav_origin = seek_playback(receiver, wav_source_codes, wav_origin, wav_codes)
+                                    if wav_origin == len(wav_source_codes):
+                                        publish_wav(replace(receiver.wav_status, state=3, played=0, total=0))
+                            else:
+                                if wav_op == 1:
+                                    wav_source_codes = wav_codes
+                                    wav_origin = 0
+                                receiver.wav_request(wav_op, wav_codes, wav_rate)
                         if receiver.wav_codes is not None or receiver.wav_pending is not None:
                             receiver.pump()
                             flush()
@@ -529,7 +572,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self.selection_dirty = True
 
         # Canal activo seleccionado para la barra de mediciones
-        self.active_meas_channel = "V_OUT"
+        self.active_meas_channel = "V_IN"
 
         # Estados de adquisición
         self.is_running = True
@@ -609,6 +652,8 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
 
         # Construir Interfaz
         self._build_ui()
+        self._build_status_boxes()
+        self._reserve_generator_height()
         self.refresh_ports()
 
         # Timer de dibujo desacoplado (~60 FPS)
@@ -631,6 +676,58 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self.applied_configuration = Configuration(14, 40000)
         self.btn_xaxis_toggle.setChecked(True)
 
+    def _build_status_boxes(self):
+        top_layout=self.status_label.parentWidget().layout()
+        top_layout.removeWidget(self.status_label)
+        self.status_boxes_widget=QtWidgets.QWidget()
+        row=QtWidgets.QHBoxLayout(self.status_boxes_widget)
+        row.setContentsMargins(0,0,0,0);row.setSpacing(8)
+        self.acquisition_status_box=StatusBox('Adquisición')
+        self.generator_status_box=StatusBox('Generador')
+        self.analysis_status_box=StatusBox('Análisis')
+        for box in (self.acquisition_status_box,self.generator_status_box,self.analysis_status_box):
+            row.addWidget(box,1)
+        top_layout.addWidget(self.status_boxes_widget,5,0,1,4)
+        sources=[self.status_label,self.generator_status,self.trigger_status_label,self.spectral.info]
+        for panel in self.spectral.bode.panels:sources.extend((panel.status,panel.coverage))
+        for source in sources:
+            layout=source.parentWidget().layout()
+            if layout is not None:layout.removeWidget(source)
+            source.hide()
+            source.text_changed.connect(self._refresh_status_boxes)
+        self._central_status_ready=True
+        self._refresh_status_boxes()
+        self._generator_availability()
+
+    def _refresh_status_boxes(self,*args):
+        if not getattr(self,'_central_status_ready',False):return
+        acquisition=self.status_label.text()
+        brief=acquisition.split(' · ')[0]
+        if 'SINGLE capturado' in acquisition:brief+=' · SINGLE capturado'
+        trigger=self.trigger_status_label.text()
+        if self.single_shot_armed:brief='SINGLE armado'
+        elif self.trigger_enabled and self.is_running and ('Esperando disparo' in trigger or 'buscando disparo' in trigger):
+            brief='Esperando trigger'
+        self.acquisition_status_box.update_status(brief,acquisition+'\n'+trigger)
+        self.generator_status_box.update_status(self.generator_status.text())
+        mode=self.spectral.mode
+        if mode==3:
+            index=self.spectral.bode.tabs.currentIndex()
+            panel=self.spectral.bode.panels[index]
+            method=('Tonos','Pulso',panel.method.currentText() if index==2 else '')[index]
+            status=panel.status.text()
+            if status.startswith(('Listo','A2','Seno barrido')):status='Listo'
+            detail='Bode '+method+'\n'+panel.status.text()
+            if panel.coverage.text():detail+='\n'+panel.coverage.text()
+            self.analysis_status_box.update_status('Bode '+method+' · '+status,detail)
+        else:
+            name=('V/t','FFT','Heatmap')[mode]
+            info=self.spectral.info.text() if mode else ''
+            state='Activo' if self.is_running else 'Congelado'
+            if info and not info.startswith('Fs '):state=info
+            if self.single_shot_armed:state='Esperando SINGLE'
+            self.analysis_status_box.update_status(name+' · '+state,name+'\n'+(info or state))
+
     def _build_ui(self):
         self.setStyleSheet("""
             QMainWindow {
@@ -639,7 +736,6 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             QWidget {
                 background-color: #121418;
                 color: #ffffff;
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
                 font-size: 12px;
             }
             QGroupBox {
@@ -747,6 +843,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self.generator_column.setMinimumWidth(250)
         self.generator_column.setMaximumWidth(285)
         generator_layout = QtWidgets.QVBoxLayout(self.generator_column)
+        generator_layout.setContentsMargins(9,6,9,6)
         instrument_column = QtWidgets.QWidget()
         instrument_column.setMinimumWidth(250)
         instrument_column.setMaximumWidth(285)
@@ -899,7 +996,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         top_layout.addWidget(self.demo_button, 1, 1)
 
 
-        self.status_label = QtWidgets.QLabel("Listo")
+        self.status_label = StatusLabel("Listo")
         self.status_label.setStyleSheet("""
             QLabel {
                 background:#171920;
@@ -956,9 +1053,9 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self.config_rate_combo = QtWidgets.QComboBox()
         self.config_rate_combo.setToolTip('T: período entre pares de muestras.\nAdq: tiempo de carga del capacitor por canal y subconversión.\nUna ventana más corta exige menor impedancia de fuente para conservar el asentamiento.\nEn 16 bits se realizan 16 subconversiones por canal.')
         for rate in RATES:
-            label = f'{rate/1000:g}'.replace('.', ',') + f' kHz · {1000000//rate} µs'
+            label = f'{number(rate/1000, formats.ng)}' + f' kHz · {1000000//rate} µs'
             config = Configuration(14, rate)
-            if rate > 31250: label += f' · SPI · ADC {config.sampling_us:g} µs'
+            if rate > 31250: label += f' · SPI · ADC {number(config.sampling_us, formats.ng)} µs'
             self.config_rate_combo.addItem(label, rate)
         self.config_rate_combo.setCurrentIndex(self.config_rate_combo.findData(40000))
         destination_layout.addWidget(self.config_rate_combo, 4, 1, 1, 2)
@@ -1097,7 +1194,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             combo.currentIndexChanged.connect(self._schedule_configuration)
 
         # Botón toggle Eje X: Muestras ↔ Tiempo µs (ancho fijo para no desplazar layout)
-        self.btn_xaxis_toggle = QtWidgets.QPushButton("⧖ EJE: MUESTRAS")
+        self.btn_xaxis_toggle = QtWidgets.QPushButton("Muestras")
         self.btn_xaxis_toggle.setCheckable(True)
         self.btn_xaxis_toggle.setChecked(False)
         self.btn_xaxis_toggle.setToolTip(
@@ -1264,7 +1361,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self._build_generator_panel(generator_layout)
 
         # 2. Pantalla de Osciloscopio (PyQtGraph)
-        self.plot_widget = pg.PlotWidget()
+        self.plot_widget = pg.PlotWidget(axisItems={'bottom': LocaleAxis('bottom'), 'left': LocaleAxis('left')})
         self.temporal_single_marker = pg.TextItem('SINGLE', color='#ff9f43', anchor=(1,0), fill=pg.mkBrush('#24201b'))
         self.temporal_single_marker.setZValue(100)
         self.plot_widget.addItem(self.temporal_single_marker, ignoreBounds=True)
@@ -1336,17 +1433,30 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         mtf_layout = QtWidgets.QVBoxLayout(meas_title_frame)
         mtf_layout.setContentsMargins(2, 2, 2, 2)
         mtf_layout.setSpacing(2)
-        lbl_m1 = QtWidgets.QLabel("MEDICIONES EN VIVO")
-        lbl_m1.setStyleSheet("font-size: 9px; font-weight: 800; color: #00e5ff; letter-spacing: 0.5px;")
+        lbl_m1 = QtWidgets.QLabel("Medición")
+        lbl_m1.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        meas_title_frame.setFixedWidth(94)
+        lbl_m1.setStyleSheet("font-size: 12px; font-weight: 800; color: #00e5ff; letter-spacing: 0.5px;")
         
-        self.meas_channel_combo = QtWidgets.QComboBox()
+        self.meas_channel_combo = GeneratorComboBox()
+        self.meas_channel_combo.setProperty("centerInWholeBox", True)
+        self.meas_channel_combo.setProperty("selectedTextColor", self.channel_colors.get("V_IN", "#00e5ff"))
+        popup = QtWidgets.QListView(self.meas_channel_combo)
+        popup.setItemDelegate(NeutralMeasurementDelegate(self.config_bits_combo.view(), popup))
+        popup.setUniformItemSizes(True)
+        popup.setSpacing(0)
+
+        popup.setStyleSheet("QListView {background-color:#1a1d24; color:#ffffff; border:1px solid #323946;} QListView::item {background-color:#1a1d24; color:#ffffff; padding:4px 8px;} QListView::item:selected {background-color:#323946; color:#ffffff;}")
+        self.meas_channel_combo.setView(popup)
         self.meas_channel_combo.addItems(["V_OUT", "V_IN", "ADC_OUT", "ADC_IN"])
-        self.meas_channel_combo.setCurrentText("V_OUT")
+        self.meas_channel_combo.setCurrentText("V_IN")
+        for index in range(self.meas_channel_combo.count()):
+            self.meas_channel_combo.setItemData(index, QtCore.Qt.AlignmentFlag.AlignCenter,
+                                               QtCore.Qt.ItemDataRole.TextAlignmentRole)
         self.meas_channel_combo.setStyleSheet("""
             QComboBox {
                 background-color: #21252f;
                 border: 1px solid #3a4150;
-                color: #ffd600;
                 font-weight: bold;
                 font-size: 11px;
                 padding: 2px 6px;
@@ -1365,12 +1475,12 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         card_vavg, self.val_vavg = self._create_meas_card("V MEDIA", "#b388ff")
         card_freq, self.val_freq = self._create_meas_card("F SEÑAL", "#ff9100")
 
-        meas_layout.addWidget(card_vmax)
-        meas_layout.addWidget(card_vmin)
-        meas_layout.addWidget(card_vpp)
-        meas_layout.addWidget(card_vrms)
-        meas_layout.addWidget(card_vavg)
-        meas_layout.addWidget(card_freq)
+        meas_layout.addWidget(card_vmax, 1)
+        meas_layout.addWidget(card_vmin, 1)
+        meas_layout.addWidget(card_vpp, 1)
+        meas_layout.addWidget(card_vrms, 1)
+        meas_layout.addWidget(card_vavg, 1)
+        meas_layout.addWidget(card_freq, 1)
 
         left_layout.addWidget(self.measurements_box)
 
@@ -1793,7 +1903,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         trig_layout.addWidget(level_card)
 
         # Fila 4: Status label
-        self.trigger_status_label = QtWidgets.QLabel("● Modo continuo")
+        self.trigger_status_label = StatusLabel("● Modo continuo")
         self.trigger_status_label.setWordWrap(True)
         self.trigger_status_label.setStyleSheet("""
             QLabel {
@@ -1816,6 +1926,8 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
     def _create_meas_card(self, title: str, color: str) -> Tuple[QtWidgets.QFrame, QtWidgets.QLabel]:
         """Crea una tarjeta modular estilizada para una medición de osciloscopio."""
         card = QtWidgets.QFrame()
+        card.setMinimumWidth(0)
+        card.setSizePolicy(QtWidgets.QSizePolicy.Policy.Ignored, QtWidgets.QSizePolicy.Policy.Preferred)
         card.setStyleSheet("""
             QFrame {
                 background-color: #21252f;
@@ -1833,6 +1945,8 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         lbl_t.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
 
         lbl_v = QtWidgets.QLabel("--")
+        lbl_v.setMinimumWidth(0)
+        lbl_v.setSizePolicy(QtWidgets.QSizePolicy.Policy.Ignored, QtWidgets.QSizePolicy.Policy.Preferred)
         lbl_v.setStyleSheet(f"font-size: 12px; font-weight: bold; color: {color}; background: transparent;")
         lbl_v.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
 
@@ -1843,11 +1957,11 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
     def _on_meas_channel_changed(self, ch: str):
         self.active_meas_channel = ch
         color = self.channel_colors.get(ch, "#ffffff")
+        self.meas_channel_combo.setProperty("selectedTextColor", color)
         self.meas_channel_combo.setStyleSheet(f"""
             QComboBox {{
                 background-color: #21252f;
                 border: 1px solid {color};
-                color: {color};
                 font-weight: bold;
                 font-size: 11px;
                 padding: 2px 6px;
@@ -2001,6 +2115,8 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self.generator_duration.setRange(0.001,600); self.generator_duration.setDecimals(3)
         self.generator_duration.setSuffix(' s'); self.generator_duration.setValue(1)
         self._generator_duration_ms = False
+        self._generator_duration_us = False
+        self._pulse_us_capable = False
         self.generator_frequency_dial = InstrumentDial()
         self.generator_frequency_dial.setRange(0,1000)
         self.generator_frequency_dial.setNotchesVisible(True)
@@ -2033,7 +2149,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self.generator_restart.clicked.connect(self._apply_generator)
         controls = [('Modo',self.generator_mode),('Forma de onda',self.generator_wave),
                     ('Frecuencia',self.generator_frequency),('Frecuencia final',self.generator_final_frequency),
-                    ('Amplitud pico a pico',self.generator_amplitude),('Offset',self.generator_offset),
+                    ('Amplitud pico pico',self.generator_amplitude),('Offset',self.generator_offset),
                     ('Duración',self.generator_duration)]
         self._generator_labels = {}
         positions = [(0,0,1),(0,1,1),(2,1,1),(5,0,1),(7,0,1),(7,1,1),(5,1,1)]
@@ -2060,7 +2176,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self.generator_restart.setFixedHeight(34)
         self.generator_restart.setText('Disparar')
         grid.addWidget(self.generator_restart,12,0,1,2)
-        self.generator_status = QtWidgets.QLabel('Conectar el Q')
+        self.generator_status = StatusLabel('Conectar el Q')
         self.generator_status.setStyleSheet('color:#aeb8c8; background:transparent; border:none;')
         self.generator_status.setWordWrap(True)
         self.generator_status.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
@@ -2120,6 +2236,14 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             channel_layout.addWidget(button)
         channel_layout.addStretch()
         self.wav_channels.setFixedHeight(34)
+        self.wav_back = QtWidgets.QToolButton()
+        self.wav_forward = QtWidgets.QToolButton()
+        for button, delta, icon in ((self.wav_back, -10, 'wav_back.svg'), (self.wav_forward, 10, 'wav_forward.svg')):
+            button.setIcon(QtGui.QIcon(str(ROOT / 'monitor/v13/assets' / icon)))
+            button.setToolTip(('Retroceder' if delta < 0 else 'Avanzar') + ' 10 segundos')
+            button.setAccessibleName(button.toolTip())
+            button.setEnabled(False)
+            button.clicked.connect(lambda checked=False, seconds=delta: self._seek_wav(seconds))
         self.wav_play = QtWidgets.QToolButton()
         self.wav_play.setIcon(QtGui.QIcon(str(ROOT / 'monitor/v13/assets/wav_play.svg')))
         self.wav_play.setToolTip('Reproducir WAV')
@@ -2130,7 +2254,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self.wav_file.setSizePolicy(QtWidgets.QSizePolicy.Policy.Ignored, QtWidgets.QSizePolicy.Policy.Fixed)
         self.wav_rate = GeneratorComboBox()
         for rate in (20000,40000,50000):
-            self.wav_rate.addItem(f'Salida {rate//1000} kHz', rate)
+            self.wav_rate.addItem(f'{rate//1000} kHz', rate)
             if rate!=20000: self.wav_rate.model().item(self.wav_rate.count()-1).setEnabled(False)
         self.wav_rate.setCurrentIndex(self.wav_rate.findData(50000))
         self.wav_rate.setFixedHeight(28)
@@ -2139,16 +2263,17 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self.wav_info = QtWidgets.QLabel('Mono · 50.000 muestras/s · 12 bits')
         self.wav_info.setWordWrap(True)
         self.wav_info.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.wav_info.setContentsMargins(0,6,0,0)
         self.wav_transport = QtWidgets.QWidget()
         self.wav_transport.setFixedHeight(38)
         transport_layout = QtWidgets.QHBoxLayout(self.wav_transport)
         transport_layout.setContentsMargins(0, 0, 0, 0)
         transport_layout.setSpacing(8)
         transport_layout.addStretch()
-        for button in (self.wav_play,):
+        for button in (self.wav_back, self.wav_play, self.wav_forward):
             button.setFixedSize(34, 34)
             button.setIconSize(QtCore.QSize(16, 16))
-            button.setStyleSheet('QToolButton {padding:0; margin:0; background:#245348; color:#55dfc4; border:1px solid #55dfc4; border-radius:7px;} QToolButton:hover {border-color:#55dfc4;} QToolButton:disabled {background:#171920; border-color:#30343b;}')
+            button.setStyleSheet('QToolButton {padding:0; margin:0; background:#245348; color:#55dfc4; border:1px solid #55dfc4; border-radius:7px;} QToolButton:hover {background:#2d6558; border-color:#83ead5;} QToolButton:pressed {background:#153e35; border-color:#acf9e9;} QToolButton:disabled {background:#171920; border-color:#30343b;}')
             transport_layout.addWidget(button)
         transport_layout.addStretch()
         self._wav_widgets = [self.wav_file,self.wav_channels,self.wav_rate,self.wav_transport,self.wav_info]
@@ -2162,6 +2287,13 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self.wav_info.setStyleSheet('color:#8f98a8; background:transparent; border:none; font-size:10px;')
         self._generator_layout_wav = None
         self._generator_availability()
+
+    def _seek_wav(self, seconds):
+        if self.serial_worker and self._wav_active and not self._wav_preparing:
+            try:
+                self.serial_worker.request_wav(4, seconds)
+            except queue.Full:
+                self.generator_status.setText('Wav ocupado; intentar el salto otra vez.')
 
     def _toggle_wav(self):
         if self._wav_active or self._wav_preparing:
@@ -2186,8 +2318,8 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
 
     def _wav_rate_changed(self):
         metadata = self._wav_metadata
-        source = (f"{metadata['rate']/1000:g} kHz · {metadata['bits']} bits · {metadata['channels']} canales · {metadata['duration']:.1f} s\n" if metadata else '')
-        self.wav_info.setText(source + f'Salida: {self.wav_rate.currentData()/1000:g} kHz · 12 bits · mono')
+        source = (f"{number(metadata['rate']/1000, formats.ng)} kHz · {metadata['bits']} bits · {metadata['channels']} canales · {number(metadata['duration'], formats.n_1f)} s\n" if metadata else '')
+        self.wav_info.setText(source + f'Salida: {number(self.wav_rate.currentData()/1000, formats.ng)} kHz · 12 bits · mono')
 
     def _choose_wav(self):
         path, _ = QtWidgets.QFileDialog.getOpenFileName(self,'Elegir archivo WAV','','WAV (*.wav *.WAV)')
@@ -2203,8 +2335,8 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
                 return
             self.wav_path = path
             self._wav_metadata = metadata
-            description = f"{metadata['rate']/1000:g} kHz · {metadata['bits']} bits · {metadata['channels']} canales · {metadata['duration']:.1f} s"
-            self.wav_info.setText(description + f'\nSalida: {self.wav_rate.currentData()/1000:g} kHz · 12 bits · mono')
+            description = f"{number(metadata['rate']/1000, formats.ng)} kHz · {metadata['bits']} bits · {metadata['channels']} canales · {number(metadata['duration'], formats.n_1f)} s"
+            self.wav_info.setText(description + f'\nSalida: {number(self.wav_rate.currentData()/1000, formats.ng)} kHz · 12 bits · mono')
             self.generator_status.setText('WAV válido · ' + description)
             self._sync_wav_transport()
             self.wav_file.setText(self.wav_file.fontMetrics().elidedText(Path(path).name, QtCore.Qt.TextElideMode.ElideMiddle, 210))
@@ -2227,7 +2359,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self._wav_preparing = True
         self._wav_cancelled = False
         self._sync_wav_transport()
-        self.generator_status.setText(f'Preparando mono y remuestreo a {self.wav_rate.currentData()/1000:g} kHz…')
+        self.generator_status.setText(f'Preparando mono y remuestreo a {number(self.wav_rate.currentData()/1000, formats.ng)} kHz…')
         self._wav_target_worker = self.serial_worker
         self._wav_thread = QtCore.QThread(self)
         self._wav_preparation = WavPreparation(self.wav_path,
@@ -2251,7 +2383,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             return
         metadata = self._wav_metadata
         source_bits = f" · {metadata['bits']} bits" if metadata else ''
-        self.wav_info.setText(f'{source.original_rate/1000:g} kHz{source_bits} · {source.channels} canales · {source.duration:.1f} s\nSalida: {getattr(source,"output_rate",20000)/1000:g} kHz · 12 bits · mono')
+        self.wav_info.setText(f'{number(source.original_rate/1000, formats.ng)} kHz{source_bits} · {source.channels} canales · {number(source.duration, formats.n_1f)} s\nSalida: {number(getattr(source,"output_rate",20000)/1000, formats.ng)} kHz · 12 bits · mono')
         try:
             self._update_wav_levels()
             self.serial_worker.request_wav(1,source.codes,getattr(source,"output_rate",20000))
@@ -2280,12 +2412,14 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             with QtCore.QSignalBlocker(self.wav_rate): self.wav_rate.setCurrentIndex(0)
             self._wav_rate_changed()
         self._wav_active = int(status.state) in (1,2,4,5)
+        for button in (self.wav_back, self.wav_forward):
+            button.setEnabled(int(status.state) == 2 and not self._wav_preparing)
         self._sync_wav_transport()
         if self.generator_mode.currentIndex() == 4:
             names = ('Listo','Cargando','Reproduciendo','Finalizado','Interrumpido: faltaron muestras','Error')
             metadata = self._wav_metadata
-            detail = f" · {metadata['rate']/1000:g} kHz · {metadata['bits']} bits · {metadata['channels']} canales" if metadata else ''
-            self.generator_status.setText(f'{names[int(status.state)]} · {status.played/status.rate:.2f} / {status.total/status.rate:.2f} s' + (f' · motivo {status.reason}' if status.reason else ''))
+            detail = f" · {number(metadata['rate']/1000, formats.ng)} kHz · {metadata['bits']} bits · {metadata['channels']} canales" if metadata else ''
+            self.generator_status.setText(f'{names[int(status.state)]} · {number(status.played/status.rate, formats.n_2f)} / {number(status.total/status.rate, formats.n_2f)} s' + (f' · motivo {status.reason}' if status.reason else ''))
 
     def _update_generator_offset_bounds(self, *args):
         # Round inward to the 0.01 V resolution so every selectable offset is valid.
@@ -2300,7 +2434,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             self.generator_offset_slider.setRange(minimum, maximum)
             self.generator_offset_slider.setValue(round(self.generator_offset.value() * 100))
         self.generator_offset_slider.setToolTip(
-            f'Offset permitido: {minimum / 100:.2f} a {maximum / 100:.2f} V\nDoble clic: centrar en 1,65 V')
+            f'Offset permitido: {number(minimum / 100, formats.n_2f)} a {number(maximum / 100, formats.n_2f)} V\nDoble clic: centrar en 1,65 V')
         offset = self.generator_offset.value()
         near_rail = offset - half < 0.2 - 1e-9 or offset + half > 3.1 + 1e-9
         self.generator_headroom.setText(
@@ -2311,16 +2445,18 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         wav_mode=self.generator_mode.currentIndex()==4
         pulse=self.generator_mode.currentIndex()==3
         mode=self.generator_mode.currentIndex()
-        if pulse != self._generator_duration_ms:
-            duration_ms = self.generator_duration.value() * (1 if self._generator_duration_ms else 1000)
-            was_blocked = self.generator_duration.blockSignals(True)
-            self.generator_duration.setRange(1 if pulse else 0.001, 600000 if pulse else 600)
-            self.generator_duration.setDecimals(0 if pulse else 3)
-            self.generator_duration.setSuffix(' ms' if pulse else ' s')
-            self.generator_duration.setValue(duration_ms if pulse else duration_ms / 1000)
-            self.generator_duration.blockSignals(was_blocked)
+        pulse_us = pulse and self._pulse_us_capable
+        if pulse != self._generator_duration_ms or pulse_us != self._generator_duration_us:
+            seconds = self.generator_duration.value() / (1000000 if self._generator_duration_us else 1000 if self._generator_duration_ms else 1)
+            with QtCore.QSignalBlocker(self.generator_duration):
+                self.generator_duration.setRange(100 if pulse_us else 1 if pulse else 0.001,
+                                                 65535 if pulse_us else 600000 if pulse else 600)
+                self.generator_duration.setDecimals(0 if pulse else 3)
+                self.generator_duration.setSuffix(' µs' if pulse_us else ' ms' if pulse else ' s')
+                self.generator_duration.setValue(seconds * (1000000 if pulse_us else 1000 if pulse else 1))
             self._generator_duration_ms = pulse
-        self._generator_labels[self.generator_frequency].setText('Frecuencia inicial' if mode else 'Frecuencia')
+            self._generator_duration_us = pulse_us
+
         self._generator_labels[self.generator_duration].setText('Ancho del pulso' if pulse else 'Duración del barrido')
         for control, visible in ((self.generator_wave, not pulse),
                                  (self.generator_frequency, not pulse),
@@ -2338,7 +2474,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self.wav_amplitude_dial.setVisible(wav_mode)
         self.generator_amplitude.setVisible(not wav_mode)
         self._generator_labels[self.generator_amplitude].setText(
-            f'Amplitud · {self.generator_amplitude.value():.2f} Vpp' if wav_mode else 'Amplitud pico a pico')
+            f'Amplitud · {number(self.generator_amplitude.value(), formats.n_2f)} Vpp' if wav_mode else 'Amplitud pico pico')
         if hasattr(self, "_wav_widgets"):
             for widget in self._wav_widgets: widget.setVisible(wav_mode)
             self._sync_wav_transport()
@@ -2353,14 +2489,40 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         if hasattr(self, '_wav_labels') and self._generator_layout_wav != wav_mode:
             self._arrange_generator_mode(wav_mode)
         self.generator_panel.layout().activate()
-        self.generator_scroll.setMinimumHeight(self.generator_panel.sizeHint().height())
+        self.generator_scroll.setMinimumHeight(getattr(self, '_generator_reserved_height',
+                                                       self.generator_panel.sizeHint().height()))
+
+    def _reserve_generator_height(self):
+        """Measure every local layout once, without emitting generator commands."""
+        mode = self.generator_mode.currentIndex()
+        duration = self.generator_duration.value()
+        syncing = self._generator_syncing
+        warning_visible = not self.generator_headroom.isHidden()
+        self._generator_syncing = True
+        height = 0
+        try:
+            with QtCore.QSignalBlocker(self.generator_mode), QtCore.QSignalBlocker(self.generator_duration):
+                for index in range(self.generator_mode.count()):
+                    self.generator_mode.setCurrentIndex(index)
+                    self._generator_availability()
+                    self.generator_headroom.show()
+                    self.generator_panel.layout().activate()
+                    height = max(height, self.generator_panel.sizeHint().height())
+                self.generator_mode.setCurrentIndex(mode)
+                self._generator_availability()
+                self.generator_duration.setValue(duration)
+        finally:
+            self.generator_headroom.setVisible(warning_visible)
+            self._generator_syncing = syncing
+        self._generator_reserved_height = height
+        self.generator_scroll.setMinimumHeight(height)
 
     def _arrange_generator_mode(self, wav_mode):
         grid = self.generator_panel.layout()
         self._generator_layout_wav = wav_mode
         shared = [self.generator_offset, self.generator_offset_slider,
                   self._generator_labels[self.generator_amplitude], self._generator_labels[self.generator_offset],
-                  self.wav_amplitude_dial, self.generator_status, self.generator_headroom]
+                  self.wav_amplitude_dial, self.generator_headroom]
         for widget in shared + self._wav_widgets:
             grid.removeWidget(widget)
         if wav_mode:
@@ -2371,23 +2533,26 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
                           (self._generator_labels[self.generator_offset],4,1,1,1),
                           (self.generator_offset,5,1,1,1),(self.generator_offset_slider,6,1,1,1),
                           (self.generator_headroom,7,0,1,2),(self.wav_transport,8,0,1,2),
-                          (self.generator_status,9,0,1,2),(self.wav_info,10,0,1,2)]
+                          (self.wav_info,9,0,1,2)]
             grid.addWidget(self.wav_amplitude_dial,5,0,2,1,alignment=QtCore.Qt.AlignmentFlag.AlignCenter)
         else:
             placements = [(self._generator_labels[self.generator_amplitude],7,0,1,1),
                           (self._generator_labels[self.generator_offset],7,1,1,1),
                           (self.generator_offset,8,1,1,1),(self.generator_offset_slider,9,1,1,1),
-                          (self.generator_headroom,10,0,1,2),(self.generator_status,13,0,1,2)]
+                          (self.generator_headroom,10,0,1,2)]
             grid.addWidget(self.wav_amplitude_dial,8,0,alignment=QtCore.Qt.AlignmentFlag.AlignCenter)
         for widget,row,col,rows,cols in placements:
             grid.addWidget(widget,row,col,rows,cols)
         grid.setHorizontalSpacing(10)
-        grid.setVerticalSpacing(5)
+        grid.setVerticalSpacing(3)
 
     def _generator_mode_changed(self, mode):
         if self._generator_syncing:
             return
         self._generator_availability()
+        if mode == 3:
+            with QtCore.QSignalBlocker(self.generator_duration):
+                self.generator_duration.setValue(1000 if self._generator_duration_us else 1)
         if mode in (1, 2):
             # User selections start from these presets; hardware confirmations
             # keep their reported settings through _generator_syncing.
@@ -2436,9 +2601,9 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             low=self._generator_active.low*3.3/4095
             high=self._generator_active.high*3.3/4095
         return GeneratorConfig(4 if self.generator_mode.currentIndex() == 3 else self.generator_wave.currentIndex(),int(self.generator_enabled.isChecked()),
-            0 if self.generator_mode.currentIndex() == 3 else self.generator_mode.currentIndex(),round(self.generator_frequency.value()*1000),
+            0 if self.generator_mode.currentIndex() in (3,4) else self.generator_mode.currentIndex(),round(self.generator_frequency.value()*1000),
             round(self.generator_final_frequency.value()*1000),round(max(0,low)*4095/3.3),
-            round(min(3.3,high)*4095/3.3),round(self.generator_duration.value()*(1 if self._generator_duration_ms else 1000)))
+            round(min(3.3,high)*4095/3.3),round(self.generator_duration.value()*(1 if self._generator_duration_ms else 1000)), int(self._generator_duration_us))
 
     def _apply_generator(self):
         self._generator_timer.stop()
@@ -2457,12 +2622,20 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             self.generator_status.setText(str(exc) or 'Generador ocupado; volver a seleccionar o reiniciar.')
 
     def _generator_confirmed(self, reply):
+        capability = getattr(reply, 'pulse_us_capable', False)
+        if capability != self._pulse_us_capable:
+            self._pulse_us_capable = capability
+            self._generator_availability()
         from monitor.v13.receiver.unoq_switch import Phase
         if reply.phase == Phase.APPLIED and (self._generator_requested is None or reply.active == self._generator_requested):
             self._generator_active = reply.active
             self._generator_state_known = True
         self.spectral.bode.confirmed(reply)
-        if self.spectral.bode.active or self.generator_mode.currentIndex() == 4: return
+        if self.spectral.bode.active:
+            state='Activo' if reply.running else ('Finalizado' if reply.active.enabled else 'Apagado')
+            self.generator_status.setText(f'{state} · Bode')
+            return
+        if self.generator_mode.currentIndex() == 4: return
         if reply.phase==Phase.REJECTED:
             self.generator_status.setText(f'Q rechazó el generador: {reply.reason.name}')
             self._generator_requested=None
@@ -2490,14 +2663,14 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
                 self.generator_offset.setValue((c.high+c.low)*3.3/8190)
                 self._update_generator_offset_bounds()
                 self._generator_availability()
-                self.generator_duration.setValue(c.duration if self._generator_duration_ms else c.duration/1000)
+                self.generator_duration.setValue(c.duration * (1000 if self._generator_duration_us and not c.duration_us else .001 if c.duration_us and not self._generator_duration_us else 1) if self._generator_duration_ms else c.duration/1000)
                 self.generator_enabled.setChecked(bool(c.enabled))
             finally:
                 self._generator_syncing=False
             self._generator_availability()
             self._generator_display_config = c
         state='Activo' if reply.running else ('Finalizado' if c.enabled else 'Apagado')
-        self.generator_status.setText(f'{state} · {WAVES[c.wave]} · {c.frequency/1000:g} Hz')
+        self.generator_status.setText(f'{state} · {WAVES[c.wave]} · {number(c.frequency/1000, formats.ng)} Hz')
         if self._generator_dirty and self.generator_mode.currentIndex() == 0 and not self._generator_timer.isActive(): self._generator_timer.start()
 
     def _on_column_toggled(self):
@@ -2540,9 +2713,9 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self._h_time_ms = self.h_scale * self._horizontal_dt_us() / 1000
         self._sync_horizontal_controls()
         if checked:
-            self.btn_xaxis_toggle.setText("⧗ EJE: TIEMPO µs")
+            self.btn_xaxis_toggle.setText("Tiempo")
         else:
-            self.btn_xaxis_toggle.setText("⧖ EJE: MUESTRAS")
+            self.btn_xaxis_toggle.setText("Muestras")
 
     def _on_trace_mode_changed(self, text: str):
         """Cambia el modo de trazo entre Escalón (Step) y Línea (Linear)."""
@@ -2844,7 +3017,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
     def on_h_pos_changed(self, value: int):
         self.h_pos = int(value)
         if self.x_axis_time_mode:
-            text = f"{self.h_pos * self._horizontal_dt_us() / 1000:.1f} ms"
+            text = f"{number(self.h_pos * self._horizontal_dt_us() / 1000, formats.n_1f)} ms"
         else:
             text = f"{self.h_pos} smp"
         self.lbl_h_pos.setText(text + (" (En vivo)" if self.h_pos == 0 else ""))
@@ -2856,7 +3029,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
 
     def on_v_pos_changed(self, value: int):
         self.v_pos = value / 100.0
-        self.lbl_v_pos.setText(f"{self.v_pos:.2f} V")
+        self.lbl_v_pos.setText(f"{number(self.v_pos, formats.n_2f)} V")
         self._apply_vertical_range()
 
     def _apply_vertical_range(self):
@@ -2891,7 +3064,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             self.lbl_trigger_level.setText(f"{int(self.trigger_level)}")
         else:
             self.trigger_level = value / 100.0
-            self.lbl_trigger_level.setText(f"{self.trigger_level:.2f} V")
+            self.lbl_trigger_level.setText(f"{number(self.trigger_level, formats.n_2f)} V")
 
         self._updating_trigger_line = True
         self.trigger_line.setValue(self.trigger_level)
@@ -2909,7 +3082,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             self.dial_trigger_level.setValue(int(round(self.trigger_level)))
         else:
             self.trigger_level = max(0.0, min(3.3, new_val))
-            self.lbl_trigger_level.setText(f"{self.trigger_level:.2f} V")
+            self.lbl_trigger_level.setText(f"{number(self.trigger_level, formats.n_2f)} V")
             self.dial_trigger_level.setValue(int(round(self.trigger_level * 100)))
         self._updating_trigger_line = False
 
@@ -2934,7 +3107,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             self.trigger_line.setValue(self.trigger_level)
         else:
             self.trigger_level = max(0.0, min(3.3, v_mid))
-            self.lbl_trigger_level.setText(f"{self.trigger_level:.2f} V")
+            self.lbl_trigger_level.setText(f"{number(self.trigger_level, formats.n_2f)} V")
             self.dial_trigger_level.setValue(int(round(self.trigger_level * 100)))
             self.trigger_line.setValue(self.trigger_level)
         self._updating_trigger_line = False
@@ -2959,7 +3132,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         if self.trigger_enabled:
             is_adc = "ADC" in self.trigger_source
             unit = "" if is_adc else "V"
-            val_str = f"{int(self.trigger_level)}" if is_adc else f"{self.trigger_level:.2f}"
+            val_str = f"{int(self.trigger_level)}" if is_adc else f"{number(self.trigger_level, formats.n_2f)}"
             self.trigger_status_label.setText(
                 f"● Armado: {self.trigger_source} {self.trigger_edge} a {val_str}{unit}"
             )
@@ -3096,7 +3269,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         if not self.recording:
             return
         elapsed = min(time.perf_counter() - self.record_start_time, RECORD_MAX_SECONDS)
-        self.record_status_label.setText(f"● {self.record_format} {elapsed:04.1f}/30.0 s | {self.record_rows:,} muestras")
+        self.record_status_label.setText(f"● {self.record_format} {number(elapsed, formats.n04_1f)}/30.0 s | {number(self.record_rows, formats.n_)} muestras")
         self.record_status_label.setStyleSheet("background:#171920;border:1px solid #323946;padding:4px;color:#aeb8c8;font-weight:normal;")
         if elapsed >= RECORD_MAX_SECONDS:
             self.stop_recording(auto=True)
@@ -3139,7 +3312,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             reason = "límite de 30 s" if auto else "detenida por usuario"
             display_name = re.sub(r'_\d+bit_[0-9.]+(?:kHz|Hz)', '', filename)
             self.record_status_label.setText(f"Guardado: {display_name}")
-            self.record_status_label.setToolTip(f"{self.record_filename}\n{self.record_rows:,} muestras · {reason}")
+            self.record_status_label.setToolTip(f"{self.record_filename}\n{number(self.record_rows, formats.n_)} muestras · {reason}")
             self.record_status_label.setStyleSheet("color:#aeb8c8;font-weight:normal;")
 
     def _update_port_tooltip(self, index):
@@ -3186,6 +3359,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             self.h_scale = max(VISIBLE_SAMPLES_MIN, min(VISIBLE_SAMPLES_MAX, round(duration * 1000 / config.period)))
         self._sync_horizontal_controls()
         self.spectral.bode.update_estimate()
+        self.spectral.bode.refresh_reference()
         self.adc_combo.setCurrentText(f'{bits} bits ({(1 << bits)-1})')
         self.adc_summary_label.setText(f'{bits} bits')
         self._refresh_applied_summary()
@@ -3203,7 +3377,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
                 config = self.applied_configuration
                 link = 'SPI' if mode == int(Mode.SPI) else 'UART · R4'
                 bits = f'{config.bits} bits' + (' (OS)' if config.bits == 16 else '')
-                rate = f'{config.rate/1000:g}'.replace('.', ',') + ' kHz'
+                rate = f'{number(config.rate/1000)}' + ' kHz'
                 message += f' · {link} · {bits} · {rate}'
         self.status_label.setText(message)
         self.status_label.setToolTip(message)
@@ -3213,7 +3387,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         mode = getattr(self, 'confirmed_mode', None)
         port = getattr(self, 'confirmed_r4', '')
         name = 'SPI · UNO Q' if mode == int(Mode.SPI) else f'UART · R4 {port}'
-        self.confirmed_output_label.setText(f'{name} · {config.bits} bits' + (' OS ×16' if config.bits == 16 else '') + ' · ' + f'{config.rate/1000:g}'.replace('.', ',') + ' kHz')
+        self.confirmed_output_label.setText(f'{name} · {config.bits} bits' + (' OS ×16' if config.bits == 16 else '') + ' · ' + f'{number(config.rate/1000, formats.ng)}' + ' kHz')
         self._set_connection_status('Adquisición en vivo' if self.is_running else 'Pantalla congelada (STOP)')
 
     def _destination_changed(self):
@@ -3224,10 +3398,10 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
                 allowed = (not uart or rate in UART_RATES) and (self.config_bits_combo.currentData() != 16 or rate <= 62500)
                 self.config_rate_combo.model().item(i).setEnabled(allowed)
                 bits = self.config_bits_combo.currentData()
-                label = f'{rate/1000:g}'.replace('.', ',') + f' kHz · {1000000//rate} µs'
+                label = f'{number(rate/1000, formats.ng)}' + f' kHz · {1000000//rate} µs'
                 if bits != 16 or rate <= 62500:
                     profile = Configuration(bits, rate)
-                    acquisition = f'{profile.sampling_us:g}'.replace('.', ',')
+                    acquisition = f'{number(profile.sampling_us, formats.ng)}'
                     tooltip = (f'Período entre pares: {profile.period} µs.\n'
                                f'Adquisición por canal y subconversión: {acquisition} µs '
                                f'({profile.sampling_cycles} ciclos ADC).\n'
@@ -3355,6 +3529,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self.serial_worker.output_confirmed.connect(lambda mode, r4: self._from_worker(worker, self._output_confirmed, mode, r4))
         self.serial_worker.acquisition_confirmed.connect(lambda bits, rate: self._from_worker(worker, self._acquisition_confirmed, bits, rate))
         self.serial_worker.generator_confirmed.connect(lambda reply: self._from_worker(worker, self._generator_confirmed, reply))
+        self.serial_worker.instrument_confirmed.connect(lambda identity: self._from_worker(worker, self.spectral.bode.set_instrument, identity))
         self.serial_worker.wav_confirmed.connect(lambda reply: self._from_worker(worker, self._wav_confirmed, reply))
         self.serial_worker.switching.connect(lambda pending: self._from_worker(worker, self._set_output_pending, pending))
         self.serial_worker.error_occurred.connect(lambda text: self._from_worker(worker, self._on_worker_error, text))
@@ -3488,6 +3663,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             self.serial_thread = None
 
         self.serial_worker = None
+        self.spectral.bode.set_instrument(None)
         self._set_connect_state('disconnected')
         self.port_combo.setEnabled(True)
         self.refresh_button.setEnabled(True)
@@ -3612,11 +3788,11 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
 
         if fs_hz > 0.0:
             if fs_hz >= 1_000_000.0:
-                text = f"{fs_hz / 1_000_000.0:.2f} MS/s"
+                text = f"{number(fs_hz / 1_000_000.0, formats.n_2f)} MS/s"
             elif fs_hz >= 1000.0:
-                text = f"{fs_hz / 1000.0:.2f} kS/s"
+                text = f"{number(fs_hz / 1000.0, formats.n_2f)} kS/s"
             else:
-                text = f"{fs_hz:.1f} S/s"
+                text = f"{number(fs_hz, formats.n_1f)} S/s"
         else:
             text = "-- S/s"
 
@@ -3824,7 +4000,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
 
                 is_adc = "ADC" in source
                 unit = "" if is_adc else "V"
-                lvl_str = f"{int(self.trigger_level)}" if is_adc else f"{self.trigger_level:.2f}"
+                lvl_str = f"{int(self.trigger_level)}" if is_adc else f"{number(self.trigger_level, formats.n_2f)}"
                 self.trigger_status_label.setText(
                     f"● Disparo ({source} {self.trigger_edge} @ {lvl_str}{unit})"
                 )
@@ -3921,9 +4097,9 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self.lbl_top_fs.setText(fs_text)
         if dt_us > 0:
             if dt_us < 1000.0:
-                tip = f"Frecuencia de Muestreo: {fs_hz:.1f} Hz\nPeriodo entre muestras: {dt_us:.1f} µs"
+                tip = f"Frecuencia de Muestreo: {number(fs_hz, formats.n_1f)} Hz\nPeriodo entre muestras: {number(dt_us, formats.n_1f)} µs"
             else:
-                tip = f"Frecuencia de Muestreo: {fs_hz:.1f} Hz\nPeriodo entre muestras: {dt_us/1000.0:.2f} ms"
+                tip = f"Frecuencia de Muestreo: {number(fs_hz, formats.n_1f)} Hz\nPeriodo entre muestras: {number(dt_us/1000.0, formats.n_2f)} ms"
             self.lbl_top_fs.setToolTip(tip)
             self.config_rate_combo.setToolTip(tip)
 
@@ -3936,8 +4112,8 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             self.last_fps_calc = now_calc
             mode_str = "RUN" if self.is_running else "STOP"
             self.plot_widget.setTitle(
-                f"SCOPE V13 [{mode_str}] | Muestras: {self.sample_counter} | "
-                f"Ventana: {self.h_scale} | Fs: {fs_text} | FPS: {self.current_fps:.1f}"
+                f"SCOPE V13 [{mode_str}] | Muestras: {number(self.sample_counter, formats.n_)} | "
+                f"Ventana: {number(self.h_scale, formats.n_)} | Fs: {fs_text} | FPS: {number(self.current_fps, formats.n_1f)}"
             )
 
     def _update_live_measurements(self, y_slices, active_columns):
@@ -3982,14 +4158,14 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
                         if t_delta_us > 0:
                             freq_hz = 1_000_000.0 / t_delta_us
                             if freq_hz < 1000:
-                                freq_text = f"{freq_hz:.1f} Hz"
+                                freq_text = f"{number(freq_hz, formats.n_1f)} Hz"
                             else:
-                                freq_text = f"{freq_hz/1000.0:.2f} kHz"
+                                freq_text = f"{number(freq_hz/1000.0, formats.n_2f)} kHz"
 
                     # Fallback si no hay timestamps
                     if freq_text == "--" and delta_samples > 0 and self.current_fs_hz > 0:
                         freq_est = self.current_fs_hz / delta_samples
-                        freq_text = f"~{freq_est:.1f} Hz"
+                        freq_text = f"{number(freq_est, formats.n_1f)} Hz"
 
             self.val_freq.setText(freq_text)
 
@@ -4026,6 +4202,7 @@ def main():
     prepare_platform_plugins()
     app = QtWidgets.QApplication([])
     app.setStyle("Fusion")
+    app.setFont(QtGui.QFontDatabase.systemFont(QtGui.QFontDatabase.SystemFont.GeneralFont))
     window = SerialMonitorWindow()
     window.show()
     sys.exit(app.exec())

@@ -71,15 +71,16 @@ assert(wav::queue.accepted==wav::queue.total);
 wav_hw::position=-2;wav::poll();assert(wav::queue.state==scope_wav::DONE);
 assert(wav::queue.played==480*20+37);assert(generator_hw::level==2048);
 wav::service();assert(!wav::owned);assert(generator::external_tick==nullptr);
+assert(!generator::running);assert(!generator::active.enabled);
 }
 ''')
-    def test_underrun_neutral_and_explicit_stop_restoration(self):
+    def test_underrun_neutral_and_explicit_stop_silence(self):
         self.run_cpp(r'''
 int main(){command(1,77,1,480*10);for(unsigned i=0;i<4;++i)chunk(2+i,i*480);
 command(6,77,2);wav_hw::position=3;wav::poll();
 assert(wav::queue.state==scope_wav::UNDERRUN);assert(generator_hw::level==2048);
 assert(wav::owned);assert(chunk(7,4*480).reason!=0);
-command(8,77,3);wav::service();assert(!wav::owned);assert(generator::running);
+command(8,77,3);wav::service();assert(!wav::owned);assert(!generator::running);assert(!generator::active.enabled);
 }
 ''')
     def test_guard_terminal_handles_delayed_supervisor(self):

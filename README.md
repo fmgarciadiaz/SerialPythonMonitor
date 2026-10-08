@@ -10,10 +10,11 @@
 
 Un instrumento para generar señales, observar circuitos y analizar su respuesta.
 Combina adquisición y generación por hardware con un monitor Python de dos
-canales, análisis espectral, respuesta en frecuencia y grabación de señales.
+canales, análisis espectral, respuesta en frecuencia, grabación de señales y un
+sintetizador MIDI con FM y modelos físicos de instrumentos.
 
 La tecnología combina Python/PyQt6 y pyqtgraph para la interfaz, NumPy/SciPy
-para el análisis y audio, C/C++ con Arduino/Zephyr en el STM32 y un relay C
+para el análisis y audio, Numba para los cálculos recurrentes del sinte, C/C++ con Arduino/Zephyr en el STM32 y un relay C
 sobre Linux. Los temporizadores fijan los tiempos de ADC/DAC y DMA mueve los
 bloques; USB/ADB conecta el instrumento con la computadora.
 
@@ -36,7 +37,7 @@ La imagen muestra una cuadrada y la respuesta de un filtro RC simulado.
 | Muestreo SPI | Hasta 125 mil pares/s en ADC nativo; hasta 62,5 mil pares/s con ADC16 (OS) |
 | Salida DAC | A0, 12 bits, rango nominal 0–3,3 V; amplitud y offset ajustables dentro de esos límites |
 | Generador | Seno, cuadrada, triángulo, rampa; modos Sweep, Chirp y Pulso; frecuencia configurada 0,1 Hz–20 kHz |
-| Audio de salida | WAV mono por A0, L/R/Mix, tasas negociadas de 20/40/50 ksps; 50 ksps por defecto |
+| Audio de salida | WAV mono por A0, L/R/Mix, tasas negociadas de 20/40/50 ksps; 40 ksps por defecto |
 | Audio de entrada | WAV estéreo PCM16 de A2/A3; filtro DC continuo opcional a 5 Hz |
 | Registro | CSV o WAV, muestras recibidas completas, hasta 30 s por grabación |
 | Análisis | FFT, evolución espectral en heatmap y Bode de ganancia/fase; comparación de hasta cinco barridos |
@@ -53,11 +54,13 @@ fallos observados; WAV50 con ADC14/100 kHz pasó el ensayo sostenido.
 
 ## FFT · espectro de frecuencia
 
-![Monitor en modo FFT: espectros de entrada y salida](assets/monitor_fft.png)
+![Monitor en modo FFT Spectrum: entradas sintéticas](assets/monitor_fft_spectrum.png)
 
 Descompone cada canal en sus componentes de frecuencia para observar tonos,
 armónicos y atenuación. Permite elegir tamaño de FFT, ventana, solapamiento,
 escala de amplitud, eje de frecuencia lineal/logarítmico y eliminación de DC.
+El selector de análisis ofrece **Spectrum**, **Power**, **Distortion** y
+**Transfer**. [Modos y unidades](docs/FFT_ANALISIS.md).
 La resolución entre bins depende de Fs/N. En SINGLE conserva el bloque próximo
 al trigger de mayor energía; RUN vuelve al espectro en vivo.
 
@@ -75,16 +78,70 @@ visible y comparar los dos canales.
 ![Monitor en modo Bode: ganancia y fase de tres filtros RC simulados](assets/monitor_bode.png)
 
 Mide la relación V_OUT/V_IN por frecuencia: ganancia en dB y fase en grados.
-Genera tonos por pasos, espera el asentamiento del circuito y estima la respuesta
-con los ciclos configurados. Permite repetir, agregar y comparar hasta cinco
-curvas y aplicar una referencia instrumental compatible. Elegir el modo prepara
-el panel; la medición empieza con Repetir o Agregar.
+Ofrece tres paneles: **Tonos**, con asentamiento y ciclos por frecuencia;
+**Pulso**, con captura de la respuesta transitoria; y **Sweep/Chirp**, con
+barrido lineal o exponencial. Pulso promedia espectros cruzados de varios
+disparos (8 por defecto); Sweep/Chirp calcula FFT(V_OUT)/FFT(V_IN).
+Ambos incluyen la cola de respuesta y descartan
+frecuencias sin señal suficiente. Permite comparar hasta cinco curvas por
+método. Elegir el modo prepara el panel; la medición empieza con Repetir
+o Agregar. Los pulsos de 100 µs requieren el firmware experimental.
 
-Estas cuatro capturas pertenecen a la interfaz actual y usan señales sintéticas;
+Estas capturas usan señales sintéticas; FFT muestra la nueva variante
+y las otras vistas muestran la versión conservada;
 Bode ilustra tres filtros RC, sin representar una medición física.
-[Controles del monitor](monitor/v13/README.md) · [Análisis y Bode](docs/MONITOR_TECNICO.md).
+[Controles del monitor](monitor/v14/README.md) · [Análisis y Bode](docs/MONITOR_TECNICO.md).
+
+## Wav · grabación y reproducción
+
+Graba las entradas **A2 como L** y **A3 como R** en WAV estéreo PCM16,
+con el mismo botón de registro que CSV. El selector permite elegir el formato;
+los archivos se guardan junto a las capturas con fecha y hora, hasta 30 s.
+**Eliminar DC** aplica un filtro continuo de 5 Hz, con estado entre bloques:
+una señal centrada en 1 V no necesita estar centrada en 1,65 V para escucharse.
+
+En el generador, **Wav** permite elegir un archivo, seleccionar **L, R o Mix**
+y reproducirlo por **A0 en mono**. Python remuestrea con antialias, convierte
+el audio a 12 bits y ajusta amplitud y offset al rango del DAC. La salida usa
+**40 kHz por defecto**, con 20/40/50 kHz según el firmware. Incluye Play/Stop,
+avance y retroceso de 10 s y amplitud ajustable durante reproducción. Al
+terminar queda en silencio. Play activa la adquisición y bloquea cambios ADC.
+
+La ruta es PC → USB/ADB → relay Linux → SPI → MCU → temporizador/DMA → A0.
+Es reproducción de archivos; no crea una salida de audio del sistema operativo.
+[Uso del monitor](monitor/v15/README.md#wav--archivos-y-grabación) ·
+[Tasas y ensayos físicos](docs/WAV_TASAS.md).
+
+## Synth · FM, ondas y modelos físicos
+
+Mini sintetizador **mono de salida y polifónico de nueve voces**, controlado
+por MIDI o Play. Ofrece **Osc 1, Osc 2 y Osc 3**, FM con feedback, seno,
+cuadrada, triángulo y rampa; ADSR por oscilador, mezcla, detune y filtros
+pasa bajos, pasa altos, pasa banda y notch.
+
+**DX Piano** es el instrumento inicial; **DX Brillo** agrega ataque metálico.
+También incluye flauta, órgano, campana, Bass Punch, Lead, Brass, Warm Pad
+y Pluck. Son presets editables, no emulaciones exactas de instrumentos comerciales.
+
+**Virtual** agrega dos instrumentos físicos: **Guitarra**, con cuerda pulsada,
+dos planos de vibración, puente y caja; y **Piano Virtual**, con martillo no
+lineal, cuerdas rígidas, unísonos acoplados y resonancias simpáticas con pedal.
+Permite ajustar posición, brillo, vibración, caja, puente y rigidez del piano.
+Sus parámetros y resonancias son sintéticos, pendientes de ajuste por escucha.
+
+La salida A0 es de 12 bits, **20 kHz por defecto** o 40 kHz. Velocidad MIDI,
+pedal CC64 y volumen CC7 funcionan durante reproducción. Numba compila feedback,
+envolventes y los modelos físicos; la preparación ocurre antes de Play.
+El buffer aporta al menos 120 ms a 20 kHz y 192 ms a 40 kHz y puede crecer.
+40 kHz sigue siendo experimental: las pruebas locales de cálculo no garantizan
+continuidad física con adquisición y transporte activos.
+[Guía y controles](monitor/v15/README.md#generador-synth) ·
+[Motor, modelos físicos y límites](docs/SYNTH.md).
 
 ## Qué hace
+
+FFT incorpora Spectrum, Power, Distortion y Transfer: espectro, potencia,
+distorsión y respuesta entre entradas. [Definiciones y límites](docs/FFT_ANALISIS.md).
 
 - Osciloscopio V(t) con trigger, RUN/STOP y captura SINGLE.
 - FFT, heatmap y Bode de ganancia y fase.
@@ -92,6 +149,7 @@ Bode ilustra tres filtros RC, sin representar una medición física.
 - Grabación CSV o WAV estéreo de A2/A3, con eliminación de DC opcional.
 - Reproducción de archivos WAV por A0: selección L/R/Mix, remuestreo,
   conversión a 12 bits y ajuste de amplitud/offset entre 0 y 3,3 V.
+- Synth con MIDI, nueve voces, FM, ondas clásicas y guitarra/piano físicos.
 - Adquisición configurable: 8/10/12/14 bits o 16 bits por oversampling.
   SPI hasta 125 kHz por canal; 16 bits hasta 62,5 kHz.
 
@@ -100,9 +158,9 @@ Bode ilustra tres filtros RC, sin representar una medición física.
 Desde la raíz del repositorio:
 
 ```sh
-conda env create -f monitor/v13/environment.yml
+conda env create -f monitor/v15/environment.yml
 conda activate Python_3_13_DataScience
-python monitor/v13/app.py
+python monitor/v15/app.py
 ```
 
 Si el entorno ya existe, omitir su creación. Demo permite probar la interfaz
@@ -113,11 +171,11 @@ proyecto; requiere un UNO Q con Linux, ADB y las herramientas Arduino operativas
 
 Valores iniciales: ADC 14 bits/40 kHz, amplitud 2 Vpp, offset 1,65 V y salida
 apagada. Sweep y Chirp: 20 Hz→2 kHz en 2 s; se lanzan con Disparar.
-Wav usa 50 mil muestras/s por defecto si el firmware lo admite.
+Wav usa 40 mil muestras/s por defecto si el firmware lo admite.
 Durante Play se activa la adquisición y se bloquea el cambio de perfil ADC;
 la amplitud se puede ajustar durante la reproducción. Desconectar apaga la salida.
 
-[Guía del monitor](monitor/v13/README.md) · [Instalación del Q](arduino/v12_audio/README.md)
+[Guía del monitor](monitor/v15/README.md) · [Instalación del Q](arduino/v12_audio/README.md)
 
 ## Cómo se conectan los componentes
 
@@ -208,7 +266,10 @@ identifican por separado en los informes.
 
 | Conjunto | Estado y documentación |
 |---|---|
-| [Monitor V13 · PyQt6](monitor/v13/README.md) + [Q V12 Audio](arduino/v12_audio/README.md) | Conjunto usado actualmente, con grabación y reproducción WAV |
+| [Monitor V15 · Synth](monitor/v15/README.md) | Synth: tres osciladores, feedback, FM/ondas/Virtual, guitarra y piano físicos, nueve voces y MIDI; estabilidad de cada perfil pendiente de validación física |
+| [Monitor V14 · PyQt6](monitor/v14/README.md) | Nueva variante con cuatro modos FFT; firmware existente |
+| [Monitor V13 · PyQt6](monitor/v13/README.md) + [Q V12 Audio](arduino/v12_audio/README.md) | Pareja principal conservada, con grabación y reproducción WAV |
+| [Q V13 Pulse experimental](arduino/v13_pulse/README.md) + [Monitor V13](monitor/v13/README.md) | Variante actualmente en prueba: pulso desde 100 µs |
 | [Monitor V12 · PyQt5](monitor/v12/README.md) + [Q V11 P992](arduino/v11_p992/README.md) | Pareja anterior conservada, sin reproducción WAV |
 | [Monitores históricos](monitor/historico/README.md) | Versiones anteriores archivadas |
 | [Firmware histórico](arduino/historico/README.md) | Sketches y puentes anteriores |
@@ -217,3 +278,5 @@ identifican por separado en los informes.
 Las herramientas de consola conservan V11 P992 como valor predeterminado.
 Para el conjunto de audio usar explícitamente `--version v12_audio` o
 `--firmware v12_audio`. El monitor detecta la app instalada al conectar.
+
+[Pulsos de microsegundos: variante experimental](arduino/v13_pulse/README.md).

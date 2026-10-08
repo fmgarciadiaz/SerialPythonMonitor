@@ -1,3 +1,5 @@
+from monitor.number_format import number, formats
+from monitor.locale_axis import LocaleAxis
 """Live one-sided spectra and bounded scrolling spectrograms."""
 import os
 os.environ["PYQTGRAPH_QT_LIB"] = "PyQt6"
@@ -6,11 +8,13 @@ import numpy as np
 import time
 from monitor.v13.qt_environment import prepare_platform_plugins
 prepare_platform_plugins()
-from PyQt6 import QtCore, QtWidgets
+from PyQt6 import QtCore, QtWidgets, QtGui
+from monitor.v13.status_widgets import StatusLabel
 import pyqtgraph as pg
 if pg.Qt.QT_LIB != "PyQt6":
     raise RuntimeError("V13 requiere pyqtgraph con PyQt6; iniciar en un proceso separado de V12.")
 from monitor.v13.bode import BodeSweep
+from monitor.v13.bode_pulse import BodePanels
 
 
 WINDOWS = {'Hann': np.hanning, 'Hamming': np.hamming,
@@ -35,7 +39,7 @@ def _amplitudes(values, weights, remove_dc):
     return amplitude
 
 
-class FrequencyAxis(pg.AxisItem):
+class FrequencyAxis(LocaleAxis):
     """Keep logarithmic labels readable while retaining minor grid lines."""
     def __init__(self, orientation):
         super().__init__(orientation)
@@ -52,7 +56,7 @@ class FrequencyAxis(pg.AxisItem):
         return [(1, major), (None, minor)]
 
     def logTickStrings(self, values, scale, spacing):
-        return [f'{10**value*scale:.4g}' for value in values]
+        return [f'{number(10**value*scale, formats.n_4g)}' for value in values]
 
 
 class SpectralDisplay:
@@ -93,16 +97,33 @@ class SpectralDisplay:
             bar.setImageItem(image, insert_in=plot)
             self.plots.append(plot); self.curves.append(curve)
             self.images.append(image); self.bars.append(bar)
-        group = QtWidgets.QGroupBox('MODOS · ANÁLISIS')
+        group = QtWidgets.QGroupBox('ANÁLISIS')
         box = QtWidgets.QVBoxLayout(group)
-        buttons = QtWidgets.QHBoxLayout()
         self.buttons = QtWidgets.QButtonGroup(group)
         for i, text in enumerate(('V/t', 'FFT', 'Heatmap', 'Bode')):
-            button = QtWidgets.QPushButton(text)
+            button = QtWidgets.QPushButton(text, group)
             button.setCheckable(True); button.setFixedHeight(34)
             button.setStyleSheet("QPushButton {padding:2px; font-size:11px; background:#21252f; border:1px solid #323946; border-radius:6px;} QPushButton:checked {background:#006879; border:1px solid #00e5ff; color:white;}")
-            self.buttons.addButton(button, i); buttons.addWidget(button)
-            button.clicked.connect(lambda checked, mode=i: self.set_mode(mode))
+            self.buttons.addButton(button, i); button.hide()
+            if i != 3:
+                button.clicked.connect(lambda checked, mode=i: self.set_mode(mode))
+            else:
+                self.bode_menu = QtWidgets.QMenu(button)
+                self.bode_menu.setStyleSheet('QMenu {background:#1a1d24; color:#e6eaf0; '
+                    'border:1px solid #323946; padding:4px;} '
+                    'QMenu::item {padding:7px 18px;} '
+                    'QMenu::item:selected {background:#323946;}')
+                self.bode_actions = []
+                from PyQt6.QtGui import QActionGroup
+                methods = QActionGroup(self.bode_menu)
+                methods.setExclusive(True)
+                for index, title in enumerate(('Bode tono','Bode pulso','Bode sweep')):
+                    action = self.bode_menu.addAction(title)
+                    action.setCheckable(True); methods.addAction(action)
+                    action.setChecked(index == 0)
+                    action.triggered.connect(lambda checked, method=index: self.select_bode(method))
+                    self.bode_actions.append(action)
+                button.setMenu(self.bode_menu)
             if i == 0: button.setChecked(True)
         # Use the same neutral tick asset as the channel controls.
         from pathlib import Path
@@ -112,12 +133,40 @@ class SpectralDisplay:
                 border-radius:3px; background:#171920;}}
             QCheckBox::indicator:checked {{image:url("{check_icon}");}}
             QCheckBox::indicator:unchecked {{image:none;}}""")
-        box.addLayout(buttons)
+        from monitor.v13.app import GeneratorComboBox
+        self.mode_combo = GeneratorComboBox()
+        names = ('V(t)', 'FFT', 'Heatmap', 'Bode')
+        icons = ('analysis_time', 'analysis_fft', 'analysis_heatmap',
+                 'analysis_tone')
+        for name, icon in zip(names, icons):
+            self.mode_combo.addItem(QtGui.QIcon(str(Path(__file__).parent / f'assets/{icon}.svg')), name)
+        self.mode_combo.setIconSize(QtCore.QSize(18,18))
+        self.mode_combo.setFixedHeight(28)
+        self.mode_combo.setMinimumWidth(0)
+        self.mode_combo.setSizePolicy(QtWidgets.QSizePolicy.Policy.Ignored, QtWidgets.QSizePolicy.Policy.Fixed)
+        self.mode_combo.currentIndexChanged.connect(
+            self.set_mode)
+        mode_row = QtWidgets.QGridLayout()
+        mode_row.setContentsMargins(0,0,0,0)
+        mode_label = QtWidgets.QLabel('Modo')
+        mode_label.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        mode_row.setColumnStretch(0,1); mode_row.setColumnStretch(1,1)
+        mode_row.setHorizontalSpacing(8)
+        mode_row.addWidget(mode_label,0,0)
+        mode_row.addWidget(self.mode_combo,1,0)
+        self.secondary_label = QtWidgets.QLabel('Eje horizontal')
+        self.secondary_label.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.secondary_stack = QtWidgets.QStackedWidget()
+        self.secondary_stack.setSizePolicy(QtWidgets.QSizePolicy.Policy.Ignored, QtWidgets.QSizePolicy.Policy.Fixed)
+        self.secondary_stack.setFixedHeight(28)
+        mode_row.addWidget(self.secondary_label,0,1)
+        mode_row.addWidget(self.secondary_stack,1,1)
+        box.addLayout(mode_row)
         self.settings = QtWidgets.QWidget()
         grid = QtWidgets.QFormLayout(self.settings)
         grid.setContentsMargins(0, 0, 0, 0)
         grid.setVerticalSpacing(2)
-        self.size = QtWidgets.QComboBox(); self.size.addItems(['256','512','1024','2048','4096','8192']); self.size.setCurrentText('2048')
+        self.size = GeneratorComboBox(); self.size.addItems(['256','512','1024','2048','4096','8192']); self.size.setCurrentText('2048')
         self.window = QtWidgets.QComboBox(); self.window.addItems(list(WINDOWS))
         self.overlap = QtWidgets.QComboBox(); self.overlap.addItems(['0 %','50 %','75 %']); self.overlap.setCurrentIndex(1)
         self.scale = QtWidgets.QComboBox(); self.scale.addItems(['dBV', 'V pico'])
@@ -127,12 +176,13 @@ class SpectralDisplay:
             self.channels.append(combo)
         self.seconds = QtWidgets.QSpinBox(); self.seconds.setRange(2, 60); self.seconds.setValue(10); self.seconds.setSuffix(' s')
         self.remove_dc = QtWidgets.QCheckBox('Quitar componente DC'); self.remove_dc.setChecked(True)
-        for label, control in [('Muestras',self.size), ('Ventana',self.window), ('Solapamiento',self.overlap),
+        for label, control in [('Ventana',self.window), ('Solapamiento',self.overlap),
                                ('Escala',self.scale), ('Canal arriba',self.channels[0]), ('Canal abajo',self.channels[1]),
                                ('Historia',self.seconds)]:
             grid.addRow(label, control)
             signal = control.valueChanged if isinstance(control, QtWidgets.QSpinBox) else control.currentIndexChanged
             signal.connect(self.reset)
+        self.size.currentIndexChanged.connect(self.reset)
         grid.addRow(self.remove_dc); self.remove_dc.toggled.connect(self.reset)
         self.log_frequency = QtWidgets.QCheckBox('Frecuencia logarítmica')
         self.log_frequency.toggled.connect(self.reset)
@@ -140,7 +190,7 @@ class SpectralDisplay:
         self.lock_axes = QtWidgets.QCheckBox('Misma escala en ambos canales')
         self.lock_axes.toggled.connect(self.reset)
         grid.insertRow(0, self.lock_axes)
-        self.info = QtWidgets.QLabel(''); self.info.setWordWrap(True)
+        self.info = StatusLabel(''); self.info.setWordWrap(True)
         self.info.setStyleSheet('color:#aeb8c8; background:transparent; border:none; margin-top:10px;')
         grid.addRow(self.info)
         scroll = QtWidgets.QScrollArea(); scroll.setWidgetResizable(True)
@@ -149,13 +199,24 @@ class SpectralDisplay:
         options_layout = QtWidgets.QVBoxLayout(options)
         options_layout.setContentsMargins(0,0,0,0)
         self.temporal_settings = owner.temporal_settings
+        temporal_form = self.temporal_settings.layout()
+        axis_row = temporal_form.takeRow(owner.btn_xaxis_toggle)
+        if axis_row.labelItem: axis_row.labelItem.widget().deleteLater()
+        self.bode_method_combo = GeneratorComboBox()
+        for title,icon in zip(('Tono','Pulso','Sweep'),('analysis_tone','mode_pulse','mode_sweep')):
+            self.bode_method_combo.addItem(QtGui.QIcon(str(Path(__file__).parent / f'assets/{icon}.svg')),title)
+        self.bode_method_combo.currentIndexChanged.connect(self.select_bode)
+        for control in (owner.btn_xaxis_toggle,self.size,self.bode_method_combo):
+            control.setFixedHeight(28); control.setMinimumWidth(0)
+            control.setSizePolicy(QtWidgets.QSizePolicy.Policy.Ignored,QtWidgets.QSizePolicy.Policy.Fixed)
+            self.secondary_stack.addWidget(control)
         options_layout.addWidget(self.temporal_settings)
         options_layout.addWidget(self.settings)
         self.bode_settings = QtWidgets.QWidget()
         bode_form = QtWidgets.QFormLayout(self.bode_settings)
         bode_form.setContentsMargins(0,0,0,0)
         bode_form.setVerticalSpacing(2)
-        self.bode = BodeSweep(self, bode_form)
+        self.bode = BodePanels(self, bode_form)
         options_layout.addWidget(self.bode_settings)
         options_layout.addStretch()
         scroll.setWidget(options)
@@ -178,10 +239,24 @@ class SpectralDisplay:
             curve.setData([], []); image.clear()
         for fill in self.fft_fills: fill.setData([], [])
 
+    def select_bode(self, method):
+        self.bode.tabs.setCurrentIndex(method)
+        self.bode_actions[method].setChecked(True)
+        self.bode_method_combo.blockSignals(True)
+        self.bode_method_combo.setCurrentIndex(method)
+        self.bode_method_combo.blockSignals(False)
+        self.buttons.button(3).setToolTip(self.bode_actions[method].text())
+        self.set_mode(3)
+
     def set_mode(self, mode):
         if self.bode.active: self.bode.cancel('Cambio de modo')
         self.mode = mode
         self.buttons.button(mode).setChecked(True)
+        self.mode_combo.blockSignals(True)
+        self.mode_combo.setCurrentIndex(mode)
+        self.mode_combo.blockSignals(False)
+        self.secondary_label.setText('Eje horizontal' if mode==0 else 'Muestras' if mode in (1,2) else 'Método')
+        self.secondary_stack.setCurrentIndex(0 if mode==0 else 1 if mode in (1,2) else 2)
         self.stack.setCurrentIndex(0 if mode == 0 else 1)
         self.settings.setEnabled(mode in (1,2))
         self.settings.setVisible(mode in (1,2))
@@ -190,7 +265,10 @@ class SpectralDisplay:
         self.reset()
         self.configure_plots()
         if mode == 3:
-            self.bode.status.setText('Listo · pulsar Repetir o Agregar para iniciar el barrido.')
+            self.bode.draw()
+            if not self.bode.result:
+                self.bode.status.setText('Listo · pulsar Repetir o Agregar para iniciar el barrido.')
+        if getattr(self.owner,'_central_status_ready',False):self.owner._refresh_status_boxes()
 
     def configure_plots(self):
         heat = self.mode == 2
@@ -326,7 +404,7 @@ class SpectralDisplay:
             self.last_fast_render = now if elapsed >= 2*interval else self.last_fast_render+interval
         n = int(self.size.currentText())
         if len(owner.sample_numbers) < n:
-            self.info.setText(f'Esperando {n:,} muestras…'); return
+            self.info.setText(f'Esperando {number(n, formats.n_)} muestras…'); return
         timestamps = owner.series.get('Tiempo (us)')
         if timestamps is not None and len(timestamps) >= n:
             dt = np.diff(timestamps[-n:])
@@ -374,7 +452,7 @@ class SpectralDisplay:
                 spectra.append(20 * np.log10(np.maximum(amplitudes, 1e-12)) if self.scale.currentIndex() == 0 else amplitudes)
             self.frames.append((block_end, spectra)); self.last_end = block_end
         if not self.frames: return
-        self.info.setText(f'Fs {fs:,.0f} Hz · Δf {fs/n:.2f} Hz\nVentana {n/fs*1000:.1f} ms · paso {hop/fs*1000:.1f} ms')
+        self.info.setText(f'Fs {number(fs, formats.n__0f)} Hz · Δf {number(fs/n, formats.n_2f)} Hz\nVentana {number(n/fs*1000, formats.n_1f)} ms · paso {number(hop/fs*1000, formats.n_1f)} ms')
         latest_values = self.frames[-1][1]
         shared_range = None
         if self.mode == 1 and self.lock_axes.isChecked():

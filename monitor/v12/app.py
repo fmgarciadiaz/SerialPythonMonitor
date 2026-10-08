@@ -13,6 +13,8 @@ import sys
 ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
+from monitor.number_format import number, formats
+from monitor.locale_axis import LocaleAxis
 from monitor.v12.history import SampleHistory
 from monitor.v12.spectrum import SpectralDisplay
 from monitor.v12.receiver.unoq_usb import Connection, usb_devices
@@ -752,9 +754,9 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self.config_rate_combo = QtWidgets.QComboBox()
         self.config_rate_combo.setToolTip('T: período entre pares de muestras.\nAdq: tiempo de carga del capacitor por canal y subconversión.\nUna ventana más corta exige menor impedancia de fuente para conservar el asentamiento.\nEn 16 bits se realizan 16 subconversiones por canal.')
         for rate in RATES:
-            label = f'{rate/1000:g}'.replace('.', ',') + f' kHz · {1000000//rate} µs'
+            label = f'{number(rate/1000, formats.ng)}' + f' kHz · {1000000//rate} µs'
             config = Configuration(14, rate)
-            if rate > 31250: label += f' · SPI · ADC {config.sampling_us:g} µs'
+            if rate > 31250: label += f' · SPI · ADC {number(config.sampling_us, formats.ng)} µs'
             self.config_rate_combo.addItem(label, rate)
         self.config_rate_combo.setCurrentIndex(self.config_rate_combo.findData(31250))
         destination_layout.addWidget(self.config_rate_combo, 4, 1, 1, 2)
@@ -1030,7 +1032,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self._build_generator_panel(generator_layout)
 
         # 2. Pantalla de Osciloscopio (PyQtGraph)
-        self.plot_widget = pg.PlotWidget()
+        self.plot_widget = pg.PlotWidget(axisItems={'bottom': LocaleAxis('bottom'), 'left': LocaleAxis('left')})
         self.plot_widget.setMenuEnabled(False)
         self.plot_widget.setMouseEnabled(x=True, y=True)
         self.plot_widget.showGrid(x=True, y=True, alpha=0.35)
@@ -1898,7 +1900,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
                 self._generator_syncing=False
             self._generator_availability()
         state='Activo' if reply.running else ('Finalizado' if c.enabled else 'Apagado · A0 a 0 V')
-        self.generator_status.setText(f'A0 · {state} · {WAVES[c.wave]} · {c.frequency/1000:g} Hz · DAC 12 bits por DMA')
+        self.generator_status.setText(f'A0 · {state} · {WAVES[c.wave]} · {number(c.frequency/1000, formats.ng)} Hz · DAC 12 bits por DMA')
         if self._generator_dirty and not self._generator_timer.isActive(): self._generator_timer.start()
 
     def _on_column_toggled(self):
@@ -2218,7 +2220,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
     def on_h_pos_changed(self, value: int):
         self.h_pos = int(value)
         if self.x_axis_time_mode:
-            text = f"{self.h_pos * self._horizontal_dt_us() / 1000:.1f} ms"
+            text = f"{number(self.h_pos * self._horizontal_dt_us() / 1000, formats.n_1f)} ms"
         else:
             text = f"{self.h_pos} smp"
         self.lbl_h_pos.setText(text + (" (En vivo)" if self.h_pos == 0 else ""))
@@ -2230,7 +2232,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
 
     def on_v_pos_changed(self, value: int):
         self.v_pos = value / 100.0
-        self.lbl_v_pos.setText(f"{self.v_pos:.2f} V")
+        self.lbl_v_pos.setText(f"{number(self.v_pos, formats.n_2f)} V")
         self._apply_vertical_range()
 
     def _apply_vertical_range(self):
@@ -2265,7 +2267,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             self.lbl_trigger_level.setText(f"{int(self.trigger_level)}")
         else:
             self.trigger_level = value / 100.0
-            self.lbl_trigger_level.setText(f"{self.trigger_level:.2f} V")
+            self.lbl_trigger_level.setText(f"{number(self.trigger_level, formats.n_2f)} V")
 
         self._updating_trigger_line = True
         self.trigger_line.setValue(self.trigger_level)
@@ -2283,7 +2285,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             self.dial_trigger_level.setValue(int(round(self.trigger_level)))
         else:
             self.trigger_level = max(0.0, min(3.3, new_val))
-            self.lbl_trigger_level.setText(f"{self.trigger_level:.2f} V")
+            self.lbl_trigger_level.setText(f"{number(self.trigger_level, formats.n_2f)} V")
             self.dial_trigger_level.setValue(int(round(self.trigger_level * 100)))
         self._updating_trigger_line = False
 
@@ -2308,7 +2310,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             self.trigger_line.setValue(self.trigger_level)
         else:
             self.trigger_level = max(0.0, min(3.3, v_mid))
-            self.lbl_trigger_level.setText(f"{self.trigger_level:.2f} V")
+            self.lbl_trigger_level.setText(f"{number(self.trigger_level, formats.n_2f)} V")
             self.dial_trigger_level.setValue(int(round(self.trigger_level * 100)))
             self.trigger_line.setValue(self.trigger_level)
         self._updating_trigger_line = False
@@ -2333,7 +2335,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         if self.trigger_enabled:
             is_adc = "ADC" in self.trigger_source
             unit = "" if is_adc else "V"
-            val_str = f"{int(self.trigger_level)}" if is_adc else f"{self.trigger_level:.2f}"
+            val_str = f"{int(self.trigger_level)}" if is_adc else f"{number(self.trigger_level, formats.n_2f)}"
             self.trigger_status_label.setText(
                 f"● Armado: {self.trigger_source} {self.trigger_edge} a {val_str}{unit}"
             )
@@ -2417,7 +2419,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         if not self.recording:
             return
         elapsed = min(time.perf_counter() - self.record_start_time, RECORD_MAX_SECONDS)
-        self.record_status_label.setText(f"● REC {elapsed:04.1f}/30.0 s | {self.record_rows:,} filas")
+        self.record_status_label.setText(f"● REC {number(elapsed, formats.n04_1f)}/30.0 s | {number(self.record_rows, formats.n_)} filas")
         self.record_status_label.setStyleSheet("background:rgba(255,82,82,0.15);border:1px solid #ff5252;padding:4px;color:#ff5252;font-weight:bold;")
         if elapsed >= RECORD_MAX_SECONDS:
             self.stop_recording(auto=True)
@@ -2447,7 +2449,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
                 QtWidgets.QMessageBox.critical(self, "Error de grabación", f"La grabación se detuvo:\n{error_message}")
         elif was_recording:
             reason = "límite de 30 s" if auto else "detenida por usuario"
-            self.record_status_label.setText(f"CSV guardado: {filename} | {self.record_rows:,} filas | {reason}")
+            self.record_status_label.setText(f"CSV guardado: {filename} | {number(self.record_rows, formats.n_)} filas | {reason}")
             self.record_status_label.setStyleSheet("color:#00e676;font-weight:bold;")
 
     def _update_port_tooltip(self, index):
@@ -2503,7 +2505,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         mode = getattr(self, 'confirmed_mode', None)
         port = getattr(self, 'confirmed_r4', '')
         name = 'SPI · UNO Q' if mode == int(Mode.SPI) else f'UART · R4 {port}'
-        self.confirmed_output_label.setText(f'{name} · {config.bits} bits' + (' OS ×16' if config.bits == 16 else '') + ' · ' + f'{config.rate/1000:g}'.replace('.', ',') + ' kHz')
+        self.confirmed_output_label.setText(f'{name} · {config.bits} bits' + (' OS ×16' if config.bits == 16 else '') + ' · ' + f'{number(config.rate/1000, formats.ng)}' + ' kHz')
         self.status_label.setText('Adquisición aplicada · control Q conectado')
 
     def _destination_changed(self):
@@ -2514,10 +2516,10 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
                 allowed = (not uart or rate in UART_RATES) and (self.config_bits_combo.currentData() != 16 or rate <= 62500)
                 self.config_rate_combo.model().item(i).setEnabled(allowed)
                 bits = self.config_bits_combo.currentData()
-                label = f'{rate/1000:g}'.replace('.', ',') + f' kHz · {1000000//rate} µs'
+                label = f'{number(rate/1000, formats.ng)}' + f' kHz · {1000000//rate} µs'
                 if bits != 16 or rate <= 62500:
                     profile = Configuration(bits, rate)
-                    acquisition = f'{profile.sampling_us:g}'.replace('.', ',')
+                    acquisition = f'{number(profile.sampling_us, formats.ng)}'
                     tooltip = (f'Período entre pares: {profile.period} µs.\n'
                                f'Adquisición por canal y subconversión: {acquisition} µs '
                                f'({profile.sampling_cycles} ciclos ADC).\n'
@@ -2853,11 +2855,11 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
 
         if fs_hz > 0.0:
             if fs_hz >= 1_000_000.0:
-                text = f"{fs_hz / 1_000_000.0:.2f} MS/s"
+                text = f"{number(fs_hz / 1_000_000.0, formats.n_2f)} MS/s"
             elif fs_hz >= 1000.0:
-                text = f"{fs_hz / 1000.0:.2f} kS/s"
+                text = f"{number(fs_hz / 1000.0, formats.n_2f)} kS/s"
             else:
-                text = f"{fs_hz:.1f} S/s"
+                text = f"{number(fs_hz, formats.n_1f)} S/s"
         else:
             text = "-- S/s"
 
@@ -3061,7 +3063,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
 
                 is_adc = "ADC" in source
                 unit = "" if is_adc else "V"
-                lvl_str = f"{int(self.trigger_level)}" if is_adc else f"{self.trigger_level:.2f}"
+                lvl_str = f"{int(self.trigger_level)}" if is_adc else f"{number(self.trigger_level, formats.n_2f)}"
                 self.trigger_status_label.setText(
                     f"● Disparo ({source} {self.trigger_edge} @ {lvl_str}{unit})"
                 )
@@ -3155,9 +3157,9 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self.lbl_top_fs.setText(fs_text)
         if dt_us > 0:
             if dt_us < 1000.0:
-                tip = f"Frecuencia de Muestreo: {fs_hz:.1f} Hz\nPeriodo entre muestras: {dt_us:.1f} µs"
+                tip = f"Frecuencia de Muestreo: {number(fs_hz, formats.n_1f)} Hz\nPeriodo entre muestras: {number(dt_us, formats.n_1f)} µs"
             else:
-                tip = f"Frecuencia de Muestreo: {fs_hz:.1f} Hz\nPeriodo entre muestras: {dt_us/1000.0:.2f} ms"
+                tip = f"Frecuencia de Muestreo: {number(fs_hz, formats.n_1f)} Hz\nPeriodo entre muestras: {number(dt_us/1000.0, formats.n_2f)} ms"
             self.lbl_top_fs.setToolTip(tip)
             self.config_rate_combo.setToolTip(tip)
 
@@ -3171,7 +3173,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             mode_str = "RUN" if self.is_running else "STOP"
             self.plot_widget.setTitle(
                 f"SCOPE V12 [{mode_str}] | Muestras: {self.sample_counter} | "
-                f"Ventana: {self.h_scale} | Fs: {fs_text} | FPS: {self.current_fps:.1f}"
+                f"Ventana: {self.h_scale} | Fs: {fs_text} | FPS: {number(self.current_fps, formats.n_1f)}"
             )
 
     def _update_live_measurements(self, y_slices, active_columns):
@@ -3216,14 +3218,14 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
                         if t_delta_us > 0:
                             freq_hz = 1_000_000.0 / t_delta_us
                             if freq_hz < 1000:
-                                freq_text = f"{freq_hz:.1f} Hz"
+                                freq_text = f"{number(freq_hz, formats.n_1f)} Hz"
                             else:
-                                freq_text = f"{freq_hz/1000.0:.2f} kHz"
+                                freq_text = f"{number(freq_hz/1000.0, formats.n_2f)} kHz"
 
                     # Fallback si no hay timestamps
                     if freq_text == "--" and delta_samples > 0 and self.current_fs_hz > 0:
                         freq_est = self.current_fs_hz / delta_samples
-                        freq_text = f"~{freq_est:.1f} Hz"
+                        freq_text = f"~{number(freq_est, formats.n_1f)} Hz"
 
             self.val_freq.setText(freq_text)
 

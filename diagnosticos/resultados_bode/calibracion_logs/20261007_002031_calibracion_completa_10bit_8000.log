@@ -1,0 +1,12 @@
+qt.qpa.fonts: Populating font family aliases took 122 ms. Replace uses of missing font family "Sans Serif" with one that exists to avoid this cost. 
+Traceback (most recent call last):
+  File "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/tools/calibrate_bode.py", line 172, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/tools/calibrate_bode.py", line 147, in main
+    wait(lambda:not panel.active,40)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/tools/calibrate_bode.py", line 118, in wait
+    app.processEvents();time.sleep(.002)
+                        ~~~~~~~~~~^^^^^^
+KeyboardInterrupt

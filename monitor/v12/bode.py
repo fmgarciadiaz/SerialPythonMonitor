@@ -1,3 +1,4 @@
+from monitor.number_format import number, formats
 """Stepped sine sweep and synchronous two-channel transfer measurement."""
 import time
 import numpy as np
@@ -128,7 +129,7 @@ class BodeSweep:
         fs = config.rate if config is not None else 31250
         frequencies = decade_frequencies(self.start.value(),self.end.value(),self.points.value())
         seconds = sum(sum(self.timing(frequency,fs)) for frequency in frequencies)
-        duration = f'{seconds:.1f} s' if seconds < 60 else f'{seconds/60:.1f} min'
+        duration = f'{number(seconds, formats.n_1f)} s' if seconds < 60 else f'{number(seconds/60, formats.n_1f)} min'
         self.estimate.setText(f'{len(frequencies)} puntos · mínimo {duration}\n+ comunicación y entrega de muestras')
 
     def change_axis(self):
@@ -148,7 +149,7 @@ class BodeSweep:
         for spin in (self.start,self.end,self.points,self.settle,self.cycles): spin.interpretText()
         fs = owner.applied_configuration.rate
         if self.start.value() >= self.end.value() or self.end.value() >= .45*fs:
-            self.status.setText(f'Rango inválido: inicio < final < {fs*.45:,.0f} Hz (0,45 Fs).'); return
+            self.status.setText(f'Rango inválido: inicio < final < {number(fs*.45, formats.n__0f)} Hz (0,45 Fs).'); return
         if not owner._generator_state_known or owner._generator_requested is not None:
             self.status.setText('Esperar confirmación del generador antes de iniciar Bode.'); return
         try:
@@ -197,7 +198,7 @@ class BodeSweep:
             self.owner.serial_worker.request_generator(self.config)
         except Exception as exc:
             self.cancel(f'No se pudo iniciar el tono: {exc}'); return
-        self.status.setText(f'{self.index+1}/{len(self.frequencies)} · {self.frequency:g} Hz · esperando Q…')
+        self.status.setText(f'{self.index+1}/{len(self.frequencies)} · {number(self.frequency, formats.ng)} Hz · esperando Q…')
 
     def confirmed(self, reply):
         if not self.active: return
@@ -209,7 +210,7 @@ class BodeSweep:
             self.waiting = False
             settle, duration = self.timing(self.frequency,self.owner.applied_configuration.rate)
             self.deadline = time.monotonic()+settle+duration+max(10, (settle+duration)*.2)
-            self.status.setText(f'{self.index+1}/{len(self.frequencies)} · {self.frequency:g} Hz · midiendo…')
+            self.status.setText(f'{self.index+1}/{len(self.frequencies)} · {number(self.frequency, formats.ng)} Hz · midiendo…')
 
     def batch(self, batch):
         if not self.active or self.waiting: return
@@ -248,7 +249,7 @@ class BodeSweep:
                 self.index += 1
                 if self.index == len(self.frequencies):
                     undefined = sum(np.isnan(p) and not np.isnan(g) for _,g,p in self.result)
-                    self.cancel(f'Barrido terminado · {self.frequencies[0]:g}–{self.frequencies[-1]:g} Hz · {len(self.invalid_points)} referencias inválidas · {undefined} fases indeterminadas'); return
+                    self.cancel(f'Barrido terminado · {number(self.frequencies[0], formats.ng)}–{number(self.frequencies[-1], formats.ng)} Hz · {len(self.invalid_points)} referencias inválidas · {undefined} fases indeterminadas'); return
                 self.next_tone()
                 return  # Discard the rest of the batch from the previous tone.
 
@@ -286,7 +287,7 @@ class BodeSweep:
                 finite = values[np.isfinite(values)]
                 floor = min(-160, float(finite.min())-20) if len(finite) else -160
                 values[zero] = floor
-                suffix = f' · cero: −∞ dB (piso visual {floor:g} dB)' if np.any(zero) else ''
+                suffix = f' · cero: −∞ dB (piso visual {number(floor, formats.ng)} dB)' if np.any(zero) else ''
                 self.spectral.plots[0].setTitle('Ganancia V_OUT / V_IN'+suffix)
             if i == 1:
                 valid = np.isfinite(values)

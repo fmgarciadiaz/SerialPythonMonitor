@@ -1,6 +1,6 @@
 # Monitor Python · funcionamiento técnico
 
-[Proyecto](../README.md) · [Uso del monitor](../monitor/v13/README.md)
+[Proyecto](../README.md) · [Uso del monitor](../monitor/v14/README.md)
 
 ## Flujo de datos
 
@@ -66,6 +66,12 @@ visual. Cada curva añadida conserva el perfil con el que fue adquirida.
 
 ## FFT, heatmap y dibujo
 
+La nueva variante añade Spectrum, Power, Distortion y Transfer.
+[Algoritmos, unidades y límites](FFT_ANALISIS.md) ·
+[Motor numérico](../monitor/v14/spectral_analysis.py).
+
+Las opciones de la versión conservada se describen a continuación.
+
 FFT unilateral con amplitud pico normalizada por ganancia coherente de la
 ventana; DC y Nyquist no se duplican. Se puede mostrar dBV o voltios pico.
 El heatmap limita historia y trabajo por cuadro; las discontinuidades dejan
@@ -74,3 +80,9 @@ El relleno llega al límite inferior de amplitud en dBV o a cero en voltios.
 
 [Opciones y criterios completos](FFT_V10.md) ·
 [Pruebas](../tests) · [Evidencia de Bode](../diagnosticos/BODE_V10.md)
+
+## Audio y sintetizador
+
+[Wav: grabación y reproducción](../README.md#wav--grabación-y-reproducción) ·
+[Synth: FM y modelos físicos](SYNTH.md) ·
+[Guía actual del monitor](../monitor/v15/README.md).
