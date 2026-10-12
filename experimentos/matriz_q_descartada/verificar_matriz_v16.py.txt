@@ -1,0 +1,100 @@
+"""Q matrix commands plus timestamp-validated ADC; outputs remain disabled."""
+import argparse
+from dataclasses import asdict
+from datetime import datetime
+import json
+from pathlib import Path
+import sys
+import time
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+from diagnosticos.probar_audio_owner_v16 import require_exclusive_monitor
+from monitor.v16.receiver.unoq_usb import Connection
+from monitor.v16.receiver.unoq_config_receiver import OutputReceiver
+from monitor.v16.receiver.unoq_switch import Mode
+from monitor.v16.receiver.unoq_acquisition import Configuration
+from monitor.v16.receiver.unoq_generator import GeneratorConfig
+from monitor.v16.receiver.unoq_matrix import MODES
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--seconds', type=float, default=60)
+    parser.add_argument('--restore-rate', type=int)
+    args = parser.parse_args()
+    require_exclusive_monitor()
+    folder = ROOT / 'diagnosticos/resultados_v16'
+    folder.mkdir(exist_ok=True)
+    path = folder / (datetime.now().strftime('%Y%m%d_%H%M%S') + '_matriz.json')
+    report = dict(cases=[], restored=False, scope='Command ACK and strict ADC continuity; no visual/acoustic acceptance')
+    pairs = 0
+
+    def collect(batch):
+        nonlocal pairs
+        pairs += len(batch)
+
+    def save():
+        path.write_text(json.dumps(report, indent=2) + '\n')
+
+    with Connection('1060031107') as connection:
+        connection.socket.settimeout(.01)
+        receiver = OutputReceiver(connection, collect)
+        receiver.select(Mode.SPI)
+        prior = receiver.config
+        generator = receiver.generator().active
+        receiver.reset_wav_output()
+        if generator.enabled or receiver.wav_status.state != 0:
+            raise RuntimeError('Q ocupado: ensayo cancelado')
+        if not receiver.wav_status.matrix_modes:
+            raise RuntimeError('Firmware sin matriz')
+        restore = Configuration(prior.bits, args.restore_rate) if args.restore_rate else prior
+        report['prior'] = dict(adc=asdict(prior), generator=asdict(generator))
+        report['restore_adc'] = asdict(restore)
+        try:
+            for rate in (40000, 250000):
+                receiver.configure(Configuration(14, rate))
+                before = pairs
+                started = time.monotonic()
+                changes = []
+                next_change = started
+                mode = 1
+                while time.monotonic() - started < args.seconds:
+                    if time.monotonic() >= next_change:
+                        rid = receiver.next_id
+                        receiver.set_matrix_mode(mode)
+                        deadline = time.monotonic() + 2
+                        while True:
+                            receiver.pump()
+                            if any(s['ack'] == rid for s in receiver.decoder.statuses):
+                                break
+                            if time.monotonic() > deadline:
+                                raise TimeoutError('Sin ACK de matriz')
+                        changes.append(dict(mode=MODES[mode], ack=rid))
+                        mode = mode % 10 + 1
+                        next_change = time.monotonic() + .5
+                    receiver.pump()
+                report['cases'].append(dict(rate=rate, seconds=time.monotonic()-started,
+                                           pairs=pairs-before, changes=changes,
+                                           adc_status=receiver.decoder.status))
+                save()
+                print(rate, pairs-before, 'pares, cambios', len(changes), flush=True)
+            report['ok'] = True
+        except Exception as exc:
+            report['error'] = str(exc)
+            raise
+        finally:
+            try:
+                receiver.set_matrix_mode(0)
+                receiver.configure(restore)
+                receiver.generator(GeneratorConfig(**asdict(generator)))
+                report['final'] = dict(adc=asdict(receiver.config), generator=asdict(receiver.generator().active))
+                report['restored'] = receiver.config == restore and report['final']['generator'] == asdict(generator)
+            except Exception as exc:
+                report['restore_error'] = str(exc)
+            save()
+            print(path, flush=True)
+
+
+if __name__ == '__main__':
+    main()

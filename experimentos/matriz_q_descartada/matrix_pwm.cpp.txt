@@ -1,0 +1,24 @@
+#include "../oscilloscope/sketch/matrix_pwm.h"
+#include <cassert>
+int main() {
+    bool seen[11][11] = {};
+    for(unsigned i=0;i<104;++i) {
+        const auto p=matrix_pwm::pair(i);
+        assert(p.anode<11 && p.cathode<11 && p.anode!=p.cathode);
+        assert(!seen[p.anode][p.cathode]); seen[p.anode][p.cathode]=true;
+        const auto opposite=matrix_pwm::pair(i^1);
+        assert(p.anode==opposite.cathode && p.cathode==opposite.anode);
+    }
+    assert(matrix_pwm::pair(0).anode==0 && matrix_pwm::pair(0).cathode==1);
+    assert(matrix_pwm::pair(103).anode==10 && matrix_pwm::pair(103).cathode==6);
+    for(uint32_t slot : {50U, 8000U}) {
+        uint32_t prior=0;
+        for(uint8_t level=0;level<8;++level) {
+            const uint32_t on=matrix_pwm::on_ticks(level,slot), off=slot-on;
+            assert(on+off==slot && on<=slot);
+            assert(level==0 ? on==0 : on>prior);
+            assert(level!=7 || off==0);
+            prior=on;
+        }
+    }
+}

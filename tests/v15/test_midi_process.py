@@ -4,8 +4,8 @@ import json
 import unittest
 from unittest.mock import patch
 from PyQt6 import QtCore,QtWidgets
-from monitor.v15.midi_process import MidiProcess
-from monitor.v15.app import SerialMonitorWindow
+from monitor.historico.v15.midi_process import MidiProcess
+from monitor.historico.v15.app import SerialMonitorWindow
 
 
 class MidiProcessTests(unittest.TestCase):
@@ -34,10 +34,10 @@ class MidiProcessTests(unittest.TestCase):
         client.close()
 
     def test_refresh_is_async_and_populates_physical_inputs(self):
-        with patch('monitor.v15.app.usb_devices',return_value=[]):w=SerialMonitorWindow()
+        with patch('monitor.historico.v15.app.usb_devices',return_value=[]):w=SerialMonitorWindow()
         try:
             panel=w.fm_panel
-            with patch('monitor.v15.fm_panel.MidiProcess') as factory:
+            with patch('monitor.historico.v15.fm_panel.MidiProcess') as factory:
                 panel.refresh_midi()
                 factory.return_value.start.assert_called_once_with()
                 self.assertFalse(panel.refresh.isEnabled())

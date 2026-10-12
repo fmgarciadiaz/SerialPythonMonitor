@@ -2,19 +2,47 @@
 
 ## Perfiles de adquisición
 
-SPI: hasta 125 kHz por canal en 8/10/12/14 bits, y 62,5 kHz en
-16 bits por oversampling ×16 de conversiones de 14 bits, shift derecho 2.
-UART: hasta 31,25 kHz. Los valores de 16 bits no certifican ENOB de 16 bits.
-ADC a 50 MHz mediante PLL2; la ventana indicada por Python corresponde a
-ciclos/50 MHz. A 62,5 kHz/16 bits se usan 5 ciclos de adquisición.
-Con 17 ciclos de conversión, dos canales ×16 requieren nominalmente
-32×(5+17)/50 = 14,08 µs frente a un período de 16 µs, antes de latencias.
-El aumento acorta también las ventanas de los perfiles anteriores y requiere
-comprobar ruido, asentamiento y referencias Bode compatibles.
+Todas las tasas son **por canal**, en **kHz**. En dual se capturan CH1 y CH2
+por disparo; en CH1 sólo A2. Se muestran tres decimales cuando hace falta para
+identificar la tasa en Hz enteros; la tasa efectiva depende del período aplicado.
 
-SCP1 V3 usa 992 bytes, payload 972 y CRC32 en 988–991; los tipos de
-comando y campos iniciales se conservan. Firmware, relay y receptor deben
-aceptar juntos 16 bits/período 16 µs y rechazar 100/125 kHz en 16 bits.
+| Salida / resolución | Tasas dual comunes (kHz) |
+| --- | --- |
+| SPI y UART · 8/10/12/14/16 bits | 1; 2; 4; 5; 8; 10; 12,500; 15,625; 20; 25; 31,250 |
+| Sólo SPI · 8/10/12/14/16 bits | 40; 50; 62,500; 66,666; 71,428 |
+| Sólo SPI · 8/10/12/14 bits | 100; 125; 200; 250; 333,333 |
+
+| Bits | CH1 · sólo SPI (kHz) | Dual adicional · sólo SPI (kHz) |
+| --- | --- | --- |
+| 8 | 1118,881 ✓; 1203,007; 1221,374 | 597,014 ✓; 632,411 |
+| 10 | 909,090 ✓ | 495,356; 519,480 |
+| 12 | — | 410,256; 437,158 |
+| 14 | 599,250; 661,157; 701,754 ✓; 747,663 | 355,555 ✓; 363,636 |
+| 16 | — | 76,226 ✓ |
+
+**✓**: perfil nativo con margen de envío ≥10%, cola máxima menor de cuatro y
+margen positivo antes de sobrescritura, confirmado también en producción.
+ADC10/495,356 y ADC12/410,256 kHz conservan integridad pero midieron 9,03% y
+9,39% de margen integrado; no llevan esta marca.
+
+UART conserva dos canales y un máximo de 31,250 kHz. En **Synth**, SPI limita
+la adquisición a **40 kHz** y UART a **31,250 kHz**; los perfiles CH1 y dual
+nativos altos no se ofrecen en ese modo. El selector filtra por resolución,
+salida y Synth. Los perfiles heredados conservan la evidencia y límites de sus
+ensayos; disponibilidad en el selector no equivale a certificación analógica.
+
+La pareja actual es **monitor/MCU/relay V16**, SCP1 V4/992, ADC a 54 MHz
+mediante PLL2. ADC16 usa oversampling ×16 de conversiones de 14 bits, con
+shift derecho de dos bits. TIM2/TIM5 usan 1 MHz en dual heredado y 160 MHz en
+CH1 rápido y perfiles nativos. Los nativos se identifican mediante bits, ticks,
+tamaño de nodo y número de canales compartidos por las tres capas.
+
+[Perfiles disponibles en Python](../monitor/v16/receiver/unoq_acquisition.py) ·
+[Whitelist nativa](../monitor/v16/receiver/native_profiles.json) ·
+[Evidencia de integración](../experimentos/maxfreq_dual_v16/RESULTADOS.md#incorporación-a-producción-completada).
+
+Las secciones siguientes conservan los contratos y límites históricos V8/V10;
+para las frecuencias actuales se aplica la tabla anterior.
 
 ## Contrato anterior V8 / V10 (V2/512)
 

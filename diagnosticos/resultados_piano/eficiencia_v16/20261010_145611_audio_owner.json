@@ -1,0 +1,92 @@
+{
+  "scope": "Dedicated audio/Q owner, bounded lossless ADC IPC, simulated controls and forced parent GC; no GUI/acoustic acceptance",
+  "cases": [
+    {
+      "queue_growth": [
+        {
+          "time": 370458.774668129,
+          "target": 7,
+          "actual_blocks": 4
+        }
+      ],
+      "target": 5,
+      "adc_rate": 40000,
+      "freeze_worker": false,
+      "restored": true,
+      "sent_samples": 4145152,
+      "max_target": 7,
+      "min_blocks": 3,
+      "initial_wav": "IDLE",
+      "prior": {
+        "adc": {
+          "bits": 14,
+          "rate": 100000
+        },
+        "generator": {
+          "wave": 0,
+          "enabled": 0,
+          "mode": 0,
+          "frequency": 2500,
+          "final_frequency": 2500,
+          "low": 0,
+          "high": 0,
+          "duration": 1000,
+          "duration_us": 0
+        }
+      },
+      "seconds": 103.73298908100696,
+      "state": "UNDERRUN",
+      "reason": 2,
+      "played": 2071680,
+      "max_ack_gap_ms": 53.11559000983834,
+      "transport": {
+        "max_socket_send_ms": 0.7484169909730554,
+        "max_send_to_ack_ms": 53.08787798276171,
+        "max_chunk_generation_ms": 118.60326101304963
+      },
+      "adc_status": {
+        "ack": 25485600,
+        "rate": 40000,
+        "bits": 14,
+        "dropped": 0,
+        "fatal": 0,
+        "epoch": 35,
+        "prepare_us": 497,
+        "check_us": 99
+      },
+      "ok": false,
+      "final": {
+        "adc": {
+          "bits": 14,
+          "rate": 100000
+        },
+        "generator": {
+          "wave": 0,
+          "enabled": 0,
+          "mode": 0,
+          "frequency": 2500,
+          "final_frequency": 2500,
+          "low": 0,
+          "high": 0,
+          "duration": 1000,
+          "duration_us": 0
+        },
+        "wav": "IDLE"
+      },
+      "trace_path": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_piano/eficiencia_v16/20261010_145611_audio_owner_target5_trace.json",
+      "socket_probe": {
+        "samples": 83830,
+        "overwritten": 0,
+        "error": null,
+        "max_wake_gap_ms": 43.45139698125422
+      },
+      "socket_probe_path": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_piano/eficiencia_v16/20261010_145611_audio_owner_target5_trace.socket.npz",
+      "trace_limit_reached": false,
+      "adc_ipc": "shared_ring",
+      "ipc_samples": 4145152,
+      "ipc_ok": true,
+      "parent_gc_max_ms": 173.67499799001962,
+      "parent_pause_max_ms": 253.69811995187774
+    }
+  ]
+}

@@ -1,0 +1,226 @@
+{
+  "scope": "Host intervals; read includes waiting/ADC arrival; unaccounted includes other host work and transport, not pure Q RTT",
+  "requests": 4678,
+  "summary_ms": {
+    "send_return_to_ack_ms": {
+      "median": 4.611556505551562,
+      "p95": 7.148244691779836,
+      "max": 36.38693899847567
+    },
+    "generate_ms": {
+      "median": 0.0,
+      "p95": 0.0,
+      "max": 0.15552103286609054
+    },
+    "decode_ms": {
+      "median": 0.31314350781030953,
+      "p95": 1.0646570532117037,
+      "max": 2.8517484315671027
+    },
+    "read_ms": {
+      "median": 3.9395169587805867,
+      "p95": 6.684910139301792,
+      "max": 35.04283702932298
+    },
+    "send_ms": {
+      "median": 0.0,
+      "p95": 0.0,
+      "max": 0.024375971406698227
+    },
+    "unaccounted_ms": {
+      "median": 0.1685354218352586,
+      "p95": 0.450616082525812,
+      "max": 3.512775059789419
+    }
+  },
+  "worst": [
+    {
+      "request_id": 2680455331,
+      "send_return_to_ack_ms": 36.38693899847567,
+      "generate_ms": 0,
+      "decode_ms": 1.0821829782798886,
+      "read_ms": 35.04283702932298,
+      "send_ms": 0,
+      "unaccounted_ms": 0.26191899087280035
+    },
+    {
+      "request_id": 2680455427,
+      "send_return_to_ack_ms": 34.10453296964988,
+      "generate_ms": 0,
+      "decode_ms": 0.34097605384886265,
+      "read_ms": 33.605101983994246,
+      "send_ms": 0,
+      "unaccounted_ms": 0.15845493180677295
+    },
+    {
+      "request_id": 2680453059,
+      "send_return_to_ack_ms": 32.57778403349221,
+      "generate_ms": 0,
+      "decode_ms": 0.41997991502285004,
+      "read_ms": 31.992457050364465,
+      "send_ms": 0,
+      "unaccounted_ms": 0.16534706810489297
+    },
+    {
+      "request_id": 2680453062,
+      "send_return_to_ack_ms": 12.680322979576886,
+      "generate_ms": 0.15552103286609054,
+      "decode_ms": 0.14906900469213724,
+      "read_ms": 11.906373023521155,
+      "send_ms": 0.024375971406698227,
+      "unaccounted_ms": 0.4449839470908046
+    },
+    {
+      "request_id": 2680454571,
+      "send_return_to_ack_ms": 8.59194400254637,
+      "generate_ms": 0,
+      "decode_ms": 0.3187520778737962,
+      "read_ms": 8.137417025864124,
+      "send_ms": 0,
+      "unaccounted_ms": 0.1357748988084495
+    },
+    {
+      "request_id": 2680454279,
+      "send_return_to_ack_ms": 8.385521010495722,
+      "generate_ms": 0,
+      "decode_ms": 0.3974909777753055,
+      "read_ms": 7.695970009081066,
+      "send_ms": 0,
+      "unaccounted_ms": 0.29206002363935113
+    },
+    {
+      "request_id": 2680455686,
+      "send_return_to_ack_ms": 8.368798007722944,
+      "generate_ms": 0,
+      "decode_ms": 0.7306549814529717,
+      "read_ms": 7.363573997281492,
+      "send_ms": 0,
+      "unaccounted_ms": 0.27456902898848057
+    },
+    {
+      "request_id": 2680453395,
+      "send_return_to_ack_ms": 8.350968011654913,
+      "generate_ms": 0,
+      "decode_ms": 0.25416293647140265,
+      "read_ms": 7.965176017023623,
+      "send_ms": 0,
+      "unaccounted_ms": 0.1316290581598878
+    },
+    {
+      "request_id": 2680454726,
+      "send_return_to_ack_ms": 8.321547997184098,
+      "generate_ms": 0,
+      "decode_ms": 0.5583640304394066,
+      "read_ms": 7.488162897061557,
+      "send_ms": 0,
+      "unaccounted_ms": 0.27502106968313456
+    },
+    {
+      "request_id": 2680456215,
+      "send_return_to_ack_ms": 8.203822013456374,
+      "generate_ms": 0,
+      "decode_ms": 0.7015119772404432,
+      "read_ms": 7.073674933053553,
+      "send_ms": 0,
+      "unaccounted_ms": 0.4286351031623781
+    }
+  ],
+  "slow_decode": [
+    {
+      "wall_ms": 1.8585379584692419,
+      "cpu_ms": 1.8635959999997453,
+      "gc_overlap_ms": 1.3035120209679008
+    },
+    {
+      "wall_ms": 1.783337036613375,
+      "cpu_ms": 1.7916710000003278,
+      "gc_overlap_ms": 1.3565379776991904
+    },
+    {
+      "wall_ms": 1.2812920031137764,
+      "cpu_ms": 1.286856000000114,
+      "gc_overlap_ms": 0.9116620058193803
+    },
+    {
+      "wall_ms": 1.2764169950969517,
+      "cpu_ms": 1.2841040000006743,
+      "gc_overlap_ms": 0.8566640317440033
+    },
+    {
+      "wall_ms": 1.080902002286166,
+      "cpu_ms": 1.1031720000000966,
+      "gc_overlap_ms": 0
+    },
+    {
+      "wall_ms": 0.9361960110254586,
+      "cpu_ms": 0.9025719999997683,
+      "gc_overlap_ms": 0
+    },
+    {
+      "wall_ms": 0.9209580020979047,
+      "cpu_ms": 0.8993349999997235,
+      "gc_overlap_ms": 0
+    },
+    {
+      "wall_ms": 0.8779559866525233,
+      "cpu_ms": 0.8417039999999432,
+      "gc_overlap_ms": 0
+    },
+    {
+      "wall_ms": 0.850360025651753,
+      "cpu_ms": 0.8173039999999077,
+      "gc_overlap_ms": 0
+    },
+    {
+      "wall_ms": 0.8489550091326237,
+      "cpu_ms": 0.7872380000000234,
+      "gc_overlap_ms": 0
+    }
+  ],
+  "slow_generate": [
+    {
+      "wall_ms": 69.18167899129912,
+      "gc_overlap_ms": 68.90384602593258
+    },
+    {
+      "wall_ms": 0.49779494293034077,
+      "gc_overlap_ms": 0
+    },
+    {
+      "wall_ms": 0.49194396706297994,
+      "gc_overlap_ms": 0
+    },
+    {
+      "wall_ms": 0.4746000049635768,
+      "gc_overlap_ms": 0
+    },
+    {
+      "wall_ms": 0.4582940018735826,
+      "gc_overlap_ms": 0
+    },
+    {
+      "wall_ms": 0.4472740110941231,
+      "gc_overlap_ms": 0
+    },
+    {
+      "wall_ms": 0.4432559944689274,
+      "gc_overlap_ms": 0
+    },
+    {
+      "wall_ms": 0.4339389852248132,
+      "gc_overlap_ms": 0
+    },
+    {
+      "wall_ms": 0.4310659714974463,
+      "gc_overlap_ms": 0
+    },
+    {
+      "wall_ms": 0.42375799966976047,
+      "gc_overlap_ms": 0
+    }
+  ],
+  "gc": {
+    "count": 31,
+    "max_ms": 68.90384602593258
+  }
+}

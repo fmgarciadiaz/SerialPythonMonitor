@@ -23,7 +23,7 @@ activa por defecto si existe el JSON. La referencia es ADC16/50 kHz creada el
 3 de octubre, mientras que la documentación actual indica que fue medida con
 reloj ADC de 40 MHz y que después se cambió a 50 MHz. El firmware actual local
 configura PLL2 HSE/2 ×25 /4 en
-`arduino/v13_pulse/oscilloscope/sketch/acquisition.h:62`. El mismo cambio figura
+`arduino/historico/v13_pulse/oscilloscope/sketch/acquisition.h:62`. El mismo cambio figura
 en V11 P992. Volver a ADC16/50 kHz hace que la referencia antigua se aplique
 automáticamente aunque cambió el tiempo de conversión entre canales.
 

@@ -11,21 +11,23 @@ usa lo instalado y comprueba/inicia app y relay cuando el enlace no responde.
 Para administrar manualmente el conjunto de audio:
 
 ```sh
-python tools/unoq.py status --version v12_audio
-python tools/unoq.py compile --version v12_audio
-python tools/usb_stream.py start --firmware v12_audio
+python tools/unoq.py status --version v16
+python tools/unoq.py compile --version v16
+python tools/usb_stream.py start --firmware v16
 ```
 
 Compile valida sin cargar. Antes de cambiar firmware, cerrar el monitor y
-detener la pareja anterior. [Instalación y respaldo](v12_audio/README.md).
+detener la pareja anterior. [Instalación y respaldo](historico/v12_audio/README.md).
 
 [MCU y cableado](../docs/UNO_Q_TECNICO.md) · [Relay](../docs/TRANSPORTE_TECNICO.md)
 
 ## Versiones
 
-- [V12 Audio](v12_audio/README.md): MCU y relay compatibles con Monitor V15; añade WAV por A0.
-- [V11 P992](historico/v11_p992/README.md): archivada con Monitor V12; predeterminado de las herramientas de consola.
+- [V16](v16/README.md): pareja actual del monitor V16, CH1/dual y SCP1 V4.
+
+- [V12 Audio](historico/v12_audio/README.md): variante anterior de audio, conservada para selección explícita.
+- [V11 P992](historico/v11_p992/README.md): archivada con Monitor V12; selección explícita de consola.
 - [Histórico](historico/README.md) y [catálogo de apps](apps_catalogo.json).
 - [Puente R4 V5](historico/v5/r4_bridge_v5/README.md): transporte UART opcional.
 
-[V13 Pulse experimental](v13_pulse/README.md).
+[V13 Pulse](historico/v13_pulse/README.md): firmware histórico de Monitor V15, con audio y pulsos desde 100 µs.

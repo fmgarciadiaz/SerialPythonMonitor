@@ -2,7 +2,7 @@
 
 [Arquitectura completa del sistema](ARQUITECTURA.md)
 
-[Proyecto](../README.md) · [Firmware de audio](../arduino/v12_audio/README.md)
+[Proyecto](../README.md) · [Firmware V16](../arduino/v16/README.md)
 
 ## MCU y MPU en la pareja actual
 
@@ -12,10 +12,12 @@ genera la salida DAC de A0. El MPU ejecuta Linux y App Lab; aloja el
 relay nativo que intercambia tramas SPI con el MCU y las entrega al PC
 por TCP reenviado mediante USB/ADB. El monitor Python se ejecuta en el PC.
 
-Monitor V15 con Q V12 Audio o V13 Pulse usa SCP1 V3 de 992 bytes;
-la pareja histórica Monitor V12/Q V11 P992 comparte ese tamaño de trama. El ADC pasó de 40 a
-50 MHz mediante PLL2 para todos los perfiles; admite 16 bits por
-oversampling ×16 hasta 62,5 kHz. El kernel de reloj es compartido con DAC: el
+La pareja actual monitor/MCU/relay V16 usa SCP1 V4 de 992 bytes. El ADC usa
+54 MHz mediante PLL2: admite dual hasta 632,41 kHz por canal en ADC8,
+76,23 kHz en ADC16 con oversampling ×16, y CH1 hasta 1,221 MHz en ADC8.
+[Todas las frecuencias por resolución y salida](CONFIGURACION_ADQUISICION.md#perfiles-de-adquisición).
+Monitor V15/Q V13 Pulse y Monitor V12/Q V11 P992 son parejas históricas SCP1 V3.
+El kernel de reloj es compartido con DAC: el
 cambio requiere verificar también su configuración y generación de señal.
 HFSEL del DAC se mantiene en01 porque HCLK permanece160MHz. PLL2 se
 prepara antes del generador; al cambiar resolución/tasa se verifica el
@@ -56,9 +58,12 @@ flowchart TB
  D4 --> DAC
 ```
 
-TIM2/TIM5 conservan una base de 1 MHz; tasas válidas corresponden a períodos
-enteros en microsegundos. El timestamp procede de captura CCR1, evitando el
-jitter de leer CNT por DMA. ADC y timestamps usan dos nodos de 2048 pares.
+TIM2/TIM5 usan 1 MHz en dual heredado y 160 MHz en CH1 rápido y perfiles
+nativos; cada tasa corresponde a un período entero en esa base. El timestamp
+procede de captura CCR1, evitando el jitter de leer CNT por DMA. ADC y
+timestamps conservan dos nodos ping-pong; el tamaño depende del perfil.
+Las arenas estáticas CH1 compacto y dual/legacy se comparten entre modos
+excluyentes, con cuatro slots completos de cola y sin heap.
 El motor DAC tiene temporizador y DMA independientes de adquisición.
 
 ## Temporizadores, DMA e interrupciones
@@ -66,7 +71,7 @@ El motor DAC tiene temporizador y DMA independientes de adquisición.
 | Recurso | Trabajo concreto |
 |---|---|
 | TIM2 | TRGO inicia una secuencia ADC A2/A3 por período de muestreo |
-| TIM5 CH1 | Captura el instante del disparo en CCR1, con contador de 1 MHz |
+| TIM5 CH1 | Captura el disparo en CCR1, con contador de 1 o 160 MHz según perfil |
 | TIM6 | TRGO alimenta el DAC al ritmo de tabla de onda o audio |
 | GPDMA1 canal 0 | Lleva CCR1 a la memoria de timestamps |
 | GPDMA1 canal 1 | Lleva conversiones ADC a la memoria de ambos canales |
@@ -83,7 +88,7 @@ aplicación por conversión ni una ISR propia de adquisición. Un flag TC aislad
 no demuestra que el bloque siga disponible: se verifica también la posición
 del DMA y se detiene ante sobreescritura, overrun ADC o captura temporal perdida.
 Los nodos publicados se encolan para el transporte sin insertar texto de debug
-en el flujo binario. [Implementación](../arduino/v12_audio/oscilloscope/sketch/acquisition.h).
+en el flujo binario. [Implementación](../arduino/v16/oscilloscope/sketch/acquisition.h).
 
 ### SPI: IRQ de fin/error y semáforo
 
@@ -92,7 +97,7 @@ El callback registra fin/error de cada dirección y libera `transfer_done` cuand
 ambas terminaron o hubo un fallo. El hilo espera ese semáforo y controla plazos;
 DMA mueve los bytes. El sketch evita reemplazar las ISR compartidas del core.
 READY indica al MPU que la siguiente transferencia está preparada; se retira
-al completar la operación. [Servicio SPI](../arduino/v12_audio/oscilloscope/sketch/sketch.ino).
+al completar la operación. [Servicio SPI](../arduino/v16/oscilloscope/sketch/sketch.ino).
 
 ### DAC: tabla periódica y bloques WAV
 
@@ -107,22 +112,22 @@ comprueba dirección fuente y bytes restantes para reconocer el bloque actual
 y liberar créditos; no deduce avance únicamente de TC. Descriptores neutrales
 impiden volver a reproducir datos antiguos si faltan muestras. Al finalizar o
 fallar se detiene el DAC y se informa el estado al PC.
-[Motor de ondas](../arduino/v12_audio/oscilloscope/sketch/generator_dma.h) ·
-[Motor WAV](../arduino/v12_audio/oscilloscope/sketch/wav_dma.h) ·
-[Cola y supervisión](../arduino/v12_audio/oscilloscope/sketch/wav.h).
+[Motor de ondas](../arduino/historico/v13_pulse/oscilloscope/sketch/generator_dma.h) ·
+[Motor WAV](../arduino/historico/v13_pulse/oscilloscope/sketch/wav_dma.h) ·
+[Cola y supervisión](../arduino/historico/v13_pulse/oscilloscope/sketch/wav.h).
 
 ## Fuentes y responsabilidades
 
 | Archivo | Función |
 |---|---|
-| [sketch.ino](../arduino/v12_audio/oscilloscope/sketch/sketch.ino) | Inicio, servicio de comandos y envío |
-| [scope_config.h](../arduino/v12_audio/oscilloscope/sketch/scope_config.h) | Pines, relojes, recursos y tamaños |
-| [acquisition.h](../arduino/v12_audio/oscilloscope/sketch/acquisition.h) | ADC, timers, DMA y continuidad |
-| [generator.h](../arduino/v12_audio/oscilloscope/sketch/generator.h) | Formas de onda y cambios de generador |
-| [generator_dma.h](../arduino/v12_audio/oscilloscope/sketch/generator_dma.h) | Motor DAC temporizado |
-| [control_protocol.h](../arduino/v12_audio/oscilloscope/sketch/control_protocol.h) | Selección SPI/UART |
-| [acquisition_protocol.h](../arduino/v12_audio/oscilloscope/sketch/acquisition_protocol.h) | Configuración ADC |
-| [generator_protocol.h](../arduino/v12_audio/oscilloscope/sketch/generator_protocol.h) | Comandos del generador |
+| [sketch.ino](../arduino/historico/v13_pulse/oscilloscope/sketch/sketch.ino) | Inicio, servicio de comandos y envío |
+| [scope_config.h](../arduino/historico/v13_pulse/oscilloscope/sketch/scope_config.h) | Pines, relojes, recursos y tamaños |
+| [acquisition.h](../arduino/historico/v13_pulse/oscilloscope/sketch/acquisition.h) | ADC, timers, DMA y continuidad |
+| [generator.h](../arduino/historico/v13_pulse/oscilloscope/sketch/generator.h) | Formas de onda y cambios de generador |
+| [generator_dma.h](../arduino/historico/v13_pulse/oscilloscope/sketch/generator_dma.h) | Motor DAC temporizado |
+| [control_protocol.h](../arduino/historico/v13_pulse/oscilloscope/sketch/control_protocol.h) | Selección SPI/UART |
+| [acquisition_protocol.h](../arduino/historico/v13_pulse/oscilloscope/sketch/acquisition_protocol.h) | Configuración ADC |
+| [generator_protocol.h](../arduino/historico/v13_pulse/oscilloscope/sketch/generator_protocol.h) | Comandos del generador |
 
 ## Perfiles y transiciones
 

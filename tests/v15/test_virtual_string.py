@@ -1,7 +1,7 @@
 import unittest
 import numpy as np
-from monitor.v15.virtual_string import PluckedString, warmup, kernel
-from monitor.v15.fm_source import FMSource, FMParameters
+from monitor.historico.v15.virtual_string import PluckedString, warmup, kernel
+from monitor.historico.v15.fm_source import FMSource, FMParameters
 
 class VirtualStringTests(unittest.TestCase):
     def setUp(self):

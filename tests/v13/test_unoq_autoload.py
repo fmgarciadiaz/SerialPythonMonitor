@@ -7,7 +7,7 @@ from monitor.historico.v13.receiver.unoq_autoload import ensure_scope,ROOT,run_c
 class AutoloadTests(unittest.TestCase):
     def runner(self,active=True,other=False,relay=True):
         commands=[]
-        source=[ROOT/f'arduino/v12_audio/relay/{n}' for n in ('unoq_config_stream.c','base_verifier.c','config_relay_protocol.h')]
+        source=[ROOT/f'arduino/historico/v12_audio/relay/{n}' for n in ('unoq_config_stream.c','base_verifier.c','config_relay_protocol.h')]
         digest=hashlib.sha256(b''.join(p.read_bytes() for p in source)).hexdigest()[:20]
         binary=f'/home/arduino/.cache/serialmonitor/usb-stream-{digest}/unoq_stream'
         def run(args,running,timeout):

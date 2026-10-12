@@ -1,0 +1,17 @@
+#pragma once
+#include <stdint.h>
+namespace matrix_pwm {
+struct Pins { uint8_t anode, cathode; };
+// UNO Q row-major LED wiring: successive unordered pairs, both polarities.
+constexpr Pins pair(unsigned pixel) {
+    const unsigned index = pixel / 2;
+    unsigned high = 1;
+    while (index >= high * (high + 1) / 2) ++high;
+    const unsigned low = index - high * (high - 1) / 2;
+    return pixel & 1 ? Pins{uint8_t(high), uint8_t(low)}
+                     : Pins{uint8_t(low), uint8_t(high)};
+}
+constexpr uint32_t on_ticks(uint8_t brightness, uint32_t slot_ticks) {
+    return slot_ticks * brightness / 7;
+}
+}

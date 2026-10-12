@@ -17,3 +17,8 @@ La versión actual se encuentra en [V15](../v15/README.md).
 También se conservan los scripts y notebooks anteriores a V6.
 Las rutas de importación y capturas se ajustaron al archivo histórico.
 Ver [guía anterior completa](README_versions.md).
+
+Los monitores Qt5 requieren un entorno separado: [dependencias Qt5](requirements-qt5.txt).
+El requirements de la raíz instala V15/PyQt6.
+
+- [V15](v15/README.md): archivada; selección explícita conservada.

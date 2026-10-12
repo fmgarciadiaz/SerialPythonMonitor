@@ -18,27 +18,30 @@ las muestras llegan por R4; el Q continúa conectado para controlar adquisición
 generador y destino. El relay admite un solo cliente PC: desconectar el monitor
 antes de ejecutar diagnósticos que necesitan el mismo enlace.
 
-El pequeño [main.py de App Lab](../arduino/v12_audio/oscilloscope/python/main.py)
+El pequeño [main.py de App Lab](../arduino/v16/oscilloscope/python/main.py)
 mantiene viva la aplicación; el relay de datos es un proceso nativo separado.
 [tools/usb_stream.py](../tools/usb_stream.py) administra su compilación y estado;
 [tools/unoq.py](../tools/unoq.py) administra las apps y firmware.
 
 ## Implementación de adquisición y control
 
-El relay del MPU está en `arduino/v12_audio/relay/unoq_config_stream.c`;
+El relay del MPU está en `arduino/v16/relay/unoq_config_stream.c`;
 se compila para Linux ARM y corre en un contenedor independiente. No es
 el sketch MCU ni el pequeño Python de App Lab. Valida CRC, secuencias y
 estado de adquisición; transmite muestras y canaliza comandos ADC/DAC.
-El PC usa el receptor propio de `monitor/v15/receiver/`.
+El PC usa el receptor propio de `monitor/v16/receiver/`.
 
-SPI funciona a 32 MHz con SCP1 V3: 992 bytes por trama, 113 pares de
-muestras por fragmento y 19 fragmentos por nodo de 2048 pares. TCP escucha
-en 8766; USB/ADB reenvía esa conexión, sin depender de Wi-Fi. UART conserva
+SPI funciona a 32 MHz con SCP1 V4: 992 bytes por trama y CRC en 988–991.
+La capacidad y el tamaño de nodo dependen de bits/canales/perfil; kind20 usa
+metadata hasta115, timestamp base en80 y muestras compactas desde116.
+La whitelist nativa comparte bits, ticks, nodo y canales entre MCU, relay y PC.
+[Frecuencias disponibles](CONFIGURACION_ADQUISICION.md#perfiles-de-adquisición).
+TCP escucha en8766; USB/ADB reenvía esa conexión, sin depender de Wi-Fi. UART conserva
 su formato DATA de 512 pares y su máximo de 31,25 kHz; la validación física
 del puente R4 sigue pendiente para esta pareja.
 
 La sección siguiente conserva detalles del formato UART y del contrato
-anterior V2/512; no usar sus offsets CRC para las tramas SPI V3/992.
+anterior V2/512; no usar sus offsets CRC para las tramas SPI V4/992.
 
 ## Contrato binario
 
@@ -54,7 +57,7 @@ espera la confirmación correspondiente antes de iniciar la medición de Bode.
 [Selección de salida](CONTROL_TRANSPORTE.md) ·
 [Contrato de cambio](PROTOCOLO_CAMBIO_TRANSPORTE.md) ·
 [Adquisición configurable](CONFIGURACION_ADQUISICION.md) ·
-[Relay actual](../arduino/v12_audio/relay) · [Puente R4](../arduino/historico/v5/r4_bridge_v5/README.md)
+[Relay actual](../arduino/v16/relay) · [Puente R4](../arduino/historico/v5/r4_bridge_v5/README.md)
 
 ## Linux: GPIO READY y transferencia SPI
 
@@ -77,21 +80,21 @@ muestras. El monitor prueba recepción y puede recuperar app/relay cuando recibe
 EOF o no hay respuesta. El relay admite un único cliente; otros ensayos deben
 liberar primero la conexión del monitor.
 
-[Relay C y bucle de intercambio](../arduino/v12_audio/relay/unoq_config_stream.c) ·
-[Validadores](../arduino/v12_audio/relay/config_relay_protocol.h) ·
-[Conexión y recuperación Python](../monitor/v15/receiver/unoq_autoload.py).
+[Relay C y bucle de intercambio](../arduino/historico/v13_pulse/relay/unoq_config_stream.c) ·
+[Validadores](../arduino/historico/v13_pulse/relay/config_relay_protocol.h) ·
+[Conexión y recuperación Python](../monitor/historico/v15/receiver/unoq_autoload.py).
 
 ## Operación
 
 ```sh
-python3 tools/unoq.py status --version v12_audio
-python3 tools/usb_stream.py status --firmware v12_audio
-python3 tools/usb_stream.py logs --firmware v12_audio
-python3 tools/usb_stream.py start --firmware v12_audio
+python3 tools/unoq.py status --version v13_pulse
+python3 tools/usb_stream.py status --firmware v13_pulse
+python3 tools/usb_stream.py logs --firmware v13_pulse
+python3 tools/usb_stream.py start --firmware v13_pulse
 ```
 
 Para actualizar, cerrar el monitor y detener el relay antes de cargar firmware.
-Usar la [guía del firmware de audio](../arduino/v12_audio/README.md) para compilar, importar
+Usar la [guía del firmware de audio](../arduino/historico/v13_pulse/README.md) para compilar, importar
 la app y desplegarla. No confundir la app de App Lab con el proceso relay.
 
 ## Audio por el mismo enlace
@@ -105,5 +108,5 @@ El audio vuelve a las entradas mediante el cableado o circuito externo.
 
 ## Versiones y enlaces
 
-- [Relay V12 Audio](../arduino/v12_audio/README.md): incluye control y bloques WAV.
+- [Relay V12 Audio](../arduino/historico/v12_audio/README.md): incluye control y bloques WAV.
 - [Relay V11 P992](../arduino/historico/v11_p992/README.md): adquisición y generador sin WAV.

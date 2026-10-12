@@ -1,9 +1,9 @@
 import unittest
 import numpy as np
 from dataclasses import replace
-from monitor.v15.virtual_instruments import PianoStrings, InstrumentBody, GuitarStrings, warmup, modal_kernel
-from monitor.v15.fm_source import FMSource, FMParameters
-from monitor.v15.piano_profile import piano_profile
+from monitor.historico.v15.virtual_instruments import PianoStrings, InstrumentBody, GuitarStrings, warmup, modal_kernel
+from monitor.historico.v15.fm_source import FMSource, FMParameters
+from monitor.historico.v15.piano_profile import piano_profile
 
 class PhysicalInstrumentTests(unittest.TestCase):
     def setUp(self):
@@ -33,7 +33,8 @@ class PhysicalInstrumentTests(unittest.TestCase):
     def test_bridge_and_body_have_stable_decaying_tails(self):
         for model in ('guitar','piano'):
             body=InstrumentBody(40000,model)
-            impulse=np.zeros(40000);impulse[0]=1
+            # Undamped treble strings now ring beyond the first second.
+            impulse=np.zeros(120000);impulse[0]=1
             output=body.render(impulse,.8,.5)
             self.assertTrue(np.isfinite(output).all())
             self.assertGreater(np.max(abs(output[1:4000])),.0001)
@@ -48,7 +49,7 @@ class PhysicalInstrumentTests(unittest.TestCase):
             self.assertEqual(len(source.voices),0)
 
     def test_nonlinear_hammer_and_coupling_are_bounded(self):
-        from monitor.v15.virtual_instruments import hammer_kernel
+        from monitor.historico.v15.virtual_instruments import hammer_kernel
         soft=hammer_kernel(80000,.25,.75,220.)
         hard=hammer_kernel(80000,1.,.75,220.)
         self.assertTrue(np.isfinite(hard).all())
@@ -101,7 +102,7 @@ class PhysicalInstrumentTests(unittest.TestCase):
             self.assertAlmostEqual(profile['exponent'],p)
 
     def test_contact_and_tuning_across_register_and_velocity(self):
-        from monitor.v15.virtual_instruments import hammer_kernel
+        from monitor.historico.v15.virtual_instruments import hammer_kernel
         for note in range(24,109,12):
             frequency=440*2**((note-69)/12)
             for velocity in (.25,1.):
@@ -125,3 +126,96 @@ class PhysicalInstrumentTests(unittest.TestCase):
             peak=f[region][np.argmax(power[region])]
             # Unison detune is intentionally up to +/-2 cents.
             self.assertLess(abs(peak-frequency),max(1.,frequency*.002))
+
+    def test_reflected_hammer_contact_shortens_in_high_register(self):
+        from monitor.historico.v15.virtual_instruments import hammer_kernel
+        durations=[]
+        for note in (36,60,84,96,108):
+            frequency=440*2**((note-69)/12)
+            force=hammer_kernel(80000,1.,.78,frequency)
+            significant=np.flatnonzero(force>force.max()*.001)
+            durations.append((significant[-1]-significant[0]+1)/80000)
+            self.assertTrue(np.isfinite(force).all())
+            self.assertAlmostEqual(force.sum(),1)
+        self.assertLess(durations[-1],.001)
+        self.assertLess(durations[2],durations[1])
+
+    def test_bass_uses_available_band_and_damper_reduces_tail(self):
+        source=PianoStrings(20000,65.406)
+        source.render(480)
+        self.assertGreater(len(source.orders),64)
+        self.assertTrue(np.all(source.frequencies<source.bandlimit))
+        ringing=PianoStrings(20000,261.626)
+        damped=PianoStrings(20000,261.626)
+        ringing.render(4000);damped.render(4000)
+        open_tail=ringing.render(4000)
+        closed_tail=damped.render(4000,damper_t60=.1)
+        self.assertLess(np.linalg.norm(closed_tail[-1000:]),np.linalg.norm(open_tail[-1000:])*.01)
+
+    def test_native_piano_does_not_resample_and_handles_mixed_transitions(self):
+        from unittest.mock import patch
+        params=FMParameters(preset='Piano Virtual',waveform='virtual',virtual_model='piano',
+                            notes=((60,110),(64,100)),envelope=(.001,.01,1,.1))
+        source=FMSource(20000,params)
+        with patch('monitor.historico.v15.fm_source.sosfilt',side_effect=AssertionError('piano resampled')):
+            native=source[0:480]
+        self.assertTrue(np.isfinite(native).all())
+        previous=native
+        for at,mix,wave in ((480,.2,'virtual'),(960,0.,'virtual'),(1440,0.,'fm'),(1920,0.,'virtual'),(2400,0.,'virtual')):
+            previous_route=source._last_native
+            source.update(replace(params,osc2_mix=mix,waveform=wave))
+            data=source[at:at+480]
+            self.assertEqual(len(data),480)
+            self.assertTrue(np.isfinite(data).all())
+            if source._last_native!=previous_route:
+                self.assertLess(abs(int(data[0])-int(previous[-1])),128)
+            previous=data
+
+    def test_native_damper_release_is_independent_of_block_size(self):
+        params=FMParameters(preset='Piano Virtual',waveform='virtual',virtual_model='piano',
+                            envelope=(.001,.01,1,.1))
+        whole=FMSource(20000,params);chunks=FMSource(20000,params)
+        whole[0:4000];chunks[0:4000]
+        whole.update(replace(params,gate=False));chunks.update(replace(params,gate=False))
+        expected=whole[4000:7000]
+        parts=[]
+        at=4000
+        for size in (137,480,213,1000,1170):
+            parts.append(chunks[at:at+size]);at+=size
+        actual=np.concatenate(parts)
+        self.assertGreater(np.std(expected[:1000]),1)
+        self.assertLessEqual(np.max(abs(actual.astype(int)-expected.astype(int))),1)
+
+    def test_shared_bridge_is_passive_and_preserves_differential_motion(self):
+        from monitor.historico.v15.virtual_instruments import bridge_unisons_kernel
+        common=np.ones((6,2))
+        differential=np.tile([[1.,-2.],[-1.,2.],[0.,0.]],(2,1))
+        reference=differential.copy()
+        loss=np.array([.3,.1])
+        bridge_unisons_kernel(common,3,loss)
+        bridge_unisons_kernel(differential,3,loss)
+        self.assertLess(np.sum(common**2),12)
+        np.testing.assert_array_equal(differential,reference)
+        state=np.random.default_rng(12).normal(size=(120,2))
+        energy=np.sum(state**2)
+        bridge_unisons_kernel(state,3,np.linspace(.01,.9,40))
+        self.assertLessEqual(np.sum(state**2),energy)
+
+    def test_force_driven_impact_is_short_and_register_sensitive(self):
+        from monitor.historico.v15.virtual_instruments import hammer_impact
+        soft=hammer_impact(20000,.25,.78,220.,.12)
+        hard=hammer_impact(20000,1.,.78,220.,.12)
+        self.assertTrue(np.isfinite(hard).all())
+        self.assertGreater(np.linalg.norm(hard),np.linalg.norm(soft))
+        self.assertLess(np.linalg.norm(hard[-100:]),np.linalg.norm(hard[:100])*.01)
+        self.assertFalse(np.array_equal(hard,hammer_impact(20000,1.,.78,880.,.12)))
+        for rate in (20000,40000):
+            for note in range(24,109,12):
+                impact=hammer_impact(rate,1.,.78,440*2**((note-69)/12),.12)
+                self.assertLess(np.max(abs(impact)),.12)
+
+    def test_motion_bridge_and_impact_survive_irregular_short_blocks(self):
+        expected=PianoStrings(20000,261.626).render(4000)
+        source=PianoStrings(20000,261.626)
+        parts=[source.render(n) for n in (1,7,13,480,137,3362)]
+        np.testing.assert_array_equal(expected,np.concatenate(parts))

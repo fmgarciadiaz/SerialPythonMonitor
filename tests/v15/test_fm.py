@@ -4,8 +4,8 @@ import unittest
 from unittest.mock import patch, MagicMock
 import numpy as np
 from PyQt6 import QtWidgets
-from monitor.v15.fm_source import FMSource,FMParameters
-from monitor.v15.app import SerialMonitorWindow
+from monitor.historico.v15.fm_source import FMSource,FMParameters
+from monitor.historico.v15.app import SerialMonitorWindow
 
 
 class FMSourceTests(unittest.TestCase):
@@ -120,7 +120,7 @@ class FMSourceTests(unittest.TestCase):
 
     def test_low_queue_grows_once_per_episode(self):
         from types import SimpleNamespace as Status
-        from monitor.v15.receiver.unoq_config_receiver import OutputReceiver
+        from monitor.historico.v15.receiver.unoq_config_receiver import OutputReceiver
         source=FMSource(rate=20000)
         receiver=OutputReceiver(None,lambda batch:None)
         receiver.wav_codes=source;receiver.wav_session=1;receiver.wav_started=True
@@ -200,7 +200,7 @@ class FMSourceTests(unittest.TestCase):
 
     def test_receiver_streams_lazy_source_with_existing_credit_protocol(self):
         from types import SimpleNamespace
-        from monitor.v15.receiver.unoq_config_receiver import OutputReceiver
+        from monitor.historico.v15.receiver.unoq_config_receiver import OutputReceiver
         import struct
         receiver=OutputReceiver(None,lambda batch:None)
         receiver.wav_candidate=True
@@ -284,7 +284,7 @@ class FMSourceTests(unittest.TestCase):
 
     def test_fm_refills_when_only_six_blocks_remain(self):
         from types import SimpleNamespace
-        from monitor.v15.receiver.unoq_config_receiver import OutputReceiver
+        from monitor.historico.v15.receiver.unoq_config_receiver import OutputReceiver
         receiver=OutputReceiver(None,lambda batch:None)
         source=FMSource();receiver.wav_codes=source;receiver.wav_session=123;receiver.wav_started=True
         receiver.wav_status=SimpleNamespace(session=123,free_blocks=10,accepted=0)
@@ -294,10 +294,10 @@ class FMSourceTests(unittest.TestCase):
 
     def test_usb_commands_disable_nagle(self):
         import socket
-        from monitor.v15.receiver.unoq_usb import Connection
-        with patch('monitor.v15.receiver.unoq_usb.usb_devices',return_value=['q']), \
-             patch('monitor.v15.receiver.unoq_usb.adb',side_effect=['','12345']), \
-             patch('monitor.v15.receiver.unoq_usb.socket.create_connection') as connect:
+        from monitor.historico.v15.receiver.unoq_usb import Connection
+        with patch('monitor.historico.v15.receiver.unoq_usb.usb_devices',return_value=['q']), \
+             patch('monitor.historico.v15.receiver.unoq_usb.adb',side_effect=['','12345']), \
+             patch('monitor.historico.v15.receiver.unoq_usb.socket.create_connection') as connect:
             connection=Connection('q');connection.open()
             connect.return_value.setsockopt.assert_called_once_with(socket.IPPROTO_TCP,socket.TCP_NODELAY,1)
 
@@ -324,7 +324,7 @@ class FMSourceTests(unittest.TestCase):
 
     def test_fm_fills_complete_queue_before_starting(self):
         from types import SimpleNamespace
-        from monitor.v15.receiver.unoq_config_receiver import OutputReceiver
+        from monitor.historico.v15.receiver.unoq_config_receiver import OutputReceiver
         receiver=OutputReceiver(None,lambda batch:None)
         source=FMSource();receiver.wav_codes=source;receiver.wav_session=123
         receiver.wav_status=SimpleNamespace(session=123,free_blocks=0,accepted=7680)
@@ -392,10 +392,10 @@ class FMSourceTests(unittest.TestCase):
         from types import SimpleNamespace
         source=FMSource()
         status=SimpleNamespace(state=2,free_blocks=8,reason=0)
-        with patch('monitor.v15.fm_source.time.monotonic',return_value=100):source.observe_status(status)
-        with patch('monitor.v15.fm_source.time.monotonic',return_value=100.05):source.observe_status(status)
+        with patch('monitor.historico.v15.fm_source.time.monotonic',return_value=100):source.observe_status(status)
+        with patch('monitor.historico.v15.fm_source.time.monotonic',return_value=100.05):source.observe_status(status)
         status.state=0
-        with patch('monitor.v15.fm_source.time.monotonic',return_value=200):source.observe_status(status)
+        with patch('monitor.historico.v15.fm_source.time.monotonic',return_value=200):source.observe_status(status)
         self.assertAlmostEqual(source._max_ack_gap,.05)
         self.assertIsNone(source._last_ack)
 
@@ -413,7 +413,7 @@ class FMSourceTests(unittest.TestCase):
     def test_synth_pipeline_reserves_two_credits_and_advances_on_ack(self):
         from types import SimpleNamespace
         import struct
-        from monitor.v15.receiver.unoq_config_receiver import OutputReceiver
+        from monitor.historico.v15.receiver.unoq_config_receiver import OutputReceiver
         socket=MagicMock();connection=SimpleNamespace(socket=socket,read=lambda:b'')
         receiver=OutputReceiver(connection,lambda batch:None)
         receiver.wav_candidate=True
@@ -440,7 +440,7 @@ class FMSourceTests(unittest.TestCase):
 
     def test_file_wav_does_not_pipeline(self):
         from types import SimpleNamespace
-        from monitor.v15.receiver.unoq_config_receiver import OutputReceiver
+        from monitor.historico.v15.receiver.unoq_config_receiver import OutputReceiver
         socket=MagicMock();receiver=OutputReceiver(SimpleNamespace(socket=socket),lambda batch:None)
         receiver.wav_codes=np.zeros(4800,dtype='<u2');receiver.wav_session=123;receiver.wav_started=True
         receiver.wav_status=SimpleNamespace(session=123,free_blocks=16,accepted=0)
@@ -469,7 +469,7 @@ class FMPanelTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls): cls.app=QtWidgets.QApplication.instance() or QtWidgets.QApplication([])
     def setUp(self):
-        with patch('monitor.v15.app.usb_devices',return_value=[]):self.w=SerialMonitorWindow()
+        with patch('monitor.historico.v15.app.usb_devices',return_value=[]):self.w=SerialMonitorWindow()
     def tearDown(self):self.w.close()
 
     def test_fm_isolated_layout_and_start_stop(self):
@@ -563,10 +563,11 @@ class FMPanelTests(unittest.TestCase):
         reserved=self.w.generator_scroll.height()
         for tab in range(panel.tabs.count()):
             panel.tabs.setCurrentIndex(tab);self.app.processEvents()
-            self.w.generator_scroll.ensureWidgetVisible(panel.info,0,0)
+            visible_control=panel.info if tab==0 else panel.tabs.currentWidget()
+            self.w.generator_scroll.ensureWidgetVisible(visible_control,0,0)
             self.app.processEvents()
             viewport=panel.parentWidget().parentWidget()
-            bottom=panel.info.mapTo(viewport,QtCore.QPoint(0,panel.info.height())).y()
+            bottom=visible_control.mapTo(viewport,QtCore.QPoint(0,visible_control.height())).y()
             self.assertLessEqual(bottom,viewport.height())
             self.assertEqual(self.w.generator_scroll.height(),reserved)
 
@@ -609,7 +610,7 @@ class FMPanelTests(unittest.TestCase):
 
     def test_low_rate_queue_grows_when_running_low(self):
         from types import SimpleNamespace
-        from monitor.v15.receiver.unoq_config_receiver import OutputReceiver
+        from monitor.historico.v15.receiver.unoq_config_receiver import OutputReceiver
         source=FMSource(rate=20000);self.assertEqual(source.target_blocks,5)
         receiver=OutputReceiver(None,lambda batch:None)
         receiver.wav_codes=source;receiver.wav_session=1;receiver.wav_started=True
@@ -648,10 +649,10 @@ class FMPanelTests(unittest.TestCase):
         self.assertEqual(panel.waveform.currentData(),'fm');self.assertTrue(panel.ratio.isEnabled())
 
     def test_subtractive_presets_load_editable_wave_envelope_filter(self):
-        from monitor.v15.fm_source import SYNTH_PATCHES
+        from monitor.historico.v15.fm_source import SYNTH_PATCHES
         panel=self.w.fm_panel
-        self.assertEqual(panel.editor_mode.itemText(5),'Filtros')
-        self.assertFalse(panel.editor_mode.itemIcon(4).isNull())
+        self.assertEqual(panel.editor_mode.itemText(6),'Filtros')
+        self.assertFalse(panel.editor_mode.itemIcon(5).isNull())
         for name,patch in SYNTH_PATCHES.items():
             panel.preset.setCurrentText(name)
             params=panel.parameters()
@@ -667,14 +668,14 @@ class FMPanelTests(unittest.TestCase):
 
     def test_stable_interval_does_not_shrink_live_queue(self):
         from types import SimpleNamespace
-        from monitor.v15.receiver.unoq_config_receiver import OutputReceiver
+        from monitor.historico.v15.receiver.unoq_config_receiver import OutputReceiver
         source=FMSource(rate=20000);source.target_blocks=10
         receiver=OutputReceiver(None,lambda batch:None)
         receiver.wav_codes=source;receiver.wav_session=1;receiver.wav_started=True
         receiver.wav_buffer_adjust_at=100;receiver.wav_poll_at=float('inf')
         receiver.wav_status=SimpleNamespace(session=1,free_blocks=6,accepted=0)
         receiver._wav_send=MagicMock()
-        with patch('monitor.v15.receiver.unoq_config_receiver.time.monotonic',return_value=1000):receiver.service_wav()
+        with patch('monitor.historico.v15.receiver.unoq_config_receiver.time.monotonic',return_value=1000):receiver.service_wav()
         self.assertEqual(source.target_blocks,10)
         receiver._wav_send.assert_not_called()
 
@@ -702,7 +703,7 @@ class FMPanelTests(unittest.TestCase):
 
     def test_second_oscillator_editor_and_preset_settings(self):
         panel=self.w.fm_panel
-        self.assertEqual(panel.editor_mode.itemText(1),'Osc 2')
+        self.assertEqual(panel.editor_mode.itemText(2),'Osc 2')
         panel.preset.setCurrentText('Warm Pad')
         params=panel.parameters()
         self.assertEqual((params.osc2_detune,params.osc2_mix,params.osc2_octave),(10,.5,0))

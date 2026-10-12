@@ -1,0 +1,79 @@
+"""Validated SET_ACQUISITION contract and supported integer-microsecond rates."""
+from dataclasses import dataclass
+import struct
+import zlib
+from monitor.v16.receiver.unoq_switch import Phase, Reason
+from monitor.v16.receiver.unoq_usb import ProtocolError
+
+BITS = (8,)
+CHANNELS = 1
+UART_RATES = ()
+SPI_RATES = RATES = (1203007,)
+
+@dataclass(frozen=True)
+class Configuration:
+    bits: int = 8
+    rate: int = 1203007
+    def __post_init__(self):
+        if self.bits not in BITS or self.rate not in RATES or (self.bits == 16 and self.rate > 62500):
+            raise ValueError('Bits o tasa no admitidos por la adquisición actual')
+    @property
+    def period(self): return 133
+    @property
+    def channels(self): return CHANNELS
+    @property
+    def timestamp_hz(self): return 160000000
+    @property
+    def dt_us(self): return self.period/160
+    @property
+    def actual_rate(self): return self.timestamp_hz/self.period
+    @property
+    def sampling_cycles(self): return 5
+    @property
+    def sampling_us(self): return self.sampling_cycles/54
+    @property
+    def maximum(self): return (1 << self.bits)-1
+    @property
+    def sample_timeout(self): return max(2, 4096/self.rate+0.5)
+
+
+def acquisition_request(rid, config):
+    if not 0x80000000 <= rid < 0xffffffff: raise ValueError('Identificador inválido')
+    p = bytearray(1120)
+    struct.pack_into('<4sHHII', p, 0, b'SCP1', 4, 6, rid, 1100)
+    p[16] = config.bits
+    struct.pack_into('<I', p, 20, config.period)
+    struct.pack_into('<I', p, 1116, zlib.crc32(p[:1116]))
+    return bytes(p)
+
+@dataclass(frozen=True)
+class AcquisitionReply:
+    request_id: int
+    requested_bits: int
+    active: Configuration
+    phase: Phase
+    reason: Reason
+    requested_period: int
+    epoch: int
+
+
+def acquisition_reply(p):
+    if len(p)!=1120 or struct.unpack_from('<4sHH',p)!=(b'SCP1',4,7) or struct.unpack_from('<I',p,12)[0]!=1100:
+        raise ProtocolError('Cabecera de adquisición inválida')
+    if zlib.crc32(p[:1116])!=struct.unpack_from('<I',p,1116)[0]:
+        raise ProtocolError('CRC de adquisición incorrecto')
+    rid, requested, bits, phase, reason, wanted, period, epoch = struct.unpack_from('<IBBBBIII',p,16)
+    if not 0x80000000 <= rid < 0xffffffff or any(p[36:1116]) or epoch > 0x7fffffff:
+        raise ProtocolError('Campos reservados de adquisición inválidos')
+    try:
+        if not period: raise ValueError()
+        active = Configuration(bits,160000000//period)
+        if active.period != period: raise ValueError()
+        phase, reason = Phase(phase), Reason(reason)
+        if phase!=Phase.REJECTED:
+            if not wanted: raise ValueError()
+            if Configuration(requested,160000000//wanted).period != wanted: raise ValueError()
+        if (phase==Phase.REJECTED)!=(reason!=Reason.OK): raise ValueError()
+        if phase==Phase.APPLIED and (requested!=bits or wanted!=period): raise ValueError()
+    except ValueError as exc: raise ProtocolError('Estado de adquisición contradictorio') from exc
+    return AcquisitionReply(rid,requested,active,phase,reason,wanted,epoch)

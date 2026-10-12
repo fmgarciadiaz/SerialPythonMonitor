@@ -102,7 +102,7 @@ class UnoQTests(unittest.TestCase):
 
     def test_default_and_experimental_targets_are_separate(self):
         for version in ('v11_p992', 'v8_config', 'v6_adc', 'v4', 'v5'):
-            args = ['unoq.py', 'compile'] + (['--version', version] if version != 'v11_p992' else [])
+            args = ['unoq.py', 'compile', '--version', version]
             with self.subTest(version=version), patch('sys.argv', args), patch('tools.unoq.Board') as board:
                 self.assertEqual(main(), 0)
                 config = board.call_args.args[0]

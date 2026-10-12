@@ -1,4 +1,74 @@
-# Plan de trabajo para Osciloscopio Arduino*
+# Plan de trabajo Etapa II 09-10-2026
+
+## Integración dual terminada · 12/10/2026
+
+Nueve perfiles dual incorporados y verificados junto con los cinco CH1.
+14 perfiles nativos ×120s, ambos canales/timestamps NumericBatch,18 casos de
+perfiles y transiciones, cero pérdidas/errores. RAM compartida entre modos
+excluyentes:3012 bytes libres, cuatro slots, UART/WAV y referencia temporal
+conservados. ADC10/495,36kHz y ADC12/410,26kHz mantienen integridad pero tuvieron
+margen integrado9,03%/9,39%: etiquetas de margen retiradas. Flags restantes
+verificados. 279 tests V16 y controles nativos pasan. Firmware nuevo instalado,
+parámetros originales restaurados; integridad del perfil previo sigue fallando.
+[Evidencia final](experimentos/maxfreq_dual_v16/RESULTADOS.md#incorporación-a-producción-completada).
+
+## Cierre de barrido dual · 12/10/2026
+
+Después de incorporar y verificar CH1, terminó el barrido dual con nueve perfiles
+aceptados en 60 + 3×120 + 600s. Mayor tasa aceptada / tasa con margen por canal:
+ADC8 632,41/597,01 kHz; ADC10 519,48/495,36 kHz; ADC12 437,16/410,26 kHz;
+ADC14 363,64/355,56 kHz; ADC16 76,23/76,23 kHz. Integridad y hashes auditados.
+Q restaurado al V16 integrado y campos originales; la integridad del perfil
+previo sigue fallando como antes. Dueño host y caffeinate terminados.
+Perfiles dual aún experimentales; integración MCU/whitelist/RAM y validación
+física de producción pendientes. No todos los ticks intermedios tienen
+aceptación larga. [Resultados y evidencia](experimentos/maxfreq_dual_v16/RESULTADOS.md).
+
+Consideramos terminada la primera etapa
+1) Vamos a mejorar la frecuencia de sampleo. Ahora estamos capturando timestamp muestra por muestra y perdemos tiempo ahi. Unifiquemos versiones de monitor, relay, sketch en V16, asi van a la par con monitor. Ver formas de mejorar sampleo; a) mandar un solo timestamp por bloque y calcular las demas, para ahorra tiempo en la captura y transporte. b) eliminar los canales adc 1 2, timestamp, etc. solo mandar v_in v_out ahora se van a llamar CH1 y CH2. hay que ajustar monitor, transporte etc.
+
+2) Una vez concluido 1) vamos a eliminar el panel de seleccion de canales porque solo vamos a tener CH1 y CH2. Vamos a reemplazar ese espacio por un panel de filtros: low, band, hi, RC, butter, etc. Con selector de modo y perillas para el cut. El filtro tiene que poder elegir de que canal toma CH1 o CH2 y generar un canal nuevo que se llame FILTER.
+
+3) En los paneles de analisis, todos, tenemos que poder elegir CH1 , CH2 o FILTER como entrada para los graficos, asi puedo ver por ejemplo CH1 y abajo el resultado del filtrado digital.
+
+4) Una vez logrado esto explorar modo de super sampleo con un solo canal, para llevar la frecuencia al mango.
+
+
+
+## Inicio de implementación · 9 de octubre de 2026
+
+Astra revisó la Etapa II y Sol implementó el primer incremento aislado en
+[Monitor V16](monitor/v16/README.md) y [Arduino/relay V16](arduino/v16/README.md).
+SCP1 V4: timestamp por fragmento y CH1/CH2 compactos; 226 pares/trama,
+diez tramas por nodo frente a diecinueve. Se conserva por ahora TIM5/GPDMA
+como referencia independiente para validar los tiempos originales.
+El monitor elimina canales ADC derivados y conserva índice/tiempo como metadata.
+135 pruebas V16, validadores nativos y sketch UNO Q completo pasan; no se instaló firmware ni se
+promovieron tasas nuevas. Filtros/FILTER y adquisición de un canal quedan en
+los pasos posteriores. [Diseño, límites y aceptación](docs/ETAPA_II_V16.md).
+
+### Validación física inicial V16
+
+Instalados sketch/app/relay V16 en el Q. Tres ensayos de 120 s:
+14 bits/40 kHz (4 796 416 pares), 14 bits/125 kHz (14 991 346) y
+16 bits/62,5 kHz (7 495 666), sin errores ni dropped/fatal.
+Generador y WAV20/40 con ADC14/100 kHz confirmados; todas las muestras WAV
+reproducidas. Estado final V16 activa, ADC14/40 kHz y salida apagada.
+No se subieron tasas ni se retiró el DMA temporal; UART y precisión analógica
+pendientes. [Informe](docs/ETAPA_II_V16.md#ensayo-físico--9-de-octubre-de-2026).
+
+### Filtros digitales V16 · 9 de octubre de 2026
+
+Paso 2 implementado: panel Filtro digital, fuente CH1/CH2, RC, Butterworth,
+Bessel, Chebyshev I/II y elíptico,
+paso bajo/alto/banda y bypass, corte con perillas. FILTER conserva estado
+entre bloques y se reinicia con cambios de configuración. Selector de trazas
+V(t), FFT/heatmap, medidas y trigger permiten FILTER; CSV lo agrega, WAV
+conserva las entradas originales. Paso 3 todavía requiere referencia/respuesta
+seleccionables para Bode y Transfer, que siguen CH2/CH1.
+[Uso y límites](docs/FILTROS_V16.md). No se modificó firmware ni se operó el Q.
+
+# Etapa 1: Plan de trabajo para Osciloscopio Arduino*
 
 Este es el plan de la app completa. Pero lo tenemos que ir haciendo paso a paso. Te paso todo asi cada paso no hacemos cosas que sean incompatbles con los proximos.
 
@@ -102,7 +172,7 @@ la adquisición; la mejora de rendimiento se evalúa por escenario.
 - Modo WAV en V13: archivo local, L/R/Mix, Reproducir y Detener; conversión antialias a 20 ksps, eliminación de media y ajuste Vpp/offset a códigos DAC12.
 - Firmware aislado V12 Audio y relay MPU propio con créditos, buffers acotados y parada neutral ante falta de datos. V11 P992 sigue predeterminado.
 - 51 pruebas locales Qt6/protocolo/firmware aprobadas; sketch compilado (107000 bytes flash, 192524 RAM). Respaldo V11 conservado. Carga y ensayo A0→A2/A3 pendientes de autorización.
-- Ver [activación y restauración](arduino/v12_audio/README.md) y [uso](monitor/historico/v13/README.md).
+- Ver [activación y restauración](arduino/historico/v12_audio/README.md) y [uso](monitor/historico/v13/README.md).
 
 ### V12 Audio cargado y ensayo físico inicial aprobado
 
@@ -275,7 +345,7 @@ Evidencia: diagnosticos/resultados_wav/20261006_final_silencio.json. Salida fina
 
 ### 2026-10-06 — Pulso experimental de microsegundos
 
-Variante independiente arduino/v13_pulse, app Scope Pulse US V13 Experimental.
+Variante independiente arduino/historico/v13_pulse, app Scope Pulse US V13 Experimental.
 TIM6 one-shot devuelve DAC al nivel bajo por hardware; DMA4 no se usa durante
 ese pulso. Protocolo con duración µs y capacidad anunciada; V13 ofrece 100–65535 µs
 sólo si el Q confirma soporte. Ancho inicial sigue equivalente a 1 ms (1000 µs).
@@ -283,7 +353,7 @@ V12 Audio mantiene el contrato ms y sus fuentes/app como respaldo.
 18 disparos físicos ADC14/100 kHz: seis de 100, 200 y 1000 µs, anchos coincidentes
 con resolución de 10 µs. Wav50 completó un segundo; salida final apagada.
 La variante quedó activa, ADC14/40 kHz. Falta comprobar flancos y precisión con
-osciloscopio externo. Detalles y vuelta a V12 Audio: arduino/v13_pulse/README.md.
+osciloscopio externo. Detalles y vuelta a V12 Audio: arduino/historico/v13_pulse/README.md.
 Respaldo previo: respaldos/unoq/osciloscopio_20261006_190836_603319.zip.
 
 
@@ -437,3 +507,806 @@ al cambiar las vistas; coherencia/retardo N/A con un solo segmento.
 Inicio: `conda activate Python_3_13_DataScience`, `python monitor/historico/v14/app.py`.
 Documentación: `monitor/historico/v14/README.md`, `docs/FFT_ANALISIS.md` y
 `diagnosticos/FFT_V14.md`. Pendiente: validación manual con hardware.
+
+### Análisis con FILTER · 9 de octubre de 2026
+
+Paso 3: FFT Transfer y Bode por tonos, pulso y sweep/chirp permiten seleccionar
+referencia X y respuesta Y entre CH1, CH2 y FILTER. Conservan el retardo causal;
+la calibración física de CH2/CH1 no se aplica a otros pares. Cambiar canales o
+parámetros del filtro invalida las comparaciones afectadas. En transitorios se
+mantiene CH1 como detector del estímulo A0. Validación numérica local del filtro
+Butterworth: aproximadamente −3 dB y −90° en su corte. Sin cambios de firmware.
+
+### Tasas altas V16 con timestamps conservados
+
+ADC14 a 200 y 250 kHz pasó 120 s por perfil sin pérdidas ni errores; opciones
+experimentales habilitadas en el monitor. Seno concurrente pasó a ADC250,
+pero WAV cerró el flujo y requirió reiniciar app/relay. WAV20/40 a ADC200 pasó
+cinco segundos por tasa. 16 bits conserva 62,5 kHz; audio del monitor conserva
+ADC ≤100 kHz. Q restaurado a ADC14/40 kHz y salida apagada. Precisión analógica,
+margen de cola y retiro del DMA temporal pendientes.
+[Informe y evidencia](docs/ETAPA_II_V16.md#tasas-altas-con-dma-temporal--9-de-octubre-de-2026).
+
+### Validación temporal por nodo
+
+Simplificación del bucle del productor conservando captura temporal completa.
+154 pruebas locales pasan y el sketch compila. No se atribuye mejora de tasa
+sin medir el costo CPU real. [Detalle](docs/CAPTURA_TEMPORAL_V16.md).
+
+Validador instalado y probado: 60 s a ADC14/200 y 250 kHz sin pérdidas ni
+errores; seno y WAV20/40 concurrentes a ADC200 completos. Q restaurado a
+ADC14/40 kHz, salida apagada. La variante optimizada permanece activa.
+
+### Rendimiento del monitor a 200/250 kHz
+
+Ingesta por columnas NumPy, evitando diccionarios/copias por muestra en la
+ruta de recepción normal. Se conservan todos los datos, FILTER, registros y
+trigger. Benchmark sintético: 8,93 → 0,36 ms por 4096 muestras; FPS reales por
+USB pendientes de comparación. Mínimo horizontal de 8 muestras y µs para
+ventanas menores de 1 ms. Sin cambios de firmware.
+
+
+### Generador V16 hasta 50 kHz · validación física
+
+Instalados firmware/relay actualizados. 12 condiciones a 40/50 kHz y Sweep/Chirp
+en ambos sentidos: 22 501 122 pares sin errores, ADC14/250 kHz. Restauración
+exacta del perfil anterior y salida apagada. Ver docs/ETAPA_II_V16.md e informe
+20261009_172039_generador_50khz.json. Queda por validar forma analógica con
+instrumento externo y excitación del piezo; ADC16 continúa en 62,5 kHz.
+
+
+### Synth V16 · volumen, mezcla y 11 voces · 9 de octubre de 2026
+
+Volumen máximo trasladado a Config con AmplitudeDial de color variable.
+Mezcla independiente por Osc 1/2/3, conservando el balance de los presets.
+Piano Virtual: ganancia 5,0 → 5,3 y refuerzo leve adicional del golpe grave/medio.
+Límite 9 → 11 voces; reserva conjunta del acorde antes de crear voces,
+priorizando retiro de voces no solicitadas. MIDI procesa toda la tanda antes
+de retirar las notas más antiguas sostenidas sólo por pedal.
+85 pruebas locales aprobadas; inspección visual local de Config y Osc 1.
+Benchmark de 11 voces: máximo 5,1 ms/bloque de 24 ms a 20 kHz y
+6,4 ms/bloque de 12 ms a 40 kHz, sin saturación DAC. No se operó el Q;
+aceptación por USB y escucha pendientes. Detalles en monitor/v16/README.md
+y diagnosticos/resultados_piano/revision_ataque_v16/once_voces.json.
+
+
+### Piano V16 · liberación y armónicos · 9 de octubre de 2026
+
+Liberación del preset 220 → 550 ms. Caída de cuerda conservada en 4 s
+tras descartar una extensión global que se alejaba de las referencias.
+Parciales superiores: hasta +12 % amplitud y +6 % duración, con transición
+gradual desde el tercer parcial. Conservados los ajustes de martillo/subida.
+Comparación local Do3/Do4/Do5: cola 100–200 ms tras note-off +14,5 a +19,6 dB
+relativa al cuerpo; armónicos superiores +0,7 a +0,84 dB. Sin valores no
+finitos; picos de audio por debajo de 0,43. 86 pruebas locales aprobadas,
+incluyendo retiro de voces y cola audible. Sin operación del Q.
+Referencias locales sin note-off aislado: ajuste de sonoridad, no nueva
+calibración física. Audios/mediciones: diagnosticos/resultados_piano/revision_cola_v16.
+
+
+### Piano V16 · resonancia identificada al soltar · 9 de octubre de 2026
+
+Estudiadas las tres capas de liberación Salamander de Do3/Do4/Do5 y
+su mapeo SFZ. Resonancia identificada en primeros dos parciales: T60
+mediano extrapolado 2,16/1,88/1,62 s. Nivel ajustado a la relación RMS
+release/sostenido para MIDI60 y 0,5 s de tecla, con factores de SFZ.
+Motor: transferencia del estado simpático existente a colas del cuerpo
+compartido, entrada 10 ms, expiración por reloj de muestra y reciclado
+al reabrir la tecla. Pedal difiere la transferencia hasta levantarse.
+Sin samples en el motor, sin nuevas voces de tecla ni cambios al ataque
+o al sostenido; se mantiene la liberación modal de 550 ms.
+88 pruebas locales aprobadas. Benchmark local con 53 colas y máximo
+11 voces: 6,9 ms/bloque de 24 ms a 20 kHz y 6,6 ms/bloque de 12 ms
+a 40 kHz, voces retiradas al final. Sin operación del Q.
+Reproducible con diagnosticos/identificar_liberacion_piano_v16.py;
+fuentes/límites en diagnosticos/referencias_piano/liberacion/README.md.
+A/B y mediciones en diagnosticos/resultados_piano/revision_cola_v16.
+Aproximación reducida de resonancia: no se identificó un apagador completo
+ni todos los niveles/tiempos de tecla. Escucha y USB pendientes.
+
+
+### Synth V16 · eficiencia y latencia con revisión Astra · 9 de octubre de 2026
+
+Corregida inflación del buffer: target5 y cola4 es reposición normal,
+no aumenta a7. Alarma ahora min(4,target-2), con recuperación target-1.
+MIDI por señal, sin polling4ms; un update del motor por tanda y CC agrupados
+con señales de dial/etiqueta conservadas. Ataque: FFT de exponenciales
+reemplazada por recurrencia causal equivalente; colas: resonancia/fade
+fusionadas en Numba; cache de bancos16 → 256.
+Benchmark A/B local20k: ataque mediano1,71 → 0,65 ms;53colas0,80 → 0,22 ms.
+A40k ataque2,23 → 0,78 ms y colas0,80 → 0,22 ms. Audios de12notas
+20/40k antes/después difieren menos de4e-16; colas equivalentes a1e-12.
+94 pruebas integradas MIDI/FM/piano aprobadas. Script reproducible:
+diagnosticos/benchmark_synth_v16.py; evidencia en
+diagnosticos/resultados_piano/eficiencia_v16/.
+No se operó Q ni firmware. Se mantienen mínimos físicos120ms20k/192ms40k
+y40k experimental. No se afirma latencia total física medida o menor;
+primeros acordes fríos todavía pueden presentar picos.
+
+### Virtual compacto y eficiencia host con Astra · 10 de octubre de 2026
+
+Panel Virtual 249 → 212 px; Sala y Cola en dos columnas. Gradiente verde,
+azul y violeta aplicado exclusivamente a sus seis diales según aclaración.
+Etiqueta del eje temporal cacheada: A/B Qt offscreen con 250 mil muestras,
+mediana 16–17 → 7–9 ms/frame. MIDI parseado por tandas, ADC evita checks
+redundantes de posiciones calculadas y conserva rangos/CRC/época/fronteras.
+Niveles DAC constantes evitan arrays. Nuevos tiempos diagnósticos host
+MIDI→Qt y control→inicio de render, sin incluir DAC ni sonido.
+Evidencia en diagnosticos/resultados_piano/eficiencia_v16/latencia_host.json
+y qt_eje_ab.json; benchmark_latencia_host_v16.py reproducible sin Q.
+Se mantienen pisos de cola 120/192 ms a 20/40 kHz; validación física pendiente.
+Validación: 176 de 177 pruebas aprobadas contando repetición corregida del
+test de etiqueta inicialmente igual a la ya visible. Pendiente ajeno a estos
+cambios: test_high_rates_are_offered_and_16bit_limit_remains espera texto
+«experimental», pero el selector muestra «200 kHz · 5 µs».
+
+### Synth · filtro longitudinal por voz · 10 de octubre de 2026
+
+Perfil local con 11 voces: filtro de deformación longitudinal preparaba
+lfilter en cada bloque. Sustituido por recurrencia Numba con estado separado
+por cuerda y calentamiento inicial. A/B 480 muestras: mediana16,1 → 2,3µs.
+87 pruebas Synth/FM/ataque/cuerdas aprobadas más prueba de equivalencia
+SciPy/continuidad entre bloques a1e-12. No cambia coeficientes ni buffers.
+Evidencia: diagnosticos/resultados_piano/eficiencia_v16/strain_ab.json.
+Sin operación del Q; latencia física pendiente.
+
+### Synth · reposición y medidas de transporte · 10 de octubre de 2026
+
+service_wav llena ambos créditos disponibles en una llamada; elimina espera
+por otro pump para enviar el segundo bloque, sin ampliar ventana. Respeta
+target/capacidad, offsets consecutivos y comandos serializados. WAV archivo
+conserva una petición. Diagnósticos registran máximos generación de bloque,
+sendall y envío→ACK por request_id. 64 pruebas FM/contrato/latencia aprobadas,
+incluyendo límite target y reposición inmediata. No se operó Q ni se redujo
+mínimo todavía: comprobar gaps ACK, cola mínima y cortes en acordes/pedal
+con Q antes de ensayar 5→4→3 bloques a20kHz.
+
+### Synth · ensayo físico de cola · 10 de octubre de 2026
+
+Q libre confirmado: sin monitor local ni cliente8766. Ensayo headless30s
+a20kHz/ADC14-100k, acordes hasta11voces y pedal simulado cada350ms.
+Sin UNDERRUN, reason0 y dropped/fatal0, pero target5 creció a9; cola mínima
+observada3. Peores tiempos: generación40,98ms, envío0,31ms, envío→ACK56,36ms,
+gap ACK56,98ms. No aprueba mantener120ms ni reducir a96/72ms: casos4/3
+omitidos por falta de margen. No mide Qt/MIDI real ni latencia acústica.
+Restauración confirmada: ADC14/40k, generador previo deshabilitado y WAV IDLE.
+Script diagnosticos/probar_cola_synth_v16.py; evidencia
+diagnosticos/resultados_piano/eficiencia_v16/20261010_043344_cola_fisica.json.
+max_render_ms del source permanece0 en esta ruta sin niveles DAC; usar
+max_chunk_generation_ms del transporte como costo total de generación.
+
+### Synth · preparación previa y repetición física · 10 de octubre de 2026
+
+prepare_audio inicializa cuerpo/sala antes de BEGIN, sin generar notas ni
+avanzar posición. Test demuestra códigos idénticos con/sin preparación;
+22 pruebas instrumentos/contrato aprobadas. Perfil host11voces ~3–4ms medio,
+con picos iniciales variables. Repetición física30s misma carga: sin cortes,
+target5→7, generación máxima32,37ms, ACK38,67ms, gap56,80ms, dropped/fatal0.
+Anterior5→9, generación40,98ms/ACK56,36ms; A/B no controlado, no atribuir
+toda diferencia al cambio. No probar4/3 ante crecimiento con5. Restauración
+confirmada ADC14/40k, generador previo y WAV IDLE. Evidencia:
+diagnosticos/resultados_piano/eficiencia_v16/20261010_044206_cola_fisica.json.
+
+### Synth · ACK atendido por trama · 10 de octubre de 2026
+
+Durante Synth, pump procesa eventos después de cada tramo992B del lote TCP,
+en vez de esperar hasta64KB decodificados para atender ACK. Conserva orden
+de configuración/muestras y agrega statuses para no perder confirmaciones
+PING de tramas anteriores. Fuera de Synth mantiene feed del lote completo.
+77 pruebas FM/contrato/protocolo/latencia aprobadas, incluyendo reposición
+antes de la siguiente trama y conservación de statuses.
+Repetición física30s: sin cortes ni pérdidas, target5→7. Gap máximo ACK36,30ms
+(previo56,80ms), envío→ACK36,27ms, generación32,50ms. Ensayos separados,
+no A/B controlado; aún no aprueba cola5 estable ni probar4/3. Restauración
+confirmada ADC14/40k, generador previo deshabilitado y WAV IDLE. Evidencia:
+diagnosticos/resultados_piano/eficiencia_v16/20261010_044435_cola_fisica.json.
+
+### Synth · filtros del ataque y calentamiento del ensayo · 10 de octubre de 2026
+
+Ruido de ataque: SOS causal Numba con estado inicial cero, equivalente a
+SciPy1e-12 y mismas bandas/coeficientes. Warmup prepara bandas y firma para
+ambas tasas. A/B220ataques20kHz: mediana0,67→0,26ms, p952,70→0,77ms.
+91 pruebas FM/instrumentos/ataque/contrato aprobadas. Se corrigió ensayo
+físico: faltaba warmup fm_feedback, presente en interfaz; los máximos previos
+incluían carga fría de envolvente y no representan exactamente el monitor.
+Repetición30s: generación máxima21,09ms, ACK39,75ms, gap39,89ms, sin cortes
+ni pérdidas; target5→7. Comparaciones físicas no son A/B controlado y también
+cambió calentamiento, no atribuir toda reducción al filtro. No probar4/3.
+Q restaurado aADC14/40k, salidas apagadas. Evidencia:
+diagnosticos/resultados_piano/eficiencia_v16/attack_filter_ab.json y
+diagnosticos/resultados_piano/eficiencia_v16/20261010_044729_cola_fisica.json.
+
+### Synth · relay candidato pre-SPI rechazado · 10 de octubre de 2026
+
+recv de comandos movido después de READY y antes de ioctl SPI. Compiló
+con Wall/Wextra/Werror; ensayo30s sin cortes/pérdidas pero target5→7,
+generación37,79ms/ACK55,49ms/gap57,09ms. No demostró mejora: aislado en
+experimentos/synth_relay_pre_spi, fuente estable restaurada y comparada
+byte a byte con fuente de binario previo. Contenedor previo y configuración
+ADC14/40k, generador deshabilitado, WAV IDLE restaurados y confirmados.
+Primer intento abortó por generador habilitado tras reinicio; preparación
+del ensayo corregida para reponer estado previo antes de probar.
+Evidencia20261010_045234_cola_fisica.json y relay_trial_restoration.json
+en diagnosticos/resultados_piano/eficiencia_v16. Envío→ACK incluye trabajo
+host intercalado: no se puede atribuir demora íntegra a relay/Q sin medir allí.
+
+
+### Synth · traza de espera ACK host · 10 de octubre de 2026
+
+Traza opcional acotada100000eventos: envío, generación, lectura, decode y
+ACK por request_id; sin cambios de protocolo. 6 pruebas relevantes y
+contabilidad sintética aprobadas. Ensayo30s relay estable, 4969solicitudes
+WAV (incluye consultas): mediana4,51ms/p957,11ms/máximo73,35ms desde retorno
+sendall hasta ACK atendido. Peor solicitud: decode71,47ms, read1,72ms,
+generación0ms, resto0,15ms. Otro pico57,87ms incluye51,48ms en read.
+Son tiempos de reloj: decode puede incluir GC/planificación; read incluye
+espera y transporte. No se midió CPU thread ni latencia interna Q/relay.
+Sin cortes/pérdidas pero target5→9; no reducir cola. Restauración confirmada.
+Evidencia20261010_045638_cola_fisica.json y *_target5_trace_analysis.json
+junto a traza cruda en diagnosticos/resultados_piano/eficiencia_v16.
+Reproducible: probar_cola_synth_v16.py --timings y analizar_tiempos_synth_v16.py.
+
+
+### Synth · CPU/GC y ensayo freeze · 10 de octubre de 2026
+
+Decoder medido con thread_time y GC callbacks: pico63,31ms de reloj,
+63,24ms CPU y63,19ms GC solapado. Otro pico16,95ms consume0,33ms CPU:
+pausa compatible con planificación. Eliminada lista intermedia de pares ADC,
+conservando chequeo de ambas columnas/todas muestras y continuidad.17pruebas
+protocolo/latencia/contrato aprobadas. GC largo sólo cambió de ubicación:
+en siguiente ensayo generación61,66ms con59,38ms GC solapado; target5→7.
+Ensayo diagnóstico --freeze-startup, gc.collect+freeze de objetos existentes,
+GC normal para objetos nuevos y unfreeze garantizado en finally: target5
+estable30s, cola mínima4, sin cortes ni pérdidas; GC máximo1,45ms. Target4
+falló UNDERRUN/reason2 a8,13s (target creció6); no probar3. No aplicar freeze
+al monitor ni bajar defaults con este ensayo corto. Restauración Q confirmada
+ADC14/40k, generador previo deshabilitado y WAV IDLE; GC descongelado.
+Evidencia045931/050035/050153_cola_fisica y *_trace_analysis.json del10/10
+bajo diagnosticos/resultados_piano/eficiencia_v16. Continúa pendiente medir
+pausas del host/transporte noGC y validar política GC con GUI/memoria.
+
+
+### Synth · worker experimental de generación · 10 de octubre de 2026
+
+SynthProcess spawn separado, una solicitud de bloque pendiente, control FIFO
+notas/pedal, respuesta asincrónica; no reserva crédito ni avanza offset hasta
+que haya códigos. Bloque pendiente conserva nivel DAC solicitado; siguiente
+rampa parte del nivel efectivamente entregado.7pruebas incluyendo equivalencia
+exacta de códigos, notas/pedal/volumen, cierre y reposición diferida aprobadas.
+No activado en interfaz; ensayo --process. Primer intento cerró sesión por
+arranque bloqueante con ADC activo; se corrigió arranque async bombeando
+recepción hasta READY. Q recuperado por conexión nueva y estado restaurado.
+Repetición30s: sin cortes ni pérdidas, target5→9. Worker máximo30,51ms,
+receptor al recoger bloque69,18ms; GC padre68,90ms confirmado por callbacks.
+Separar generación sola no protege entrega al Q: ambas aún dependen del
+receptor. No bajar cola ni promover esta variante a UI. Pendiente aislar
+entrega/propietario Q y canal ADC/control con IPC acotado sin perder muestras.
+Evidencia20261010_050855_cola_fisica y *_trace_analysis.json en carpeta de
+ eficiencia. Restauración confirmada ADC14/40k, generador previo, WAV IDLE;
+worker cerrado. Ensayo fallido previo050729 conserva restauración recuperada.
+
+### Synth · proceso dueño Q/audio y ADC IPC · 10 de octubre de 2026
+
+Variante diagnosticos/probar_audio_owner_v16.py: un hijo posee conexión Q,
+Synth y reposición. Padre manda controles y recibe ADC en Queue32 acotada,
+sin descartes: valida rango, índices/timestamps entre lotes, wrap e igualdad
+de enviados/recibidos; canal lleno rechaza ensayo.2pruebas IPC aprobadas.
+Padre fuerza GC y75ms de pausa adicional por segundo; hijo con GC normal.
+30s target5 estable, 2.996.902muestras, padre135ms; target4 creció6 sin cortes.
+120s target5 creció7, sin cortes y11.992.170muestras íntegramente recibidas;
+padre158ms, gap53,37ms. Demuestra aislamiento frente a padre, no cola mínima.
+Contraste120s freeze sólo hijo: target5→9, sin cortes,11.991.492muestras,
+padre188ms, gap67,12ms, generación50,93ms/sendall19,11ms. No mejora demostrada:
+no activar en GUI ni bajar defaults. Comparaciones no son A/B controlado.
+Q restaurado en todos los ensayos válidos: ADC14/40k, generador previo,
+WAV IDLE. Primero abortó por estado WAV inicialNone, guard corregida y
+restauración confirmada. Evidencia133125/133345/133706_audio_owner.json bajo
+diagnosticos/resultados_piano/eficiencia_v16. Descripción/límites en
+experimentos/synth_audio_owner/README.md. Relay y firmware sin cambios.
+
+### Synth V16: CPU y GC en proceso dueño del audio — 2026-10-10
+
+Se agregó diagnóstico optativo `--timings` al ensayo audio-owner, sin activar
+esta arquitectura en GUI ni modificar cola mínima, firmware o relay. CPU del
+hilo y tiempo real de render/decode/read/send, controles e IPC ADC; GC y
+crecimiento del target. Traza acotada y guardada después de restauración;
+análisis mantiene separados intervalos anidados y acepta trazas antiguas.
+
+Primer ensayo `20261010_134620_audio_owner.json`: UNDERRUN a0,167s,
+5→7,14.788 muestras IPC íntegras, Q restaurado. GC máximo3,19ms, sendall
+11,35ms con CPU0,09ms y pausa posterior sin instrumentar36,75ms; no se
+atribuye esa pausa a una causa concreta. Se amplió medición de IPC/controles.
+
+Repetición `20261010_134704_audio_owner.json`:120s sin cortes,11.991.718
+muestras ADC/IPC exactas, dropped/fatal0, pero5→9: perfil fijo rechazado.
+Traza100.000 eventos cubre sólo27,71s y el primer aumento5→7. Antes de
+ese aumento, generación42,24ms con CPU42,22ms y GC39,70ms. Lectura llega
+26,11ms con CPU0,31ms; IPC30,41ms con CPU1,67ms sin GC superpuesto.
+No hay evidencia suficiente para atribuir esas esperas a red o scheduler,
+ni para explicar el segundo aumento fuera de la ventana. El diagnóstico
+mismo asigna objetos y puede influir en GC; no prueba mejora de rendimiento.
+Q restaurado ADC14/40k, generador deshabilitado y WAV IDLE en ambos casos.
+7 tests relevantes pasan, incluidos contabilidad temporal/GC/compatibilidad,
+IPC, worker y contrato WAV. Próximo paso: reducir asignaciones del camino
+del audio y verificar picos con traza que conserve episodios tardíos.
+
+### Synth V16: quitar cierres creados por bloque — 2026-10-10
+
+`FMSource._render` ya no crea funciones ramp/phase y sus celdas por voz en
+cada bloque; se usan auxiliares compartidos con la misma aritmética. No cambia
+cola mínima, timbre, síntesis, protocolo ni arquitectura de la interfaz.
+Copia anterior usada para A/B: `/tmp/fm_source_before_alloc.py`.
+`benchmark_alloc_synth_v16.py` compara11 voces, cambios cada15 bloques,
+pedal, piano/FM y20/40kHz:576.000 códigos DAC idénticos en total. Informe
+`20261010_alloc_shared_helpers.json`: piano20k mediana2,449→2,376ms,
+p95 6,802→6,373ms. Comparación secuencial de host, susceptible
+a cachés/planificación; no demuestra eliminación del GC ni menor latencia
+física.72 tests FM/piano/feedback pasan.
+
+Ensayo Q dedicado sin traza pesada `20261010_135340_audio_owner.json`:
+120s,11.992.396 muestras ADC14/100k recibidas íntegramente en IPC,
+sin cortes y dropped/fatal0, pero target5→9: cola fija rechazada.
+Generación máxima15,94ms, sendall2,81ms, send→ACK51,31ms,
+gap ACK53,93ms. Pausa máxima del padre118,60ms. Es un ensayo diferente
+del anterior con traza y no permite atribuir diferencias exclusivamente
+al cambio. Q restaurado ADC14/40k, gen off, WAV IDLE. La reducción de
+asignaciones se conserva por equivalencia y menor trabajo; no se declara
+resuelto el crecimiento de cola ni se activa la arquitectura experimental.
+
+### Synth V16: ADC IPC sin pickle/hilo auxiliar — 2026-10-10
+
+Variante experimental `SharedAdcRing` y flag `--shared-adc` en ensayo
+owner. Memoria preasignada32x4096x4uint32, slots publicados por semáforo,
+lector copia antes de liberar ranura, full/empty explícitos. El diagnóstico
+sigue rechazando overflow y exige todos los índices/timestamps ADC y el
+mismo conteo producido/recibido. No se activa en GUI ni se cambia cola.
+
+Comparación local `20261010_shared_adc_local.json`: cuatro corridas alternadas,
+2.048.000 registros por corrida exactos/en orden, con pausas GC+20ms del padre.
+CPU productor Queue97,23/104,54ms→ring41,29/44,05ms (~58% menos).
+put ring tiene más costo síncrono: Queue oculta serialización en feeder;
+la CPU de proceso mide ambos hilos. Reintentos por cola llena sólo en este
+benchmark de throughput, nunca en diagnóstico Q. No certifica latencia
+ni margen de audio.10 tests IPC/preflight/traza/worker pasan.
+
+Intento físico `20261010_142430_audio_owner.json`: se inició erróneamente con
+monitor/v16/app.py abierto (PID63797). Conexión cerrada, cero muestras y
+sin perfil previo capturado/restauración verificada. No usarlo como evidencia
+ni operar el Q mientras lo usa la GUI. Se agregó comprobación de procesos
+al CLI para rechazar el ensayo antes de conectar. Comparación física queda
+pendiente hasta tener dueño exclusivo; se completaron pruebas locales.
+
+### Synth V16: ensayo físico del anillo ADC compartido — 2026-10-10
+
+Monitor cerrado confirmado antes de conectar. Primeros intentos143657/143742
+rechazados sin muestras por estado WAV DONE previo. Se revisó firmware:
+BEGIN acepta DONE; STOP con una sesión distinta produce ID_CONFLICT y no
+es necesario para reemplazar una reproducción terminada. El diagnóstico
+ahora acepta IDLE o DONE sin razón de error, con generador deshabilitado,
+y sigue rechazando PLAYING/BUFFERING y estados fallidos. Test de aceptación
+comprueba que no se envíe STOP a una sesión anterior.11 tests pasan.
+
+Ensayo `20261010_143852_audio_owner.json`, shared_ring,120s sin freeze/traza:
+11.993.780 registros ADC14/100k producidos y recibidos exactamente, índices
+y timestamps íntegros, dropped/fatal0, sin cortes WAV. Target5→9,min3:
+rechazado como perfil fijo. Generación máxima26,82ms, sendall0,324ms,
+send→ACK52,17ms, gap ACK53,01ms; padre pausó122,07ms. Frente al ensayo
+Queue135340 (5→9,gap53,93ms), no demostró menor cola o latencia sostenida;
+la mejora CPU local no resuelve el cuello de botella de punta a punta.
+Son corridas separadas; no atribuir diferencias de máximos a una sola causa.
+
+Se restauró el perfil de ESTA sesión: ADC14/100k (no40k de ensayos viejos),
+generador deshabilitado con valores previos exactos y WAV IDLE. La
+reproducción anterior ya había terminado; no se reinicia ese archivo.
+No se baja cola ni se integra el proceso dedicado/anillo en GUI. Próximo
+paso requiere investigar esperas de transporte/planificación de~53ms y
+preservar evidencia de episodios tardíos, en vez de seguir cambiando IPC.
+
+### Synth V16: limitar adquisición ADC a40kHz — 2026-10-10
+
+Petición del usuario aplicada aGUI: modo Synth deshabilita tasas ADC>40k,
+reduce selección mayor automáticamente y aplica usando configuración normal.
+Play rechaza iniciar hasta que adquisición<=40k esté confirmada y no haya
+output_pending. Al salir restaura selección anterior reducida; configuración
+espera STOP confirmado. No cambia tasa DAC ni límites UART/ADC16, ni activa
+owner/ring enGUI. Evitar aplicar ADC repetidamente por cada status WAV IDLE:
+sólo se agenda si selección y configuración aplicada difieren.
+
+11 tests focalizados UI/límite, IPC y período ADC pasan. Corrida ampliada
+UI19 tests:18 pasan,1 fallo previamente conocido test_high_rates_are_offered...
+exige texto experimental en200k que la etiqueta actual no contiene; sin
+alterar etiqueta o test para ocultarlo.
+
+El diagnóstico owner admite --adc-rate40000/100000 y valida timestamps con
+período25/10us según perfil. Ensayo120s shared_ring40k:
+`20261010_144500_audio_owner.json`,4.796.416 muestras exactas, dropped/fatal0,
+sin cortes, pero target5→7 (100k previo5→9). Generación máxima25,58ms,
+gap ACK54,35ms, send→ACK52,04ms. Menor crecimiento en esta corrida no
+certifica cola fija ni baja latencia acústica; siguen picos similares y
+son ensayos separados. No bajar mínimo de audio. Q restaurado aADC14/100k
+y generador previo off, WAV IDLE. La prueba física usa owner experimental,
+no certifica GUI/MIDI/tecla→sonido. La política40k sí queda enGUI para
+reducir carga ADC durante Synth.
+
+### Synth V16: localizar espera de lectura con traza numérica — 2026-10-10
+
+La traza optativa del owner ahora preasigna500.000 eventos numéricos (~20MB)
+en vez de retener tuplas durante reproducción. Anillo conserva última ventana
+con contador de sobrescritos, exportación JSON sólo después de restaurar;
+reporte guarda todos los aumentos del target por separado. Analyzer acepta
+listas antiguas/envelope nuevo, incluye IPC/controles en contabilidad y usa
+búsqueda de intervalos GC, sin sumar pump sobre etapas internas.
+
+Ensayo `20261010_145129_audio_owner.json`,ADC40k/shared_ring/trace:
+UNDERRUN a20,855s (reason0 en respuesta de consulta no significa éxito),
+833.536 muestras exactas IPC, dropped/fatal0 y restauración confirmada de
+ADC14/100k, gen previo off y WAV IDLE. No ocultar corte ni certificar perfil.
+Traza61.784 eventos cubre20,957s sin sobrescritos: mayor send→ACK89,831ms,
+89,084ms dentro de lectura; read individual87,600ms con CPU0,0537ms y
+sin GC superpuesto. Generación máxima15,948ms con CPU15,929ms; GC total
+3 episodios, máximo2,597ms. Target permaneció5 hasta corte repentino.
+Los datos localizan la espera en lectura (y un control12,074ms/CPU0,101ms),
+pero no distinguen falta de datos de relay/ADB de desplanificación del host.
+No atribuirla al cálculo de synth ni afirmar menor latencia por cambiar IPC.
+Instrumentación sigue añadiendo trabajo.13 tests focalizados pasan.
+
+Próxima prueba útil: correlacionar disponibilidad real de socket y tiempo de
+reactivación del proceso/relay, con reloj independiente, conservando margen,
+firmware y validación ADC. No acortar arbitrariamente timeout ni aumentar
+créditos sin medir, porque no crea datos/ACK faltantes. GUI continúa con
+límite ADC40k; no se integra arquitectura experimental ni baja cola mínima.
+
+### Synth V16: observador de socket no consumidor — 2026-10-10
+
+SocketProbe optativo con --timings: hilo separado observa select sin consumir
+socket, registra readiness/gaps en array preasignado. Guarda tras restaurar
+Q. Tests de socketpair comprueban payload intacto y cierre de hilo; análisis
+separa observación de readiness y retraso del propio observador. No cambia
+cola, timeout, protocolo o GUI. Se agregaron marcas start/end de pausas del
+padre para ensayos futuros (no disponibles en145611).
+
+`20261010_145611_audio_owner.json`, ADC40k/shared_ring/probe, rechazado:
+UNDERRUN103,733s, target5→7.4.145.152 muestras exactas, dropped/fatal0,
+restauración ADC14/100k, gen previo off y WAV IDLE confirmada. Traza306.398
+eventos completa. Gen118,590ms/CPUhilo21,148ms/sinGC en máximo. GC5 episodios,
+max2,841ms. Probe83.830 muestras, sin exceso/error, gap máximo43,451ms.
+Mayor read50,126ms/CPU0,162ms:4 observaciones, gap máximo23,023ms, ninguna
+readiness positiva antes de retorno. Falta de observación no prueba falta
+de datos porque reader puede consumir primero y observador también se demora.
+
+No atribuir todo a transporte: también falla dentro de generación con97ms
+fuera de CPU del hilo, sin GC. Podrían ser desplanificación, espera interna
+o trabajo en otros hilos; medir CPU del proceso completo/contexto de pausas
+antes de modificar prioridades/timeout. Padre GC máximo173,675ms y pausa
+253,698ms, sin marcas absolutas en esa corrida: no afirmar coincidencia.
+No bajar cola ni promover arquitectura; límite ADC40k GUI sigue vigente.
+
+### Synth V16: CPU del proceso y correlación de pausas — 2026-10-10
+
+Traces optativas de read/decode/send/generate incluyen CPU de proceso además
+de CPU de hilo. Array preasignado pasa a6 campos (~24MB/500.000 eventos),
+exportación conserva CPU opcional y formatos anteriores. Analyzer --report
+correlaciona máximos con intervalo de pausa y GC del padre separadamente;
+superposición no implica causalidad. Tests cubren6 campos y contabilidad.
+
+Ensayo `20261010_150300_audio_owner.json`,120s ADC40k/shared_ring/probe:
+sin cortes,4.796.416 muestras exactas, dropped/fatal0, pero5→7,min3.
+Restauración ADC14/100k y gen previo off, WAV IDLE. Traza354.874 eventos
+completa. Gen máximo34,141ms/CPUhilo4,303ms/CPUproceso4,631ms, sinGC ni
+pausa padre superpuesta. Gen21,636ms/CPUproceso4,439ms coincide enteramente
+con GC padre, pero no demuestra causalidad. Read47,107ms/CPUproceso0,341ms
+sinGC o pausa padre; por tanto picos principales no son CPU oculta de otros
+hilos del owner ni exclusivamente GC del padre. GC hijo max11,510ms en
+un decode11,592ms (CPU11,493ms): también existe esta fuente separada.
+
+Tiempo no usado en CPU todavía puede ser desplanificación o espera interna;
+no distingue red de scheduler en read. No declarar resuelta latencia, ni
+bajar cola/promover owner.15 tests de instrumentación/IPC/worker pasan.
+Los máximos de esta corrida no reexplican automáticamente el corte de118ms
+de la corrida anterior que no tenía CPU de proceso. Próxima intervención
+requiere ensayo aislado de prioridad/reactivación o espera interna, con el
+mismo perfil y controles, no seguir microoptimizando cálculos ya rápidos.
+
+### Synth V16: separar voces/postprocesado/DAC — 2026-10-10
+
+FMSource incorpora audio_trace optativo, desactivado en GUI: etapas preparación
+de voces, render de voces, post de piano, render total y volumen/limitador DAC,
+con CPU hilo/proceso. Child voices sin callbacks para evitar multiplicar costo.
+Analyzer no suma etapas anidadas a contabilidad ACK. Test de acordes/pedal y
+release exige códigos DAC idénticos con/sin instrumentación.73 tests de
+síntesis/ataque/feedback y equivalencia pasan;6 tests de traza/análisis pasan.
+
+Ensayo150901,120s ADC40k/shared_ring: sin cortes y4.796.416 muestras exactas,
+pero5→9. Preparación max2,156ms; render voces16,844ms; post6,581ms; read35,228ms.
+Se detectó que todos los ensayos owner anteriores usaban __getitem__ directo
+sin set_wav_levels: no incluían render_dac_codes/compresor/volumen del panel.
+Conservan evidencia ADC/transporte del camino bruto, pero no certifican
+la cadena GUI completa. No hay tiempos dac_convert en esa traza por este motivo.
+
+Diagnóstico corregido: usa set_wav_levels(1.0,1.65) y registra estos valores.
+Es la ruta GUI con amplitud fija1Vpp, no el valor inicial2,5Vpp del panel.
+Ensayo151149,30s: sin cortes, target5 estable,min4,1.198.080 muestras exactas,
+ADC timestamps25us/dropped0/fatal0, Q restaurado ADC14/100k, gen previooff y
+WAV IDLE. Máximos preparación1,476ms/render voces16,511ms/post7,095ms/
+DAC0,574ms/read25,022ms. Generación18,180ms; send→ACK29,986ms.
+No atribuir estabilidad al limitador ni comparar30s con120s como mejora;
+no bajar cola ni certificar GUI/MIDI acústico. La conversión DAC no domina
+en esta corrida. Próximo candidato CPU: render/ataques de voces y post de
+piano, preservando timbre; esperas de lectura siguen siendo fuente separada.
+
+### 2026-10-10 — Plan Astra y ensayos de cola/reflexiones
+
+Plan: conservar audio exacto, medir candidatos CPU en host y probar cola5→4
+sólo después de estabilidad; distinguir owner experimental de GUI/MIDI real.
+Reordenar resonadores conservó muestras/estado pero hizo el kernel1.5–2x
+más lento: descartado y restaurado. Resultado20261010_astra_resonadores.json.
+
+Baseline153649 con niveles1Vpp120s: sin cortes pero5→9; no admite bajar cola.
+QoS154456: override reversible validado, base ya user_interactive; UNDERRUN
+a89.8s, sendACK188.4ms, ADC3.588.096 muestras íntegras yQ restaurado.
+Astra localiza142.15ms en decode y44.55ms controles, poca CPU, sinGC propio
+ni pausa padre superpuesta; no atribuir a timeout100ms. QoS no se habilitaGUI.
+
+Driver separa --timings y --socket-probe (antes eran inseparables); --qos
+es optativo y sólo afecta al child. --amplitude1.0/2.5 registra ruta DAC real.
+Sin instrumentación154724: target5 ytarget4 pasaron120s cadauno sincrecer
+ni cortes, ADC íntegro yQ restaurado enambos. Target4=96ms vs5=120ms,
+reducción experimental24ms; no certifica GUI ni atribuye causa a quitarprobe.
+
+Reflexiones: normalización de pesos constante fuera del bucle de muestras.
+ABBA calentado kernel mediana0.10846→0.03299ms; exactos salida,buffer,
+posición y288.000 códigosDAC a20/40k. Fullsynth timing variable: no afirmar
+70% menoslatencia global. Resultado20261010_astra_reflexiones.json.
+48 tests QoS/resonadores/owner/instrumentos y29 finales reflexiones/owner/
+instrumentos/audio_trace pasan. Synth/colaGUI no se cambian con este ensayo.
+
+Ensayo final 165214, con normalización optimizada, sin instrumentación y
+2,5 Vpp: target 4 permaneció estable durante 300,001 s, sin cortes ni
+crecimiento. Se validaron 11.991.266 muestras ADC por índice y timestamps;
+Q restaurado a ADC14/100 kHz, generador previo apagado y WAV IDLE.
+Máximos: generación 24,414 ms; envío→ACK 11,805 ms; socket 0,301 ms.
+Resultado: cola objetivo experimental 96 ms, 24 ms menos que target 5.
+La mejora CPU de reflexiones sí queda aplicada al camino normal; el owner
+separado y target 4 todavía requieren validación GUI/MIDI antes de promoverlos.
+Reporte: diagnosticos/resultados_piano/eficiencia_v16/20261010_165214_audio_owner.json.
+
+### 2026-10-10 — Optimización común y revisión de todos los instrumentos
+
+Se ensayan los 13 presets del panel con sus mezclas reales, 11 notas, pedal,
+release y cambios de drive/mix. `diagnosticos/synth_presets_v16.py` extrae
+parámetros del FMPanel sin conectar MIDI ni hardware. El owner acepta
+`--presets` y restaura/verifica el Q entre casos; aborta si falla restauración.
+
+Mejora común aplicada en FMSource: curvas constantes del compresor y
+transición del filtro con caché acotada e inmutable; transición calculada
+sólo cuando se usa. Drive y wet estables reutilizan `_ramp`, manteniendo
+interpolaciones al cambiar controles. No cambia ADSR, mezcla ni timbre.
+
+Benchmark de 26 casos (13 presets × 20/40 kHz) conserva exactamente
+2.246.400 códigos DAC. Suma de medianas: 20 kHz 28,72→28,22 ms;
+40 kHz 24,09→23,66 ms. Son corridas secuenciales host, diferencia pequeña
+y sensible a carga; no equivale a una reducción garantizada de latencia.
+Resultado: 20261010_cache_instrumentos.json. Benchmark inicial general:
+20261010_instrumentos.json. Los mayores p95 fueron piano, DX y guitarra;
+Brass mostró picos aislados. Pasaron 72 tests FM/feedback/owner/límite ADC.
+La cola GUI permanece en su valor previo hasta validar esa arquitectura.
+
+Ensayos físicos 200843, ADC40 kHz, 2,5 Vpp y target inicial4, con presets
+del panel y controles simulados: guitarra120s sin cortes pero target4→8;
+DX Brillo UNDERRUN a70,738s (generación máxima31,402ms); Brass120s
+sin cortes pero4→8. Guitarra/Brass tuvieron send→ACK máximos55,55/58,53ms.
+ADC íntegro en los tres casos (4.796.416 / 2.826.240 / 4.796.416 muestras),
+y Q restaurado entre todos los casos: ADC14/100k, generador previooff,
+WAV IDLE. Resultado20261010_200843_audio_owner.json.
+Conclusión: no promover cola4 a la GUI ni generalizar aprobación previa
+de piano a otros presets. Sí conservar optimización común exacta; requiere
+seguir investigando pausas de transporte/scheduling y margen de generación.
+
+### 2026-10-10 — Guitarra y Brass: coeficientes y PolyBLEP
+
+Guitarra: caché acotada de 512 combinaciones para coeficientes de pérdida
+de la cuerda (rate/frequency/brightness/decay/bridge). No contiene buffer,
+cursor ni estado de ruido. Controles nuevos invalidan por clave; comparación
+de muestras/buffer/cursor exacta en cambios de brillo, decay y bridge.
+
+Brass: nuevo `synth_oscillator.py` calcula PolyBLEP de sierra/cuadrada en
+un kernel Numba sin fastmath, respetando orden de operaciones y evitando
+arrays temporales y máscaras por voz. Warmup de las variantes de frecuencia
+escribible e inmutable antes de BEGIN; fallback NumPy si Numba no existe.
+También beneficia Lead, Bass Punch y Warm Pad, que usan esas ondas.
+
+Benchmark calentado ABBA con parámetros reales del panel, 11 notas,
+pedal/releases y cambios de drive/mix; 10 casos × 115.200 códigos DAC,
+exactos entre cuatro corridas cada caso. Resultado20261010_guitarra_brass.json.
+Medianas a20k: guitarra2,884→2,718ms (-5,8%); Brass2,096→0,991ms (-52,7%).
+A40k: guitarra2,176→2,030ms (-6,7%); Brass1,650→0,848ms (-48,6%).
+Lead/Bass Punch/Warm Pad también mejoran, aproximadamente49–61% según
+preset/rate. Son tiempos de generación host, no latencia acústica total.
+93 tests de oscilador/cuerda/FM/feedback/instrumentos/owner pasan.
+
+Ensayo físico201809, mismo rig a40k/2,5Vpp, sin instrumentación,120s
+por instrumento: guitarra sin cortes, target4→8; Brass sin cortes,4→10.
+Cada caso validó4.796.416 muestras ADC y restauró Q aADC14/100k, generador
+previo apagado yWAV IDLE. Guitarra sendACK38,916ms/generación31,633ms;
+Brass sendACK82,870ms/generación33,763ms. Estos máximos de pared incluyen
+pausas y no contradicen la mejora de cálculo host; no prueban menor latencia
+física. Target4 rechazado nuevamente, colaGUI conservada. Optimización CPU
+exacta aplicada; se necesitan pruebas de pausas/transport para bajar cola.
+Reporte20261010_201809_audio_owner.json.
+
+### 2026-10-10 — Segunda optimización guitarra/Brass
+
+Perfil host: guitarra dominada por GuitarStrings.render y dos waveguides;
+Brass por preparación de voces, fases/osciladores y wrappers de sosfilt.
+No confundir ese perfil CPU con pausas largas del transporte.
+
+Guitarra: calcular índice/fracción de interpolación para cada posición
+del buffer una vez por delay, mediante el mismo cálculo escalar original.
+Guardar una sola tabla por cuerda y regenerarla cuando cambia delay; estado
+y contenido del buffer no se cachean. El kernel sustituye modulo de float
+por acceso a tabla y wrap entero por comparación, con muestras/estado exactos.
+
+Filtros internos: kernel SOS stateful directo sin fastmath, con salida y
+estado final exactos respecto de SciPy en señales fragmentadas/strided y
+órdenes2/4/8. Conserva semántica de no modificar zi de entrada; fallback
+SciPy sin Numba. Warmup C/strided y coeficientes mutables/inmutables antes
+de BEGIN. Limitado a filtros internos normalizados, no API general SciPy.
+
+ABBA completo20261010_filter_table.json: a20k guitarra2,805→2,300ms
+(-18,0%), Brass1,021→0,861ms (-15,6%); a40k guitarra2,126→1,827ms
+(-14,1%), Brass0,856→0,711ms (-16,9%). Mejoras adicionales a la etapa
+anterior. Lead a40k varió levemente hacia peor; no afirmar mejora uniforme.
+Comparación26casos/13presets a20/40k conserva2.246.400 códigosDAC exactos
+(20261010_filter_all_presets.json). 93 tests generales pasan; test SOS
+corregido para usar copia escribible en referenciaSciPy también pasa.
+
+Diagnóstico --scheduler opcional: getrusage antes/después de pump; sólo
+guarda iteraciones>=20ms, hasta256 registros y contador de omitidos.
+Incluye CPU proceso, faults minor/major y context switches; no permite
+atribuir causalidad ni interpretar minor faults como disco. Sin hilo extra
+ni traza de todos los eventos. No activado en GUI.
+
+Fases sin uso: avanzar sólo estado final de portadora virtual y modulador
+noFM, sin construir sus arrays; usar recorrido original cuando cambia el
+pitch. Estados exactos, incluidos cambios de pitch y continuidad de fase.
+Warmup de waveguide/tabla añadido a prepare_audio antes de BEGIN.
+ABBA final20261010_filter_table_phase.json, frente a inicio de esta etapa:
+guitarra20k2,769→2,092ms (-24,5%),40k2,085→1,646ms (-21,0%);
+Brass20k0,997→0,805ms (-19,2%),40k0,848→0,671ms (-20,9%).
+
+Ensayo202923, target4: guitarraUNDERRUN a12,447s, Brass120s sin cortes
+pero4→8; ADC íntegro yQ restaurado en ambos. Pausa guitarra52,606ms
+con CPU0,296ms, sin major/minor faults: no atribuir el corte a generación.
+
+Con warmup/fases y target5,203451: guitarraUNDERRUN a25,597s tras
+lectura138,494ms/CPU0,091ms; generación máxima10,675ms. Brass60s
+sin cortes pero5→7; generación16,022ms. ADC íntegro yQ restaurado.
+Diagnóstico --scheduler ahora también mide lecturas largas, sin hilo extra.
+--read-timeout-ms5/20/100 optativo; restaura timeout antes de restaurarQ.
+
+Comparativo203701 con timeout5ms: guitarra60s, target5 estable, ADC
+2.398.208 muestras ysendACK9,845ms/generación12,423ms. BrassUNDERRUN
+a5.634s. target5.224.136 muestras; sendACK145,894ms/generación6,383ms.
+Dos lecturas61,330/62,488ms con CPU0,060/0,107ms, sin major faults,
+aun con timeout5ms. Un timeout no limita toda demora de reactivación del
+proceso. No atribuir mejora estable a5ms ni promoverlo aGUI. Q restaurado
+en ambos casos. Quedan aplicadas mejoras CPU exactas; cola y política de
+lectura de producción conservadas. Investigar transporte/reactivación
+separadamente; no ocultar los cortes ni reducir validación ADC.
+
+
+Ensayos 2026-10-10: observador independiente y ventana de créditos
+----------------------------------------------------------------
+ProcessSocketProbe usa un proceso separado y select sobre un duplicado del
+socket: no consume datos ni cambia el timeout. Guarda muestras en memoria
+compartida preasignada y cierra sólo el duplicado. Es diagnóstico optativo
+(--probe-process), no se activa en GUI. Prueba verifica datos preservados,
+readiness y que el socket original sigue abierto.
+20261010_204406_audio_owner.json: Guitarra/Brass 60s cada uno, ADC40k,
+synth20k, 2,5Vpp, target5→7; sin cortes, ADC íntegro y Q restaurado.
+El proceso observador también demoró 43,335ms (guitarra) y23,771ms (Brass).
+La ausencia de readiness observada no demuestra ausencia de datos: el owner
+puede haberlos consumido antes de que el observador vuelva a ejecutarse.
+No atribuir toda pausa al GIL del owner ni certificar causa de transporte.
+
+--credits1/2/3/4 permite ensayar ventana acotada sin cambiar el target ni
+las confirmaciones. Producción conserva2. BEGIN/PLAY/QUERY/STOP y WAV
+siguen serializados; se respetan reservas y espacio libre confirmado.
+20261010_204744_audio_owner.json, créditos3, target5, ADC40k/synth20k:
+Guitarra120,002s sin cortes pero target5→9; 4.796.416 muestras ADC.
+Brass UNDERRUN a94,247s, target5→9; 3.766.272 muestras ADC.
+Ambos con ADC íntegro, cero dropped/fatal y restauración exacta del Q:
+ADC14/100k, generador apagado, WAV IDLE. No promover créditos3 ni bajar
+cola normal con estos resultados. 70 tests pasaron (FM, audio owner,
+sondas y ventana de créditos); incluyen offsets, ACK, STOP y límites.
+
+
+Comparativo de carga de voces, 2026-10-10
+---------------------------------------
+Driver agrega --voices0..11 (default11), conservando el patrón de controles,
+intervalos, pedal y GC del padre. No cambia la aplicación ni el firmware.
+ADC40k/synth20k,2,5Vpp,target5,créditos2,timeout100ms,--scheduler;
+60s por preset, en serie sin benchmarks concurrentes.
+20261010_205346_audio_owner.json, cero voces:
+Guitarra cola5→7, generación máxima2,636ms, sendACK58,610ms;
+Brass cola5→9, generación1,734ms, sendACK96,202ms.
+20261010_205637_audio_owner.json, once voces:
+Guitarra cola5→7, generación20,981ms, sendACK53,794ms;
+Brass cola5→7, generación8,662ms, sendACK36,286ms.
+Los cuatro casos sin cortes, 2.398.208 muestras ADC cada uno, continuidad
+índice/timestamp válida, cero dropped/fatal y Q restaurado exactamente.
+Ninguno acepta reducir cola fija: todos crecieron. Son ensayos secuenciales,
+no prueban que once voces mejore transporte. Demoras persisten sin carga de
+voces: síntesis no explica por sí sola el límite de cola. Revisar scheduling
+host/Q, ADB/TCP y tramo SPI con tiempos independientes; no atribuir causa
+única con estos máximos. Relay estable sin cambios: envíos no bloqueantes,
+TCP_NODELAY y espera READY; no quitar sincronización para ganar latencia.
+
+
+Serie alternada comparable, 2026-10-10
+------------------------------------
+20261010_210056_audio_owner.json. Seis casos secuenciales, parámetros reales
+del panel, once voces/controles/pedal idénticos, synth20k/ADC40k,2,5Vpp,
+cola inicial5,créditos2,timeout100ms,--scheduler. Driver ahora conserva
+presets repetidos en --presets; snapshot por nombre, orden de ejecución
+exacto. Restauración entre cada caso y sin benchmark concurrente.
+Orden y resultado (tope60s):
+1 Piano: UNDERRUN53,89s,cola5→7,gen máx15,434ms,sendACK53,899ms.
+2 Guitarra:60s sin cortes,5→7,gen43,231ms,sendACK28,222ms.
+3 Piano:60s sin cortes,5→7,gen25,040ms,sendACK50,543ms.
+4 Brass:60s sin cortes,5→7,gen10,376ms,sendACK56,036ms.
+5 Guitarra:UNDERRUN24,47s,cola5,gen31,411ms,sendACK70,901ms.
+6 Piano:60s sin cortes,5→7,gen34,335ms,sendACK32,489ms.
+Piano no es garantía de estabilidad a cola baja: mismo preset pasa y falla.
+Guitarra también pasa y falla. Muestra pequeña: no estimar tasas de fallo ni
+atribuir diferencias a preset o a un único componente. Máximos por etapa
+no son una reconstrucción temporal del corte. En piano hay lectura23,660ms
+con CPU0,135ms; en guitarra pump33,151ms/CPU4,559ms y23 cambios
+involuntarios. Los tiempos sugieren investigar esperas/reactivación además
+del cálculo, pero no prueban causalidad del corte.
+Total12.722.176 muestras ADC válidas, continuidad índice/timestamp y IPC
+sin pérdida, dropped/fatal0 en seis casos. Q restaurado exactamente cada
+vez (ADC14/100k, generador apagado, WAV IDLE). Ningún caso acepta cola5
+estable; conservar política normal. No modificar firmware/relay estable.
+
+
+Generación asíncrona y despertar por audio, 2026-10-10
+---------------------------------------------------
+Driver --async-synth usa SynthProcess existente y lo cierra en finally.
+--worker-wakeup implica async y multiplexa socket/pipe cuando un bloque está
+pendiente. read_with_audio_wakeup no consume respuesta de worker; devuelve
+vacío para que service_wav la retire, prioriza socket si ambos están listos.
+Sin audio pendiente conserva Connection.read. Sólo diagnóstico, GUI normal
+sin cambios. Test socketpair/pipe comprueba respuesta preservada, prioridad
+de ACK y lectura normal. Audio DAC exacto de SynthProcess validado por tests.
+20261010_210923_audio_owner.json: async sin despertar, target5;
+Guitarra60s sin cortes5→7; BrassUNDERRUN14,970s; PianoUNDERRUN34,978s5→7.
+20261010_211254_audio_owner.json: async con despertar, target5;
+Guitarra/Brass/Piano60s cada uno sin cortes, targets máximos7/9/9.
+Reposición del owner máxima0,952/1,097/1,454ms. No afirmar causalidad o
+mejora estable entre series de una repetición; ventanas de ejecución difieren.
+20261010_211644_audio_owner.json: target4 (96ms), despertar y margen
+experimental3 en alarma; cortes Guitarra34,397s,Brass21,331s,Piano9,726s.
+Los tres mantuvieron target4 hasta corte; NO aceptado.
+Revisión de wav_queue.h: ready requiere4 bloques (salvo fin de archivo),
+accepts en PLAYING requiereused>=2, guarded corta cuandoused<=1 para
+proteger DMA. Margen experimental3 con target4 advierteused<=1: coincide
+con corte preventivo del firmware y llega demasiado tarde. Retirados override,
+CLI --low-margin y test experimental: umbral original min(4,target-2) intacto.
+No concluir que crecer5→7 sea falsa alarma sólo por dos créditos pendientes:
+las reservas host todavía no son datos publicados en el Q.
+Los nueve casos: 14,201,058 muestras ADC íntegras, cero dropped/fatal,
+IPC sin pérdida y restauración exacta (ADC14/100k, generador apagado,WAV IDLE).
+No modificar firmware/relay ni promover async/despertar aGUI sin aceptación.
+Próxima reducción requiere resolver tiempos de entrega y/o estudiar bloques
+más cortos en firmware aislado; no reducir resguardo DMA para ocultar cortes.
+
+
+WAV240 aislado (2026-10-10): experimentos/synth_wav240/README.md registra
+compilación, nueve ensayos y restauraciones exactas.240p no aceptado paraGUI:
+Guitarra pasó60s a96ms pero repeticiones cortaron96,085/65,956s; Brass yPiano
+fallaron. Créditos4 tampoco sostuvieron96ms.19.761.152 muestras ADC íntegras.
+Hostdefault480,firmware/relayV16 estables conservados. Appexperimental detenida,
+V16 activa,ADC14/100k,generadorapagado,WAVIDLE. Primer arranque rechazado por
+selección de relayantiguo no es evidencia de latencia; wrappercorregido y
+restauración finalverificada. No confundir wallrender146ms conCPU delworker.

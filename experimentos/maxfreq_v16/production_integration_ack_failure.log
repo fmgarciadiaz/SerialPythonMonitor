@@ -1,0 +1,17 @@
+Esperando confirmación del Q…
+Traceback (most recent call last):
+  File "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/experimentos/maxfreq_v16/verify_production.py", line 81, in <module>
+    main()
+    ~~~~^^
+  File "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/experimentos/maxfreq_v16/verify_production.py", line 49, in main
+    r.configure(config);configured(r.config)
+    ~~~~~~~~~~~^^^^^^^^
+  File "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v16/receiver/unoq_config_receiver.py", line 386, in configure
+    self.pump()
+    ~~~~~~~~~^^
+  File "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v16/receiver/unoq_config_receiver.py", line 302, in pump
+    self._process_decoder_events()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v16/receiver/unoq_config_receiver.py", line 266, in _process_decoder_events
+    raise ProtocolError('ACK de otra configuración')
+monitor.v16.receiver.unoq_usb.ProtocolError: ACK de otra configuración

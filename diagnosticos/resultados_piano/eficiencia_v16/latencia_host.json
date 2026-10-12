@@ -1,0 +1,99 @@
+{
+  "scope": "host microbenchmarks; no hardware or acoustic latency measurement",
+  "parsing": [
+    {
+      "pending_records": 1,
+      "processed_records": 1,
+      "before": {
+        "median_us": 3.595,
+        "p95_us": 4.766
+      },
+      "after": {
+        "median_us": 3.013,
+        "p95_us": 3.26
+      }
+    },
+    {
+      "pending_records": 256,
+      "processed_records": 256,
+      "before": {
+        "median_us": 1142.124,
+        "p95_us": 3128.648
+      },
+      "after": {
+        "median_us": 647.13,
+        "p95_us": 1842.556
+      }
+    },
+    {
+      "pending_records": 4096,
+      "processed_records": 256,
+      "before": {
+        "median_us": 16609.333,
+        "p95_us": 23509.911
+      },
+      "after": {
+        "median_us": 1576.539,
+        "p95_us": 4541.417
+      }
+    }
+  ],
+  "constant_levels": {
+    "before": {
+      "median_us": 29.092,
+      "p95_us": 61.074
+    },
+    "after": {
+      "median_us": 0.085,
+      "p95_us": 0.161
+    }
+  },
+  "adc_decode": [
+    {
+      "samples": 2048,
+      "tcp_bytes": 9920,
+      "after": {
+        "median_us": 1420.943,
+        "p95_us": 4610.725
+      },
+      "before": {
+        "median_us": 3117.033,
+        "p95_us": 5714.974
+      }
+    },
+    {
+      "samples": 12288,
+      "tcp_bytes": 59520,
+      "after": {
+        "median_us": 19648.675,
+        "p95_us": 25195.59
+      },
+      "before": {
+        "median_us": 25003.357,
+        "p95_us": 33825.042
+      }
+    }
+  ],
+  "existing_logs": [
+    {
+      "path": "diagnosticos/resultados_fm/fm_20261009_205802_932978.jsonl",
+      "records": 47,
+      "duration_s": 226.714,
+      "max_target_blocks": 9,
+      "max_render_ms": 60.941,
+      "max_ack_gap_ms": 175.847,
+      "playing_queue_ms": [
+        144.0,
+        168.0,
+        192.0,
+        216.0
+      ],
+      "terminal": [
+        {
+          "state": 4,
+          "reason": 2
+        }
+      ]
+    }
+  ]
+}

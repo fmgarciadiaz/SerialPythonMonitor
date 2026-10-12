@@ -67,7 +67,7 @@ def ensure_scope(serial, progress=lambda text: None, running=lambda: True, runne
         version=next((v for v in ('v12_audio','v11_p992') if any(APPS[a['name']]==v for a in available)),None)
     if version is None:
         raise RuntimeError('Instalar primero V12 Audio o V11 P992 en el Q; el inicio automático no carga fuentes.')
-    sources=[ROOT/f'arduino/{version}/relay/{name}' for name in ('unoq_config_stream.c','base_verifier.c','config_relay_protocol.h')]
+    sources=[ROOT/f'arduino/historico/{version}/relay/{name}' for name in ('unoq_config_stream.c','base_verifier.c','config_relay_protocol.h')]
     digest=hashlib.sha256(b''.join(path.read_bytes() for path in sources)).hexdigest()[:20]
     binary=f'/home/arduino/.cache/serialmonitor/usb-stream-{digest}/unoq_stream'
     names=remote('docker','ps','-a','--format','{{.Names}}').splitlines()

@@ -1,0 +1,61 @@
+{
+  "scope": "Local IPC only; includes forced parent GC and 20 ms sleeps. Full retries measure throughput, not real-time acceptance.",
+  "cases": [
+    {
+      "producer_cpu_ms": 97.23000000000003,
+      "producer_wall_ms": 336.41288499347866,
+      "put_median_ms": 0.0025240005925297737,
+      "put_p95_ms": 0.0072248425567522576,
+      "put_max_ms": 0.11619401630014181,
+      "full_retries": 2130,
+      "transport": "queue",
+      "samples": 2048000,
+      "exact": true,
+      "total_wall_ms": 539.3590040039271,
+      "consumer_cpu_ms": 141.47500000000002,
+      "parent_pause_max_ms": 38.46185200382024
+    },
+    {
+      "producer_cpu_ms": 41.291999999999994,
+      "producer_wall_ms": 320.85355900926515,
+      "put_median_ms": 0.005284004146233201,
+      "put_p95_ms": 0.021947568166069683,
+      "put_max_ms": 0.181709008757025,
+      "full_retries": 2244,
+      "transport": "shared_ring",
+      "samples": 2048000,
+      "exact": true,
+      "total_wall_ms": 625.164527038578,
+      "consumer_cpu_ms": 117.65999999999998,
+      "parent_pause_max_ms": 42.130126035772264
+    },
+    {
+      "producer_cpu_ms": 44.05499999999996,
+      "producer_wall_ms": 326.9671339658089,
+      "put_median_ms": 0.005929468898102641,
+      "put_p95_ms": 0.03287404251750558,
+      "put_max_ms": 0.15678402269259095,
+      "full_retries": 2287,
+      "transport": "shared_ring",
+      "samples": 2048000,
+      "exact": true,
+      "total_wall_ms": 612.6109079923481,
+      "consumer_cpu_ms": 136.18400000000008,
+      "parent_pause_max_ms": 47.09818697301671
+    },
+    {
+      "producer_cpu_ms": 104.54300000000005,
+      "producer_wall_ms": 314.0722980024293,
+      "put_median_ms": 0.002823973773047328,
+      "put_p95_ms": 0.0079753459431231,
+      "put_max_ms": 0.11710298713296652,
+      "full_retries": 1881,
+      "transport": "queue",
+      "samples": 2048000,
+      "exact": true,
+      "total_wall_ms": 544.8981510126032,
+      "consumer_cpu_ms": 119.15699999999995,
+      "parent_pause_max_ms": 29.90177395986393
+    }
+  ]
+}

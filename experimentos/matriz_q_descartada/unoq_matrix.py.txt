@@ -1,0 +1,24 @@
+"""Fixed 13x8 grayscale mode icons. No animation or audio data shares this command."""
+from monitor.v16.receiver.unoq_wav import _frame, _finish
+
+MODES = ('Desconectado', 'Osciloscopio', 'Trigger', 'FFT', 'Heatmap',
+         'Bode', 'Generador', 'Barrido', 'Pulso', 'WAV', 'Synth')
+
+
+def mode_request(request_id, mode):
+    if not isinstance(mode, int) or not 0 <= mode < len(MODES):
+        raise ValueError('Modo de matriz inválido')
+    frame = _frame(14, request_id)
+    frame[16] = mode
+    return _finish(frame)
+
+
+def selected_mode(spectral, trigger, generator_mode, generator_enabled):
+    # Selected audio pages take precedence; analysis follows, then active generator.
+    if generator_mode in (4, 5):
+        return 9 if generator_mode == 4 else 10
+    if spectral:
+        return (1, 3, 4, 5)[spectral]
+    if generator_enabled:
+        return (6, 7, 7, 8)[generator_mode]
+    return 2 if trigger else 1

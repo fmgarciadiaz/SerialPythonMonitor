@@ -22,7 +22,7 @@ class PrepareQTests(unittest.TestCase):
         module, board = self.load()
         board.cli.return_value.stdout = '{"apps": []}'
         with patch.object(module.subprocess, 'run') as run, patch.dict(module.os.environ):
-            module.prepare('another-q')
+            module.prepare('another-q','v12_audio')
             self.assertEqual(module.os.environ['UNOQ_SERIAL'], 'another-q')
         board.compile.assert_called_once()
         board.create.assert_called_once()
@@ -34,7 +34,7 @@ class PrepareQTests(unittest.TestCase):
         module, board = self.load()
         board.cli.return_value.stdout = '{"apps": [{"name": "Scope WAV V12 Audio", "status": "stopped"}]}'
         with patch.object(module.subprocess, 'run'), patch.dict(module.os.environ):
-            module.prepare('q')
+            module.prepare('q','v12_audio')
         board.backup.assert_called_once()
         board.push_sources.assert_called_once()
         board.create.assert_not_called()
@@ -43,7 +43,7 @@ class PrepareQTests(unittest.TestCase):
         module, board = self.load()
         board.cli.return_value.stdout = '{"apps": [{"name": "Other", "status": "running"}]}'
         with patch.dict(module.os.environ), self.assertRaisesRegex(RuntimeError, 'otra aplicación'):
-            module.prepare('q')
+            module.prepare('q','v12_audio')
         board.compile.assert_not_called()
         module.stop.assert_not_called()
 
@@ -61,6 +61,6 @@ class PrepareQTests(unittest.TestCase):
         board.cli.return_value.stdout = '{"apps": []}'
         module.binary.side_effect = [module.subprocess.CalledProcessError(1,['test']),'/relay']
         with patch.object(module.subprocess,'run'),patch.dict(module.os.environ):
-            module.prepare('q')
+            module.prepare('q','v12_audio')
         self.assertEqual(module.binary.call_count,2)
         module.binary.assert_called_with(board,build=True,p992=True,audio=True)

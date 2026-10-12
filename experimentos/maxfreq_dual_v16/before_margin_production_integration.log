@@ -1,0 +1,20 @@
+Esperando confirmación del Q…
+PRODUCTION ADC8/1118881 30s
+PRODUCTION ADC8/1118881 60s
+PRODUCTION ADC8/1118881 90s
+PRODUCTION ADC8/1118881 120s
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/experimentos/maxfreq_dual_v16/verify_production.py", line 95, in <module>
+    main()
+    ~~~~^^
+  File "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/experimentos/maxfreq_dual_v16/verify_production.py", line 58, in main
+    r.pump()
+    ~~~~~~^^
+  File "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v16/receiver/unoq_config_receiver.py", line 290, in pump
+    began=time.monotonic();data=self.connection.read()
+                                ~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v16/receiver/unoq_usb.py", line 147, in read
+    data = self.socket.recv(65536)
+KeyboardInterrupt

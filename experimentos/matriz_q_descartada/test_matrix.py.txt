@@ -1,0 +1,54 @@
+import struct
+import unittest
+from types import SimpleNamespace
+from unittest.mock import Mock
+from monitor.v16.receiver.unoq_matrix import mode_request, selected_mode
+from monitor.v16.receiver.unoq_wav import _frame, _finish, status
+from monitor.v16.receiver.unoq_config_receiver import OutputReceiver
+
+
+class MatrixTests(unittest.TestCase):
+    def test_request_has_exact_contract(self):
+        for mode in range(11):
+            packet = mode_request(0x80000000, mode)
+            self.assertEqual(len(packet), 992)
+            self.assertEqual(struct.unpack_from('<4sHHII', packet),
+                             (b'SCP1', 4, 14, 0x80000000, 972))
+            self.assertEqual(packet[16], mode)
+            self.assertFalse(any(packet[17:988]))
+        for mode in (-1, 11, 1.5):
+            with self.assertRaises(ValueError):
+                mode_request(0x80000000, mode)
+
+    def test_capability_preserves_audio_rates(self):
+        for mask in (7, 15):
+            packet = _frame(12, 0x80000000)
+            struct.pack_into('<IIBBHIIIII', packet, 16,
+                             0x80000000, 0, 0, 0, 16, 0, 0, 0, 20000, mask)
+            reply = status(_finish(packet))
+            self.assertEqual(reply.rates_mask, 7)
+            self.assertEqual(reply.matrix_modes, mask == 15)
+
+    def test_old_firmware_receives_no_matrix_commands_and_changes_coalesce(self):
+        connection = SimpleNamespace(socket=Mock())
+        receiver = OutputReceiver(connection, lambda samples: None)
+        for reply in (None, SimpleNamespace(matrix_modes=False)):
+            receiver.wav_status = reply
+            self.assertFalse(receiver.set_matrix_mode(10))
+        connection.socket.sendall.assert_not_called()
+        receiver.wav_status = SimpleNamespace(matrix_modes=True)
+        for _ in range(20):
+            self.assertTrue(receiver.set_matrix_mode(10))
+        self.assertEqual(connection.socket.sendall.call_count, 1)
+        receiver.set_matrix_mode(0)
+        self.assertEqual(connection.socket.sendall.call_count, 2)
+
+    def test_selected_mode_precedence(self):
+        self.assertEqual(selected_mode(0, False, 0, False), 1)
+        self.assertEqual(selected_mode(0, True, 0, False), 2)
+        for spectral, expected in ((1, 3), (2, 4), (3, 5)):
+            self.assertEqual(selected_mode(spectral, True, 0, True), expected)
+        for mode, expected in enumerate((6, 7, 7, 8)):
+            self.assertEqual(selected_mode(0, False, mode, True), expected)
+        self.assertEqual(selected_mode(3, True, 4, False), 9)
+        self.assertEqual(selected_mode(3, True, 5, False), 10)

@@ -1,8 +1,8 @@
 import unittest
 from dataclasses import replace
 import numpy as np
-from monitor.v15.fm_feedback import warmup, modulate
-from monitor.v15.fm_source import FMSource, FMParameters
+from monitor.historico.v15.fm_feedback import warmup, modulate
+from monitor.historico.v15.fm_source import FMSource, FMParameters
 
 class FeedbackTests(unittest.TestCase):
     def test_compiled_envelopes_match_numpy_during_live_changes(self):
@@ -20,7 +20,7 @@ class FeedbackTests(unittest.TestCase):
                 params=replace(params,envelope=(.001,.01,.2,.01))
                 compiled.update(params);reference.update(params)
             actual=compiled[i:i+480]
-            with patch('monitor.v15.fm_source.envelope_kernel',None):
+            with patch('monitor.historico.v15.fm_source.envelope_kernel',None):
                 expected=reference[i:i+480]
             self.assertLessEqual(np.max(abs(actual.astype(int)-expected.astype(int))),1)
             self.assertEqual(compiled.envelope_stage,reference.envelope_stage)

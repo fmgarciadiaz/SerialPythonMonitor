@@ -34,5 +34,5 @@ int main() {
 '''
         with tempfile.TemporaryDirectory() as folder:
             source=Path(folder)/'test.cpp';exe=Path(folder)/'test';source.write_text(code)
-            subprocess.run(['c++','-std=c++11','-Wall','-Wextra','-Werror','-I',str(ROOT/'arduino/v12_audio/oscilloscope/sketch'),str(source),'-o',str(exe)],check=True)
+            subprocess.run(['c++','-std=c++11','-Wall','-Wextra','-Werror','-I',str(ROOT/'arduino/historico/v12_audio/oscilloscope/sketch'),str(source),'-o',str(exe)],check=True)
             subprocess.run([str(exe)],check=True)

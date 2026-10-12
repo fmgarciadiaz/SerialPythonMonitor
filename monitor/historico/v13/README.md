@@ -204,7 +204,7 @@ si faltan datos, detiene la salida en el centro y muestra el error.
 Al terminar normalmente o pulsar Detener, la salida queda apagada;
 no se reactiva la onda del generador anterior.
 
-Requiere el [firmware y relay V12 Audio](../../../arduino/v12_audio/README.md)
+Requiere el [firmware y relay V12 Audio](../../../arduino/historico/v12_audio/README.md)
 V13 detecta automáticamente la aplicación V12 Audio activa en el Q y consulta
 su capacidad. También se puede seleccionar con `MONITOR_V13_WAV_FIRMWARE=v12_audio`.
 Los comandos nuevos quedan bloqueados sin detección/selección y sin
@@ -370,7 +370,7 @@ pendientes de probar con el Q.
 
 ### 2026-10-06 — Pulso experimental de microsegundos
 
-Variante independiente arduino/v13_pulse, app Scope Pulse US V13 Experimental.
+Variante independiente arduino/historico/v13_pulse, app Scope Pulse US V13 Experimental.
 TIM6 one-shot devuelve DAC al nivel bajo por hardware; DMA4 no se usa durante
 ese pulso. Protocolo con duración µs y capacidad anunciada; V13 ofrece 100–65535 µs
 sólo si el Q confirma soporte. Ancho inicial sigue equivalente a 1 ms (1000 µs).
@@ -378,7 +378,7 @@ V12 Audio mantiene el contrato ms y sus fuentes/app como respaldo.
 18 disparos físicos ADC14/100 kHz: seis de 100, 200 y 1000 µs, anchos coincidentes
 con resolución de 10 µs. Wav50 completó un segundo; salida final apagada.
 La variante quedó activa, ADC14/40 kHz. Falta comprobar flancos y precisión con
-osciloscopio externo. Detalles y vuelta a V12 Audio: arduino/v13_pulse/README.md.
+osciloscopio externo. Detalles y vuelta a V12 Audio: arduino/historico/v13_pulse/README.md.
 Respaldo previo: respaldos/unoq/osciloscopio_20261006_190836_603319.zip.
 
 ### Referencias instrumentales de Bode
@@ -435,6 +435,6 @@ del panel. Los estados ya no ocupan filas en los paneles laterales.
 
 ## Versiones y enlaces
 
-- [Monitor V13](app.py): PyQt6; [firmware Q V12 Audio](../../../arduino/v12_audio/README.md).
+- [Monitor V13](app.py): PyQt6; [firmware Q V12 Audio](../../../arduino/historico/v12_audio/README.md).
 - [Monitor V12](../v12/README.md): PyQt5; [firmware Q V11 P992](../../../arduino/historico/v11_p992/README.md).
 - [Histórico](../README.md) · [Historia completa](../../../docs/HISTORIA.md).

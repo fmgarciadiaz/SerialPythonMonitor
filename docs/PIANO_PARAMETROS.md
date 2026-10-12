@@ -1,9 +1,16 @@
 # Parámetros publicados para calibrar el piano físico
 
-[Motor Synth](SYNTH.md) · [Monitor](../monitor/v15/README.md)
+[Motor Synth](SYNTH.md) · [Monitor](../monitor/historico/v15/README.md)
+
+[Revisión de realismo y plan del motor con Astra](PIANO_REVISION_REALISMO.md).
 
 Aplicado al preset **Piano Virtual** de V15. Es una parametrización basada en
 publicaciones, no una calibración física contra un piano o el DAC del Q.
+
+El preset del monitor aplica además [correcciones acústicas identificadas
+contra Salamander/Yamaha C5](PIANO_IDENTIFICACION.md). Las tablas Broadwood
+de este documento describen la base física sin esas correcciones; no se
+deben interpretar como las dimensiones medidas del Yamaha.
 
 ## Tablas de referencia
 
@@ -54,7 +61,7 @@ ideal de tensión y el modelo de extremos añaden incertidumbre.
 
 ## Aplicación en V15
 
-[Perfil por nota](../monitor/v15/piano_profile.py) reemplaza las heurísticas
+[Perfil por nota](../monitor/historico/v15/piano_profile.py) reemplaza las heurísticas
 fijas de masa, contacto e impedancia. Masa y posición se interpolan linealmente
 en número MIDI; B e impedancia se interpolan en logaritmo entre C1 y C8.
 K se interpola en logaritmo y p linealmente entre C2, C4 y C7. Fuera de los
@@ -73,6 +80,21 @@ referencia; variar brillo multiplica K por `2**(4*(brillo-0.78))`, conservando p
 La velocidad MIDI modifica la velocidad inicial del martillo. El impulso
 se normaliza por integral para separar el color de la ganancia del motor.
 Esta normalización no reproduce una fuerza absoluta en newtons a la salida.
+
+El contacto incorpora ahora ondas reflejadas en ambos extremos con retardos
+fraccionarios, usando una cuerda ideal equivalente durante el golpe. Después
+excita los modos dispersivos; ambas etapas todavía son una aproximación híbrida.
+Los nuevos coeficientes de radiación, pérdidas y caja se describen en la
+[revisión e implementación del motor](PIANO_REVISION_REALISMO.md).
+
+El puente incluye ahora una pérdida común pasiva por parcial y polarización:
+`z_s ← z_s − g·media(z)`, con `0 ≤ g < 1`. La energía del movimiento común
+disminuye y el diferencial se conserva, evitando la sincronización artificial
+de las cuerdas. Es una aproximación de banda estrecha, no una movilidad medida
+ni un modelo completo de interacción entre todas las teclas.
+El impacto mecánico usa resonancias de 190/620/1800 Hz con T60 de
+12/8/4 ms, excitadas por la fuerza de contacto. Estos números son elecciones
+de diseño pendientes de ajuste acústico, no parámetros extraídos de Pianoteq.
 
 No se deben copiar coeficientes de filtros allpass como valores de B.
 [El piano de Snd/CLM](https://sources.debian.org/src/snd/25.3-1/piano.scm)

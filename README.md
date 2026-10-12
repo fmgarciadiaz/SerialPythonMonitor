@@ -22,6 +22,8 @@ bloques; USB/ADB conecta el instrumento con la computadora.
 ordenado por el monitor, relay Linux, aplicación App Lab y sketch MCU;
 flujos de muestras y órdenes, temporizadores, DMA, IRQ, mutex, colas y carga del Q.
 
+[Validación física actual, perfiles probados y respaldos](docs/VALIDACION_CIERRE.md).
+
 ## V(t) · osciloscopio
 
 ![Monitor en modo V(t): dos canales y respuesta RC](assets/monitor_vt.png)
@@ -38,9 +40,9 @@ La imagen muestra una cuadrada y la respuesta de un filtro RC simulado.
 |---|---|
 | Entradas | Dos canales: A2/V_IN y A3/V_OUT, rango nominal 0–3,3 V |
 | Resolución ADC | 8/10/12/14 bits; 16 bits por oversampling ×16, sin implicar 16 bits de precisión efectiva |
-| Muestreo SPI | Hasta 125 mil pares/s en ADC nativo; hasta 62,5 mil pares/s con ADC16 (OS) |
+| Muestreo SPI V16 | Dual hasta 632,41 kHz por canal (ADC8) y 76,23 kHz (ADC16 OS); CH1 hasta 1,221 MHz (ADC8) |
 | Salida DAC | A0, 12 bits, rango nominal 0–3,3 V; amplitud y offset ajustables dentro de esos límites |
-| Generador | Seno, cuadrada, triángulo, rampa; modos Sweep, Chirp y Pulso; frecuencia configurada 0,1 Hz–20 kHz |
+| Generador | Seno, cuadrada, triángulo, rampa; modos Sweep, Chirp y Pulso; frecuencia configurada 0,1 Hz–50 kHz |
 | Audio de salida | WAV mono por A0, L/R/Mix, tasas negociadas de 20/40/50 ksps; 40 ksps por defecto |
 | Audio de entrada | WAV estéreo PCM16 de A2/A3; filtro DC continuo opcional a 5 Hz |
 | Registro | CSV o WAV, muestras recibidas completas, hasta 30 s por grabación |
@@ -55,6 +57,40 @@ inicial de 2 Vpp/1,65 V deja margen. WAV50 con ADC125 está bloqueado por los
 fallos observados; WAV50 con ADC14/100 kHz pasó el ensayo sostenido.
 [Perfiles ADC](docs/CONFIGURACION_ADQUISICION.md) · [Límites del generador](docs/GENERADOR_PASO4.md) ·
 [Ensayos de audio](docs/WAV_TASAS.md).
+
+### Frecuencias de adquisición V16 disponibles
+
+Todas las tasas son **por canal**, en **kHz**. En dual se capturan CH1 y CH2
+por disparo; en CH1 sólo A2. Se muestran tres decimales cuando hace falta para
+identificar la tasa en Hz enteros; la tasa efectiva depende del período aplicado.
+
+| Salida / resolución | Tasas dual comunes (kHz) |
+| --- | --- |
+| SPI y UART · 8/10/12/14/16 bits | 1; 2; 4; 5; 8; 10; 12,500; 15,625; 20; 25; 31,250 |
+| Sólo SPI · 8/10/12/14/16 bits | 40; 50; 62,500; 66,666; 71,428 |
+| Sólo SPI · 8/10/12/14 bits | 100; 125; 200; 250; 333,333 |
+
+| Bits | CH1 · sólo SPI (kHz) | Dual adicional · sólo SPI (kHz) |
+| --- | --- | --- |
+| 8 | 1118,881 ✓; 1203,007; 1221,374 | 597,014 ✓; 632,411 |
+| 10 | 909,090 ✓ | 495,356; 519,480 |
+| 12 | — | 410,256; 437,158 |
+| 14 | 599,250; 661,157; 701,754 ✓; 747,663 | 355,555 ✓; 363,636 |
+| 16 | — | 76,226 ✓ |
+
+**✓**: perfil nativo con margen de envío ≥10%, cola máxima menor de cuatro y
+margen positivo antes de sobrescritura, confirmado también en producción.
+ADC10/495,356 y ADC12/410,256 kHz conservan integridad pero midieron 9,03% y
+9,39% de margen integrado; no llevan esta marca.
+
+UART conserva dos canales y un máximo de 31,250 kHz. En **Synth**, SPI limita
+la adquisición a **40 kHz** y UART a **31,250 kHz**; los perfiles CH1 y dual
+nativos altos no se ofrecen en ese modo. El selector filtra por resolución,
+salida y Synth. Los perfiles heredados conservan la evidencia y límites de sus
+ensayos; disponibilidad en el selector no equivale a certificación analógica.
+
+[Tabla y contrato de referencia](docs/CONFIGURACION_ADQUISICION.md#perfiles-de-adquisición) ·
+[Validación física de los perfiles incorporados](experimentos/maxfreq_dual_v16/RESULTADOS.md#incorporación-a-producción-completada).
 
 ## FFT · espectro de frecuencia
 
@@ -94,7 +130,7 @@ o Agregar. Los pulsos de 100 µs requieren el firmware experimental.
 Estas capturas usan señales sintéticas; FFT muestra la nueva variante
 y las otras vistas muestran la versión conservada;
 Bode ilustra tres filtros RC, sin representar una medición física.
-[Controles del monitor](monitor/v15/README.md) · [Análisis y Bode](docs/MONITOR_TECNICO.md).
+[Controles del monitor](monitor/v16/README.md) · [Análisis y Bode](docs/MONITOR_TECNICO.md).
 
 ## Wav · grabación y reproducción
 
@@ -115,7 +151,7 @@ terminar queda en silencio. Play activa la adquisición y bloquea cambios ADC.
 
 La ruta es PC → USB/ADB → relay Linux → SPI → MCU → temporizador/DMA → A0.
 Es reproducción de archivos; no crea una salida de audio del sistema operativo.
-[Uso del monitor](monitor/v15/README.md#wav--archivos-y-grabación) ·
+[Uso del monitor](monitor/v16/README.md) ·
 [Tasas y ensayos físicos](docs/WAV_TASAS.md).
 
 ## Synth · FM, ondas y modelos físicos
@@ -137,6 +173,9 @@ lineal, cuerdas rígidas, unísonos acoplados y resonancias simpáticas con peda
 Permite ajustar posición, brillo, vibración, caja, puente y rigidez del piano.
 El piano usa parámetros mecánicos publicados por registro; las resonancias
 de caja siguen siendo sintéticas, pendientes de ajuste por escucha.
+Piano Virtual añade un perfil acústico identificado contra grabaciones de un
+Yamaha C5, con ajuste de parciales, pérdidas, batimientos y crecimiento inicial.
+[Método, referencias y comparación A/B](docs/PIANO_IDENTIFICACION.md).
 
 La salida A0 es de 12 bits, **20 kHz por defecto** o 40 kHz. Velocidad MIDI,
 pedal CC64 y volumen CC7 funcionan durante reproducción. Numba compila feedback,
@@ -144,7 +183,7 @@ envolventes y los modelos físicos; la preparación ocurre antes de Play.
 El buffer aporta al menos 120 ms a 20 kHz y 192 ms a 40 kHz y puede crecer.
 40 kHz sigue siendo experimental: las pruebas locales de cálculo no garantizan
 continuidad física con adquisición y transporte activos.
-[Guía y controles](monitor/v15/README.md#generador-synth) ·
+[Guía y controles](monitor/v16/README.md) ·
 [Motor, modelos físicos y límites](docs/SYNTH.md).
 
 ## Qué hace
@@ -160,20 +199,21 @@ distorsión y respuesta entre entradas. [Definiciones y límites](docs/FFT_ANALI
   conversión a 12 bits y ajuste de amplitud/offset entre 0 y 3,3 V.
 - Synth con MIDI, nueve voces, FM, ondas clásicas y guitarra/piano físicos.
 - Adquisición configurable: 8/10/12/14 bits o 16 bits por oversampling.
-  SPI hasta 125 kHz por canal; 16 bits hasta 62,5 kHz.
+  SPI dual hasta632,41kHz por canal (ADC8), ADC16 hasta76,23kHz y
+  CH1 hasta1,221MHz (ADC8); ver tabla de frecuencias.
 
 ## Empezar
 
 Desde la raíz del repositorio:
 
 ```sh
-conda env create -f monitor/v15/environment.yml
+conda env create -f monitor/v16/environment.yml
 conda activate Python_3_13_DataScience
-python monitor/v15/app.py
+python monitor/v16/app.py
 ```
 
 Si el entorno ya existe, omitir su creación. Demo permite probar la interfaz
-sin placa. Conectar intenta usar el enlace existente y, si no responde,
+sin placa. V16 requiere la pareja MCU/relay V16. Conectar verifica esa app instalada y, si el enlace no responde,
 comprueba la app instalada y el relay e inicia lo que falte.
 Preparar Q instala o actualiza la app MCU y el relay desde las fuentes del
 proyecto; requiere un UNO Q con Linux, ADB y las herramientas Arduino operativas.
@@ -182,9 +222,9 @@ Valores iniciales: ADC 14 bits/40 kHz, amplitud 2 Vpp, offset 1,65 V y salida
 apagada. Sweep y Chirp: 20 Hz→2 kHz en 2 s; se lanzan con Disparar.
 Wav usa 40 mil muestras/s por defecto si el firmware lo admite.
 Durante Play se activa la adquisición y se bloquea el cambio de perfil ADC;
-la amplitud se puede ajustar durante la reproducción. Desconectar apaga la salida.
+la amplitud se puede ajustar durante la reproducción. Desconectar solicita y espera el apagado; si falta su confirmación, lo informa.
 
-[Guía del monitor](monitor/v15/README.md) · [Instalación del Q](arduino/v12_audio/README.md)
+[Guía del monitor](monitor/v16/README.md) · [Instalación del Q](arduino/v16/README.md)
 
 ## Cómo se conectan los componentes
 
@@ -217,7 +257,7 @@ la cantidad de puntos dibujados a la pantalla. Python prepara WAV, remuestrea
 con filtro antialias y ajusta códigos de salida; el hardware mantiene su ritmo.
 
 [Arquitectura, historial, FFT y Bode](docs/MONITOR_TECNICO.md) ·
-[Receptor y comandos del PC](monitor/v15/receiver/README.md).
+[Receptor y comandos del PC](monitor/v16/receiver/README.md).
 
 ## Relay C · Linux del MPU
 
@@ -227,7 +267,7 @@ ADC/generador y bloques WAV en sentido inverso. Corre en Linux y es distinto
 del pequeño Python que mantiene viva la app de App Lab.
 
 [Detalles: GPIO READY, SPI, tramas, créditos y recuperación](docs/TRANSPORTE_TECNICO.md) ·
-[Fuentes del relay](arduino/v12_audio/relay/unoq_config_stream.c).
+[Fuentes del relay](arduino/v16/relay/unoq_config_stream.c).
 
 ## C/C++ Arduino · firmware del MCU
 
@@ -238,8 +278,8 @@ A0. Las IRQ del DMA SPI notifican fin/error mediante el driver Zephyr; la
 adquisición comprueba flags y buffers sin una ISR por muestra.
 
 [Detalles: relojes, timers, DMA, IRQ y propiedad de buffers](docs/UNO_Q_TECNICO.md) ·
-[Sketch Arduino](arduino/v12_audio/oscilloscope/sketch/sketch.ino) ·
-[Instalación y compilación](arduino/v12_audio/README.md).
+[Sketch Arduino](arduino/v16/oscilloscope/sketch/sketch.ino) ·
+[Instalación y compilación](arduino/v16/README.md).
 
 ## Carpetas
 
@@ -275,17 +315,20 @@ identifican por separado en los informes.
 
 | Conjunto | Estado y documentación |
 |---|---|
-| [Monitor V15 · Synth](monitor/v15/README.md) | Synth: tres osciladores, feedback, FM/ondas/Virtual, guitarra y piano físicos, nueve voces y MIDI; estabilidad de cada perfil pendiente de validación física |
+| [Monitor V16 + MCU/relay V16](monitor/v16/README.md) | Actual: CH1/dual, perfiles por resolución y salida, filtros/FILTER, Synth y SCP1 V4; [evidencia](experimentos/maxfreq_dual_v16/RESULTADOS.md) |
+| [Monitor V15 · Synth](monitor/historico/v15/README.md) | Synth: tres osciladores, feedback, FM/ondas/Virtual, guitarra y piano físicos, nueve voces y MIDI; estabilidad de cada perfil pendiente de validación física |
 | [Monitor V14 · PyQt6](monitor/historico/v14/README.md) | Archivado: cuatro modos FFT; firmware existente |
-| [Monitor V13 · PyQt6](monitor/historico/v13/README.md) + [Q V12 Audio](arduino/v12_audio/README.md) | Archivado: grabación y reproducción WAV |
-| [Q V13 Pulse experimental](arduino/v13_pulse/README.md) + [Monitor V15](monitor/v15/README.md) | Firmware compatible con la versión actual: pulso desde 100 µs |
+| [Monitor V13 · PyQt6](monitor/historico/v13/README.md) + [Q V12 Audio](arduino/historico/v12_audio/README.md) | Archivado: grabación y reproducción WAV |
+| [Q V13 Pulse experimental](arduino/historico/v13_pulse/README.md) + [Monitor V15](monitor/historico/v15/README.md) | Pareja anterior V15: pulso desde100µs |
 | [Monitor V12 · PyQt5](monitor/historico/v12/README.md) + [Q V11 P992](arduino/historico/v11_p992/README.md) | Archivado: sin reproducción WAV |
 | [Monitores históricos](monitor/historico/README.md) | Versiones anteriores archivadas |
 | [Firmware histórico](arduino/historico/README.md) | Sketches y puentes anteriores |
 | [Historia completa](docs/HISTORIA.md) | Evolución y catálogo del proyecto |
 
-Las herramientas de consola conservan V11 P992 como valor predeterminado.
-Para el conjunto de audio usar explícitamente `--version v12_audio` o
-`--firmware v12_audio`. El monitor detecta la app instalada al conectar.
+Las herramientas de consola usan V16 por defecto; las versiones históricas se seleccionan explícitamente.
+Para V16, indicar `--version v16` en unoq o `--firmware v16` en preparación/relay. Conectar verifica
+la app instalada; Preparar Q actualiza desde las fuentes actuales del repositorio.
 
-[Pulsos de microsegundos: variante experimental](arduino/v13_pulse/README.md).
+[Pulsos de microsegundos: variante experimental](arduino/historico/v13_pulse/README.md).
+
+Implementación de la [Etapa II · V16](docs/ETAPA_II_V16.md), con [monitor](monitor/v16/README.md) y [firmware/relay](arduino/v16/README.md) alineados.

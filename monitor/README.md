@@ -7,16 +7,17 @@ El receptor de cada aplicación corre en el PC; el relay corre en Linux del Q.
 
 ```sh
 conda activate Python_3_13_DataScience
-python monitor/v15/app.py
+python monitor/v16/app.py
 ```
 
-[Controles y uso](v15/README.md) · [Arquitectura](../docs/MONITOR_TECNICO.md)
+[Controles y uso](v16/README.md) · [Arquitectura](../docs/MONITOR_TECNICO.md)
 
 [Wav y Synth](../README.md#wav--grabación-y-reproducción) · [Motor Synth](../docs/SYNTH.md)
 
 ## Versiones
 
-- [V15 / Synth](v15/README.md): FM, tres osciladores, MIDI y modelos físicos de guitarra/piano; 40 kHz experimental.
+- [V16](v16/README.md): versión actual, CH1/dual, filtros y Synth.
+- [V15 / Synth](historico/v15/README.md): FM, tres osciladores, MIDI y modelos físicos de guitarra/piano; 40 kHz experimental.
 - [V14 / PyQt6](historico/v14/README.md): archivada con Spectrum, Power, Distortion y Transfer en FFT.
 - [V13 / PyQt6](historico/v13/README.md): archivada; audio con firmware Q V12 Audio.
 - [V12 / PyQt5](historico/v12/README.md): archivada con Q V11 P992.

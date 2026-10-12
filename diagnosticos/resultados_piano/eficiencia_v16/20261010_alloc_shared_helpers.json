@@ -1,0 +1,85 @@
+{
+  "scope": "Host only, sequential runs, not MIDI/acoustic/transport latency",
+  "cases": [
+    {
+      "rate": 20000,
+      "model": "piano",
+      "samples": 144000,
+      "identical": true,
+      "before": {
+        "median_ms": 2.448654006002471,
+        "p95_ms": 6.802426368813032,
+        "max_ms": 21.946012042462826,
+        "gc_count": 0,
+        "gc_max_ms": 0
+      },
+      "after": {
+        "median_ms": 2.376123477006331,
+        "p95_ms": 6.373171386076138,
+        "max_ms": 14.373206009622663,
+        "gc_count": 0,
+        "gc_max_ms": 0
+      }
+    },
+    {
+      "rate": 20000,
+      "model": "fm",
+      "samples": 144000,
+      "identical": true,
+      "before": {
+        "median_ms": 2.7076239930465817,
+        "p95_ms": 4.419767146464437,
+        "max_ms": 8.268113946542144,
+        "gc_count": 1,
+        "gc_max_ms": 0.025549030397087336
+      },
+      "after": {
+        "median_ms": 2.6595459785312414,
+        "p95_ms": 4.496653616661206,
+        "max_ms": 8.651794982142746,
+        "gc_count": 1,
+        "gc_max_ms": 0.027052010409533978
+      }
+    },
+    {
+      "rate": 40000,
+      "model": "piano",
+      "samples": 144000,
+      "identical": true,
+      "before": {
+        "median_ms": 3.216584969777614,
+        "p95_ms": 7.3866990191163495,
+        "max_ms": 18.457719997968525,
+        "gc_count": 0,
+        "gc_max_ms": 0
+      },
+      "after": {
+        "median_ms": 3.199903992936015,
+        "p95_ms": 6.616680315346457,
+        "max_ms": 10.317003994714469,
+        "gc_count": 0,
+        "gc_max_ms": 0
+      }
+    },
+    {
+      "rate": 40000,
+      "model": "fm",
+      "samples": 144000,
+      "identical": true,
+      "before": {
+        "median_ms": 2.0721709879580885,
+        "p95_ms": 3.141731466166676,
+        "max_ms": 5.180801963433623,
+        "gc_count": 1,
+        "gc_max_ms": 0.025799963623285294
+      },
+      "after": {
+        "median_ms": 2.0632344821933657,
+        "p95_ms": 3.094708535354585,
+        "max_ms": 4.891134973149747,
+        "gc_count": 1,
+        "gc_max_ms": 0.15802402049303055
+      }
+    }
+  ]
+}

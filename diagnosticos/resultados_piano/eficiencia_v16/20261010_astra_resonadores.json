@@ -1,0 +1,93 @@
+{
+  "scope": "Host A/B; no board/acoustic latency acceptance",
+  "kernels": [
+    {
+      "modes": 8,
+      "output_and_state_exact": true,
+      "before": {
+        "median_ms": 0.008316012099385262,
+        "p95_ms": 0.00855419784784317
+      },
+      "after": {
+        "median_ms": 0.016646459698677063,
+        "p95_ms": 0.026985944714397192
+      }
+    },
+    {
+      "modes": 32,
+      "output_and_state_exact": true,
+      "before": {
+        "median_ms": 0.0448110222350806,
+        "p95_ms": 0.05594867980107662
+      },
+      "after": {
+        "median_ms": 0.06892098463140428,
+        "p95_ms": 0.08181912126019596
+      }
+    },
+    {
+      "modes": 96,
+      "output_and_state_exact": true,
+      "before": {
+        "median_ms": 0.09281400707550347,
+        "p95_ms": 0.11020257952623068
+      },
+      "after": {
+        "median_ms": 0.16014798893593252,
+        "p95_ms": 0.1724724192172289
+      }
+    },
+    {
+      "modes": 192,
+      "output_and_state_exact": true,
+      "before": {
+        "median_ms": 0.1823639904614538,
+        "p95_ms": 0.23528255114797503
+      },
+      "after": {
+        "median_ms": 0.3164114896208048,
+        "p95_ms": 0.38479421637021005
+      }
+    }
+  ],
+  "dac": [
+    {
+      "rate": 20000,
+      "samples": 144000,
+      "exact": true,
+      "before": {
+        "median_ms": 2.3009064607322216,
+        "p95_ms": 6.086629861965778,
+        "max_ms": 18.739604973234236,
+        "gc_count": 1,
+        "gc_max_ms": 0.12969702947884798
+      },
+      "after": {
+        "median_ms": 2.413978014374152,
+        "p95_ms": 5.746589018963277,
+        "max_ms": 10.92154800426215,
+        "gc_count": 0,
+        "gc_max_ms": 0
+      }
+    },
+    {
+      "rate": 40000,
+      "samples": 144000,
+      "exact": true,
+      "before": {
+        "median_ms": 3.321382973808795,
+        "p95_ms": 6.890018002013676,
+        "max_ms": 13.60192202264443,
+        "gc_count": 0,
+        "gc_max_ms": 0
+      },
+      "after": {
+        "median_ms": 3.3799054799601436,
+        "p95_ms": 6.892022301326507,
+        "max_ms": 13.940708944573998,
+        "gc_count": 0,
+        "gc_max_ms": 0
+      }
+    }
+  ]
+}

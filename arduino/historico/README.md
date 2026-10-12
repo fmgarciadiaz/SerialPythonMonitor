@@ -26,3 +26,7 @@ no mueve ni elimina las apps instaladas en el Q.
 
 El firmware actual es [V8 config](v8_config/README.md). Las apps del Q
 conservan sus nombres y destinos remotos; esta consolidación organiza los archivos locales.
+
+- [V13 Pulse](v13_pulse/README.md): archivada; selección explícita conservada.
+
+- [V12 Audio](v12_audio/README.md): archivada; selección explícita conservada.

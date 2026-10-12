@@ -11,7 +11,7 @@ con temporizadores y DMA. Cada uno tiene su propio proceso, memoria y tareas.
 Esta guía describe el monitor V15 y el firmware V13 Pulse. V12 Audio conserva
 la misma arquitectura de adquisición y audio; V13 Pulse añade el pulso corto
 por hardware. Los nombres de las versiones de monitor y firmware no tienen
-que coincidir. Las rutas enlazadas permiten pasar de esta explicación al código.
+que coincidir. V15 requiere V13 Pulse; V12 Audio queda para los monitores anteriores. Las rutas enlazadas permiten pasar de esta explicación al código.
 
 ## 1. Mapa del sistema
 
@@ -47,11 +47,11 @@ flowchart LR
 
 | Parte | Dónde corre | Responsabilidad | Fuente principal |
 |---|---|---|---|
-| Monitor | PC, Python/PyQt6 | Controles, visualización, FFT/Bode, registro, preparación de audio y MIDI | [app.py](../monitor/v15/app.py) |
-| Receptor y worker | PC, hilo separado de Qt | Mantener conexión, decodificar tramas, enviar órdenes y esperar confirmaciones | [receiver](../monitor/v15/receiver/README.md) |
-| Relay | MPU Linux, proceso C en contenedor | Intercambiar tramas SPI con el MCU, validarlas y entregarlas por TCP; enviar órdenes/audio del PC | [unoq_config_stream.c](../arduino/v13_pulse/relay/unoq_config_stream.c) |
-| Python de App Lab | MPU Linux, aplicación administrada por App CLI | Mantener viva la app que contiene el sketch | [main.py](../arduino/v13_pulse/oscilloscope/python/main.py) |
-| Sketch | MCU, C/C++ sobre Arduino/Zephyr | ADC/DAC, relojes, DMA, colas, protocolos y estados de hardware | [sketch.ino](../arduino/v13_pulse/oscilloscope/sketch/sketch.ino) |
+| Monitor | PC, Python/PyQt6 | Controles, visualización, FFT/Bode, registro, preparación de audio y MIDI | [app.py](../monitor/historico/v15/app.py) |
+| Receptor y worker | PC, hilo separado de Qt | Mantener conexión, decodificar tramas, enviar órdenes y esperar confirmaciones | [receiver](../monitor/historico/v15/receiver/README.md) |
+| Relay | MPU Linux, proceso C en contenedor | Intercambiar tramas SPI con el MCU, validarlas y entregarlas por TCP; enviar órdenes/audio del PC | [unoq_config_stream.c](../arduino/historico/v13_pulse/relay/unoq_config_stream.c) |
+| Python de App Lab | MPU Linux, aplicación administrada por App CLI | Mantener viva la app que contiene el sketch | [main.py](../arduino/historico/v13_pulse/oscilloscope/python/main.py) |
+| Sketch | MCU, C/C++ sobre Arduino/Zephyr | ADC/DAC, relojes, DMA, colas, protocolos y estados de hardware | [sketch.ino](../arduino/historico/v13_pulse/oscilloscope/sketch/sketch.ino) |
 | Herramientas de instalación | PC; ejecutan comandos en Linux del Q mediante ADB | Compilar, respaldar, importar/actualizar app e iniciar MCU y relay | [prepare_q.py](../tools/prepare_q.py), [unoq.py](../tools/unoq.py), [usb_stream.py](../tools/usb_stream.py) |
 
 El audio no usa una clase USB Audio ni crea un dispositivo de sonido del sistema.
@@ -116,7 +116,7 @@ el dispositivo SPI y los eventos GPIO. Los DMA descritos abajo pertenecen al
 STM32; la implementación interna del controlador Linux queda fuera del sketch.
 
 [Detalle de transporte y protocolos](TRANSPORTE_TECNICO.md) ·
-[Validación de tramas](../arduino/v13_pulse/relay/config_relay_protocol.h)
+[Validación de tramas](../arduino/historico/v13_pulse/relay/config_relay_protocol.h)
 
 ## 4. MCU: adquisición desde A2 y A3
 
@@ -162,8 +162,8 @@ requieren 19 fragmentos SPI de hasta 113 pares. El tiempo nominal de los bytes
 SPI es sólo una parte del presupuesto: también cuentan GPIO, preparación,
 copias, validación y planificación Linux/Zephyr.
 
-[Adquisición](../arduino/v13_pulse/oscilloscope/sketch/acquisition.h) ·
-[Recursos y tamaños](../arduino/v13_pulse/oscilloscope/sketch/scope_config.h) ·
+[Adquisición](../arduino/historico/v13_pulse/oscilloscope/sketch/acquisition.h) ·
+[Recursos y tamaños](../arduino/historico/v13_pulse/oscilloscope/sketch/scope_config.h) ·
 [Perfiles ADC](CONFIGURACION_ADQUISICION.md)
 
 ## 5. MCU: generación por A0
@@ -217,11 +217,11 @@ por un cable o circuito externo; no hay una conexión analógica interna creada
 por el software. Para referencia instrumental se conecta A0 a ambas entradas,
 con masa común; para medir un circuito A2 observa su entrada y A3 su salida.
 
-[Generador](../arduino/v13_pulse/oscilloscope/sketch/generator.h) ·
-[Motor DAC](../arduino/v13_pulse/oscilloscope/sketch/generator_dma.h) ·
-[Supervisión WAV](../arduino/v13_pulse/oscilloscope/sketch/wav.h) ·
-[Cola](../arduino/v13_pulse/oscilloscope/sketch/wav_queue.h) ·
-[Descriptores DMA WAV](../arduino/v13_pulse/oscilloscope/sketch/wav_dma.h)
+[Generador](../arduino/historico/v13_pulse/oscilloscope/sketch/generator.h) ·
+[Motor DAC](../arduino/historico/v13_pulse/oscilloscope/sketch/generator_dma.h) ·
+[Supervisión WAV](../arduino/historico/v13_pulse/oscilloscope/sketch/wav.h) ·
+[Cola](../arduino/historico/v13_pulse/oscilloscope/sketch/wav_queue.h) ·
+[Descriptores DMA WAV](../arduino/historico/v13_pulse/oscilloscope/sketch/wav_dma.h)
 
 ## 6. IRQ, mutex, semáforos y coherencia de memoria
 
@@ -258,10 +258,10 @@ supervisión de registros; no todos los canales DMA usan la misma estrategia.
 
 ## 7. App Lab y carga del Arduino
 
-La aplicación contiene [app.yaml](../arduino/v13_pulse/oscilloscope/app.yaml),
+La aplicación contiene [app.yaml](../arduino/historico/v13_pulse/oscilloscope/app.yaml),
 `python/main.py`, `sketch/sketch.ino` y sus headers. El
-[sketch.yaml](../arduino/v13_pulse/oscilloscope/sketch/sketch.yaml) declara
-plataforma y librerías; [unoq.json](../arduino/v13_pulse/unoq.json) identifica
+[sketch.yaml](../arduino/historico/v13_pulse/oscilloscope/sketch/sketch.yaml) declara
+plataforma y librerías; [unoq.json](../arduino/historico/v13_pulse/unoq.json) identifica
 app remota, FQBN, puerto y GPIO de arranque.
 
 El pequeño Python importa `arduino.app_utils.App` y ejecuta `App.run` con un
@@ -288,7 +288,7 @@ al MCU en reset al preparar el nivel del GPIO para el loader, liberan reset y
 arrancan la app. Después ese GPIO se usa como READY para el transporte SPI.
 Se coordina esta secuencia para no confundir el arranque con una trama disponible.
 
-**Conectar** intenta usar lo instalado y comprobar muestras. Si el enlace falta,
+**Conectar** comprueba que esté instalado V13 Pulse y luego verifica muestras. Si el enlace falta,
 comprueba/inicia app y relay cuando corresponde. **Preparar Q** es la acción
 explícita para instalar o actualizar fuentes/firmware; compilar y cargar puede
 tardar varios minutos. El monitor del PC no se copia al Q.
@@ -308,9 +308,8 @@ python tools/usb_stream.py status --firmware v13_pulse
 python tools/usb_stream.py logs --firmware v13_pulse
 ```
 
-Para V12 Audio usar `v12_audio`. Las herramientas de consola conservan
-V11 P992 como predeterminado histórico; especificar la variante evita preparar
-el conjunto equivocado. [Guía de firmware](../arduino/v13_pulse/README.md) ·
+V15 y las herramientas usan V13 Pulse por defecto. V12 Audio y V11 P992
+se conservan como variantes anteriores, seleccionables explícitamente por consola. [Guía de firmware](../arduino/historico/v13_pulse/README.md) ·
 [Apps y ciclo de vida](../arduino/APPS_APPLAB.md)
 
 ## 8. Opción R4 y límites de la arquitectura
@@ -327,6 +326,8 @@ se revisan timestamps, épocas, secuencias, nodos perdidos y errores/underruns.
 Las capacidades de un perfil y su aceptación física se documentan en los
 [ensayos de audio](WAV_TASAS.md) y las [especificaciones ADC](CONFIGURACION_ADQUISICION.md).
 EOF de audio, desconexión del PC y fallo de adquisición son eventos distintos.
+La desconexión es asíncrona: mantiene el worker hasta finalizar. Si el apagado
+no obtiene ACK, informa salida sin confirmar; no presume que A0 quedó apagado.
 
 ## 9. Detalles ampliados por componente
 
@@ -335,5 +336,5 @@ EOF de audio, desconexión del PC y fallo de adquisición son eventos distintos.
 - [Synth, modelos físicos y rendimiento](SYNTH.md).
 - [MCU, circuito, relojes y perfiles](UNO_Q_TECNICO.md).
 - [Relay y protocolos](TRANSPORTE_TECNICO.md).
-- [Firmware V13 Pulse](../arduino/v13_pulse/README.md) y [V12 Audio](../arduino/v12_audio/README.md).
+- [Firmware V13 Pulse](../arduino/historico/v13_pulse/README.md) y [V12 Audio](../arduino/historico/v12_audio/README.md).
 - [Versiones activas e históricas](ORGANIZACION.md).

@@ -8,7 +8,7 @@ import numpy as np
 from monitor.historico.v13.receiver import unoq_wav as wav
 
 ROOT=Path(__file__).resolve().parents[2]
-SKETCH=ROOT/'arduino/v12_audio/oscilloscope/sketch'
+SKETCH=ROOT/'arduino/historico/v12_audio/oscilloscope/sketch'
 STUB=r'''
 #include <cassert>
 #include <cstdio>
@@ -52,7 +52,7 @@ class WavFirmwareTests(unittest.TestCase):
         cls.tmp=tempfile.TemporaryDirectory();cls.addClassCleanup(cls.tmp.cleanup)
         cls.folder=Path(cls.tmp.name)
         cls.relay=cls.folder/'checker'
-        subprocess.run(['cc','-std=c11','-Wall','-Wextra','-Werror',str(ROOT/'arduino/v12_audio/tests/checker.c'),'-lm','-o',str(cls.relay)],check=True)
+        subprocess.run(['cc','-std=c11','-Wall','-Wextra','-Werror',str(ROOT/'arduino/historico/v12_audio/tests/checker.c'),'-lm','-o',str(cls.relay)],check=True)
     def run_cpp(self,code):
         source=self.folder/'wav.cpp';exe=self.folder/'wav'
         source.write_text('#include "generator_protocol.h"\n'+STUB+code)

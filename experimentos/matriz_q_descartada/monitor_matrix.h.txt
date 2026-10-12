@@ -1,0 +1,201 @@
+#pragma once
+#include <zephyr/device.h>
+#include <zephyr/drivers/counter.h>
+#include "matrix_pwm.h"
+#include "control_protocol.h"
+namespace monitor_matrix {
+// 13 columns x 8 rows, row-major brightness 0..7. Static icons only.
+static const uint8_t icons[11][104] = {
+    {
+        0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0
+    },
+    {
+        0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,4,7,0,0,0,0,0,4,7,0,
+        0,0,3,7,0,7,0,0,0,3,7,0,7,
+        0,2,7,0,0,7,0,0,2,7,0,0,7,
+        7,7,0,0,0,7,0,7,7,0,0,0,7,
+        0,0,0,0,0,7,4,7,0,0,0,0,0,
+        0,0,0,0,0,3,7,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0
+    },
+    {
+        0,0,0,0,0,0,7,0,0,0,0,0,0,
+        0,0,0,0,0,0,7,0,0,0,4,7,0,
+        0,0,0,0,0,0,7,0,0,3,7,0,7,
+        0,0,0,0,0,0,7,4,2,7,0,0,7,
+        2,2,2,2,2,2,7,7,7,2,2,2,2,
+        0,0,0,0,2,7,7,0,0,0,0,0,0,
+        0,0,0,3,7,0,7,0,0,0,0,0,0,
+        0,0,7,4,0,0,7,0,0,0,0,0,0
+    },
+    {
+        0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,7,0,0,0,0,0,0,0,0,
+        0,0,0,0,7,0,0,0,0,7,0,0,0,
+        0,0,0,0,7,0,0,0,0,7,0,0,0,
+        0,0,0,0,7,0,7,0,0,7,0,0,0,
+        0,0,7,0,7,0,7,0,7,7,0,7,0,
+        0,0,7,0,7,0,7,0,7,7,0,7,0,
+        2,2,7,2,7,2,7,2,7,2,7,2,2
+    },
+    {
+        0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,1,2,3,4,5,6,7,6,5,4,3,0,
+        0,1,2,3,4,5,6,7,6,5,4,3,0,
+        0,0,1,2,3,4,5,6,5,4,3,2,0,
+        0,0,0,1,2,3,4,5,4,3,2,1,0,
+        0,0,0,0,1,2,3,4,3,2,1,0,0,
+        0,0,0,0,0,1,2,3,2,1,0,0,0,
+        0,0,0,0,0,0,1,2,1,0,0,0,0
+    },
+    {
+        0,7,0,0,0,0,0,0,0,0,0,0,0,
+        0,7,0,0,0,0,0,0,0,0,0,0,0,
+        0,7,4,7,7,7,7,0,0,0,0,0,0,
+        0,7,0,0,0,0,4,7,0,0,0,0,0,
+        0,7,0,0,0,0,0,3,7,0,0,0,0,
+        0,7,0,0,0,0,0,0,2,7,0,0,0,
+        0,7,0,0,0,0,0,0,0,4,7,0,0,
+        2,7,7,7,7,7,7,7,7,7,7,7,2
+    },
+    {
+        0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,4,7,0,0,0,0,0,4,7,0,
+        0,0,3,7,0,7,0,0,0,3,7,0,7,
+        0,2,7,0,0,7,0,0,2,7,0,0,7,
+        7,7,0,0,0,7,0,7,7,0,0,0,7,
+        0,0,0,0,0,7,4,7,0,0,0,0,0,
+        0,0,0,0,0,3,7,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0
+    },
+    {
+        0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,4,7,0,0,0,4,7,0,4,7,0,0,
+        3,7,0,7,0,3,7,0,7,7,0,7,0,
+        7,0,0,7,2,7,0,0,7,0,0,7,7,
+        0,0,0,7,4,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,2,2,2,2,2,2,2,2,7,0,0,
+        0,0,0,0,0,0,0,0,0,7,0,0,0
+    },
+    {
+        0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,7,7,7,7,7,0,0,0,0,0,
+        0,0,0,7,0,0,0,7,0,0,0,0,0,
+        0,0,0,7,0,0,0,7,0,0,0,0,0,
+        7,7,7,7,0,0,0,7,7,7,7,7,7,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0
+    },
+    {
+        0,0,0,0,0,7,0,0,0,0,0,0,0,
+        0,0,0,0,0,7,7,4,0,0,0,0,0,
+        0,0,0,0,0,7,7,7,4,0,0,0,0,
+        0,0,0,0,0,7,7,7,7,4,0,0,0,
+        0,0,0,0,0,7,7,7,4,0,0,0,0,
+        0,0,0,0,0,7,7,4,0,0,0,0,0,
+        0,0,0,0,0,7,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0
+    },
+    {
+        0,0,0,0,0,0,0,0,0,0,0,0,0,
+        2,7,7,7,7,7,7,7,7,7,7,7,2,
+        2,7,0,0,7,0,0,7,0,0,0,7,2,
+        2,7,0,0,7,0,0,7,0,0,0,7,2,
+        2,7,0,0,7,0,0,7,0,0,0,7,2,
+        2,7,7,7,7,7,7,7,7,7,7,7,2,
+        2,7,2,7,2,7,2,7,2,7,2,7,2,
+        2,7,7,7,7,7,7,7,7,7,7,7,2
+    }
+};
+// Counter TIM17 belongs exclusively to the onboard matrix. ADC/DAC timers stay intact.
+static_assert(DT_REG_ADDR(DT_PARENT(DT_NODELABEL(counter_matrix))) == TIM17_BASE,
+              "Revisar timer de matriz");
+static const device *const timer = DEVICE_DT_GET(DT_NODELABEL(counter_matrix));
+static constexpr IRQn_Type timer_irq = IRQn_Type(DT_IRQN(DT_PARENT(DT_NODELABEL(counter_matrix))));
+static constexpr uint32_t pin_modes_mask = (1U << 22) - 1U; // PF0..PF10 only.
+static uint8_t active = 0;
+static unsigned next_pixel = 0;
+static uint32_t slot_ticks = 0, off_ticks = 0, prior_priority = 0;
+static bool pending_off = false;
+static counter_top_cfg timer_config{};
+static inline void blank() { GPIOF->MODER &= ~pin_modes_mask; }
+static void scan(const device *, void *) {
+    blank();
+    uint32_t ticks;
+    if (pending_off) {
+        pending_off = false;
+        ticks = off_ticks;
+    } else {
+        const unsigned pixel = next_pixel;
+        next_pixel = (pixel + 1) % 104;
+        const uint32_t on = matrix_pwm::on_ticks(icons[active][pixel], slot_ticks);
+        if (on) {
+            const auto pins = matrix_pwm::pair(pixel);
+            GPIOF->BSRR = (1U << pins.anode) | (1U << (pins.cathode + 16));
+            GPIOF->MODER |= (1U << (pins.anode * 2)) | (1U << (pins.cathode * 2));
+        }
+        pending_off = on && on < slot_ticks;
+        off_ticks = slot_ticks - on;
+        ticks = on ? on : slot_ticks;
+    }
+    // ARPE is disabled at begin: the next dwell takes effect immediately.
+    TIM17->ARR = ticks - 1;
+    TIM17->CNT = 0;
+}
+static bool begin() {
+    if (!device_is_ready(timer)) return false;
+    slot_ticks = counter_us_to_ticks(timer, 50);
+    if (slot_ticks < 7 || slot_ticks > counter_get_max_top_value(timer)) return false;
+    RCC->AHB2ENR1 |= RCC_AHB2ENR1_GPIOFEN;
+    (void)RCC->AHB2ENR1;
+    counter_stop(timer);
+    blank(); next_pixel = 0; pending_off = false;
+    timer_config.ticks = slot_ticks;
+    timer_config.callback = scan;
+    if (counter_set_top_value(timer, &timer_config)) return false;
+    TIM17->CR1 &= ~TIM_CR1_ARPE;
+    TIM17->ARR = slot_ticks - 1;
+    TIM17->CNT = 0;
+    prior_priority = NVIC_GetPriority(timer_irq);
+    NVIC_SetPriority(timer_irq, (1U << __NVIC_PRIO_BITS) - 1U);
+    if (counter_start(timer)) {
+        NVIC_SetPriority(timer_irq, prior_priority);
+        return false;
+    }
+    return true;
+}
+inline bool decode(const uint8_t *p, size_t size, uint8_t &mode) {
+    if (size != scope_control::BLOCK || memcmp(p,"SCP1",4) || p[4]!=4 || p[5] ||
+        p[6]!=14 || p[7] || scope_control::get32(p+12)!=972 ||
+        !scope_control::pc_id(scope_control::get32(p+8)) ||
+        scope_control::get32(p+988)!=scope_control::crc(p,988) || p[16]>10) return false;
+    for (unsigned i=17;i<988;++i) if(p[i]) return false;
+    mode=p[16]; return true;
+}
+inline bool show(uint8_t mode) {
+    if (mode == active) return true;
+    if (mode > 10) return false;
+    if (!mode) {
+        counter_stop(timer); blank();
+        NVIC_SetPriority(timer_irq, prior_priority);
+        active = 0;
+    } else if (!active) {
+        active = mode;
+        if (!begin()) { active = 0; return false; }
+    } else {
+        // ISR reads a single-byte selector; frames are immutable.
+        active = mode;
+    }
+    return true;
+}
+}

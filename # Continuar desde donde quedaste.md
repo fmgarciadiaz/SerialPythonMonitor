@@ -1,419 +1,484 @@
-# Estado de carpetas · 8 de octubre de 2026
-
-Monitor visible: `monitor/v15/app.py`. V12, V13 y V14 están en
-`monitor/historico/`; V11 P992 en `arduino/historico/`. V12 Audio y V13 Pulse
-siguen visibles porque V15 los usa. Documentación, imports, herramientas y
-VS Code ajustados. Datos, calibraciones y respaldos conservados.
-[Mapa actual](docs/ORGANIZACION.md).
-
-El registro siguiente conserva la evolución anterior del proyecto.
-
-# Punto de continuación · 5 de octubre de 2026
-
-Pareja actual: Monitor V12 y firmware V11 P992, SCP1 V3/992, SPI 32 MHz.
-Antigravity integró ADC a 50 MHz con PLL2 (HSE16/M2/N25/R4), para todos
-los perfiles; ADC16 por oversampling ×16 hasta 62,5 kHz, ADC14 hasta 125 kHz.
-UART hasta 31,25 kHz; validación física R4 pendiente.
-
-Revisión posterior: diagnóstico corregido para observar el perfil real antes
-de guardarlo, preservar stream.scp y comprobar restauración exacta. Prueba
-sostenida final de 120 s aprobada: 7.495.906 pares sin errores. 206 pruebas locales pasan.
-Firmware local prepara/verifica PLL2 antes del generador, usa esperas acotadas
-y evita conmutar el reloj compartido ADC/DAC durante reconfiguración.
-Cambios compilados y cargados; respaldo previo conservado. Perfil del usuario
-restaurado: ADC16/62,5 kHz, seno 26 Hz (niveles 186–3909), habilitado.
-
-Documentación actualizada en README, monitor/, arduino/ y docs/, sin mover
-versiones históricas. Margen nominal ADC16 / 62.500 Hz: 14,08 µs antes de latencias,
-no 12,16 µs. Calibración Bode anterior corresponde al reloj ADC a 40 MHz.
-Cableado directo A0 a A2/A3 confirmado. Comparación a 2/10/20 kHz:
-amplitud cambia menos de 0,23%; residuo crece a 20 kHz (1,6→3,4 mV).
-Ver diagnosticos/ADC16_V12.md para evidencia y límites.
-Audio WAV: grabación implementada posteriormente en V13 (ver sección abajo); reproducción pendiente.
-
-40 etapas de transición ADC14/125k ↔ ADC16/50k/62,5k aprobadas,
-con consultas concurrentes y restauración exacta.
-
-## Organización posterior
-
-V12 y V11 P992 quedan como únicas versiones visibles en las carpetas
-principales. V10/V11 Python y V8 config/V9 Fast/V10 diagnóstico Arduino
-fueron movidas a sus carpetas histórico. Herramientas por defecto: V11 P992.
-Capturas de prueba pesadas eliminadas; inventario en capturas/limpieza_20261005.json.
-Informes, calibraciones y respaldos conservados. No se operó la placa.
-
-Verificación de consolidación: 206 pruebas aprobadas; configuraciones locales
-resuelven sus nuevas rutas. Limpieza: 87 archivos, aproximadamente 1,75 GiB.
-
-V12: estados uniformados y cuadro de 34 px; etiqueta MUESTREO. Escala
-horizontal temporal editable en ms, convertida internamente a muestras y
-con duración conservada al cambiar Fs. Posición temporal también en ms.
-208 pruebas aprobadas y layout comprobado sin operar la placa.
-
-## V13 experimental · PyQt6
-
-Astra planificó/revisó y Sol6.1 implementó V13 independiente. Arranque:
-`.venv-v13/bin/python monitor/historico/v13/app.py`. Firmware V11 P992 sin cambios.
-V12 queda disponible; no se promovió V13 como reemplazo por rendimiento.
-PyQt6 6.11.0, runtimeQt 6.11.2, pyqtgraph0.13.7, NumPy1.23.3.
-Receptor/assets y copia de referencias Bode dentro de V13; CSV en capturas/v13.
-Dials sin marcas densas. HelpermacOS corrige únicamente UF_HIDDEN de los
-plugins Qt6 cuando ese atributo impide su descubrimiento.
-
-24 pruebas Qt6 aprobadas y 208 pruebas Qt5 pasan en procesos separados.
-Comparación sintética secuencial,40 cuadrosmedidosmás10warmup:
-Qt6 más lento en todos los escenarios offscreen probados. No extrapolar
-FPS reales ni atrasoUSB; probar apariencia/fluidezmanualantespromoción.
-Evidencia: diagnosticos/QT6_V13.md y diagnosticos/resultados_qt/20261005/.
-No se operó la placa ni se modificó firmware en esta migración.
-
-## Entorno Conda V13 · 2026-10-05
-
-Creado `Python_3_13_DataScience`: Python 3.13.5, NumPy 2.3.1, pandas 2.3.1,
-SciPy 1.16.0, Matplotlib 3.10.0, IPykernel y PyQt6 6.11.0 / Qt 6.11.2,
-pyqtgraph 0.14.0, pyserial 3.5. 24 pruebas V13 aprobadas y pip check limpio.
-Reproducible con monitor/historico/v13/environment.yml; requirements-python310.txt
-preserva dependencias del benchmark previo, cuyos resultados no describen
-el nuevo entorno. VS Code: intérprete predeterminado y launch/tarea V13
-apuntan a este Conda; launch/tarea V12 mantienen Python_3_10_DataScience.
-Arranque: `conda activate Python_3_13_DataScience`, luego
-`python monitor/historico/v13/app.py`. Si VS Code conserva una selección vieja,
-Python: Select Interpreter → Python_3_13_DataScience.
-Registro opcional de kernel Jupyter no ejecutado: revisión automática
-indisponible por capacidad del modelo; IPykernel está instalado.
-
-
-## Grabación WAV V13 · 2026-10-05
-
-Selector CSV/WAV en la fila de estado, RECORD/STOP REC existentes y CSV predeterminado.
-WAV PCM16 estéreo graba A2 izquierda y A3 derecha desde muestras crudas,
-Fs confirmada, centro ADC fijo, sin remuestreo/filtro/AGC. Capturas en
-capturas/v13 con misma convención de nombre y contador compartido CSV/WAV.
-Máximo 30 s; STOP visual continúa grabando. Cambios de configuración,
-desconexión, cierre y errores finalizan WAV. Saltos de índice/timestamp
-interrumpen con error sin rellenar huecos; wrap32 permitido. Demo sólo CSV.
-
-Astra no pudo ejecutar la planificación solicitada por límite de uso;
-se continuó con alcance autorizado e implementación/revisión Sol. Pruebas
-locales Qt6 aprobadas; validación física WAV pendiente. No se operó la placa.
-Reproducción: próxima etapa, falta decidir botón y destino de salida.
-
-## Reproducción WAV candidata preparada
-
-V13 agrega modo WAV L/R/Mix, 20 ksps, DC eliminado y Vpp/offset DAC12.
-Firmware y relay aislados en arduino/v12_audio; 51 pruebas locales aprobadas
-y sketch compilado. No cargado: falta autorización y validación A0→A2/A3.
-Respaldo previo: respaldos/unoq/osciloscopio_20261005_160559_272516.zip.
-Ver arduino/v12_audio/README.md para activación y restauración.
-
-### V12 Audio cargado y ensayo físico inicial aprobado
-
-Autorizado y cargado el 5 de octubre: firmware MCU V12 Audio y relay MPU propio
-quedaron activos. WAV estéreo 44,1 kHz→20 ksps, L=997 Hz, R=2003 Hz,
-Mix con ambos tonos comprobados en A2/A3; 40000 muestras por pasada,
-sin underrun ni discontinuidades ADC14/31,25 kHz. Detener→IDLE y
-restauración del generador confirmados. Falta ensayo sostenido y evaluación visual.
-VS Code: «Monitor V13 — WAV A0 (V12 Audio)» habilita el protocolo nuevo.
-Informe: diagnosticos/resultados_wav/20261005_fisico.json.
-
-### Tasas WAV negociadas probadas · 5 de octubre de 2026
-
-V12 Audio MCU/relay actualizados y activos; selector Salida 20/40/50 kHz en V13.
-Ensayos de 120 s aprobados: WAV40/ADC14-40k, WAV50/ADC14-40k y
-WAV50/ADC14-100k. WAV50/ADC125 falló dos veces con integridad ADC;
-Play bloquea ADC mayor de 100 kHz. STOP y restauración confirmados.
-57 pruebas locales y regresiones Qt6 adicionales aprobadas. Respaldo previo
-osciloscopio_20261005_181834_429412.zip y fuentes 20 ksps conservadas.
-Ver docs/WAV_TASAS.md e informes diagnosticos/resultados_wav.
-
-### Autoinicio después de encender Q
-
-Reproducido READY timeout de 1 s. Relay V12 Audio actualizado: primer
-READY admite 10 s; arranque sólo se confirma con primera trama SPI válida.
-Autoload y lector verificados (63488 pares en 2 s, ADC14/31,25 kHz).
-Firmware MCU sin cambios de fuentes. Falta nuevo ciclo físico de alimentación.
-Informe diagnosticos/resultados_autoload/20261005_ready_arranque.json.
-
-### 2026-10-06 — Botón Preparar Q
-
-V13 ahora incluye **Preparar Q** junto al autoinicio. Ejecuta
-`tools/prepare_q.py --serial` sobre el Q seleccionado: compila MCU, respalda la
-app existente o importa una nueva, compila relay y arranca con confirmación SPI.
-El lector permanece en el host; conectar después de la preparación.
-Pruebas locales: 3 de instalación/actualización/protección y 13 de autoload/Qt.
-No se ejecutó una nueva carga física en esta etapa; queda pendiente probar el
-botón en el Q encendido y, especialmente, en una placa nueva.
-
-### 2026-10-06 — Fallo real de Preparar Q y Autoiniciar
-
-El log preparar_q_20261006_091448_711424.log mostró MCU compilado/cargado y app
-iniciada; falló después el relay por READY timeout. Reproducido autoinicio:
-RESET=1, READY=1 después del fallo. Relay corregido para consumir un único
-crédito inicial por nivel, drenar eventos antes de SPI y conservar flancos
-estrictos para todos los intercambios posteriores. Compilado en el Q sin
-modificar MCU. Autoinicio real completó con primera trama validada.
-Pruebas locales: 11 firmware/protocolo/autoinicio. Errores de autoinicio
-persisten ahora en logs. Resultado ADC en
-`diagnosticos/resultados_autoload/20261006_ready_credito_inicial.json`.
-No se repitió un apagado/encendido físico después de instalar esta corrección.
-
-### 2026-10-06 — Persistencia del autoinicio y conexión V13
-
-Autoiniciar ahora persiste inmediatamente con QSettings INI en
-.local/monitor_v13.ini (ignorado por Git); por defecto marcado sin preferencia.
-Verificados ambos valores al recrear ventana. Conexión real desde el propio
-V13 con QThread y casilla marcada: estado Activo SPI 14 bits 40 kHz,
-219.136 muestras por canal en prueba de aproximadamente 6 s, sin error mostrado.
-
-### 2026-10-06 — Conexión unificada
-
-Ya no existe Autoiniciar ni Desconectar independiente. Conectar abre primero
-el enlace disponible y sólo si falla ejecuta ensure_scope y vuelve a abrir.
-connect_scope maneja cierre también ante error. El mismo botón muestra tres
-iconos plug y permite cancelar durante arranque o desconectar al estar activo.
-Preparar Q pasó a la fila Conectar/Demo, en el antiguo espacio de Desconectar.
-La preferencia antigua .local/monitor_v13.ini ya no se lee. 32 pruebas OK.
-
-### 2026-10-06 — EOF del túnel ADB tras desenchufar
-
-Causa reproducida: app/relay Exited(255) tras corte; Connection.open aceptaba
-socket local ADB pero read devolvía EOF, sin ejecutar ensure_scope. connect_scope
-ahora verifica bytes con MSG_PEEK; EOF/silencio inicia recuperación. Nueve
-pruebas OK. Prueba física sobre Q recién vuelto a conectar: fallback inició
-app/relay y entregó 992 bytes válidos. Luego se verificó adquisición desde V13.
-
-### 2026-10-06 — Pico al iniciar Sweep/Chirp
-
-Usuario ubicó el pico al inicio y autorizó corregir. V12 Audio generator.h:
-stop(initial) usa value(wave,phase0,low,high) con salida habilitada, antes de
-reutilizar RAM; antes usaba stop(0). Apagada conserva cero. Firmware compilado
-y cargado; respaldo osciloscopio_20261006_114127_867106.zip. Siete pruebas
-locales OK. Seis arranques físicos (3 Sweep/3 Chirp), A2 14 bits/40 kHz, seno
-2 Vpp/1,65 V, medición primeros ~0,2 s: mínimo global 0,635 V, ninguno <0,5 V.
-El Q quedó con salida apagada. Evidencia resultados_autoload/20261006_sweep_start.json.
-No se midió con osciloscopio externo ni se modificó el comportamiento al final.
-
-### 2026-10-06 — Chirp intermitente: fin prematuro
-
-Reproducido antes de la corrección: el octavo Chirp de 20→2000 Hz/2 s
-quedó detenido a los 0,1 s, con confirmación OK. generator::tick convertía
-la diferencia de ticks directamente a uint64_t: una diferencia negativa
-terminaba inmediatamente el barrido. Ahora conserva la diferencia signed
-y descarta callbacks con tiempo anterior al arranque. Prueba nativa reproduce
-ese caso y verifica también la finalización normal; siete pruebas locales OK.
-La relación exacta entre el callback y el fallo físico es una hipótesis;
-no se instrumentaron los ticks del MCU durante el fallo.
-
-Firmware compilado y cargado, con respaldo
-respaldos/unoq/osciloscopio_20261006_123319_510143.zip. Después: 24 Chirps
-consecutivos, seno 2 Vpp/offset 1,65 V, ADC 14 bits/40 kHz; todos activos
-a los 0,1/0,6/1,2/1,8 s y finalizados a los 2,1 s, sin errores de estado.
-Salida apagada al terminar. Informes:
-diagnosticos/resultados_autoload/20261006_chirp_repeticiones.json (antes) y
-20261006_chirp_timer_corregido.json (después). La repetición sin fallos
-no descarta otros problemas intermitentes.
-
-### 2026-10-06 — Documentación y organización
-
-Usuario confirmó que Chirp funcionó tras la corrección. README principal y
-los índices describen el instrumento, audio y flujo MCU/MPU/relay; versiones
-con enlaces al final. Guías activas apuntan a V13/V12 Audio; V12/V11 P992
-continúa disponible y las herramientas de consola conservan sus defaults.
-Cuatro sketches `.bak` agrupados en respaldos/historico, contenido conservado
-y referencias actualizadas. Índices nuevos de diagnósticos y respaldos.
-
-### 2026-10-06 — Presentación e imágenes del README
-
-Portada con badges, especificaciones y capturas actuales de V(t), FFT,
-heatmap y Bode; son demostraciones sintéticas, Bode ilustra filtros RC.
-Secciones independientes Python, relay C/MPU y firmware C/C++ Arduino/MCU,
-con enlaces a guías ampliadas de timers, DMA, IRQ, READY y propiedad de buffers.
-Las versiones siguen al final. Capturas en assets/monitor_{vt,fft,heatmap,bode}.png.
-
-### Formato del sistema y saltos Wav · 6 de octubre de 2026
-
-Los controles, estados y ticks numéricos de los monitores V13/V12 usan
-separadores del locale del sistema. CSV, protocolos y nombres de archivo
-conservan formatos independientes del idioma para mantener compatibilidad.
-En Wav, −10 y +10 junto a Play saltan diez segundos durante reproducción.
-Se usa la posición reproducida confirmada, se limita al inicio/final y se
-confirma Stop antes de comenzar una sesión DAC nueva desde el destino.
-El estado muestra la posición absoluta en el archivo tras cada salto.
-Hay una breve interrupción por parada y recarga de buffers; no es un salto
-continuo sin pausa. Verificado con 34 pruebas locales; saltos en hardware
-pendientes de probar con el Q.
-
-### 2026-10-06 — Final de Wav en silencio
-
-V12 Audio libera la sesión con el generador anterior deshabilitado, tanto
-al finalizar como con Stop. Ya no restaura una onda continua activa.
-Seis pruebas nativas verifican EOF y Stop con salida deshabilitada.
-Firmware cargado con respaldo. Prueba física: generador seno habilitado antes
-de Wav50/ADC14-40k; EOF confirmado y generador enabled=0/running=false después.
-Evidencia: diagnosticos/resultados_wav/20261006_final_silencio.json. Salida final apagada.
-
-
-### 2026-10-06 — Pulso experimental de microsegundos
-
-Variante independiente arduino/v13_pulse, app Scope Pulse US V13 Experimental.
-TIM6 one-shot devuelve DAC al nivel bajo por hardware; DMA4 no se usa durante
-ese pulso. Protocolo con duración µs y capacidad anunciada; V13 ofrece 100–65535 µs
-sólo si el Q confirma soporte. Ancho inicial sigue equivalente a 1 ms (1000 µs).
-V12 Audio mantiene el contrato ms y sus fuentes/app como respaldo.
-18 disparos físicos ADC14/100 kHz: seis de 100, 200 y 1000 µs, anchos coincidentes
-con resolución de 10 µs. Wav50 completó un segundo; salida final apagada.
-La variante quedó activa, ADC14/40 kHz. Falta comprobar flancos y precisión con
-osciloscopio externo. Detalles y vuelta a V12 Audio: arduino/v13_pulse/README.md.
-Respaldo previo: respaldos/unoq/osciloscopio_20261006_190836_603319.zip.
-
-
-### 2026-10-06 — Bode con tres paneles
-
-V13 incorpora Tonos, Pulso y Sweep/Chirp, con inicio manual e historiales
-independientes. Los métodos transitorios usan FFT de ambos canales sobre
-la misma captura, nivel previo y cola; rechazan discontinuidades, respuestas
-incompletas y frecuencias sin referencia suficiente. El umbral relativo se
-calcula dentro de la banda medida, excluyendo DC. 31 pruebas locales pasaron.
-Con A0 conectado a A2/A3, Chirp y Sweep a ADC14/40 kHz cubrieron respectivamente
-5117/5138 y 5128/5128 puntos entre 20 Hz y 2 kHz. Ganancia mediana próxima
-a 0 dB; fase mediana cercana a 3 grados sin calibración instrumental.
-El pulso de 100 µs pasó una vez a 40 kHz pero falló repeticiones por referencia
-insuficiente, también a 100 kHz: no se considera validado de forma repetible.
-Evidencia: diagnosticos/resultados_bode/20261006_barridos.json.
-Al terminar se restaura ADC14/40 kHz y salida apagada.
-
-
-### 2026-10-06 — Corrección de referencia previa en Bode Pulso
-
-La captura rechazada contenía el pulso en ambos canales. A3 veía el flanco
-una muestra antes que A2: esa muestra entraba en la estimación de ruido previo
-y elevaba artificialmente el umbral FFT. Se excluye un margen de 1 ms (mínimo
-dos muestras) sólo de las estadísticas de referencia; la FFT conserva toda
-la captura y el desfase real entre canales. No se reduce el umbral de ruido.
-32 pruebas locales pasaron, incluida regresión del flanco adelantado.
-Seis pulsos físicos consecutivos de 100 µs a ADC14/100 kHz: todas las frecuencias
-20–2000 Hz válidas, ganancia mediana -0,04 a +0,07 dB y fase dentro de ±0,3°.
-Seis capturas a 40 kHz también completaron, con 93–97 % de puntos válidos;
-la fase mediana varió hasta 9,1°, compatible con una muestra de 25 µs
-a aproximadamente 1 kHz. Para fase con pulso de 100 µs se recomienda 100 kHz;
-40 kHz conserva una limitación de resolución temporal. No se corrige esa fase
-automáticamente ni se considera validada su precisión a 40 kHz.
-Evidencia: diagnosticos/resultados_bode/20261006_pulso_corregido_100k.json
-y 20261006_pulso_corregido_40k.json. Estado final ADC14/40 kHz, salida apagada.
-
-
-### 2026-10-06 — Rango y atenuación de salida en Bode
-
-Los tres paneles arrancan en 20–5000 Hz. Pulso y Sweep/Chirp ya no
-descartan la ganancia por amplitud baja de V_OUT: la referencia válida
-se determina con V_IN. Se conserva la ganancia estimada y sólo se omite
-la fase si V_OUT no supera el umbral de ruido. Bajo ese umbral, la ganancia
-puede representar el piso de ruido y no la atenuación real del circuito.
-33 pruebas locales pasaron, incluyendo salida de -80 dB y salida sólo ruido.
-No se realizó una nueva prueba física con filtro en este cambio.
-
-
-### 2026-10-06 — Seis correcciones de revisión Bode
-
-Se implementaron los seis hallazgos de docs/REVISION_BODE_ASTRA.md:
-referencia histórica deshabilitada sin identidad instrumental verificada;
-ajuste de tonos con todas las muestras, sin decimación; plazo de captura
-no renovado por consultas; rechazo correlacionado mostrado con motivo;
-redibujado de resultados al regresar a Bode; y bloqueo del inicio transitorio
-con configuración ADC pendiente. 39 pruebas locales pasaron, incluidas
-seis regresiones en tests/v13/test_bode_review.py. No se modificó firmware
-ni se operó el Q. Sigue pendiente aceptación física 20–5000 Hz con filtro.
-
-
-### 2026-10-06 — Nuevas referencias instrumentales Bode
-
-A0 conectado directamente a A2 y A3. Tres capturas por método y perfil,
-20–5000 Hz, ADC14/40 y 100 kHz; dos capturas para referencia y tercera
-independiente para aceptación. Se aceptaron Tonos y Sweep a ambas tasas,
-y Chirp a 100 kHz. Pulso 100 µs a ambas tasas y Chirp a 40 kHz no pasaron
-la repetibilidad exigida para toda la banda; no se guardan como calibración.
-El monitor identifica serie/app activa/hash del binario instalado por App Lab
-y exige perfil/método compatible; resultados e historiales retienen identidad.
-La identidad no lee flash MCU: una programación externa obliga a invalidar
-la referencia. Dos nuevos barridos físicos de Tonos verificaron carga y
-aplicación automática: error máximo 0,044 dB/0,40° a 40 kHz y
-0,042 dB/0,16° a 100 kHz. 40 pruebas locales aprobadas.
-Evidencia: diagnosticos/resultados_bode/20261006_referencias_validacion.json
-y 20261006_referencia_tonos_validacion_monitor.json.
-Estado final ADC14/40 kHz, salida apagada; firmware experimental sin cambios.
-
-
-### 2026-10-06 — Chirp sin curva: aceptación de cola
-
-Se reprodujo el rechazo de un Chirp de 5 s con cola de 0,5 s. El chequeo
-de asentamiento tomaba el último 10 % de toda la captura, que incluía
-estímulo; limitarlo a toda la cola todavía incluía el decaimiento legítimo
-del circuito. Ahora se evalúa sólo el quinto final de la cola configurada
-(mínimo 16 muestras), manteniendo toda la captura para la FFT y el mismo
-umbral de ruido. Una salida que no termina sigue siendo rechazada.
-14 pruebas locales aprobaron, incluidas cola con decaimiento RC y cola
-realmente no asentada. Ensayo físico ADC14/40 kHz, Chirp 20–5000 Hz de
-5 s + 0,5 s: captura completa, 27881 puntos en curva y 2948 puntos con
-ganancia/fase finitas. Esa cobertura describe la salida medida, no valida
-la exactitud de un filtro desconocido. Cuatro ensayos previos de 2 s
-también dejaron curvas. Estado final 14 bits/40 kHz, salida apagada.
-Evidencia: diagnosticos/resultados_bode/20261006_chirp_cola_5s_diagnostico.json.
-
-
-### 2026-10-06 — Estados centralizados
-
-Conexión y visualización contiene Adquisición, Generador y Análisis en
-boxes de 34 px, con texto abreviado y detalles completos en tooltip.
-Se retiran mensajes de generador, análisis/Bode y trigger de los laterales;
-la espera de trigger/SINGLE permanece visible arriba. Leyendas de curvas y
-datos del archivo Wav se conservan junto a sus controles. Las fuentes de
-mensajes notifican cambios; se mantiene el comportamiento de adquisición,
-Wav y Bode. Cuatro regresiones verifican actualización, aislamiento de
-paneles, espera de trigger y cambios de modo Wav. No se operó el Q.
-
-
-## 2026-10-06 · Promedio Bode pulso
-
-Selector Pulsos de 1 a 64, predeterminado 8. Estimador H1 por espectros
-cruzados, ventanas iguales respecto del flanco, asentamiento entre disparos,
-progreso por captura y fase filtrada por coherencia. Sweep/Chirp conserva
-su método. No se modifica firmware ni se reutiliza la calibración antigua
-para H1. Seis regresiones nuevas; 51 pruebas locales aprobadas.
-Comparación física con A0 directo a A2/A3: dos repeticiones de N=1,4,8,16
-a ADC14/40 y 100 kHz. Ocho demora unos 7 s; reduce ruido de ganancia,
-pero no elimina errores instrumentales de fase (especialmente a 40 kHz).
-Evidencia: diagnosticos/resultados_bode/20261006_promedio_pulsos_fisico.json
-y 20261006_promedio_pulsos_sintetico.json. Panel sin barra lateral verificado.
-Al finalizar se restaura ADC14/40 kHz y se apaga la salida.
-
-
-## 2026-10-07 · Calibración instrumental Bode
-
-Se conserva la tanda previa de 8 bits y los perfiles completados de 10 bits
-(27 referencias aceptadas). Por pedido del usuario se limita el foco final
-a las opciones actuales desde 32 kHz: 14 bits a 40/50/62,5/100/125 kHz y
-16 bits a 40/50/62,5 kHz. La opción anterior es 31,25 kHz y quedó fuera.
-Se completaron los ocho perfiles × cuatro métodos, con tres mediciones
-por método; 16 referencias nuevas aceptadas. Pulso H1 pasó en 16 bits a
-40 y 50 kHz; no a 62,5 kHz. Chirp no generó referencias nuevas; se mantiene
-la anterior de 14 bits / 100 kHz. Resultados y límites completos en
- docs/CALIBRACION_BODE.md y
- diagnosticos/resultados_bode/20261007_002031_calibracion_completa.json.
-Herramientas reproducibles: tools/calibrate_bode.py y
- tools/calibrate_bode_matrix.py; esta última aísla conexiones por perfil.
-Los intentos iniciales de 8 bits / 200 y 250 kHz (fuera de la interfaz)
-fallaron por cierre/integridad del flujo. Se recuperó reiniciando la misma
-app/relay; identidad de firmware verificada, sin cambios de fuentes MCU.
-Finalización confirmada: ADC14/40 kHz, salida apagada.
-
-
-## Monitor con cuatro análisis FFT · 2026-10-07
-
-Nueva variante independiente en `monitor/historico/v14/app.py`: Spectrum, Power,
-Distortion y Transfer seleccionables junto a Modo. Astra diseñó/revisó y Sol6.1
-implementó. V13 se conserva. No cambia firmware ni se operó el Q.
-22 pruebas nuevas y 121 regresiones adaptadas pasan. SINGLE conserva su bloque
-al cambiar las vistas; coherencia/retardo N/A con un solo segmento.
-Inicio: `conda activate Python_3_13_DataScience`, `python monitor/historico/v14/app.py`.
-Documentación: `monitor/historico/v14/README.md`, `docs/FFT_ANALISIS.md` y
-`diagnosticos/FFT_V14.md`. Pendiente: validación manual con hardware.
+## Limpieza de grabaciones de test · 12/10/2026
+
+Se eliminaron 194 grabaciones, muestras y trazas crudas de ensayos
+(240.9 MiB). Se conservaron informes y análisis, audios de
+referencia y uso normal, firmware y respaldos. Inventario de archivos retirados:
+diagnosticos/limpieza_grabaciones_20261012.json. Las referencias de informes a
+estas capturas son históricas; sus archivos crudos ya no están disponibles.
+
+---
+
+## Reparación de arranque y organización · 12/10/2026
+
+Se preparó e instaló Scope V16 en el Q 1060031107 y su relay actualizado.
+El autoload calculaba una identidad distinta del instalador porque omitía
+native_profiles.h; ambos ahora usan monitor/relay_identity.py y todas las cabeceras.
+Preparar Q y las herramientas usan V16 por defecto; el arranque admite hasta 600 s.
+La ruta del instalador ya no depende de la ubicación del firmware archivado.
+
+Versiones anteriores movidas a monitor/historico/v15 y
+arduino/historico/v12_audio, arduino/historico/v13_pulse. Se actualizaron imports,
+manifiestos, catálogo, índices, enlaces y entradas de VS Code; se conservan capturas.
+Se retiraron las cachés Numba de V15 que todavía referenciaban su ruta anterior.
+Verificación: 281 tests V16, 142 V15 y 123 V13 pasaron.
+Conexión física: 468.992 muestras en 15,001 s sin errores de protocolo; evidencia
+en diagnosticos/resultados_autoload/repair_v16_20261012.json.
+El perfil observado es ADC14 dual a 31,25 kHz, generador activo a 2,5 kHz; la configuración
+anterior ADC8/333333 con generador a 50 kHz había cerrado el relay por dropped=1.
+
+---
+
+## Documentación actualizada · tabla de frecuencias disponibles
+
+Manteniendo estructura y ensayos históricos, se actualizaron README general,
+monitor/v16/README.md, arduino/v16/README.md y docs/CONFIGURACION_ADQUISICION.md
+con tablas completas: tasas comunes SPI/UART, altas por bits, CH1 anteriores
+(599250/661157/1203007) y14 perfiles nativos CH1/dual. Todas las tasas por canal;
+marca✓ sólo cuando el margen nativo está confirmado también en producción.
+Sintetizador: SPI≤40kHz/UART≤31,25kHz. ADC10/495356 y ADC12/410256 sin marca.
+Tablas contrastadas automáticamente con Configuration/BITS/RATES/UART_RATES
+y native_profiles.json: conjuntos exactos por bits/canales y marcas coinciden.
+Referencias técnicas actualizadas a V16, ADC54MHz, TIM2/TIM5 a1/160MHz y nodos variables.
+README apunta a entrada V16, conserva catálogo y defaults históricos explícitos.
+Sólo documentación; no se alteró código ni estado del Q.
+
+---
+
+## Estado más reciente: integración dual TERMINADA · 12/10/2026
+
+V16 MCU/relay/monitor incorporan nueve perfiles dual y conservan cinco CH1.
+Dual por canal: ADC8 597014/632411; ADC10 495356/519480;
+ADC12 410256/437158; ADC14 355555/363636; ADC16 76226 Hz.
+Selector muestra(CH1+CH2), filtra por bits/salida/Synth y actualiza máximo ADC16.
+279 tests V16 + storage/constructor/colector pasaron; después de reconciliar
+flags,26 tests de perfiles/UI/constructor también pasaron.
+
+Los primeros intentos con1364 bytes libres fallaron READY y restauraron CH1.
+Se preservaron production_ack_failure*, second_* y failed_relay.log.
+acquisition_storage.h ahora usa arenas estáticas excluyentes CH1 compacto y
+Dual/legacy, cuatro slots, timestamps completos y sin heap. DMA/producer detenidos
+al cambiar arena; UART scratch con guard; WAV mantiene16 bloques.
+Compilación117908 bytes flash/259132 RAM/3012 libres; arranque confirmado.
+
+production_integration.json:ok=true/restored=true,18 casos/transiciones;
+120s por cada uno de14 perfiles nativos, sin pérdidas/errores, NumericBatch
+ambos canales y timestamps correctos. También mide envío por nodo y cola.
+Ganadores completos previos al rechazo de margen conservados con hashes de
+código; no se reutilizó ensayo interrumpido de before_margin_*.
+ADC10/495356 y ADC12/410256 midieron9,03%/9,39% (<10%): etiquetas de margen
+RETIRADAS en producción. Conservaron integridad. Dual ADC8/597014 (11,39%),
+ADC14/355555 (10,09%) y ADC16/76226 (77,66%) conservan margen; CH1 también.
+Auditoría:production_acceptance.json. Informe:RESULTADOS.md, apartado integración.
+
+Firmware nuevo INSTALADO. Relay:usb-stream-046d2c12bc108dce30a0/unoq_stream.
+Respaldo CH1 previo:respaldos/unoq/osciloscopio_20261012_155653_138423.zip.
+ADC8/333333 SPI y seno50kHz con campos originales restaurados.
+restore_integrity_ok=false: el perfil original sigue fallando como antes.
+No quedan dueño de validación ni caffeinate. No Astra. Reiniciar monitor.
+
+No se acepta precisión analógica/ENOB por esta evidencia. Si se busca frontera
+sostenida exacta dual ADC14,422..439 ticks aún no tienen aceptación larga.
+
+---
+
+## Integración dual: validación física pendiente en curso
+
+Nueva distribución estática de RAM: acquisition_storage.h comparte arenas CH1
+nativo y dual/legacy, con cuatro slots y timestamps completos. Compila117908 bytes
+flash,259132 bytes RAM,3012 libres. La variante anterior de1364 libres falló
+READY dos veces y se restauró CH1; logs production_ack_failure* y second_*.
+La distribución compartida ya arrancó correctamente varias veces.
+279 tests V16 y tests de storage con sanitizadores, constructor real y colector
+por nodo pasan. Firmware nuevo cargado; respaldo CH1 antes de carga:
+respaldos/unoq/osciloscopio_20261012_155653_138423.zip.
+Relay:usb-stream-046d2c12bc108dce30a0/unoq_stream.
+
+Los cinco perfiles CH1 pasaron120s con NumericBatch y márgenes declarados.
+Dual ADC8 ambos perfiles pasaron120s; ADC10/495356 pasó integridad120s pero
+margen medio9,03% (<10%). RETIRAR su etiqueta de margen en producción al cerrar.
+Evidencia margin_failure_production_integration.json y código archivado.
+Reanudación conserva sólo ensayos completos y verifica hashes originales del
+receptor y script archivado. Pendientes6 perfiles nativos y últimas transiciones.
+ÚNICO dueño Q: verify_production.py --resume, caffeinate -i -s.
+Log production_integration.log; reporte production_integration.json.
+No abrir monitor ni otros clientes durante validación. Restauración final debe
+volver a ADC8/333333 SPI/seno50kHz; su integridad previa falla igual que antes.
+No Astra. Los perfiles locales aún deben reconciliar sus flags de margen antes
+sobre todo de anunciar la integración completa.
+
+---
+
+## Integración dual en curso · 12/10/2026
+
+Autorizado continuar e incorporar los nueve perfiles dual validados, conservando
+los cinco CH1. No Astra. integrate_production.py aplicado con gate físico a ambas
+campañas y backup local production_before_dual/; whitelist tiene14 perfiles.
+Empaquetado nativo dual MCU usa capacidades exactas de campaña (ADC8=432 pares);
+CH1 conserva sus capacidades previas. Constructor real/relay/decoder coinciden
+para14 perfiles y wrap. Suite V16:279 tests pasaron. UI distingue CH1+CH2 y ADC16
+incluye76,23kHz. Compilación MCU pasó:260780 bytes RAM,1364 libres; stacks incluidos.
+No se redujo WAV ni se retiró validación temporal; validar estabilidad real.
+
+Carga Q ACTIVA: deploy_production.py, sesión52461, production_deployment.log.
+Respaldo antes de carga:respaldos/unoq/osciloscopio_20261012_153240_338072.zip.
+Relay nuevo:usb-stream-046d2c12bc108dce30a0/unoq_stream.
+NO abrir otros clientes/resetear. Pendiente verificar producción:120s por los14
+perfiles nativos, transiciones, NumericBatch ambos canales/timestamps y restaurar
+ADC8/333333 SPI/seno50kHz del snapshot (integridad previa fallaba).
+Runner:experimentos/maxfreq_dual_v16/verify_production.py; informe esperado
+production_integration.json. No considerar terminada la integración antes del gate.
+
+---
+
+## Estado más reciente 12/10/2026: barrido dual cerrado y Q restaurado
+
+CH1 sigue incorporado y verificado en producción. Campaña dual completa:
+sweep.json ok=true/restored=true, 478 ensayos, nueve perfiles distintos que
+pasaron 60 + 3×120 + 600s con control de host y cero dropped/fatal.
+Mayor tasa aceptada / tasa con margen, POR CANAL (dos entradas por disparo):
+- ADC8: 632411,067 Hz (253/N3888) /597014,925 Hz (268/N3456).
+- ADC10: 519480,519 Hz (308/N4176) /495356,037 Hz (323/N4176).
+- ADC12: 437158,470 Hz (366/N4032) /410256,410 Hz (390/N4032).
+- ADC14: 363636,364 Hz (440/N3968) /355555,556 Hz (450/N1984).
+- ADC16: 76226,775 Hz (2099/N3456), íntegro y con margen.
+
+Gate accepted_profiles, 45 aceptaciones controladas y hashes originales
+verificados: experimentos/maxfreq_dual_v16/acceptance_audit.json.
+Informe y límites: experimentos/maxfreq_dual_v16/RESULTADOS.md.
+Son máximos entre candidatos ensayados; no todos los ticks intermedios tienen
+aceptación larga (ADC14 422..439 pendiente si se busca frontera sostenida exacta).
+
+El dueño original desapareció durante ADC14, sin causa establecida. Evidencia
+conservada en interruption_20261012T161655Z/. Restauración intermedia registrada
+y reanudación con resume_finalists.py --resume (hash en reporte), sin reutilizar
+aceptaciones parciales. Conservó sólo ganadores completos ADC8/10/12; repitió
+ADC14/16 desde cero. Cinco tests y gate de reanudación pasaron.
+
+Reanudación TERMINADA con exit0; NO hay dueño host ni caffeinate activos.
+Q restaurado al V16 integrado nuevo, ADC8/333333 SPI, seno50kHz y campos
+originales. restore_integrity_ok=false: el perfil previo volvió a cerrar el
+flujo, igual que antes; campos restaurados no equivalen a integridad aprobada.
+Comprobación read-only: scope-v16-main-1 activo; app experimental detenida.
+
+DUAL NO INCORPORADO a producción. Próxima integración requiere constructor
+MCU nativo para pares, whitelist fusionada con CH1, RAM y validación física de
+receptor/transiciones/restauración. Analogía/ENOB no medidos. No Astra.
+
+---
+
+## Seguimiento anterior 12/10/2026: dual reanudado, ADC8/10/12 aceptados
+
+Máximos dual sostenidos, tasa POR CANAL; todos 60 + 3×120 + 600s:
+- ADC8: máximo íntegro ticks253/N3888 =632411,067 Hz;
+  con margen ticks268/N3456 =597014,925 Hz.
+- ADC10: máximo íntegro ticks308/N4176 =519480,519 Hz;
+  con margen ticks323/N4176 =495356,037 Hz.
+- ADC12: máximo íntegro ticks366/N4032 =437158,470 Hz;
+  con margen ticks390/N4032 =410256,410 Hz.
+
+El dueño original desapareció durante acceptance_3 ADC14 ticks420/N3968,
+sin finally ni restauración registrada. Causa no establecida; NO contar el
+ensayo interrumpido como aceptación ni límite ADC. Evidencia completa archivada
+en experimentos/maxfreq_dual_v16/interruption_20261012T161655Z/.
+Se restauró V16 integrado y ADC8/333333 SPI/seno50kHz; campos restaurados=true,
+integridad del perfil previo falló igual que antes. interruption_restore.log.
+
+Reanudación ACTIVA: caffeinate -i -s .../python
+experimentos/maxfreq_dual_v16/resume_finalists.py --resume; sesión6850.
+Log resume_finalists.log; reporte sweep.json. ÚNICO dueño Q: ese proceso.
+Los archivos originales sweep.py/contract.py/firmware NO cambiaron y sus hashes
+coinciden. Runner nuevo registra su hash y conserva sólo ganadores completos
+que pasan accepted_profiles; no reutiliza aceptaciones parciales. Descarta
+fallos largos previos controlados; repite desde cero los candidatos pendientes
+ADC14/16. Gate de reanudación y 5 tests de aceptación/contrato/tramas pasaron.
+Pendiente finalizar ADC14/16, listar ganadores y registrar restauración final.
+No hay perfiles dual incorporados a producción. No Astra.
+El caffeinate extra anterior también desapareció; el dueño nuevo tiene -i -s.
+
+---
+
+## Estado anterior 12/10/2026: CH1 incorporado, dual activo
+
+CH1 terminó e incorporó5 perfiles. Tabla aceptada:
+ADC8 máximo1.221.374 Hz (131/N6912), margen1.118.881 Hz (143/N8192);
+ADC10 máximo y margen909.090 Hz (176/N8192);
+ADC14 máximo747.663 Hz (214/N7936), margen701.754 Hz (228/N7936).
+Todos60+3×120+600s controlados. Otros120s por perfil de producción PASARON;
+9 transiciones/perfiles, sin pérdidas/errores, timestamps NumericBatch correctos,
+parámetros originales restaurados. production_integration.json ok/restored=true.
+
+Código V16 y firmware/relay Q ACTUALIZADOS. Los perfiles antiguos se conservan.
+RAM inicial excedía316 bytes; paquete UART ahora usa área fuera de los dos nodos
+de timestamps utilizados en UART (guard comprueba legacy dual y N2048).
+Constructor UART real comparado binariamente, incluido wrap; WAV conserva16 bloques.
+Compilación258484 bytes RAM,3660 libres. Respaldo preincorporación
+respaldos/unoq/osciloscopio_20261012_082204_106792.zip.
+Relay estable nuevo: usb-stream-80706d1ec26cf81e535b/unoq_stream.
+Primer ACK fallido preservado *_ack_failure; se corrigió comparación request_period
+en unoq_config_receiver.py con prueba de regresión. Ver RESULTADOS_CH1.md y README.
+
+Primer arranque dual falló por agotamiento de redes Docker, sin casos ADC.
+Se archivó sweep_network_failure.json/log. Se inspeccionó y eliminó SOLO
+scope-v16-maxfreq-experimental_default, vacía; configuración conservada en
+released_network.json. Se reintentó.
+
+DUAL físico ACTIVO: caffeinate -i -s .../python
+experimentos/maxfreq_dual_v16/awake.py. Sesión91108; log sweep_v2.log, reporte sweep.json.
+Único dueño Q: ese proceso. No iniciar otros clientes/resets mientras esté activo.
+Variantes bits8/10/12/14/16, dos valores por fila, tasa POR CANAL.
+Nodos completos:8 1728/3456/3888;10 1392/2784/4176;
+12 1152/2304/4032;14 992/1984/3968;16 864/1728/3456.
+Arrays/validadores admiten hasta4176 pares;201856 bytes RAM,60288 libres.
+16 bits: oversampling×16 existente, explorar hasta2048 ticks para detectar
+disparos omitidos, sin aumentar reloj ADC54MHz. Guard de integridad/timestamps.
+Refinamiento binario y vecinos enteros; margen refinado aparte.
+Aceptaciones60+3×120+600s; margen descartado al primer fallo de ese criterio.
+No modificar sweep.py/contract.py/firmware durante campaña: hashes impiden mezclar.
+Snapshot dual proviene de restauración integrada aprobada; backup nuevo
+respaldos/unoq/osciloscopio_20261012_091652_816649.zip. Restore vuelve al V16 NUEVO.
+Candidate relay: usb-stream-37773d65c3a519cfa0a2/unoq_stream.
+La primera campaña dual tuvo una discrepancia de capacidad ADC8 (436 frente a432);
+se preservó en full_frame_geometry_failure/ y no demuestra límites ADC.
+Corregido y verificado con constructores reales de tramas completas en los5 bits.
+Campaña actual dual_specialized_packing_v2: grilla completa, refinamiento activo;
+todavía no hay ganadores dual. Pendiente finalizar barrido, listar resultados y
+registrar restauración. Si se incorporan dual, extender empaquetador MCU nativo
+para pares (actual producción kind20 esCH1), fusionar whitelist y verificar RAM.
+
+No Astra. Preferencia menos tokens: monitorear con esperas breves y datos mínimos.
+Caffeinate extra12h sesión96824 sigue activo; detener al terminar TODO.
+Perfil original ADC8/333333 SPI con seno50kHz ya tenía pérdidas; no confundir
+restauración de campos con integridad. Analogía digital no certifica ENOB/analogía.
+
+---
+
+## Estado activo actualizado 12/10/2026
+
+- Sin Astra. Alcance autorizado: cerrar CH1, listar e incorporar perfiles
+  aceptados, verificar integración, después barrer DOS canales por bits.
+- CH1 íntegro completo (60 +3×120 +600s con host despierto):
+  ADC8 ticks131/N6912 =1.221374MHz; ADC10 ticks176/N8192 =909.091kHz;
+  ADC14 ticks214/N7936 =747.664kHz.
+  Margen completo: ADC8 ticks143/N8192 =1.118881MHz y ADC10 ticks176/N8192.
+- ADC14 ticks224/N7936 falló margen; se detuvo esa repetición con SIGINT y
+  se restauraron los campos previos (integridad del perfil previo sigue fallando).
+- Único dueño actual Q: finish_margin.py --resume, caffeinate -i -s,
+  sesión65779, log experimentos/maxfreq_v16/finish_margin.log.
+  Reusa sólo aceptaciones completas, afina225..241 y descarta un candidato
+  de margen al primer fallo de ese criterio. ADC14 ticks228/N7936 pasó60s
+  y3×120s; está en endurance600s. El Q sigue experimental: no abrir otra conexión.
+- Scripts preparados incorporate.py (gate físico), integrate_firmware.py
+  (conserva UART/WAV y formatos antiguos, sin ejecutar todavía),
+  verify_production.py (120s por perfil nativo + transiciones y restauración).
+- app.py, unoq_acquisition.py y unoq_config_decoder.py tienen soporte preparatorio
+  nativo; NO existe native_profiles.json aún, por tanto no habilita nuevas tasas.
+  Nuevo unoq_native.py; tests de interfaz21, contrato17 y empaquetado real
+  firmware/relay/decoder8/10/14 pasaron. check_integration.py actúa en temporal.
+- Variante dual PREPARADA, no compilada/cargada:
+  experimentos/maxfreq_dual_v16/, bits8/10/12/14/16, kind20 con dos valores
+  compactos, timestamps160MHz, pruebas packing/contrato3 pasan.
+  Revisar/refinar cota temporal ADC16; PLAN.md conserva fuente primaria ST.
+  Guardar prior.json después de integrar CH1 antes de preparar/cargar dual.
+- Caffeinate extra de12h sesión96824 sigue vigente; detener al terminar TODO.
+- Restauración y aceptación analógica son controles distintos de integridad.
+  Continuar hasta integración y dual; no presentar lo preparado como terminado.
+
+---
+
+## Seguimiento 12/10/2026
+
+El usuario pidió continuar sin Astra, gastar menos tokens, terminar CH1, listar e
+incorporar lo validado y luego barrer dos canales al máximo por resolución.
+
+Se confirmó una contaminación por suspensiones del Mac durante las aceptaciones:
+`pmset -g log` registra Sleep/DarkWake; en varios timeout el relay continuó
+adquiriendo sin dropped/fatal y cerró al PC lento. No son límites demostrados ADC.
+Campaña afectada preservada en `experimentos/maxfreq_v16/antes_control_suspension/`,
+con sleep_events.log. Se interrumpió PID5347 con SIGINT; campos originales
+restaurados, integridad del perfil original falló igual que antes.
+
+**Campaña CH1 activa nueva:** `caffeinate -i -s .../python experimentos/maxfreq_v16/awake.py --resume`.
+Sesión exec69080; log persistente `experimentos/maxfreq_v16/sweep_awake.log`.
+Conserva matriz/refinamientos del mismo firmware, repite TODAS las aceptaciones,
+no usa las viejas como ganadores. Cada nuevo caso registra deriva reloj pared/
+monotónico y rechaza casos con deriva mayor que dos segundos.
+Hay además caffeinate de 12h, sesión96824; detener esa sesión al cerrar TODO el trabajo.
+No iniciar otra conexión ni otro barrido; Q actualmente experimental.
+
+Sigue pendiente cierre CH1, publicación en V16 de perfiles realmente validados,
+pruebas de integración y campaña aislada dual. No se volvió a usar Astra.
+
+---
+
+## Continuación actualizada 11/10/2026, 17:09 Argentina
+
+- Se detectó el barrido original todavía vivo (PID2997). Se detuvo con SIGINT;
+  restauró los campos originales, pero la prueba de integridad del perfil previo
+  falló igual que al principio. Campaña original archivada completa en
+  `experimentos/maxfreq_v16/instrumentado_generico/`.
+- Astra revisó plan/evidencia y luego aprobó la corrección. El empaquetador original
+  genérico y la quinta trama de N3584 penalizaban el ensayo. No inferir límite ADC.
+- Se especializó únicamente firmware experimental: ADC8 byte directo, ADC10 4→5,
+  ADC14 4→7, padding solamente. Cuatro pruebas de packing/contrato pasan.
+- Se corrigió búsqueda separada de máximo íntegro y máximo con margen, refinamiento
+  con pases de repetición y hashes que impiden mezclar revisiones al reanudar.
+- **Referencia estable nueva aprobada:** baseline.json, 120.000157 s,
+  144273048 muestras ADC8/1203007 Hz, dropped=0/fatal=0. Campos restaurados.
+  Los fallos baseline anteriores siguen conservados; aún falta explicar intermitencia.
+- Variante corregida preparada con backup `respaldos/unoq/osciloscopio_20261011_170619_994241.zip`.
+- **Barrido NUEVO activo**, PID5347, sesión exec 30603, `sweep.py` SIN --resume.
+  Revisión `specialized_packing_v2`; resultados vivos `experimentos/maxfreq_v16/sweep.json`.
+  Primer N3456 pasó 5 s a ticks133 (1.203007 MHz), pero sin criterio de 10% margen.
+  No hay máximos sostenidos aceptados todavía. No lanzar otra conexión ni otro barrido.
+- El Q está con firmware experimental. El proceso tiene finally con restauración
+  del snapshot real de prior.json: ADC8/333333 Hz, SPI, seno50kHz habilitado.
+  **No confundir ese snapshot con el antiguo ADC16/71428 del primer texto.**
+- Falta completar matriz/refinamientos, 60s+3x120s+600s por candidato y comprobar
+  restauración final e integridad por separado. La UI estable no se modificó.
+
+---
+
+Retomé y completé la validación pendiente de CH1 a 1,203 MHz con ADC8:
+- 62 tests aprobados, incluido el desborde del contador.
+- 120 segundos y 144.273.920 muestras, con cero pérdidas y errores.
+- Cambios de perfil y FFT con el Q real aprobados.
+El Q quedó restaurado en ADC16 a 71,428 kHz, SPI y generador apagado. Actualicé el archivo de continuidad y el README.
+Quedan pendientes las mediciones de margen de cola, precisión analógica y pruebas visuales, trigger/SINGLE y exportación.
+
+  Edited 2 files+43-0View changesUndoView changes
+
+/private/tmp/restore_megaboom_profile.py/private/tmp/restore_megaboom_profile.py+21-0
+monitor/v16/README.mdmonitor/v16/README.md+22-0
+
+
+
+
+
+1:10 PM
+
+
+
+
+
+
+
+ver de mostrar las opciones validas para cada seleccion de bits, porque en 8 aparecen todas por ejemplo
+
+
+
+
+
+
+
+1:14 PM
+
+
+
+
+
+
+Worked for 1m 18s
+
+
+
+Aplicado: el desplegable ahora oculta las tasas incompatibles con los bits seleccionados, la salida SPI/UART y el modo Synth.
+En 8 bits se ocultan 599 y 661 kHz, que requieren ADC14; se mantiene 1,203 MHz.
+Pasaron 21 pruebas de interfaz. Reiniciá el monitor para ver el cambio.
+
+  Edited 2 files+17-2View changesUndoView changes
+
+monitor/v16/app.pymonitor/v16/app.py+1-1
+tests/v16/test_filter_ui.pytests/v16/test_filter_ui.py+16-1
+
+
+
+
+
+1:15 PM
+
+
+
+
+
+
+
+excente. hay margen para mas mhz?
+
+
+
+
+
+
+
+1:16 PM
+
+
+
+
+
+
+Puede haber margen, pero todavía no lo medimos. Los 120 segundos a 1,203 MHz sin pérdidas demuestran que funciona durante ese ensayo; no dicen cuánto sobra.
+Hay dos límites a revisar:
+- ADC: tiempo mínimo de adquisición y conversión a 8 bits.
+- Transporte: salida de cada nodo por SPI, ocupación de cola y margen antes de que DMA reutilice su memoria.
+El siguiente paso sería medir esos tiempos a 1,203 MHz. Si sobra margen sostenido, probar una tasa superior en una variante aislada y restaurar después el perfil actual.
+No subiría todavía el límite del monitor: primero necesitamos esa evidencia.
+
+
+1:16 PM
+
+
+
+
+
+
+
+ok fijate con astra de pensar planes tipo el de 8 bits que anduvo para hace run modo que maximice la freq en 8 bits, 10 y 14. tmabien validar lo actual a 1.203. astra hace el plan vos ejecutas, y hagan todo el barrido completo sin mi intervencion.
+
+
+
+
+
+
+
+1:17 PM
+
+
+
+
+
+
+Worked for 31m 40s
+
+
+
+  Edited 8 files+471-0View changesUndoView changes
+
+experimentos/maxfreq_v16/PLAN_ASTRA.mdexperimentos/maxfreq_v16/PLAN_ASTRA.md+57-0
+experimentos/maxfreq_v16/baseline.pyexperimentos/maxfreq_v16/baseline.py+45-0
+experimentos/maxfreq_v16/contract.pyexperimentos/maxfreq_v16/contract.py+88-0
+Show 5 more files
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+You're out of Codex messages
+Your rate limit resets on 6:01 PM. Upgrade or use one of your rate limit resets now.
+
+
+UpgradeReset usage

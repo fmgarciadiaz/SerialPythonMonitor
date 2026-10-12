@@ -1,0 +1,112 @@
+{
+  "ok": false,
+  "restored": true,
+  "plan": {
+    "ticks": [
+      480,
+      400,
+      320,
+      267,
+      242,
+      224,
+      208,
+      200,
+      192,
+      176,
+      160,
+      144,
+      133,
+      128,
+      120,
+      112,
+      104,
+      96,
+      88,
+      80,
+      78
+    ],
+    "nodes": {
+      "8": [
+        3456,
+        3584,
+        6912,
+        8192
+      ],
+      "10": [
+        2784,
+        5568,
+        8192
+      ],
+      "14": [
+        1984,
+        3968,
+        7936
+      ]
+    },
+    "screen_seconds": 5,
+    "settle_seconds": 1,
+    "refine_seconds": 10,
+    "long_seconds": [
+      120,
+      120,
+      120,
+      600
+    ]
+  },
+  "prior": {
+    "adc": {
+      "bits": 8,
+      "rate": 333333
+    },
+    "mode": "SPI",
+    "initial_fault": {
+      "dropped": 91611,
+      "fatal": 0,
+      "epoch": 14
+    },
+    "generator": {
+      "wave": 1,
+      "enabled": 1,
+      "mode": 0,
+      "frequency": 50000000,
+      "final_frequency": 2500,
+      "low": 807,
+      "high": 3288,
+      "duration": 1000,
+      "duration_us": 0
+    }
+  },
+  "cases": [
+    {
+      "bits": 8,
+      "ticks": 480,
+      "node_pairs": 3456,
+      "actual_rate": 333333.3333333333,
+      "requested_seconds": 5,
+      "stage": "screen",
+      "ok": false,
+      "error": "El Q cerr\u00f3 el flujo. Revisar el relay, la adquisici\u00f3n y el cable USB.",
+      "status": null
+    }
+  ],
+  "winners": {},
+  "analog": "Not measured",
+  "error": "Relay no confirm\u00f3 trama SPI",
+  "final_adc": {
+    "bits": 8,
+    "rate": 333333
+  },
+  "final_generator": {
+    "wave": 1,
+    "enabled": 1,
+    "mode": 0,
+    "frequency": 50000000,
+    "final_frequency": 2500,
+    "low": 807,
+    "high": 3288,
+    "duration": 1000,
+    "duration_us": 0
+  },
+  "restore_integrity_ok": false,
+  "restore_integrity_error": "El Q cerr\u00f3 el flujo. Revisar el relay, la adquisici\u00f3n y el cable USB."
+}

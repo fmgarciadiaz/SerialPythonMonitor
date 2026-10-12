@@ -2,7 +2,7 @@
 import unittest
 import numpy as np
 from scipy import signal
-from monitor.v15 import spectral_analysis as a
+from monitor.historico.v15 import spectral_analysis as a
 
 
 class SpectralAnalysisTests(unittest.TestCase):

@@ -32,5 +32,5 @@ c.wave=1;c.duration_us=0;c.duration=1000;assert(generator::apply(c));assert(gene
 '''
   with tempfile.TemporaryDirectory() as folder:
    p=Path(folder)/'pulse.cpp';p.write_text(code);exe=Path(folder)/'pulse'
-   subprocess.run(['c++','-std=c++17','-Wall','-Wextra','-Werror','-I',str(ROOT/'arduino/v13_pulse/oscilloscope/sketch'),str(p),'-o',str(exe)],check=True)
+   subprocess.run(['c++','-std=c++17','-Wall','-Wextra','-Werror','-I',str(ROOT/'arduino/historico/v13_pulse/oscilloscope/sketch'),str(p),'-o',str(exe)],check=True)
    subprocess.run([str(exe)],check=True)

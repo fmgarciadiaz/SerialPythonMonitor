@@ -1,0 +1,76 @@
+{
+  "scope": "Dedicated audio/Q owner, bounded lossless ADC IPC, simulated controls and forced parent GC; no GUI/acoustic acceptance",
+  "cases": [
+    {
+      "target": 5,
+      "adc_rate": 40000,
+      "freeze_worker": false,
+      "restored": true,
+      "sent_samples": 4796416,
+      "max_target": 7,
+      "min_blocks": 3,
+      "initial_wav": "IDLE",
+      "prior": {
+        "adc": {
+          "bits": 14,
+          "rate": 100000
+        },
+        "generator": {
+          "wave": 0,
+          "enabled": 0,
+          "mode": 0,
+          "frequency": 2500,
+          "final_frequency": 2500,
+          "low": 0,
+          "high": 0,
+          "duration": 1000,
+          "duration_us": 0
+        }
+      },
+      "seconds": 120.00335566198919,
+      "state": "PLAYING",
+      "reason": 0,
+      "played": 2397120,
+      "max_ack_gap_ms": 54.3506289832294,
+      "transport": {
+        "max_socket_send_ms": 0.49767299788072705,
+        "max_send_to_ack_ms": 52.037078014109284,
+        "max_chunk_generation_ms": 25.583024020306766
+      },
+      "adc_status": {
+        "ack": 24938740,
+        "rate": 40000,
+        "bits": 14,
+        "dropped": 0,
+        "fatal": 0,
+        "epoch": 31,
+        "prepare_us": 151,
+        "check_us": 99
+      },
+      "ok": false,
+      "final": {
+        "adc": {
+          "bits": 14,
+          "rate": 100000
+        },
+        "generator": {
+          "wave": 0,
+          "enabled": 0,
+          "mode": 0,
+          "frequency": 2500,
+          "final_frequency": 2500,
+          "low": 0,
+          "high": 0,
+          "duration": 1000,
+          "duration_us": 0
+        },
+        "wav": "IDLE"
+      },
+      "adc_ipc": "shared_ring",
+      "ipc_samples": 4796416,
+      "ipc_ok": true,
+      "parent_gc_max_ms": 40.86937301326543,
+      "parent_pause_max_ms": 120.76158099807799
+    }
+  ]
+}

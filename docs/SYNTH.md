@@ -1,7 +1,7 @@
 # Sintetizador y modelos físicos
 
 [Proyecto](../README.md#synth--fm-ondas-y-modelos-físicos) ·
-[Controles](../monitor/v15/README.md#generador-synth)
+[Controles](../monitor/historico/v15/README.md#generador-synth)
 
 ## Ruta de audio
 
@@ -92,11 +92,11 @@ siguen siendo importantes para el parecido sonoro.
 
 ## Fuentes y módulos
 
-- [Motor y voces](../monitor/v15/fm_source.py).
-- [Panel de controles y MIDI](../monitor/v15/fm_panel.py).
-- [Feedback y ADSR compilados](../monitor/v15/fm_feedback.py).
-- [Guía de onda](../monitor/v15/virtual_string.py).
-- [Piano, martillo, puente y caja](../monitor/v15/virtual_instruments.py).
+- [Motor y voces](../monitor/historico/v15/fm_source.py).
+- [Panel de controles y MIDI](../monitor/historico/v15/fm_panel.py).
+- [Feedback y ADSR compilados](../monitor/historico/v15/fm_feedback.py).
+- [Guía de onda](../monitor/historico/v15/virtual_string.py).
+- [Piano, martillo, puente y caja](../monitor/historico/v15/virtual_instruments.py).
 - [Pruebas](../tests/v15).
 
 Referencias: [modelado de caja](https://www.dsprelated.com/freebooks/pasp/Body_Modeling.html),

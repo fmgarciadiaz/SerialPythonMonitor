@@ -1,0 +1,779 @@
+{
+  "scope": "Dedicated audio/Q owner, bounded lossless ADC IPC, simulated controls and forced parent GC; no GUI/acoustic acceptance",
+  "cases": [
+    {
+      "dac_levels": {
+        "amplitude": 2.5,
+        "offset": 1.65
+      },
+      "queue_growth": [],
+      "target": 4,
+      "adc_rate": 40000,
+      "freeze_worker": false,
+      "restored": true,
+      "sent_samples": 1374208,
+      "max_target": 4,
+      "min_blocks": 2,
+      "slow_pumps": [
+        {
+          "start": 378557.115912936,
+          "wall_ms": 27.347308991011232,
+          "cpu_ms": 0.28900000000020576,
+          "minor_faults": 3,
+          "major_faults": 0,
+          "voluntary_switches": 0,
+          "involuntary_switches": 3
+        },
+        {
+          "start": 378565.263630206,
+          "wall_ms": 20.261592988390476,
+          "cpu_ms": 0.9739999999998084,
+          "minor_faults": 7,
+          "major_faults": 0,
+          "voluntary_switches": 0,
+          "involuntary_switches": 11
+        },
+        {
+          "start": 378565.898946081,
+          "wall_ms": 29.831901018042117,
+          "cpu_ms": 1.31099999999984,
+          "minor_faults": 0,
+          "major_faults": 0,
+          "voluntary_switches": 0,
+          "involuntary_switches": 8
+        },
+        {
+          "start": 378590.424138574,
+          "wall_ms": 24.623767007142305,
+          "cpu_ms": 0.18999999999991246,
+          "minor_faults": 0,
+          "major_faults": 0,
+          "voluntary_switches": 0,
+          "involuntary_switches": 4
+        }
+      ],
+      "slow_pumps_omitted": 0,
+      "slow_reads": [
+        {
+          "start": 378557.115916622,
+          "wall_ms": 27.124045009259135,
+          "cpu_ms": 0.07399999999990747
+        },
+        {
+          "start": 378565.898948836,
+          "wall_ms": 26.871745998505503,
+          "cpu_ms": 0.058000000000113516
+        },
+        {
+          "start": 378590.424141442,
+          "wall_ms": 24.47561197914183,
+          "cpu_ms": 0.06599999999945538
+        }
+      ],
+      "slow_reads_omitted": 0,
+      "read_timeout_ms": 100,
+      "credits": 2,
+      "low_margin": 3,
+      "preset": "Guitarra",
+      "async_synth": true,
+      "worker_wakeup": true,
+      "initial_wav": "IDLE",
+      "prior": {
+        "adc": {
+          "bits": 14,
+          "rate": 100000
+        },
+        "generator": {
+          "wave": 0,
+          "enabled": 0,
+          "mode": 0,
+          "frequency": 2500,
+          "final_frequency": 2500,
+          "low": 0,
+          "high": 0,
+          "duration": 1000,
+          "duration_us": 0
+        }
+      },
+      "seconds": 34.396795640990604,
+      "state": "UNDERRUN",
+      "reason": 2,
+      "played": 686400,
+      "max_ack_gap_ms": 32.944762031547725,
+      "transport": {
+        "max_socket_send_ms": 0.33104600152000785,
+        "max_send_to_ack_ms": 32.8099739854224,
+        "max_chunk_generation_ms": 0.7547089480794966
+      },
+      "adc_status": {
+        "ack": 44697441,
+        "rate": 40000,
+        "bits": 14,
+        "dropped": 0,
+        "fatal": 0,
+        "epoch": 115,
+        "prepare_us": 136,
+        "check_us": 113
+      },
+      "ok": false,
+      "final": {
+        "adc": {
+          "bits": 14,
+          "rate": 100000
+        },
+        "generator": {
+          "wave": 0,
+          "enabled": 0,
+          "mode": 0,
+          "frequency": 2500,
+          "final_frequency": 2500,
+          "low": 0,
+          "high": 0,
+          "duration": 1000,
+          "duration_us": 0
+        },
+        "wav": "IDLE"
+      },
+      "max_worker_render_ms": 16.66253001894802,
+      "voices": 11,
+      "adc_ipc": "shared_ring",
+      "ipc_samples": 1374208,
+      "ipc_ok": true,
+      "parent_pause_events": [
+        {
+          "start": 378556.088341686,
+          "end": 378556.231101385,
+          "gc_ms": 67.33403902035207
+        },
+        {
+          "start": 378557.089161414,
+          "end": 378557.246203343,
+          "gc_ms": 80.93155396636575
+        },
+        {
+          "start": 378558.089766546,
+          "end": 378558.210594295,
+          "gc_ms": 45.69613700732589
+        },
+        {
+          "start": 378559.089818491,
+          "end": 378559.216214952,
+          "gc_ms": 46.44057800760493
+        },
+        {
+          "start": 378560.090950951,
+          "end": 378560.216587613,
+          "gc_ms": 49.65854302281514
+        },
+        {
+          "start": 378561.091983593,
+          "end": 378561.216278486,
+          "gc_ms": 49.110641004517674
+        },
+        {
+          "start": 378562.092605616,
+          "end": 378562.202013173,
+          "gc_ms": 34.01996794855222
+        },
+        {
+          "start": 378563.093047513,
+          "end": 378563.219357503,
+          "gc_ms": 47.584128042217344
+        },
+        {
+          "start": 378564.093672489,
+          "end": 378564.219811303,
+          "gc_ms": 49.13565702736378
+        },
+        {
+          "start": 378565.09373774,
+          "end": 378565.218428783,
+          "gc_ms": 46.997699013445526
+        },
+        {
+          "start": 378566.094458069,
+          "end": 378566.220529513,
+          "gc_ms": 47.6339950109832
+        },
+        {
+          "start": 378567.094575679,
+          "end": 378567.217585345,
+          "gc_ms": 47.39720904035494
+        },
+        {
+          "start": 378568.095300121,
+          "end": 378568.22183447,
+          "gc_ms": 50.81057199276984
+        },
+        {
+          "start": 378569.095723075,
+          "end": 378569.221166636,
+          "gc_ms": 47.726357995998114
+        },
+        {
+          "start": 378570.096531057,
+          "end": 378570.218211008,
+          "gc_ms": 45.70406803395599
+        },
+        {
+          "start": 378571.096736853,
+          "end": 378571.222553099,
+          "gc_ms": 45.885716972406954
+        },
+        {
+          "start": 378572.097991591,
+          "end": 378572.225272892,
+          "gc_ms": 50.6302309804596
+        },
+        {
+          "start": 378573.098571565,
+          "end": 378573.224319721,
+          "gc_ms": 47.25798999425024
+        },
+        {
+          "start": 378574.09945352,
+          "end": 378574.22531486,
+          "gc_ms": 48.62233705352992
+        },
+        {
+          "start": 378575.100236443,
+          "end": 378575.224528375,
+          "gc_ms": 45.68228003336117
+        },
+        {
+          "start": 378576.100704864,
+          "end": 378576.230013068,
+          "gc_ms": 49.59051398327574
+        },
+        {
+          "start": 378577.101616206,
+          "end": 378577.224045662,
+          "gc_ms": 47.3947610007599
+        },
+        {
+          "start": 378578.102872073,
+          "end": 378578.223949945,
+          "gc_ms": 46.05823697056621
+        },
+        {
+          "start": 378579.103929499,
+          "end": 378579.317053287,
+          "gc_ms": 137.67259300220758
+        },
+        {
+          "start": 378580.105214075,
+          "end": 378580.35640887,
+          "gc_ms": 176.12165096215904
+        },
+        {
+          "start": 378581.106056007,
+          "end": 378581.359492767,
+          "gc_ms": 175.03337701782584
+        },
+        {
+          "start": 378582.106225383,
+          "end": 378582.240839731,
+          "gc_ms": 58.27919999137521
+        },
+        {
+          "start": 378583.10710955,
+          "end": 378583.233684441,
+          "gc_ms": 48.334615014027804
+        },
+        {
+          "start": 378584.107717851,
+          "end": 378584.232216938,
+          "gc_ms": 49.34773000422865
+        },
+        {
+          "start": 378585.108326737,
+          "end": 378585.233710119,
+          "gc_ms": 47.405226971022785
+        },
+        {
+          "start": 378586.109547968,
+          "end": 378586.234860012,
+          "gc_ms": 46.58287495840341
+        },
+        {
+          "start": 378587.110487318,
+          "end": 378587.233698222,
+          "gc_ms": 46.54572199797258
+        },
+        {
+          "start": 378588.111229234,
+          "end": 378588.234743201,
+          "gc_ms": 48.221062985248864
+        },
+        {
+          "start": 378589.112011053,
+          "end": 378589.244694408,
+          "gc_ms": 54.96513401158154
+        },
+        {
+          "start": 378590.112152737,
+          "end": 378590.248092314,
+          "gc_ms": 58.060935989487916
+        }
+      ],
+      "parent_gc_max_ms": 176.12165096215904,
+      "parent_pause_max_ms": 253.43676004558802
+    },
+    {
+      "dac_levels": {
+        "amplitude": 2.5,
+        "offset": 1.65
+      },
+      "queue_growth": [],
+      "target": 4,
+      "adc_rate": 40000,
+      "freeze_worker": false,
+      "restored": true,
+      "sent_samples": 851968,
+      "max_target": 4,
+      "min_blocks": 2,
+      "slow_pumps": [
+        {
+          "start": 378605.771182946,
+          "wall_ms": 31.851264007855207,
+          "cpu_ms": 0.22799999999989495,
+          "minor_faults": 2,
+          "major_faults": 0,
+          "voluntary_switches": 0,
+          "involuntary_switches": 3
+        },
+        {
+          "start": 378613.938062112,
+          "wall_ms": 24.201430962421,
+          "cpu_ms": 0.2969999999988815,
+          "minor_faults": 0,
+          "major_faults": 0,
+          "voluntary_switches": 0,
+          "involuntary_switches": 4
+        },
+        {
+          "start": 378614.57140996,
+          "wall_ms": 27.08757802611217,
+          "cpu_ms": 0.2309999999994261,
+          "minor_faults": 0,
+          "major_faults": 0,
+          "voluntary_switches": 0,
+          "involuntary_switches": 2
+        },
+        {
+          "start": 378615.436882926,
+          "wall_ms": 30.066248029470444,
+          "cpu_ms": 0.934999999999242,
+          "minor_faults": 0,
+          "major_faults": 0,
+          "voluntary_switches": 0,
+          "involuntary_switches": 1
+        }
+      ],
+      "slow_pumps_omitted": 0,
+      "slow_reads": [
+        {
+          "start": 378605.771186421,
+          "wall_ms": 31.680020038038492,
+          "cpu_ms": 0.0700000000000145
+        },
+        {
+          "start": 378613.93806505,
+          "wall_ms": 23.99687300203368,
+          "cpu_ms": 0.09699999999934761
+        },
+        {
+          "start": 378614.571413442,
+          "wall_ms": 26.89220500178635,
+          "cpu_ms": 0.06099999999964467
+        },
+        {
+          "start": 378615.436885824,
+          "wall_ms": 29.477500007487833,
+          "cpu_ms": 0.3609999999998337
+        }
+      ],
+      "slow_reads_omitted": 0,
+      "read_timeout_ms": 100,
+      "credits": 2,
+      "low_margin": 3,
+      "preset": "Brass",
+      "async_synth": true,
+      "worker_wakeup": true,
+      "initial_wav": "IDLE",
+      "prior": {
+        "adc": {
+          "bits": 14,
+          "rate": 100000
+        },
+        "generator": {
+          "wave": 0,
+          "enabled": 0,
+          "mode": 0,
+          "frequency": 2500,
+          "final_frequency": 2500,
+          "low": 0,
+          "high": 0,
+          "duration": 1000,
+          "duration_us": 0
+        }
+      },
+      "seconds": 21.33075398002984,
+      "state": "UNDERRUN",
+      "reason": 2,
+      "played": 425280,
+      "max_ack_gap_ms": 47.58491599932313,
+      "transport": {
+        "max_socket_send_ms": 0.24130498059093952,
+        "max_send_to_ack_ms": 36.14216099958867,
+        "max_chunk_generation_ms": 0.6646809633821249
+      },
+      "adc_status": {
+        "ack": 44715819,
+        "rate": 40000,
+        "bits": 14,
+        "dropped": 0,
+        "fatal": 0,
+        "epoch": 117,
+        "prepare_us": 151,
+        "check_us": 99
+      },
+      "ok": false,
+      "final": {
+        "adc": {
+          "bits": 14,
+          "rate": 100000
+        },
+        "generator": {
+          "wave": 0,
+          "enabled": 0,
+          "mode": 0,
+          "frequency": 2500,
+          "final_frequency": 2500,
+          "low": 0,
+          "high": 0,
+          "duration": 1000,
+          "duration_us": 0
+        },
+        "wav": "IDLE"
+      },
+      "max_worker_render_ms": 6.827549950685352,
+      "voices": 11,
+      "adc_ipc": "shared_ring",
+      "ipc_samples": 851968,
+      "ipc_ok": true,
+      "parent_pause_events": [
+        {
+          "start": 378594.166623799,
+          "end": 378594.30394559,
+          "gc_ms": 61.74042198108509
+        },
+        {
+          "start": 378595.166366165,
+          "end": 378595.29588837,
+          "gc_ms": 53.05083002895117
+        },
+        {
+          "start": 378596.166902751,
+          "end": 378596.304929629,
+          "gc_ms": 62.53172899596393
+        },
+        {
+          "start": 378597.167845035,
+          "end": 378597.305265795,
+          "gc_ms": 57.730669039301574
+        },
+        {
+          "start": 378598.168274743,
+          "end": 378598.299189576,
+          "gc_ms": 54.12318598246202
+        },
+        {
+          "start": 378599.168479166,
+          "end": 378599.317045137,
+          "gc_ms": 69.98179497895762
+        },
+        {
+          "start": 378600.169209992,
+          "end": 378600.296889009,
+          "gc_ms": 50.315456988755614
+        },
+        {
+          "start": 378601.16996255,
+          "end": 378601.309434447,
+          "gc_ms": 59.422901016660035
+        },
+        {
+          "start": 378602.170961385,
+          "end": 378602.298420908,
+          "gc_ms": 52.012015017680824
+        },
+        {
+          "start": 378603.170998654,
+          "end": 378603.299228597,
+          "gc_ms": 52.92718601413071
+        },
+        {
+          "start": 378604.17103828,
+          "end": 378604.303962522,
+          "gc_ms": 57.26676998892799
+        },
+        {
+          "start": 378605.171176131,
+          "end": 378605.300471773,
+          "gc_ms": 53.708344988990575
+        },
+        {
+          "start": 378606.172050004,
+          "end": 378606.29881673,
+          "gc_ms": 51.07442196458578
+        },
+        {
+          "start": 378607.172355457,
+          "end": 378607.302192812,
+          "gc_ms": 54.42353000398725
+        },
+        {
+          "start": 378608.172439009,
+          "end": 378608.301329291,
+          "gc_ms": 50.391087017487735
+        },
+        {
+          "start": 378609.172596602,
+          "end": 378609.297571389,
+          "gc_ms": 48.64294402068481
+        },
+        {
+          "start": 378610.173461501,
+          "end": 378610.306988894,
+          "gc_ms": 55.316903977654874
+        },
+        {
+          "start": 378611.174344737,
+          "end": 378611.313387288,
+          "gc_ms": 59.43875899538398
+        },
+        {
+          "start": 378612.175540959,
+          "end": 378612.308488432,
+          "gc_ms": 56.57372798305005
+        },
+        {
+          "start": 378613.175762068,
+          "end": 378613.298890717,
+          "gc_ms": 47.368117957375944
+        },
+        {
+          "start": 378614.176397637,
+          "end": 378614.299050927,
+          "gc_ms": 47.00891801621765
+        },
+        {
+          "start": 378615.176921184,
+          "end": 378615.30139136,
+          "gc_ms": 45.716650027316064
+        }
+      ],
+      "parent_gc_max_ms": 69.98179497895762,
+      "parent_pause_max_ms": 148.56597100151703
+    },
+    {
+      "dac_levels": {
+        "amplitude": 2.5,
+        "offset": 1.65
+      },
+      "queue_growth": [],
+      "target": 4,
+      "adc_rate": 40000,
+      "freeze_worker": false,
+      "restored": true,
+      "sent_samples": 387072,
+      "max_target": 4,
+      "min_blocks": 3,
+      "slow_pumps": [
+        {
+          "start": 378620.175772819,
+          "wall_ms": 29.322776943445206,
+          "cpu_ms": 0.5999999999999339,
+          "minor_faults": 14,
+          "major_faults": 0,
+          "voluntary_switches": 0,
+          "involuntary_switches": 12
+        },
+        {
+          "start": 378628.599826121,
+          "wall_ms": 32.10483898874372,
+          "cpu_ms": 0.7220000000001114,
+          "minor_faults": 1,
+          "major_faults": 0,
+          "voluntary_switches": 0,
+          "involuntary_switches": 8
+        },
+        {
+          "start": 378628.643657702,
+          "wall_ms": 65.2945379843004,
+          "cpu_ms": 0.3500000000000725,
+          "minor_faults": 0,
+          "major_faults": 0,
+          "voluntary_switches": 0,
+          "involuntary_switches": 5
+        },
+        {
+          "start": 378628.709011337,
+          "wall_ms": 21.404658968094736,
+          "cpu_ms": 10.517999999999361,
+          "minor_faults": 13,
+          "major_faults": 0,
+          "voluntary_switches": 1,
+          "involuntary_switches": 24
+        }
+      ],
+      "slow_pumps_omitted": 0,
+      "slow_reads": [
+        {
+          "start": 378620.175776288,
+          "wall_ms": 27.010266028810292,
+          "cpu_ms": 0.04900000000018778
+        },
+        {
+          "start": 378628.599829387,
+          "wall_ms": 27.702677994966507,
+          "cpu_ms": 0.06799999999973494
+        },
+        {
+          "start": 378628.643663345,
+          "wall_ms": 64.94989100610837,
+          "cpu_ms": 0.06299999999992423
+        }
+      ],
+      "slow_reads_omitted": 0,
+      "read_timeout_ms": 100,
+      "credits": 2,
+      "low_margin": 3,
+      "preset": "Piano Virtual",
+      "async_synth": true,
+      "worker_wakeup": true,
+      "initial_wav": "IDLE",
+      "prior": {
+        "adc": {
+          "bits": 14,
+          "rate": 100000
+        },
+        "generator": {
+          "wave": 0,
+          "enabled": 0,
+          "mode": 0,
+          "frequency": 2500,
+          "final_frequency": 2500,
+          "low": 0,
+          "high": 0,
+          "duration": 1000,
+          "duration_us": 0
+        }
+      },
+      "seconds": 9.725743525021244,
+      "state": "UNDERRUN",
+      "reason": 2,
+      "played": 192000,
+      "max_ack_gap_ms": 77.44967099279165,
+      "transport": {
+        "max_socket_send_ms": 0.178007991053164,
+        "max_send_to_ack_ms": 69.66541497968137,
+        "max_chunk_generation_ms": 0.585522036999464
+      },
+      "adc_status": {
+        "ack": 44725747,
+        "rate": 40000,
+        "bits": 14,
+        "dropped": 0,
+        "fatal": 0,
+        "epoch": 119,
+        "prepare_us": 137,
+        "check_us": 99
+      },
+      "ok": false,
+      "final": {
+        "adc": {
+          "bits": 14,
+          "rate": 100000
+        },
+        "generator": {
+          "wave": 0,
+          "enabled": 0,
+          "mode": 0,
+          "frequency": 2500,
+          "final_frequency": 2500,
+          "low": 0,
+          "high": 0,
+          "duration": 1000,
+          "duration_us": 0
+        },
+        "wav": "IDLE"
+      },
+      "max_worker_render_ms": 13.765985961072147,
+      "voices": 11,
+      "adc_ipc": "shared_ring",
+      "ipc_samples": 387072,
+      "ipc_ok": true,
+      "parent_pause_events": [
+        {
+          "start": 378619.011446537,
+          "end": 378619.144822252,
+          "gc_ms": 57.44337901705876
+        },
+        {
+          "start": 378620.011332835,
+          "end": 378620.14281779,
+          "gc_ms": 52.46638396056369
+        },
+        {
+          "start": 378621.01172657,
+          "end": 378621.133688866,
+          "gc_ms": 42.64206800144166
+        },
+        {
+          "start": 378622.011857434,
+          "end": 378622.126694085,
+          "gc_ms": 38.61792501993477
+        },
+        {
+          "start": 378623.012487003,
+          "end": 378623.126996229,
+          "gc_ms": 36.37596598127857
+        },
+        {
+          "start": 378624.012981118,
+          "end": 378624.137063359,
+          "gc_ms": 45.86093901889399
+        },
+        {
+          "start": 378625.01362259,
+          "end": 378625.141846818,
+          "gc_ms": 50.524797989055514
+        },
+        {
+          "start": 378626.014413457,
+          "end": 378626.144661117,
+          "gc_ms": 53.95979800960049
+        },
+        {
+          "start": 378627.015030078,
+          "end": 378627.143233563,
+          "gc_ms": 51.846991002094
+        },
+        {
+          "start": 378628.016055904,
+          "end": 378628.134339191,
+          "gc_ms": 38.64747303305194
+        },
+        {
+          "start": 378629.016424602,
+          "end": 378629.140653134,
+          "gc_ms": 47.81228001229465
+        }
+      ],
+      "parent_gc_max_ms": 57.44337901705876,
+      "parent_pause_max_ms": 133.37571499869227
+    }
+  ]
+}

@@ -249,7 +249,7 @@ y [evidencia del candidato](../experimentos/tasas_spi/opt125/README.md).
 ## 6 de octubre de 2026 · Monitor y audio
 
 [Monitor V13](../monitor/historico/v13/README.md), PyQt6/Python 3.13, con grabación WAV
-estéreo de A2/A3 y filtro DC opcional. [Q V12 Audio](../arduino/v12_audio/README.md)
+estéreo de A2/A3 y filtro DC opcional. [Q V12 Audio](../arduino/historico/v12_audio/README.md)
 añade reproducción L/R/Mix por A0 con remuestreo 20/40/50 ksps y amplitud en vivo.
 Conectar recupera app y relay instalados; Preparar Q instala/actualiza el conjunto.
 SINGLE conserva la FFT próxima al trigger de mayor energía y restaura el trigger
