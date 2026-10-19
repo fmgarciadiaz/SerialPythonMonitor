@@ -1,3 +1,22 @@
+> Respaldo local anterior. La pareja activa es [V17](../v17/README.md). Scope V16 fue exportada y retirada del Q el 19/10/2026; los ensayos siguientes son históricos.
+
+## 2026-10-13 — Incorporación V16 ADC8/CH1 1,4035 MHz cerrada
+
+Continuación del hilo 01a135c8-7ed5-7413-89a6-88e013600d90.
+Reporte físico integration/physical_20261013_192502/report.json: ok/restored=true.
+Pasó60+3x120+600s, dropped=fatal0 y continuidad completa. En producción,
+margen7,017–9,822%, cola pico4/4: acepta integridad, NO holgura.
+SPI38/FIFO10/espera50us/anillo3 se activan sólo ADC8 CH1 114ticks/N3456;
+retornos ADC10 y perfiles ADC14 dual/ADC16 con scheduler normal0 verificados.
+GUI completada: integration/gui_20261013_195708.json ok/restored=true;
+8.832.672 muestras a1,4035MHz y WAV ADC14/40kHz con233.730frames estéreo.
+Qt offscreen: no aceptación visual ni FFT/trigger/SINGLE bajo carga/analógica.
+WAV permanece bloqueado a tasa alta. Referencias Bode previas conservadas,
+ligadas al firmware anterior; no trasladar calibración sin nueva medición.
+Q restaurado ADC8/1221374 SPI,generadorapagado con campos previos;
+3.664.224 muestras íntegras en3s. Firmware incorporado fa7b490d676aa267a8a797dd0a1c409e1c30740e4bd4fb3b847a02707db41a47.
+Detalle: experimentos/send1400_v16/integration/README.md.
+
 # Monitor V16
 
 V16 implementa el paso 1 de la Etapa II: dos señales **CH1 (A2)** y
@@ -35,17 +54,28 @@ identificar la tasa en Hz enteros; la tasa efectiva depende del período aplicad
 
 | Salida / resolución | Tasas dual comunes (kHz) |
 | --- | --- |
-| SPI y UART · 8/10/12/14/16 bits | 1; 2; 4; 5; 8; 10; 12,500; 15,625; 20; 25; 31,250 |
-| Sólo SPI · 8/10/12/14/16 bits | 40; 50; 62,500; 66,666; 71,428 |
-| Sólo SPI · 8/10/12/14 bits | 100; 125; 200; 250; 333,333 |
+| SPI y UART · 8/10/12/14/16 bits | 1; 5; 10; 20; 31,250 |
+| Sólo SPI · 8/10/12/14/16 bits | 40 |
 
-| Bits | CH1 · sólo SPI (kHz) | Dual adicional · sólo SPI (kHz) |
+| Bits | CH1 · sólo SPI (kHz) | Máximos dual · sólo SPI (kHz) |
 | --- | --- | --- |
-| 8 | 1118,881 ✓; 1203,007; 1221,374 | 597,014 ✓; 632,411 |
+| 8 | 1118,881 ✓; 1221,374 | 597,014 ✓; 632,411 |
 | 10 | 909,090 ✓ | 495,356; 519,480 |
 | 12 | — | 410,256; 437,158 |
-| 14 | 599,250; 661,157; 701,754 ✓; 747,663 | 355,555 ✓; 363,636 |
+| 14 | 701,754 ✓; 747,663 | 355,555 ✓; 363,636 |
 | 16 | — | 76,226 ✓ |
+
+| Bits | Intermedias / audio · dual SPI (kHz por canal) |
+| --- | --- |
+| 8 | 225,670; 411,311 |
+| 10 | 191,847; 343,348 |
+| 12 | 163,432; 286,738 |
+| 14 | 145,191; 250,391 |
+| 16 | 44,1 nominal; 48 nominal |
+
+Estas diez tasas adicionales usan el reloj nativo de 160 MHz. Los diez perfiles pasaron 60 s físicos cada uno, sin pérdidas ni errores de
+integridad; aceptación prolongada de margen y precisión analógica pendientes. En ADC16, las tasas reales son **44.101,43 y 48.004,80 Hz**;
+el selector muestra 44,1/48,0 kHz y el detalle informa la tasa real.
 
 **✓**: perfil nativo con margen de envío ≥10%, cola máxima menor de cuatro y
 margen positivo antes de sobrescritura, confirmado también en producción.
@@ -55,11 +85,34 @@ ADC10/495,356 y ADC12/410,256 kHz conservan integridad pero midieron 9,03% y
 UART conserva dos canales y un máximo de 31,250 kHz. En **Synth**, SPI limita
 la adquisición a **40 kHz** y UART a **31,250 kHz**; los perfiles CH1 y dual
 nativos altos no se ofrecen en ese modo. El selector filtra por resolución,
-salida y Synth. Los perfiles heredados conservan la evidencia y límites de sus
-ensayos; disponibilidad en el selector no equivale a certificación analógica.
+salida y Synth. Se ofrecen seis tasas bajas comunes, los 14 máximos nativos con aceptación
+prolongada y diez tasas adicionales intermedias/de audio. Los perfiles heredados
+siguen siendo compatibles con el protocolo, pero ya no aparecen en el selector.
+La integridad validada no equivale a certificación analógica.
 
 [Contrato y tabla de referencia](../../docs/CONFIGURACION_ADQUISICION.md#perfiles-de-adquisición) ·
 [Resultados físicos](../../experimentos/maxfreq_dual_v16/RESULTADOS.md#incorporación-a-producción-completada).
+
+### Escala horizontal según FS
+
+El dial usa un recorrido logarítmico, con mínimo de ocho muestras y máximo de
+al menos cuatro segundos en todas las FS. Las bajas conservan ventanas mayores:
+250 s a 1 kHz, 50 s a 5 kHz y 6,25 s a 40 kHz. Al cambiar FS se conserva la
+duración elegida si entra en el nuevo rango; si no, se ajusta al límite disponible.
+El historial crece según la FS para contener realmente la ventana máxima y un
+margen de desplazamiento. La lectura alterna automáticamente entre µs, ms y s.
+Las tasas, grabaciones y datos de análisis mantienen todas sus muestras.
+
+### Duty de cuadrada continua
+
+La cuadrada continua incorpora un dial de duty de **1–99 %**, con **50 %**
+por defecto. Sólo aparece en ese modo. La frecuencia seleccionada se conserva;
+la resolución de la tabla DAC puede redondear el duty: a 5 kHz los pasos son de 1 %; a 50 kHz, de 5 % (1 % solicitado produce
+5 %, y 99 % produce 95 %). El 50 % mantiene el camino previo de dos puntos.
+El Q informa capacidad de duty; en firmware anterior el control queda deshabilitado.
+Preparar Q instala app, firmware y relay compatibles. Las capturas ADC conservan
+sus bits, tasas y comprobaciones de integridad. El duty efectivo es el calculado
+para la tabla del DAC, no una medición analógica de la señal.
 
 ## Datos y análisis
 
@@ -317,7 +370,8 @@ trigger, SINGLE y exportación con este perfil. No certifican estabilidad indefi
 
 ## Perfiles dual incorporados, 12/10/2026
 
-TASA muestra los perfiles nuevos como **(CH1+CH2)** y los filtra por bits y
+FS muestra las tasas duales con el formato común y sólo aclara **(CH1)**
+en los perfiles de un canal. Filtra por bits y
 SPI/UART/Synth. Tasas por canal:
 
 | Bits | Tasas dual nuevas (kHz) |
@@ -350,3 +404,41 @@ incluida la conversión de timestamps. No se detectaron pérdidas ni errores.
 Precisión analógica, asentamiento y FPS GUI no están certificados por esas pruebas.
 
 [Tabla, parámetros y evidencia](../../experimentos/maxfreq_v16/RESULTADOS_CH1.md).
+
+
+### Grabación WAV
+
+RECORD en WAV admite FS comunes de 1, 5, 10, 20, 31,25 y 40 kHz para ADC
+de 8/10/12/14/16 bits, y 44,1/48 kHz nominales o 76,226 kHz en ADC16 dual. El archivo
+es PCM16 también para ADC de menos bits: conserva su resolución original sin
+agregar precisión. CSV permanece disponible en todas las FS.
+La cabecera usa la FS aplicada; en audio nativo es 44101/48004 Hz;
+no remuestrea a 44100/48000 Hz. WAV y CSV se guardan en `capturas/v16/`. Se verificaron archivos, ambos canales y
+continuidad entre lotes mediante pruebas locales; esto no constituye un ensayo
+físico sostenido de grabación. Demo no permite WAV.
+
+## Compensación de fase ADC en Bode · 13/10/2026
+
+Bode Tonos/Pulso/Sweep/Chirp muestra por defecto «Compensar retardo ADC».
+Modelo por perfil: retardo entre ranks = repeticiones × (ciclos de muestreo
++ bits nativos + 3) / 54 MHz; ADC16 usa 16 repeticiones de ADC14.
+Fuente: ST DS13086 rev10, tabla ADC1, página245, tCONV = ts + N + 3.
+Se conserva resultado crudo; desmarcar permite compararlo. Cada curva conserva
+su perfil y retardo, aun al agregar curvas de otra FS. FILTER hereda el instante
+de su canal fuente; se mantiene la fase propia del filtro. Calibración medida
+tiene prioridad en su banda, evitando descontar dos veces el retardo ADC.
+Dos perfiles nuevos medidos: ADC14/40000 y ADC16/40000; se reutilizó el ensayo
+ADC16/76226. Máximos residuales: 2,346° (ADC14/40, dispersión puntual),
+0,470° (ADC16/40); repetición con GUI corregida ADC16/40: máximo0,241°.
+ADC16/76226: máximo0,0362°. El resto de perfiles usa estimación del modelo,
+no calibración física individual; no se promete fase cero exacta.
+Todos los ensayos terminaron con continuidad y restauración exacta del Q:
+ADC14/40000, SPI, generador apagado con campos previos.
+[Resumen](diagnosticos/resultados_bode/phase_timing_summary_20261013.json).
+Cinco tests nuevos pasan: fase de circuito conservada, origen FILTER, par
+inverso, calibración sin doble corrección y toggles/historial GUI en los tres
+paneles. 21/22 tests filter_ui pasan; falla WAV mono previamente observado
+en el hilo anterior, fuera de Bode. No se modificó firmware ni calibraciones.
+
+---
+

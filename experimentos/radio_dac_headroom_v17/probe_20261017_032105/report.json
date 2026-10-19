@@ -1,0 +1,114 @@
+{
+  "ok": false,
+  "restored": true,
+  "cases": [],
+  "error": "RuntimeError('El Q cerr\u00f3 el flujo. Revisar el relay, la adquisici\u00f3n y el cable USB.')",
+  "traceback": "Traceback (most recent call last):\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/experimentos/radio_dac_headroom_v17/run.py\", line 20, in main\n    x.snapshot()\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/experimentos/otros_bits_cpu_relay_v17/run.py\", line 35, in snapshot\n    r=OutputReceiver(c,lambda b:None);r.decoder.numeric=True;r.select(Mode.SPI)\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v17/receiver/unoq_config_receiver.py\", line 352, in select\n    self._switch(Mode.SPI)\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v17/receiver/unoq_config_receiver.py\", line 336, in _switch\n    self.pump()\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v17/receiver/unoq_config_receiver.py\", line 290, in pump\n    began=time.monotonic();data=self.connection.read()\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v17/receiver/unoq_usb.py\", line 153, in read\n    raise RuntimeError('El Q cerr\u00f3 el flujo. Revisar el relay, la adquisici\u00f3n y el cable USB.')\nRuntimeError: El Q cerr\u00f3 el flujo. Revisar el relay, la adquisici\u00f3n y el cable USB.\n",
+  "old_mounts": [
+    {
+      "Type": "bind",
+      "Source": "/sys/devices/system/cpu/cpufreq/policy0/scaling_governor",
+      "Destination": "/scope_cpu_governor",
+      "Mode": "",
+      "RW": true,
+      "Propagation": "rprivate"
+    },
+    {
+      "Type": "bind",
+      "Source": "/home/arduino/.cache/serialmonitor/usb-stream-2c7a13b19bc7c90dcaf2/unoq_stream",
+      "Destination": "/work/unoq_stream",
+      "Mode": "",
+      "RW": false,
+      "Propagation": "rprivate"
+    }
+  ],
+  "old_cpuset": "",
+  "old_cap_add": [
+    "SYS_NICE"
+  ],
+  "old_scope_environment": [],
+  "old_relay": "/home/arduino/.cache/serialmonitor/usb-stream-2c7a13b19bc7c90dcaf2/unoq_stream",
+  "prior": {
+    "adc": {
+      "bits": 8,
+      "rate": 1600000
+    },
+    "generator": {
+      "wave": 0,
+      "enabled": 0,
+      "mode": 0,
+      "frequency": 2500,
+      "final_frequency": 2500,
+      "low": 0,
+      "high": 0,
+      "duration": 1000,
+      "duration_us": 0,
+      "duty": 50
+    }
+  },
+  "prior_identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v17-main-1",
+    "firmware_sha256": "23bc0e28212ea8c44de498f58a471a480e43feaa55899924b80d304f347de8ac"
+  },
+  "recovery_settings_source": "Last verified Radio report; initial stream unreadable before mutation",
+  "backup": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/respaldos/unoq/osciloscopio_20261017_032223_797634.zip",
+  "restored_low_policy": {
+    "governor": "schedutil",
+    "cpus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "scheduler": 0,
+    "priority": 0
+  },
+  "final_settings": {
+    "adc": {
+      "bits": 8,
+      "rate": 1600000
+    },
+    "generator": {
+      "wave": 0,
+      "enabled": 0,
+      "mode": 0,
+      "frequency": 2500,
+      "final_frequency": 2500,
+      "low": 0,
+      "high": 0,
+      "duration": 1000,
+      "duration_us": 0,
+      "duty": 50
+    }
+  },
+  "final_identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v17-main-1",
+    "firmware_sha256": "23bc0e28212ea8c44de498f58a471a480e43feaa55899924b80d304f347de8ac"
+  },
+  "recovery": {
+    "ok": true,
+    "samples": 15990912,
+    "status": {
+      "ack": 25762,
+      "rate": 1600000,
+      "bits": 8,
+      "dropped": 0,
+      "fatal": 0,
+      "epoch": 3,
+      "prepare_us": 34,
+      "check_us": 79,
+      "queue_slots": 8,
+      "node_pairs": 3456,
+      "queue": 1,
+      "queue_peak": 2,
+      "copy_ticks": 39257,
+      "poll_ticks": 222442,
+      "slack_ticks": 131702,
+      "send_ticks": 333319,
+      "produced": 4629
+    },
+    "method": "No administrative Q calls after final high-rate configuration"
+  }
+}

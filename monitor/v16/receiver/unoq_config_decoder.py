@@ -3,6 +3,7 @@ import secrets
 import struct
 import time
 import zlib
+from monitor.v16.receiver.native_unpack import unpack_native, NativeRecords, numeric_records, join_records
 from monitor.v16.receiver.unoq_usb import BLOCK, MASK, SAMPLE, ProtocolError
 from monitor.v16.receiver.unoq_generator import generator_reply
 from monitor.v16.receiver.unoq_wav import status as wav_status
@@ -12,6 +13,7 @@ from monitor.v16.receiver.unoq_switch import Mode, Phase, switch_request, switch
 
 class ConfigurationDecoder:
     def __init__(self):
+        self.numeric = False  # GUI opt-in; default readers keep Python rows.
         self.buffer = bytearray()
         self.sequence = None
         self.mode = None
@@ -126,7 +128,10 @@ class ConfigurationDecoder:
             # Do not retain a second list of tracked tuples for every frame:
             # at ADC100k it triggers collections in the audio refill path.
             if kind == 20:
-                if bits == 8 and channels == 1:
+                decoded=unpack_native(p[payload:payload+used],bits,channels,count,timestamp,period,index,self.numeric)
+                if decoded is not None:
+                    pass
+                elif bits == 8 and channels == 1:
                     decoded=[((timestamp+i*period)&MASK,a,0,(index+i)&MASK)
                              for i,a in enumerate(p[payload:payload+used])]
                 elif bits in (8,16) and channels == 2:
@@ -163,8 +168,13 @@ class ConfigurationDecoder:
                 for i, (a,b) in enumerate(struct.iter_unpack('<HH', p[84:84+used])):
                     if a>maximum or b>maximum: raise ProtocolError('ADC fuera de rango')
                     decoded.append(((timestamp+i*period)&MASK,a,b,(index+i)&MASK))
+            if self.numeric:
+                decoded=numeric_records(decoded)
             self.previous_timestamp,_,_,self.previous_index=decoded[-1]
             self.pairs += count
-            samples.extend(decoded)
+            if isinstance(decoded,NativeRecords):
+                samples.append(decoded)
+            else:
+                samples.extend(decoded)
             self.events.append(('samples', decoded))
-        return samples
+        return join_records(samples) if samples and isinstance(samples[0],NativeRecords) else samples

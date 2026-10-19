@@ -11,14 +11,14 @@ class SynthAdcLimitTests(unittest.TestCase):
         with patch('monitor.v16.app.usb_devices',return_value=[]):self.w=SerialMonitorWindow()
     def tearDown(self):self.w.close()
     def test_enter_caps_and_leave_restores_previous_rate(self):
-        w=self.w;w.config_rate_combo.setCurrentIndex(w.config_rate_combo.findData(250000))
+        w=self.w;w.config_rate_combo.setCurrentIndex(w.config_rate_combo.findData(363636))
         w.generator_mode.setCurrentIndex(5)
         self.assertEqual(w.config_rate_combo.currentData(),40000)
         for i in range(w.config_rate_combo.count()):
             if w.config_rate_combo.itemData(i)>40000:self.assertFalse(w.config_rate_combo.model().item(i).isEnabled())
         w.generator_mode.setCurrentIndex(0)
-        self.assertEqual(w.config_rate_combo.currentData(),250000)
-        self.assertTrue(w.config_rate_combo.model().item(w.config_rate_combo.findData(250000)).isEnabled())
+        self.assertEqual(w.config_rate_combo.currentData(),363636)
+        self.assertTrue(w.config_rate_combo.model().item(w.config_rate_combo.findData(363636)).isEnabled())
     def test_lower_rate_is_preserved(self):
         w=self.w;w.config_rate_combo.setCurrentIndex(w.config_rate_combo.findData(20000))
         w.generator_mode.setCurrentIndex(5)

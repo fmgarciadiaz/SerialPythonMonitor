@@ -1,0 +1,117 @@
+--- a/monitor/v17/app.py
++++ b/monitor/v17/app.py
+@@ -32,6 +32,7 @@
+ from monitor.v17.digital_filter import DigitalFilter, FilterConfig
+ from monitor.v17.radio_am import RadioConfig, radio_input_supported, radio_tuning_max
+ from monitor.v17.radio_stream import RadioStream, RadioTimeline
++from monitor.v17.processing import same_audio_continuity
+ from monitor.v17.processing import (BatchProcessor, ProcessingSettings,
+     initialize_process_owner, process_owner_ready, process_owned_result)
+ from monitor.v17.history import SampleHistory
+@@ -519,6 +520,7 @@
+         self.wav_requests = queue.Queue(maxsize=4)
+         self.wav_levels = queue.Queue(maxsize=1)
+         self.radio_output_source = None
++        self._radio_output_session = 0
+ 
+     def publish_batch(self,batch):
+         with self._batch_lock:
+@@ -528,6 +530,7 @@
+             self.pending_batches_peak=max(self.pending_batches_peak,self.pending_batches)
+             batch.pending_batches=self.pending_batches
+             settings = self.processing_settings
++            batch.radio_output_session = self._radio_output_session
+         if settings is None:
+             self.batch_ready.emit(batch)
+         elif settings.active and self.processing_backend=='process' and not self._ensure_process().done():
+@@ -576,13 +579,16 @@
+             self.processing_settings = settings
+ 
+     def set_radio_output_source(self, source):
+-        with self._batch_lock:self.radio_output_source=source
++        with self._batch_lock:
++            self._radio_output_session += 1
++            self.radio_output_source=source
+ 
+     def _feed_radio_output(self,batch):
+         result=getattr(batch,'processing',None)
+         with self._batch_lock:
+             source=self.radio_output_source;settings=self.processing_settings
+-        if source is not None and result is not None and settings is not None and settings.radio_enabled and result['generation']==settings.generation:
++            session=self._radio_output_session
++        if source is not None and result is not None and settings is not None and settings.radio_enabled and getattr(batch,'radio_output_session',None)==session and same_audio_continuity(result['settings'],settings):
+             columns=getattr(batch,'columns',{})
+             if 'CH1' in columns:
+                 source.observe_input(columns['CH1'],settings.acquisition.actual_rate)
+@@ -879,6 +885,7 @@
+         self.digital_filter = DigitalFilter()
+         self.filter_config = FilterConfig(source='OFF')
+         self._processing_generation = 0
++        self._audio_continuity_epoch = 0
+         self.channel_colors["FILTER"] = "#00e676"
+         self.series["FILTER"] = SampleHistory(MAX_BUFFER_SAMPLES)
+         self.known_columns = ["CH1", "CH2", "FILTER", "RADIO"]
+@@ -2701,7 +2708,7 @@
+         self.radio_stream=None;self.radio_key=None
+         self.radio_filter.reset()
+         if hasattr(self,'spectral'):self.spectral.reset()
+-        self._reset_processing_settings()
++        self._reset_processing_settings(levels_only=True)
+ 
+     def _sync_radio_gain_dial(self,value):
+         with QtCore.QSignalBlocker(self.radio_gain_dial):self.radio_gain_dial.setValue(round(value*10))
+@@ -2727,6 +2734,7 @@
+ 
+     def _processing_settings(self):
+         return ProcessingSettings(generation=self._processing_generation,
++            continuity_epoch=self._audio_continuity_epoch,
+             acquisition=self.applied_configuration, filter=self.filter_config,
+             radio_enabled=hasattr(self,'radio_enabled') and self.radio_enabled.isChecked(),
+             radio_frequency=self.radio_frequency.value()*1000 if hasattr(self,'radio_frequency') else 550000,
+@@ -2735,8 +2743,9 @@
+             radio_offset=self.radio_offset.value() if hasattr(self,'radio_offset') else 1.65,
+             radio_bandwidth=self.radio_bandwidth.currentData() if hasattr(self,'radio_bandwidth') else 9000.)
+ 
+-    def _reset_processing_settings(self):
++    def _reset_processing_settings(self, *, levels_only=False):
+         self._processing_generation += 1
++        if not levels_only:self._audio_continuity_epoch += 1
+         worker = getattr(self,'serial_worker',None)
+         if worker is not None:
+             worker.set_processing_settings(self._processing_settings())
+--- a/monitor/v17/processing.py
++++ b/monitor/v17/processing.py
+@@ -33,6 +33,7 @@
+ @dataclass(frozen=True)
+ class ProcessingSettings:
+     generation: int = 0
++    continuity_epoch: int = 0
+     acquisition: Configuration = Configuration()
+     filter: FilterConfig = FilterConfig(source='OFF')
+     radio_enabled: bool = False
+@@ -45,6 +46,13 @@
+     @property
+     def active(self):
+         return self.radio_enabled or self.filter.source != 'OFF'
++
++
++def same_audio_continuity(previous, current):
++    """Level edits preserve audio only within an explicit structural epoch."""
++    return (previous.continuity_epoch == current.continuity_epoch
++        and replace(previous, generation=current.generation,
++                    radio_gain=current.radio_gain, radio_offset=current.radio_offset) == current)
+ 
+ 
+ class BatchProcessor:
+@@ -62,10 +70,7 @@
+         if self.key != key:
+             previous,previous_config=self.key if self.key is not None else (None,None)
+             levels_only=(previous is not None and previous_config==config
+-                and settings.generation==previous.generation+1
+-                and (previous.radio_gain,previous.radio_offset)!=(settings.radio_gain,settings.radio_offset)
+-                and replace(previous,generation=settings.generation,
+-                    radio_gain=settings.radio_gain,radio_offset=settings.radio_offset)==settings)
++                and same_audio_continuity(previous, settings))
+             if not levels_only:
+                 self.rf_filter.reset(); self.audio_filter.reset()
+                 self.radio = None; self.previous_time = None

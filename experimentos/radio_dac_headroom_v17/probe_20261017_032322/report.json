@@ -1,0 +1,154 @@
+{
+  "ok": false,
+  "restored": true,
+  "cases": [
+    {
+      "report": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v17/generador_radio_20261017_032423/report.json",
+      "ok": false,
+      "queue_peak": 3,
+      "adc_status": {
+        "ack": 33125,
+        "rate": 1600000,
+        "bits": 8,
+        "dropped": 0,
+        "fatal": 0,
+        "epoch": 3,
+        "prepare_us": 333,
+        "check_us": 79,
+        "queue_slots": 8,
+        "node_pairs": 3456,
+        "queue": 1,
+        "queue_peak": 3,
+        "copy_ticks": 39608,
+        "poll_ticks": 227648,
+        "slack_ticks": 130305,
+        "send_ticks": 298564,
+        "produced": 6694
+      }
+    }
+  ],
+  "prior": {
+    "adc": {
+      "bits": 8,
+      "rate": 1600000
+    },
+    "generator": {
+      "wave": 0,
+      "enabled": 0,
+      "mode": 0,
+      "frequency": 2500,
+      "final_frequency": 2500,
+      "low": 0,
+      "high": 0,
+      "duration": 1000,
+      "duration_us": 0,
+      "duty": 50
+    }
+  },
+  "prior_identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v17-main-1",
+    "firmware_sha256": "23bc0e28212ea8c44de498f58a471a480e43feaa55899924b80d304f347de8ac"
+  },
+  "old_relay": "/home/arduino/.cache/serialmonitor/usb-stream-2c7a13b19bc7c90dcaf2/unoq_stream",
+  "old_cap_add": [
+    "SYS_NICE"
+  ],
+  "old_scope_environment": [],
+  "backup": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/respaldos/unoq/osciloscopio_20261017_032323_256726.zip",
+  "old_mounts": [
+    {
+      "Type": "bind",
+      "Source": "/sys/devices/system/cpu/cpufreq/policy0/scaling_governor",
+      "Destination": "/scope_cpu_governor",
+      "Mode": "",
+      "RW": true,
+      "Propagation": "rprivate"
+    },
+    {
+      "Type": "bind",
+      "Source": "/home/arduino/.cache/serialmonitor/usb-stream-2c7a13b19bc7c90dcaf2/unoq_stream",
+      "Destination": "/work/unoq_stream",
+      "Mode": "",
+      "RW": false,
+      "Propagation": "rprivate"
+    }
+  ],
+  "old_cpuset": "",
+  "normal_policy": {
+    "governor": "schedutil",
+    "cpus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "scheduler": 0,
+    "priority": 0
+  },
+  "candidate_hashes": {
+    "wav_protocol.h": "fa3dc26f8a6a591f48cd804e7b465f6b608407bee3cd9d07df41a58aac70a5a6",
+    "wav_dma.h": "18ca3b96c643f6d438c1ea91c3cc1a3524d206c1caee671771841344dae2bd38",
+    "wav.h": "0dc2b88b7d25de037fc0598c85b70b3903caaa3c2d6a92ea84b23ab680ddb1f2"
+  },
+  "error": "RuntimeError('Isolated audio trial failed')",
+  "traceback": "Traceback (most recent call last):\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/experimentos/radio_dac_headroom_v17/run.py\", line 34, in main\n    if not report['ok']:raise RuntimeError('Isolated audio trial failed')\nRuntimeError: Isolated audio trial failed\n",
+  "restored_low_policy": {
+    "governor": "schedutil",
+    "cpus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "scheduler": 0,
+    "priority": 0
+  },
+  "final_settings": {
+    "adc": {
+      "bits": 8,
+      "rate": 1600000
+    },
+    "generator": {
+      "wave": 0,
+      "enabled": 0,
+      "mode": 0,
+      "frequency": 2500,
+      "final_frequency": 2500,
+      "low": 0,
+      "high": 0,
+      "duration": 1000,
+      "duration_us": 0,
+      "duty": 50
+    }
+  },
+  "final_identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v17-main-1",
+    "firmware_sha256": "23bc0e28212ea8c44de498f58a471a480e43feaa55899924b80d304f347de8ac"
+  },
+  "recovery": {
+    "ok": true,
+    "samples": 15990912,
+    "status": {
+      "ack": 25930,
+      "rate": 1600000,
+      "bits": 8,
+      "dropped": 0,
+      "fatal": 0,
+      "epoch": 3,
+      "prepare_us": 34,
+      "check_us": 79,
+      "queue_slots": 8,
+      "node_pairs": 3456,
+      "queue": 1,
+      "queue_peak": 2,
+      "copy_ticks": 39268,
+      "poll_ticks": 217343,
+      "slack_ticks": 131466,
+      "send_ticks": 333849,
+      "produced": 4629
+    },
+    "method": "No administrative Q calls after final high-rate configuration"
+  }
+}

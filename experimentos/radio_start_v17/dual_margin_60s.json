@@ -1,0 +1,148 @@
+{
+  "scope": "Physical ADC10 CH1 to dual with RADIO TEST; transport integrity only, no analog acceptance or GUI FPS",
+  "cases": [
+    {
+      "cycle": 0,
+      "ch1": {
+        "seconds": 2.0002476120134816,
+        "samples": 2282880,
+        "status": {
+          "ack": 1237428,
+          "rate": 1142857,
+          "bits": 10,
+          "dropped": 0,
+          "fatal": 0,
+          "epoch": 8,
+          "prepare_us": 38,
+          "check_us": 79,
+          "node_pairs": 2784,
+          "queue": 1,
+          "queue_peak": 2,
+          "copy_ticks": 32752,
+          "poll_ticks": 225771,
+          "slack_ticks": 183137,
+          "send_ticks": 328574,
+          "produced": 820
+        },
+        "maxima": {
+          "queue": 1,
+          "queue_peak": 2,
+          "copy_ticks": 32752,
+          "poll_ticks": 225771,
+          "send_ticks": 602382
+        },
+        "minimum_send_margin": -0.5455203201970444,
+        "mean_observed_send_margin": 0.10081477145824437,
+        "send_margin_observations": 819,
+        "integrity_ok": true
+      },
+      "generator": {
+        "wave": 1,
+        "enabled": 1,
+        "mode": 3,
+        "frequency": 20000000,
+        "final_frequency": 40000000,
+        "low": 807,
+        "high": 3288,
+        "duration": 1000,
+        "duration_us": 0,
+        "duty": 50
+      },
+      "dual": {
+        "seconds": 60.000104996957816,
+        "samples": 31146696,
+        "status": {
+          "ack": 1326936,
+          "rate": 519480,
+          "bits": 10,
+          "dropped": 0,
+          "fatal": 0,
+          "epoch": 9,
+          "prepare_us": 72,
+          "check_us": 80,
+          "node_pairs": 4176,
+          "queue": 1,
+          "queue_peak": 2,
+          "copy_ticks": 106690,
+          "poll_ticks": 287332,
+          "slack_ticks": 1006523,
+          "send_ticks": 1127251,
+          "produced": 7459
+        },
+        "maxima": {
+          "queue": 2,
+          "queue_peak": 2,
+          "copy_ticks": 106690,
+          "poll_ticks": 287332,
+          "send_ticks": 1430475
+        },
+        "minimum_send_margin": -0.11216459546200919,
+        "mean_observed_send_margin": 0.08568653316724202,
+        "send_margin_observations": 8266,
+        "integrity_ok": true
+      }
+    }
+  ],
+  "ok": true,
+  "restored": true,
+  "relay_sources_sha256": {
+    "arduino/v17/relay/unoq_config_stream.c": "ac31444cad2d456241de6e64cfb3369393762948663c85220c80685d7c4cb393",
+    "arduino/v17/relay/base_verifier.c": "66499e8bbec8ae3058a0624c9377c9fad6d5ef6a0fbb3f8de70d0c58eaab5bb0",
+    "arduino/v17/relay/additional_profiles.h": "b8d94095548a562807ba48fd08b6f9cb6c4148e9926ee80cf0e46bc6142e5591",
+    "arduino/v17/relay/native_profiles.h": "b351470a05ebfb7ba5d187ab264c8c3e9721d25141ae3b08900eae29a1a41c79",
+    "arduino/v17/relay/config_relay_protocol.h": "443de31923d9b6cc7b87bed58e26c5cb9b538dc66e38a72674ba600f018e9b8a",
+    "arduino/v17/relay/transport_policy.h": "7da1fd18188fc13925a6ceea12a1bd107299c155c2d1322425f92a24425527b2",
+    "arduino/v17/relay/high_rate_profile.h": "d5f88703840f6c3860895877016e59cffb76ae25ee977326ee775f1bbf65ca8e"
+  },
+  "identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v17-main-1",
+    "firmware_sha256": "3e275a52cb560bf08bca481972a18ff21debc9442236b65f55b74c566c9cac8c"
+  },
+  "recovery": {
+    "seconds": 10.000090084038675,
+    "samples": 311296,
+    "status": {
+      "ack": 1333527,
+      "rate": 31250,
+      "bits": 14,
+      "dropped": 0,
+      "fatal": 0,
+      "epoch": 10,
+      "prepare_us": 106,
+      "check_us": 80
+    },
+    "maxima": {
+      "queue": 0,
+      "queue_peak": 0,
+      "copy_ticks": 0,
+      "poll_ticks": 0,
+      "send_ticks": 0
+    },
+    "minimum_send_margin": 1.0,
+    "mean_observed_send_margin": null,
+    "send_margin_observations": 0,
+    "integrity_ok": true
+  },
+  "final_adc": {
+    "bits": 14,
+    "rate": 31250
+  },
+  "final_generator": {
+    "wave": 0,
+    "enabled": 0,
+    "mode": 0,
+    "frequency": 2500,
+    "final_frequency": 2500,
+    "low": 0,
+    "high": 4095,
+    "duration": 1000,
+    "duration_us": 0,
+    "duty": 50
+  },
+  "final_identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v17-main-1",
+    "firmware_sha256": "3e275a52cb560bf08bca481972a18ff21debc9442236b65f55b74c566c9cac8c"
+  }
+}

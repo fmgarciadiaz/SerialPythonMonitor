@@ -18,7 +18,7 @@ from spi_benchmark import IMAGE
 
 def start_relay(board,target):
  usb_stream.stop(board)
- board.shell('docker','run','-d','--name',usb_stream.CONTAINER,'--network','host','--read-only','--cap-drop','ALL','--security-opt','no-new-privileges','--user','0:0','--device','/dev/spidev0.0:/dev/spidev0.0:rw','--device','/dev/gpiochip1:/dev/gpiochip1:rw','--mount',f'type=bind,src={target},dst=/work/unoq_stream,readonly','--entrypoint','/work/unoq_stream',IMAGE)
+ board.shell('docker','run','-d','--name',usb_stream.CONTAINER,'--network','host','--read-only','--cap-drop','ALL',*(['--cap-add','SYS_NICE'] if board.config.get('local_app')=='arduino/v16/oscilloscope' else []),'--security-opt','no-new-privileges','--user','0:0','--device','/dev/spidev0.0:/dev/spidev0.0:rw','--device','/dev/gpiochip1:/dev/gpiochip1:rw','--mount',f'type=bind,src={target},dst=/work/unoq_stream,readonly','--entrypoint','/work/unoq_stream',IMAGE)
  end=time.monotonic()+15
  while time.monotonic()<end:
   logs=board.run('shell','docker logs '+usb_stream.CONTAINER+' 2>&1',capture=True).stdout

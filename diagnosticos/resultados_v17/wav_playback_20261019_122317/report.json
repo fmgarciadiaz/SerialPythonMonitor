@@ -1,0 +1,121 @@
+{
+  "cases": [
+    {
+      "bits": 14,
+      "adc_rate": 100000,
+      "audio_rate": 50000,
+      "radio": false,
+      "samples": 6514946,
+      "errors": [
+        "WAV 4/2",
+        "WAV 4/0"
+      ],
+      "states": [
+        {
+          "state": 0,
+          "reason": 0,
+          "played": 902400,
+          "accepted": 909600
+        },
+        {
+          "state": 1,
+          "reason": 0,
+          "played": 0,
+          "accepted": 0
+        },
+        {
+          "state": 2,
+          "reason": 0,
+          "played": 0,
+          "accepted": 7680
+        },
+        {
+          "state": 4,
+          "reason": 2,
+          "played": 2955840,
+          "accepted": 2956320
+        },
+        {
+          "state": 0,
+          "reason": 0,
+          "played": 2955840,
+          "accepted": 2956320
+        }
+      ],
+      "play_requested": true,
+      "max_played": 2951520,
+      "dac_reserve_min_ms": 76.8,
+      "live_epoch": 3,
+      "generator_status": "Interrumpido: faltaron muestras \u00b7 59,12 / 179,59 s \u00b7 motivo 2",
+      "metadata": {
+        "rate": 16000,
+        "bits": 16,
+        "channels": 1,
+        "encoding": "PCM",
+        "align": 2,
+        "duration": 179.5933125
+      },
+      "selected": true,
+      "pending_peak": 3,
+      "dsp_peak": 0,
+      "gui_delay_max_ms": 64.64663299266249,
+      "ok": false
+    }
+  ],
+  "errors": [
+    "Traceback (most recent call last):\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v17/app.py\", line 5220, in _auto_apply_configuration\n    self.apply_output()\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v17/app.py\", line 5231, in apply_output\n    config = Configuration(self.config_bits_combo.currentData(), self.config_rate_combo.currentData())\n  File \"<string>\", line 5, in __init__\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v17/receiver/unoq_acquisition.py\", line 35, in __post_init__\n    raise ValueError('Bits o tasa no admitidos por la adquisici\u00f3n actual')\nValueError: Bits o tasa no admitidos por la adquisici\u00f3n actual\n",
+    "Traceback (most recent call last):\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v17/app.py\", line 5220, in _auto_apply_configuration\n    self.apply_output()\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v17/app.py\", line 5231, in apply_output\n    config = Configuration(self.config_bits_combo.currentData(), self.config_rate_combo.currentData())\n  File \"<string>\", line 5, in __init__\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v17/receiver/unoq_acquisition.py\", line 35, in __post_init__\n    raise ValueError('Bits o tasa no admitidos por la adquisici\u00f3n actual')\nValueError: Bits o tasa no admitidos por la adquisici\u00f3n actual\n"
+  ],
+  "restored": true,
+  "platform": "cocoa",
+  "prior": {
+    "adc": {
+      "bits": 16,
+      "rate": 76226
+    },
+    "generator": {
+      "wave": 0,
+      "enabled": 0,
+      "mode": 0,
+      "frequency": 2500,
+      "final_frequency": 2500,
+      "low": 0,
+      "high": 0,
+      "duration": 1000,
+      "duration_us": 0,
+      "duty": 50
+    }
+  },
+  "identity_before": {
+    "board_serial": "1060031107",
+    "app": "scope-v17-main-1",
+    "firmware_sha256": "f3cab6f48a0d6b45fb7c1329ceee7e485f6cf32baadac1c9578533d1f5090bf5"
+  },
+  "recovery": {
+    "samples": 382752,
+    "status": {
+      "ack": 74781247,
+      "rate": 76226,
+      "bits": 16,
+      "dropped": 0,
+      "fatal": 0,
+      "epoch": 236,
+      "prepare_us": 46,
+      "check_us": 48,
+      "queue_slots": 4,
+      "node_pairs": 3456,
+      "queue": 1,
+      "queue_peak": 1,
+      "copy_ticks": 67427,
+      "poll_ticks": 240102,
+      "slack_ticks": 7010800,
+      "send_ticks": 1575101,
+      "produced": 112
+    }
+  },
+  "identity_after": {
+    "board_serial": "1060031107",
+    "app": "scope-v17-main-1",
+    "firmware_sha256": "f3cab6f48a0d6b45fb7c1329ceee7e485f6cf32baadac1c9578533d1f5090bf5"
+  }
+}

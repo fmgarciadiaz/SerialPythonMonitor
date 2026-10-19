@@ -40,7 +40,8 @@ class DigitalFilter:
                 for mode,frequency in ([('highpass',cutoff),('lowpass',upper)] if config.mode=='bandpass' else [(config.mode,cutoff)]):
                     w=2*rate*np.tan(np.pi*frequency/rate)
                     b,a=bilinear([1,0] if mode=='highpass' else [w],[1,w],fs=rate)
-                    sections.extend(tf2sos(b,a))
+                    for _ in range(config.order):
+                        sections.extend(tf2sos(b,a))
                 self.sos=np.asarray(sections)
             else:
                 edge=[cutoff,upper] if config.mode=='bandpass' else cutoff

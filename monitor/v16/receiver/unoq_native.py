@@ -1,9 +1,10 @@
-"""Physically accepted native-clock profiles, shared with firmware generation."""
+"""Native-clock maxima and additional profiles with explicit validation status."""
 import json
 from pathlib import Path
 
 _path = Path(__file__).with_name('native_profiles.json')
-PROFILES = tuple(json.loads(_path.read_text()) if _path.exists() else ())
+_extra = Path(__file__).with_name('additional_profiles.json')
+PROFILES = tuple(json.loads(_path.read_text()) if _path.exists() else ()) + tuple(json.loads(_extra.read_text()) if _extra.exists() else ())
 
 
 def profile(bits, rate):

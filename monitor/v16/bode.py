@@ -14,6 +14,7 @@ if pg.Qt.QT_LIB != "PyQt6":
 from monitor.v16.receiver.unoq_generator import GeneratorConfig
 from monitor.v16.receiver.unoq_switch import Phase
 from monitor.v16.bode_calibration import load_reference, correct_transfer
+from monitor.v16.bode_timing import pair_delay_us, correct_phase
 from monitor.v16.plot_fill import area_polygons
 
 
@@ -89,6 +90,8 @@ class BodeSweep:
         self.history_profiles = []
         self.history_instruments = []
         self.history_methods = []
+        self.history_delays = []
+        self.result_delay_us = 0.0
         self.result_instrument = None
         self.result_method = 'tone'
         self.result_profile = None
@@ -127,12 +130,11 @@ class BodeSweep:
         self.curve_labels = QtWidgets.QLabel()
         self.curve_labels.setWordWrap(True)
         form.addRow(self.curve_labels)
-        self.calibrated = QtWidgets.QCheckBox('Corregir con calibración')
-        self.calibrated.setChecked(self.reference is not None)
-        self.calibrated.setEnabled(self.reference is not None)
-        self.calibrated.setToolTip('Requiere referencia validada para el firmware, reloj ADC y perfil conectados. La referencia histórica no se aplica a la cadena actual.')
-        self.calibrated.toggled.connect(self.draw)
-        form.addRow(self.calibrated)
+        self.correction = QtWidgets.QCheckBox('Corregir (estimado)')
+        self.correction.setChecked(True)
+        self.correction.setToolTip('Compensa el retardo ADC estimado. Desmarcar para ver los datos crudos.')
+        self.correction.toggled.connect(self.draw)
+        form.addRow(self.correction)
         self.log_frequency = QtWidgets.QCheckBox('Eje X logarítmico')
         self.log_frequency.setChecked(True)
         self.log_frequency.toggled.connect(self.change_axis)
@@ -164,7 +166,7 @@ class BodeSweep:
     def pair_changed(self):
         if self.active:self.cancel('Par de canales cambiado')
         self.result.clear();self.history.clear();self.history_profiles.clear()
-        self.history_instruments.clear();self.history_methods.clear()
+        self.history_instruments.clear();self.history_methods.clear();self.history_delays.clear()
         self.result_profile=None
         self.spectral.bode.refresh_reference()
         self.status.setText('Referencia X / respuesta Y · '+self.pair_label())
@@ -219,11 +221,13 @@ class BodeSweep:
                 self.history_profiles.append(self.result_profile)
                 self.history_instruments.append(self.result_instrument)
                 self.history_methods.append(self.result_method)
+                self.history_delays.append(self.result_delay_us)
         else:
             self.history.clear()
             self.history_profiles.clear()
-            self.history_instruments.clear(); self.history_methods.clear()
+            self.history_instruments.clear(); self.history_methods.clear(); self.history_delays.clear()
         self.result_profile = owner.applied_configuration
+        self.result_delay_us = pair_delay_us(self.result_profile, self.pair(), owner.filter_config.source)
         self.result_instrument = self.spectral.bode.instrument if self.pair()==('CH1','CH2') else None
         self.result_method = 'tone'
         self.index = 0; self.result.clear(); self.invalid_points = []; self.active = True
@@ -324,10 +328,10 @@ class BodeSweep:
         gains = int(np.count_nonzero(~np.isnan(data[:,1])))
         phases = int(np.count_nonzero(np.isfinite(data[:,2])))
         self.coverage.setText(f'Ganancia: {gains}/{target} · Fase: {phases}/{target}')
-        if self.calibrated.isChecked() and self.result_profile is not None:
+        if self.correction.isChecked() and self.result_profile is not None:
             reference, instrument = self.reference_for(len(self.history), self.result_profile)
             _, corrected = correct_transfer(data, reference, self.result_profile, instrument)
-            self.coverage.setText(self.coverage.text()+f'\nCalibración: {int(corrected.sum())}/{len(data)} puntos')
+            self.coverage.setText(self.coverage.text()+f'\nCorrección: {int(corrected.sum())} medidos · {len(data)-int(corrected.sum())} estimados')
         self.coverage.setToolTip('Cada marcador es una frecuencia medida. La fase se omite cuando no se puede resolver, sin descartar la ganancia.')
 
     def draw_curve(self, result, index):
@@ -335,9 +339,7 @@ class BodeSweep:
         data = np.asarray(result)
         profiles = self.history_profiles + [self.result_profile]
         profile = profiles[index] if index < len(profiles) else None
-        if self.calibrated.isChecked() and profile is not None:
-            reference, instrument = self.reference_for(index, profile)
-            data, _ = correct_transfer(data, reference, profile, instrument)
+        data = self.display_data(data, index, profile)
         color = self.owner.channel_palette[index]
         for i in range(2):
             values = data[:,1].copy() if i == 0 else data[:,2].copy()
@@ -365,6 +367,21 @@ class BodeSweep:
             xfill, yfill = area_polygons(xdraw, ydraw, bottom)
             self.shadows[index][i].setData(xfill, yfill,
                 pen=None, fillLevel='enclosed', fillBrush=pg.mkBrush(shadow), connect='finite')
+
+    def display_data(self, data, index, profile):
+        # Measured calibration already includes rank skew: never subtract twice.
+        raw = np.asarray(data, dtype=float)
+        corrected = np.zeros(len(raw), dtype=bool)
+        data = raw.copy()
+        if self.correction.isChecked() and profile is not None:
+            reference, instrument = self.reference_for(index, profile)
+            data, corrected = correct_transfer(raw, reference, profile, instrument)
+        if self.correction.isChecked() and profile is not None:
+            delays = self.history_delays + [self.result_delay_us]
+            delay = delays[index] if index < len(delays) else 0.0
+            estimated = correct_phase(raw, delay)
+            data[~corrected] = estimated[~corrected]
+        return data
 
     def reference_for(self, index, profile):
         from monitor.v16.bode_calibration import find_reference

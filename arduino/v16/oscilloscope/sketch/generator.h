@@ -71,8 +71,10 @@ static bool apply(const scope_gen::Config &c) {
     const uint16_t initial=c.enabled?(c.duration_us?c.low:value(c.wave,0,c.low,c.high)):0;
     if(!generator_hw::stop(initial)) {faulted=true;irq_unlock(key);return false;}
     points=prepared_points;
+    const unsigned high_points=(points*c.duty+50)/100;
+    const unsigned square_high=high_points<1?1:high_points>=points?points-1:high_points;
     for(unsigned i=0;i<points;++i)
-        samples[i]=value(c.wave,uint32_t((uint64_t(i)<<32)/points),c.low,c.high);
+        samples[i]=c.wave==0?(i<square_high?c.high:c.low):value(c.wave,uint32_t((uint64_t(i)<<32)/points),c.low,c.high);
     bool ok=true;
     if(c.enabled) {
         if(c.wave==4) ok=c.duration_us?generator_hw::pulse(c.high,c.low,c.duration):generator_hw::stop(c.high);

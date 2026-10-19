@@ -4,7 +4,7 @@ namespace generator {
 struct Timing { uint16_t prescaler, reload; };
 constexpr uint32_t DAC_TIMER_HZ=160000000;
 inline unsigned points_for(const scope_gen::Config &c) {
-    if(c.wave==0) return 2;
+    if(c.wave==0) return c.duty==50?2:unsigned(c.frequency<=10000000?100:uint64_t(scope_gen::UPDATE_HZ)*1000/c.frequency);
     uint32_t maximum=c.mode && c.final_frequency>c.frequency?c.final_frequency:c.frequency;
     unsigned points=256;
     while(uint64_t(maximum)*points>uint64_t(scope_gen::UPDATE_HZ)*1000 && points>16) points/=2;

@@ -1,0 +1,291 @@
+{
+  "ok": false,
+  "restored": true,
+  "cases": [
+    {
+      "adc": {
+        "bits": 14,
+        "rate": 40000
+      },
+      "period": 25,
+      "node_pairs": 2048,
+      "actual_rate": 40000.0,
+      "stage": "legacy_before",
+      "requested_seconds": 10,
+      "ok": true,
+      "scheduler": {
+        "policy": 0,
+        "priority": 0
+      },
+      "seconds": 10.000403710990213,
+      "samples": 399360,
+      "observed_rate": 39934.38780487557,
+      "status": {
+        "ack": 7891,
+        "rate": 40000,
+        "bits": 14,
+        "dropped": 0,
+        "fatal": 0,
+        "epoch": 1,
+        "prepare_us": 123,
+        "check_us": 80
+      },
+      "wall_monotonic_drift_seconds": -9.686627890914679e-05
+    },
+    {
+      "adc": {
+        "bits": 10,
+        "rate": 1167883
+      },
+      "period": 137,
+      "node_pairs": 5568,
+      "actual_rate": 1167883.211678832,
+      "stage": "finalist",
+      "requested_seconds": 60,
+      "ok": true,
+      "scheduler": {
+        "policy": 1,
+        "priority": 10
+      },
+      "scheduler_verification": "Relay kernel getters checked before forwarding APPLIED; logs persisted",
+      "seconds": 60.00032861996442,
+      "samples": 70044744,
+      "observed_rate": 1167406.0061179968,
+      "status": {
+        "ack": 102497,
+        "rate": 1167883,
+        "bits": 10,
+        "dropped": 0,
+        "fatal": 0,
+        "epoch": 1,
+        "prepare_us": 35,
+        "check_us": 79,
+        "node_pairs": 5568,
+        "queue": 1,
+        "queue_peak": 4,
+        "copy_ticks": 62521,
+        "poll_ticks": 251981,
+        "slack_ticks": 526985,
+        "send_ticks": 767044,
+        "produced": 12787
+      },
+      "wall_monotonic_drift_seconds": -0.0005446271970868111,
+      "metrics": {
+        "mean_send_headroom": 0.07071132301159055,
+        "maxima": {
+          "queue_peak": 4,
+          "copy_ticks": 62521,
+          "poll_ticks": 251981,
+          "slack_ticks": 526985
+        },
+        "send_mean_us": 4430.476696409941,
+        "send_observations": 100639
+      },
+      "headroom_ok": false
+    },
+    {
+      "adc": {
+        "bits": 10,
+        "rate": 909090
+      },
+      "period": 176,
+      "node_pairs": 8192,
+      "actual_rate": 909090.9090909091,
+      "stage": "normal_after_finalist",
+      "requested_seconds": 3,
+      "ok": true,
+      "scheduler": {
+        "policy": 0,
+        "priority": 0
+      },
+      "seconds": 3.0003173729637638,
+      "samples": 2725848,
+      "observed_rate": 908519.886783631,
+      "status": {
+        "ack": 108606,
+        "rate": 909090,
+        "bits": 10,
+        "dropped": 0,
+        "fatal": 0,
+        "epoch": 2,
+        "prepare_us": 96,
+        "check_us": 80,
+        "node_pairs": 8192,
+        "queue": 1,
+        "queue_peak": 2,
+        "copy_ticks": 121473,
+        "poll_ticks": 289300,
+        "slack_ticks": 1147353,
+        "send_ticks": 1177311,
+        "produced": 478
+      },
+      "wall_monotonic_drift_seconds": -2.721755299717188e-05,
+      "metrics": {
+        "mean_send_headroom": 0.14692390215564333,
+        "maxima": {
+          "queue_peak": 2,
+          "copy_ticks": 121473,
+          "poll_ticks": 289300,
+          "slack_ticks": 1147353
+        },
+        "send_mean_us": 7687.239332895067,
+        "send_observations": 3993
+      },
+      "headroom_ok": true
+    },
+    {
+      "adc": {
+        "bits": 10,
+        "rate": 1167883
+      },
+      "period": 137,
+      "node_pairs": 5568,
+      "actual_rate": 1167883.211678832,
+      "stage": "acceptance_1",
+      "requested_seconds": 120,
+      "ok": false,
+      "scheduler": {
+        "policy": 1,
+        "priority": 10
+      },
+      "scheduler_verification": "Relay kernel getters checked before forwarding APPLIED; logs persisted",
+      "error": "RuntimeError('El Q cerr\u00f3 el flujo. Revisar el relay, la adquisici\u00f3n y el cable USB.')"
+    }
+  ],
+  "scope": "V17 production CH1 maxima; no analog/dual/GUI acceptance",
+  "acceptance_seconds": [
+    60,
+    120,
+    120,
+    120
+  ],
+  "runner_sha256": "4bda93430ba7366986f08a66052497208a1107a0bfe1df2151bfd9e274d5fc10",
+  "source_hashes": {
+    "arduino/v17/unoq.json": "9ad1779ac9cc006e423506bc62301f8cd137464e8ca45c5d315369ae85d86977",
+    "arduino/v17/README.md": "643e5762ddcac510ac8c2e0e5888ccb1e8fb80536c9020b3bbffcf0f8e9efadf",
+    "arduino/v17/manifest.json": "a4c7e0de5eca2f26b7727b272ebca0683dd1dcf0dd021d3ee563ce1caec559b7",
+    "arduino/v17/tests/checker.c": "0c1f45738c0db95044fc6142f1a90f440abc0d9e875b75b77ac12b1763dd8d29",
+    "arduino/v17/tests/radio_test_table.cpp": "1689733948e9202ff147108ce16cb1ec7b45f02c60a852e624745bc0a5571a20",
+    "arduino/v17/tests/radio_test_backend.h": "50d598c43b615cdd798ac0f59b8de4a94dba6d4076d8658c5b0b6d2aff8f55df",
+    "arduino/v17/tests/node_validation.cpp": "c02c6baa57c5980b495d5b8a45ec99ce4d8581f8dddeb8cd2b106838e0abfc44",
+    "arduino/v17/tests/generator_duty.cpp": "066442d3bc9987368b4c6e1f75408ac1c397ca2ff8cabeea71847db0a09e2ab2",
+    "arduino/v17/tests/golden.cpp": "ee219a48fd6dc8049b6e22f73def305701fa039c47764b56e7b24c8c7f6b5588",
+    "arduino/v17/tests/generator_timing.cpp": "c53c9f2a8dbf8117700baba40d3aee15e2f08c234055f43abe20712352c67fd7",
+    "arduino/v17/relay/unoq_config_stream.c": "a8e6bb168f1e12571fae5752d1c7303418efb8b224d0bc3403f2a02378e679e3",
+    "arduino/v17/relay/base_verifier.c": "66499e8bbec8ae3058a0624c9377c9fad6d5ef6a0fbb3f8de70d0c58eaab5bb0",
+    "arduino/v17/relay/additional_profiles.h": "b8d94095548a562807ba48fd08b6f9cb6c4148e9926ee80cf0e46bc6142e5591",
+    "arduino/v17/relay/native_profiles.h": "b351470a05ebfb7ba5d187ab264c8c3e9721d25141ae3b08900eae29a1a41c79",
+    "arduino/v17/relay/config_relay_protocol.h": "f8d691516c550be85063d4041fd9a55aca7fda8a470cbbcd07462fc657cfa7ca",
+    "arduino/v17/relay/high_rate_profile.h": "d5f88703840f6c3860895877016e59cffb76ae25ee977326ee775f1bbf65ca8e",
+    "arduino/v17/oscilloscope/app.yaml": "f5c6c3b2263d221cd7e0753cd21aa2fd97de2f16bd1f0090b942f423552dfb03",
+    "arduino/v17/oscilloscope/python/main.py": "b3bfd0d2c5282d4a3e84cb47d9b2c565721c7dda41f1c253a42908e0ae18587b",
+    "arduino/v17/oscilloscope/sketch/scope_protocol.h": "c2bf92aed1aac5efc4f6283cd302297d3c8be3ce40e7b838fa8d5bcacef9d612",
+    "arduino/v17/oscilloscope/sketch/node_validation.h": "f0c38dae55f9fbfb2d4aece35643df6264fbc0c7b054c14ef301a2dd750cfa38",
+    "arduino/v17/oscilloscope/sketch/generator_timing.h": "dc0079e0eb590188d3aa5f64b02a6b792bc2af1e62217ea2c26dcd339fd1b505",
+    "arduino/v17/oscilloscope/sketch/acquisition_storage.h": "bc800194e8e7b1a0a12eb797afbdcced1149d802a8515e2419bd6ad4e44f00ba",
+    "arduino/v17/oscilloscope/sketch/wav_queue.h": "002553b2c58ff1343a218959f58632a394656aeb0f28fc74bb17a97f2793dd83",
+    "arduino/v17/oscilloscope/sketch/generator_dma.h": "faec31f7ebb7cb64ec04d3c9c8e94225cd66a7513535f7eca9b4be6d282e697c",
+    "arduino/v17/oscilloscope/sketch/control_protocol.h": "1c9ea38fa73b7e6fcfb88bde462077b319b7ebada3eab787c33fdcbbaa84ee3a",
+    "arduino/v17/oscilloscope/sketch/sketch.yaml": "2ee56ed8561b6ea420885ed62ca804f498a54825ce6df906168e78a014c424ea",
+    "arduino/v17/oscilloscope/sketch/sketch.ino": "d94593ef021693b5be0cae9ce08b1136e2bb4546602d426d7e9097e38783e349",
+    "arduino/v17/oscilloscope/sketch/wav_dma.h": "919e3d2254486e531d021a54b66d854550ed1de4591ed1993a9650a377b8a40d",
+    "arduino/v17/oscilloscope/sketch/wav.h": "d56b86cbcac01c78ef5936ab17c4c04e944137dd575a49470fe60e33e876b2c2",
+    "arduino/v17/oscilloscope/sketch/sample_packing.h": "969227ee4db1ed2be4edafacf616d327fad996b117098d4413d3fed76ec05c43",
+    "arduino/v17/oscilloscope/sketch/additional_profiles.h": "b8d94095548a562807ba48fd08b6f9cb6c4148e9926ee80cf0e46bc6142e5591",
+    "arduino/v17/oscilloscope/sketch/generator_protocol.h": "cbaa83d19c0fc1534bbfd56840bfae673311208ddab94b3d3ad621a85cf56584",
+    "arduino/v17/oscilloscope/sketch/native_profiles.h": "b351470a05ebfb7ba5d187ab264c8c3e9721d25141ae3b08900eae29a1a41c79",
+    "arduino/v17/oscilloscope/sketch/radio_test.h": "257bec979251cdee8ea4e5c602c1b2721340e1d2c62d34596db5d63bb678b46e",
+    "arduino/v17/oscilloscope/sketch/node_validation_fast.h": "5e582042ee500b79946b0e4ca5e238abfee3bdc08752b5d16b639a0e193c046a",
+    "arduino/v17/oscilloscope/sketch/high_rate_profile.h": "d5f88703840f6c3860895877016e59cffb76ae25ee977326ee775f1bbf65ca8e",
+    "arduino/v17/oscilloscope/sketch/crc32_fast.h": "994c2247c4fdb7c4863511fe97879fc7597a5a80c23c3aecdcc5c3270cdf6241",
+    "arduino/v17/oscilloscope/sketch/benchmark_protocol.h": "8ab078d333b64c9c55e20c8476ce9fbe6a7a17f9dd24582717f263c5c2ea4763",
+    "arduino/v17/oscilloscope/sketch/scope_config.h": "827bb698332fb2405306c57b4ab4e5389c95969185096d780f97c750abcc04b1",
+    "arduino/v17/oscilloscope/sketch/acquisition.h": "73f2e06334b01668b5b931f11143ac132ea49185eaa56b1f811ccc2c90e597ae",
+    "arduino/v17/oscilloscope/sketch/frame_buffer.h": "ac0d1d25cbfd5db0ea629d6990a919bb72de07c116fa23f9689f7db1e32c37f5",
+    "arduino/v17/oscilloscope/sketch/wav_protocol.h": "b321c16d3938a97acf624f0f49c05b0db3717764c46e482424e3e24c371f59d9",
+    "arduino/v17/oscilloscope/sketch/generator.h": "db57bffce56330a1a6f4099a744ee93d50646545d7d1b1453292132a86579345",
+    "arduino/v17/oscilloscope/sketch/acquisition_protocol.h": "83838fb7388aa6b837757b83b963f5951b174dd58b49d6b3be93c8c3aa51c376"
+  },
+  "prior_identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v17-main-1",
+    "firmware_sha256": "d8a6f1d0f9c9df03f4abdd09df585cccfa1de6639f7026c00df651b10d24eddf"
+  },
+  "prior": {
+    "adc": {
+      "bits": 10,
+      "rate": 909090
+    },
+    "generator": {
+      "wave": 0,
+      "enabled": 0,
+      "mode": 0,
+      "frequency": 2500,
+      "final_frequency": 2500,
+      "low": 0,
+      "high": 0,
+      "duration": 1000,
+      "duration_us": 0,
+      "duty": 50
+    }
+  },
+  "old_relay": "/home/arduino/.cache/serialmonitor/usb-stream-84ecc0e6c3dc73571e8b/unoq_stream",
+  "old_cap_add": [
+    "SYS_NICE"
+  ],
+  "old_scope_environment": [],
+  "backup": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/respaldos/unoq/osciloscopio_20261014_091549_072871.zip",
+  "relay": "/home/arduino/.cache/serialmonitor/usb-stream-e4902089216244bfe271/unoq_stream",
+  "remote_backup": "/home/arduino/.cache/serialmonitor/v17-before-optimized-optimized_integration_20261014_091548",
+  "error": "RuntimeError('El Q cerr\u00f3 el flujo. Revisar el relay, la adquisici\u00f3n y el cable USB.')",
+  "rolled_back": true,
+  "final_settings": {
+    "adc": {
+      "bits": 10,
+      "rate": 909090
+    },
+    "generator": {
+      "wave": 0,
+      "enabled": 0,
+      "mode": 0,
+      "frequency": 2500,
+      "final_frequency": 2500,
+      "low": 0,
+      "high": 0,
+      "duration": 1000,
+      "duration_us": 0,
+      "duty": 50
+    }
+  },
+  "recovery": {
+    "ok": true,
+    "samples": 9091032,
+    "status": {
+      "ack": 13486,
+      "rate": 909090,
+      "bits": 10,
+      "dropped": 0,
+      "fatal": 0,
+      "epoch": 1,
+      "prepare_us": 73,
+      "check_us": 80,
+      "node_pairs": 8192,
+      "queue": 1,
+      "queue_peak": 2,
+      "copy_ticks": 121439,
+      "poll_ticks": 289304,
+      "slack_ticks": 1147180,
+      "send_ticks": 1218425,
+      "produced": 1111
+    }
+  },
+  "final_scheduler": {
+    "policy": 0,
+    "priority": 0
+  },
+  "final_identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v17-main-1",
+    "firmware_sha256": "d8a6f1d0f9c9df03f4abdd09df585cccfa1de6639f7026c00df651b10d24eddf"
+  }
+}

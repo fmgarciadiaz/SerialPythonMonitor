@@ -1,0 +1,204 @@
+{
+  "ok": false,
+  "restored": true,
+  "errors": [
+    "Procesamiento DSP/GUI atrasado: l\u00edmite de 8 lotes pendientes; adquisici\u00f3n detenida sin descartar muestras silenciosamente."
+  ],
+  "seconds": 120.0,
+  "scope": "Live ADC8/CH1 1.4035MHz RADIO40 FILTER RADIO fft. Generator off; no known AM/analog acceptance.",
+  "identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v17-main-1",
+    "firmware_sha256": "bc150efba8fe229838c65a2dc9945aee020455ce8592c77fefb97772bdac592b"
+  },
+  "source_sha256": {
+    "app.py": "84bb8fe6c24a9f7112969839377696cdf6359ef6866326de4c13f2130288a938",
+    "processing.py": "2549c9715888ec9851e80142ee5407d5b14bfe0d1229dbc0aa1e673e84441151",
+    "radio_stream.py": "18ddf631f8b9a8547bd4e7de898c692b889a8309316d071790a09534f1e1061f",
+    "radio_am.py": "d5cf8d29cbdf4d4e8435dc245386d8c06dd75e9191f96842c62878daa184fafd",
+    "spectral_analysis.py": "5237d0e8255f8632e5fc9e8ebf7a374efcc8350f46b1f6b8c3fba5de0e7d6825",
+    "spectrum.py": "dfd5950558606224e6bdffd19c6554a6f0890e73cb3f9f1a7dc00d27251b3a1e",
+    "numeric_batch.py": "af96d4000ee7e85a76eab321f0461cb0e6653a4214a6012eb37bd2356e9012a4",
+    "receiver/unoq_config_receiver.py": "484231266d45c43ddca6709fd9fa9ba61ecbb19d03bdf696aaa3bb1e23f3d48e",
+    "receiver/unoq_config_decoder.py": "e0e9a87cfb83960237d4ad8d9e319cd12a199dcf8d757df730bcbf8508367fa4"
+  },
+  "prior": {
+    "adc": {
+      "bits": 10,
+      "rate": 909090
+    },
+    "generator": {
+      "wave": 0,
+      "enabled": 0,
+      "mode": 0,
+      "frequency": 2500,
+      "final_frequency": 2500,
+      "low": 0,
+      "high": 0,
+      "duration": 1000,
+      "duration_us": 0,
+      "duty": 50
+    }
+  },
+  "elapsed_seconds": 8.55822555301711,
+  "rf_samples": 11405664,
+  "audio_samples": 325028,
+  "batches": 361,
+  "pending_peak": 8,
+  "stages": {
+    "transport_read_ms": {
+      "count": 11580,
+      "mean_ms": 0.5141006600287049,
+      "p50_p95_p99_max_ms": [
+        0.3916179412044585,
+        0.962315627839416,
+        1.9476257043424987,
+        32.08856098353863
+      ]
+    },
+    "transport_decode_ms": {
+      "count": 11580,
+      "mean_ms": 0.11442544481424302,
+      "p50_p95_p99_max_ms": [
+        0.07741793524473906,
+        0.1656454405747353,
+        0.8438567782286548,
+        13.452494982630014
+      ]
+    },
+    "radio_demod_ms": {
+      "count": 362,
+      "mean_ms": 1.5129985687199425,
+      "p50_p95_p99_max_ms": [
+        1.3957794872112572,
+        2.0829064131248742,
+        2.8394935978576505,
+        3.395268926396966
+      ]
+    },
+    "radio_resample_ms": {
+      "count": 362,
+      "mean_ms": 0.42472596091182274,
+      "p50_p95_p99_max_ms": [
+        0.34752156352624297,
+        0.791392335668206,
+        1.3856391620356585,
+        2.4062959710136056
+      ]
+    },
+    "audio_filter_ms": {
+      "count": 362,
+      "mean_ms": 0.13216996008468515,
+      "p50_p95_p99_max_ms": [
+        0.12385199079290032,
+        0.1708778319880366,
+        0.25547276251018025,
+        0.7332650711759925
+      ]
+    },
+    "rf_filter_ms": {
+      "count": 362,
+      "mean_ms": 0.0010480218597826707,
+      "p50_p95_p99_max_ms": [
+        0.000942964106798172,
+        0.0016983889508992425,
+        0.0022014277055859566,
+        0.0028300564736127853
+      ]
+    },
+    "dsp_total_ms": {
+      "count": 362,
+      "mean_ms": 2.4870745956676483,
+      "p50_p95_p99_max_ms": [
+        2.246885502245277,
+        3.757590486202388,
+        5.156731153838332,
+        6.496488000266254
+      ]
+    },
+    "publish_to_consume_ms": {
+      "count": 362,
+      "mean_ms": 19.84930168116949,
+      "p50_p95_p99_max_ms": [
+        6.19180197827518,
+        22.71733320667408,
+        506.08619979815535,
+        577.9260429553688
+      ]
+    },
+    "fft_render_ms": {
+      "count": 80,
+      "mean_ms": 11.041217726597097,
+      "p50_p95_p99_max_ms": [
+        12.94378045713529,
+        17.88498268579132,
+        24.85006758593948,
+        32.51710603944957
+      ]
+    },
+    "gui_delivery_ms": {
+      "count": 361,
+      "mean_ms": 0.8581190349384523,
+      "p50_p95_p99_max_ms": [
+        0.8092720527201891,
+        1.5928189968690276,
+        2.420176845043893,
+        3.2816020539030433
+      ]
+    },
+    "fft_paint_ms": {
+      "count": 66,
+      "mean_ms": 12.616645096744778,
+      "p50_p95_p99_max_ms": [
+        12.061115994583815,
+        14.97414827463217,
+        18.325448856921852,
+        20.123383961617947
+      ]
+    }
+  },
+  "paints": 0,
+  "fft_paints": 66,
+  "fft_viewport_paints": 66,
+  "fft_paint_fps": 7.711879009397271,
+  "viewport_paints": 0,
+  "paint_fps": 0.0,
+  "viewport_paint_fps": 0.0,
+  "exposed_fraction": 1.0,
+  "deferred_spectral_timer_calls": 2,
+  "processing_backend": "process",
+  "transport": {
+    "mean_send_headroom": 0.09258536133926853,
+    "queue_peak": 3,
+    "slack_min_us": 1126.54375,
+    "dropped": 0,
+    "fatal": 0
+  },
+  "visible_painting_valid": true,
+  "recovery": {
+    "samples": 9089104,
+    "status": {
+      "ack": 3749181,
+      "rate": 909090,
+      "bits": 10,
+      "dropped": 0,
+      "fatal": 0,
+      "epoch": 25,
+      "prepare_us": 72,
+      "check_us": 80,
+      "node_pairs": 8192,
+      "queue": 1,
+      "queue_peak": 2,
+      "copy_ticks": 121470,
+      "poll_ticks": 289310,
+      "slack_ticks": 1147363,
+      "send_ticks": 1197166,
+      "produced": 1110
+    }
+  },
+  "final_identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v17-main-1",
+    "firmware_sha256": "bc150efba8fe229838c65a2dc9945aee020455ce8592c77fefb97772bdac592b"
+  }
+}

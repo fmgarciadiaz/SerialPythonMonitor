@@ -159,7 +159,7 @@ static int ready_open(Ready *r, const char *chip, uint32_t offset) {
     if (fcntl(r->fd,F_SETFL,O_NONBLOCK)<0) { saved=errno; close(r->fd); errno=saved; return -1; }
     return 0;
 }
-static int ready_event(Ready *r, double deadline, double after) {
+static int ready_event_legacy(Ready *r, double deadline, double after) {
     for (;;) {
         double left=deadline-now();
         if (left<=0) { errno=ETIMEDOUT; return -1; }
@@ -179,6 +179,37 @@ static int ready_event(Ready *r, double deadline, double after) {
         if (event.timestamp_ns/1e9 < after) continue; // Delayed initial edge is not a new credit.
         return 0;
     }
+}
+static int ready_event_fast(Ready *r, double deadline, double after) {
+    // Short bounded userspace wait before sleeping; never reuse an old edge.
+    const double spin_until=now()+0.000050;
+    for (;;) {
+        struct gpio_v2_line_event event;
+        ssize_t n=read(r->fd,&event,sizeof event);
+        if (n<0 && errno==EINTR) continue;
+        if (n<0 && errno==EAGAIN) {
+            double left=deadline-now();
+            if(left<=0) { errno=ETIMEDOUT; return -1; }
+            if(now()<spin_until) continue;
+            struct pollfd p={r->fd,POLLIN,0};
+            int result=poll(&p,1,(int)ceil(left*1000));
+            if(result<0 && errno==EINTR) continue;
+            if(result<=0) { if(!result) errno=ETIMEDOUT; return -1; }
+            if(!(p.revents&POLLIN)) { errno=EIO; return -1; }
+            continue;
+        }
+        if(n!=sizeof event) { if(n>=0) errno=EIO; return -1; }
+        if(event.id!=GPIO_V2_LINE_EVENT_RISING_EDGE || event.line_seqno!=r->sequence+1) {
+            errno=EOVERFLOW; return -1;
+        }
+        r->sequence=event.line_seqno;
+        if(event.timestamp_ns/1e9<after) continue;
+        return 0;
+    }
+}
+static bool high_rate_ready=false;
+static int ready_event(Ready *r,double deadline,double after) {
+    return high_rate_ready?ready_event_fast(r,deadline,after):ready_event_legacy(r,deadline,after);
 }
 static int ready_initial(Ready *r, double deadline) {
     struct gpio_v2_line_values values={.mask=1};

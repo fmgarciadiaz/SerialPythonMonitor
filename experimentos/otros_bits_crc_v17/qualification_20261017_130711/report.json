@@ -1,0 +1,319 @@
+{
+  "ok": false,
+  "restored": true,
+  "cases": [
+    {
+      "adc": {
+        "bits": 10,
+        "rate": 1250000
+      },
+      "period": 128,
+      "node_pairs": 5568,
+      "actual_rate": 1250000.0,
+      "stage": "adc10_screen60",
+      "requested_seconds": 60,
+      "ok": true,
+      "boot_warmup": {
+        "seconds": 5.001207228982821,
+        "samples": 198656,
+        "status": {
+          "ack": 3653,
+          "rate": 40000,
+          "bits": 14,
+          "dropped": 0,
+          "fatal": 0,
+          "epoch": 1,
+          "prepare_us": 86,
+          "check_us": 48
+        }
+      },
+      "scheduler": {
+        "policy": 1,
+        "priority": 10
+      },
+      "scheduler_verification": "Relay kernel getters checked before forwarding APPLIED; logs persisted",
+      "seconds": 60.00024433003273,
+      "samples": 74957808,
+      "observed_rate": 1249291.7126752492,
+      "status": {
+        "ack": 113148,
+        "rate": 1250000,
+        "bits": 10,
+        "dropped": 0,
+        "fatal": 0,
+        "epoch": 2,
+        "prepare_us": 12,
+        "check_us": 49,
+        "queue_slots": 4,
+        "node_pairs": 5568,
+        "queue": 1,
+        "queue_peak": 3,
+        "copy_ticks": 62528,
+        "poll_ticks": 246992,
+        "slack_ticks": 476746,
+        "send_ticks": 575723,
+        "produced": 13686
+      },
+      "wall_monotonic_drift_seconds": 0.0006585611263290048,
+      "metrics": {
+        "mean_send_headroom": 0.19370307017207267,
+        "maxima": {
+          "queue_peak": 3,
+          "copy_ticks": 62528,
+          "poll_ticks": 246992,
+          "slack_ticks": 476746
+        },
+        "send_mean_us": 3591.5690442255195,
+        "send_observations": 107698
+      },
+      "headroom_ok": true
+    },
+    {
+      "adc": {
+        "bits": 14,
+        "rate": 40000
+      },
+      "period": 25,
+      "node_pairs": 2048,
+      "actual_rate": 40000.0,
+      "stage": "adc10_screen60_normal",
+      "requested_seconds": 10,
+      "ok": true,
+      "scheduler": {
+        "policy": 0,
+        "priority": 0
+      },
+      "seconds": 10.000810455996543,
+      "samples": 399618,
+      "observed_rate": 39958.56153441912,
+      "status": {
+        "ack": 121730,
+        "rate": 40000,
+        "bits": 14,
+        "dropped": 0,
+        "fatal": 0,
+        "epoch": 3,
+        "prepare_us": 81,
+        "check_us": 48
+      },
+      "wall_monotonic_drift_seconds": 4.975823685526848e-05
+    },
+    {
+      "adc": {
+        "bits": 12,
+        "rate": 1066666
+      },
+      "period": 150,
+      "node_pairs": 8064,
+      "actual_rate": 1066666.6666666667,
+      "stage": "adc12_screen60",
+      "requested_seconds": 60,
+      "ok": false,
+      "boot_warmup": {
+        "seconds": 5.000150709063746,
+        "samples": 198656,
+        "status": {
+          "ack": 3658,
+          "rate": 40000,
+          "bits": 14,
+          "dropped": 0,
+          "fatal": 0,
+          "epoch": 1,
+          "prepare_us": 81,
+          "check_us": 48
+        }
+      },
+      "scheduler": {
+        "policy": 1,
+        "priority": 10
+      },
+      "scheduler_verification": "Relay kernel getters checked before forwarding APPLIED; logs persisted",
+      "error": "RuntimeError('El Q cerr\u00f3 el flujo. Revisar el relay, la adquisici\u00f3n y el cable USB.')"
+    }
+  ],
+  "target_bits": [
+    10,
+    12
+  ],
+  "source_hashes": {
+    "sketch/wav_protocol.h": "78e788ab24dac52eff1d79cc15d08ac730451316e28050f461d5f4febf2cd223",
+    "sketch/wav_dma.h": "82bf749b289b5dfc4907e751ac1c1dd146d2ab1b0fe92c046d7492b3cc15cc10",
+    "sketch/wav.h": "0dc2b88b7d25de037fc0598c85b70b3903caaa3c2d6a92ea84b23ab680ddb1f2",
+    "sketch/crc32_fast.h": "5d80da2df5d483bb028cf98abdaa2aed0a12da1be7f2ceb8591269debee81959",
+    "sketch/generator.h": "e853fca473f9c13df50912a54fc621cee9f2fcb125ffe6f810670e93a17ebc77",
+    "sketch/wav_storage.h": "a06e48b8192d2674dfa3ce1f57e601f523244c1016b5ecc899607d48fb1cce69",
+    "sketch/native_profiles.h": "07a78f8bff09ba23a8677b611fa7be962bdb559e70a72930f516285f03edb5e5",
+    "sketch/high_rate_profile.h": "d669a3a4e9c685047c27f961b709eceb76c2a1de71670e7bbed7df469358b397",
+    "sketch/sample_packing.h": "969227ee4db1ed2be4edafacf616d327fad996b117098d4413d3fed76ec05c43",
+    "sketch/sketch.ino": "619fea280dd7fdea7aeaebeffc928acdfc2e2eaeb584bbff869c16f70d8bfe21",
+    "relay/additional_profiles.h": "b8d94095548a562807ba48fd08b6f9cb6c4148e9926ee80cf0e46bc6142e5591",
+    "relay/base_verifier.c": "66499e8bbec8ae3058a0624c9377c9fad6d5ef6a0fbb3f8de70d0c58eaab5bb0",
+    "relay/config_relay_protocol.h": "4c9083c55a9ce039732dc7fd21efe74a947f292ef854dbf6ae802490d4b24724",
+    "relay/cpu_profile.h": "5b45fb67c1c4fb6aa79132602af77a573b2326c1e8f873e2d6c1b5c3a3aadd7a",
+    "relay/cpu_runtime.h": "bd5afdb012a41a8decdfd015352ae391e05786f2075115d13087925819e735ea",
+    "relay/frame_send_queue.h": "e1a158fac306a098ade76464ca813a33d27e785bd7874c7fc7e21673bec388ca",
+    "relay/high_rate_profile.h": "d669a3a4e9c685047c27f961b709eceb76c2a1de71670e7bbed7df469358b397",
+    "relay/native_profiles.h": "07a78f8bff09ba23a8677b611fa7be962bdb559e70a72930f516285f03edb5e5",
+    "relay/transport_policy.h": "7da1fd18188fc13925a6ceea12a1bd107299c155c2d1322425f92a24425527b2",
+    "relay/unoq_config_stream.c": "0ef9e678c86cd850e4700cceb2ee1623180ae81f66be1372e153c4a21aa55152"
+  },
+  "phase": "screen",
+  "acceptance_seconds": [
+    60
+  ],
+  "runner_sha256": "df904a7353f29c9058e35570646d3aa1f298d2a34db45f3170242d801147d87c",
+  "prior": {
+    "adc": {
+      "bits": 8,
+      "rate": 1600000
+    },
+    "generator": {
+      "wave": 0,
+      "enabled": 0,
+      "mode": 0,
+      "frequency": 2500,
+      "final_frequency": 2500,
+      "low": 0,
+      "high": 0,
+      "duration": 1000,
+      "duration_us": 0,
+      "duty": 50
+    }
+  },
+  "prior_identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v17-main-1",
+    "firmware_sha256": "e8d8411bec6a9aebef0ffc58b21448c14cd8503cd8209a4f28bd6fb852c0e1a9"
+  },
+  "old_relay": "/home/arduino/.cache/serialmonitor/usb-stream-d15bba39aa8f5260e426/unoq_stream",
+  "old_cap_add": [
+    "SYS_NICE"
+  ],
+  "old_scope_environment": [],
+  "backup": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/respaldos/unoq/osciloscopio_20261017_130711_806522.zip",
+  "old_mounts": [
+    {
+      "Type": "bind",
+      "Source": "/home/arduino/.cache/serialmonitor/usb-stream-d15bba39aa8f5260e426/unoq_stream",
+      "Destination": "/work/unoq_stream",
+      "Mode": "",
+      "RW": false,
+      "Propagation": "rprivate"
+    },
+    {
+      "Type": "bind",
+      "Source": "/sys/devices/system/cpu/cpufreq/policy0/scaling_governor",
+      "Destination": "/scope_cpu_governor",
+      "Mode": "",
+      "RW": true,
+      "Propagation": "rprivate"
+    }
+  ],
+  "old_cpuset": "",
+  "normal_policy": {
+    "governor": "schedutil",
+    "cpus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "scheduler": 0,
+    "priority": 0
+  },
+  "prior_header_presence": {
+    "wav_protocol.h": true,
+    "wav_dma.h": true,
+    "wav.h": true,
+    "crc32_fast.h": true,
+    "generator.h": true,
+    "wav_storage.h": true,
+    "native_profiles.h": true,
+    "high_rate_profile.h": true,
+    "sample_packing.h": true,
+    "sketch.ino": true
+  },
+  "candidate_relay": "/home/arduino/.cache/serialmonitor/cpu-relay-96a8733bdc48d77fcd54/unoq_stream",
+  "candidate_relay_sha256": "53777e0b8e927ed4e03175d860f2849d8afeac772683f36ac04197e999944d5b",
+  "candidate_identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v17-main-1",
+    "firmware_sha256": "42cff22046d3dbebc4678bd18c62b36e2ee8e4dc6d2d2eb39d69adf2cae30e29"
+  },
+  "normal_policy_checks": [
+    {
+      "stage": "adc10_screen60_normal",
+      "policy": {
+        "governor": "schedutil",
+        "cpus": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "scheduler": 0,
+        "priority": 0
+      }
+    }
+  ],
+  "error": "RuntimeError('El Q cerr\u00f3 el flujo. Revisar el relay, la adquisici\u00f3n y el cable USB.')",
+  "traceback": "Traceback (most recent call last):\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/experimentos/otros_bits_crc_v17/run.py\", line 74, in main\n    row=x.trial(config,seconds,name,restart=True)\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/experimentos/otros_bits_cpu_relay_v17/run.py\", line 105, in trial\n    return super().trial(*args,**kwargs)\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/incorporar_adc1600_v17.py\", line 146, in trial\n    receiver.pump()\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v17/receiver/unoq_config_receiver.py\", line 290, in pump\n    began=time.monotonic();data=self.connection.read()\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v17/receiver/unoq_usb.py\", line 149, in read\n    raise RuntimeError('El Q cerr\u00f3 el flujo. Revisar el relay, la adquisici\u00f3n y el cable USB.')\nRuntimeError: El Q cerr\u00f3 el flujo. Revisar el relay, la adquisici\u00f3n y el cable USB.\n",
+  "restored_low_policy": {
+    "governor": "schedutil",
+    "cpus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "scheduler": 0,
+    "priority": 0
+  },
+  "final_settings": {
+    "adc": {
+      "bits": 8,
+      "rate": 1600000
+    },
+    "generator": {
+      "wave": 0,
+      "enabled": 0,
+      "mode": 0,
+      "frequency": 2500,
+      "final_frequency": 2500,
+      "low": 0,
+      "high": 0,
+      "duration": 1000,
+      "duration_us": 0,
+      "duty": 50
+    }
+  },
+  "final_identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v17-main-1",
+    "firmware_sha256": "e8d8411bec6a9aebef0ffc58b21448c14cd8503cd8209a4f28bd6fb852c0e1a9"
+  },
+  "recovery": {
+    "ok": true,
+    "samples": 15993504,
+    "status": {
+      "ack": 25996,
+      "rate": 1600000,
+      "bits": 8,
+      "dropped": 0,
+      "fatal": 0,
+      "epoch": 3,
+      "prepare_us": 12,
+      "check_us": 49,
+      "queue_slots": 8,
+      "node_pairs": 3456,
+      "queue": 1,
+      "queue_peak": 2,
+      "copy_ticks": 39159,
+      "poll_ticks": 209730,
+      "slack_ticks": 131417,
+      "send_ticks": 258160,
+      "produced": 4629
+    },
+    "method": "No administrative Q calls after final high-rate configuration"
+  }
+}

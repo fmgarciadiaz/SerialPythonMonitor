@@ -1,42 +1,39 @@
-# Organización del proyecto
+# Organización del proyecto · 19/10/2026
 
-## Entradas actuales
+## Código y recursos
 
-- [Monitor V16](../monitor/v16/README.md): `python monitor/v16/app.py`.
-- [Q V16](../arduino/v16/README.md): MCU/app/relay de la pareja actual.
-- `tools/`: preparación del Q y relay por defecto V16; calibración V15 conservada para la versión histórica.
-- `transport/`: herramientas y documentación del transporte.
+| Ruta | Función |
+|---|---|
+| `monitor/v17`, `arduino/v17`, `tests/v17` | Pareja activa y pruebas |
+| `monitor/v16`, `arduino/v16`, `tests/v16` | Respaldo local anterior |
+| `monitor/historico`, `arduino/historico` | Versiones archivadas; rutas conservadas |
+| `tools`, `transport` | Preparación, relay y utilidades de transporte |
+| `experimentos` | Candidatos aislados con capturas, informes y restauración |
+| `diagnosticos` | Scripts de ensayo y resultados por área |
+| `respaldos/unoq` | Exportaciones del Q y archivos de recuperación |
+| `audios`, `capturas`, `calibraciones`, `assets` | Datos, evidencia y recursos |
 
-## Versiones archivadas
+Se mantuvieron las rutas del código, los experimentos y la evidencia para no romper imports ni runners. No se eliminaron capturas ni respaldos.
 
-[Monitores históricos](../monitor/historico/README.md) reúne V6–V15 y los
-scripts anteriores. V12, V13 y V14 conservan sus receptores, recursos y
-calibraciones. Sus imports y tareas de VS Code apuntan a las rutas históricas.
+## Documentación
 
-[Firmwares históricos](../arduino/historico/README.md) incluye V12 Audio, V13 Pulse, V11 P992
-(adquisición sin WAV) y las versiones anteriores. Las herramientas siguen
-aceptando `--version v11_p992` de forma explícita. El valor predeterminado
-de consola es V16; V12 Audio y V13 Pulse siguen seleccionables explícitamente.
+El [estado vigente](ESTADO_ACTUAL_V17.md), el [plan](../Plan%20de%20trabajo.md) y la [continuidad](../%23%20Continuar%20desde%20donde%20quedaste.md) son las entradas para retomar. Las guías de monitor/firmware enlazan ese estado antes de sus informes fechados.
 
-Las imágenes V10 están en `assets/historico/`; las capturas usadas en la
-presentación actual permanecen en `assets/`.
+Se archivaron sin perder su contenido la presentación V16 y los registros acumulados de plan/continuidad. Se ajustaron sus enlaces Markdown relativos desde la raíz original:
 
-## Datos y validación
+- [Presentación anterior](historico/README_v16_20261019.md).
+- [Plan acumulado](historico/PLAN_ACUMULADO_20261019.md).
+- [Continuidad acumulada](historico/CONTINUIDAD_ACUMULADA_20261019.md).
+- [Inventario anterior de apps](historico/APPS_APPLAB_20261019.md).
 
-`capturas/`, `calibraciones/`, `audios/`, `diagnosticos/` y `respaldos/`
-conservan los datos y evidencia existentes. Esta organización no elimina
-capturas ni modifica apps instaladas en el Q.
+Los informes históricos conservan sus cifras y resultados. Un ensayo aprobado en una fecha no acredita automáticamente la estabilidad global actual. Los documentos técnicos heredados siguen disponibles como descripción de su implementación original.
 
-`tests/v13`, `tests/v14` y las pruebas anteriores verifican las versiones
-archivadas, incluida `tests/v15`; `tests/v16` verifica la actual. Qt5 y Qt6 se prueban en procesos
-separados. La verificación de rutas y pruebas locales no implica una nueva
-validación física.
+## Q
 
-## Verificación de la consolidación · 8 de octubre de 2026
+Sólo Scope V17 queda como app de usuario, activa. V16 y Send1400 se exportaron y verificaron antes de retirarlas; los ejemplos Arduino se conservaron. [Inventario, hashes y recuperación](../arduino/APPS_APPLAB.md).
 
-469 pruebas locales aprobadas: 208 anteriores, 123 de V13, 32 de V14 y
-106 de V15, en procesos separados. Se comprobaron enlaces Markdown, tareas
-de VS Code y configuraciones/catálogo Arduino. Los 250 archivos versionados
-migrados permanecen en sus destinos históricos. No se operó el Q.
+La limpieza no cambió lógica, fuentes de firmware, configuración ADC/DAC ni reinició V17. Las herramientas CLI conservan el valor predeterminado V16; elegir V17 explícitamente.
 
-V16 es la pareja activa. Monitor V15 está en `monitor/historico/v15`; Q V12 Audio y V13 Pulse están en `arduino/historico/v12_audio` y `arduino/historico/v13_pulse`. Catálogos, imports, tests y herramientas siguen esas rutas.
+## Validación de esta organización
+
+Se verifican enlaces de las entradas vigentes, catálogos JSON y rutas locales de la app activa. La limpieza del Q comprueba inventario final e identidad de firmware antes/después. Son comprobaciones de organización e instalación; no agregan validación analógica, de tasas o de estabilidad de audio.

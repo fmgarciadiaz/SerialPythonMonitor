@@ -1,0 +1,2170 @@
+{
+  "ok": false,
+  "restored": true,
+  "plan": {
+    "reference_ticks": 112,
+    "screen_start": [
+      111,
+      110
+    ],
+    "coarse_step": 2,
+    "minimum_ticks": 78,
+    "screen_seconds": 10,
+    "qualification_seconds": [
+      60,
+      120,
+      120,
+      120
+    ],
+    "refine_first_failing_interval": true,
+    "failure_repeat_is_diagnostic_only": true,
+    "node_pairs": 3456,
+    "electrical_acceptance": false
+  },
+  "prior": {
+    "adc": {
+      "bits": 8,
+      "rate": 1403508
+    },
+    "generator": {
+      "wave": 0,
+      "enabled": 0,
+      "mode": 0,
+      "frequency": 2500,
+      "final_frequency": 2500,
+      "low": 0,
+      "high": 0,
+      "duration": 1000,
+      "duration_us": 0,
+      "duty": 50
+    }
+  },
+  "cases": [
+    {
+      "bits": 8,
+      "ticks": 112,
+      "node_pairs": 3456,
+      "actual_rate": 1428571.4285714286,
+      "requested_seconds": 10,
+      "stage": "reference",
+      "ok": true,
+      "phase": "measure",
+      "seconds": 10.000386163010262,
+      "samples": 14278464,
+      "full_nodes": 4131,
+      "observed_rate": 1427791.2639827474,
+      "status": {
+        "bits": 8,
+        "ticks": 112,
+        "node_pairs": 3456,
+        "rate": 1428571,
+        "dropped": 0,
+        "fatal": 0,
+        "queue": 1,
+        "queue_peak": 2,
+        "copy_ticks": 38769,
+        "poll_ticks": 210302,
+        "slack_ticks": 173763,
+        "send_ticks": 318183,
+        "produced": 4544,
+        "epoch": 1
+      },
+      "metrics": {
+        "node_budget_us": 2419.2,
+        "queue_histogram_frames": {
+          "1": 16526
+        },
+        "queue_peak": 2,
+        "copy_max_us": 242.30625,
+        "poll_max_us": 1314.3875,
+        "overwrite_slack_min_us": 1086.01875,
+        "send_observations": 4131,
+        "send_mean_us": 2000.0691327765676,
+        "send_p50_p95_p99_max_us": [
+          1949.98125,
+          2424.75625,
+          2492.85,
+          2695.25
+        ],
+        "mean_send_headroom": 0.1732518465705326,
+        "producer_conservative_slack_us": 1086.01875
+      },
+      "headroom_ok": true,
+      "wall_monotonic_drift_seconds": -0.0004026825772598386,
+      "variant": "B",
+      "legacy_timings": {
+        "tx_prepare": {
+          "count": 16526,
+          "mean_us": 36.30642623744403,
+          "p50_p95_p99_max_us": [
+            35.0,
+            52.0,
+            54.0,
+            61.0
+          ]
+        },
+        "rx_check": {
+          "count": 16526,
+          "mean_us": 86.04157085804188,
+          "p50_p95_p99_max_us": [
+            79.0,
+            98.0,
+            328.0,
+            336.0
+          ]
+        }
+      },
+      "spi_requested_hz": 40000000,
+      "configuration": {
+        "kind": "read_only_configuration_not_electrical_measurement",
+        "spi_base": "0x04a94000",
+        "wrapper_base": "0x04ac0000",
+        "source_hz_before": 120000000,
+        "branch_cached_hz": 120000000,
+        "snapshots": [
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          },
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          },
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          }
+        ],
+        "wrapper_version": 805306368,
+        "gcc_dfs_control": 45,
+        "source_hz_after": 120000000,
+        "configured_hz": 40000000.0,
+        "gcc_active_level": 6
+      },
+      "clock_matches": true
+    },
+    {
+      "bits": 8,
+      "ticks": 111,
+      "node_pairs": 3456,
+      "actual_rate": 1441441.4414414414,
+      "requested_seconds": 10,
+      "stage": "screen",
+      "ok": true,
+      "phase": "measure",
+      "seconds": 10.000480954069644,
+      "samples": 14407200,
+      "full_nodes": 4169,
+      "observed_rate": 1440650.7113177455,
+      "status": {
+        "bits": 8,
+        "ticks": 111,
+        "node_pairs": 3456,
+        "rate": 1441441,
+        "dropped": 0,
+        "fatal": 0,
+        "queue": 1,
+        "queue_peak": 2,
+        "copy_ticks": 38885,
+        "poll_ticks": 222075,
+        "slack_ticks": 169766,
+        "send_ticks": 328324,
+        "produced": 4585,
+        "epoch": 1
+      },
+      "metrics": {
+        "node_budget_us": 2397.6,
+        "queue_histogram_frames": {
+          "1": 16675
+        },
+        "queue_peak": 2,
+        "copy_max_us": 243.03125,
+        "poll_max_us": 1387.96875,
+        "overwrite_slack_min_us": 1061.0375,
+        "send_observations": 4168,
+        "send_mean_us": 2010.5442118522074,
+        "send_p50_p95_p99_max_us": [
+          1957.303125,
+          2425.2046875,
+          2492.1790625000003,
+          2855.05625
+        ],
+        "mean_send_headroom": 0.16143467974132153,
+        "producer_conservative_slack_us": 1061.0375
+      },
+      "headroom_ok": true,
+      "wall_monotonic_drift_seconds": 0.15898866998031735,
+      "variant": "B",
+      "legacy_timings": {
+        "tx_prepare": {
+          "count": 16675,
+          "mean_us": 36.19370314842579,
+          "p50_p95_p99_max_us": [
+            35.0,
+            45.0,
+            58.0,
+            291.0
+          ]
+        },
+        "rx_check": {
+          "count": 16675,
+          "mean_us": 86.79832083958021,
+          "p50_p95_p99_max_us": [
+            79.0,
+            98.0,
+            332.0,
+            336.0
+          ]
+        }
+      },
+      "spi_requested_hz": 40000000,
+      "configuration": {
+        "kind": "read_only_configuration_not_electrical_measurement",
+        "spi_base": "0x04a94000",
+        "wrapper_base": "0x04ac0000",
+        "source_hz_before": 120000000,
+        "branch_cached_hz": 120000000,
+        "snapshots": [
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          },
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          },
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          }
+        ],
+        "wrapper_version": 805306368,
+        "gcc_dfs_control": 45,
+        "source_hz_after": 120000000,
+        "configured_hz": 40000000.0,
+        "gcc_active_level": 6
+      },
+      "clock_matches": true
+    },
+    {
+      "bits": 8,
+      "ticks": 110,
+      "node_pairs": 3456,
+      "actual_rate": 1454545.4545454546,
+      "requested_seconds": 10,
+      "stage": "screen",
+      "ok": true,
+      "phase": "measure",
+      "seconds": 10.000367159955204,
+      "samples": 14538528,
+      "full_nodes": 4207,
+      "observed_rate": 1453799.4223069232,
+      "status": {
+        "bits": 8,
+        "ticks": 110,
+        "node_pairs": 3456,
+        "rate": 1454545,
+        "dropped": 0,
+        "fatal": 0,
+        "queue": 1,
+        "queue_peak": 2,
+        "copy_ticks": 38891,
+        "poll_ticks": 228114,
+        "slack_ticks": 165823,
+        "send_ticks": 339787,
+        "produced": 4627,
+        "epoch": 1
+      },
+      "metrics": {
+        "node_budget_us": 2376.0,
+        "queue_histogram_frames": {
+          "1": 16827
+        },
+        "queue_peak": 2,
+        "copy_max_us": 243.06875,
+        "poll_max_us": 1425.7125,
+        "overwrite_slack_min_us": 1036.39375,
+        "send_observations": 4207,
+        "send_mean_us": 2005.736859698122,
+        "send_p50_p95_p99_max_us": [
+          1957.78125,
+          2415.11875,
+          2476.91425,
+          2951.21875
+        ],
+        "mean_send_headroom": 0.1558346550092079,
+        "producer_conservative_slack_us": 1036.39375
+      },
+      "headroom_ok": true,
+      "wall_monotonic_drift_seconds": -0.00027439615223556757,
+      "variant": "B",
+      "legacy_timings": {
+        "tx_prepare": {
+          "count": 16827,
+          "mean_us": 36.83360076068224,
+          "p50_p95_p99_max_us": [
+            35.0,
+            52.0,
+            60.0,
+            291.0
+          ]
+        },
+        "rx_check": {
+          "count": 16827,
+          "mean_us": 86.36708860759494,
+          "p50_p95_p99_max_us": [
+            79.0,
+            98.0,
+            332.0,
+            336.0
+          ]
+        }
+      },
+      "spi_requested_hz": 40000000,
+      "configuration": {
+        "kind": "read_only_configuration_not_electrical_measurement",
+        "spi_base": "0x04a94000",
+        "wrapper_base": "0x04ac0000",
+        "source_hz_before": 120000000,
+        "branch_cached_hz": 120000000,
+        "snapshots": [
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          },
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          },
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          }
+        ],
+        "wrapper_version": 805306368,
+        "gcc_dfs_control": 45,
+        "source_hz_after": 120000000,
+        "configured_hz": 40000000.0,
+        "gcc_active_level": 6
+      },
+      "clock_matches": true
+    },
+    {
+      "bits": 8,
+      "ticks": 108,
+      "node_pairs": 3456,
+      "actual_rate": 1481481.4814814816,
+      "requested_seconds": 10,
+      "stage": "screen",
+      "ok": true,
+      "phase": "measure",
+      "seconds": 10.000321843079291,
+      "samples": 14808096,
+      "full_nodes": 4285,
+      "observed_rate": 1480761.9427016664,
+      "status": {
+        "bits": 8,
+        "ticks": 108,
+        "node_pairs": 3456,
+        "rate": 1481481,
+        "dropped": 0,
+        "fatal": 0,
+        "queue": 1,
+        "queue_peak": 2,
+        "copy_ticks": 38914,
+        "poll_ticks": 227695,
+        "slack_ticks": 158468,
+        "send_ticks": 310011,
+        "produced": 4712,
+        "epoch": 1
+      },
+      "metrics": {
+        "node_budget_us": 2332.8,
+        "queue_histogram_frames": {
+          "1": 17139
+        },
+        "queue_peak": 2,
+        "copy_max_us": 243.2125,
+        "poll_max_us": 1423.09375,
+        "overwrite_slack_min_us": 990.425,
+        "send_observations": 4284,
+        "send_mean_us": 2004.5364306139122,
+        "send_p50_p95_p99_max_us": [
+          1960.490625,
+          2357.780625,
+          2455.1920625000002,
+          2503.2375
+        ],
+        "mean_send_headroom": 0.14071655066276045,
+        "producer_conservative_slack_us": 990.425
+      },
+      "headroom_ok": true,
+      "wall_monotonic_drift_seconds": -0.000293164630420506,
+      "variant": "B",
+      "legacy_timings": {
+        "tx_prepare": {
+          "count": 17139,
+          "mean_us": 37.26314254040492,
+          "p50_p95_p99_max_us": [
+            35.0,
+            45.0,
+            60.0,
+            292.0
+          ]
+        },
+        "rx_check": {
+          "count": 17139,
+          "mean_us": 86.5478149250248,
+          "p50_p95_p99_max_us": [
+            79.0,
+            98.0,
+            332.0,
+            337.0
+          ]
+        }
+      },
+      "spi_requested_hz": 40000000,
+      "configuration": {
+        "kind": "read_only_configuration_not_electrical_measurement",
+        "spi_base": "0x04a94000",
+        "wrapper_base": "0x04ac0000",
+        "source_hz_before": 120000000,
+        "branch_cached_hz": 120000000,
+        "snapshots": [
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          },
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          },
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          }
+        ],
+        "wrapper_version": 805306368,
+        "gcc_dfs_control": 45,
+        "source_hz_after": 120000000,
+        "configured_hz": 40000000.0,
+        "gcc_active_level": 6
+      },
+      "clock_matches": true
+    },
+    {
+      "bits": 8,
+      "ticks": 106,
+      "node_pairs": 3456,
+      "actual_rate": 1509433.9622641508,
+      "requested_seconds": 10,
+      "stage": "screen",
+      "ok": true,
+      "phase": "measure",
+      "seconds": 10.000440335017629,
+      "samples": 15086304,
+      "full_nodes": 4365,
+      "observed_rate": 1508563.972645651,
+      "status": {
+        "bits": 8,
+        "ticks": 106,
+        "node_pairs": 3456,
+        "rate": 1509433,
+        "dropped": 0,
+        "fatal": 0,
+        "queue": 1,
+        "queue_peak": 3,
+        "copy_ticks": 38927,
+        "poll_ticks": 228124,
+        "slack_ticks": 150282,
+        "send_ticks": 311087,
+        "produced": 4801,
+        "epoch": 1
+      },
+      "metrics": {
+        "node_budget_us": 2289.6,
+        "queue_histogram_frames": {
+          "1": 17364,
+          "2": 95,
+          "3": 2
+        },
+        "queue_peak": 3,
+        "copy_max_us": 243.29375,
+        "poll_max_us": 1425.775,
+        "overwrite_slack_min_us": 939.2625,
+        "send_observations": 4365,
+        "send_mean_us": 2008.618876002291,
+        "send_p50_p95_p99_max_us": [
+          1967.625,
+          2324.23625,
+          2439.889,
+          2570.0875
+        ],
+        "mean_send_headroom": 0.12272061670060663,
+        "producer_conservative_slack_us": 939.2625
+      },
+      "headroom_ok": true,
+      "wall_monotonic_drift_seconds": -0.0002931853523477912,
+      "variant": "B",
+      "legacy_timings": {
+        "tx_prepare": {
+          "count": 17461,
+          "mean_us": 38.50724471679744,
+          "p50_p95_p99_max_us": [
+            35.0,
+            52.0,
+            281.40000000000146,
+            292.0
+          ]
+        },
+        "rx_check": {
+          "count": 17461,
+          "mean_us": 87.03390412920223,
+          "p50_p95_p99_max_us": [
+            79.0,
+            98.0,
+            333.0,
+            337.0
+          ]
+        }
+      },
+      "spi_requested_hz": 40000000,
+      "configuration": {
+        "kind": "read_only_configuration_not_electrical_measurement",
+        "spi_base": "0x04a94000",
+        "wrapper_base": "0x04ac0000",
+        "source_hz_before": 120000000,
+        "branch_cached_hz": 120000000,
+        "snapshots": [
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          },
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          },
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          }
+        ],
+        "wrapper_version": 805306368,
+        "gcc_dfs_control": 45,
+        "source_hz_after": 120000000,
+        "configured_hz": 40000000.0,
+        "gcc_active_level": 6
+      },
+      "clock_matches": true
+    },
+    {
+      "bits": 8,
+      "ticks": 104,
+      "node_pairs": 3456,
+      "actual_rate": 1538461.5384615385,
+      "requested_seconds": 10,
+      "stage": "screen",
+      "ok": false,
+      "phase": "settle",
+      "error": "El Q cerr\u00f3 el flujo. Revisar el relay, la adquisici\u00f3n y el cable USB.",
+      "status": {
+        "bits": 8,
+        "ticks": 104,
+        "node_pairs": 3456,
+        "rate": 1538461,
+        "dropped": 0,
+        "fatal": 0,
+        "queue": 4,
+        "queue_peak": 4,
+        "copy_ticks": 38931,
+        "poll_ticks": 228475,
+        "slack_ticks": 144874,
+        "send_ticks": 359501,
+        "produced": 214,
+        "epoch": 1
+      },
+      "rejected_adc_status": {
+        "rate": 1538461,
+        "index": 729216,
+        "dropped": 1,
+        "fatal": 0,
+        "count": 864,
+        "bits": 8,
+        "channels": 1,
+        "ticks": 104,
+        "node": 211,
+        "flags": 2
+      },
+      "rejected_metrics": {
+        "node_pairs": 3456,
+        "queue": 3,
+        "queue_peak": 4,
+        "copy_ticks": 38931,
+        "poll_ticks": 228475,
+        "overwrite_slack_min_ticks": 144874,
+        "send_ticks": 405247,
+        "produced": 215
+      },
+      "wall_monotonic_drift_seconds": -0.00018588034436106682,
+      "variant": "B",
+      "legacy_timings": {
+        "tx_prepare": {
+          "count": 857,
+          "mean_us": 41.8973162193699,
+          "p50_p95_p99_max_us": [
+            35.0,
+            44.0,
+            289.0,
+            292.0
+          ]
+        },
+        "rx_check": {
+          "count": 857,
+          "mean_us": 95.40256709451575,
+          "p50_p95_p99_max_us": [
+            79.0,
+            327.0,
+            335.0,
+            336.0
+          ]
+        }
+      },
+      "spi_requested_hz": 40000000,
+      "configuration": {
+        "kind": "read_only_configuration_not_electrical_measurement",
+        "spi_base": "0x04a94000",
+        "wrapper_base": "0x04ac0000",
+        "source_hz_before": 120000000,
+        "branch_cached_hz": 120000000,
+        "snapshots": [
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          },
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          },
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          }
+        ],
+        "wrapper_version": 805306368,
+        "gcc_dfs_control": 45,
+        "source_hz_after": 120000000,
+        "configured_hz": 40000000.0,
+        "gcc_active_level": 6
+      },
+      "clock_matches": true,
+      "failure_repeat_ok": false,
+      "intermittent": false
+    },
+    {
+      "bits": 8,
+      "ticks": 104,
+      "node_pairs": 3456,
+      "actual_rate": 1538461.5384615385,
+      "requested_seconds": 10,
+      "stage": "repeat_failure",
+      "ok": false,
+      "phase": "settle",
+      "error": "El Q cerr\u00f3 el flujo. Revisar el relay, la adquisici\u00f3n y el cable USB.",
+      "status": {
+        "bits": 8,
+        "ticks": 104,
+        "node_pairs": 3456,
+        "rate": 1538461,
+        "dropped": 0,
+        "fatal": 0,
+        "queue": 4,
+        "queue_peak": 4,
+        "copy_ticks": 38897,
+        "poll_ticks": 226985,
+        "slack_ticks": 147164,
+        "send_ticks": 387287,
+        "produced": 144,
+        "epoch": 1
+      },
+      "rejected_adc_status": {
+        "rate": 1538461,
+        "index": 487296,
+        "dropped": 1,
+        "fatal": 0,
+        "count": 864,
+        "bits": 8,
+        "channels": 1,
+        "ticks": 104,
+        "node": 141,
+        "flags": 2
+      },
+      "rejected_metrics": {
+        "node_pairs": 3456,
+        "queue": 3,
+        "queue_peak": 4,
+        "copy_ticks": 38897,
+        "poll_ticks": 226985,
+        "overwrite_slack_min_ticks": 147164,
+        "send_ticks": 403066,
+        "produced": 145
+      },
+      "wall_monotonic_drift_seconds": -0.0001852798741310835,
+      "variant": "B",
+      "legacy_timings": {
+        "tx_prepare": {
+          "count": 574,
+          "mean_us": 39.70383275261324,
+          "p50_p95_p99_max_us": [
+            34.0,
+            43.0,
+            284.80999999999995,
+            289.0
+          ]
+        },
+        "rx_check": {
+          "count": 574,
+          "mean_us": 101.22822299651568,
+          "p50_p95_p99_max_us": [
+            79.0,
+            332.0,
+            335.0,
+            336.0
+          ]
+        }
+      },
+      "spi_requested_hz": 40000000,
+      "configuration": {
+        "kind": "read_only_configuration_not_electrical_measurement",
+        "spi_base": "0x04a94000",
+        "wrapper_base": "0x04ac0000",
+        "source_hz_before": 120000000,
+        "branch_cached_hz": 120000000,
+        "snapshots": [
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          },
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          },
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          }
+        ],
+        "wrapper_version": 805306368,
+        "gcc_dfs_control": 45,
+        "source_hz_after": 120000000,
+        "configured_hz": 40000000.0,
+        "gcc_active_level": 6
+      },
+      "clock_matches": true
+    },
+    {
+      "bits": 8,
+      "ticks": 105,
+      "node_pairs": 3456,
+      "actual_rate": 1523809.5238095238,
+      "requested_seconds": 10,
+      "stage": "screen",
+      "ok": true,
+      "phase": "measure",
+      "seconds": 10.000363849918358,
+      "samples": 15230592,
+      "full_nodes": 4407,
+      "observed_rate": 1523003.785519698,
+      "status": {
+        "bits": 8,
+        "ticks": 105,
+        "node_pairs": 3456,
+        "rate": 1523809,
+        "dropped": 0,
+        "fatal": 0,
+        "queue": 1,
+        "queue_peak": 3,
+        "copy_ticks": 38927,
+        "poll_ticks": 228039,
+        "slack_ticks": 145426,
+        "send_ticks": 358111,
+        "produced": 4847,
+        "epoch": 1
+      },
+      "metrics": {
+        "node_budget_us": 2268.0,
+        "queue_histogram_frames": {
+          "1": 17407,
+          "2": 221
+        },
+        "queue_peak": 3,
+        "copy_max_us": 243.29375,
+        "poll_max_us": 1425.24375,
+        "overwrite_slack_min_us": 908.9125,
+        "send_observations": 4407,
+        "send_mean_us": 2034.2164071363738,
+        "send_p50_p95_p99_max_us": [
+          1984.06875,
+          2357.1599999999994,
+          2434.942499999999,
+          2686.925
+        ],
+        "mean_send_headroom": 0.10307918556597273,
+        "producer_conservative_slack_us": 908.9125
+      },
+      "headroom_ok": true,
+      "wall_monotonic_drift_seconds": -0.0002973666414618492,
+      "variant": "B",
+      "legacy_timings": {
+        "tx_prepare": {
+          "count": 17628,
+          "mean_us": 38.77314499659632,
+          "p50_p95_p99_max_us": [
+            35.0,
+            45.0,
+            283.0,
+            291.0
+          ]
+        },
+        "rx_check": {
+          "count": 17628,
+          "mean_us": 88.25419786702973,
+          "p50_p95_p99_max_us": [
+            79.0,
+            98.0,
+            334.0,
+            337.0
+          ]
+        }
+      },
+      "spi_requested_hz": 40000000,
+      "configuration": {
+        "kind": "read_only_configuration_not_electrical_measurement",
+        "spi_base": "0x04a94000",
+        "wrapper_base": "0x04ac0000",
+        "source_hz_before": 120000000,
+        "branch_cached_hz": 120000000,
+        "snapshots": [
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          },
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          },
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          }
+        ],
+        "wrapper_version": 805306368,
+        "gcc_dfs_control": 45,
+        "source_hz_after": 120000000,
+        "configured_hz": 40000000.0,
+        "gcc_active_level": 6
+      },
+      "clock_matches": true
+    },
+    {
+      "bits": 8,
+      "ticks": 105,
+      "node_pairs": 3456,
+      "actual_rate": 1523809.5238095238,
+      "requested_seconds": 60,
+      "stage": "finalist",
+      "ok": true,
+      "phase": "measure",
+      "seconds": 60.000304945977405,
+      "samples": 91376640,
+      "full_nodes": 26440,
+      "observed_rate": 1522936.2597785622,
+      "status": {
+        "bits": 8,
+        "ticks": 105,
+        "node_pairs": 3456,
+        "rate": 1523809,
+        "dropped": 0,
+        "fatal": 0,
+        "queue": 1,
+        "queue_peak": 2,
+        "copy_ticks": 38940,
+        "poll_ticks": 228459,
+        "slack_ticks": 148121,
+        "send_ticks": 312435,
+        "produced": 26880,
+        "epoch": 1
+      },
+      "metrics": {
+        "node_budget_us": 2268.0,
+        "queue_histogram_frames": {
+          "1": 105751,
+          "2": 9
+        },
+        "queue_peak": 2,
+        "copy_max_us": 243.375,
+        "poll_max_us": 1427.86875,
+        "overwrite_slack_min_us": 925.75625,
+        "send_observations": 26440,
+        "send_mean_us": 2028.4425590960666,
+        "send_p50_p95_p99_max_us": [
+          1980.009375,
+          2342.626875,
+          2445.106,
+          2732.91875
+        ],
+        "mean_send_headroom": 0.10562497394353332,
+        "producer_conservative_slack_us": 925.75625
+      },
+      "headroom_ok": true,
+      "wall_monotonic_drift_seconds": -0.0008507817983627319,
+      "variant": "B",
+      "legacy_timings": {
+        "tx_prepare": {
+          "count": 105760,
+          "mean_us": 39.138086232980335,
+          "p50_p95_p99_max_us": [
+            35.0,
+            51.0,
+            284.0,
+            292.0
+          ]
+        },
+        "rx_check": {
+          "count": 105760,
+          "mean_us": 87.85985249621785,
+          "p50_p95_p99_max_us": [
+            79.0,
+            98.0,
+            333.0,
+            337.0
+          ]
+        }
+      },
+      "spi_requested_hz": 40000000,
+      "configuration": {
+        "kind": "read_only_configuration_not_electrical_measurement",
+        "spi_base": "0x04a94000",
+        "wrapper_base": "0x04ac0000",
+        "source_hz_before": 120000000,
+        "branch_cached_hz": 120000000,
+        "snapshots": [
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          },
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          },
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          }
+        ],
+        "wrapper_version": 805306368,
+        "gcc_dfs_control": 45,
+        "source_hz_after": 120000000,
+        "configured_hz": 40000000.0,
+        "gcc_active_level": 6
+      },
+      "clock_matches": true
+    },
+    {
+      "bits": 8,
+      "ticks": 105,
+      "node_pairs": 3456,
+      "actual_rate": 1523809.5238095238,
+      "requested_seconds": 120,
+      "stage": "acceptance_1",
+      "ok": false,
+      "phase": "settle",
+      "error": "El Q cerr\u00f3 el flujo. Revisar el relay, la adquisici\u00f3n y el cable USB.",
+      "status": {
+        "bits": 8,
+        "ticks": 105,
+        "node_pairs": 3456,
+        "rate": 1523809,
+        "dropped": 0,
+        "fatal": 0,
+        "queue": 3,
+        "queue_peak": 4,
+        "copy_ticks": 38900,
+        "poll_ticks": 226960,
+        "slack_ticks": 148241,
+        "send_ticks": 393129,
+        "produced": 109,
+        "epoch": 1
+      },
+      "rejected_adc_status": {
+        "rate": 1523809,
+        "index": 369792,
+        "dropped": 1,
+        "fatal": 0,
+        "count": 864,
+        "bits": 8,
+        "channels": 1,
+        "ticks": 105,
+        "node": 107,
+        "flags": 2
+      },
+      "rejected_metrics": {
+        "node_pairs": 3456,
+        "queue": 3,
+        "queue_peak": 4,
+        "copy_ticks": 38900,
+        "poll_ticks": 226960,
+        "overwrite_slack_min_ticks": 148241,
+        "send_ticks": 408702,
+        "produced": 111
+      },
+      "wall_monotonic_drift_seconds": -0.00018167460802942514,
+      "variant": "B",
+      "legacy_timings": {
+        "tx_prepare": {
+          "count": 438,
+          "mean_us": 38.99315068493151,
+          "p50_p95_p99_max_us": [
+            34.5,
+            44.0,
+            283.63,
+            291.0
+          ]
+        },
+        "rx_check": {
+          "count": 438,
+          "mean_us": 95.2648401826484,
+          "p50_p95_p99_max_us": [
+            79.0,
+            326.0,
+            334.0,
+            337.0
+          ]
+        }
+      },
+      "spi_requested_hz": 40000000,
+      "configuration": {
+        "kind": "read_only_configuration_not_electrical_measurement",
+        "spi_base": "0x04a94000",
+        "wrapper_base": "0x04ac0000",
+        "source_hz_before": 120000000,
+        "branch_cached_hz": 120000000,
+        "snapshots": [
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          },
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          },
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          }
+        ],
+        "wrapper_version": 805306368,
+        "gcc_dfs_control": 45,
+        "source_hz_after": 120000000,
+        "configured_hz": 40000000.0,
+        "gcc_active_level": 6
+      },
+      "clock_matches": true
+    },
+    {
+      "bits": 8,
+      "ticks": 106,
+      "node_pairs": 3456,
+      "actual_rate": 1509433.9622641508,
+      "requested_seconds": 60,
+      "stage": "finalist",
+      "ok": true,
+      "phase": "measure",
+      "seconds": 60.000697893090546,
+      "samples": 90515232,
+      "full_nodes": 26191,
+      "observed_rate": 1508569.6529943761,
+      "status": {
+        "bits": 8,
+        "ticks": 106,
+        "node_pairs": 3456,
+        "rate": 1509433,
+        "dropped": 0,
+        "fatal": 0,
+        "queue": 1,
+        "queue_peak": 3,
+        "copy_ticks": 38936,
+        "poll_ticks": 228090,
+        "slack_ticks": 152068,
+        "send_ticks": 305755,
+        "produced": 26627,
+        "epoch": 1
+      },
+      "metrics": {
+        "node_budget_us": 2289.6,
+        "queue_histogram_frames": {
+          "1": 104745,
+          "2": 18
+        },
+        "queue_peak": 3,
+        "copy_max_us": 243.35,
+        "poll_max_us": 1425.5625,
+        "overwrite_slack_min_us": 950.425,
+        "send_observations": 26191,
+        "send_mean_us": 2029.4195057462487,
+        "send_p50_p95_p99_max_us": [
+          1983.95,
+          2349.065625,
+          2444.2031249999995,
+          3776.19375
+        ],
+        "mean_send_headroom": 0.11363578540083485,
+        "producer_conservative_slack_us": 950.425
+      },
+      "headroom_ok": true,
+      "wall_monotonic_drift_seconds": -0.0008513170760124922,
+      "variant": "B",
+      "legacy_timings": {
+        "tx_prepare": {
+          "count": 104763,
+          "mean_us": 38.52849765661541,
+          "p50_p95_p99_max_us": [
+            35.0,
+            51.0,
+            283.0,
+            292.0
+          ]
+        },
+        "rx_check": {
+          "count": 104763,
+          "mean_us": 87.59831238127965,
+          "p50_p95_p99_max_us": [
+            79.0,
+            98.0,
+            333.0,
+            337.0
+          ]
+        }
+      },
+      "spi_requested_hz": 40000000,
+      "configuration": {
+        "kind": "read_only_configuration_not_electrical_measurement",
+        "spi_base": "0x04a94000",
+        "wrapper_base": "0x04ac0000",
+        "source_hz_before": 120000000,
+        "branch_cached_hz": 120000000,
+        "snapshots": [
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          },
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          },
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          }
+        ],
+        "wrapper_version": 805306368,
+        "gcc_dfs_control": 45,
+        "source_hz_after": 120000000,
+        "configured_hz": 40000000.0,
+        "gcc_active_level": 6
+      },
+      "clock_matches": true
+    },
+    {
+      "bits": 8,
+      "ticks": 106,
+      "node_pairs": 3456,
+      "actual_rate": 1509433.9622641508,
+      "requested_seconds": 120,
+      "stage": "acceptance_1",
+      "ok": false,
+      "phase": "settle",
+      "error": "El Q cerr\u00f3 el flujo. Revisar el relay, la adquisici\u00f3n y el cable USB.",
+      "status": {
+        "bits": 8,
+        "ticks": 106,
+        "node_pairs": 3456,
+        "rate": 1509433,
+        "dropped": 0,
+        "fatal": 0,
+        "queue": 3,
+        "queue_peak": 4,
+        "copy_ticks": 38908,
+        "poll_ticks": 226753,
+        "slack_ticks": 154260,
+        "send_ticks": 376140,
+        "produced": 102,
+        "epoch": 1
+      },
+      "rejected_adc_status": {
+        "rate": 1509433,
+        "index": 345600,
+        "dropped": 1,
+        "fatal": 0,
+        "count": 864,
+        "bits": 8,
+        "channels": 1,
+        "ticks": 106,
+        "node": 100,
+        "flags": 2
+      },
+      "rejected_metrics": {
+        "node_pairs": 3456,
+        "queue": 3,
+        "queue_peak": 4,
+        "copy_ticks": 38908,
+        "poll_ticks": 226753,
+        "overwrite_slack_min_ticks": 154260,
+        "send_ticks": 367755,
+        "produced": 104
+      },
+      "wall_monotonic_drift_seconds": -0.00018082023598253727,
+      "variant": "B",
+      "legacy_timings": {
+        "tx_prepare": {
+          "count": 408,
+          "mean_us": 39.78921568627451,
+          "p50_p95_p99_max_us": [
+            35.0,
+            44.64999999999998,
+            286.86,
+            289.0
+          ]
+        },
+        "rx_check": {
+          "count": 408,
+          "mean_us": 96.44117647058823,
+          "p50_p95_p99_max_us": [
+            79.0,
+            327.0,
+            334.93,
+            336.0
+          ]
+        }
+      },
+      "spi_requested_hz": 40000000,
+      "configuration": {
+        "kind": "read_only_configuration_not_electrical_measurement",
+        "spi_base": "0x04a94000",
+        "wrapper_base": "0x04ac0000",
+        "source_hz_before": 120000000,
+        "branch_cached_hz": 120000000,
+        "snapshots": [
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          },
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          },
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          }
+        ],
+        "wrapper_version": 805306368,
+        "gcc_dfs_control": 45,
+        "source_hz_after": 120000000,
+        "configured_hz": 40000000.0,
+        "gcc_active_level": 6
+      },
+      "clock_matches": true
+    },
+    {
+      "bits": 8,
+      "ticks": 108,
+      "node_pairs": 3456,
+      "actual_rate": 1481481.4814814816,
+      "requested_seconds": 60,
+      "stage": "finalist",
+      "ok": true,
+      "phase": "measure",
+      "seconds": 60.00078249105718,
+      "samples": 88842528,
+      "full_nodes": 25707,
+      "observed_rate": 1480689.4895619326,
+      "status": {
+        "bits": 8,
+        "ticks": 108,
+        "node_pairs": 3456,
+        "rate": 1481481,
+        "dropped": 0,
+        "fatal": 0,
+        "queue": 1,
+        "queue_peak": 4,
+        "copy_ticks": 38918,
+        "poll_ticks": 227984,
+        "slack_ticks": 159269,
+        "send_ticks": 301957,
+        "produced": 26134,
+        "epoch": 1
+      },
+      "metrics": {
+        "node_budget_us": 2332.8,
+        "queue_histogram_frames": {
+          "2": 338,
+          "1": 102328,
+          "3": 151,
+          "4": 10
+        },
+        "queue_peak": 4,
+        "copy_max_us": 243.2375,
+        "poll_max_us": 1424.9,
+        "overwrite_slack_min_us": 995.43125,
+        "send_observations": 25707,
+        "send_mean_us": 2013.2797314447428,
+        "send_p50_p95_p99_max_us": [
+          1967.0125,
+          2380.3824999999997,
+          2469.461875,
+          2976.05625
+        ],
+        "mean_send_headroom": 0.1369685650528366,
+        "producer_conservative_slack_us": 995.43125
+      },
+      "headroom_ok": false,
+      "wall_monotonic_drift_seconds": -0.0008465445134788752,
+      "variant": "B",
+      "legacy_timings": {
+        "tx_prepare": {
+          "count": 102827,
+          "mean_us": 37.49904208038745,
+          "p50_p95_p99_max_us": [
+            35.0,
+            51.0,
+            60.0,
+            291.0
+          ]
+        },
+        "rx_check": {
+          "count": 102827,
+          "mean_us": 87.07323951880343,
+          "p50_p95_p99_max_us": [
+            79.0,
+            98.0,
+            333.0,
+            337.0
+          ]
+        }
+      },
+      "spi_requested_hz": 40000000,
+      "configuration": {
+        "kind": "read_only_configuration_not_electrical_measurement",
+        "spi_base": "0x04a94000",
+        "wrapper_base": "0x04ac0000",
+        "source_hz_before": 120000000,
+        "branch_cached_hz": 120000000,
+        "snapshots": [
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          },
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          },
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          }
+        ],
+        "wrapper_version": 805306368,
+        "gcc_dfs_control": 45,
+        "source_hz_after": 120000000,
+        "configured_hz": 40000000.0,
+        "gcc_active_level": 6
+      },
+      "clock_matches": true
+    },
+    {
+      "bits": 8,
+      "ticks": 108,
+      "node_pairs": 3456,
+      "actual_rate": 1481481.4814814816,
+      "requested_seconds": 120,
+      "stage": "acceptance_1",
+      "ok": true,
+      "phase": "measure",
+      "seconds": 120.0007310899673,
+      "samples": 177675552,
+      "full_nodes": 51411,
+      "observed_rate": 1480620.5794429083,
+      "status": {
+        "bits": 8,
+        "ticks": 108,
+        "node_pairs": 3456,
+        "rate": 1481481,
+        "dropped": 0,
+        "fatal": 0,
+        "queue": 1,
+        "queue_peak": 4,
+        "copy_ticks": 38916,
+        "poll_ticks": 228183,
+        "slack_ticks": 145969,
+        "send_ticks": 395898,
+        "produced": 51839,
+        "epoch": 1
+      },
+      "metrics": {
+        "node_budget_us": 2332.8,
+        "queue_histogram_frames": {
+          "1": 204986,
+          "2": 413,
+          "3": 231,
+          "4": 13
+        },
+        "queue_peak": 4,
+        "copy_max_us": 243.225,
+        "poll_max_us": 1426.14375,
+        "overwrite_slack_min_us": 912.30625,
+        "send_observations": 51411,
+        "send_mean_us": 2009.588979498551,
+        "send_p50_p95_p99_max_us": [
+          1963.4875,
+          2371.740625,
+          2465.04375,
+          3209.08125
+        ],
+        "mean_send_headroom": 0.13855067751262395,
+        "producer_conservative_slack_us": 912.30625
+      },
+      "headroom_ok": false,
+      "wall_monotonic_drift_seconds": -0.0015129257226362824,
+      "variant": "B",
+      "legacy_timings": {
+        "tx_prepare": {
+          "count": 205643,
+          "mean_us": 37.712030071531736,
+          "p50_p95_p99_max_us": [
+            35.0,
+            52.0,
+            60.0,
+            291.0
+          ]
+        },
+        "rx_check": {
+          "count": 205643,
+          "mean_us": 86.81056977383135,
+          "p50_p95_p99_max_us": [
+            79.0,
+            98.0,
+            332.0,
+            337.0
+          ]
+        }
+      },
+      "spi_requested_hz": 40000000,
+      "configuration": {
+        "kind": "read_only_configuration_not_electrical_measurement",
+        "spi_base": "0x04a94000",
+        "wrapper_base": "0x04ac0000",
+        "source_hz_before": 120000000,
+        "branch_cached_hz": 120000000,
+        "snapshots": [
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          },
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          },
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          }
+        ],
+        "wrapper_version": 805306368,
+        "gcc_dfs_control": 45,
+        "source_hz_after": 120000000,
+        "configured_hz": 40000000.0,
+        "gcc_active_level": 6
+      },
+      "clock_matches": true
+    },
+    {
+      "bits": 8,
+      "ticks": 108,
+      "node_pairs": 3456,
+      "actual_rate": 1481481.4814814816,
+      "requested_seconds": 120,
+      "stage": "acceptance_2",
+      "ok": true,
+      "phase": "measure",
+      "seconds": 120.00042951793876,
+      "samples": 177676416,
+      "full_nodes": 51411,
+      "observed_rate": 1480631.5003517494,
+      "status": {
+        "bits": 8,
+        "ticks": 108,
+        "node_pairs": 3456,
+        "rate": 1481481,
+        "dropped": 0,
+        "fatal": 0,
+        "queue": 1,
+        "queue_peak": 3,
+        "copy_ticks": 38915,
+        "poll_ticks": 228536,
+        "slack_ticks": 155851,
+        "send_ticks": 300792,
+        "produced": 51839,
+        "epoch": 1
+      },
+      "metrics": {
+        "node_budget_us": 2332.8,
+        "queue_histogram_frames": {
+          "1": 205488,
+          "2": 156
+        },
+        "queue_peak": 3,
+        "copy_max_us": 243.21875,
+        "poll_max_us": 1428.35,
+        "overwrite_slack_min_us": 974.06875,
+        "send_observations": 51411,
+        "send_mean_us": 2007.1760475627784,
+        "send_p50_p95_p99_max_us": [
+          1963.825,
+          2356.190625,
+          2460.768125,
+          3377.75625
+        ],
+        "mean_send_headroom": 0.13958502762226577,
+        "producer_conservative_slack_us": 974.06875
+      },
+      "headroom_ok": true,
+      "wall_monotonic_drift_seconds": -0.0015112929977476597,
+      "variant": "B",
+      "legacy_timings": {
+        "tx_prepare": {
+          "count": 205644,
+          "mean_us": 37.519446227461046,
+          "p50_p95_p99_max_us": [
+            35.0,
+            52.0,
+            60.0,
+            292.0
+          ]
+        },
+        "rx_check": {
+          "count": 205644,
+          "mean_us": 86.72365349827858,
+          "p50_p95_p99_max_us": [
+            79.0,
+            98.0,
+            332.0,
+            337.0
+          ]
+        }
+      },
+      "spi_requested_hz": 40000000,
+      "configuration": {
+        "kind": "read_only_configuration_not_electrical_measurement",
+        "spi_base": "0x04a94000",
+        "wrapper_base": "0x04ac0000",
+        "source_hz_before": 120000000,
+        "branch_cached_hz": 120000000,
+        "snapshots": [
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          },
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          },
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          }
+        ],
+        "wrapper_version": 805306368,
+        "gcc_dfs_control": 45,
+        "source_hz_after": 120000000,
+        "configured_hz": 40000000.0,
+        "gcc_active_level": 6
+      },
+      "clock_matches": true
+    },
+    {
+      "bits": 8,
+      "ticks": 108,
+      "node_pairs": 3456,
+      "actual_rate": 1481481.4814814816,
+      "requested_seconds": 120,
+      "stage": "acceptance_3",
+      "ok": true,
+      "phase": "measure",
+      "seconds": 120.00022800196894,
+      "samples": 177676416,
+      "full_nodes": 51411,
+      "observed_rate": 1480633.9867711312,
+      "status": {
+        "bits": 8,
+        "ticks": 108,
+        "node_pairs": 3456,
+        "rate": 1481481,
+        "dropped": 0,
+        "fatal": 0,
+        "queue": 1,
+        "queue_peak": 3,
+        "copy_ticks": 38918,
+        "poll_ticks": 228402,
+        "slack_ticks": 151240,
+        "send_ticks": 308635,
+        "produced": 51839,
+        "epoch": 1
+      },
+      "metrics": {
+        "node_budget_us": 2332.8,
+        "queue_histogram_frames": {
+          "1": 205583,
+          "2": 61
+        },
+        "queue_peak": 3,
+        "copy_max_us": 243.2375,
+        "poll_max_us": 1427.5125,
+        "overwrite_slack_min_us": 945.25,
+        "send_observations": 51411,
+        "send_mean_us": 2011.0783638229173,
+        "send_p50_p95_p99_max_us": [
+          1963.775,
+          2376.48125,
+          2463.634375,
+          2992.34375
+        ],
+        "mean_send_headroom": 0.1379122240128099,
+        "producer_conservative_slack_us": 945.25
+      },
+      "headroom_ok": true,
+      "wall_monotonic_drift_seconds": -0.0015163905918598175,
+      "variant": "B",
+      "legacy_timings": {
+        "tx_prepare": {
+          "count": 205644,
+          "mean_us": 37.491947248643285,
+          "p50_p95_p99_max_us": [
+            35.0,
+            45.0,
+            60.0,
+            292.0
+          ]
+        },
+        "rx_check": {
+          "count": 205644,
+          "mean_us": 87.01909610783684,
+          "p50_p95_p99_max_us": [
+            79.0,
+            98.0,
+            332.0,
+            337.0
+          ]
+        }
+      },
+      "spi_requested_hz": 40000000,
+      "configuration": {
+        "kind": "read_only_configuration_not_electrical_measurement",
+        "spi_base": "0x04a94000",
+        "wrapper_base": "0x04ac0000",
+        "source_hz_before": 120000000,
+        "branch_cached_hz": 120000000,
+        "snapshots": [
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          },
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          },
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          }
+        ],
+        "wrapper_version": 805306368,
+        "gcc_dfs_control": 45,
+        "source_hz_after": 120000000,
+        "configured_hz": 40000000.0,
+        "gcc_active_level": 6
+      },
+      "clock_matches": true
+    }
+  ],
+  "winners": {},
+  "analog": "Not measured",
+  "skipped_after_repeated_failure": [],
+  "revision": "adc8_spi40_search_v17",
+  "source_hashes": {
+    "arduino/v16/README.md": "4a324bdb8ae1d0ae3f1a85ec25f5c6b6eb8f779e5dedb5ed8353f00f97f19c97",
+    "arduino/v16/manifest.json": "a4c7e0de5eca2f26b7727b272ebca0683dd1dcf0dd021d3ee563ce1caec559b7",
+    "arduino/v16/oscilloscope/app.yaml": "262f3f4fe672b1aa168308e4056f7272cd6ee26706d614afc61df821ce2a17b3",
+    "arduino/v16/oscilloscope/python/main.py": "47010abf364c29a798e68bb5246cb00d75512ccc4e0f569215adc609757d4918",
+    "arduino/v16/oscilloscope/sketch/acquisition.h": "65f97e04473989ad35bb0a2c3ecf13973f5554a58225d261d3b0c87fd7f45dd2",
+    "arduino/v16/oscilloscope/sketch/acquisition_protocol.h": "62eb3f63bbd8b1b000c0480b765a80a4533223e3d8be9c8bb7ad8b0d29d8b620",
+    "arduino/v16/oscilloscope/sketch/benchmark_protocol.h": "8ab078d333b64c9c55e20c8476ce9fbe6a7a17f9dd24582717f263c5c2ea4763",
+    "arduino/v16/oscilloscope/sketch/control_protocol.h": "1c9ea38fa73b7e6fcfb88bde462077b319b7ebada3eab787c33fdcbbaa84ee3a",
+    "arduino/v16/oscilloscope/sketch/crc32_fast.h": "994c2247c4fdb7c4863511fe97879fc7597a5a80c23c3aecdcc5c3270cdf6241",
+    "arduino/v16/oscilloscope/sketch/generator.h": "f4b12229fef4a42c8516e5b32f9ce02b9136cd5213a5c01f696de1ccc202b58c",
+    "arduino/v16/oscilloscope/sketch/generator_dma.h": "7c70c7c4d09c50b05a2eabc9db291a0d5b64ec73e22a5749b0a080acfa7760a4",
+    "arduino/v16/oscilloscope/sketch/generator_protocol.h": "5c8bf66a32ae6472477a129688ea84a94ceba4e502724cb404293390d635bf45",
+    "arduino/v16/oscilloscope/sketch/generator_timing.h": "555c42c3c7229b42ce8c8d43b65d73f7b750eab2b0e7c6187a69017d0a82650e",
+    "arduino/v16/oscilloscope/sketch/node_validation.h": "b9f2e98686af25f140ac6702d8283d80b095b3808b6a41b3abce357b3d2457d0",
+    "arduino/v16/oscilloscope/sketch/sample_packing.h": "c21549368b386226b00aaf1b81b7779980572e1dd44562f76e49e9c77185c0ac",
+    "arduino/v16/oscilloscope/sketch/scope_config.h": "827bb698332fb2405306c57b4ab4e5389c95969185096d780f97c750abcc04b1",
+    "arduino/v16/oscilloscope/sketch/scope_protocol.h": "c2bf92aed1aac5efc4f6283cd302297d3c8be3ce40e7b838fa8d5bcacef9d612",
+    "arduino/v16/oscilloscope/sketch/sketch.ino": "68b072fd1486f1701db0164deb3a87bba98d3caacea69fe17c5083aafd6a2f80",
+    "arduino/v16/oscilloscope/sketch/sketch.yaml": "2ee56ed8561b6ea420885ed62ca804f498a54825ce6df906168e78a014c424ea",
+    "arduino/v16/oscilloscope/sketch/spi_word_experiment.h": "61d0da81473cb0e920797cce2068fe67df1e46652b75b4a014f05a4400abe06d",
+    "arduino/v16/oscilloscope/sketch/wav.h": "d56b86cbcac01c78ef5936ab17c4c04e944137dd575a49470fe60e33e876b2c2",
+    "arduino/v16/oscilloscope/sketch/wav_dma.h": "4f9a126c193e5bb40672e6c339675fe05b4f0a87eda1ee4aac6131d3cabd214f",
+    "arduino/v16/oscilloscope/sketch/wav_protocol.h": "2da0fc6c697199d6e432a3997448b07c0bbee00596837551ea8a6d951542dc7a",
+    "arduino/v16/oscilloscope/sketch/wav_queue.h": "002553b2c58ff1343a218959f58632a394656aeb0f28fc74bb17a97f2793dd83",
+    "arduino/v16/relay/base_verifier.c": "e733a7ea2aaa3abfa1e3ca05f4b31a483aca4e37bdcd693c177b909992bdd6c9",
+    "arduino/v16/relay/config_relay_protocol.h": "1fff6b0124032e9af55ab2b0819b498ddf169723faef58fa1363ab1a7f5155df",
+    "arduino/v16/relay/unoq_config_stream.c": "7fb2ea7a1fd0d0b8b250b5aca511975aed2d37d008336ddaca9a40712027a44f",
+    "arduino/v16/tests/checker.c": "0c1f45738c0db95044fc6142f1a90f440abc0d9e875b75b77ac12b1763dd8d29",
+    "arduino/v16/tests/generator_timing.cpp": "cc931754bbd5cc96252597f707f6dfe0a3fc3f1aee2dd3e9a14dbedf38e32782",
+    "arduino/v16/tests/golden.cpp": "ee219a48fd6dc8049b6e22f73def305701fa039c47764b56e7b24c8c7f6b5588",
+    "arduino/v16/tests/node_validation.cpp": "c02c6baa57c5980b495d5b8a45ec99ce4d8581f8dddeb8cd2b106838e0abfc44",
+    "arduino/v16/unoq.json": "851721d3b8d97c7a6f03c5ec2f46fc50f5bdad45b4477c0d9d729fe615ecf28f"
+  },
+  "selector_modified": false,
+  "changes": [
+    "Only SPI requested clock38/40MHz; source/DFS verification without cache",
+    "Original kind20 payload864 and WORD DMA; no compact format or TCP batching"
+  ],
+  "channels": 1,
+  "acceptance_limit": "User requested no 600 s run; maximum run 120 s",
+  "runner_sha256": "d5e5ade8ca81489ca053e380014cf2cdaa445436fc57fc3c53c16f11f1caadd6",
+  "variants": {},
+  "instrumentation": "Only existing MCU prepare/check fields; no per-syscall profiler",
+  "production_sources_modified": false,
+  "gate": "All B cases intact and headroom true; B send means at least2% lower with no overlap against A at both rates",
+  "relay_spi_hz": {
+    "A": 38000000,
+    "B": 40000000
+  },
+  "policy_checks": [],
+  "mcu": "Reference PING, corrected WORD DMA; identical for A and B",
+  "initial_configuration": {
+    "kind": "read_only_configuration_not_electrical_measurement",
+    "spi_base": "0x04a94000",
+    "wrapper_base": "0x04ac0000",
+    "source_hz_before": 100000000,
+    "branch_cached_hz": 100000000,
+    "snapshots": [
+      {
+        "serial_clock_config": 49,
+        "fifo_interface_disabled": 0,
+        "firmware_revision": 258,
+        "clock_select": 5,
+        "dma_mode": 1,
+        "gsi_event_enable": 0,
+        "dma_interface_enable": 1
+      },
+      {
+        "serial_clock_config": 49,
+        "fifo_interface_disabled": 0,
+        "firmware_revision": 258,
+        "clock_select": 5,
+        "dma_mode": 1,
+        "gsi_event_enable": 0,
+        "dma_interface_enable": 1
+      },
+      {
+        "serial_clock_config": 49,
+        "fifo_interface_disabled": 0,
+        "firmware_revision": 258,
+        "clock_select": 5,
+        "dma_mode": 1,
+        "gsi_event_enable": 0,
+        "dma_interface_enable": 1
+      }
+    ],
+    "wrapper_version": 805306368,
+    "gcc_dfs_control": 43,
+    "source_hz_after": 100000000,
+    "configured_hz": 33333333.333333332,
+    "gcc_active_level": 5
+  },
+  "stable_cap_add": [
+    "SYS_NICE"
+  ],
+  "stable_scope_environment": [],
+  "prior_identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v17-main-1",
+    "firmware_sha256": "3e275a52cb560bf08bca481972a18ff21debc9442236b65f55b74c566c9cac8c"
+  },
+  "backup": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/respaldos/unoq/osciloscopio_20261016_084749_948956.zip",
+  "experimental_network": {
+    "name": "scope-v16-send1400-experimental_default",
+    "subnet": "10.203.141.0/24"
+  },
+  "candidate_source_hashes": {
+    "app.yaml": "262f3f4fe672b1aa168308e4056f7272cd6ee26706d614afc61df821ce2a17b3",
+    "python/main.py": "47010abf364c29a798e68bb5246cb00d75512ccc4e0f569215adc609757d4918",
+    "sketch/acquisition.h": "65f97e04473989ad35bb0a2c3ecf13973f5554a58225d261d3b0c87fd7f45dd2",
+    "sketch/acquisition_protocol.h": "62eb3f63bbd8b1b000c0480b765a80a4533223e3d8be9c8bb7ad8b0d29d8b620",
+    "sketch/benchmark_protocol.h": "8ab078d333b64c9c55e20c8476ce9fbe6a7a17f9dd24582717f263c5c2ea4763",
+    "sketch/control_protocol.h": "1c9ea38fa73b7e6fcfb88bde462077b319b7ebada3eab787c33fdcbbaa84ee3a",
+    "sketch/crc32_fast.h": "994c2247c4fdb7c4863511fe97879fc7597a5a80c23c3aecdcc5c3270cdf6241",
+    "sketch/generator.h": "f4b12229fef4a42c8516e5b32f9ce02b9136cd5213a5c01f696de1ccc202b58c",
+    "sketch/generator_dma.h": "7c70c7c4d09c50b05a2eabc9db291a0d5b64ec73e22a5749b0a080acfa7760a4",
+    "sketch/generator_protocol.h": "5c8bf66a32ae6472477a129688ea84a94ceba4e502724cb404293390d635bf45",
+    "sketch/generator_timing.h": "555c42c3c7229b42ce8c8d43b65d73f7b750eab2b0e7c6187a69017d0a82650e",
+    "sketch/node_validation.h": "b9f2e98686af25f140ac6702d8283d80b095b3808b6a41b3abce357b3d2457d0",
+    "sketch/sample_packing.h": "c21549368b386226b00aaf1b81b7779980572e1dd44562f76e49e9c77185c0ac",
+    "sketch/scope_config.h": "827bb698332fb2405306c57b4ab4e5389c95969185096d780f97c750abcc04b1",
+    "sketch/scope_protocol.h": "c2bf92aed1aac5efc4f6283cd302297d3c8be3ce40e7b838fa8d5bcacef9d612",
+    "sketch/sketch.ino": "68b072fd1486f1701db0164deb3a87bba98d3caacea69fe17c5083aafd6a2f80",
+    "sketch/sketch.yaml": "2ee56ed8561b6ea420885ed62ca804f498a54825ce6df906168e78a014c424ea",
+    "sketch/spi_word_experiment.h": "61d0da81473cb0e920797cce2068fe67df1e46652b75b4a014f05a4400abe06d",
+    "sketch/wav.h": "d56b86cbcac01c78ef5936ab17c4c04e944137dd575a49470fe60e33e876b2c2",
+    "sketch/wav_dma.h": "4f9a126c193e5bb40672e6c339675fe05b4f0a87eda1ee4aac6131d3cabd214f",
+    "sketch/wav_protocol.h": "2da0fc6c697199d6e432a3997448b07c0bbee00596837551ea8a6d951542dc7a",
+    "sketch/wav_queue.h": "002553b2c58ff1343a218959f58632a394656aeb0f28fc74bb17a97f2793dd83"
+  },
+  "deployment": {
+    "backup": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/respaldos/unoq/osciloscopio_20261011_170619_994241.zip",
+    "stable_relay": "/home/arduino/.cache/serialmonitor/usb-stream-588a891cf0c8b731426b/unoq_stream",
+    "candidate_relay": "/home/arduino/.cache/serialmonitor/usb-stream-d1cc16464c495086f1e5/unoq_stream"
+  },
+  "first_coarse_failure_ticks": 104,
+  "eligible_ticks": [
+    105,
+    106,
+    108,
+    110,
+    111
+  ],
+  "qualified_profiles": [
+    {
+      "bits": 8,
+      "channels": 1,
+      "ticks": 108,
+      "node_pairs": 3456,
+      "actual_rate": 1481481.4814814816,
+      "integrity_accepted": true,
+      "headroom_accepted": false,
+      "qualification_seconds": [
+        60,
+        120,
+        120,
+        120
+      ],
+      "samples": 621870912
+    }
+  ],
+  "error": "signal 2",
+  "final_adc": {
+    "bits": 8,
+    "rate": 1403508
+  },
+  "final_generator": {
+    "wave": 0,
+    "enabled": 0,
+    "mode": 0,
+    "frequency": 2500,
+    "final_frequency": 2500,
+    "low": 0,
+    "high": 0,
+    "duration": 1000,
+    "duration_us": 0,
+    "duty": 50
+  },
+  "restore_samples": 14031360,
+  "restore_integrity_ok": true,
+  "final_identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v17-main-1",
+    "firmware_sha256": "3e275a52cb560bf08bca481972a18ff21debc9442236b65f55b74c566c9cac8c"
+  },
+  "restored_configuration": {
+    "kind": "read_only_configuration_not_electrical_measurement",
+    "spi_base": "0x04a94000",
+    "wrapper_base": "0x04ac0000",
+    "source_hz_before": 100000000,
+    "branch_cached_hz": 100000000,
+    "snapshots": [
+      {
+        "serial_clock_config": 49,
+        "fifo_interface_disabled": 0,
+        "firmware_revision": 258,
+        "clock_select": 5,
+        "dma_mode": 1,
+        "gsi_event_enable": 0,
+        "dma_interface_enable": 1
+      },
+      {
+        "serial_clock_config": 49,
+        "fifo_interface_disabled": 0,
+        "firmware_revision": 258,
+        "clock_select": 5,
+        "dma_mode": 1,
+        "gsi_event_enable": 0,
+        "dma_interface_enable": 1
+      },
+      {
+        "serial_clock_config": 49,
+        "fifo_interface_disabled": 0,
+        "firmware_revision": 258,
+        "clock_select": 5,
+        "dma_mode": 1,
+        "gsi_event_enable": 0,
+        "dma_interface_enable": 1
+      }
+    ],
+    "wrapper_version": 805306368,
+    "gcc_dfs_control": 43,
+    "source_hz_after": 100000000,
+    "configured_hz": 33333333.333333332,
+    "gcc_active_level": 5
+  }
+}

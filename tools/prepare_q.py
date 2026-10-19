@@ -16,7 +16,7 @@ def prepare(serial, firmware='v16'):
     print('Comprobando Q y aplicaciones…', flush=True)
     board.run('get-state')
     apps = json.loads(board.cli('app', 'list', '--format', 'json', capture=True).stdout).get('apps', [])
-    compatible = {'Scope V16':'v16','Scope WAV V12 Audio':'v12_audio','Scope Pulse US V13 Experimental':'v13_pulse','Scope Acquisition P992 V11':'v11_p992'}
+    compatible = {'Scope V17':'v17','Scope V16':'v16','Scope WAV V12 Audio':'v12_audio','Scope Pulse US V13 Experimental':'v13_pulse','Scope Acquisition P992 V11':'v11_p992'}
     if any(a.get('status') == 'running' and a.get('name') != board.config['name'] and a.get('name') not in compatible for a in apps):
         raise RuntimeError('Hay otra aplicación activa en el Q; detenerla antes de preparar el monitor.')
     existing = any(a.get('name') == board.config['name'] for a in apps)
@@ -34,12 +34,13 @@ def prepare(serial, firmware='v16'):
         print('Compilando relay en el Q…', flush=True)
         binary(board, build=True, p992=True, audio=True)
     try:
+        # Release READY ownership before Board.stop reconfigures its GPIO.
+        stop(board)
         for app in apps:
             if app.get('status') == 'running' and app.get('name') != board.config['name']:
                 print('Deteniendo la aplicación anterior del monitor…', flush=True)
                 previous = Board(json.loads(config_path(compatible[app['name']]).read_text()))
                 previous.stop()
-        stop(board)
         if existing:
             print('Actualizando app y firmware MCU…', flush=True)
             board.stop()
@@ -61,7 +62,7 @@ def prepare(serial, firmware='v16'):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--serial', required=True)
-    parser.add_argument('--firmware', choices=('v12_audio','v13_pulse','v16'), default='v16')
+    parser.add_argument('--firmware', choices=('v12_audio','v13_pulse','v16', 'v17'), default='v16')
     args = parser.parse_args()
     try:
         prepare(args.serial,args.firmware)

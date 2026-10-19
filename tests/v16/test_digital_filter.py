@@ -2,6 +2,14 @@ import unittest
 import numpy as np
 from monitor.v16.digital_filter import DigitalFilter,FilterConfig
 class FilterTests(unittest.TestCase):
+ def test_rc_order_matches_cascaded_stages(self):
+  x=np.random.default_rng(9).normal(size=4000)
+  for mode in ('lowpass','highpass','bandpass'):
+   first=FilterConfig(design='RC',mode=mode,order=1)
+   expected=x
+   for _ in range(3):expected=DigitalFilter().process(expected,40000,first)
+   actual=DigitalFilter().process(x,40000,FilterConfig(design='RC',mode=mode,order=3))
+   np.testing.assert_allclose(actual,expected,atol=1e-12)
  def test_chunks_match(self):
   x=np.random.default_rng(4).normal(size=10000);cfg=FilterConfig()
   a=DigitalFilter().process(x,40000,cfg);f=DigitalFilter();b=np.concatenate([f.process(x[i:i+226],40000,cfg) for i in range(0,len(x),226)])

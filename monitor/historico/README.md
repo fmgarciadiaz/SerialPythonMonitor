@@ -1,6 +1,6 @@
 # Monitores históricos
 
-La versión actual se encuentra en [V15](../v15/README.md).
+La versión actual está en [V17](../v17/README.md). V15 y las versiones de esta carpeta son históricas.
 
 | Carpeta | Firmware de referencia |
 |---|---|

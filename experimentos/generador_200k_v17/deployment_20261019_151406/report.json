@@ -1,0 +1,116 @@
+{
+  "ok": false,
+  "installed": false,
+  "restored": true,
+  "evidence": "experimentos/generador_200k_v17/probe_20261019_145935/report.json",
+  "prior": {
+    "adc": {
+      "bits": 8,
+      "rate": 1600000
+    },
+    "generator": {
+      "wave": 0,
+      "enabled": 0,
+      "mode": 0,
+      "frequency": 2500,
+      "final_frequency": 2500,
+      "low": 0,
+      "high": 0,
+      "duration": 1000,
+      "duration_us": 0,
+      "duty": 50
+    }
+  },
+  "prior_identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v17-main-1",
+    "firmware_sha256": "f3cab6f48a0d6b45fb7c1329ceee7e485f6cf32baadac1c9578533d1f5090bf5"
+  },
+  "old_relay": "/home/arduino/.cache/serialmonitor/usb-stream-f2530b489639bf119a6a/unoq_stream",
+  "old_cap_add": [
+    "SYS_NICE"
+  ],
+  "old_scope_environment": [],
+  "backup": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/respaldos/unoq/osciloscopio_20261019_151406_949764.zip",
+  "old_mounts": [
+    {
+      "Type": "bind",
+      "Source": "/home/arduino/.cache/serialmonitor/usb-stream-f2530b489639bf119a6a/unoq_stream",
+      "Destination": "/work/unoq_stream",
+      "Mode": "",
+      "RW": false,
+      "Propagation": "rprivate"
+    },
+    {
+      "Type": "bind",
+      "Source": "/sys/devices/system/cpu/cpufreq/policy0/scaling_governor",
+      "Destination": "/scope_cpu_governor",
+      "Mode": "",
+      "RW": true,
+      "Propagation": "rprivate"
+    }
+  ],
+  "old_cpuset": "",
+  "local_sources_updated": true,
+  "error": "KeyboardInterrupt()",
+  "traceback": "Traceback (most recent call last):\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/experimentos/generador_200k_v17/install.py\", line 33, in main\n    x.sources=sorted(p for p in (ROOT/'arduino/v17/relay').iterdir() if p.is_file());x.build()\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/experimentos/otros_bits_cpu_relay_v17/run.py\", line 101, in build\n    self.board.shell('docker','run','--rm','--user','0:0','--security-opt','no-new-privileges','--mount',f'type=bind,src={remote},dst=/build','--entrypoint','sh',BUILD_IMAGE,'-c','apt-get update && apt-get install -y --no-install-recommends gcc libc6-dev && cc -O2 -std=c11 -Wall -Wextra -Werror /build/unoq_config_stream.c -lm -o /build/unoq_stream')\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/tools/unoq.py\", line 54, in shell\n    return self.run('shell', shlex.join(str(a) for a in args), capture=capture)\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/tools/unoq.py\", line 50, in run\n    return subprocess.run([self.adb, '-s', self.serial, *args], check=True,\n  File \"/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_10_DataScience/lib/python3.10/subprocess.py\", line 505, in run\n    stdout, stderr = process.communicate(input, timeout=timeout)\n  File \"/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_10_DataScience/lib/python3.10/subprocess.py\", line 1146, in communicate\n    self.wait()\n  File \"/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_10_DataScience/lib/python3.10/subprocess.py\", line 1209, in wait\n    return self._wait(timeout=timeout)\n  File \"/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_10_DataScience/lib/python3.10/subprocess.py\", line 1959, in _wait\n    (pid, sts) = self._try_wait(0)\n  File \"/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_10_DataScience/lib/python3.10/subprocess.py\", line 1917, in _try_wait\n    (pid, sts) = os.waitpid(self.pid, wait_flags)\nKeyboardInterrupt\n",
+  "restored_low_policy": {
+    "governor": "schedutil",
+    "cpus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "scheduler": 0,
+    "priority": 0
+  },
+  "final_settings": {
+    "adc": {
+      "bits": 8,
+      "rate": 1600000
+    },
+    "generator": {
+      "wave": 0,
+      "enabled": 0,
+      "mode": 0,
+      "frequency": 2500,
+      "final_frequency": 2500,
+      "low": 0,
+      "high": 0,
+      "duration": 1000,
+      "duration_us": 0,
+      "duty": 50
+    }
+  },
+  "final_identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v17-main-1",
+    "firmware_sha256": "f3cab6f48a0d6b45fb7c1329ceee7e485f6cf32baadac1c9578533d1f5090bf5"
+  },
+  "recovery": {
+    "ok": true,
+    "samples": 15991776,
+    "status": {
+      "ack": 25905,
+      "rate": 1600000,
+      "bits": 8,
+      "dropped": 0,
+      "fatal": 0,
+      "epoch": 3,
+      "prepare_us": 10,
+      "check_us": 49,
+      "queue_slots": 8,
+      "node_pairs": 3456,
+      "queue": 1,
+      "queue_peak": 2,
+      "copy_ticks": 39183,
+      "poll_ticks": 209799,
+      "slack_ticks": 131551,
+      "send_ticks": 265412,
+      "produced": 4629
+    },
+    "method": "No administrative Q calls after final high-rate configuration"
+  },
+  "recovery_after_interruption_ok": true
+}

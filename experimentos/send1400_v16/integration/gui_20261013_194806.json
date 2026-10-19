@@ -1,0 +1,48 @@
+{
+  "scope": "Production V16 GUI and PCM16 WAV: ADC8/CH1 1403508 then ordinary ADC14/dual40000;6s per profile",
+  "cases": [],
+  "errors": [
+    "WAV profile or production recording gate not confirmed"
+  ],
+  "restored": true,
+  "ok": false,
+  "source_sha256": {
+    "monitor/v16/app.py": "c1f1810c8461d12318d1a3f0a85db0bbf3b0d08df30852feb42b4ee9391e1ee3",
+    "monitor/v16/receiver/unoq_config_decoder.py": "97dca061295225391226cc3dd7ea1e2559a0af69ccd9e19d37eea66f9f915dda"
+  },
+  "profiles": [
+    {
+      "bits": 8,
+      "rate": 1403508
+    },
+    {
+      "bits": 14,
+      "rate": 40000
+    }
+  ],
+  "prior": {
+    "configuration": {
+      "bits": 8,
+      "rate": 1221374
+    },
+    "generator": {
+      "wave": 0,
+      "enabled": 0,
+      "mode": 0,
+      "frequency": 2500,
+      "final_frequency": 2500,
+      "low": 0,
+      "high": 0,
+      "duration": 1000,
+      "duration_us": 0,
+      "duty": 50
+    },
+    "wav_state": "IDLE",
+    "mode": "SPI"
+  },
+  "restoration_integrity": {
+    "seconds": 3.0007209049654193,
+    "samples": 3666816,
+    "ok": true
+  }
+}

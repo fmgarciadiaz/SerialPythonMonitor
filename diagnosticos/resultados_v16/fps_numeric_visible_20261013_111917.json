@@ -1,0 +1,73 @@
+{
+  "scope": "Live visible Qt painting with production numeric receiver; 120 s per CH1 profile, 2 s warmup, one Q reader; prior generator state preserved.",
+  "cases": [
+    {
+      "bits": 8,
+      "rate": 1221374,
+      "channels": 1,
+      "detail_slider": 50,
+      "vertices_sent": 2441,
+      "seconds": 120.448,
+      "paint_fps": 20.02,
+      "viewport_paint_fps": 20.02,
+      "plot_is_instrumented": true,
+      "window_exposed": false,
+      "window_active": false,
+      "render_ms_p50": 0.754,
+      "ingest_ms_p50": 1.769,
+      "decode_ms_p50": 0.085,
+      "batch_delay_ms_p95": 3.173,
+      "batch_delay_ms_max": 48.77203900832683,
+      "samples": 147106368,
+      "viewport_visible": true,
+      "window_visible": true,
+      "timer_fps": 35.82,
+      "generator": "GeneratorConfig(wave=0, enabled=0, mode=0, frequency=2500, final_frequency=2500, low=807, high=3288, duration=1000, duration_us=0, duty=50)",
+      "paint_ms_p50": 0.85,
+      "generator_frequency_hz": 2.5,
+      "painting_valid": true
+    },
+    {
+      "bits": 10,
+      "rate": 909090,
+      "channels": 1,
+      "detail_slider": 50,
+      "vertices_sent": 1817,
+      "seconds": 120.938,
+      "paint_fps": 0.0,
+      "viewport_paint_fps": 0.0,
+      "plot_is_instrumented": true,
+      "window_exposed": false,
+      "window_active": false,
+      "render_ms_p50": 0.713,
+      "ingest_ms_p50": 3.984,
+      "decode_ms_p50": 0.176,
+      "batch_delay_ms_p95": 0.22,
+      "batch_delay_ms_max": 7.664445962291211,
+      "samples": 109873032,
+      "viewport_visible": true,
+      "window_visible": true,
+      "timer_fps": 2.37,
+      "generator": "GeneratorConfig(wave=0, enabled=0, mode=0, frequency=2500, final_frequency=2500, low=807, high=3288, duration=1000, duration_us=0, duty=50)",
+      "paint_ms_p50": null,
+      "generator_frequency_hz": 2.5,
+      "painting_valid": false
+    }
+  ],
+  "errors": [],
+  "source_sha256": {
+    "monitor/v16/app.py": "1d2f739a3994c3a2eda18f8309afb745058d2e413ba49b22178dfdd73bb176be",
+    "monitor/v16/receiver/unoq_config_decoder.py": "97dca061295225391226cc3dd7ea1e2559a0af69ccd9e19d37eea66f9f915dda",
+    "monitor/v16/receiver/native_unpack.py": "8150e43c3118ac627c1766f2c2db3988182a0a89661153af089aba9462a20979"
+  },
+  "prior": {
+    "bits": 14,
+    "rate": 363636,
+    "generator": "GeneratorConfig(wave=0, enabled=0, mode=0, frequency=2500, final_frequency=2500, low=0, high=0, duration=1000, duration_us=0, duty=50)"
+  },
+  "restored": true,
+  "acquisition_observed": true,
+  "painting_complete": false,
+  "outcome": "acquisition_with_partial_painting",
+  "limitations": "ADC8 paint events are a session average with uncontrolled exposure; ADC10 had zero observable paint events. Timer Hz does not certify visible FPS. Numeric receiver integrity is established by numeric_sustained_20261013_105929.json."
+}

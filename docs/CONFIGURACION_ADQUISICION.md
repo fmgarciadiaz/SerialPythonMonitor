@@ -8,17 +8,28 @@ identificar la tasa en Hz enteros; la tasa efectiva depende del período aplicad
 
 | Salida / resolución | Tasas dual comunes (kHz) |
 | --- | --- |
-| SPI y UART · 8/10/12/14/16 bits | 1; 2; 4; 5; 8; 10; 12,500; 15,625; 20; 25; 31,250 |
-| Sólo SPI · 8/10/12/14/16 bits | 40; 50; 62,500; 66,666; 71,428 |
-| Sólo SPI · 8/10/12/14 bits | 100; 125; 200; 250; 333,333 |
+| SPI y UART · 8/10/12/14/16 bits | 1; 5; 10; 20; 31,250 |
+| Sólo SPI · 8/10/12/14/16 bits | 40 |
 
-| Bits | CH1 · sólo SPI (kHz) | Dual adicional · sólo SPI (kHz) |
+| Bits | CH1 · sólo SPI (kHz) | Máximos dual · sólo SPI (kHz) |
 | --- | --- | --- |
-| 8 | 1118,881 ✓; 1203,007; 1221,374 | 597,014 ✓; 632,411 |
+| 8 | 1118,881 ✓; 1221,374 | 597,014 ✓; 632,411 |
 | 10 | 909,090 ✓ | 495,356; 519,480 |
 | 12 | — | 410,256; 437,158 |
-| 14 | 599,250; 661,157; 701,754 ✓; 747,663 | 355,555 ✓; 363,636 |
+| 14 | 701,754 ✓; 747,663 | 355,555 ✓; 363,636 |
 | 16 | — | 76,226 ✓ |
+
+| Bits | Intermedias / audio · dual SPI (kHz por canal) |
+| --- | --- |
+| 8 | 225,670; 411,311 |
+| 10 | 191,847; 343,348 |
+| 12 | 163,432; 286,738 |
+| 14 | 145,191; 250,391 |
+| 16 | 44,1 nominal; 48 nominal |
+
+Estas diez tasas adicionales usan el reloj nativo de 160 MHz. Los diez perfiles pasaron 60 s físicos cada uno, sin pérdidas ni errores de
+integridad; aceptación prolongada de margen y precisión analógica pendientes. En ADC16, las tasas reales son **44.101,43 y 48.004,80 Hz**;
+el selector muestra 44,1/48,0 kHz y el detalle informa la tasa real.
 
 **✓**: perfil nativo con margen de envío ≥10%, cola máxima menor de cuatro y
 margen positivo antes de sobrescritura, confirmado también en producción.
@@ -28,8 +39,10 @@ ADC10/495,356 y ADC12/410,256 kHz conservan integridad pero midieron 9,03% y
 UART conserva dos canales y un máximo de 31,250 kHz. En **Synth**, SPI limita
 la adquisición a **40 kHz** y UART a **31,250 kHz**; los perfiles CH1 y dual
 nativos altos no se ofrecen en ese modo. El selector filtra por resolución,
-salida y Synth. Los perfiles heredados conservan la evidencia y límites de sus
-ensayos; disponibilidad en el selector no equivale a certificación analógica.
+salida y Synth. Se ofrecen seis tasas bajas comunes, los 14 máximos nativos con aceptación
+prolongada y diez tasas adicionales intermedias/de audio. Los perfiles heredados
+siguen siendo compatibles con el protocolo, pero ya no aparecen en el selector.
+La integridad validada no equivale a certificación analógica.
 
 La pareja actual es **monitor/MCU/relay V16**, SCP1 V4/992, ADC a 54 MHz
 mediante PLL2. ADC16 usa oversampling ×16 de conversiones de 14 bits, con
@@ -38,7 +51,9 @@ CH1 rápido y perfiles nativos. Los nativos se identifican mediante bits, ticks,
 tamaño de nodo y número de canales compartidos por las tres capas.
 
 [Perfiles disponibles en Python](../monitor/v16/receiver/unoq_acquisition.py) ·
-[Whitelist nativa](../monitor/v16/receiver/native_profiles.json) ·
+[Máximos nativos](../monitor/v16/receiver/native_profiles.json) ·
+[Tasas adicionales](../monitor/v16/receiver/additional_profiles.json) ·
+[Ensayo de las adicionales](../diagnosticos/resultados_v16/additional_rates_60s_20261012.json) ·
 [Evidencia de integración](../experimentos/maxfreq_dual_v16/RESULTADOS.md#incorporación-a-producción-completada).
 
 Las secciones siguientes conservan los contratos y límites históricos V8/V10;
@@ -145,3 +160,15 @@ Referencia: [ST RM0456](https://www.st.com/resource/en/reference_manual/rm0456-s
 ## Captura física del timestamp
 
 TIM5 conserva su contador de 1 MHz. Su canal 1 captura TIM2 TRGO mediante TRC/ITR1 y DMA0 lee CCR1 usando TIM5_CH1. La captura precede la petición DMA, por lo que los tiempos no dependen de la demora de lectura de CNT en el bus. Se verifica CC1OF además de los errores DMA/ADC y de los intervalos exactos del productor. [Causa y prueba de 40 perfiles](../diagnosticos/CIERRE_16BITS_20261002.md).
+
+
+### Grabación WAV
+
+RECORD en WAV admite FS comunes de 1, 5, 10, 20, 31,25 y 40 kHz para ADC
+de 8/10/12/14/16 bits, y 44,1/48 kHz nominales o 76,226 kHz en ADC16 dual. El archivo
+es PCM16 también para ADC de menos bits: conserva su resolución original sin
+agregar precisión. CSV permanece disponible en todas las FS.
+La cabecera usa la FS aplicada; en audio nativo es 44101/48004 Hz;
+no remuestrea a 44100/48000 Hz. WAV y CSV se guardan en `capturas/v16/`. Se verificaron archivos, ambos canales y
+continuidad entre lotes mediante pruebas locales; esto no constituye un ensayo
+físico sostenido de grabación. Demo no permite WAV.

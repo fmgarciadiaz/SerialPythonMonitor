@@ -1,0 +1,141 @@
+{
+  "ok": false,
+  "installed": false,
+  "restored": true,
+  "cases": [
+    {
+      "bits": 14,
+      "rate": 833333,
+      "audio_rate": 40000,
+      "ok": true,
+      "audio_report": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v17/generador_radio_20261018_132616/report.json"
+    },
+    {
+      "bits": 14,
+      "rate": 851063,
+      "audio_rate": 40000,
+      "ok": true,
+      "audio_report": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v17/generador_radio_20261018_132732/report.json"
+    },
+    {
+      "bits": 8,
+      "rate": 1600000,
+      "audio_rate": 40000,
+      "ok": false,
+      "audio_report": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v17/generador_radio_20261018_132848/report.json"
+    }
+  ],
+  "acceptance": "experimentos/radio14_nodes_v17/probe_20261018_131346/report.json",
+  "prior": {
+    "adc": {
+      "bits": 14,
+      "rate": 599250
+    },
+    "generator": {
+      "wave": 0,
+      "enabled": 0,
+      "mode": 0,
+      "frequency": 2500,
+      "final_frequency": 2500,
+      "low": 0,
+      "high": 4095,
+      "duration": 1000,
+      "duration_us": 0,
+      "duty": 50
+    }
+  },
+  "prior_identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v17-main-1",
+    "firmware_sha256": "42cff22046d3dbebc4678bd18c62b36e2ee8e4dc6d2d2eb39d69adf2cae30e29"
+  },
+  "old_relay": "/home/arduino/.cache/serialmonitor/usb-stream-1041f7c9ce459f0ec43a/unoq_stream",
+  "old_cap_add": [
+    "SYS_NICE"
+  ],
+  "old_scope_environment": [],
+  "backup": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/respaldos/unoq/osciloscopio_20261018_132501_948619.zip",
+  "old_mounts": [
+    {
+      "Type": "bind",
+      "Source": "/sys/devices/system/cpu/cpufreq/policy0/scaling_governor",
+      "Destination": "/scope_cpu_governor",
+      "Mode": "",
+      "RW": true,
+      "Propagation": "rprivate"
+    },
+    {
+      "Type": "bind",
+      "Source": "/home/arduino/.cache/serialmonitor/usb-stream-1041f7c9ce459f0ec43a/unoq_stream",
+      "Destination": "/work/unoq_stream",
+      "Mode": "",
+      "RW": false,
+      "Propagation": "rprivate"
+    }
+  ],
+  "old_cpuset": "",
+  "normal_policy": {
+    "governor": "schedutil",
+    "cpus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "scheduler": 0,
+    "priority": 0
+  },
+  "installed_relay": "/home/arduino/.cache/serialmonitor/usb-stream-f2530b489639bf119a6a/unoq_stream",
+  "relay_sha256": "7a95247c9b51619843a58ae01021ca5f595a093f00a95604b10c677c3bdaff68",
+  "error": "ValueError('Final RADIO14 failed: 1600000')",
+  "traceback": "Traceback (most recent call last):\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/experimentos/radio14_nodes_v17/install.py\", line 97, in main\n    if not report['ok']:raise ValueError('Final RADIO14 failed: '+str(rate))\nValueError: Final RADIO14 failed: 1600000\n",
+  "restored_low_policy": {
+    "governor": "schedutil",
+    "cpus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "scheduler": 0,
+    "priority": 0
+  },
+  "final_settings": {
+    "adc": {
+      "bits": 14,
+      "rate": 599250
+    },
+    "generator": {
+      "wave": 0,
+      "enabled": 0,
+      "mode": 0,
+      "frequency": 2500,
+      "final_frequency": 2500,
+      "low": 0,
+      "high": 4095,
+      "duration": 1000,
+      "duration_us": 0,
+      "duty": 50
+    }
+  },
+  "final_identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v17-main-1",
+    "firmware_sha256": "42cff22046d3dbebc4678bd18c62b36e2ee8e4dc6d2d2eb39d69adf2cae30e29"
+  },
+  "recovery": {
+    "ok": true,
+    "samples": 5990916,
+    "status": {
+      "ack": 17706,
+      "rate": 599250,
+      "bits": 14,
+      "dropped": 0,
+      "fatal": 0,
+      "epoch": 2,
+      "prepare_us": 81,
+      "check_us": 48
+    },
+    "method": "No administrative Q calls after final high-rate configuration"
+  }
+}

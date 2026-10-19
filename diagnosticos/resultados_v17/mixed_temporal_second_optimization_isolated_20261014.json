@@ -1,0 +1,154 @@
+{
+  "scope": "Offline native ADC8 CH1 1.4035MHz + RADIO40 on common temporal view, 10ms window; no physical transport or visible FPS acceptance",
+  "seconds": 15.0,
+  "backend": "process",
+  "mixed_view": true,
+  "radio_frequency_hz": 20525.0,
+  "fft_size": 65536,
+  "filter": "RADIO",
+  "errors": [],
+  "stages": {
+    "decoder_ms": {
+      "count": 762,
+      "mean_ms": 2.093640964886472,
+      "p50_p95_p99_max_ms": [
+        1.3618214870803058,
+        4.525604518130419,
+        6.0351926588919005,
+        7.898189011029899
+      ]
+    },
+    "numeric_conversion_ms": {
+      "count": 762,
+      "mean_ms": 0.5429745521921948,
+      "p50_p95_p99_max_ms": [
+        0.40680653182789683,
+        1.1311826063320036,
+        2.6782894029747677,
+        4.1593259666115046
+      ]
+    },
+    "gui_delivery_ms": {
+      "count": 762,
+      "mean_ms": 0.398355367498135,
+      "p50_p95_p99_max_ms": [
+        0.272839970421046,
+        0.7186508271843194,
+        0.9030403185170143,
+        1.0805550264194608
+      ]
+    },
+    "publish_to_consume_ms": {
+      "count": 762,
+      "mean_ms": 5.302491275626638,
+      "p50_p95_p99_max_ms": [
+        4.71440504770726,
+        7.712798961438239,
+        10.995641810586676,
+        82.10396696813405
+      ]
+    },
+    "render_frame_ms": {
+      "count": 933,
+      "mean_ms": 3.849238353044729,
+      "p50_p95_p99_max_ms": [
+        3.381167072802782,
+        8.260962972417474,
+        9.855376239866013,
+        11.158438981510699
+      ]
+    },
+    "radio_demod_ms": {
+      "count": 703,
+      "mean_ms": 1.2659795898917643,
+      "p50_p95_p99_max_ms": [
+        1.234765979461372,
+        1.4569015824235976,
+        1.6826194827444856,
+        2.0165869500488043
+      ]
+    },
+    "radio_resample_ms": {
+      "count": 703,
+      "mean_ms": 0.35121493093844286,
+      "p50_p95_p99_max_ms": [
+        0.3241869853809476,
+        0.5282181547954679,
+        0.8423453872092076,
+        1.3134899782016873
+      ]
+    },
+    "audio_filter_ms": {
+      "count": 703,
+      "mean_ms": 0.12071365139488222,
+      "p50_p95_p99_max_ms": [
+        0.11748995166271925,
+        0.1324453391134739,
+        0.18592364620417362,
+        0.6469690706580877
+      ]
+    },
+    "rf_filter_ms": {
+      "count": 703,
+      "mean_ms": 0.0009246228148850744,
+      "p50_p95_p99_max_ms": [
+        0.0008520437404513359,
+        0.0012096250429749489,
+        0.0017060991376638421,
+        0.01729791983962059
+      ]
+    },
+    "dsp_total_ms": {
+      "count": 703,
+      "mean_ms": 2.0048453023453185,
+      "p50_p95_p99_max_ms": [
+        1.9296570681035519,
+        2.3955502663739026,
+        2.895225365646184,
+        6.6983470460399985
+      ]
+    }
+  },
+  "native_width": {
+    "before": {
+      "count": 1000,
+      "mean_ms": 0.02021504333242774,
+      "p50_p95_p99_max_ms": [
+        0.01808302477002144,
+        0.027597241569310423,
+        0.044003577204421156,
+        0.1557330833747983
+      ],
+      "bytes_per_sample": 32.0
+    },
+    "after": {
+      "count": 1000,
+      "mean_ms": 0.013488401658833027,
+      "p50_p95_p99_max_ms": [
+        0.013411976397037506,
+        0.013663177378475666,
+        0.0145301828160882,
+        0.07131602615118027
+      ],
+      "bytes_per_sample": 16.0
+    }
+  },
+  "produced_batches": 762,
+  "decoded_samples": 21067776,
+  "pending_peak": 5,
+  "processed_batches": 762,
+  "gui_samples": 21067776,
+  "audio_samples": 553884,
+  "delivery_ok": true,
+  "nominal_rate_fraction": 1.00071936,
+  "full_rate_ok": true,
+  "ok": true,
+  "source_sha256": {
+    "monitor/v17/app.py": "5f89c3f884724bb18d37cba9eac9688ae49ed2abb9b1f65eae6678d14f53a0d1",
+    "monitor/v17/history.py": "02ce011b271d69bb509e5b4027ea7bd77be61dc614dffbbef005045dc926e52f",
+    "monitor/v17/spectrum.py": "562b5dbbd02c97ffde1bc3a8cc92b3b242bdc51cb17fa619b8f1f016b2870d47",
+    "monitor/v17/receiver/unoq_config_decoder.py": "1a896a32e884975001fcd35776ca2fd1cf3e5309e64d658a4aa3ce5cd6e6ee49",
+    "monitor/v17/processing.py": "df4a1772d7b34123d15c3dec3afe2f9b8f4309913e08d3427d229690959c0ebb",
+    "monitor/v17/radio_stream.py": "f4bfb4ed73f6f7cb9c940bd613f6a74d9b8b2430e12d160edbab0d89b745d60d"
+  }
+}

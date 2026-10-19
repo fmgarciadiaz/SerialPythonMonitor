@@ -58,7 +58,7 @@ uint8_t p[992]={{}};build_native_samples(p,&node,offset,count);data_frame(p,seq+
             c=Path(folder)/'relay.c';c.write_text(checker);verify=c.with_suffix('')
             subprocess.run(['c++','-O2','-std=c++17',str(cpp),'-o',str(binary)],check=True,capture_output=True)
             subprocess.run(['cc','-O2','-std=c11',str(c),'-lm','-o',str(verify)],check=True,capture_output=True)
-            for profile in json.loads((EXP.parents[1]/'monitor/v16/receiver/native_profiles.json').read_text()):
+            for profile in unoq_native.PROFILES:
                 bits,n,ticks,channels=(profile[k] for k in ('bits','node_pairs','ticks','channels'))
                 for node in (0,(1<<32)//n):
                     packets=subprocess.run([str(binary),str(bits),str(ticks),str(n),str(node),str(channels)],check=True,capture_output=True).stdout
@@ -68,6 +68,8 @@ uint8_t p[992]={{}};build_native_samples(p,&node,offset,count);data_frame(p,seq+
                         self.assertEqual(diagnostic.pairs,n)
                     with patch.object(unoq_native,'PROFILES',(profile,)):
                         rows=ConfigurationDecoder().feed(packets)
+                        numeric=ConfigurationDecoder();numeric.numeric=True
+                        self.assertEqual(list(numeric.feed(packets)),rows)
                     self.assertEqual([(r[1],r[2]) for r in rows],
                                      [((i*13)&((1<<bits)-1),(i*29)&((1<<bits)-1) if channels==2 else 0) for i in range(n)])
                     self.assertEqual([r[3] for r in rows],[(node*n+i)&0xffffffff for i in range(n)])

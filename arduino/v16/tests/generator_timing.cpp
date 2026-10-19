@@ -20,6 +20,14 @@ int main() {
    }
   }
  }
+ c.wave=0;c.mode=0;c.duty=25;c.frequency=5000000;
+ assert(scope_gen::valid(c));assert(generator::points_for(c)==100);
+ c.frequency=50000000;assert(generator::points_for(c)==20);
+ auto square=generator::timing(c.frequency,generator::points_for(c));
+ assert(double(generator::DAC_TIMER_HZ)/(square.prescaler+1)/(square.reload+1)/20==50000);
+ c.mode=1;assert(!scope_gen::valid(c));
+ c.mode=0;c.duty=0;assert(!scope_gen::valid(c));
+ c.duty=100;assert(!scope_gen::valid(c));c.duty=50;
  c.wave=1;c.mode=0;c.frequency=40000000;
  assert(generator::points_for(c)==16);
  c.frequency=50000000;assert(generator::points_for(c)==16);

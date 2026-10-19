@@ -1,0 +1,90 @@
+{
+  "environment": {
+    "python": "3.13.5 | packaged by Anaconda, Inc. | (main, Jun 12 2025, 11:09:21) [Clang 14.0.6 ]",
+    "numpy": "2.3.1",
+    "scipy": "1.16.0"
+  },
+  "scope": "Offline exact-output equivalence and CPU cost; no physical acceptance",
+  "equivalence_checks": 48,
+  "cases": {
+    "white_noise": {
+      "before": {
+        "median_ms": 7.256719982251525,
+        "p95_ms": 7.875283423345536,
+        "candidates": 0
+      },
+      "after": {
+        "median_ms": 8.209648018237203,
+        "p95_ms": 10.41178401792422,
+        "candidates": 0
+      },
+      "speedup": 0.8839258353258495
+    },
+    "colored_noise_am": {
+      "before": {
+        "median_ms": 7.7378019923344254,
+        "p95_ms": 8.60540879657492,
+        "candidates": 2
+      },
+      "after": {
+        "median_ms": 7.183576992247254,
+        "p95_ms": 9.768799995072186,
+        "candidates": 2
+      },
+      "speedup": 1.0771516753680386
+    },
+    "impulsive_noise": {
+      "before": {
+        "median_ms": 6.8110639695078135,
+        "p95_ms": 8.167100988794118,
+        "candidates": 1
+      },
+      "after": {
+        "median_ms": 6.718183984048665,
+        "p95_ms": 7.75022559100762,
+        "candidates": 1
+      },
+      "speedup": 1.0138251625260157
+    },
+    "strong_transient_weak_neighbor": {
+      "before": {
+        "median_ms": 6.475925969425589,
+        "p95_ms": 8.077695616520941,
+        "candidates": 1
+      },
+      "after": {
+        "median_ms": 6.6381089854985476,
+        "p95_ms": 6.981610180810094,
+        "candidates": 1
+      },
+      "speedup": 0.9755678889232973
+    },
+    "adc8_many_images": {
+      "before": {
+        "median_ms": 62.21618800191209,
+        "p95_ms": 91.19930858723818,
+        "candidates": 98
+      },
+      "after": {
+        "median_ms": 23.699999961536378,
+        "p95_ms": 24.441345443483442,
+        "candidates": 98
+      },
+      "speedup": 2.6251556161554888
+    },
+    "band_edges": {
+      "before": {
+        "median_ms": 6.580618966836482,
+        "p95_ms": 7.921376032754779,
+        "candidates": 2
+      },
+      "after": {
+        "median_ms": 7.011339999735355,
+        "p95_ms": 7.643812370952219,
+        "candidates": 2
+      },
+      "speedup": 0.9385679438003105
+    }
+  },
+  "ok": true
+}

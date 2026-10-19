@@ -6,6 +6,18 @@ from PyQt6 import QtWidgets
 import numpy as np
 from monitor.v16.app import SerialMonitorWindow
 class FilterUiTests(unittest.TestCase):
+ def test_rc_order_can_change_and_survives_mode_changes(self):
+  self.w.filter_design.setCurrentIndex(self.w.filter_design.findData('RC'))
+  for mode in ('lowpass','highpass','bandpass'):
+   self.w.filter_mode.setCurrentIndex(self.w.filter_mode.findData(mode))
+   self.assertTrue(self.w.filter_order.isEnabled())
+   self.w.filter_order.setValue(4)
+   self.assertEqual(self.w.filter_config.order,4)
+  self.w.filter_mode.setCurrentIndex(self.w.filter_mode.findData('bypass'))
+  self.assertFalse(self.w.filter_order.isEnabled())
+  self.w.filter_mode.setCurrentIndex(self.w.filter_mode.findData('lowpass'))
+  self.assertTrue(self.w.filter_order.isEnabled())
+  self.assertEqual(self.w.filter_config.order,4)
  @classmethod
  def setUpClass(cls):cls.app=QtWidgets.QApplication.instance() or QtWidgets.QApplication([])
  def setUp(self):
@@ -96,18 +108,34 @@ class FilterUiTests(unittest.TestCase):
    panel.response_channel.setCurrentText('FILTER')
    self.assertEqual(panel.pair(),('CH1','FILTER'))
    self.assertEqual(panel.result,[])
-   self.assertFalse(panel.calibrated.isEnabled())
+   self.assertTrue(panel.correction.isEnabled())
+   self.assertEqual(panel.correction.text(),'Corregir (estimado)')
    self.assertEqual(panel.reference_for(0,self.w.applied_configuration),(None,None))
 
- def test_high_rates_are_offered_and_16bit_limit_remains(self):
+ def test_high_rates_are_native_and_legacy_rates_are_hidden(self):
   combo=self.w.config_rate_combo
   for rate in (200000,250000,333333):
    index=combo.findData(rate)
-   self.assertGreaterEqual(index,0)
-   self.assertNotIn('experimental',combo.itemText(index))
+   self.assertEqual(index,-1)
   from monitor.v16.receiver.unoq_acquisition import Configuration
   for rate in (200000,250000,333333):
    with self.assertRaises(ValueError):Configuration(16,rate)
+
+ def test_curated_rates_keep_every_validated_native_and_safe_fallback(self):
+  from monitor.v16.receiver.unoq_native import PROFILES
+  from monitor.v16.app import COMMON_RATES
+  combo=self.w.config_rate_combo
+  offered={combo.itemData(i) for i in range(combo.count())}
+  self.assertEqual(offered,set(COMMON_RATES)|{160000000//p['ticks'] for p in PROFILES})
+  self.w.config_bits_combo.setCurrentIndex(self.w.config_bits_combo.findData(12))
+  combo.setCurrentIndex(combo.findData(437158))
+  self.w.config_bits_combo.setCurrentIndex(self.w.config_bits_combo.findData(16))
+  self.assertEqual(combo.currentData(),40000)
+  for p in PROFILES:
+   self.w.config_bits_combo.setCurrentIndex(self.w.config_bits_combo.findData(p['bits']))
+   i=combo.findData(160000000//p['ticks'])
+   self.assertFalse(combo.view().isRowHidden(i))
+   self.assertNotIn('(CH1+CH2)',combo.itemText(i))
 
  def test_numeric_hardware_blocks_keep_all_columns_and_continuity(self):
   from monitor.v16.numeric_batch import NumericBatch
@@ -151,12 +179,29 @@ class FilterUiTests(unittest.TestCase):
    dial.setValue(1000);self.assertEqual(spin.value(),50000)
    spin.setValue(40000);self.assertLess(dial.value(),1000)
 
+ def test_1400_profile_is_scoped_to_adc8_and_ch1(self):
+  from monitor.v16.receiver.unoq_acquisition import Configuration
+  w=self.w;combo=w.config_rate_combo
+  w.config_bits_combo.setCurrentIndex(w.config_bits_combo.findData(8))
+  index=combo.findData(1403508)
+  self.assertGreaterEqual(index,0)
+  self.assertFalse(combo.view().isRowHidden(index))
+  self.assertTrue(combo.itemText(index).endswith(' (CH1)'))
+  combo.setCurrentIndex(index)
+  w.applied_configuration=Configuration(8,1403508)
+  w._acquisition_confirmed(8,1403508)
+  self.assertAlmostEqual(w._horizontal_dt_us(),.7125)
+  self.assertFalse(w.graph_channel_actions['CH2'].isEnabled())
+  w.config_bits_combo.setCurrentIndex(w.config_bits_combo.findData(14))
+  self.assertTrue(combo.view().isRowHidden(index))
+  self.assertNotEqual(combo.currentData(),1403508)
+
  def test_ch1_fast_selector_channels_clock_and_mono_recording(self):
   import io,wave,time
   from monitor.v16.numeric_batch import NumericBatch,SampleClock
   from monitor.v16.receiver.unoq_acquisition import Configuration
   w=self.w
-  for rate in (599250,661157):
+  for rate in (701754,747663):
    idx=w.config_rate_combo.findData(rate)
    self.assertGreaterEqual(idx,0)
    self.assertTrue(w.config_rate_combo.itemText(idx).endswith(' kHz (CH1)'))
@@ -171,11 +216,16 @@ class FilterUiTests(unittest.TestCase):
   batch=NumericBatch([(0xffffff00,0,0,0),((0xffffff00+267)&0xffffffff,16383,0,1)],16383,clock,1)
   self.assertAlmostEqual(np.diff(batch.columns['Tiempo (us)'])[0],267/160)
   self.assertTrue(np.isnan(batch.columns['CH2']).all())
+  # Emulate the applied native ACK used by the current WAV validator.
+  w.applied_configuration=Configuration(14,747663)
+  w._acquisition_confirmed(14,747663)
+  clock=SampleClock(160000000)
+  batch=NumericBatch([(0xffffff00,0,0,0),((0xffffff00+214)&0xffffffff,16383,0,1)],16383,clock,1)
   stream=io.BytesIO();w.record_file=stream;w.record_wave=wave.open(stream,'wb')
-  w.record_wave.setparams((1,2,599250,0,'NONE','not compressed'))
+  w.record_wave.setparams((1,2,747663,0,'NONE','not compressed'))
   w.record_previous=None;w.record_dc_filter=None;w.record_rows=0;w.record_last_flush_time=time.perf_counter()
   w._write_wave_batch(batch)
-  next_batch=NumericBatch([((0xffffff00+534)&0xffffffff,8192,0,2),((0xffffff00+801)&0xffffffff,8192,0,3)],16383,clock,1)
+  next_batch=NumericBatch([((0xffffff00+428)&0xffffffff,8192,0,2),((0xffffff00+642)&0xffffffff,8192,0,3)],16383,clock,1)
   w._write_wave_batch(next_batch);w.record_wave.close();w.record_wave=None
   reader=wave.open(io.BytesIO(stream.getvalue()),'rb');self.assertEqual(reader.getnchannels(),1);self.assertEqual(reader.getnframes(),4);reader.close();w.record_file=None
   w._acquisition_confirmed(14,333333)
@@ -187,11 +237,11 @@ class FilterUiTests(unittest.TestCase):
   w.config_bits_combo.setCurrentIndex(w.config_bits_combo.findData(16));w._destination_changed()
   for i in range(combo.count()):
    self.assertEqual(combo.view().isRowHidden(i),not combo.model().item(i).isEnabled())
-  self.assertFalse(combo.view().isRowHidden(combo.findData(71428)))
-  self.assertTrue(combo.view().isRowHidden(combo.findData(100000)))
+  self.assertFalse(combo.view().isRowHidden(combo.findData(76226)))
+  self.assertTrue(combo.view().isRowHidden(combo.findData(437158)))
   w.config_bits_combo.setCurrentIndex(w.config_bits_combo.findData(14));w._destination_changed()
-  self.assertFalse(combo.view().isRowHidden(combo.findData(661157)))
-  self.assertTrue(combo.view().isRowHidden(combo.findData(1203007)))
+  self.assertFalse(combo.view().isRowHidden(combo.findData(747663)))
+  self.assertTrue(combo.view().isRowHidden(combo.findData(1221374)))
 
  def test_rate_visibility_for_each_resolution(self):
   from monitor.v16.receiver.unoq_acquisition import Configuration
@@ -211,10 +261,13 @@ class FilterUiTests(unittest.TestCase):
   w=self.w
   w.meas_channel_combo.setCurrentText('CH2');w.filter_source.setCurrentText('CH2')
   w.graph_channel_actions['CH2'].setChecked(True)
+  w.spectral.channels[1].setCurrentText('FILTER')
   w._acquisition_confirmed(14,599250)
   self.assertEqual(w.meas_channel_combo.findText('CH2'),-1)
+  self.assertEqual(w.spectral.channels[1].currentText(),'Ninguno')
   w._acquisition_confirmed(14,661157)
   w._acquisition_confirmed(14,333333)
+  self.assertEqual(w.spectral.channels[1].currentText(),'FILTER')
   self.assertEqual(w.meas_channel_combo.currentText(),'CH2')
   self.assertEqual(w.active_meas_channel,'CH2')
   self.assertEqual(w.filter_source.currentText(),'CH2')

@@ -10,6 +10,9 @@ EXP = Path(__file__).resolve().parent
 
 
 def main():
+    installed=json.loads((ROOT/'monitor/v16/receiver/native_profiles.json').read_text())
+    if any(p['channels']==2 or p['ticks']==114 for p in installed):
+        raise RuntimeError('One-time CH1 incorporation already completed; preserve the current whitelist. Use tools/sync_high_rate_profile.py for the scoped extension.')
     report = json.loads((EXP/'sweep.json').read_text())
     profiles = accepted_profiles(report)
     header = firmware_header(profiles)

@@ -1,0 +1,155 @@
+{
+  "ok": false,
+  "restored": true,
+  "errors": [
+    "El Q cerr\u00f3 el flujo. Revisar el relay, la adquisici\u00f3n y el cable USB.",
+    "Traceback (most recent call last):\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/validar_generador_radio_v17.py\", line 99, in <module>\n    if __name__=='__main__':main()\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/validar_generador_radio_v17.py\", line 91, in main\n    r=OutputReceiver(c,lambda b:None);r.decoder.numeric=True;r.select(Mode.SPI);r.configure(Configuration(14,40000))\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v17/receiver/unoq_config_receiver.py\", line 352, in select\n    self._switch(Mode.SPI)\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v17/receiver/unoq_config_receiver.py\", line 336, in _switch\n    self.pump()\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v17/receiver/unoq_config_receiver.py\", line 290, in pump\n    began=time.monotonic();data=self.connection.read()\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v17/receiver/unoq_usb.py\", line 153, in read\n    raise RuntimeError('El Q cerr\u00f3 el flujo. Revisar el relay, la adquisici\u00f3n y el cable USB.')\nRuntimeError: El Q cerr\u00f3 el flujo. Revisar el relay, la adquisici\u00f3n y el cable USB.\n"
+  ],
+  "samples": 2268864,
+  "wav_states": [
+    {
+      "state": 0,
+      "reason": 0,
+      "played": 0,
+      "accepted": 0
+    },
+    {
+      "state": 1,
+      "reason": 0,
+      "played": 0,
+      "accepted": 0
+    },
+    {
+      "state": 2,
+      "reason": 0,
+      "played": 0,
+      "accepted": 7680
+    }
+  ],
+  "qt_platform": "offscreen",
+  "prior": {
+    "adc": {
+      "bits": 8,
+      "rate": 1600000
+    },
+    "generator": {
+      "wave": 0,
+      "enabled": 0,
+      "mode": 0,
+      "frequency": 2500,
+      "final_frequency": 2500,
+      "low": 0,
+      "high": 0,
+      "duration": 1000,
+      "duration_us": 0,
+      "duty": 50
+    }
+  },
+  "identity_before": {
+    "board_serial": "1060031107",
+    "app": "scope-v17-main-1",
+    "firmware_sha256": "23bc0e28212ea8c44de498f58a471a480e43feaa55899924b80d304f347de8ac"
+  },
+  "play_started_seconds": 0.5565292841056362,
+  "max_played": 0,
+  "changed": [],
+  "pending_peak": 2,
+  "max_queue_delay_ms": 56.581743992865086,
+  "radio_enabled_after_stop": true,
+  "output_source_detached": false,
+  "adc": {
+    "bits": 8,
+    "rate": 1403508
+  },
+  "retunes": 0,
+  "source_error": null,
+  "clipped": 0,
+  "old_mounts": [
+    {
+      "Type": "bind",
+      "Source": "/sys/devices/system/cpu/cpufreq/policy0/scaling_governor",
+      "Destination": "/scope_cpu_governor",
+      "Mode": "",
+      "RW": true,
+      "Propagation": "rprivate"
+    },
+    {
+      "Type": "bind",
+      "Source": "/home/arduino/.cache/serialmonitor/usb-stream-2c7a13b19bc7c90dcaf2/unoq_stream",
+      "Destination": "/work/unoq_stream",
+      "Mode": "",
+      "RW": false,
+      "Propagation": "rprivate"
+    }
+  ],
+  "old_relay": "/home/arduino/.cache/serialmonitor/usb-stream-2c7a13b19bc7c90dcaf2/unoq_stream",
+  "old_cap_add": [
+    "SYS_NICE"
+  ],
+  "old_scope_environment": [],
+  "old_cpuset": "",
+  "prior_identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v17-main-1",
+    "firmware_sha256": "23bc0e28212ea8c44de498f58a471a480e43feaa55899924b80d304f347de8ac"
+  },
+  "recovery_note": "Restoring after failed 1403508 Radio A0 verification",
+  "restored_low_policy": {
+    "governor": "schedutil",
+    "cpus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "scheduler": 0,
+    "priority": 0
+  },
+  "final_settings": {
+    "adc": {
+      "bits": 8,
+      "rate": 1600000
+    },
+    "generator": {
+      "wave": 0,
+      "enabled": 0,
+      "mode": 0,
+      "frequency": 2500,
+      "final_frequency": 2500,
+      "low": 0,
+      "high": 0,
+      "duration": 1000,
+      "duration_us": 0,
+      "duty": 50
+    }
+  },
+  "final_identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v17-main-1",
+    "firmware_sha256": "23bc0e28212ea8c44de498f58a471a480e43feaa55899924b80d304f347de8ac"
+  },
+  "recovery": {
+    "ok": true,
+    "samples": 15990912,
+    "status": {
+      "ack": 25868,
+      "rate": 1600000,
+      "bits": 8,
+      "dropped": 0,
+      "fatal": 0,
+      "epoch": 3,
+      "prepare_us": 34,
+      "check_us": 90,
+      "queue_slots": 8,
+      "node_pairs": 3456,
+      "queue": 1,
+      "queue_peak": 2,
+      "copy_ticks": 39263,
+      "poll_ticks": 216586,
+      "slack_ticks": 131587,
+      "send_ticks": 339317,
+      "produced": 4629
+    },
+    "method": "No administrative Q calls after final high-rate configuration"
+  }
+}

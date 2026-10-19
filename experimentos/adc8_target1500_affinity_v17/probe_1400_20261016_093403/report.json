@@ -1,0 +1,1254 @@
+{
+  "ok": true,
+  "restored": true,
+  "plan": {
+    "target_ticks": 106,
+    "target_rate": 1509433.9622641508,
+    "screen_seconds": 30,
+    "order": [
+      "F",
+      "L",
+      "R",
+      "R",
+      "L",
+      "F"
+    ],
+    "qualification_seconds": [
+      60,
+      120,
+      120,
+      120
+    ],
+    "electrical_acceptance": false
+  },
+  "prior": {
+    "adc": {
+      "bits": 8,
+      "rate": 1403508
+    },
+    "generator": {
+      "wave": 0,
+      "enabled": 0,
+      "mode": 0,
+      "frequency": 2500,
+      "final_frequency": 2500,
+      "low": 0,
+      "high": 0,
+      "duration": 1000,
+      "duration_us": 0,
+      "duty": 50
+    }
+  },
+  "cases": [
+    {
+      "bits": 8,
+      "ticks": 106,
+      "node_pairs": 4320,
+      "actual_rate": 1509433.9622641508,
+      "requested_seconds": 30,
+      "stage": "affinity_pilot",
+      "ok": true,
+      "phase": "measure",
+      "seconds": 30.000562686938792,
+      "samples": 45258048,
+      "full_nodes": 10476,
+      "observed_rate": 1508573.3048501716,
+      "status": {
+        "bits": 8,
+        "ticks": 106,
+        "node_pairs": 4320,
+        "rate": 1509433,
+        "dropped": 0,
+        "fatal": 0,
+        "queue": 1,
+        "queue_peak": 3,
+        "copy_ticks": 47998,
+        "poll_ticks": 237990,
+        "slack_ticks": 235159,
+        "send_ticks": 399796,
+        "produced": 10825,
+        "epoch": 2
+      },
+      "metrics": {
+        "node_budget_us": 2862.0,
+        "queue_histogram_frames": {
+          "1": 52325,
+          "2": 57
+        },
+        "queue_peak": 3,
+        "copy_max_us": 299.9875,
+        "poll_max_us": 1487.4375,
+        "overwrite_slack_min_us": 1469.74375,
+        "send_observations": 10476,
+        "send_mean_us": 2587.4673718499425,
+        "send_p50_p95_p99_max_us": [
+          2591.859375,
+          2940.153125,
+          3013.3609375,
+          3825.1625
+        ],
+        "mean_send_headroom": 0.09592335015725273,
+        "producer_conservative_slack_us": 1469.74375
+      },
+      "headroom_ok": false,
+      "wall_monotonic_drift_seconds": -0.00037442788016051054,
+      "variant": "B",
+      "legacy_timings": {
+        "tx_prepare": {
+          "count": 52382,
+          "mean_us": 38.606868771715476,
+          "p50_p95_p99_max_us": [
+            35.0,
+            44.0,
+            341.0,
+            348.0
+          ]
+        },
+        "rx_check": {
+          "count": 52382,
+          "mean_us": 85.51439425756939,
+          "p50_p95_p99_max_us": [
+            79.0,
+            97.0,
+            383.0,
+            393.0
+          ]
+        }
+      },
+      "affinity_start": {
+        "allowed": "0-3",
+        "process": "Name:\tunoq_stream\nUmask:\t0022\nState:\tS (sleeping)\nTgid:\t1\nNgid:\t0\nPid:\t1\nPPid:\t0\nTracerPid:\t0\nUid:\t0\t0\t0\t0\nGid:\t0\t0\t0\t0\nFDSize:\t64\nGroups:\t0 \nNStgid:\t1\nNSpid:\t1\nNSpgid:\t1\nNSsid:\t1\nKthread:\t0\nVmPeak:\t    2900 kB\nVmSize:\t    2812 kB\nVmLck:\t       0 kB\nVmPin:\t       0 kB\nVmHWM:\t    1500 kB\nVmRSS:\t    1500 kB\nRssAnon:\t      96 kB\nRssFile:\t    1404 kB\nRssShmem:\t       0 kB\nVmData:\t      92 kB\nVmStk:\t     132 kB\nVmExe:\t      24 kB\nVmLib:\t    2384 kB\nVmPTE:\t      36 kB\nVmSwap:\t       0 kB\nHugetlbPages:\t       0 kB\nCoreDumping:\t0\nTHP_enabled:\t1\nuntag_mask:\t0xffffffffffffff\nThreads:\t1\nSigQ:\t4/14635\nSigPnd:\t0000000000000000\nShdPnd:\t0000000000000000\nSigBlk:\t0000000000000000\nSigIgn:\t0000000000001000\nSigCgt:\t0000000000004002\nCapInh:\t0000000000000000\nCapPrm:\t0000000000800000\nCapEff:\t0000000000800000\nCapBnd:\t0000000000800000\nCapAmb:\t0000000000000000\nNoNewPrivs:\t1\nSeccomp:\t2\nSeccomp_filters:\t1\nSpeculation_Store_Bypass:\tnot vulnerable\nSpeculationIndirectBranch:\tunknown\nCpus_allowed:\tf\nCpus_allowed_list:\t0-3\nMems_allowed:\t0001\nMems_allowed_list:\t0\nvoluntary_ctxt_switches:\t237\nnonvoluntary_ctxt_switches:\t14\nunoq_stream (1, #threads: 1)\n-------------------------------------------------------------------\nse.exec_start                                :     578155875.490699\nse.vruntime                                  :             9.539447\nse.sum_exec_runtime                          :            92.453226\nse.nr_migrations                             :                    4\nnr_switches                                  :                  251\nnr_voluntary_switches                        :                  237\nnr_involuntary_switches                      :                   14\nse.load.weight                               :              1048576\nse.avg.load_sum                              :                26031\nse.avg.runnable_sum                          :             24387300\nse.avg.util_sum                              :             23495239\nse.avg.load_avg                              :                  564\nse.avg.runnable_avg                          :                  516\nse.avg.util_avg                              :                  497\nse.avg.last_update_time                      :      578126543833088\nse.avg.util_est                              :                  629\npolicy                                       :                    1\nprio                                         :                   89\nclock-delta                                  :                  208\nmm->numa_scan_seq                            :                    0\nnuma_pages_migrated                          :                    0\nnuma_preferred_nid                           :                   -1\ntotal_numa_faults                            :                    0\ncurrent_node=0, numa_group_id=0\nnuma_faults node=0 task_private=0 task_shared=0 group_private=0 group_shared=0\n",
+        "interrupts": "           CPU0       CPU1       CPU2       CPU3       \n 11:   98482306  125271683  117369249  122405322    GICv3  19 Level     arch_timer\n 13:    7198050          0          0          0    GICv3 226 Edge      glink-rpm\n 14:          0          0          0          0    GICv3 229 Edge      qcom_mpm\n 15:          6          0          0          0    GICv3 311 Edge      smp2p-adsp\n 16:          6          0          0          0    GICv3 102 Edge      smp2p-mpss\n 18:          0          0          0          0      mpm   2 Level     4411000.thermal-sensor\n 19:          0          0          0          0    GICv3 222 Level     4411000.thermal-sensor\n 21:          0          0          0          0    GICv3  39 Level     arch_mem_timer\n 22:          0          0          0          0    GICv3  22 Level     arm-pmu\n 24:          0          0          0          0    GICv3 113 Level     arm-smmu global fault\n 25:          0          0          0          0    GICv3 119 Level     arm-smmu-context-fault\n 26:          0          0          0          0    GICv3 120 Level     arm-smmu-context-fault\n 27:          0          0          0          0    GICv3 121 Level     arm-smmu-context-fault\n 28:          0          0          0          0    GICv3 122 Level     arm-smmu-context-fault\n 29:          0          0          0          0    GICv3 123 Level     arm-smmu-context-fault\n 30:          0          0          0          0    GICv3 124 Level     arm-smmu-context-fault\n 31:          0          0          0          0    GICv3 125 Level     arm-smmu-context-fault\n 32:          0          0          0          0    GICv3 126 Level     arm-smmu-context-fault\n 33:          0          0          0          0    GICv3 127 Level     arm-smmu-context-fault\n 34:          0          0          0          0    GICv3 128 Level     arm-smmu-context-fault\n 35:          0          0          0          0    GICv3 129 Level     arm-smmu-context-fault\n 36:          0          0          0          0    GICv3 130 Level     arm-smmu-context-fault\n 37:          0          0          0          0    GICv3 131 Level     arm-smmu-context-fault\n 38:          0          0          0          0    GICv3 132 Level     arm-smmu-context-fault\n 89:          0          0          0          0      mpm  12 Level     ss_phy_irq\n 90:          0          0          0          0    GICv3 279 Level     bam_dma\n 91:          0          0          0          0    GICv3 361 Level     qcom_geni_serial_uart1\n 92:        391          0          0          0    GICv3 362 Level     qcom_geni_serial_uart2\n 93:        788          0          0          0    GICv3 363 Level     qcom_geni_serial_uart0\n 94:    1325929          0          0          0    GICv3 380 Level     mmc0\n 95:          0          0          0          0  msmgpio  96 Edge      Volume Up\n 96:          2          0          0          0    GICv3 384 Level     4744000.mmc\n 97:          0          0          0          0  msmgpio  36 Edge      Volume Down\n 98:     395967          0          0          0    GICv3 453 Level     1b8e300.pmu\n 99:  390103271          0          0          0    GICv3 287 Level     dwc3\n105:          0          0          0          0    GICv3 339 Edge      q6v5 wdog\n106:          0          0          0          0    GICv3 359 Level     4a80000.i2c\n107:          0          0          0          0 smp2p-mpss   0 Edge      q6v5 fatal\n108:          1          0          0          0 smp2p-mpss   1 Edge      q6v5 ready\n109:          1          0          0          0 smp2p-mpss   2 Edge      q6v5 handover\n110:          0          0          0          0 smp2p-mpss   3 Edge      q6v5 stop\n111:          0          0          0          0 smp2p-mpss   7 Edge      q6v5 shutdown-ack\n112:          0          0          0          0    GICv3 195 Level     arm-smmu global fault\n113:          0          0          0          0    GICv3 199 Level     arm-smmu-context-fault\n121:          0          0          0          0 pmic_arb 6365272 Edge      pm8xxx_rtc_alarm\n122:          0          0          0          0    GICv3  35 Edge      wdt_bark\n123:  665217605          0          0          0    GICv3 364 Level     4a94000.spi\n124:          0          0          0          0    GICv3 314 Edge      q6v5 wdog\n125:        198          0          0          0    GICv3 360 Level     4a84000.i2c\n126:          0          0          0          0 smp2p-adsp   0 Edge      q6v5 fatal\n127:          1          0          0          0 smp2p-adsp   1 Edge      q6v5 ready\n128:          0          0          0          0 pmic_arb 524363 Edge      pm8941_pwrkey\n129:          1          0          0          0 smp2p-adsp   2 Edge      q6v5 handover\n130:          0          0          0          0 smp2p-adsp   3 Edge      q6v5 stop\n132:     227096          0          0          0    GICv3 309 Edge      glink-smem\n133:          0          0          0          0 msm_mdss   0 Edge      msm\n134:          0          0          0          0 msm_mdss   4 Edge      dsi_isr\n135:          1          0          0          0  msmgpio  81 Edge      anx7625-intp\n136:      35808          0          0          0    GICv3 209 Level     gpu-irq\n137:          0          0          0          0    GICv3  69 Level     lmh-irq\n138:       1111          0          0          0    GICv3 257 Level     venus\n139:          0          0          0          0      lmh   0 Edge      dcvsh-irq-0\n140:          9          0          0          0    GICv3 390 Level     WLAN_CE_0\n141:    4868317          0          0          0    GICv3 391 Level     WLAN_CE_1\n142:     504674          0          0          0    GICv3 392 Level     WLAN_CE_2\n143:       4207          0          0          0    GICv3 393 Level     WLAN_CE_3\n144:          0          0          0          0    GICv3 394 Level     WLAN_CE_4\n145:          0          0          0          0    GICv3 395 Level     WLAN_CE_5\n146:          0          0          0          0    GICv3 396 Level     WLAN_CE_6\n147:          0          0          0          0    GICv3 397 Level     WLAN_CE_7\n148:          0          0          0          0    GICv3 398 Level     WLAN_CE_8\n149:          0          0          0          0    GICv3 399 Level     WLAN_CE_9\n150:          0          0          0          0    GICv3 400 Level     WLAN_CE_10\n151:          0          0          0          0    GICv3 401 Level     WLAN_CE_11\n152:      17699          0          0          0    GICv3 329 Edge      soundwire\n153:       8852          0          0          0    GICv3 328 Edge      soundwire\n154:          0          0          0          0    GICv3 111 Level     swr_wake_irq\n155:          0          0          0          0 pm4125_codec   0 Edge      pm4125\n156:          0          0          0          0   pm4125  14 Edge      HPHR PDM WDOG INT\n157:          0          0          0          0   pm4125  13 Edge      HPHL PDM WDOG INT\n158:          0          0          0          0   pm4125   4 Edge      mbhc sw intr\n159:          0          0          0          0   pm4125   0 Edge      Button Press detect\n160:          0          0          0          0   pm4125   1 Edge      Button Release detect\n161:          0          0          0          0   pm4125   3 Edge      Elect Insert\n162:          0          0          0          0   pm4125   2 Edge      Elect Remove\n163:          0          0          0          0   pm4125   7 Edge      HPH_L OCP detect\n164:          0          0          0          0   pm4125   5 Edge      HPH_R OCP detect\n165:        973          0          0          0    GICv3 100 Edge      glink-smem\n166:  665219272          7          3          4  msmgpio  70 Edge      scope-spi-ready\nIPI0:   3742336   14939782    9769220   13900830       Rescheduling interrupts\nIPI1: 400551356  975695368  835860287  724222594       Function call interrupts\nIPI2:         0          0          0          0       CPU stop interrupts\nIPI3:         0          0          0          0       CPU stop NMIs\nIPI4:         0          0          0          0       Timer broadcast interrupts\nIPI5:     20039      13694      12719      12350       IRQ work interrupts\nIPI6:         0          0          0          0       CPU backtrace interrupts\nIPI7:         0          0          0          0       KGDB roundup interrupts\nErr:          3\n"
+      },
+      "interrupts_after": "           CPU0       CPU1       CPU2       CPU3       \n 11:   98490913  125280444  117377881  122413956    GICv3  19 Level     arch_timer\n 13:    7198435          0          0          0    GICv3 226 Edge      glink-rpm\n 14:          0          0          0          0    GICv3 229 Edge      qcom_mpm\n 15:          6          0          0          0    GICv3 311 Edge      smp2p-adsp\n 16:          6          0          0          0    GICv3 102 Edge      smp2p-mpss\n 18:          0          0          0          0      mpm   2 Level     4411000.thermal-sensor\n 19:          0          0          0          0    GICv3 222 Level     4411000.thermal-sensor\n 21:          0          0          0          0    GICv3  39 Level     arch_mem_timer\n 22:          0          0          0          0    GICv3  22 Level     arm-pmu\n 24:          0          0          0          0    GICv3 113 Level     arm-smmu global fault\n 25:          0          0          0          0    GICv3 119 Level     arm-smmu-context-fault\n 26:          0          0          0          0    GICv3 120 Level     arm-smmu-context-fault\n 27:          0          0          0          0    GICv3 121 Level     arm-smmu-context-fault\n 28:          0          0          0          0    GICv3 122 Level     arm-smmu-context-fault\n 29:          0          0          0          0    GICv3 123 Level     arm-smmu-context-fault\n 30:          0          0          0          0    GICv3 124 Level     arm-smmu-context-fault\n 31:          0          0          0          0    GICv3 125 Level     arm-smmu-context-fault\n 32:          0          0          0          0    GICv3 126 Level     arm-smmu-context-fault\n 33:          0          0          0          0    GICv3 127 Level     arm-smmu-context-fault\n 34:          0          0          0          0    GICv3 128 Level     arm-smmu-context-fault\n 35:          0          0          0          0    GICv3 129 Level     arm-smmu-context-fault\n 36:          0          0          0          0    GICv3 130 Level     arm-smmu-context-fault\n 37:          0          0          0          0    GICv3 131 Level     arm-smmu-context-fault\n 38:          0          0          0          0    GICv3 132 Level     arm-smmu-context-fault\n 89:          0          0          0          0      mpm  12 Level     ss_phy_irq\n 90:          0          0          0          0    GICv3 279 Level     bam_dma\n 91:          0          0          0          0    GICv3 361 Level     qcom_geni_serial_uart1\n 92:        391          0          0          0    GICv3 362 Level     qcom_geni_serial_uart2\n 93:        788          0          0          0    GICv3 363 Level     qcom_geni_serial_uart0\n 94:    1326004          0          0          0    GICv3 380 Level     mmc0\n 95:          0          0          0          0  msmgpio  96 Edge      Volume Up\n 96:          2          0          0          0    GICv3 384 Level     4744000.mmc\n 97:          0          0          0          0  msmgpio  36 Edge      Volume Down\n 98:     395995          0          0          0    GICv3 453 Level     1b8e300.pmu\n 99:  390275580          0          0          0    GICv3 287 Level     dwc3\n105:          0          0          0          0    GICv3 339 Edge      q6v5 wdog\n106:          0          0          0          0    GICv3 359 Level     4a80000.i2c\n107:          0          0          0          0 smp2p-mpss   0 Edge      q6v5 fatal\n108:          1          0          0          0 smp2p-mpss   1 Edge      q6v5 ready\n109:          1          0          0          0 smp2p-mpss   2 Edge      q6v5 handover\n110:          0          0          0          0 smp2p-mpss   3 Edge      q6v5 stop\n111:          0          0          0          0 smp2p-mpss   7 Edge      q6v5 shutdown-ack\n112:          0          0          0          0    GICv3 195 Level     arm-smmu global fault\n113:          0          0          0          0    GICv3 199 Level     arm-smmu-context-fault\n121:          0          0          0          0 pmic_arb 6365272 Edge      pm8xxx_rtc_alarm\n122:          0          0          0          0    GICv3  35 Edge      wdt_bark\n123:  665275245          0          0          0    GICv3 364 Level     4a94000.spi\n124:          0          0          0          0    GICv3 314 Edge      q6v5 wdog\n125:        198          0          0          0    GICv3 360 Level     4a84000.i2c\n126:          0          0          0          0 smp2p-adsp   0 Edge      q6v5 fatal\n127:          1          0          0          0 smp2p-adsp   1 Edge      q6v5 ready\n128:          0          0          0          0 pmic_arb 524363 Edge      pm8941_pwrkey\n129:          1          0          0          0 smp2p-adsp   2 Edge      q6v5 handover\n130:          0          0          0          0 smp2p-adsp   3 Edge      q6v5 stop\n132:     227096          0          0          0    GICv3 309 Edge      glink-smem\n133:          0          0          0          0 msm_mdss   0 Edge      msm\n134:          0          0          0          0 msm_mdss   4 Edge      dsi_isr\n135:          1          0          0          0  msmgpio  81 Edge      anx7625-intp\n136:      35811          0          0          0    GICv3 209 Level     gpu-irq\n137:          0          0          0          0    GICv3  69 Level     lmh-irq\n138:       1111          0          0          0    GICv3 257 Level     venus\n139:          0          0          0          0      lmh   0 Edge      dcvsh-irq-0\n140:          9          0          0          0    GICv3 390 Level     WLAN_CE_0\n141:    4868370          0          0          0    GICv3 391 Level     WLAN_CE_1\n142:     504678          0          0          0    GICv3 392 Level     WLAN_CE_2\n143:       4207          0          0          0    GICv3 393 Level     WLAN_CE_3\n144:          0          0          0          0    GICv3 394 Level     WLAN_CE_4\n145:          0          0          0          0    GICv3 395 Level     WLAN_CE_5\n146:          0          0          0          0    GICv3 396 Level     WLAN_CE_6\n147:          0          0          0          0    GICv3 397 Level     WLAN_CE_7\n148:          0          0          0          0    GICv3 398 Level     WLAN_CE_8\n149:          0          0          0          0    GICv3 399 Level     WLAN_CE_9\n150:          0          0          0          0    GICv3 400 Level     WLAN_CE_10\n151:          0          0          0          0    GICv3 401 Level     WLAN_CE_11\n152:      17699          0          0          0    GICv3 329 Edge      soundwire\n153:       8852          0          0          0    GICv3 328 Edge      soundwire\n154:          0          0          0          0    GICv3 111 Level     swr_wake_irq\n155:          0          0          0          0 pm4125_codec   0 Edge      pm4125\n156:          0          0          0          0   pm4125  14 Edge      HPHR PDM WDOG INT\n157:          0          0          0          0   pm4125  13 Edge      HPHL PDM WDOG INT\n158:          0          0          0          0   pm4125   4 Edge      mbhc sw intr\n159:          0          0          0          0   pm4125   0 Edge      Button Press detect\n160:          0          0          0          0   pm4125   1 Edge      Button Release detect\n161:          0          0          0          0   pm4125   3 Edge      Elect Insert\n162:          0          0          0          0   pm4125   2 Edge      Elect Remove\n163:          0          0          0          0   pm4125   7 Edge      HPH_L OCP detect\n164:          0          0          0          0   pm4125   5 Edge      HPH_R OCP detect\n165:        973          0          0          0    GICv3 100 Edge      glink-smem\n166:  665276913          7          3          4  msmgpio  70 Edge      scope-spi-ready\nIPI0:   3742394   14952563    9770456   13901668       Rescheduling interrupts\nIPI1: 400666718  975943336  835979656  724376581       Function call interrupts\nIPI2:         0          0          0          0       CPU stop interrupts\nIPI3:         0          0          0          0       CPU stop NMIs\nIPI4:         0          0          0          0       Timer broadcast interrupts\nIPI5:     20039      13694      12719      12350       IRQ work interrupts\nIPI6:         0          0          0          0       CPU backtrace interrupts\nIPI7:         0          0          0          0       KGDB roundup interrupts\nErr:          3\n",
+      "spi_requested_hz": 40000000,
+      "scheme": "F",
+      "warm": true,
+      "cpu": null,
+      "warm_steps": [
+        {
+          "profile": [
+            8,
+            112,
+            4320
+          ],
+          "phase": "ready",
+          "samples": 2851200
+        }
+      ],
+      "startup_trace": "case_00_startup_trace.json",
+      "configuration": {
+        "kind": "read_only_configuration_not_electrical_measurement",
+        "spi_base": "0x04a94000",
+        "wrapper_base": "0x04ac0000",
+        "source_hz_before": 120000000,
+        "branch_cached_hz": 120000000,
+        "snapshots": [
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          },
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          },
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          }
+        ],
+        "wrapper_version": 805306368,
+        "gcc_dfs_control": 45,
+        "source_hz_after": 120000000,
+        "configured_hz": 40000000.0,
+        "gcc_active_level": 6
+      },
+      "clock_matches": true
+    },
+    {
+      "bits": 8,
+      "ticks": 106,
+      "node_pairs": 4320,
+      "actual_rate": 1509433.9622641508,
+      "requested_seconds": 30,
+      "stage": "affinity_pilot",
+      "ok": true,
+      "phase": "measure",
+      "seconds": 30.000385659048334,
+      "samples": 45258048,
+      "full_nodes": 10476,
+      "observed_rate": 1508582.2067207275,
+      "status": {
+        "bits": 8,
+        "ticks": 106,
+        "node_pairs": 4320,
+        "rate": 1509433,
+        "dropped": 0,
+        "fatal": 0,
+        "queue": 1,
+        "queue_peak": 4,
+        "copy_ticks": 48000,
+        "poll_ticks": 243081,
+        "slack_ticks": 235044,
+        "send_ticks": 419100,
+        "produced": 10825,
+        "epoch": 2
+      },
+      "metrics": {
+        "node_budget_us": 2862.0,
+        "queue_histogram_frames": {
+          "1": 52085,
+          "2": 208,
+          "3": 87,
+          "4": 2
+        },
+        "queue_peak": 4,
+        "copy_max_us": 300.0,
+        "poll_max_us": 1519.25625,
+        "overwrite_slack_min_us": 1469.025,
+        "send_observations": 10476,
+        "send_mean_us": 2603.3673754295532,
+        "send_p50_p95_p99_max_us": [
+          2596.803125,
+          2897.3015625,
+          2975.39375,
+          4258.3125
+        ],
+        "mean_send_headroom": 0.09036779335095968,
+        "producer_conservative_slack_us": 1469.025
+      },
+      "headroom_ok": false,
+      "wall_monotonic_drift_seconds": -0.0003728652372956276,
+      "variant": "B",
+      "legacy_timings": {
+        "tx_prepare": {
+          "count": 52382,
+          "mean_us": 39.87218891985797,
+          "p50_p95_p99_max_us": [
+            35.0,
+            45.0,
+            344.0,
+            348.0
+          ]
+        },
+        "rx_check": {
+          "count": 52382,
+          "mean_us": 85.9846321255393,
+          "p50_p95_p99_max_us": [
+            79.0,
+            97.0,
+            389.0,
+            393.0
+          ]
+        }
+      },
+      "affinity_start": {
+        "allowed": "0",
+        "process": "Name:\tunoq_stream\nUmask:\t0022\nState:\tS (sleeping)\nTgid:\t1\nNgid:\t0\nPid:\t1\nPPid:\t0\nTracerPid:\t0\nUid:\t0\t0\t0\t0\nGid:\t0\t0\t0\t0\nFDSize:\t64\nGroups:\t0 \nNStgid:\t1\nNSpid:\t1\nNSpgid:\t1\nNSsid:\t1\nKthread:\t0\nVmPeak:\t    2900 kB\nVmSize:\t    2812 kB\nVmLck:\t       0 kB\nVmPin:\t       0 kB\nVmHWM:\t    1500 kB\nVmRSS:\t    1500 kB\nRssAnon:\t      96 kB\nRssFile:\t    1404 kB\nRssShmem:\t       0 kB\nVmData:\t      92 kB\nVmStk:\t     132 kB\nVmExe:\t      24 kB\nVmLib:\t    2384 kB\nVmPTE:\t      36 kB\nVmSwap:\t       0 kB\nHugetlbPages:\t       0 kB\nCoreDumping:\t0\nTHP_enabled:\t1\nuntag_mask:\t0xffffffffffffff\nThreads:\t1\nSigQ:\t4/14635\nSigPnd:\t0000000000000000\nShdPnd:\t0000000000000000\nSigBlk:\t0000000000000000\nSigIgn:\t0000000000001000\nSigCgt:\t0000000000004002\nCapInh:\t0000000000000000\nCapPrm:\t0000000000800000\nCapEff:\t0000000000800000\nCapBnd:\t0000000000800000\nCapAmb:\t0000000000000000\nNoNewPrivs:\t1\nSeccomp:\t2\nSeccomp_filters:\t1\nSpeculation_Store_Bypass:\tnot vulnerable\nSpeculationIndirectBranch:\tunknown\nCpus_allowed:\t1\nCpus_allowed_list:\t0\nMems_allowed:\t0001\nMems_allowed_list:\t0\nvoluntary_ctxt_switches:\t239\nnonvoluntary_ctxt_switches:\t171\nunoq_stream (1, #threads: 1)\n-------------------------------------------------------------------\nse.exec_start                                :     562457721.715436\nse.vruntime                                  :            41.399136\nse.sum_exec_runtime                          :            91.666001\nse.nr_migrations                             :                    3\nnr_switches                                  :                  410\nnr_voluntary_switches                        :                  239\nnr_involuntary_switches                      :                  171\nse.load.weight                               :              1048576\nse.avg.load_sum                              :                26930\nse.avg.runnable_sum                          :             25366800\nse.avg.util_sum                              :             24364590\nse.avg.load_avg                              :                  588\nse.avg.runnable_avg                          :                  541\nse.avg.util_avg                              :                  520\nse.avg.last_update_time                      :      562433606409216\nse.avg.util_est                              :                  702\npolicy                                       :                    1\nprio                                         :                   89\nclock-delta                                  :                  104\nmm->numa_scan_seq                            :                    0\nnuma_pages_migrated                          :                    0\nnuma_preferred_nid                           :                   -1\ntotal_numa_faults                            :                    0\ncurrent_node=0, numa_group_id=0\nnuma_faults node=0 task_private=0 task_shared=0 group_private=0 group_shared=0\n",
+        "interrupts": "           CPU0       CPU1       CPU2       CPU3       \n 11:   98498541  125287989  117384897  122420708    GICv3  19 Level     arch_timer\n 13:    7200231          0          0          0    GICv3 226 Edge      glink-rpm\n 14:          0          0          0          0    GICv3 229 Edge      qcom_mpm\n 15:          6          0          0          0    GICv3 311 Edge      smp2p-adsp\n 16:          6          0          0          0    GICv3 102 Edge      smp2p-mpss\n 18:          0          0          0          0      mpm   2 Level     4411000.thermal-sensor\n 19:          0          0          0          0    GICv3 222 Level     4411000.thermal-sensor\n 21:          0          0          0          0    GICv3  39 Level     arch_mem_timer\n 22:          0          0          0          0    GICv3  22 Level     arm-pmu\n 24:          0          0          0          0    GICv3 113 Level     arm-smmu global fault\n 25:          0          0          0          0    GICv3 119 Level     arm-smmu-context-fault\n 26:          0          0          0          0    GICv3 120 Level     arm-smmu-context-fault\n 27:          0          0          0          0    GICv3 121 Level     arm-smmu-context-fault\n 28:          0          0          0          0    GICv3 122 Level     arm-smmu-context-fault\n 29:          0          0          0          0    GICv3 123 Level     arm-smmu-context-fault\n 30:          0          0          0          0    GICv3 124 Level     arm-smmu-context-fault\n 31:          0          0          0          0    GICv3 125 Level     arm-smmu-context-fault\n 32:          0          0          0          0    GICv3 126 Level     arm-smmu-context-fault\n 33:          0          0          0          0    GICv3 127 Level     arm-smmu-context-fault\n 34:          0          0          0          0    GICv3 128 Level     arm-smmu-context-fault\n 35:          0          0          0          0    GICv3 129 Level     arm-smmu-context-fault\n 36:          0          0          0          0    GICv3 130 Level     arm-smmu-context-fault\n 37:          0          0          0          0    GICv3 131 Level     arm-smmu-context-fault\n 38:          0          0          0          0    GICv3 132 Level     arm-smmu-context-fault\n 89:          0          0          0          0      mpm  12 Level     ss_phy_irq\n 90:          0          0          0          0    GICv3 279 Level     bam_dma\n 91:          0          0          0          0    GICv3 361 Level     qcom_geni_serial_uart1\n 92:        391          0          0          0    GICv3 362 Level     qcom_geni_serial_uart2\n 93:        788          0          0          0    GICv3 363 Level     qcom_geni_serial_uart0\n 94:    1326984          0          0          0    GICv3 380 Level     mmc0\n 95:          0          0          0          0  msmgpio  96 Edge      Volume Up\n 96:          2          0          0          0    GICv3 384 Level     4744000.mmc\n 97:          0          0          0          0  msmgpio  36 Edge      Volume Down\n 98:     396163          0          0          0    GICv3 453 Level     1b8e300.pmu\n 99:  390275874          0          0          0    GICv3 287 Level     dwc3\n105:          0          0          0          0    GICv3 339 Edge      q6v5 wdog\n106:          0          0          0          0    GICv3 359 Level     4a80000.i2c\n107:          0          0          0          0 smp2p-mpss   0 Edge      q6v5 fatal\n108:          1          0          0          0 smp2p-mpss   1 Edge      q6v5 ready\n109:          1          0          0          0 smp2p-mpss   2 Edge      q6v5 handover\n110:          0          0          0          0 smp2p-mpss   3 Edge      q6v5 stop\n111:          0          0          0          0 smp2p-mpss   7 Edge      q6v5 shutdown-ack\n112:          0          0          0          0    GICv3 195 Level     arm-smmu global fault\n113:          0          0          0          0    GICv3 199 Level     arm-smmu-context-fault\n121:          0          0          0          0 pmic_arb 6365272 Edge      pm8xxx_rtc_alarm\n122:          0          0          0          0    GICv3  35 Edge      wdt_bark\n123:  665277681          0          0          0    GICv3 364 Level     4a94000.spi\n124:          0          0          0          0    GICv3 314 Edge      q6v5 wdog\n125:        198          0          0          0    GICv3 360 Level     4a84000.i2c\n126:          0          0          0          0 smp2p-adsp   0 Edge      q6v5 fatal\n127:          1          0          0          0 smp2p-adsp   1 Edge      q6v5 ready\n128:          0          0          0          0 pmic_arb 524363 Edge      pm8941_pwrkey\n129:          1          0          0          0 smp2p-adsp   2 Edge      q6v5 handover\n130:          0          0          0          0 smp2p-adsp   3 Edge      q6v5 stop\n132:     227303          0          0          0    GICv3 309 Edge      glink-smem\n133:          0          0          0          0 msm_mdss   0 Edge      msm\n134:          0          0          0          0 msm_mdss   4 Edge      dsi_isr\n135:          1          0          0          0  msmgpio  81 Edge      anx7625-intp\n136:      35811          0          0          0    GICv3 209 Level     gpu-irq\n137:          0          0          0          0    GICv3  69 Level     lmh-irq\n138:       1112          0          0          0    GICv3 257 Level     venus\n139:          0          0          0          0      lmh   0 Edge      dcvsh-irq-0\n140:          9          0          0          0    GICv3 390 Level     WLAN_CE_0\n141:    4868398          0          0          0    GICv3 391 Level     WLAN_CE_1\n142:     504680          0          0          0    GICv3 392 Level     WLAN_CE_2\n143:       4207          0          0          0    GICv3 393 Level     WLAN_CE_3\n144:          0          0          0          0    GICv3 394 Level     WLAN_CE_4\n145:          0          0          0          0    GICv3 395 Level     WLAN_CE_5\n146:          0          0          0          0    GICv3 396 Level     WLAN_CE_6\n147:          0          0          0          0    GICv3 397 Level     WLAN_CE_7\n148:          0          0          0          0    GICv3 398 Level     WLAN_CE_8\n149:          0          0          0          0    GICv3 399 Level     WLAN_CE_9\n150:          0          0          0          0    GICv3 400 Level     WLAN_CE_10\n151:          0          0          0          0    GICv3 401 Level     WLAN_CE_11\n152:      17715          0          0          0    GICv3 329 Edge      soundwire\n153:       8860          0          0          0    GICv3 328 Edge      soundwire\n154:          0          0          0          0    GICv3 111 Level     swr_wake_irq\n155:          0          0          0          0 pm4125_codec   0 Edge      pm4125\n156:          0          0          0          0   pm4125  14 Edge      HPHR PDM WDOG INT\n157:          0          0          0          0   pm4125  13 Edge      HPHL PDM WDOG INT\n158:          0          0          0          0   pm4125   4 Edge      mbhc sw intr\n159:          0          0          0          0   pm4125   0 Edge      Button Press detect\n160:          0          0          0          0   pm4125   1 Edge      Button Release detect\n161:          0          0          0          0   pm4125   3 Edge      Elect Insert\n162:          0          0          0          0   pm4125   2 Edge      Elect Remove\n163:          0          0          0          0   pm4125   7 Edge      HPH_L OCP detect\n164:          0          0          0          0   pm4125   5 Edge      HPH_R OCP detect\n165:        973          0          0          0    GICv3 100 Edge      glink-smem\n166:  665279349          7          3          4  msmgpio  70 Edge      scope-spi-ready\nIPI0:   3743100   14954017    9771426   13902425       Rescheduling interrupts\nIPI1: 400670680  975948346  835985020  724381027       Function call interrupts\nIPI2:         0          0          0          0       CPU stop interrupts\nIPI3:         0          0          0          0       CPU stop NMIs\nIPI4:         0          0          0          0       Timer broadcast interrupts\nIPI5:     20064      13699      12726      12373       IRQ work interrupts\nIPI6:         0          0          0          0       CPU backtrace interrupts\nIPI7:         0          0          0          0       KGDB roundup interrupts\nErr:          3\n"
+      },
+      "interrupts_after": "           CPU0       CPU1       CPU2       CPU3       \n 11:   98506929  125296718  117393784  122429375    GICv3  19 Level     arch_timer\n 13:    7200634          0          0          0    GICv3 226 Edge      glink-rpm\n 14:          0          0          0          0    GICv3 229 Edge      qcom_mpm\n 15:          6          0          0          0    GICv3 311 Edge      smp2p-adsp\n 16:          6          0          0          0    GICv3 102 Edge      smp2p-mpss\n 18:          0          0          0          0      mpm   2 Level     4411000.thermal-sensor\n 19:          0          0          0          0    GICv3 222 Level     4411000.thermal-sensor\n 21:          0          0          0          0    GICv3  39 Level     arch_mem_timer\n 22:          0          0          0          0    GICv3  22 Level     arm-pmu\n 24:          0          0          0          0    GICv3 113 Level     arm-smmu global fault\n 25:          0          0          0          0    GICv3 119 Level     arm-smmu-context-fault\n 26:          0          0          0          0    GICv3 120 Level     arm-smmu-context-fault\n 27:          0          0          0          0    GICv3 121 Level     arm-smmu-context-fault\n 28:          0          0          0          0    GICv3 122 Level     arm-smmu-context-fault\n 29:          0          0          0          0    GICv3 123 Level     arm-smmu-context-fault\n 30:          0          0          0          0    GICv3 124 Level     arm-smmu-context-fault\n 31:          0          0          0          0    GICv3 125 Level     arm-smmu-context-fault\n 32:          0          0          0          0    GICv3 126 Level     arm-smmu-context-fault\n 33:          0          0          0          0    GICv3 127 Level     arm-smmu-context-fault\n 34:          0          0          0          0    GICv3 128 Level     arm-smmu-context-fault\n 35:          0          0          0          0    GICv3 129 Level     arm-smmu-context-fault\n 36:          0          0          0          0    GICv3 130 Level     arm-smmu-context-fault\n 37:          0          0          0          0    GICv3 131 Level     arm-smmu-context-fault\n 38:          0          0          0          0    GICv3 132 Level     arm-smmu-context-fault\n 89:          0          0          0          0      mpm  12 Level     ss_phy_irq\n 90:          0          0          0          0    GICv3 279 Level     bam_dma\n 91:          0          0          0          0    GICv3 361 Level     qcom_geni_serial_uart1\n 92:        391          0          0          0    GICv3 362 Level     qcom_geni_serial_uart2\n 93:        788          0          0          0    GICv3 363 Level     qcom_geni_serial_uart0\n 94:    1327089          0          0          0    GICv3 380 Level     mmc0\n 95:          0          0          0          0  msmgpio  96 Edge      Volume Up\n 96:          2          0          0          0    GICv3 384 Level     4744000.mmc\n 97:          0          0          0          0  msmgpio  36 Edge      Volume Down\n 98:     396197          0          0          0    GICv3 453 Level     1b8e300.pmu\n 99:  390448061          0          0          0    GICv3 287 Level     dwc3\n105:          0          0          0          0    GICv3 339 Edge      q6v5 wdog\n106:          0          0          0          0    GICv3 359 Level     4a80000.i2c\n107:          0          0          0          0 smp2p-mpss   0 Edge      q6v5 fatal\n108:          1          0          0          0 smp2p-mpss   1 Edge      q6v5 ready\n109:          1          0          0          0 smp2p-mpss   2 Edge      q6v5 handover\n110:          0          0          0          0 smp2p-mpss   3 Edge      q6v5 stop\n111:          0          0          0          0 smp2p-mpss   7 Edge      q6v5 shutdown-ack\n112:          0          0          0          0    GICv3 195 Level     arm-smmu global fault\n113:          0          0          0          0    GICv3 199 Level     arm-smmu-context-fault\n121:          0          0          0          0 pmic_arb 6365272 Edge      pm8xxx_rtc_alarm\n122:          0          0          0          0    GICv3  35 Edge      wdt_bark\n123:  665335324          0          0          0    GICv3 364 Level     4a94000.spi\n124:          0          0          0          0    GICv3 314 Edge      q6v5 wdog\n125:        198          0          0          0    GICv3 360 Level     4a84000.i2c\n126:          0          0          0          0 smp2p-adsp   0 Edge      q6v5 fatal\n127:          1          0          0          0 smp2p-adsp   1 Edge      q6v5 ready\n128:          0          0          0          0 pmic_arb 524363 Edge      pm8941_pwrkey\n129:          1          0          0          0 smp2p-adsp   2 Edge      q6v5 handover\n130:          0          0          0          0 smp2p-adsp   3 Edge      q6v5 stop\n132:     227303          0          0          0    GICv3 309 Edge      glink-smem\n133:          0          0          0          0 msm_mdss   0 Edge      msm\n134:          0          0          0          0 msm_mdss   4 Edge      dsi_isr\n135:          1          0          0          0  msmgpio  81 Edge      anx7625-intp\n136:      35814          0          0          0    GICv3 209 Level     gpu-irq\n137:          0          0          0          0    GICv3  69 Level     lmh-irq\n138:       1112          0          0          0    GICv3 257 Level     venus\n139:          0          0          0          0      lmh   0 Edge      dcvsh-irq-0\n140:          9          0          0          0    GICv3 390 Level     WLAN_CE_0\n141:    4868439          0          0          0    GICv3 391 Level     WLAN_CE_1\n142:     504859          0          0          0    GICv3 392 Level     WLAN_CE_2\n143:       4209          0          0          0    GICv3 393 Level     WLAN_CE_3\n144:          0          0          0          0    GICv3 394 Level     WLAN_CE_4\n145:          0          0          0          0    GICv3 395 Level     WLAN_CE_5\n146:          0          0          0          0    GICv3 396 Level     WLAN_CE_6\n147:          0          0          0          0    GICv3 397 Level     WLAN_CE_7\n148:          0          0          0          0    GICv3 398 Level     WLAN_CE_8\n149:          0          0          0          0    GICv3 399 Level     WLAN_CE_9\n150:          0          0          0          0    GICv3 400 Level     WLAN_CE_10\n151:          0          0          0          0    GICv3 401 Level     WLAN_CE_11\n152:      17715          0          0          0    GICv3 329 Edge      soundwire\n153:       8860          0          0          0    GICv3 328 Edge      soundwire\n154:          0          0          0          0    GICv3 111 Level     swr_wake_irq\n155:          0          0          0          0 pm4125_codec   0 Edge      pm4125\n156:          0          0          0          0   pm4125  14 Edge      HPHR PDM WDOG INT\n157:          0          0          0          0   pm4125  13 Edge      HPHL PDM WDOG INT\n158:          0          0          0          0   pm4125   4 Edge      mbhc sw intr\n159:          0          0          0          0   pm4125   0 Edge      Button Press detect\n160:          0          0          0          0   pm4125   1 Edge      Button Release detect\n161:          0          0          0          0   pm4125   3 Edge      Elect Insert\n162:          0          0          0          0   pm4125   2 Edge      Elect Remove\n163:          0          0          0          0   pm4125   7 Edge      HPH_L OCP detect\n164:          0          0          0          0   pm4125   5 Edge      HPH_R OCP detect\n165:        973          0          0          0    GICv3 100 Edge      glink-smem\n166:  665336994          7          3          4  msmgpio  70 Edge      scope-spi-ready\nIPI0:   3743329   14954323    9780586   13902454       Rescheduling interrupts\nIPI1: 400691500  976141748  836172664  724565419       Function call interrupts\nIPI2:         0          0          0          0       CPU stop interrupts\nIPI3:         0          0          0          0       CPU stop NMIs\nIPI4:         0          0          0          0       Timer broadcast interrupts\nIPI5:     20064      13699      12726      12373       IRQ work interrupts\nIPI6:         0          0          0          0       CPU backtrace interrupts\nIPI7:         0          0          0          0       KGDB roundup interrupts\nErr:          3\n",
+      "spi_requested_hz": 40000000,
+      "scheme": "L",
+      "warm": true,
+      "cpu": 0,
+      "warm_steps": [
+        {
+          "profile": [
+            8,
+            112,
+            4320
+          ],
+          "phase": "ready",
+          "samples": 2852064
+        }
+      ],
+      "startup_trace": "case_01_startup_trace.json",
+      "configuration": {
+        "kind": "read_only_configuration_not_electrical_measurement",
+        "spi_base": "0x04a94000",
+        "wrapper_base": "0x04ac0000",
+        "source_hz_before": 120000000,
+        "branch_cached_hz": 120000000,
+        "snapshots": [
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          },
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          },
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          }
+        ],
+        "wrapper_version": 805306368,
+        "gcc_dfs_control": 45,
+        "source_hz_after": 120000000,
+        "configured_hz": 40000000.0,
+        "gcc_active_level": 6
+      },
+      "clock_matches": true
+    },
+    {
+      "bits": 8,
+      "ticks": 106,
+      "node_pairs": 4320,
+      "actual_rate": 1509433.9622641508,
+      "requested_seconds": 30,
+      "stage": "affinity_pilot",
+      "ok": true,
+      "phase": "measure",
+      "seconds": 30.000214228988625,
+      "samples": 45256320,
+      "full_nodes": 10476,
+      "observed_rate": 1508533.227615078,
+      "status": {
+        "bits": 8,
+        "ticks": 106,
+        "node_pairs": 4320,
+        "rate": 1509433,
+        "dropped": 0,
+        "fatal": 0,
+        "queue": 1,
+        "queue_peak": 3,
+        "copy_ticks": 47998,
+        "poll_ticks": 232610,
+        "slack_ticks": 235201,
+        "send_ticks": 472851,
+        "produced": 10825,
+        "epoch": 2
+      },
+      "metrics": {
+        "node_budget_us": 2862.0,
+        "queue_histogram_frames": {
+          "1": 52356,
+          "2": 24
+        },
+        "queue_peak": 3,
+        "copy_max_us": 299.9875,
+        "poll_max_us": 1453.8125,
+        "overwrite_slack_min_us": 1470.00625,
+        "send_observations": 10476,
+        "send_mean_us": 2573.2226422298586,
+        "send_p50_p95_p99_max_us": [
+          2570.06875,
+          2919.015625,
+          2989.53125,
+          3802.63125
+        ],
+        "mean_send_headroom": 0.10090054429424922,
+        "producer_conservative_slack_us": 1470.00625
+      },
+      "headroom_ok": true,
+      "wall_monotonic_drift_seconds": -0.0003741419641301036,
+      "variant": "B",
+      "legacy_timings": {
+        "tx_prepare": {
+          "count": 52380,
+          "mean_us": 38.18778159602902,
+          "p50_p95_p99_max_us": [
+            35.0,
+            43.0,
+            60.0,
+            348.0
+          ]
+        },
+        "rx_check": {
+          "count": 52380,
+          "mean_us": 84.58573883161512,
+          "p50_p95_p99_max_us": [
+            79.0,
+            97.0,
+            105.0,
+            394.0
+          ]
+        }
+      },
+      "affinity_start": {
+        "allowed": "2",
+        "process": "Name:\tunoq_stream\nUmask:\t0022\nState:\tS (sleeping)\nTgid:\t1\nNgid:\t0\nPid:\t1\nPPid:\t0\nTracerPid:\t0\nUid:\t0\t0\t0\t0\nGid:\t0\t0\t0\t0\nFDSize:\t64\nGroups:\t0 \nNStgid:\t1\nNSpid:\t1\nNSpgid:\t1\nNSsid:\t1\nKthread:\t0\nVmPeak:\t    2900 kB\nVmSize:\t    2812 kB\nVmLck:\t       0 kB\nVmPin:\t       0 kB\nVmHWM:\t    1500 kB\nVmRSS:\t    1500 kB\nRssAnon:\t      96 kB\nRssFile:\t    1404 kB\nRssShmem:\t       0 kB\nVmData:\t      92 kB\nVmStk:\t     132 kB\nVmExe:\t      24 kB\nVmLib:\t    2384 kB\nVmPTE:\t      36 kB\nVmSwap:\t       0 kB\nHugetlbPages:\t       0 kB\nCoreDumping:\t0\nTHP_enabled:\t1\nuntag_mask:\t0xffffffffffffff\nThreads:\t1\nSigQ:\t4/14635\nSigPnd:\t0000000000000000\nShdPnd:\t0000000000000000\nSigBlk:\t0000000000000000\nSigIgn:\t0000000000001000\nSigCgt:\t0000000000004002\nCapInh:\t0000000000000000\nCapPrm:\t0000000000800000\nCapEff:\t0000000000800000\nCapBnd:\t0000000000800000\nCapAmb:\t0000000000000000\nNoNewPrivs:\t1\nSeccomp:\t2\nSeccomp_filters:\t1\nSpeculation_Store_Bypass:\tnot vulnerable\nSpeculationIndirectBranch:\tunknown\nCpus_allowed:\t4\nCpus_allowed_list:\t2\nMems_allowed:\t0001\nMems_allowed_list:\t0\nvoluntary_ctxt_switches:\t253\nnonvoluntary_ctxt_switches:\t202\nunoq_stream (1, #threads: 1)\n-------------------------------------------------------------------\nse.exec_start                                :     578253557.700832\nse.vruntime                                  :            64.867343\nse.sum_exec_runtime                          :            95.007274\nse.nr_migrations                             :                    0\nnr_switches                                  :                  455\nnr_voluntary_switches                        :                  253\nnr_involuntary_switches                      :                  202\nse.load.weight                               :              1048576\nse.avg.load_sum                              :                26221\nse.avg.runnable_sum                          :             24779305\nse.avg.util_sum                              :             23656580\nse.avg.load_avg                              :                  572\nse.avg.runnable_avg                          :                  528\nse.avg.util_avg                              :                  504\nse.avg.last_update_time                      :      578224130274304\nse.avg.util_est                              :                  704\npolicy                                       :                    1\nprio                                         :                   89\nclock-delta                                  :                   52\nmm->numa_scan_seq                            :                    0\nnuma_pages_migrated                          :                    0\nnuma_preferred_nid                           :                   -1\ntotal_numa_faults                            :                    0\ncurrent_node=0, numa_group_id=0\nnuma_faults node=0 task_private=0 task_shared=0 group_private=0 group_shared=0\n",
+        "interrupts": "           CPU0       CPU1       CPU2       CPU3       \n 11:   98513763  125304819  117400483  122436626    GICv3  19 Level     arch_timer\n 13:    7202445          0          0          0    GICv3 226 Edge      glink-rpm\n 14:          0          0          0          0    GICv3 229 Edge      qcom_mpm\n 15:          6          0          0          0    GICv3 311 Edge      smp2p-adsp\n 16:          6          0          0          0    GICv3 102 Edge      smp2p-mpss\n 18:          0          0          0          0      mpm   2 Level     4411000.thermal-sensor\n 19:          0          0          0          0    GICv3 222 Level     4411000.thermal-sensor\n 21:          0          0          0          0    GICv3  39 Level     arch_mem_timer\n 22:          0          0          0          0    GICv3  22 Level     arm-pmu\n 24:          0          0          0          0    GICv3 113 Level     arm-smmu global fault\n 25:          0          0          0          0    GICv3 119 Level     arm-smmu-context-fault\n 26:          0          0          0          0    GICv3 120 Level     arm-smmu-context-fault\n 27:          0          0          0          0    GICv3 121 Level     arm-smmu-context-fault\n 28:          0          0          0          0    GICv3 122 Level     arm-smmu-context-fault\n 29:          0          0          0          0    GICv3 123 Level     arm-smmu-context-fault\n 30:          0          0          0          0    GICv3 124 Level     arm-smmu-context-fault\n 31:          0          0          0          0    GICv3 125 Level     arm-smmu-context-fault\n 32:          0          0          0          0    GICv3 126 Level     arm-smmu-context-fault\n 33:          0          0          0          0    GICv3 127 Level     arm-smmu-context-fault\n 34:          0          0          0          0    GICv3 128 Level     arm-smmu-context-fault\n 35:          0          0          0          0    GICv3 129 Level     arm-smmu-context-fault\n 36:          0          0          0          0    GICv3 130 Level     arm-smmu-context-fault\n 37:          0          0          0          0    GICv3 131 Level     arm-smmu-context-fault\n 38:          0          0          0          0    GICv3 132 Level     arm-smmu-context-fault\n 89:          0          0          0          0      mpm  12 Level     ss_phy_irq\n 90:          0          0          0          0    GICv3 279 Level     bam_dma\n 91:          0          0          0          0    GICv3 361 Level     qcom_geni_serial_uart1\n 92:        391          0          0          0    GICv3 362 Level     qcom_geni_serial_uart2\n 93:        788          0          0          0    GICv3 363 Level     qcom_geni_serial_uart0\n 94:    1328090          0          0          0    GICv3 380 Level     mmc0\n 95:          0          0          0          0  msmgpio  96 Edge      Volume Up\n 96:          2          0          0          0    GICv3 384 Level     4744000.mmc\n 97:          0          0          0          0  msmgpio  36 Edge      Volume Down\n 98:     396371          0          0          0    GICv3 453 Level     1b8e300.pmu\n 99:  390448352          0          0          0    GICv3 287 Level     dwc3\n105:          0          0          0          0    GICv3 339 Edge      q6v5 wdog\n106:          0          0          0          0    GICv3 359 Level     4a80000.i2c\n107:          0          0          0          0 smp2p-mpss   0 Edge      q6v5 fatal\n108:          1          0          0          0 smp2p-mpss   1 Edge      q6v5 ready\n109:          1          0          0          0 smp2p-mpss   2 Edge      q6v5 handover\n110:          0          0          0          0 smp2p-mpss   3 Edge      q6v5 stop\n111:          0          0          0          0 smp2p-mpss   7 Edge      q6v5 shutdown-ack\n112:          0          0          0          0    GICv3 195 Level     arm-smmu global fault\n113:          0          0          0          0    GICv3 199 Level     arm-smmu-context-fault\n121:          0          0          0          0 pmic_arb 6365272 Edge      pm8xxx_rtc_alarm\n122:          0          0          0          0    GICv3  35 Edge      wdt_bark\n123:  665337740          0          0          0    GICv3 364 Level     4a94000.spi\n124:          0          0          0          0    GICv3 314 Edge      q6v5 wdog\n125:        198          0          0          0    GICv3 360 Level     4a84000.i2c\n126:          0          0          0          0 smp2p-adsp   0 Edge      q6v5 fatal\n127:          1          0          0          0 smp2p-adsp   1 Edge      q6v5 ready\n128:          0          0          0          0 pmic_arb 524363 Edge      pm8941_pwrkey\n129:          1          0          0          0 smp2p-adsp   2 Edge      q6v5 handover\n130:          0          0          0          0 smp2p-adsp   3 Edge      q6v5 stop\n132:     227508          0          0          0    GICv3 309 Edge      glink-smem\n133:          0          0          0          0 msm_mdss   0 Edge      msm\n134:          0          0          0          0 msm_mdss   4 Edge      dsi_isr\n135:          1          0          0          0  msmgpio  81 Edge      anx7625-intp\n136:      35814          0          0          0    GICv3 209 Level     gpu-irq\n137:          0          0          0          0    GICv3  69 Level     lmh-irq\n138:       1113          0          0          0    GICv3 257 Level     venus\n139:          0          0          0          0      lmh   0 Edge      dcvsh-irq-0\n140:          9          0          0          0    GICv3 390 Level     WLAN_CE_0\n141:    4868512          0          0          0    GICv3 391 Level     WLAN_CE_1\n142:     504878          0          0          0    GICv3 392 Level     WLAN_CE_2\n143:       4209          0          0          0    GICv3 393 Level     WLAN_CE_3\n144:          0          0          0          0    GICv3 394 Level     WLAN_CE_4\n145:          0          0          0          0    GICv3 395 Level     WLAN_CE_5\n146:          0          0          0          0    GICv3 396 Level     WLAN_CE_6\n147:          0          0          0          0    GICv3 397 Level     WLAN_CE_7\n148:          0          0          0          0    GICv3 398 Level     WLAN_CE_8\n149:          0          0          0          0    GICv3 399 Level     WLAN_CE_9\n150:          0          0          0          0    GICv3 400 Level     WLAN_CE_10\n151:          0          0          0          0    GICv3 401 Level     WLAN_CE_11\n152:      17731          0          0          0    GICv3 329 Edge      soundwire\n153:       8868          0          0          0    GICv3 328 Edge      soundwire\n154:          0          0          0          0    GICv3 111 Level     swr_wake_irq\n155:          0          0          0          0 pm4125_codec   0 Edge      pm4125\n156:          0          0          0          0   pm4125  14 Edge      HPHR PDM WDOG INT\n157:          0          0          0          0   pm4125  13 Edge      HPHL PDM WDOG INT\n158:          0          0          0          0   pm4125   4 Edge      mbhc sw intr\n159:          0          0          0          0   pm4125   0 Edge      Button Press detect\n160:          0          0          0          0   pm4125   1 Edge      Button Release detect\n161:          0          0          0          0   pm4125   3 Edge      Elect Insert\n162:          0          0          0          0   pm4125   2 Edge      Elect Remove\n163:          0          0          0          0   pm4125   7 Edge      HPH_L OCP detect\n164:          0          0          0          0   pm4125   5 Edge      HPH_R OCP detect\n165:        973          0          0          0    GICv3 100 Edge      glink-smem\n166:  665339410          7          3          4  msmgpio  70 Edge      scope-spi-ready\nIPI0:   3748330   14954965    9804894   13902960       Rescheduling interrupts\nIPI1: 400695939  976145370  836177874  724568722       Function call interrupts\nIPI2:         0          0          0          0       CPU stop interrupts\nIPI3:         0          0          0          0       CPU stop NMIs\nIPI4:         0          0          0          0       Timer broadcast interrupts\nIPI5:     20080      13714      12731      12392       IRQ work interrupts\nIPI6:         0          0          0          0       CPU backtrace interrupts\nIPI7:         0          0          0          0       KGDB roundup interrupts\nErr:          3\n"
+      },
+      "interrupts_after": "           CPU0       CPU1       CPU2       CPU3       \n 11:   98522326  125313643  117408884  122445479    GICv3  19 Level     arch_timer\n 13:    7202867          0          0          0    GICv3 226 Edge      glink-rpm\n 14:          0          0          0          0    GICv3 229 Edge      qcom_mpm\n 15:          6          0          0          0    GICv3 311 Edge      smp2p-adsp\n 16:          6          0          0          0    GICv3 102 Edge      smp2p-mpss\n 18:          0          0          0          0      mpm   2 Level     4411000.thermal-sensor\n 19:          0          0          0          0    GICv3 222 Level     4411000.thermal-sensor\n 21:          0          0          0          0    GICv3  39 Level     arch_mem_timer\n 22:          0          0          0          0    GICv3  22 Level     arm-pmu\n 24:          0          0          0          0    GICv3 113 Level     arm-smmu global fault\n 25:          0          0          0          0    GICv3 119 Level     arm-smmu-context-fault\n 26:          0          0          0          0    GICv3 120 Level     arm-smmu-context-fault\n 27:          0          0          0          0    GICv3 121 Level     arm-smmu-context-fault\n 28:          0          0          0          0    GICv3 122 Level     arm-smmu-context-fault\n 29:          0          0          0          0    GICv3 123 Level     arm-smmu-context-fault\n 30:          0          0          0          0    GICv3 124 Level     arm-smmu-context-fault\n 31:          0          0          0          0    GICv3 125 Level     arm-smmu-context-fault\n 32:          0          0          0          0    GICv3 126 Level     arm-smmu-context-fault\n 33:          0          0          0          0    GICv3 127 Level     arm-smmu-context-fault\n 34:          0          0          0          0    GICv3 128 Level     arm-smmu-context-fault\n 35:          0          0          0          0    GICv3 129 Level     arm-smmu-context-fault\n 36:          0          0          0          0    GICv3 130 Level     arm-smmu-context-fault\n 37:          0          0          0          0    GICv3 131 Level     arm-smmu-context-fault\n 38:          0          0          0          0    GICv3 132 Level     arm-smmu-context-fault\n 89:          0          0          0          0      mpm  12 Level     ss_phy_irq\n 90:          0          0          0          0    GICv3 279 Level     bam_dma\n 91:          0          0          0          0    GICv3 361 Level     qcom_geni_serial_uart1\n 92:        391          0          0          0    GICv3 362 Level     qcom_geni_serial_uart2\n 93:        788          0          0          0    GICv3 363 Level     qcom_geni_serial_uart0\n 94:    1328192          0          0          0    GICv3 380 Level     mmc0\n 95:          0          0          0          0  msmgpio  96 Edge      Volume Up\n 96:          2          0          0          0    GICv3 384 Level     4744000.mmc\n 97:          0          0          0          0  msmgpio  36 Edge      Volume Down\n 98:     396396          0          0          0    GICv3 453 Level     1b8e300.pmu\n 99:  390619829          0          0          0    GICv3 287 Level     dwc3\n105:          0          0          0          0    GICv3 339 Edge      q6v5 wdog\n106:          0          0          0          0    GICv3 359 Level     4a80000.i2c\n107:          0          0          0          0 smp2p-mpss   0 Edge      q6v5 fatal\n108:          1          0          0          0 smp2p-mpss   1 Edge      q6v5 ready\n109:          1          0          0          0 smp2p-mpss   2 Edge      q6v5 handover\n110:          0          0          0          0 smp2p-mpss   3 Edge      q6v5 stop\n111:          0          0          0          0 smp2p-mpss   7 Edge      q6v5 shutdown-ack\n112:          0          0          0          0    GICv3 195 Level     arm-smmu global fault\n113:          0          0          0          0    GICv3 199 Level     arm-smmu-context-fault\n121:          0          0          0          0 pmic_arb 6365272 Edge      pm8xxx_rtc_alarm\n122:          0          0          0          0    GICv3  35 Edge      wdt_bark\n123:  665395372          0          0          0    GICv3 364 Level     4a94000.spi\n124:          0          0          0          0    GICv3 314 Edge      q6v5 wdog\n125:        198          0          0          0    GICv3 360 Level     4a84000.i2c\n126:          0          0          0          0 smp2p-adsp   0 Edge      q6v5 fatal\n127:          1          0          0          0 smp2p-adsp   1 Edge      q6v5 ready\n128:          0          0          0          0 pmic_arb 524363 Edge      pm8941_pwrkey\n129:          1          0          0          0 smp2p-adsp   2 Edge      q6v5 handover\n130:          0          0          0          0 smp2p-adsp   3 Edge      q6v5 stop\n132:     227508          0          0          0    GICv3 309 Edge      glink-smem\n133:          0          0          0          0 msm_mdss   0 Edge      msm\n134:          0          0          0          0 msm_mdss   4 Edge      dsi_isr\n135:          1          0          0          0  msmgpio  81 Edge      anx7625-intp\n136:      35818          0          0          0    GICv3 209 Level     gpu-irq\n137:          0          0          0          0    GICv3  69 Level     lmh-irq\n138:       1113          0          0          0    GICv3 257 Level     venus\n139:          0          0          0          0      lmh   0 Edge      dcvsh-irq-0\n140:          9          0          0          0    GICv3 390 Level     WLAN_CE_0\n141:    4868623          0          0          0    GICv3 391 Level     WLAN_CE_1\n142:     504902          0          0          0    GICv3 392 Level     WLAN_CE_2\n143:       4209          0          0          0    GICv3 393 Level     WLAN_CE_3\n144:          0          0          0          0    GICv3 394 Level     WLAN_CE_4\n145:          0          0          0          0    GICv3 395 Level     WLAN_CE_5\n146:          0          0          0          0    GICv3 396 Level     WLAN_CE_6\n147:          0          0          0          0    GICv3 397 Level     WLAN_CE_7\n148:          0          0          0          0    GICv3 398 Level     WLAN_CE_8\n149:          0          0          0          0    GICv3 399 Level     WLAN_CE_9\n150:          0          0          0          0    GICv3 400 Level     WLAN_CE_10\n151:          0          0          0          0    GICv3 401 Level     WLAN_CE_11\n152:      17731          0          0          0    GICv3 329 Edge      soundwire\n153:       8868          0          0          0    GICv3 328 Edge      soundwire\n154:          0          0          0          0    GICv3 111 Level     swr_wake_irq\n155:          0          0          0          0 pm4125_codec   0 Edge      pm4125\n156:          0          0          0          0   pm4125  14 Edge      HPHR PDM WDOG INT\n157:          0          0          0          0   pm4125  13 Edge      HPHL PDM WDOG INT\n158:          0          0          0          0   pm4125   4 Edge      mbhc sw intr\n159:          0          0          0          0   pm4125   0 Edge      Button Press detect\n160:          0          0          0          0   pm4125   1 Edge      Button Release detect\n161:          0          0          0          0   pm4125   3 Edge      Elect Insert\n162:          0          0          0          0   pm4125   2 Edge      Elect Remove\n163:          0          0          0          0   pm4125   7 Edge      HPH_L OCP detect\n164:          0          0          0          0   pm4125   5 Edge      HPH_R OCP detect\n165:        973          0          0          0    GICv3 100 Edge      glink-smem\n166:  665397044          7          3          4  msmgpio  70 Edge      scope-spi-ready\nIPI0:   3748405   14966196    9806550   13903087       Rescheduling interrupts\nIPI1: 400812153  976396906  836265573  724745527       Function call interrupts\nIPI2:         0          0          0          0       CPU stop interrupts\nIPI3:         0          0          0          0       CPU stop NMIs\nIPI4:         0          0          0          0       Timer broadcast interrupts\nIPI5:     20080      13714      12731      12392       IRQ work interrupts\nIPI6:         0          0          0          0       CPU backtrace interrupts\nIPI7:         0          0          0          0       KGDB roundup interrupts\nErr:          3\n",
+      "spi_requested_hz": 40000000,
+      "scheme": "R",
+      "warm": true,
+      "cpu": 2,
+      "warm_steps": [
+        {
+          "profile": [
+            8,
+            112,
+            4320
+          ],
+          "phase": "ready",
+          "samples": 2852064
+        }
+      ],
+      "startup_trace": "case_02_startup_trace.json",
+      "configuration": {
+        "kind": "read_only_configuration_not_electrical_measurement",
+        "spi_base": "0x04a94000",
+        "wrapper_base": "0x04ac0000",
+        "source_hz_before": 120000000,
+        "branch_cached_hz": 120000000,
+        "snapshots": [
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          },
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          },
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          }
+        ],
+        "wrapper_version": 805306368,
+        "gcc_dfs_control": 45,
+        "source_hz_after": 120000000,
+        "configured_hz": 40000000.0,
+        "gcc_active_level": 6
+      },
+      "clock_matches": true
+    },
+    {
+      "bits": 8,
+      "ticks": 106,
+      "node_pairs": 4320,
+      "actual_rate": 1509433.9622641508,
+      "requested_seconds": 30,
+      "stage": "affinity_pilot",
+      "ok": true,
+      "phase": "measure",
+      "seconds": 30.001126409042627,
+      "samples": 45258048,
+      "full_nodes": 10476,
+      "observed_rate": 1508544.9587105766,
+      "status": {
+        "bits": 8,
+        "ticks": 106,
+        "node_pairs": 4320,
+        "rate": 1509433,
+        "dropped": 0,
+        "fatal": 0,
+        "queue": 1,
+        "queue_peak": 2,
+        "copy_ticks": 48003,
+        "poll_ticks": 236757,
+        "slack_ticks": 235016,
+        "send_ticks": 415521,
+        "produced": 10825,
+        "epoch": 2
+      },
+      "metrics": {
+        "node_budget_us": 2862.0,
+        "queue_histogram_frames": {
+          "1": 52382
+        },
+        "queue_peak": 2,
+        "copy_max_us": 300.01875,
+        "poll_max_us": 1479.73125,
+        "overwrite_slack_min_us": 1468.85,
+        "send_observations": 10476,
+        "send_mean_us": 2566.522012218404,
+        "send_p50_p95_p99_max_us": [
+          2551.546875,
+          2903.203125,
+          2985.678125,
+          3154.7125
+        ],
+        "mean_send_headroom": 0.10324178468958634,
+        "producer_conservative_slack_us": 1468.85
+      },
+      "headroom_ok": true,
+      "wall_monotonic_drift_seconds": -0.00037207803688943386,
+      "variant": "B",
+      "legacy_timings": {
+        "tx_prepare": {
+          "count": 52382,
+          "mean_us": 37.94248024130427,
+          "p50_p95_p99_max_us": [
+            35.0,
+            43.0,
+            60.0,
+            348.0
+          ]
+        },
+        "rx_check": {
+          "count": 52382,
+          "mean_us": 84.43551219884694,
+          "p50_p95_p99_max_us": [
+            79.0,
+            97.0,
+            105.0,
+            393.0
+          ]
+        }
+      },
+      "affinity_start": {
+        "allowed": "2",
+        "process": "Name:\tunoq_stream\nUmask:\t0022\nState:\tS (sleeping)\nTgid:\t1\nNgid:\t0\nPid:\t1\nPPid:\t0\nTracerPid:\t0\nUid:\t0\t0\t0\t0\nGid:\t0\t0\t0\t0\nFDSize:\t64\nGroups:\t0 \nNStgid:\t1\nNSpid:\t1\nNSpgid:\t1\nNSsid:\t1\nKthread:\t0\nVmPeak:\t    2900 kB\nVmSize:\t    2812 kB\nVmLck:\t       0 kB\nVmPin:\t       0 kB\nVmHWM:\t    1500 kB\nVmRSS:\t    1500 kB\nRssAnon:\t      96 kB\nRssFile:\t    1404 kB\nRssShmem:\t       0 kB\nVmData:\t      92 kB\nVmStk:\t     132 kB\nVmExe:\t      24 kB\nVmLib:\t    2384 kB\nVmPTE:\t      40 kB\nVmSwap:\t       0 kB\nHugetlbPages:\t       0 kB\nCoreDumping:\t0\nTHP_enabled:\t1\nuntag_mask:\t0xffffffffffffff\nThreads:\t1\nSigQ:\t4/14635\nSigPnd:\t0000000000000000\nShdPnd:\t0000000000000000\nSigBlk:\t0000000000000000\nSigIgn:\t0000000000001000\nSigCgt:\t0000000000004002\nCapInh:\t0000000000000000\nCapPrm:\t0000000000800000\nCapEff:\t0000000000800000\nCapBnd:\t0000000000800000\nCapAmb:\t0000000000000000\nNoNewPrivs:\t1\nSeccomp:\t2\nSeccomp_filters:\t1\nSpeculation_Store_Bypass:\tnot vulnerable\nSpeculationIndirectBranch:\tunknown\nCpus_allowed:\t4\nCpus_allowed_list:\t2\nMems_allowed:\t0001\nMems_allowed_list:\t0\nvoluntary_ctxt_switches:\t238\nnonvoluntary_ctxt_switches:\t143\nunoq_stream (1, #threads: 1)\n-------------------------------------------------------------------\nse.exec_start                                :     578301114.409144\nse.vruntime                                  :            41.701482\nse.sum_exec_runtime                          :            94.561459\nse.nr_migrations                             :                    3\nnr_switches                                  :                  381\nnr_voluntary_switches                        :                  238\nnr_involuntary_switches                      :                  143\nse.load.weight                               :              1048576\nse.avg.load_sum                              :                27925\nse.avg.runnable_sum                          :             26222859\nse.avg.util_sum                              :             25441336\nse.avg.load_avg                              :                  606\nse.avg.runnable_avg                          :                  556\nse.avg.util_avg                              :                  539\nse.avg.last_update_time                      :      578271714883584\nse.avg.util_est                              :                  711\npolicy                                       :                    1\nprio                                         :                   89\nclock-delta                                  :                   52\nmm->numa_scan_seq                            :                    0\nnuma_pages_migrated                          :                    0\nnuma_preferred_nid                           :                   -1\ntotal_numa_faults                            :                    0\ncurrent_node=0, numa_group_id=0\nnuma_faults node=0 task_private=0 task_shared=0 group_private=0 group_shared=0\n",
+        "interrupts": "           CPU0       CPU1       CPU2       CPU3       \n 11:   98528864  125320708  117415097  122453393    GICv3  19 Level     arch_timer\n 13:    7204619          0          0          0    GICv3 226 Edge      glink-rpm\n 14:          0          0          0          0    GICv3 229 Edge      qcom_mpm\n 15:          6          0          0          0    GICv3 311 Edge      smp2p-adsp\n 16:          6          0          0          0    GICv3 102 Edge      smp2p-mpss\n 18:          0          0          0          0      mpm   2 Level     4411000.thermal-sensor\n 19:          0          0          0          0    GICv3 222 Level     4411000.thermal-sensor\n 21:          0          0          0          0    GICv3  39 Level     arch_mem_timer\n 22:          0          0          0          0    GICv3  22 Level     arm-pmu\n 24:          0          0          0          0    GICv3 113 Level     arm-smmu global fault\n 25:          0          0          0          0    GICv3 119 Level     arm-smmu-context-fault\n 26:          0          0          0          0    GICv3 120 Level     arm-smmu-context-fault\n 27:          0          0          0          0    GICv3 121 Level     arm-smmu-context-fault\n 28:          0          0          0          0    GICv3 122 Level     arm-smmu-context-fault\n 29:          0          0          0          0    GICv3 123 Level     arm-smmu-context-fault\n 30:          0          0          0          0    GICv3 124 Level     arm-smmu-context-fault\n 31:          0          0          0          0    GICv3 125 Level     arm-smmu-context-fault\n 32:          0          0          0          0    GICv3 126 Level     arm-smmu-context-fault\n 33:          0          0          0          0    GICv3 127 Level     arm-smmu-context-fault\n 34:          0          0          0          0    GICv3 128 Level     arm-smmu-context-fault\n 35:          0          0          0          0    GICv3 129 Level     arm-smmu-context-fault\n 36:          0          0          0          0    GICv3 130 Level     arm-smmu-context-fault\n 37:          0          0          0          0    GICv3 131 Level     arm-smmu-context-fault\n 38:          0          0          0          0    GICv3 132 Level     arm-smmu-context-fault\n 89:          0          0          0          0      mpm  12 Level     ss_phy_irq\n 90:          0          0          0          0    GICv3 279 Level     bam_dma\n 91:          0          0          0          0    GICv3 361 Level     qcom_geni_serial_uart1\n 92:        391          0          0          0    GICv3 362 Level     qcom_geni_serial_uart2\n 93:        788          0          0          0    GICv3 363 Level     qcom_geni_serial_uart0\n 94:    1329168          0          0          0    GICv3 380 Level     mmc0\n 95:          0          0          0          0  msmgpio  96 Edge      Volume Up\n 96:          2          0          0          0    GICv3 384 Level     4744000.mmc\n 97:          0          0          0          0  msmgpio  36 Edge      Volume Down\n 98:     396552          0          0          0    GICv3 453 Level     1b8e300.pmu\n 99:  390620122          0          0          0    GICv3 287 Level     dwc3\n105:          0          0          0          0    GICv3 339 Edge      q6v5 wdog\n106:          0          0          0          0    GICv3 359 Level     4a80000.i2c\n107:          0          0          0          0 smp2p-mpss   0 Edge      q6v5 fatal\n108:          1          0          0          0 smp2p-mpss   1 Edge      q6v5 ready\n109:          1          0          0          0 smp2p-mpss   2 Edge      q6v5 handover\n110:          0          0          0          0 smp2p-mpss   3 Edge      q6v5 stop\n111:          0          0          0          0 smp2p-mpss   7 Edge      q6v5 shutdown-ack\n112:          0          0          0          0    GICv3 195 Level     arm-smmu global fault\n113:          0          0          0          0    GICv3 199 Level     arm-smmu-context-fault\n121:          0          0          0          0 pmic_arb 6365272 Edge      pm8xxx_rtc_alarm\n122:          0          0          0          0    GICv3  35 Edge      wdt_bark\n123:  665397841          0          0          0    GICv3 364 Level     4a94000.spi\n124:          0          0          0          0    GICv3 314 Edge      q6v5 wdog\n125:        198          0          0          0    GICv3 360 Level     4a84000.i2c\n126:          0          0          0          0 smp2p-adsp   0 Edge      q6v5 fatal\n127:          1          0          0          0 smp2p-adsp   1 Edge      q6v5 ready\n128:          0          0          0          0 pmic_arb 524363 Edge      pm8941_pwrkey\n129:          1          0          0          0 smp2p-adsp   2 Edge      q6v5 handover\n130:          0          0          0          0 smp2p-adsp   3 Edge      q6v5 stop\n132:     227714          0          0          0    GICv3 309 Edge      glink-smem\n133:          0          0          0          0 msm_mdss   0 Edge      msm\n134:          0          0          0          0 msm_mdss   4 Edge      dsi_isr\n135:          1          0          0          0  msmgpio  81 Edge      anx7625-intp\n136:      35818          0          0          0    GICv3 209 Level     gpu-irq\n137:          0          0          0          0    GICv3  69 Level     lmh-irq\n138:       1114          0          0          0    GICv3 257 Level     venus\n139:          0          0          0          0      lmh   0 Edge      dcvsh-irq-0\n140:          9          0          0          0    GICv3 390 Level     WLAN_CE_0\n141:    4868640          0          0          0    GICv3 391 Level     WLAN_CE_1\n142:     504910          0          0          0    GICv3 392 Level     WLAN_CE_2\n143:       4209          0          0          0    GICv3 393 Level     WLAN_CE_3\n144:          0          0          0          0    GICv3 394 Level     WLAN_CE_4\n145:          0          0          0          0    GICv3 395 Level     WLAN_CE_5\n146:          0          0          0          0    GICv3 396 Level     WLAN_CE_6\n147:          0          0          0          0    GICv3 397 Level     WLAN_CE_7\n148:          0          0          0          0    GICv3 398 Level     WLAN_CE_8\n149:          0          0          0          0    GICv3 399 Level     WLAN_CE_9\n150:          0          0          0          0    GICv3 400 Level     WLAN_CE_10\n151:          0          0          0          0    GICv3 401 Level     WLAN_CE_11\n152:      17747          0          0          0    GICv3 329 Edge      soundwire\n153:       8876          0          0          0    GICv3 328 Edge      soundwire\n154:          0          0          0          0    GICv3 111 Level     swr_wake_irq\n155:          0          0          0          0 pm4125_codec   0 Edge      pm4125\n156:          0          0          0          0   pm4125  14 Edge      HPHR PDM WDOG INT\n157:          0          0          0          0   pm4125  13 Edge      HPHL PDM WDOG INT\n158:          0          0          0          0   pm4125   4 Edge      mbhc sw intr\n159:          0          0          0          0   pm4125   0 Edge      Button Press detect\n160:          0          0          0          0   pm4125   1 Edge      Button Release detect\n161:          0          0          0          0   pm4125   3 Edge      Elect Insert\n162:          0          0          0          0   pm4125   2 Edge      Elect Remove\n163:          0          0          0          0   pm4125   7 Edge      HPH_L OCP detect\n164:          0          0          0          0   pm4125   5 Edge      HPH_R OCP detect\n165:        973          0          0          0    GICv3 100 Edge      glink-smem\n166:  665399512          7          3          4  msmgpio  70 Edge      scope-spi-ready\nIPI0:   3756735   14967427    9808031   13907714       Rescheduling interrupts\nIPI1: 400815302  976402397  836272496  724748875       Function call interrupts\nIPI2:         0          0          0          0       CPU stop interrupts\nIPI3:         0          0          0          0       CPU stop NMIs\nIPI4:         0          0          0          0       Timer broadcast interrupts\nIPI5:     20098      13726      12747      12397       IRQ work interrupts\nIPI6:         0          0          0          0       CPU backtrace interrupts\nIPI7:         0          0          0          0       KGDB roundup interrupts\nErr:          3\n"
+      },
+      "interrupts_after": "           CPU0       CPU1       CPU2       CPU3       \n 11:   98537338  125329675  117423526  122462092    GICv3  19 Level     arch_timer\n 13:    7204934          0          0          0    GICv3 226 Edge      glink-rpm\n 14:          0          0          0          0    GICv3 229 Edge      qcom_mpm\n 15:          6          0          0          0    GICv3 311 Edge      smp2p-adsp\n 16:          6          0          0          0    GICv3 102 Edge      smp2p-mpss\n 18:          0          0          0          0      mpm   2 Level     4411000.thermal-sensor\n 19:          0          0          0          0    GICv3 222 Level     4411000.thermal-sensor\n 21:          0          0          0          0    GICv3  39 Level     arch_mem_timer\n 22:          0          0          0          0    GICv3  22 Level     arm-pmu\n 24:          0          0          0          0    GICv3 113 Level     arm-smmu global fault\n 25:          0          0          0          0    GICv3 119 Level     arm-smmu-context-fault\n 26:          0          0          0          0    GICv3 120 Level     arm-smmu-context-fault\n 27:          0          0          0          0    GICv3 121 Level     arm-smmu-context-fault\n 28:          0          0          0          0    GICv3 122 Level     arm-smmu-context-fault\n 29:          0          0          0          0    GICv3 123 Level     arm-smmu-context-fault\n 30:          0          0          0          0    GICv3 124 Level     arm-smmu-context-fault\n 31:          0          0          0          0    GICv3 125 Level     arm-smmu-context-fault\n 32:          0          0          0          0    GICv3 126 Level     arm-smmu-context-fault\n 33:          0          0          0          0    GICv3 127 Level     arm-smmu-context-fault\n 34:          0          0          0          0    GICv3 128 Level     arm-smmu-context-fault\n 35:          0          0          0          0    GICv3 129 Level     arm-smmu-context-fault\n 36:          0          0          0          0    GICv3 130 Level     arm-smmu-context-fault\n 37:          0          0          0          0    GICv3 131 Level     arm-smmu-context-fault\n 38:          0          0          0          0    GICv3 132 Level     arm-smmu-context-fault\n 89:          0          0          0          0      mpm  12 Level     ss_phy_irq\n 90:          0          0          0          0    GICv3 279 Level     bam_dma\n 91:          0          0          0          0    GICv3 361 Level     qcom_geni_serial_uart1\n 92:        391          0          0          0    GICv3 362 Level     qcom_geni_serial_uart2\n 93:        788          0          0          0    GICv3 363 Level     qcom_geni_serial_uart0\n 94:    1329259          0          0          0    GICv3 380 Level     mmc0\n 95:          0          0          0          0  msmgpio  96 Edge      Volume Up\n 96:          2          0          0          0    GICv3 384 Level     4744000.mmc\n 97:          0          0          0          0  msmgpio  36 Edge      Volume Down\n 98:     396565          0          0          0    GICv3 453 Level     1b8e300.pmu\n 99:  390791269          0          0          0    GICv3 287 Level     dwc3\n105:          0          0          0          0    GICv3 339 Edge      q6v5 wdog\n106:          0          0          0          0    GICv3 359 Level     4a80000.i2c\n107:          0          0          0          0 smp2p-mpss   0 Edge      q6v5 fatal\n108:          1          0          0          0 smp2p-mpss   1 Edge      q6v5 ready\n109:          1          0          0          0 smp2p-mpss   2 Edge      q6v5 handover\n110:          0          0          0          0 smp2p-mpss   3 Edge      q6v5 stop\n111:          0          0          0          0 smp2p-mpss   7 Edge      q6v5 shutdown-ack\n112:          0          0          0          0    GICv3 195 Level     arm-smmu global fault\n113:          0          0          0          0    GICv3 199 Level     arm-smmu-context-fault\n121:          0          0          0          0 pmic_arb 6365272 Edge      pm8xxx_rtc_alarm\n122:          0          0          0          0    GICv3  35 Edge      wdt_bark\n123:  665455506          0          0          0    GICv3 364 Level     4a94000.spi\n124:          0          0          0          0    GICv3 314 Edge      q6v5 wdog\n125:        198          0          0          0    GICv3 360 Level     4a84000.i2c\n126:          0          0          0          0 smp2p-adsp   0 Edge      q6v5 fatal\n127:          1          0          0          0 smp2p-adsp   1 Edge      q6v5 ready\n128:          0          0          0          0 pmic_arb 524363 Edge      pm8941_pwrkey\n129:          1          0          0          0 smp2p-adsp   2 Edge      q6v5 handover\n130:          0          0          0          0 smp2p-adsp   3 Edge      q6v5 stop\n132:     227714          0          0          0    GICv3 309 Edge      glink-smem\n133:          0          0          0          0 msm_mdss   0 Edge      msm\n134:          0          0          0          0 msm_mdss   4 Edge      dsi_isr\n135:          1          0          0          0  msmgpio  81 Edge      anx7625-intp\n136:      35818          0          0          0    GICv3 209 Level     gpu-irq\n137:          0          0          0          0    GICv3  69 Level     lmh-irq\n138:       1114          0          0          0    GICv3 257 Level     venus\n139:          0          0          0          0      lmh   0 Edge      dcvsh-irq-0\n140:          9          0          0          0    GICv3 390 Level     WLAN_CE_0\n141:    4868671          0          0          0    GICv3 391 Level     WLAN_CE_1\n142:     504922          0          0          0    GICv3 392 Level     WLAN_CE_2\n143:       4209          0          0          0    GICv3 393 Level     WLAN_CE_3\n144:          0          0          0          0    GICv3 394 Level     WLAN_CE_4\n145:          0          0          0          0    GICv3 395 Level     WLAN_CE_5\n146:          0          0          0          0    GICv3 396 Level     WLAN_CE_6\n147:          0          0          0          0    GICv3 397 Level     WLAN_CE_7\n148:          0          0          0          0    GICv3 398 Level     WLAN_CE_8\n149:          0          0          0          0    GICv3 399 Level     WLAN_CE_9\n150:          0          0          0          0    GICv3 400 Level     WLAN_CE_10\n151:          0          0          0          0    GICv3 401 Level     WLAN_CE_11\n152:      17747          0          0          0    GICv3 329 Edge      soundwire\n153:       8876          0          0          0    GICv3 328 Edge      soundwire\n154:          0          0          0          0    GICv3 111 Level     swr_wake_irq\n155:          0          0          0          0 pm4125_codec   0 Edge      pm4125\n156:          0          0          0          0   pm4125  14 Edge      HPHR PDM WDOG INT\n157:          0          0          0          0   pm4125  13 Edge      HPHL PDM WDOG INT\n158:          0          0          0          0   pm4125   4 Edge      mbhc sw intr\n159:          0          0          0          0   pm4125   0 Edge      Button Press detect\n160:          0          0          0          0   pm4125   1 Edge      Button Release detect\n161:          0          0          0          0   pm4125   3 Edge      Elect Insert\n162:          0          0          0          0   pm4125   2 Edge      Elect Remove\n163:          0          0          0          0   pm4125   7 Edge      HPH_L OCP detect\n164:          0          0          0          0   pm4125   5 Edge      HPH_R OCP detect\n165:        973          0          0          0    GICv3 100 Edge      glink-smem\n166:  665457177          7          3          4  msmgpio  70 Edge      scope-spi-ready\nIPI0:   3756999   14967730    9809667   13921754       Rescheduling interrupts\nIPI1: 400924951  976587173  836360878  724988957       Function call interrupts\nIPI2:         0          0          0          0       CPU stop interrupts\nIPI3:         0          0          0          0       CPU stop NMIs\nIPI4:         0          0          0          0       Timer broadcast interrupts\nIPI5:     20098      13726      12747      12397       IRQ work interrupts\nIPI6:         0          0          0          0       CPU backtrace interrupts\nIPI7:         0          0          0          0       KGDB roundup interrupts\nErr:          3\n",
+      "spi_requested_hz": 40000000,
+      "scheme": "R",
+      "warm": true,
+      "cpu": 2,
+      "warm_steps": [
+        {
+          "profile": [
+            8,
+            112,
+            4320
+          ],
+          "phase": "ready",
+          "samples": 2852064
+        }
+      ],
+      "startup_trace": "case_03_startup_trace.json",
+      "configuration": {
+        "kind": "read_only_configuration_not_electrical_measurement",
+        "spi_base": "0x04a94000",
+        "wrapper_base": "0x04ac0000",
+        "source_hz_before": 120000000,
+        "branch_cached_hz": 120000000,
+        "snapshots": [
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          },
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          },
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          }
+        ],
+        "wrapper_version": 805306368,
+        "gcc_dfs_control": 45,
+        "source_hz_after": 120000000,
+        "configured_hz": 40000000.0,
+        "gcc_active_level": 6
+      },
+      "clock_matches": true
+    },
+    {
+      "bits": 8,
+      "ticks": 106,
+      "node_pairs": 4320,
+      "actual_rate": 1509433.9622641508,
+      "requested_seconds": 30,
+      "stage": "affinity_pilot",
+      "ok": true,
+      "phase": "measure",
+      "seconds": 30.000327980029397,
+      "samples": 45257184,
+      "full_nodes": 10476,
+      "observed_rate": 1508556.3074552645,
+      "status": {
+        "bits": 8,
+        "ticks": 106,
+        "node_pairs": 4320,
+        "rate": 1509433,
+        "dropped": 0,
+        "fatal": 0,
+        "queue": 1,
+        "queue_peak": 2,
+        "copy_ticks": 47996,
+        "poll_ticks": 232615,
+        "slack_ticks": 235081,
+        "send_ticks": 463540,
+        "produced": 10825,
+        "epoch": 2
+      },
+      "metrics": {
+        "node_budget_us": 2862.0,
+        "queue_histogram_frames": {
+          "1": 52381
+        },
+        "queue_peak": 2,
+        "copy_max_us": 299.975,
+        "poll_max_us": 1453.84375,
+        "overwrite_slack_min_us": 1469.25625,
+        "send_observations": 10476,
+        "send_mean_us": 2615.8717467306224,
+        "send_p50_p95_p99_max_us": [
+          2597.28125,
+          2906.5328125,
+          2959.990625,
+          3272.78125
+        ],
+        "mean_send_headroom": 0.0859986908698035,
+        "producer_conservative_slack_us": 1469.25625
+      },
+      "headroom_ok": false,
+      "wall_monotonic_drift_seconds": -0.0003717540530487895,
+      "variant": "B",
+      "legacy_timings": {
+        "tx_prepare": {
+          "count": 52381,
+          "mean_us": 40.3351215135259,
+          "p50_p95_p99_max_us": [
+            35.0,
+            45.0,
+            345.0,
+            348.0
+          ]
+        },
+        "rx_check": {
+          "count": 52381,
+          "mean_us": 86.51669498482273,
+          "p50_p95_p99_max_us": [
+            79.0,
+            97.0,
+            389.0,
+            393.0
+          ]
+        }
+      },
+      "affinity_start": {
+        "allowed": "0",
+        "process": "Name:\tunoq_stream\nUmask:\t0022\nState:\tS (sleeping)\nTgid:\t1\nNgid:\t0\nPid:\t1\nPPid:\t0\nTracerPid:\t0\nUid:\t0\t0\t0\t0\nGid:\t0\t0\t0\t0\nFDSize:\t64\nGroups:\t0 \nNStgid:\t1\nNSpid:\t1\nNSpgid:\t1\nNSsid:\t1\nKthread:\t0\nVmPeak:\t    2900 kB\nVmSize:\t    2812 kB\nVmLck:\t       0 kB\nVmPin:\t       0 kB\nVmHWM:\t    1488 kB\nVmRSS:\t    1488 kB\nRssAnon:\t      92 kB\nRssFile:\t    1396 kB\nRssShmem:\t       0 kB\nVmData:\t      92 kB\nVmStk:\t     132 kB\nVmExe:\t      24 kB\nVmLib:\t    2384 kB\nVmPTE:\t      36 kB\nVmSwap:\t       0 kB\nHugetlbPages:\t       0 kB\nCoreDumping:\t0\nTHP_enabled:\t1\nuntag_mask:\t0xffffffffffffff\nThreads:\t1\nSigQ:\t3/14635\nSigPnd:\t0000000000000000\nShdPnd:\t0000000000000000\nSigBlk:\t0000000000000000\nSigIgn:\t0000000000001000\nSigCgt:\t0000000000004002\nCapInh:\t0000000000000000\nCapPrm:\t0000000000800000\nCapEff:\t0000000000800000\nCapBnd:\t0000000000800000\nCapAmb:\t0000000000000000\nNoNewPrivs:\t1\nSeccomp:\t2\nSeccomp_filters:\t1\nSpeculation_Store_Bypass:\tnot vulnerable\nSpeculationIndirectBranch:\tunknown\nCpus_allowed:\t1\nCpus_allowed_list:\t0\nMems_allowed:\t0001\nMems_allowed_list:\t0\nvoluntary_ctxt_switches:\t236\nnonvoluntary_ctxt_switches:\t206\nunoq_stream (1, #threads: 1)\n-------------------------------------------------------------------\nse.exec_start                                :     562595477.067334\nse.vruntime                                  :            44.551604\nse.sum_exec_runtime                          :            93.995092\nse.nr_migrations                             :                    2\nnr_switches                                  :                  442\nnr_voluntary_switches                        :                  236\nnr_involuntary_switches                      :                  206\nse.load.weight                               :              1048576\nse.avg.load_sum                              :                27823\nse.avg.runnable_sum                          :             26520384\nse.avg.util_sum                              :             24659580\nse.avg.load_avg                              :                  603\nse.avg.runnable_avg                          :                  562\nse.avg.util_avg                              :                  522\nse.avg.last_update_time                      :      562571334066176\nse.avg.util_est                              :                  707\npolicy                                       :                    1\nprio                                         :                   89\nclock-delta                                  :                   52\nmm->numa_scan_seq                            :                    0\nnuma_pages_migrated                          :                    0\nnuma_preferred_nid                           :                   -1\ntotal_numa_faults                            :                    0\ncurrent_node=0, numa_group_id=0\nnuma_faults node=0 task_private=0 task_shared=0 group_private=0 group_shared=0\n",
+        "interrupts": "           CPU0       CPU1       CPU2       CPU3       \n 11:   98545890  125336751  117429372  122469136    GICv3  19 Level     arch_timer\n 13:    7206766          0          0          0    GICv3 226 Edge      glink-rpm\n 14:          0          0          0          0    GICv3 229 Edge      qcom_mpm\n 15:          6          0          0          0    GICv3 311 Edge      smp2p-adsp\n 16:          6          0          0          0    GICv3 102 Edge      smp2p-mpss\n 18:          0          0          0          0      mpm   2 Level     4411000.thermal-sensor\n 19:          0          0          0          0    GICv3 222 Level     4411000.thermal-sensor\n 21:          0          0          0          0    GICv3  39 Level     arch_mem_timer\n 22:          0          0          0          0    GICv3  22 Level     arm-pmu\n 24:          0          0          0          0    GICv3 113 Level     arm-smmu global fault\n 25:          0          0          0          0    GICv3 119 Level     arm-smmu-context-fault\n 26:          0          0          0          0    GICv3 120 Level     arm-smmu-context-fault\n 27:          0          0          0          0    GICv3 121 Level     arm-smmu-context-fault\n 28:          0          0          0          0    GICv3 122 Level     arm-smmu-context-fault\n 29:          0          0          0          0    GICv3 123 Level     arm-smmu-context-fault\n 30:          0          0          0          0    GICv3 124 Level     arm-smmu-context-fault\n 31:          0          0          0          0    GICv3 125 Level     arm-smmu-context-fault\n 32:          0          0          0          0    GICv3 126 Level     arm-smmu-context-fault\n 33:          0          0          0          0    GICv3 127 Level     arm-smmu-context-fault\n 34:          0          0          0          0    GICv3 128 Level     arm-smmu-context-fault\n 35:          0          0          0          0    GICv3 129 Level     arm-smmu-context-fault\n 36:          0          0          0          0    GICv3 130 Level     arm-smmu-context-fault\n 37:          0          0          0          0    GICv3 131 Level     arm-smmu-context-fault\n 38:          0          0          0          0    GICv3 132 Level     arm-smmu-context-fault\n 89:          0          0          0          0      mpm  12 Level     ss_phy_irq\n 90:          0          0          0          0    GICv3 279 Level     bam_dma\n 91:          0          0          0          0    GICv3 361 Level     qcom_geni_serial_uart1\n 92:        391          0          0          0    GICv3 362 Level     qcom_geni_serial_uart2\n 93:        788          0          0          0    GICv3 363 Level     qcom_geni_serial_uart0\n 94:    1330151          0          0          0    GICv3 380 Level     mmc0\n 95:          0          0          0          0  msmgpio  96 Edge      Volume Up\n 96:          2          0          0          0    GICv3 384 Level     4744000.mmc\n 97:          0          0          0          0  msmgpio  36 Edge      Volume Down\n 98:     396737          0          0          0    GICv3 453 Level     1b8e300.pmu\n 99:  390791555          0          0          0    GICv3 287 Level     dwc3\n105:          0          0          0          0    GICv3 339 Edge      q6v5 wdog\n106:          0          0          0          0    GICv3 359 Level     4a80000.i2c\n107:          0          0          0          0 smp2p-mpss   0 Edge      q6v5 fatal\n108:          1          0          0          0 smp2p-mpss   1 Edge      q6v5 ready\n109:          1          0          0          0 smp2p-mpss   2 Edge      q6v5 handover\n110:          0          0          0          0 smp2p-mpss   3 Edge      q6v5 stop\n111:          0          0          0          0 smp2p-mpss   7 Edge      q6v5 shutdown-ack\n112:          0          0          0          0    GICv3 195 Level     arm-smmu global fault\n113:          0          0          0          0    GICv3 199 Level     arm-smmu-context-fault\n121:          0          0          0          0 pmic_arb 6365272 Edge      pm8xxx_rtc_alarm\n122:          0          0          0          0    GICv3  35 Edge      wdt_bark\n123:  665458018          0          0          0    GICv3 364 Level     4a94000.spi\n124:          0          0          0          0    GICv3 314 Edge      q6v5 wdog\n125:        198          0          0          0    GICv3 360 Level     4a84000.i2c\n126:          0          0          0          0 smp2p-adsp   0 Edge      q6v5 fatal\n127:          1          0          0          0 smp2p-adsp   1 Edge      q6v5 ready\n128:          0          0          0          0 pmic_arb 524363 Edge      pm8941_pwrkey\n129:          1          0          0          0 smp2p-adsp   2 Edge      q6v5 handover\n130:          0          0          0          0 smp2p-adsp   3 Edge      q6v5 stop\n132:     227920          0          0          0    GICv3 309 Edge      glink-smem\n133:          0          0          0          0 msm_mdss   0 Edge      msm\n134:          0          0          0          0 msm_mdss   4 Edge      dsi_isr\n135:          1          0          0          0  msmgpio  81 Edge      anx7625-intp\n136:      35821          0          0          0    GICv3 209 Level     gpu-irq\n137:          0          0          0          0    GICv3  69 Level     lmh-irq\n138:       1115          0          0          0    GICv3 257 Level     venus\n139:          0          0          0          0      lmh   0 Edge      dcvsh-irq-0\n140:          9          0          0          0    GICv3 390 Level     WLAN_CE_0\n141:    4868680          0          0          0    GICv3 391 Level     WLAN_CE_1\n142:     504924          0          0          0    GICv3 392 Level     WLAN_CE_2\n143:       4209          0          0          0    GICv3 393 Level     WLAN_CE_3\n144:          0          0          0          0    GICv3 394 Level     WLAN_CE_4\n145:          0          0          0          0    GICv3 395 Level     WLAN_CE_5\n146:          0          0          0          0    GICv3 396 Level     WLAN_CE_6\n147:          0          0          0          0    GICv3 397 Level     WLAN_CE_7\n148:          0          0          0          0    GICv3 398 Level     WLAN_CE_8\n149:          0          0          0          0    GICv3 399 Level     WLAN_CE_9\n150:          0          0          0          0    GICv3 400 Level     WLAN_CE_10\n151:          0          0          0          0    GICv3 401 Level     WLAN_CE_11\n152:      17763          0          0          0    GICv3 329 Edge      soundwire\n153:       8884          0          0          0    GICv3 328 Edge      soundwire\n154:          0          0          0          0    GICv3 111 Level     swr_wake_irq\n155:          0          0          0          0 pm4125_codec   0 Edge      pm4125\n156:          0          0          0          0   pm4125  14 Edge      HPHR PDM WDOG INT\n157:          0          0          0          0   pm4125  13 Edge      HPHL PDM WDOG INT\n158:          0          0          0          0   pm4125   4 Edge      mbhc sw intr\n159:          0          0          0          0   pm4125   0 Edge      Button Press detect\n160:          0          0          0          0   pm4125   1 Edge      Button Release detect\n161:          0          0          0          0   pm4125   3 Edge      Elect Insert\n162:          0          0          0          0   pm4125   2 Edge      Elect Remove\n163:          0          0          0          0   pm4125   7 Edge      HPH_L OCP detect\n164:          0          0          0          0   pm4125   5 Edge      HPH_R OCP detect\n165:        973          0          0          0    GICv3 100 Edge      glink-smem\n166:  665459690          7          3          4  msmgpio  70 Edge      scope-spi-ready\nIPI0:   3758115   14978551    9810888   13923628       Rescheduling interrupts\nIPI1: 400928400  976591372  836367341  724994019       Function call interrupts\nIPI2:         0          0          0          0       CPU stop interrupts\nIPI3:         0          0          0          0       CPU stop NMIs\nIPI4:         0          0          0          0       Timer broadcast interrupts\nIPI5:     20102      13734      12769      12419       IRQ work interrupts\nIPI6:         0          0          0          0       CPU backtrace interrupts\nIPI7:         0          0          0          0       KGDB roundup interrupts\nErr:          4\n"
+      },
+      "interrupts_after": "           CPU0       CPU1       CPU2       CPU3       \n 11:   98554369  125345355  117438077  122477929    GICv3  19 Level     arch_timer\n 13:    7207145          0          0          0    GICv3 226 Edge      glink-rpm\n 14:          0          0          0          0    GICv3 229 Edge      qcom_mpm\n 15:          6          0          0          0    GICv3 311 Edge      smp2p-adsp\n 16:          6          0          0          0    GICv3 102 Edge      smp2p-mpss\n 18:          0          0          0          0      mpm   2 Level     4411000.thermal-sensor\n 19:          0          0          0          0    GICv3 222 Level     4411000.thermal-sensor\n 21:          0          0          0          0    GICv3  39 Level     arch_mem_timer\n 22:          0          0          0          0    GICv3  22 Level     arm-pmu\n 24:          0          0          0          0    GICv3 113 Level     arm-smmu global fault\n 25:          0          0          0          0    GICv3 119 Level     arm-smmu-context-fault\n 26:          0          0          0          0    GICv3 120 Level     arm-smmu-context-fault\n 27:          0          0          0          0    GICv3 121 Level     arm-smmu-context-fault\n 28:          0          0          0          0    GICv3 122 Level     arm-smmu-context-fault\n 29:          0          0          0          0    GICv3 123 Level     arm-smmu-context-fault\n 30:          0          0          0          0    GICv3 124 Level     arm-smmu-context-fault\n 31:          0          0          0          0    GICv3 125 Level     arm-smmu-context-fault\n 32:          0          0          0          0    GICv3 126 Level     arm-smmu-context-fault\n 33:          0          0          0          0    GICv3 127 Level     arm-smmu-context-fault\n 34:          0          0          0          0    GICv3 128 Level     arm-smmu-context-fault\n 35:          0          0          0          0    GICv3 129 Level     arm-smmu-context-fault\n 36:          0          0          0          0    GICv3 130 Level     arm-smmu-context-fault\n 37:          0          0          0          0    GICv3 131 Level     arm-smmu-context-fault\n 38:          0          0          0          0    GICv3 132 Level     arm-smmu-context-fault\n 89:          0          0          0          0      mpm  12 Level     ss_phy_irq\n 90:          0          0          0          0    GICv3 279 Level     bam_dma\n 91:          0          0          0          0    GICv3 361 Level     qcom_geni_serial_uart1\n 92:        391          0          0          0    GICv3 362 Level     qcom_geni_serial_uart2\n 93:        788          0          0          0    GICv3 363 Level     qcom_geni_serial_uart0\n 94:    1330246          0          0          0    GICv3 380 Level     mmc0\n 95:          0          0          0          0  msmgpio  96 Edge      Volume Up\n 96:          2          0          0          0    GICv3 384 Level     4744000.mmc\n 97:          0          0          0          0  msmgpio  36 Edge      Volume Down\n 98:     396756          0          0          0    GICv3 453 Level     1b8e300.pmu\n 99:  390963512          0          0          0    GICv3 287 Level     dwc3\n105:          0          0          0          0    GICv3 339 Edge      q6v5 wdog\n106:          0          0          0          0    GICv3 359 Level     4a80000.i2c\n107:          0          0          0          0 smp2p-mpss   0 Edge      q6v5 fatal\n108:          1          0          0          0 smp2p-mpss   1 Edge      q6v5 ready\n109:          1          0          0          0 smp2p-mpss   2 Edge      q6v5 handover\n110:          0          0          0          0 smp2p-mpss   3 Edge      q6v5 stop\n111:          0          0          0          0 smp2p-mpss   7 Edge      q6v5 shutdown-ack\n112:          0          0          0          0    GICv3 195 Level     arm-smmu global fault\n113:          0          0          0          0    GICv3 199 Level     arm-smmu-context-fault\n121:          0          0          0          0 pmic_arb 6365272 Edge      pm8xxx_rtc_alarm\n122:          0          0          0          0    GICv3  35 Edge      wdt_bark\n123:  665515691          0          0          0    GICv3 364 Level     4a94000.spi\n124:          0          0          0          0    GICv3 314 Edge      q6v5 wdog\n125:        198          0          0          0    GICv3 360 Level     4a84000.i2c\n126:          0          0          0          0 smp2p-adsp   0 Edge      q6v5 fatal\n127:          1          0          0          0 smp2p-adsp   1 Edge      q6v5 ready\n128:          0          0          0          0 pmic_arb 524363 Edge      pm8941_pwrkey\n129:          1          0          0          0 smp2p-adsp   2 Edge      q6v5 handover\n130:          0          0          0          0 smp2p-adsp   3 Edge      q6v5 stop\n132:     227920          0          0          0    GICv3 309 Edge      glink-smem\n133:          0          0          0          0 msm_mdss   0 Edge      msm\n134:          0          0          0          0 msm_mdss   4 Edge      dsi_isr\n135:          1          0          0          0  msmgpio  81 Edge      anx7625-intp\n136:      35821          0          0          0    GICv3 209 Level     gpu-irq\n137:          0          0          0          0    GICv3  69 Level     lmh-irq\n138:       1115          0          0          0    GICv3 257 Level     venus\n139:          0          0          0          0      lmh   0 Edge      dcvsh-irq-0\n140:          9          0          0          0    GICv3 390 Level     WLAN_CE_0\n141:    4868696          0          0          0    GICv3 391 Level     WLAN_CE_1\n142:     504931          0          0          0    GICv3 392 Level     WLAN_CE_2\n143:       4209          0          0          0    GICv3 393 Level     WLAN_CE_3\n144:          0          0          0          0    GICv3 394 Level     WLAN_CE_4\n145:          0          0          0          0    GICv3 395 Level     WLAN_CE_5\n146:          0          0          0          0    GICv3 396 Level     WLAN_CE_6\n147:          0          0          0          0    GICv3 397 Level     WLAN_CE_7\n148:          0          0          0          0    GICv3 398 Level     WLAN_CE_8\n149:          0          0          0          0    GICv3 399 Level     WLAN_CE_9\n150:          0          0          0          0    GICv3 400 Level     WLAN_CE_10\n151:          0          0          0          0    GICv3 401 Level     WLAN_CE_11\n152:      17763          0          0          0    GICv3 329 Edge      soundwire\n153:       8884          0          0          0    GICv3 328 Edge      soundwire\n154:          0          0          0          0    GICv3 111 Level     swr_wake_irq\n155:          0          0          0          0 pm4125_codec   0 Edge      pm4125\n156:          0          0          0          0   pm4125  14 Edge      HPHR PDM WDOG INT\n157:          0          0          0          0   pm4125  13 Edge      HPHL PDM WDOG INT\n158:          0          0          0          0   pm4125   4 Edge      mbhc sw intr\n159:          0          0          0          0   pm4125   0 Edge      Button Press detect\n160:          0          0          0          0   pm4125   1 Edge      Button Release detect\n161:          0          0          0          0   pm4125   3 Edge      Elect Insert\n162:          0          0          0          0   pm4125   2 Edge      Elect Remove\n163:          0          0          0          0   pm4125   7 Edge      HPH_L OCP detect\n164:          0          0          0          0   pm4125   5 Edge      HPH_R OCP detect\n165:        973          0          0          0    GICv3 100 Edge      glink-smem\n166:  665517364          7          3          4  msmgpio  70 Edge      scope-spi-ready\nIPI0:   3758282   14990187    9810949   13923665       Rescheduling interrupts\nIPI1: 400948647  976779424  836552571  725179191       Function call interrupts\nIPI2:         0          0          0          0       CPU stop interrupts\nIPI3:         0          0          0          0       CPU stop NMIs\nIPI4:         0          0          0          0       Timer broadcast interrupts\nIPI5:     20102      13734      12769      12419       IRQ work interrupts\nIPI6:         0          0          0          0       CPU backtrace interrupts\nIPI7:         0          0          0          0       KGDB roundup interrupts\nErr:          4\n",
+      "spi_requested_hz": 40000000,
+      "scheme": "L",
+      "warm": true,
+      "cpu": 0,
+      "warm_steps": [
+        {
+          "profile": [
+            8,
+            112,
+            4320
+          ],
+          "phase": "ready",
+          "samples": 2852064
+        }
+      ],
+      "startup_trace": "case_04_startup_trace.json",
+      "configuration": {
+        "kind": "read_only_configuration_not_electrical_measurement",
+        "spi_base": "0x04a94000",
+        "wrapper_base": "0x04ac0000",
+        "source_hz_before": 120000000,
+        "branch_cached_hz": 120000000,
+        "snapshots": [
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          },
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          },
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          }
+        ],
+        "wrapper_version": 805306368,
+        "gcc_dfs_control": 45,
+        "source_hz_after": 120000000,
+        "configured_hz": 40000000.0,
+        "gcc_active_level": 6
+      },
+      "clock_matches": true
+    },
+    {
+      "bits": 8,
+      "ticks": 106,
+      "node_pairs": 4320,
+      "actual_rate": 1509433.9622641508,
+      "requested_seconds": 30,
+      "stage": "affinity_pilot",
+      "ok": true,
+      "phase": "measure",
+      "seconds": 30.001152895973064,
+      "samples": 45257184,
+      "full_nodes": 10476,
+      "observed_rate": 1508514.8279776506,
+      "status": {
+        "bits": 8,
+        "ticks": 106,
+        "node_pairs": 4320,
+        "rate": 1509433,
+        "dropped": 0,
+        "fatal": 0,
+        "queue": 1,
+        "queue_peak": 2,
+        "copy_ticks": 47998,
+        "poll_ticks": 232665,
+        "slack_ticks": 235170,
+        "send_ticks": 397456,
+        "produced": 10825,
+        "epoch": 2
+      },
+      "metrics": {
+        "node_budget_us": 2862.0,
+        "queue_histogram_frames": {
+          "1": 52381
+        },
+        "queue_peak": 2,
+        "copy_max_us": 299.9875,
+        "poll_max_us": 1454.15625,
+        "overwrite_slack_min_us": 1469.8125,
+        "send_observations": 10476,
+        "send_mean_us": 2581.2255715444826,
+        "send_p50_p95_p99_max_us": [
+          2587.83125,
+          2928.340625,
+          2995.3171875,
+          3136.29375
+        ],
+        "mean_send_headroom": 0.0981042726958482,
+        "producer_conservative_slack_us": 1469.8125
+      },
+      "headroom_ok": false,
+      "wall_monotonic_drift_seconds": -0.000371193396858871,
+      "variant": "B",
+      "legacy_timings": {
+        "tx_prepare": {
+          "count": 52381,
+          "mean_us": 38.50016227257975,
+          "p50_p95_p99_max_us": [
+            35.0,
+            43.0,
+            341.0,
+            348.0
+          ]
+        },
+        "rx_check": {
+          "count": 52381,
+          "mean_us": 84.9951127317157,
+          "p50_p95_p99_max_us": [
+            79.0,
+            97.0,
+            106.0,
+            393.0
+          ]
+        }
+      },
+      "affinity_start": {
+        "allowed": "0-3",
+        "process": "Name:\tunoq_stream\nUmask:\t0022\nState:\tS (sleeping)\nTgid:\t1\nNgid:\t0\nPid:\t1\nPPid:\t0\nTracerPid:\t0\nUid:\t0\t0\t0\t0\nGid:\t0\t0\t0\t0\nFDSize:\t64\nGroups:\t0 \nNStgid:\t1\nNSpid:\t1\nNSpgid:\t1\nNSsid:\t1\nKthread:\t0\nVmPeak:\t    2900 kB\nVmSize:\t    2812 kB\nVmLck:\t       0 kB\nVmPin:\t       0 kB\nVmHWM:\t    1500 kB\nVmRSS:\t    1500 kB\nRssAnon:\t      96 kB\nRssFile:\t    1404 kB\nRssShmem:\t       0 kB\nVmData:\t      92 kB\nVmStk:\t     132 kB\nVmExe:\t      24 kB\nVmLib:\t    2384 kB\nVmPTE:\t      36 kB\nVmSwap:\t       0 kB\nHugetlbPages:\t       0 kB\nCoreDumping:\t0\nTHP_enabled:\t1\nuntag_mask:\t0xffffffffffffff\nThreads:\t1\nSigQ:\t4/14635\nSigPnd:\t0000000000000000\nShdPnd:\t0000000000000000\nSigBlk:\t0000000000000000\nSigIgn:\t0000000000001000\nSigCgt:\t0000000000004002\nCapInh:\t0000000000000000\nCapPrm:\t0000000000800000\nCapEff:\t0000000000800000\nCapBnd:\t0000000000800000\nCapAmb:\t0000000000000000\nNoNewPrivs:\t1\nSeccomp:\t2\nSeccomp_filters:\t1\nSpeculation_Store_Bypass:\tnot vulnerable\nSpeculationIndirectBranch:\tunknown\nCpus_allowed:\tf\nCpus_allowed_list:\t0-3\nMems_allowed:\t0001\nMems_allowed_list:\t0\nvoluntary_ctxt_switches:\t254\nnonvoluntary_ctxt_switches:\t7\nunoq_stream (1, #threads: 1)\n-------------------------------------------------------------------\nse.exec_start                                :     579981380.291947\nse.vruntime                                  :            36.794038\nse.sum_exec_runtime                          :            92.389434\nse.nr_migrations                             :                    2\nnr_switches                                  :                  261\nnr_voluntary_switches                        :                  254\nnr_involuntary_switches                      :                    7\nse.load.weight                               :              1048576\nse.avg.load_sum                              :                24005\nse.avg.runnable_sum                          :             22052980\nse.avg.util_sum                              :             21972605\nse.avg.load_avg                              :                  517\nse.avg.runnable_avg                          :                  464\nse.avg.util_avg                              :                  462\nse.avg.last_update_time                      :      579951196398592\nse.avg.util_est                              :                  529\npolicy                                       :                    1\nprio                                         :                   89\nclock-delta                                  :                  156\nmm->numa_scan_seq                            :                    0\nnuma_pages_migrated                          :                    0\nnuma_preferred_nid                           :                   -1\ntotal_numa_faults                            :                    0\ncurrent_node=0, numa_group_id=0\nnuma_faults node=0 task_private=0 task_shared=0 group_private=0 group_shared=0\n",
+        "interrupts": "           CPU0       CPU1       CPU2       CPU3       \n 11:   98560531  125353896  117444769  122484135    GICv3  19 Level     arch_timer\n 13:    7208972          0          0          0    GICv3 226 Edge      glink-rpm\n 14:          0          0          0          0    GICv3 229 Edge      qcom_mpm\n 15:          6          0          0          0    GICv3 311 Edge      smp2p-adsp\n 16:          6          0          0          0    GICv3 102 Edge      smp2p-mpss\n 18:          0          0          0          0      mpm   2 Level     4411000.thermal-sensor\n 19:          0          0          0          0    GICv3 222 Level     4411000.thermal-sensor\n 21:          0          0          0          0    GICv3  39 Level     arch_mem_timer\n 22:          0          0          0          0    GICv3  22 Level     arm-pmu\n 24:          0          0          0          0    GICv3 113 Level     arm-smmu global fault\n 25:          0          0          0          0    GICv3 119 Level     arm-smmu-context-fault\n 26:          0          0          0          0    GICv3 120 Level     arm-smmu-context-fault\n 27:          0          0          0          0    GICv3 121 Level     arm-smmu-context-fault\n 28:          0          0          0          0    GICv3 122 Level     arm-smmu-context-fault\n 29:          0          0          0          0    GICv3 123 Level     arm-smmu-context-fault\n 30:          0          0          0          0    GICv3 124 Level     arm-smmu-context-fault\n 31:          0          0          0          0    GICv3 125 Level     arm-smmu-context-fault\n 32:          0          0          0          0    GICv3 126 Level     arm-smmu-context-fault\n 33:          0          0          0          0    GICv3 127 Level     arm-smmu-context-fault\n 34:          0          0          0          0    GICv3 128 Level     arm-smmu-context-fault\n 35:          0          0          0          0    GICv3 129 Level     arm-smmu-context-fault\n 36:          0          0          0          0    GICv3 130 Level     arm-smmu-context-fault\n 37:          0          0          0          0    GICv3 131 Level     arm-smmu-context-fault\n 38:          0          0          0          0    GICv3 132 Level     arm-smmu-context-fault\n 89:          0          0          0          0      mpm  12 Level     ss_phy_irq\n 90:          0          0          0          0    GICv3 279 Level     bam_dma\n 91:          0          0          0          0    GICv3 361 Level     qcom_geni_serial_uart1\n 92:        391          0          0          0    GICv3 362 Level     qcom_geni_serial_uart2\n 93:        788          0          0          0    GICv3 363 Level     qcom_geni_serial_uart0\n 94:    1331190          0          0          0    GICv3 380 Level     mmc0\n 95:          0          0          0          0  msmgpio  96 Edge      Volume Up\n 96:          2          0          0          0    GICv3 384 Level     4744000.mmc\n 97:          0          0          0          0  msmgpio  36 Edge      Volume Down\n 98:     396919          0          0          0    GICv3 453 Level     1b8e300.pmu\n 99:  390963800          0          0          0    GICv3 287 Level     dwc3\n105:          0          0          0          0    GICv3 339 Edge      q6v5 wdog\n106:          0          0          0          0    GICv3 359 Level     4a80000.i2c\n107:          0          0          0          0 smp2p-mpss   0 Edge      q6v5 fatal\n108:          1          0          0          0 smp2p-mpss   1 Edge      q6v5 ready\n109:          1          0          0          0 smp2p-mpss   2 Edge      q6v5 handover\n110:          0          0          0          0 smp2p-mpss   3 Edge      q6v5 stop\n111:          0          0          0          0 smp2p-mpss   7 Edge      q6v5 shutdown-ack\n112:          0          0          0          0    GICv3 195 Level     arm-smmu global fault\n113:          0          0          0          0    GICv3 199 Level     arm-smmu-context-fault\n121:          0          0          0          0 pmic_arb 6365272 Edge      pm8xxx_rtc_alarm\n122:          0          0          0          0    GICv3  35 Edge      wdt_bark\n123:  665518089          0          0          0    GICv3 364 Level     4a94000.spi\n124:          0          0          0          0    GICv3 314 Edge      q6v5 wdog\n125:        198          0          0          0    GICv3 360 Level     4a84000.i2c\n126:          0          0          0          0 smp2p-adsp   0 Edge      q6v5 fatal\n127:          1          0          0          0 smp2p-adsp   1 Edge      q6v5 ready\n128:          0          0          0          0 pmic_arb 524363 Edge      pm8941_pwrkey\n129:          1          0          0          0 smp2p-adsp   2 Edge      q6v5 handover\n130:          0          0          0          0 smp2p-adsp   3 Edge      q6v5 stop\n132:     228125          0          0          0    GICv3 309 Edge      glink-smem\n133:          0          0          0          0 msm_mdss   0 Edge      msm\n134:          0          0          0          0 msm_mdss   4 Edge      dsi_isr\n135:          1          0          0          0  msmgpio  81 Edge      anx7625-intp\n136:      35825          0          0          0    GICv3 209 Level     gpu-irq\n137:          0          0          0          0    GICv3  69 Level     lmh-irq\n138:       1116          0          0          0    GICv3 257 Level     venus\n139:          0          0          0          0      lmh   0 Edge      dcvsh-irq-0\n140:          9          0          0          0    GICv3 390 Level     WLAN_CE_0\n141:    4868706          0          0          0    GICv3 391 Level     WLAN_CE_1\n142:     504936          0          0          0    GICv3 392 Level     WLAN_CE_2\n143:       4209          0          0          0    GICv3 393 Level     WLAN_CE_3\n144:          0          0          0          0    GICv3 394 Level     WLAN_CE_4\n145:          0          0          0          0    GICv3 395 Level     WLAN_CE_5\n146:          0          0          0          0    GICv3 396 Level     WLAN_CE_6\n147:          0          0          0          0    GICv3 397 Level     WLAN_CE_7\n148:          0          0          0          0    GICv3 398 Level     WLAN_CE_8\n149:          0          0          0          0    GICv3 399 Level     WLAN_CE_9\n150:          0          0          0          0    GICv3 400 Level     WLAN_CE_10\n151:          0          0          0          0    GICv3 401 Level     WLAN_CE_11\n152:      17779          0          0          0    GICv3 329 Edge      soundwire\n153:       8892          0          0          0    GICv3 328 Edge      soundwire\n154:          0          0          0          0    GICv3 111 Level     swr_wake_irq\n155:          0          0          0          0 pm4125_codec   0 Edge      pm4125\n156:          0          0          0          0   pm4125  14 Edge      HPHR PDM WDOG INT\n157:          0          0          0          0   pm4125  13 Edge      HPHL PDM WDOG INT\n158:          0          0          0          0   pm4125   4 Edge      mbhc sw intr\n159:          0          0          0          0   pm4125   0 Edge      Button Press detect\n160:          0          0          0          0   pm4125   1 Edge      Button Release detect\n161:          0          0          0          0   pm4125   3 Edge      Elect Insert\n162:          0          0          0          0   pm4125   2 Edge      Elect Remove\n163:          0          0          0          0   pm4125   7 Edge      HPH_L OCP detect\n164:          0          0          0          0   pm4125   5 Edge      HPH_R OCP detect\n165:        973          0          0          0    GICv3 100 Edge      glink-smem\n166:  665519762          7          3          4  msmgpio  70 Edge      scope-spi-ready\nIPI0:   3759221   14991350    9811505   13934188       Rescheduling interrupts\nIPI1: 400953459  976785216  836555625  725182723       Function call interrupts\nIPI2:         0          0          0          0       CPU stop interrupts\nIPI3:         0          0          0          0       CPU stop NMIs\nIPI4:         0          0          0          0       Timer broadcast interrupts\nIPI5:     20121      13751      12779      12426       IRQ work interrupts\nIPI6:         0          0          0          0       CPU backtrace interrupts\nIPI7:         0          0          0          0       KGDB roundup interrupts\nErr:          4\n"
+      },
+      "interrupts_after": "           CPU0       CPU1       CPU2       CPU3       \n 11:   98569116  125362567  117453344  122492889    GICv3  19 Level     arch_timer\n 13:    7209340          0          0          0    GICv3 226 Edge      glink-rpm\n 14:          0          0          0          0    GICv3 229 Edge      qcom_mpm\n 15:          6          0          0          0    GICv3 311 Edge      smp2p-adsp\n 16:          6          0          0          0    GICv3 102 Edge      smp2p-mpss\n 18:          0          0          0          0      mpm   2 Level     4411000.thermal-sensor\n 19:          0          0          0          0    GICv3 222 Level     4411000.thermal-sensor\n 21:          0          0          0          0    GICv3  39 Level     arch_mem_timer\n 22:          0          0          0          0    GICv3  22 Level     arm-pmu\n 24:          0          0          0          0    GICv3 113 Level     arm-smmu global fault\n 25:          0          0          0          0    GICv3 119 Level     arm-smmu-context-fault\n 26:          0          0          0          0    GICv3 120 Level     arm-smmu-context-fault\n 27:          0          0          0          0    GICv3 121 Level     arm-smmu-context-fault\n 28:          0          0          0          0    GICv3 122 Level     arm-smmu-context-fault\n 29:          0          0          0          0    GICv3 123 Level     arm-smmu-context-fault\n 30:          0          0          0          0    GICv3 124 Level     arm-smmu-context-fault\n 31:          0          0          0          0    GICv3 125 Level     arm-smmu-context-fault\n 32:          0          0          0          0    GICv3 126 Level     arm-smmu-context-fault\n 33:          0          0          0          0    GICv3 127 Level     arm-smmu-context-fault\n 34:          0          0          0          0    GICv3 128 Level     arm-smmu-context-fault\n 35:          0          0          0          0    GICv3 129 Level     arm-smmu-context-fault\n 36:          0          0          0          0    GICv3 130 Level     arm-smmu-context-fault\n 37:          0          0          0          0    GICv3 131 Level     arm-smmu-context-fault\n 38:          0          0          0          0    GICv3 132 Level     arm-smmu-context-fault\n 89:          0          0          0          0      mpm  12 Level     ss_phy_irq\n 90:          0          0          0          0    GICv3 279 Level     bam_dma\n 91:          0          0          0          0    GICv3 361 Level     qcom_geni_serial_uart1\n 92:        391          0          0          0    GICv3 362 Level     qcom_geni_serial_uart2\n 93:        788          0          0          0    GICv3 363 Level     qcom_geni_serial_uart0\n 94:    1331278          0          0          0    GICv3 380 Level     mmc0\n 95:          0          0          0          0  msmgpio  96 Edge      Volume Up\n 96:          2          0          0          0    GICv3 384 Level     4744000.mmc\n 97:          0          0          0          0  msmgpio  36 Edge      Volume Down\n 98:     396942          0          0          0    GICv3 453 Level     1b8e300.pmu\n 99:  391134848          0          0          0    GICv3 287 Level     dwc3\n105:          0          0          0          0    GICv3 339 Edge      q6v5 wdog\n106:          0          0          0          0    GICv3 359 Level     4a80000.i2c\n107:          0          0          0          0 smp2p-mpss   0 Edge      q6v5 fatal\n108:          1          0          0          0 smp2p-mpss   1 Edge      q6v5 ready\n109:          1          0          0          0 smp2p-mpss   2 Edge      q6v5 handover\n110:          0          0          0          0 smp2p-mpss   3 Edge      q6v5 stop\n111:          0          0          0          0 smp2p-mpss   7 Edge      q6v5 shutdown-ack\n112:          0          0          0          0    GICv3 195 Level     arm-smmu global fault\n113:          0          0          0          0    GICv3 199 Level     arm-smmu-context-fault\n121:          0          0          0          0 pmic_arb 6365272 Edge      pm8xxx_rtc_alarm\n122:          0          0          0          0    GICv3  35 Edge      wdt_bark\n123:  665575760          0          0          0    GICv3 364 Level     4a94000.spi\n124:          0          0          0          0    GICv3 314 Edge      q6v5 wdog\n125:        198          0          0          0    GICv3 360 Level     4a84000.i2c\n126:          0          0          0          0 smp2p-adsp   0 Edge      q6v5 fatal\n127:          1          0          0          0 smp2p-adsp   1 Edge      q6v5 ready\n128:          0          0          0          0 pmic_arb 524363 Edge      pm8941_pwrkey\n129:          1          0          0          0 smp2p-adsp   2 Edge      q6v5 handover\n130:          0          0          0          0 smp2p-adsp   3 Edge      q6v5 stop\n132:     228125          0          0          0    GICv3 309 Edge      glink-smem\n133:          0          0          0          0 msm_mdss   0 Edge      msm\n134:          0          0          0          0 msm_mdss   4 Edge      dsi_isr\n135:          1          0          0          0  msmgpio  81 Edge      anx7625-intp\n136:      35825          0          0          0    GICv3 209 Level     gpu-irq\n137:          0          0          0          0    GICv3  69 Level     lmh-irq\n138:       1116          0          0          0    GICv3 257 Level     venus\n139:          0          0          0          0      lmh   0 Edge      dcvsh-irq-0\n140:          9          0          0          0    GICv3 390 Level     WLAN_CE_0\n141:    4868719          0          0          0    GICv3 391 Level     WLAN_CE_1\n142:     504941          0          0          0    GICv3 392 Level     WLAN_CE_2\n143:       4209          0          0          0    GICv3 393 Level     WLAN_CE_3\n144:          0          0          0          0    GICv3 394 Level     WLAN_CE_4\n145:          0          0          0          0    GICv3 395 Level     WLAN_CE_5\n146:          0          0          0          0    GICv3 396 Level     WLAN_CE_6\n147:          0          0          0          0    GICv3 397 Level     WLAN_CE_7\n148:          0          0          0          0    GICv3 398 Level     WLAN_CE_8\n149:          0          0          0          0    GICv3 399 Level     WLAN_CE_9\n150:          0          0          0          0    GICv3 400 Level     WLAN_CE_10\n151:          0          0          0          0    GICv3 401 Level     WLAN_CE_11\n152:      17779          0          0          0    GICv3 329 Edge      soundwire\n153:       8892          0          0          0    GICv3 328 Edge      soundwire\n154:          0          0          0          0    GICv3 111 Level     swr_wake_irq\n155:          0          0          0          0 pm4125_codec   0 Edge      pm4125\n156:          0          0          0          0   pm4125  14 Edge      HPHR PDM WDOG INT\n157:          0          0          0          0   pm4125  13 Edge      HPHL PDM WDOG INT\n158:          0          0          0          0   pm4125   4 Edge      mbhc sw intr\n159:          0          0          0          0   pm4125   0 Edge      Button Press detect\n160:          0          0          0          0   pm4125   1 Edge      Button Release detect\n161:          0          0          0          0   pm4125   3 Edge      Elect Insert\n162:          0          0          0          0   pm4125   2 Edge      Elect Remove\n163:          0          0          0          0   pm4125   7 Edge      HPH_L OCP detect\n164:          0          0          0          0   pm4125   5 Edge      HPH_R OCP detect\n165:        973          0          0          0    GICv3 100 Edge      glink-smem\n166:  665577434          7          3          4  msmgpio  70 Edge      scope-spi-ready\nIPI0:   3759288   14993479    9812479   13944660       Rescheduling interrupts\nIPI1: 401065132  976934146  836697230  725412926       Function call interrupts\nIPI2:         0          0          0          0       CPU stop interrupts\nIPI3:         0          0          0          0       CPU stop NMIs\nIPI4:         0          0          0          0       Timer broadcast interrupts\nIPI5:     20121      13751      12779      12426       IRQ work interrupts\nIPI6:         0          0          0          0       CPU backtrace interrupts\nIPI7:         0          0          0          0       KGDB roundup interrupts\nErr:          4\n",
+      "spi_requested_hz": 40000000,
+      "scheme": "F",
+      "warm": true,
+      "cpu": null,
+      "warm_steps": [
+        {
+          "profile": [
+            8,
+            112,
+            4320
+          ],
+          "phase": "ready",
+          "samples": 2853792
+        }
+      ],
+      "startup_trace": "case_05_startup_trace.json",
+      "configuration": {
+        "kind": "read_only_configuration_not_electrical_measurement",
+        "spi_base": "0x04a94000",
+        "wrapper_base": "0x04ac0000",
+        "source_hz_before": 120000000,
+        "branch_cached_hz": 120000000,
+        "snapshots": [
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          },
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          },
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          }
+        ],
+        "wrapper_version": 805306368,
+        "gcc_dfs_control": 45,
+        "source_hz_after": 120000000,
+        "configured_hz": 40000000.0,
+        "gcc_active_level": 6
+      },
+      "clock_matches": true
+    },
+    {
+      "bits": 8,
+      "ticks": 106,
+      "node_pairs": 4320,
+      "actual_rate": 1509433.9622641508,
+      "requested_seconds": 60,
+      "stage": "finalist",
+      "ok": true,
+      "phase": "measure",
+      "seconds": 60.00052813405637,
+      "samples": 90515232,
+      "full_nodes": 20952,
+      "observed_rate": 1508573.9211789279,
+      "status": {
+        "bits": 8,
+        "ticks": 106,
+        "node_pairs": 4320,
+        "rate": 1509433,
+        "dropped": 0,
+        "fatal": 0,
+        "queue": 1,
+        "queue_peak": 3,
+        "copy_ticks": 48000,
+        "poll_ticks": 242928,
+        "slack_ticks": 234983,
+        "send_ticks": 415381,
+        "produced": 21301,
+        "epoch": 2
+      },
+      "metrics": {
+        "node_budget_us": 2862.0,
+        "queue_histogram_frames": {
+          "1": 104652,
+          "2": 110,
+          "3": 1
+        },
+        "queue_peak": 3,
+        "copy_max_us": 300.0,
+        "poll_max_us": 1518.3,
+        "overwrite_slack_min_us": 1468.64375,
+        "send_observations": 20952,
+        "send_mean_us": 2580.5640616050973,
+        "send_p50_p95_p99_max_us": [
+          2585.446875,
+          2922.2981250000003,
+          2985.7025625,
+          4025.79375
+        ],
+        "mean_send_headroom": 0.09833540824420084,
+        "producer_conservative_slack_us": 1468.64375
+      },
+      "headroom_ok": false,
+      "wall_monotonic_drift_seconds": -0.0006075330311432481,
+      "variant": "B",
+      "legacy_timings": {
+        "tx_prepare": {
+          "count": 104763,
+          "mean_us": 38.539808901997844,
+          "p50_p95_p99_max_us": [
+            35.0,
+            43.0,
+            341.0,
+            348.0
+          ]
+        },
+        "rx_check": {
+          "count": 104763,
+          "mean_us": 85.11769422410583,
+          "p50_p95_p99_max_us": [
+            79.0,
+            97.0,
+            383.0,
+            393.0
+          ]
+        }
+      },
+      "affinity_start": {
+        "allowed": "2",
+        "process": "Name:\tunoq_stream\nUmask:\t0022\nState:\tS (sleeping)\nTgid:\t1\nNgid:\t0\nPid:\t1\nPPid:\t0\nTracerPid:\t0\nUid:\t0\t0\t0\t0\nGid:\t0\t0\t0\t0\nFDSize:\t64\nGroups:\t0 \nNStgid:\t1\nNSpid:\t1\nNSpgid:\t1\nNSsid:\t1\nKthread:\t0\nVmPeak:\t    2900 kB\nVmSize:\t    2812 kB\nVmLck:\t       0 kB\nVmPin:\t       0 kB\nVmHWM:\t    1480 kB\nVmRSS:\t    1480 kB\nRssAnon:\t      96 kB\nRssFile:\t    1384 kB\nRssShmem:\t       0 kB\nVmData:\t      92 kB\nVmStk:\t     132 kB\nVmExe:\t      24 kB\nVmLib:\t    2384 kB\nVmPTE:\t      36 kB\nVmSwap:\t       0 kB\nHugetlbPages:\t       0 kB\nCoreDumping:\t0\nTHP_enabled:\t1\nuntag_mask:\t0xffffffffffffff\nThreads:\t1\nSigQ:\t4/14635\nSigPnd:\t0000000000000000\nShdPnd:\t0000000000000000\nSigBlk:\t0000000000000000\nSigIgn:\t0000000000001000\nSigCgt:\t0000000000004002\nCapInh:\t0000000000000000\nCapPrm:\t0000000000800000\nCapEff:\t0000000000800000\nCapBnd:\t0000000000800000\nCapAmb:\t0000000000000000\nNoNewPrivs:\t1\nSeccomp:\t2\nSeccomp_filters:\t1\nSpeculation_Store_Bypass:\tnot vulnerable\nSpeculationIndirectBranch:\tunknown\nCpus_allowed:\t4\nCpus_allowed_list:\t2\nMems_allowed:\t0001\nMems_allowed_list:\t0\nvoluntary_ctxt_switches:\t246\nnonvoluntary_ctxt_switches:\t201\nunoq_stream (1, #threads: 1)\n-------------------------------------------------------------------\nse.exec_start                                :     578446671.585566\nse.vruntime                                  :            68.197637\nse.sum_exec_runtime                          :            97.646924\nse.nr_migrations                             :                    0\nnr_switches                                  :                  447\nnr_voluntary_switches                        :                  246\nnr_involuntary_switches                      :                  201\nse.load.weight                               :              1048576\nse.avg.load_sum                              :                30640\nse.avg.runnable_sum                          :             29724282\nse.avg.util_sum                              :             21046509\nse.avg.load_avg                              :                  667\nse.avg.runnable_avg                          :                  632\nse.avg.util_avg                              :                  447\nse.avg.last_update_time                      :      578417174301696\nse.avg.util_est                              :                  714\npolicy                                       :                    1\nprio                                         :                   89\nclock-delta                                  :                  208\nmm->numa_scan_seq                            :                    0\nnuma_pages_migrated                          :                    0\nnuma_preferred_nid                           :                   -1\ntotal_numa_faults                            :                    0\ncurrent_node=0, numa_group_id=0\nnuma_faults node=0 task_private=0 task_shared=0 group_private=0 group_shared=0\n",
+        "interrupts": "           CPU0       CPU1       CPU2       CPU3       \n 11:   98574623  125371013  117460436  122500434    GICv3  19 Level     arch_timer\n 13:    7211146          0          0          0    GICv3 226 Edge      glink-rpm\n 14:          0          0          0          0    GICv3 229 Edge      qcom_mpm\n 15:          6          0          0          0    GICv3 311 Edge      smp2p-adsp\n 16:          6          0          0          0    GICv3 102 Edge      smp2p-mpss\n 18:          0          0          0          0      mpm   2 Level     4411000.thermal-sensor\n 19:          0          0          0          0    GICv3 222 Level     4411000.thermal-sensor\n 21:          0          0          0          0    GICv3  39 Level     arch_mem_timer\n 22:          0          0          0          0    GICv3  22 Level     arm-pmu\n 24:          0          0          0          0    GICv3 113 Level     arm-smmu global fault\n 25:          0          0          0          0    GICv3 119 Level     arm-smmu-context-fault\n 26:          0          0          0          0    GICv3 120 Level     arm-smmu-context-fault\n 27:          0          0          0          0    GICv3 121 Level     arm-smmu-context-fault\n 28:          0          0          0          0    GICv3 122 Level     arm-smmu-context-fault\n 29:          0          0          0          0    GICv3 123 Level     arm-smmu-context-fault\n 30:          0          0          0          0    GICv3 124 Level     arm-smmu-context-fault\n 31:          0          0          0          0    GICv3 125 Level     arm-smmu-context-fault\n 32:          0          0          0          0    GICv3 126 Level     arm-smmu-context-fault\n 33:          0          0          0          0    GICv3 127 Level     arm-smmu-context-fault\n 34:          0          0          0          0    GICv3 128 Level     arm-smmu-context-fault\n 35:          0          0          0          0    GICv3 129 Level     arm-smmu-context-fault\n 36:          0          0          0          0    GICv3 130 Level     arm-smmu-context-fault\n 37:          0          0          0          0    GICv3 131 Level     arm-smmu-context-fault\n 38:          0          0          0          0    GICv3 132 Level     arm-smmu-context-fault\n 89:          0          0          0          0      mpm  12 Level     ss_phy_irq\n 90:          0          0          0          0    GICv3 279 Level     bam_dma\n 91:          0          0          0          0    GICv3 361 Level     qcom_geni_serial_uart1\n 92:        391          0          0          0    GICv3 362 Level     qcom_geni_serial_uart2\n 93:        788          0          0          0    GICv3 363 Level     qcom_geni_serial_uart0\n 94:    1332185          0          0          0    GICv3 380 Level     mmc0\n 95:          0          0          0          0  msmgpio  96 Edge      Volume Up\n 96:          2          0          0          0    GICv3 384 Level     4744000.mmc\n 97:          0          0          0          0  msmgpio  36 Edge      Volume Down\n 98:     397111          0          0          0    GICv3 453 Level     1b8e300.pmu\n 99:  391135140          0          0          0    GICv3 287 Level     dwc3\n105:          0          0          0          0    GICv3 339 Edge      q6v5 wdog\n106:          0          0          0          0    GICv3 359 Level     4a80000.i2c\n107:          0          0          0          0 smp2p-mpss   0 Edge      q6v5 fatal\n108:          1          0          0          0 smp2p-mpss   1 Edge      q6v5 ready\n109:          1          0          0          0 smp2p-mpss   2 Edge      q6v5 handover\n110:          0          0          0          0 smp2p-mpss   3 Edge      q6v5 stop\n111:          0          0          0          0 smp2p-mpss   7 Edge      q6v5 shutdown-ack\n112:          0          0          0          0    GICv3 195 Level     arm-smmu global fault\n113:          0          0          0          0    GICv3 199 Level     arm-smmu-context-fault\n121:          0          0          0          0 pmic_arb 6365272 Edge      pm8xxx_rtc_alarm\n122:          0          0          0          0    GICv3  35 Edge      wdt_bark\n123:  665578259          0          0          0    GICv3 364 Level     4a94000.spi\n124:          0          0          0          0    GICv3 314 Edge      q6v5 wdog\n125:        198          0          0          0    GICv3 360 Level     4a84000.i2c\n126:          0          0          0          0 smp2p-adsp   0 Edge      q6v5 fatal\n127:          1          0          0          0 smp2p-adsp   1 Edge      q6v5 ready\n128:          0          0          0          0 pmic_arb 524363 Edge      pm8941_pwrkey\n129:          1          0          0          0 smp2p-adsp   2 Edge      q6v5 handover\n130:          0          0          0          0 smp2p-adsp   3 Edge      q6v5 stop\n132:     228329          0          0          0    GICv3 309 Edge      glink-smem\n133:          0          0          0          0 msm_mdss   0 Edge      msm\n134:          0          0          0          0 msm_mdss   4 Edge      dsi_isr\n135:          1          0          0          0  msmgpio  81 Edge      anx7625-intp\n136:      35825          0          0          0    GICv3 209 Level     gpu-irq\n137:          0          0          0          0    GICv3  69 Level     lmh-irq\n138:       1117          0          0          0    GICv3 257 Level     venus\n139:          0          0          0          0      lmh   0 Edge      dcvsh-irq-0\n140:          9          0          0          0    GICv3 390 Level     WLAN_CE_0\n141:    4868730          0          0          0    GICv3 391 Level     WLAN_CE_1\n142:     504946          0          0          0    GICv3 392 Level     WLAN_CE_2\n143:       4209          0          0          0    GICv3 393 Level     WLAN_CE_3\n144:          0          0          0          0    GICv3 394 Level     WLAN_CE_4\n145:          0          0          0          0    GICv3 395 Level     WLAN_CE_5\n146:          0          0          0          0    GICv3 396 Level     WLAN_CE_6\n147:          0          0          0          0    GICv3 397 Level     WLAN_CE_7\n148:          0          0          0          0    GICv3 398 Level     WLAN_CE_8\n149:          0          0          0          0    GICv3 399 Level     WLAN_CE_9\n150:          0          0          0          0    GICv3 400 Level     WLAN_CE_10\n151:          0          0          0          0    GICv3 401 Level     WLAN_CE_11\n152:      17795          0          0          0    GICv3 329 Edge      soundwire\n153:       8900          0          0          0    GICv3 328 Edge      soundwire\n154:          0          0          0          0    GICv3 111 Level     swr_wake_irq\n155:          0          0          0          0 pm4125_codec   0 Edge      pm4125\n156:          0          0          0          0   pm4125  14 Edge      HPHR PDM WDOG INT\n157:          0          0          0          0   pm4125  13 Edge      HPHL PDM WDOG INT\n158:          0          0          0          0   pm4125   4 Edge      mbhc sw intr\n159:          0          0          0          0   pm4125   0 Edge      Button Press detect\n160:          0          0          0          0   pm4125   1 Edge      Button Release detect\n161:          0          0          0          0   pm4125   3 Edge      Elect Insert\n162:          0          0          0          0   pm4125   2 Edge      Elect Remove\n163:          0          0          0          0   pm4125   7 Edge      HPH_L OCP detect\n164:          0          0          0          0   pm4125   5 Edge      HPH_R OCP detect\n165:        973          0          0          0    GICv3 100 Edge      glink-smem\n166:  665579933          7          3          4  msmgpio  70 Edge      scope-spi-ready\nIPI0:   3761871   14997877    9813602   13945873       Rescheduling interrupts\nIPI1: 401068510  976938802  836703209  725418197       Function call interrupts\nIPI2:         0          0          0          0       CPU stop interrupts\nIPI3:         0          0          0          0       CPU stop NMIs\nIPI4:         0          0          0          0       Timer broadcast interrupts\nIPI5:     20136      13756      12800      12436       IRQ work interrupts\nIPI6:         0          0          0          0       CPU backtrace interrupts\nIPI7:         0          0          0          0       KGDB roundup interrupts\nErr:          4\n"
+      },
+      "interrupts_after": "           CPU0       CPU1       CPU2       CPU3       \n 11:   98590822  125387470  117476525  122517253    GICv3  19 Level     arch_timer\n 13:    7211788          0          0          0    GICv3 226 Edge      glink-rpm\n 14:          0          0          0          0    GICv3 229 Edge      qcom_mpm\n 15:          6          0          0          0    GICv3 311 Edge      smp2p-adsp\n 16:          6          0          0          0    GICv3 102 Edge      smp2p-mpss\n 18:          0          0          0          0      mpm   2 Level     4411000.thermal-sensor\n 19:          0          0          0          0    GICv3 222 Level     4411000.thermal-sensor\n 21:          0          0          0          0    GICv3  39 Level     arch_mem_timer\n 22:          0          0          0          0    GICv3  22 Level     arm-pmu\n 24:          0          0          0          0    GICv3 113 Level     arm-smmu global fault\n 25:          0          0          0          0    GICv3 119 Level     arm-smmu-context-fault\n 26:          0          0          0          0    GICv3 120 Level     arm-smmu-context-fault\n 27:          0          0          0          0    GICv3 121 Level     arm-smmu-context-fault\n 28:          0          0          0          0    GICv3 122 Level     arm-smmu-context-fault\n 29:          0          0          0          0    GICv3 123 Level     arm-smmu-context-fault\n 30:          0          0          0          0    GICv3 124 Level     arm-smmu-context-fault\n 31:          0          0          0          0    GICv3 125 Level     arm-smmu-context-fault\n 32:          0          0          0          0    GICv3 126 Level     arm-smmu-context-fault\n 33:          0          0          0          0    GICv3 127 Level     arm-smmu-context-fault\n 34:          0          0          0          0    GICv3 128 Level     arm-smmu-context-fault\n 35:          0          0          0          0    GICv3 129 Level     arm-smmu-context-fault\n 36:          0          0          0          0    GICv3 130 Level     arm-smmu-context-fault\n 37:          0          0          0          0    GICv3 131 Level     arm-smmu-context-fault\n 38:          0          0          0          0    GICv3 132 Level     arm-smmu-context-fault\n 89:          0          0          0          0      mpm  12 Level     ss_phy_irq\n 90:          0          0          0          0    GICv3 279 Level     bam_dma\n 91:          0          0          0          0    GICv3 361 Level     qcom_geni_serial_uart1\n 92:        391          0          0          0    GICv3 362 Level     qcom_geni_serial_uart2\n 93:        788          0          0          0    GICv3 363 Level     qcom_geni_serial_uart0\n 94:    1332293          0          0          0    GICv3 380 Level     mmc0\n 95:          0          0          0          0  msmgpio  96 Edge      Volume Up\n 96:          2          0          0          0    GICv3 384 Level     4744000.mmc\n 97:          0          0          0          0  msmgpio  36 Edge      Volume Down\n 98:     397148          0          0          0    GICv3 453 Level     1b8e300.pmu\n 99:  391462639          0          0          0    GICv3 287 Level     dwc3\n105:          0          0          0          0    GICv3 339 Edge      q6v5 wdog\n106:          0          0          0          0    GICv3 359 Level     4a80000.i2c\n107:          0          0          0          0 smp2p-mpss   0 Edge      q6v5 fatal\n108:          1          0          0          0 smp2p-mpss   1 Edge      q6v5 ready\n109:          1          0          0          0 smp2p-mpss   2 Edge      q6v5 handover\n110:          0          0          0          0 smp2p-mpss   3 Edge      q6v5 stop\n111:          0          0          0          0 smp2p-mpss   7 Edge      q6v5 shutdown-ack\n112:          0          0          0          0    GICv3 195 Level     arm-smmu global fault\n113:          0          0          0          0    GICv3 199 Level     arm-smmu-context-fault\n121:          0          0          0          0 pmic_arb 6365272 Edge      pm8xxx_rtc_alarm\n122:          0          0          0          0    GICv3  35 Edge      wdt_bark\n123:  665688329          0          0          0    GICv3 364 Level     4a94000.spi\n124:          0          0          0          0    GICv3 314 Edge      q6v5 wdog\n125:        198          0          0          0    GICv3 360 Level     4a84000.i2c\n126:          0          0          0          0 smp2p-adsp   0 Edge      q6v5 fatal\n127:          1          0          0          0 smp2p-adsp   1 Edge      q6v5 ready\n128:          0          0          0          0 pmic_arb 524363 Edge      pm8941_pwrkey\n129:          1          0          0          0 smp2p-adsp   2 Edge      q6v5 handover\n130:          0          0          0          0 smp2p-adsp   3 Edge      q6v5 stop\n132:     228329          0          0          0    GICv3 309 Edge      glink-smem\n133:          0          0          0          0 msm_mdss   0 Edge      msm\n134:          0          0          0          0 msm_mdss   4 Edge      dsi_isr\n135:          1          0          0          0  msmgpio  81 Edge      anx7625-intp\n136:      35828          0          0          0    GICv3 209 Level     gpu-irq\n137:          0          0          0          0    GICv3  69 Level     lmh-irq\n138:       1117          0          0          0    GICv3 257 Level     venus\n139:          0          0          0          0      lmh   0 Edge      dcvsh-irq-0\n140:          9          0          0          0    GICv3 390 Level     WLAN_CE_0\n141:    4868790          0          0          0    GICv3 391 Level     WLAN_CE_1\n142:     504966          0          0          0    GICv3 392 Level     WLAN_CE_2\n143:       4209          0          0          0    GICv3 393 Level     WLAN_CE_3\n144:          0          0          0          0    GICv3 394 Level     WLAN_CE_4\n145:          0          0          0          0    GICv3 395 Level     WLAN_CE_5\n146:          0          0          0          0    GICv3 396 Level     WLAN_CE_6\n147:          0          0          0          0    GICv3 397 Level     WLAN_CE_7\n148:          0          0          0          0    GICv3 398 Level     WLAN_CE_8\n149:          0          0          0          0    GICv3 399 Level     WLAN_CE_9\n150:          0          0          0          0    GICv3 400 Level     WLAN_CE_10\n151:          0          0          0          0    GICv3 401 Level     WLAN_CE_11\n152:      17795          0          0          0    GICv3 329 Edge      soundwire\n153:       8900          0          0          0    GICv3 328 Edge      soundwire\n154:          0          0          0          0    GICv3 111 Level     swr_wake_irq\n155:          0          0          0          0 pm4125_codec   0 Edge      pm4125\n156:          0          0          0          0   pm4125  14 Edge      HPHR PDM WDOG INT\n157:          0          0          0          0   pm4125  13 Edge      HPHL PDM WDOG INT\n158:          0          0          0          0   pm4125   4 Edge      mbhc sw intr\n159:          0          0          0          0   pm4125   0 Edge      Button Press detect\n160:          0          0          0          0   pm4125   1 Edge      Button Release detect\n161:          0          0          0          0   pm4125   3 Edge      Elect Insert\n162:          0          0          0          0   pm4125   2 Edge      Elect Remove\n163:          0          0          0          0   pm4125   7 Edge      HPH_L OCP detect\n164:          0          0          0          0   pm4125   5 Edge      HPH_R OCP detect\n165:        973          0          0          0    GICv3 100 Edge      glink-smem\n166:  665690003          7          3          4  msmgpio  70 Edge      scope-spi-ready\nIPI0:   3761949   15022133    9816007   13946065       Rescheduling interrupts\nIPI1: 401282690  977411055  836868762  725766743       Function call interrupts\nIPI2:         0          0          0          0       CPU stop interrupts\nIPI3:         0          0          0          0       CPU stop NMIs\nIPI4:         0          0          0          0       Timer broadcast interrupts\nIPI5:     20136      13756      12800      12436       IRQ work interrupts\nIPI6:         0          0          0          0       CPU backtrace interrupts\nIPI7:         0          0          0          0       KGDB roundup interrupts\nErr:          4\n",
+      "spi_requested_hz": 40000000,
+      "scheme": "R",
+      "warm": true,
+      "cpu": 2,
+      "warm_steps": [
+        {
+          "profile": [
+            8,
+            112,
+            4320
+          ],
+          "phase": "ready",
+          "samples": 2852064
+        }
+      ],
+      "startup_trace": "case_06_startup_trace.json",
+      "configuration": {
+        "kind": "read_only_configuration_not_electrical_measurement",
+        "spi_base": "0x04a94000",
+        "wrapper_base": "0x04ac0000",
+        "source_hz_before": 120000000,
+        "branch_cached_hz": 120000000,
+        "snapshots": [
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          },
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          },
+          {
+            "serial_clock_config": 49,
+            "fifo_interface_disabled": 0,
+            "firmware_revision": 258,
+            "clock_select": 6,
+            "dma_mode": 1,
+            "gsi_event_enable": 0,
+            "dma_interface_enable": 1
+          }
+        ],
+        "wrapper_version": 805306368,
+        "gcc_dfs_control": 45,
+        "source_hz_after": 120000000,
+        "configured_hz": 40000000.0,
+        "gcc_active_level": 6
+      },
+      "clock_matches": true
+    }
+  ],
+  "winners": {},
+  "analog": "Not measured",
+  "skipped_after_repeated_failure": [],
+  "revision": "adc8_target1500_affinity_v17",
+  "source_hashes": {
+    "arduino/v16/README.md": "4a324bdb8ae1d0ae3f1a85ec25f5c6b6eb8f779e5dedb5ed8353f00f97f19c97",
+    "arduino/v16/manifest.json": "a4c7e0de5eca2f26b7727b272ebca0683dd1dcf0dd021d3ee563ce1caec559b7",
+    "arduino/v16/oscilloscope/app.yaml": "262f3f4fe672b1aa168308e4056f7272cd6ee26706d614afc61df821ce2a17b3",
+    "arduino/v16/oscilloscope/python/main.py": "47010abf364c29a798e68bb5246cb00d75512ccc4e0f569215adc609757d4918",
+    "arduino/v16/oscilloscope/sketch/acquisition.h": "65f97e04473989ad35bb0a2c3ecf13973f5554a58225d261d3b0c87fd7f45dd2",
+    "arduino/v16/oscilloscope/sketch/acquisition_protocol.h": "62eb3f63bbd8b1b000c0480b765a80a4533223e3d8be9c8bb7ad8b0d29d8b620",
+    "arduino/v16/oscilloscope/sketch/benchmark_protocol.h": "8ab078d333b64c9c55e20c8476ce9fbe6a7a17f9dd24582717f263c5c2ea4763",
+    "arduino/v16/oscilloscope/sketch/control_protocol.h": "1c9ea38fa73b7e6fcfb88bde462077b319b7ebada3eab787c33fdcbbaa84ee3a",
+    "arduino/v16/oscilloscope/sketch/crc32_fast.h": "994c2247c4fdb7c4863511fe97879fc7597a5a80c23c3aecdcc5c3270cdf6241",
+    "arduino/v16/oscilloscope/sketch/generator.h": "f4b12229fef4a42c8516e5b32f9ce02b9136cd5213a5c01f696de1ccc202b58c",
+    "arduino/v16/oscilloscope/sketch/generator_dma.h": "7c70c7c4d09c50b05a2eabc9db291a0d5b64ec73e22a5749b0a080acfa7760a4",
+    "arduino/v16/oscilloscope/sketch/generator_protocol.h": "5c8bf66a32ae6472477a129688ea84a94ceba4e502724cb404293390d635bf45",
+    "arduino/v16/oscilloscope/sketch/generator_timing.h": "555c42c3c7229b42ce8c8d43b65d73f7b750eab2b0e7c6187a69017d0a82650e",
+    "arduino/v16/oscilloscope/sketch/node_validation.h": "b9f2e98686af25f140ac6702d8283d80b095b3808b6a41b3abce357b3d2457d0",
+    "arduino/v16/oscilloscope/sketch/sample_packing.h": "c21549368b386226b00aaf1b81b7779980572e1dd44562f76e49e9c77185c0ac",
+    "arduino/v16/oscilloscope/sketch/scope_config.h": "827bb698332fb2405306c57b4ab4e5389c95969185096d780f97c750abcc04b1",
+    "arduino/v16/oscilloscope/sketch/scope_protocol.h": "c2bf92aed1aac5efc4f6283cd302297d3c8be3ce40e7b838fa8d5bcacef9d612",
+    "arduino/v16/oscilloscope/sketch/sketch.ino": "68b072fd1486f1701db0164deb3a87bba98d3caacea69fe17c5083aafd6a2f80",
+    "arduino/v16/oscilloscope/sketch/sketch.yaml": "2ee56ed8561b6ea420885ed62ca804f498a54825ce6df906168e78a014c424ea",
+    "arduino/v16/oscilloscope/sketch/spi_word_experiment.h": "61d0da81473cb0e920797cce2068fe67df1e46652b75b4a014f05a4400abe06d",
+    "arduino/v16/oscilloscope/sketch/wav.h": "d56b86cbcac01c78ef5936ab17c4c04e944137dd575a49470fe60e33e876b2c2",
+    "arduino/v16/oscilloscope/sketch/wav_dma.h": "4f9a126c193e5bb40672e6c339675fe05b4f0a87eda1ee4aac6131d3cabd214f",
+    "arduino/v16/oscilloscope/sketch/wav_protocol.h": "2da0fc6c697199d6e432a3997448b07c0bbee00596837551ea8a6d951542dc7a",
+    "arduino/v16/oscilloscope/sketch/wav_queue.h": "002553b2c58ff1343a218959f58632a394656aeb0f28fc74bb17a97f2793dd83",
+    "arduino/v16/relay/base_verifier.c": "e733a7ea2aaa3abfa1e3ca05f4b31a483aca4e37bdcd693c177b909992bdd6c9",
+    "arduino/v16/relay/config_relay_protocol.h": "1fff6b0124032e9af55ab2b0819b498ddf169723faef58fa1363ab1a7f5155df",
+    "arduino/v16/relay/unoq_config_stream.c": "7fb2ea7a1fd0d0b8b250b5aca511975aed2d37d008336ddaca9a40712027a44f",
+    "arduino/v16/tests/checker.c": "0c1f45738c0db95044fc6142f1a90f440abc0d9e875b75b77ac12b1763dd8d29",
+    "arduino/v16/tests/generator_timing.cpp": "cc931754bbd5cc96252597f707f6dfe0a3fc3f1aee2dd3e9a14dbedf38e32782",
+    "arduino/v16/tests/golden.cpp": "ee219a48fd6dc8049b6e22f73def305701fa039c47764b56e7b24c8c7f6b5588",
+    "arduino/v16/tests/node_validation.cpp": "c02c6baa57c5980b495d5b8a45ec99ce4d8581f8dddeb8cd2b106838e0abfc44",
+    "arduino/v16/unoq.json": "851721d3b8d97c7a6f03c5ec2f46fc50f5bdad45b4477c0d9d729fe615ecf28f"
+  },
+  "selector_modified": false,
+  "changes": [
+    "Only Docker cpuset changes: all CPUs, CPU0, CPU2; MCU/relay identical",
+    "Fixed ADC8 CH1 ticks106 N4320 SPI40; warm112/2s",
+    "Host peak/queue event trace throughout target epoch, retained across settle"
+  ],
+  "channels": 1,
+  "acceptance_limit": "User requested no 600 s run; maximum run 120 s",
+  "runner_sha256": "adfe806ef3d8be71c869e91401ca7f19b9a5927d0581bead7e39e35b02dc1e86",
+  "variants": {},
+  "instrumentation": "Only existing prepare/check timing fields; no stage profiler",
+  "production_sources_modified": false,
+  "gate": "All B cases intact and headroom true; B send means at least2% lower with no overlap against A at both rates",
+  "schemes": {
+    "F": {
+      "warm": true,
+      "node": 4320,
+      "cpu": null
+    },
+    "L": {
+      "warm": true,
+      "node": 4320,
+      "cpu": 0
+    },
+    "R": {
+      "warm": true,
+      "node": 4320,
+      "cpu": 2
+    }
+  },
+  "initial_configuration": {
+    "kind": "read_only_configuration_not_electrical_measurement",
+    "spi_base": "0x04a94000",
+    "wrapper_base": "0x04ac0000",
+    "source_hz_before": 100000000,
+    "branch_cached_hz": 100000000,
+    "snapshots": [
+      {
+        "serial_clock_config": 49,
+        "fifo_interface_disabled": 0,
+        "firmware_revision": 258,
+        "clock_select": 5,
+        "dma_mode": 1,
+        "gsi_event_enable": 0,
+        "dma_interface_enable": 1
+      },
+      {
+        "serial_clock_config": 49,
+        "fifo_interface_disabled": 0,
+        "firmware_revision": 258,
+        "clock_select": 5,
+        "dma_mode": 1,
+        "gsi_event_enable": 0,
+        "dma_interface_enable": 1
+      },
+      {
+        "serial_clock_config": 49,
+        "fifo_interface_disabled": 0,
+        "firmware_revision": 258,
+        "clock_select": 5,
+        "dma_mode": 1,
+        "gsi_event_enable": 0,
+        "dma_interface_enable": 1
+      }
+    ],
+    "wrapper_version": 805306368,
+    "gcc_dfs_control": 43,
+    "source_hz_after": 100000000,
+    "configured_hz": 33333333.333333332,
+    "gcc_active_level": 5
+  },
+  "stable_cap_add": [
+    "SYS_NICE"
+  ],
+  "stable_scope_environment": [],
+  "prior_identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v17-main-1",
+    "firmware_sha256": "3e275a52cb560bf08bca481972a18ff21debc9442236b65f55b74c566c9cac8c"
+  },
+  "backup": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/respaldos/unoq/osciloscopio_20261016_093410_025331.zip",
+  "experimental_network": {
+    "name": "scope-v16-send1400-experimental_default",
+    "subnet": "10.203.141.0/24"
+  },
+  "candidate_source_hashes": {
+    "app.yaml": "262f3f4fe672b1aa168308e4056f7272cd6ee26706d614afc61df821ce2a17b3",
+    "python/main.py": "47010abf364c29a798e68bb5246cb00d75512ccc4e0f569215adc609757d4918",
+    "sketch/acquisition.h": "65f97e04473989ad35bb0a2c3ecf13973f5554a58225d261d3b0c87fd7f45dd2",
+    "sketch/acquisition_protocol.h": "62eb3f63bbd8b1b000c0480b765a80a4533223e3d8be9c8bb7ad8b0d29d8b620",
+    "sketch/benchmark_protocol.h": "8ab078d333b64c9c55e20c8476ce9fbe6a7a17f9dd24582717f263c5c2ea4763",
+    "sketch/control_protocol.h": "1c9ea38fa73b7e6fcfb88bde462077b319b7ebada3eab787c33fdcbbaa84ee3a",
+    "sketch/crc32_fast.h": "994c2247c4fdb7c4863511fe97879fc7597a5a80c23c3aecdcc5c3270cdf6241",
+    "sketch/generator.h": "f4b12229fef4a42c8516e5b32f9ce02b9136cd5213a5c01f696de1ccc202b58c",
+    "sketch/generator_dma.h": "7c70c7c4d09c50b05a2eabc9db291a0d5b64ec73e22a5749b0a080acfa7760a4",
+    "sketch/generator_protocol.h": "5c8bf66a32ae6472477a129688ea84a94ceba4e502724cb404293390d635bf45",
+    "sketch/generator_timing.h": "555c42c3c7229b42ce8c8d43b65d73f7b750eab2b0e7c6187a69017d0a82650e",
+    "sketch/node_validation.h": "b9f2e98686af25f140ac6702d8283d80b095b3808b6a41b3abce357b3d2457d0",
+    "sketch/sample_packing.h": "c21549368b386226b00aaf1b81b7779980572e1dd44562f76e49e9c77185c0ac",
+    "sketch/scope_config.h": "827bb698332fb2405306c57b4ab4e5389c95969185096d780f97c750abcc04b1",
+    "sketch/scope_protocol.h": "c2bf92aed1aac5efc4f6283cd302297d3c8be3ce40e7b838fa8d5bcacef9d612",
+    "sketch/sketch.ino": "68b072fd1486f1701db0164deb3a87bba98d3caacea69fe17c5083aafd6a2f80",
+    "sketch/sketch.yaml": "2ee56ed8561b6ea420885ed62ca804f498a54825ce6df906168e78a014c424ea",
+    "sketch/spi_word_experiment.h": "61d0da81473cb0e920797cce2068fe67df1e46652b75b4a014f05a4400abe06d",
+    "sketch/wav.h": "d56b86cbcac01c78ef5936ab17c4c04e944137dd575a49470fe60e33e876b2c2",
+    "sketch/wav_dma.h": "4f9a126c193e5bb40672e6c339675fe05b4f0a87eda1ee4aac6131d3cabd214f",
+    "sketch/wav_protocol.h": "2da0fc6c697199d6e432a3997448b07c0bbee00596837551ea8a6d951542dc7a",
+    "sketch/wav_queue.h": "002553b2c58ff1343a218959f58632a394656aeb0f28fc74bb17a97f2793dd83"
+  },
+  "deployment": {
+    "backup": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/respaldos/unoq/osciloscopio_20261011_170619_994241.zip",
+    "stable_relay": "/home/arduino/.cache/serialmonitor/usb-stream-588a891cf0c8b731426b/unoq_stream",
+    "candidate_relay": "/home/arduino/.cache/serialmonitor/usb-stream-d1cc16464c495086f1e5/unoq_stream"
+  },
+  "eligible_schemes": [
+    "R"
+  ],
+  "qualification_results": [
+    {
+      "scheme": "R",
+      "cpu": 2,
+      "ticks": 106,
+      "node": 4320,
+      "warm": true,
+      "integrity_accepted": false,
+      "headroom_accepted": false
+    }
+  ],
+  "final_adc": {
+    "bits": 8,
+    "rate": 1403508
+  },
+  "final_generator": {
+    "wave": 0,
+    "enabled": 0,
+    "mode": 0,
+    "frequency": 2500,
+    "final_frequency": 2500,
+    "low": 0,
+    "high": 0,
+    "duration": 1000,
+    "duration_us": 0,
+    "duty": 50
+  },
+  "restore_samples": 14042592,
+  "restore_integrity_ok": true,
+  "final_identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v17-main-1",
+    "firmware_sha256": "3e275a52cb560bf08bca481972a18ff21debc9442236b65f55b74c566c9cac8c"
+  },
+  "restored_configuration": {
+    "kind": "read_only_configuration_not_electrical_measurement",
+    "spi_base": "0x04a94000",
+    "wrapper_base": "0x04ac0000",
+    "source_hz_before": 100000000,
+    "branch_cached_hz": 100000000,
+    "snapshots": [
+      {
+        "serial_clock_config": 49,
+        "fifo_interface_disabled": 0,
+        "firmware_revision": 258,
+        "clock_select": 5,
+        "dma_mode": 1,
+        "gsi_event_enable": 0,
+        "dma_interface_enable": 1
+      },
+      {
+        "serial_clock_config": 49,
+        "fifo_interface_disabled": 0,
+        "firmware_revision": 258,
+        "clock_select": 5,
+        "dma_mode": 1,
+        "gsi_event_enable": 0,
+        "dma_interface_enable": 1
+      },
+      {
+        "serial_clock_config": 49,
+        "fifo_interface_disabled": 0,
+        "firmware_revision": 258,
+        "clock_select": 5,
+        "dma_mode": 1,
+        "gsi_event_enable": 0,
+        "dma_interface_enable": 1
+      }
+    ],
+    "wrapper_version": 805306368,
+    "gcc_dfs_control": 43,
+    "source_hz_after": 100000000,
+    "configured_hz": 33333333.333333332,
+    "gcc_active_level": 5
+  }
+}

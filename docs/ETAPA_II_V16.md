@@ -250,3 +250,129 @@ CRC, índices, secuencia y validación DMA temporal; no aumenta cola ni reduce b
 Se restauró V16 CH1/599250 y generador apagado, comprobado otros 10 s.
 [Resultado](../experimentos/ch1_660_v16/results.json). 661,16 kHz sigue aislado;
 precisión analógica y margen mínimo de cola no certificados.
+
+
+### FPS reales de los perfiles nativos — 12 de octubre de 2026
+
+Se midieron los 14 perfiles y una referencia común, con generador normal cuadrado
+a 5 kHz confirmado por el Q, ventana temporal de 1 ms y pintado Qt real.
+Cada caso tuvo 2 s de estabilización y aproximadamente 5 s medidos. No se
+realizaron capturas de imagen periódicas dentro de las ventanas medidas.
+
+| Bits | Canales | Tasa (Hz por canal) | FPS pintados | Demora de lotes p95 (ms) |
+| --- | --- | --- | --- | --- |
+| 8 | 1 | 1118881 | 31.7 | 44.1 |
+| 8 | 1 | 1221374 | 21.7 | 57.6 |
+| 8 | 2 | 597014 | 59.8 | 16.4 |
+| 8 | 2 | 632411 | 58.7 | 15.3 |
+| 10 | 1 | 909090 | 25.2 | 37.8 |
+| 10 | 2 | 495356 | 52.4 | 17.6 |
+| 10 | 2 | 519480 | 49.4 | 17.9 |
+| 12 | 2 | 410256 | 57.0 | 16.7 |
+| 12 | 2 | 437158 | 51.9 | 17.0 |
+| 14 | 1 | 701754 | 46.9 | 17.4 |
+| 14 | 1 | 747663 | 39.0 | 19.2 |
+| 14 | 2 | 40000 | 62.6 | 7.6 |
+| 14 | 2 | 355555 | 59.9 | 15.6 |
+| 14 | 2 | 363636 | 59.6 | 16.6 |
+| 16 | 2 | 76226 | 62.5 | 11.2 |
+
+Los modos CH1 más rápidos redujeron claramente el pintado y aumentaron la demora
+de entrega de lotes. El pintado individual se mantuvo cerca de 5 ms; la ingesta
+y la decodificación comparten ejecución con la interfaz y requieren optimización.
+Estas mediciones cortas no certifican FPS sostenidos ni identifican una causa
+única; son sensibles a carga del host, ventana, trigger y modo de análisis.
+No se alteró la adquisición de producción. Se restauraron y verificaron los
+bits, tasa y generador iniciales tras cada campaña.
+
+[Informe completo](../diagnosticos/resultados_v16/fps_nativos_summary_20261012.json) ·
+[Medidor reproducible](../diagnosticos/medir_fps_nativos_v16.py).
+
+
+### Comparación del slider existente — 12 de octubre de 2026
+
+El slider ya reduce únicamente el dibujo y conserva extremos y cortes. Una
+comparación host a ADC8 CH1/1,22 MHz mostró que, con ventana de 1 ms, bajar de
+2441 a 625 vértices mantuvo el rasterizado cerca de 5,4 ms. Con 10 ms, pasar de
+24427 a 835 vértices redujo ese coste de unos 6,9 a 5,4 ms. Estos tiempos incluyen
+QWidget.grab; no equivalen a FPS físicos. La prueba confirma utilidad en ventanas
+largas, pero no respalda duplicar el control ni considerarlo solución suficiente.
+La repetición con Q preservó la tasa y restauró el estado inicial, pero no observó
+eventos de pintado nativo; sus FPS de pantalla quedan explícitamente inválidos.
+[Comparación host](../diagnosticos/resultados_v16/slider_dibujo_20261012.json) ·
+[Prueba Q y límites](../diagnosticos/resultados_v16/slider_live_20261012.json).
+
+
+### Camino numérico del host incorporado — 12 de octubre de 2026
+
+El decoder vectoriza el desempaquetado nativo y la GUI recibe bloques numéricos,
+sin reconstruir cada muestra como una tupla. Se conservan las comprobaciones de
+CRC, secuencia, índice, timestamp, configuración y pérdidas. Grabación, filtros,
+mediciones y trigger reciben todas las muestras. Los lectores de diagnóstico
+mantienen su interfaz de filas; sin NumPy permanece el camino anterior.
+
+Pasaron 284 pruebas V16 y la comparación del constructor MCU con ambos decoders
+para todos los perfiles, incluidos extremos e índices con wrap. La adquisición
+real ADC8 CH1/1,22 MHz y ADC10 CH1/909 kHz conservó sus tasas, con ingesta mediana
+cercana a 1 ms por lote y demoras p95 de 0,106 y 0,114 ms. El timer de dibujo
+rondó 63 llamadas/s. No se observaron eventos de pintado nativo en esa ejecución:
+no se presentan esas llamadas como FPS de pantalla. El Q quedó restaurado.
+Son ventanas cortas de alrededor de 5 s, con generador a 5 kHz confirmado.
+[Prueba real y límites](../diagnosticos/resultados_v16/fps_numeric_20261012.json) ·
+[Benchmark de decodificación](../diagnosticos/resultados_v16/decoder_numeric_20261012.json).
+
+
+### Escala horizontal adaptativa — 12 de octubre de 2026
+
+El dial logarítmico conserva definición para ventanas cortas. El mínimo es ocho
+muestras y el máximo es max(250000 muestras, ceil(4 × FS real)), por lo que todos
+los perfiles alcanzan al menos 4 s. A 1 kHz se ofrecen 250 s; a 5 kHz, 50 s;
+a 40 kHz, 6,25 s. El historial se amplía hasta el máximo visible más 260000
+muestras de margen, con base de 510000, y conserva los valores recientes al
+redimensionarse. La lectura selecciona µs, ms o s automáticamente.
+Al cambiar FS se mantiene la duración elegida —también en modo muestras— salvo
+que esté fuera del rango nuevo, en cuyo caso se limita al extremo disponible.
+
+Pasaron 289 pruebas en dos procesos: 62 de FM y 227 restantes. La ejecución
+conjunta sufrió un cierre nativo Qt en una prueba FM al procesar eventos; aislada
+pasó. Las pruebas nuevas verifican todos los perfiles, conservación de duración,
+extremos del dial, resize circular y cuatro segundos completos de historial a
+la FS máxima. No se cambió firmware, protocolo ni la tasa del Q.
+
+
+### Duty de cuadrada continua — 12 de octubre de 2026
+
+Pasaron 292 pruebas V16 y el constructor de tabla DAC.
+Se incorporó y desplegó el dial1–99 %, default50 %, conservando frecuencia
+y mostrando duty efectivo. A5 kHz los pasos son1 %; a50 kHz son5 %.
+El 50 % mantiene el camino de dos puntos. MCU/relay anuncian capacidad de duty;
+las configuraciones anteriores siguen representando50 %. Se verificaron ACKs
+de siete combinaciones y continuidad ADC, incluido ADC8 CH1/1,22 MHz durante
+10 s con cuadrada5 kHz/duty25 %. Se restauró el estado anterior del Q y se
+conservó respaldo de la aplicación. No se certificó duty analógico ni margen
+prolongado con las tablas nuevas. [Evidencia](../diagnosticos/resultados_v16/duty_live_20261012.json).
+
+
+### Tasas intermedias y audio — 12 de octubre de 2026
+
+Se agregaron dos intermedias duales por resolución entre 40 kHz y el primer
+máximo: ADC8 225,670/411,311; ADC10 191,847/343,348; ADC12 163,432/286,738;
+ADC14 145,191/250,391 kHz. ADC16 agrega audio nominal 44,1/48 kHz con tasas
+reales 44.101,43/48.004,80 Hz, usando ticks enteros del reloj de 160 MHz.
+Los diez perfiles están en additional_profiles.json/header, separados de los
+14 máximos con aceptación prolongada. Se mantienen filtros por bits/SPI/Synth.
+
+Firmware y relay instalados con respaldo osciloscopio_20261012_232758_157182.zip:
+118896 bytes flash, 259292 RAM, 2852 libres. Los diez perfiles pasaron 60 s cada
+uno con generador normal cuadrado de 5 kHz: CRC, secuencia, epoch, índices y
+timestamps continuos; dropped=fatal=0, cola máxima de dos nodos. Se restauró y
+verificó ADC16/40000 por SPI y generador apagado con todos sus campos originales.
+Son ensayos de integridad de 60 s; no aceptación prolongada de margen ni analógica.
+293 pruebas V16, 32 comprobaciones de tramas/GUI y dos pruebas nuevas de tasas
+pasaron. El primer intento usó una tolerancia demasiado estrecha entre relojes
+host/MCU; se conservó como evidencia y se repitió con caudal >=99% del nominal,
+sin relajar los controles exactos de continuidad del MCU.
+
+[Evidencia](../diagnosticos/resultados_v16/additional_rates_60s_20261012.json) ·
+[Estado previo](../diagnosticos/resultados_v16/additional_rates_prior_20261012.json) ·
+[Primer intento](../diagnosticos/resultados_v16/additional_rates_wall_gate_failure_20261012.json).

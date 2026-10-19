@@ -155,11 +155,13 @@ class BodePulse(BodeSweep):
             self.status.setText('Elegir una amplitud mayor.');return
         if add and self.result:
             self.history.append(list(self.result));self.history_profiles.append(self.result_profile)
-            self.history_instruments.append(self.result_instrument);self.history_methods.append(self.result_method)
+            self.history_instruments.append(self.result_instrument);self.history_methods.append(self.result_method);self.history_delays.append(self.result_delay_us)
         elif not add:
-            self.history.clear();self.history_profiles.clear();self.history_instruments.clear();self.history_methods.clear()
+            self.history.clear();self.history_profiles.clear();self.history_instruments.clear();self.history_methods.clear();self.history_delays.clear()
         self.previous=None  # Transient measurement ends with output disabled.
         self.result=[];self.result_profile=o.applied_configuration
+        from monitor.v16.bode_timing import pair_delay_us
+        self.result_delay_us=pair_delay_us(self.result_profile,self.pair(),o.filter_config.source)
         self.result_instrument=self.spectral.bode.instrument if self.pair()==('CH1','CH2') else None
         self.result_method=('chirp' if self.method.currentIndex()==1 else 'sweep') if getattr(self,'sweep_method',False) else 'pulse_h1'
         self.target_pulses=1 if getattr(self,'sweep_method',False) else self.averages.value()
@@ -298,7 +300,8 @@ class BodeStack(QtWidgets.QStackedWidget):
 
     def minimumSizeHint(self):
         widget=self.currentWidget()
-        return widget.minimumSizeHint() if widget is not None else super().minimumSizeHint()
+        hint = widget.minimumSizeHint() if widget is not None else super().minimumSizeHint()
+        return QtCore.QSize(0, hint.height())
 
     def event(self,event):
         result=super().event(event)
@@ -331,17 +334,16 @@ class BodePanels:
         for panel,method in zip(self.panels,('tone','pulse_h1','sweep')):
             if isinstance(panel,BodeChirp):method='chirp' if panel.method.currentIndex()==1 else 'sweep'
             panel.reference=find_reference(self.instrument,config,method) if panel.pair()==('CH1','CH2') else None
+            panel.correction.setText('Corregir (medido)' if panel.reference is not None else 'Corregir (estimado)')
             if panel.reference is not None:
                 low, high = panel.reference['points'][0][0], panel.reference['points'][-1][0]
-                panel.calibrated.setToolTip(
-                    f'Referencia validada · {config.bits} bits · {number(config.rate/1000, formats.ng)} kHz\n'
-                    f'Banda: {number(low, formats.ng)}–{number(high, formats.ng)} Hz. No se extrapola fuera de ella.')
+                panel.correction.setToolTip(
+                    f'Calibración medida · {config.bits} bits · {number(config.rate/1000, formats.ng)} kHz\n'
+                    f'Banda: {number(low, formats.ng)}–{number(high, formats.ng)} Hz. '
+                    'Fuera de esta banda se estima el retardo ADC.\nDesmarcar para ver los datos crudos.')
             else:
-                panel.calibrated.setToolTip('Sin referencia validada para este Q, firmware, perfil ADC y método.')
-            panel.calibrated.blockSignals(True)
-            panel.calibrated.setEnabled(panel.reference is not None)
-            panel.calibrated.setChecked(panel.reference is not None)
-            panel.calibrated.blockSignals(False)
+                panel.correction.setToolTip('Compensa el retardo ADC estimado según bits y FS.\n'
+                    'Sin calibración medida para este perfil y método. Desmarcar para ver los datos crudos.')
         if self.spectral.mode==3:self.draw()
 
     @staticmethod
@@ -366,34 +368,37 @@ class BodePanels:
                 label.setStyleSheet('color:#aeb8c8; background:transparent; border:none;')
                 grid.addWidget(label,0,col);grid.addWidget(control,1,col)
                 grid.setColumnStretch(col,1)
+            if len(fields) == 1:
+                grid.setColumnStretch(1,1)
+                grid.addWidget(QtWidgets.QWidget(),0,1,2,1)
             form.addRow(widget)
 
         pair((('Referencia X',panel.reference_channel),('Respuesta Y',panel.response_channel)))
         pair((('Desde',panel.start),('Hasta',panel.end)))
         if isinstance(panel,BodeChirp):
-            form.addRow('Método',panel.method)
+            pair((('Método',panel.method),))
             pair((('Barrido',panel.duration),('Cola',panel.capture)))
         elif isinstance(panel,BodePulse):
             pair((('Ancho',panel.width),('Captura',panel.capture)))
-            form.addRow('Pulsos',panel.averages)
+            pair((('Pulsos',panel.averages),))
         else:
             pair((('Puntos / década',panel.points),('Ciclos',panel.cycles)))
-            form.addRow('Asentamiento',panel.settle)
-            form.addRow(panel.estimate)
-        options=QtWidgets.QHBoxLayout();options.setSpacing(8)
-        panel.calibrated.setText('Calibración');panel.log_frequency.setText('Eje X log')
-        options.addWidget(panel.calibrated);options.addWidget(panel.log_frequency)
-        form.addRow(options)
+            pair((('Asentamiento',panel.settle),('',panel.estimate)))
+        panel.log_frequency.setText('Eje X log')
+        form.addRow(panel.correction)
+        form.addRow(panel.log_frequency)
         buttons=QtWidgets.QHBoxLayout();buttons.setSpacing(8)
         buttons.addWidget(panel.add_button);buttons.addWidget(panel.button)
         form.addRow(buttons)
         for label in (panel.coverage,panel.curve_labels,panel.status):form.addRow(label)
         for control in (panel.start,panel.end,panel.points,panel.settle,panel.cycles,
+                        panel.reference_channel,panel.response_channel,
                         getattr(panel,'width',None),getattr(panel,'capture',None),
                         getattr(panel,'averages',None),
                         getattr(panel,'method',None),getattr(panel,'duration',None)):
             if control is not None:
-                control.setMinimumWidth(0);control.setMinimumHeight(28)
+                control.setProperty('bodeField', True)
+                control.setMinimumWidth(0);control.setFixedHeight(28)
                 control.setSizePolicy(QtWidgets.QSizePolicy.Policy.Ignored,QtWidgets.QSizePolicy.Policy.Fixed)
         for button in (panel.button,panel.add_button):button.setMinimumHeight(30)
         for label in (panel.estimate,panel.coverage,panel.curve_labels,panel.status):

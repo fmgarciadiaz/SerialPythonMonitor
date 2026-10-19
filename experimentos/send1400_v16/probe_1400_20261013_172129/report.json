@@ -1,0 +1,654 @@
+{
+  "ok": false,
+  "restored": true,
+  "plan": {
+    "ticks": [
+      114
+    ],
+    "nodes": [
+      3456
+    ],
+    "baseline_seconds": 10,
+    "acceptance_seconds": [
+      60,
+      120,
+      120,
+      120,
+      600
+    ]
+  },
+  "prior": {
+    "adc": {
+      "bits": 10,
+      "rate": 909090
+    },
+    "generator": {
+      "wave": 0,
+      "enabled": 0,
+      "mode": 0,
+      "frequency": 2500,
+      "final_frequency": 2500,
+      "low": 0,
+      "high": 0,
+      "duration": 1000,
+      "duration_us": 0,
+      "duty": 50
+    }
+  },
+  "cases": [
+    {
+      "bits": 8,
+      "ticks": 131,
+      "node_pairs": 6912,
+      "actual_rate": 1221374.0458015266,
+      "requested_seconds": 10,
+      "stage": "baseline",
+      "ok": true,
+      "phase": "measure",
+      "seconds": 10.000079645018559,
+      "samples": 12208320,
+      "full_nodes": 1766,
+      "observed_rate": 1220822.276758711,
+      "status": {
+        "bits": 8,
+        "ticks": 131,
+        "node_pairs": 6912,
+        "rate": 1221374,
+        "dropped": 0,
+        "fatal": 0,
+        "queue": 1,
+        "queue_peak": 2,
+        "copy_ticks": 76046,
+        "poll_ticks": 241138,
+        "slack_ticks": 655936,
+        "send_ticks": 716208,
+        "produced": 1942,
+        "epoch": 1
+      },
+      "metrics": {
+        "node_budget_us": 5659.2,
+        "queue_histogram_frames": {
+          "1": 14130
+        },
+        "queue_peak": 2,
+        "copy_max_us": 475.2875,
+        "poll_max_us": 1507.1125,
+        "overwrite_slack_min_us": 4099.6,
+        "send_observations": 1766,
+        "send_mean_us": 4567.520650481313,
+        "send_p50_p95_p99_max_us": [
+          4526.321875,
+          4905.8140625,
+          4911.456875,
+          5433.9875
+        ],
+        "mean_send_headroom": 0.1929034756712409,
+        "producer_conservative_slack_us": 4099.6
+      },
+      "headroom_ok": true,
+      "wall_monotonic_drift_seconds": -5.568633787333965e-05,
+      "queue_peak_events": [
+        {
+          "event": "peak_change",
+          "elapsed": 0.009516132005956024,
+          "sequence": 100,
+          "samples_seen": 864,
+          "status": {
+            "bits": 8,
+            "ticks": 640,
+            "node_pairs": 3584,
+            "rate": 250000,
+            "dropped": 0,
+            "fatal": 0,
+            "queue": 1,
+            "queue_peak": 2,
+            "copy_ticks": 38402,
+            "poll_ticks": 209336,
+            "slack_ticks": 2082524,
+            "send_ticks": 421854,
+            "produced": 21,
+            "epoch": 0
+          }
+        },
+        {
+          "event": "peak_change",
+          "elapsed": 0.0385531930369325,
+          "sequence": 113,
+          "samples_seen": 8032,
+          "status": {
+            "bits": 8,
+            "ticks": 131,
+            "node_pairs": 6912,
+            "rate": 1221374,
+            "dropped": 0,
+            "fatal": 0,
+            "queue": 1,
+            "queue_peak": 1,
+            "copy_ticks": 73418,
+            "poll_ticks": 176929,
+            "slack_ticks": 688990,
+            "send_ticks": 0,
+            "produced": 1,
+            "epoch": 1
+          }
+        },
+        {
+          "event": "peak_change",
+          "elapsed": 0.04331493703648448,
+          "sequence": 121,
+          "samples_seen": 14944,
+          "status": {
+            "bits": 8,
+            "ticks": 131,
+            "node_pairs": 6912,
+            "rate": 1221374,
+            "dropped": 0,
+            "fatal": 0,
+            "queue": 1,
+            "queue_peak": 2,
+            "copy_ticks": 75718,
+            "poll_ticks": 240085,
+            "slack_ticks": 688990,
+            "send_ticks": 784903,
+            "produced": 2,
+            "epoch": 1
+          }
+        },
+        {
+          "event": "measurement_start",
+          "elapsed": 1.031667601026129,
+          "sequence": 1517,
+          "samples_seen": 1221088,
+          "status": {
+            "bits": 8,
+            "ticks": 131,
+            "node_pairs": 6912,
+            "rate": 1221374,
+            "dropped": 0,
+            "fatal": 0,
+            "queue": 1,
+            "queue_peak": 2,
+            "copy_ticks": 76038,
+            "poll_ticks": 240783,
+            "slack_ticks": 665979,
+            "send_ticks": 747038,
+            "produced": 176,
+            "epoch": 1
+          }
+        }
+      ]
+    },
+    {
+      "bits": 8,
+      "ticks": 114,
+      "node_pairs": 3456,
+      "actual_rate": 1403508.7719298245,
+      "requested_seconds": 60,
+      "stage": "finalist",
+      "ok": true,
+      "phase": "measure",
+      "seconds": 60.00013584503904,
+      "samples": 84162240,
+      "full_nodes": 24353,
+      "observed_rate": 1402700.8241675296,
+      "status": {
+        "bits": 8,
+        "ticks": 114,
+        "node_pairs": 3456,
+        "rate": 1403508,
+        "dropped": 0,
+        "fatal": 0,
+        "queue": 1,
+        "queue_peak": 3,
+        "copy_ticks": 40137,
+        "poll_ticks": 241906,
+        "slack_ticks": 163346,
+        "send_ticks": 393713,
+        "produced": 24758,
+        "epoch": 1
+      },
+      "metrics": {
+        "node_budget_us": 2462.4,
+        "queue_histogram_frames": {
+          "1": 97285,
+          "2": 125
+        },
+        "queue_peak": 3,
+        "copy_max_us": 250.85625,
+        "poll_max_us": 1511.9125,
+        "overwrite_slack_min_us": 1020.9125,
+        "send_observations": 24353,
+        "send_mean_us": 2282.8373185541823,
+        "send_p50_p95_p99_max_us": [
+          2375.95,
+          2497.86875,
+          2505.4515,
+          3473.9375
+        ],
+        "mean_send_headroom": 0.07292181670151787,
+        "producer_conservative_slack_us": 1020.9125
+      },
+      "headroom_ok": false,
+      "wall_monotonic_drift_seconds": -0.0004183050477877259,
+      "queue_peak_events": [
+        {
+          "event": "peak_change",
+          "elapsed": 0.007439213979523629,
+          "sequence": 85,
+          "samples_seen": 864,
+          "status": {
+            "bits": 8,
+            "ticks": 640,
+            "node_pairs": 3584,
+            "rate": 250000,
+            "dropped": 0,
+            "fatal": 0,
+            "queue": 1,
+            "queue_peak": 2,
+            "copy_ticks": 38366,
+            "poll_ticks": 209363,
+            "slack_ticks": 2082524,
+            "send_ticks": 428631,
+            "produced": 18,
+            "epoch": 0
+          }
+        },
+        {
+          "event": "peak_change",
+          "elapsed": 0.033741345978342,
+          "sequence": 98,
+          "samples_seen": 8032,
+          "status": {
+            "bits": 8,
+            "ticks": 114,
+            "node_pairs": 3456,
+            "rate": 1403508,
+            "dropped": 0,
+            "fatal": 0,
+            "queue": 1,
+            "queue_peak": 1,
+            "copy_ticks": 36607,
+            "poll_ticks": 176844,
+            "slack_ticks": 220937,
+            "send_ticks": 0,
+            "produced": 1,
+            "epoch": 1
+          }
+        },
+        {
+          "event": "peak_change",
+          "elapsed": 0.03523259301437065,
+          "sequence": 102,
+          "samples_seen": 11488,
+          "status": {
+            "bits": 8,
+            "ticks": 114,
+            "node_pairs": 3456,
+            "rate": 1403508,
+            "dropped": 0,
+            "fatal": 0,
+            "queue": 1,
+            "queue_peak": 2,
+            "copy_ticks": 37893,
+            "poll_ticks": 209291,
+            "slack_ticks": 220937,
+            "send_ticks": 399685,
+            "produced": 2,
+            "epoch": 1
+          }
+        },
+        {
+          "event": "measurement_start",
+          "elapsed": 1.0294524949858896,
+          "sequence": 1716,
+          "samples_seen": 1405984,
+          "status": {
+            "bits": 8,
+            "ticks": 114,
+            "node_pairs": 3456,
+            "rate": 1403508,
+            "dropped": 0,
+            "fatal": 0,
+            "queue": 1,
+            "queue_peak": 2,
+            "copy_ticks": 40137,
+            "poll_ticks": 240564,
+            "slack_ticks": 181761,
+            "send_ticks": 391107,
+            "produced": 405,
+            "epoch": 1
+          }
+        },
+        {
+          "event": "peak_change",
+          "elapsed": 2.8466747499769554,
+          "sequence": 4662,
+          "samples_seen": 3951328,
+          "status": {
+            "bits": 8,
+            "ticks": 114,
+            "node_pairs": 3456,
+            "rate": 1403508,
+            "dropped": 0,
+            "fatal": 0,
+            "queue": 2,
+            "queue_peak": 3,
+            "copy_ticks": 40137,
+            "poll_ticks": 241906,
+            "slack_ticks": 181109,
+            "send_ticks": 470868,
+            "produced": 1143,
+            "epoch": 1
+          }
+        }
+      ]
+    },
+    {
+      "bits": 8,
+      "ticks": 114,
+      "node_pairs": 3456,
+      "actual_rate": 1403508.7719298245,
+      "requested_seconds": 120,
+      "stage": "acceptance_1",
+      "ok": true,
+      "phase": "measure",
+      "seconds": 120.00059669400798,
+      "samples": 168326208,
+      "full_nodes": 48706,
+      "observed_rate": 1402711.425087481,
+      "status": {
+        "bits": 8,
+        "ticks": 114,
+        "node_pairs": 3456,
+        "rate": 1403508,
+        "dropped": 0,
+        "fatal": 0,
+        "queue": 1,
+        "queue_peak": 4,
+        "copy_ticks": 40136,
+        "poll_ticks": 239179,
+        "slack_ticks": 180124,
+        "send_ticks": 383890,
+        "produced": 49111,
+        "epoch": 1
+      },
+      "metrics": {
+        "node_budget_us": 2462.4,
+        "queue_histogram_frames": {
+          "1": 194445,
+          "2": 276,
+          "3": 98,
+          "4": 3
+        },
+        "queue_peak": 4,
+        "copy_max_us": 250.85,
+        "poll_max_us": 1494.86875,
+        "overwrite_slack_min_us": 1125.775,
+        "send_observations": 48706,
+        "send_mean_us": 2289.259937430707,
+        "send_p50_p95_p99_max_us": [
+          2381.69375,
+          2498.1,
+          2505.2865625,
+          3571.25625
+        ],
+        "mean_send_headroom": 0.07031354067953755,
+        "producer_conservative_slack_us": 1125.775
+      },
+      "headroom_ok": false,
+      "wall_monotonic_drift_seconds": -0.0007547898567281663,
+      "queue_peak_events": [
+        {
+          "event": "peak_change",
+          "elapsed": 0.012073602003511041,
+          "sequence": 95,
+          "samples_seen": 864,
+          "status": {
+            "bits": 8,
+            "ticks": 640,
+            "node_pairs": 3584,
+            "rate": 250000,
+            "dropped": 0,
+            "fatal": 0,
+            "queue": 1,
+            "queue_peak": 2,
+            "copy_ticks": 38362,
+            "poll_ticks": 209325,
+            "slack_ticks": 2082524,
+            "send_ticks": 415981,
+            "produced": 20,
+            "epoch": 0
+          }
+        },
+        {
+          "event": "peak_change",
+          "elapsed": 0.037670876015909016,
+          "sequence": 108,
+          "samples_seen": 8032,
+          "status": {
+            "bits": 8,
+            "ticks": 114,
+            "node_pairs": 3456,
+            "rate": 1403508,
+            "dropped": 0,
+            "fatal": 0,
+            "queue": 1,
+            "queue_peak": 1,
+            "copy_ticks": 37528,
+            "poll_ticks": 177787,
+            "slack_ticks": 217878,
+            "send_ticks": 0,
+            "produced": 1,
+            "epoch": 1
+          }
+        },
+        {
+          "event": "peak_change",
+          "elapsed": 0.03997817600611597,
+          "sequence": 112,
+          "samples_seen": 11488,
+          "status": {
+            "bits": 8,
+            "ticks": 114,
+            "node_pairs": 3456,
+            "rate": 1403508,
+            "dropped": 0,
+            "fatal": 0,
+            "queue": 1,
+            "queue_peak": 2,
+            "copy_ticks": 38728,
+            "poll_ticks": 208062,
+            "slack_ticks": 217878,
+            "send_ticks": 411791,
+            "produced": 2,
+            "epoch": 1
+          }
+        },
+        {
+          "event": "measurement_start",
+          "elapsed": 1.0345124489977024,
+          "sequence": 1726,
+          "samples_seen": 1405984,
+          "status": {
+            "bits": 8,
+            "ticks": 114,
+            "node_pairs": 3456,
+            "rate": 1403508,
+            "dropped": 0,
+            "fatal": 0,
+            "queue": 1,
+            "queue_peak": 2,
+            "copy_ticks": 40111,
+            "poll_ticks": 214209,
+            "slack_ticks": 180960,
+            "send_ticks": 395208,
+            "produced": 405,
+            "epoch": 1
+          }
+        },
+        {
+          "event": "peak_change",
+          "elapsed": 1.0986228639958426,
+          "sequence": 1828,
+          "samples_seen": 1494112,
+          "status": {
+            "bits": 8,
+            "ticks": 114,
+            "node_pairs": 3456,
+            "rate": 1403508,
+            "dropped": 0,
+            "fatal": 0,
+            "queue": 2,
+            "queue_peak": 3,
+            "copy_ticks": 40111,
+            "poll_ticks": 214209,
+            "slack_ticks": 180960,
+            "send_ticks": 469236,
+            "produced": 432,
+            "epoch": 1
+          }
+        },
+        {
+          "event": "peak_change",
+          "elapsed": 45.22367016301723,
+          "sequence": 73460,
+          "samples_seen": 63384160,
+          "status": {
+            "bits": 8,
+            "ticks": 114,
+            "node_pairs": 3456,
+            "rate": 1403508,
+            "dropped": 0,
+            "fatal": 0,
+            "queue": 3,
+            "queue_peak": 4,
+            "copy_ticks": 40129,
+            "poll_ticks": 239179,
+            "slack_ticks": 180222,
+            "send_ticks": 479436,
+            "produced": 18341,
+            "epoch": 1
+          }
+        }
+      ]
+    }
+  ],
+  "winners": {},
+  "analog": "Not measured",
+  "skipped_after_repeated_failure": [],
+  "revision": "send1400_spi38_fifo10_split_crc_v9",
+  "source_hashes": {
+    "arduino/v16/README.md": "4a324bdb8ae1d0ae3f1a85ec25f5c6b6eb8f779e5dedb5ed8353f00f97f19c97",
+    "arduino/v16/manifest.json": "a4c7e0de5eca2f26b7727b272ebca0683dd1dcf0dd021d3ee563ce1caec559b7",
+    "arduino/v16/oscilloscope/app.yaml": "262f3f4fe672b1aa168308e4056f7272cd6ee26706d614afc61df821ce2a17b3",
+    "arduino/v16/oscilloscope/python/main.py": "47010abf364c29a798e68bb5246cb00d75512ccc4e0f569215adc609757d4918",
+    "arduino/v16/oscilloscope/sketch/acquisition.h": "65f97e04473989ad35bb0a2c3ecf13973f5554a58225d261d3b0c87fd7f45dd2",
+    "arduino/v16/oscilloscope/sketch/acquisition_protocol.h": "563c87fff386f630b9741d3eca73546ac55c79bac2c9b553ff69c9f2be813d22",
+    "arduino/v16/oscilloscope/sketch/benchmark_protocol.h": "8ab078d333b64c9c55e20c8476ce9fbe6a7a17f9dd24582717f263c5c2ea4763",
+    "arduino/v16/oscilloscope/sketch/control_protocol.h": "1c9ea38fa73b7e6fcfb88bde462077b319b7ebada3eab787c33fdcbbaa84ee3a",
+    "arduino/v16/oscilloscope/sketch/crc32_fast.h": "994c2247c4fdb7c4863511fe97879fc7597a5a80c23c3aecdcc5c3270cdf6241",
+    "arduino/v16/oscilloscope/sketch/generator.h": "f4b12229fef4a42c8516e5b32f9ce02b9136cd5213a5c01f696de1ccc202b58c",
+    "arduino/v16/oscilloscope/sketch/generator_dma.h": "7c70c7c4d09c50b05a2eabc9db291a0d5b64ec73e22a5749b0a080acfa7760a4",
+    "arduino/v16/oscilloscope/sketch/generator_protocol.h": "5c8bf66a32ae6472477a129688ea84a94ceba4e502724cb404293390d635bf45",
+    "arduino/v16/oscilloscope/sketch/generator_timing.h": "555c42c3c7229b42ce8c8d43b65d73f7b750eab2b0e7c6187a69017d0a82650e",
+    "arduino/v16/oscilloscope/sketch/node_validation.h": "b9f2e98686af25f140ac6702d8283d80b095b3808b6a41b3abce357b3d2457d0",
+    "arduino/v16/oscilloscope/sketch/sample_packing.h": "cf5b74cf073e38e27e32f7b83451d87eee1fe4e1d4615639e85fd3e386b7b59d",
+    "arduino/v16/oscilloscope/sketch/scope_config.h": "827bb698332fb2405306c57b4ab4e5389c95969185096d780f97c750abcc04b1",
+    "arduino/v16/oscilloscope/sketch/scope_protocol.h": "c2bf92aed1aac5efc4f6283cd302297d3c8be3ce40e7b838fa8d5bcacef9d612",
+    "arduino/v16/oscilloscope/sketch/sketch.ino": "1570de97db2f63a072848e8998410602b217912a31a933f5671eaf471ec88b45",
+    "arduino/v16/oscilloscope/sketch/sketch.yaml": "2ee56ed8561b6ea420885ed62ca804f498a54825ce6df906168e78a014c424ea",
+    "arduino/v16/oscilloscope/sketch/split_crc.h": "ec4aa324fb2331ef85831aed67bda386c60bb8d087343009a3b4afc10b42ab53",
+    "arduino/v16/oscilloscope/sketch/wav.h": "d56b86cbcac01c78ef5936ab17c4c04e944137dd575a49470fe60e33e876b2c2",
+    "arduino/v16/oscilloscope/sketch/wav_dma.h": "4f9a126c193e5bb40672e6c339675fe05b4f0a87eda1ee4aac6131d3cabd214f",
+    "arduino/v16/oscilloscope/sketch/wav_protocol.h": "2da0fc6c697199d6e432a3997448b07c0bbee00596837551ea8a6d951542dc7a",
+    "arduino/v16/oscilloscope/sketch/wav_queue.h": "002553b2c58ff1343a218959f58632a394656aeb0f28fc74bb17a97f2793dd83",
+    "arduino/v16/relay/base_verifier.c": "e733a7ea2aaa3abfa1e3ca05f4b31a483aca4e37bdcd693c177b909992bdd6c9",
+    "arduino/v16/relay/config_relay_protocol.h": "71a911ad80d2691b41b1af864cf5de2729796c852c8e55e67d1f9a9e004494ed",
+    "arduino/v16/relay/unoq_config_stream.c": "3a007ffcb76fe42581e5dc3803a6558a30eff792b60c5928d5bc231d6dcc24c4",
+    "arduino/v16/tests/checker.c": "0c1f45738c0db95044fc6142f1a90f440abc0d9e875b75b77ac12b1763dd8d29",
+    "arduino/v16/tests/generator_timing.cpp": "cc931754bbd5cc96252597f707f6dfe0a3fc3f1aee2dd3e9a14dbedf38e32782",
+    "arduino/v16/tests/golden.cpp": "ee219a48fd6dc8049b6e22f73def305701fa039c47764b56e7b24c8c7f6b5588",
+    "arduino/v16/tests/node_validation.cpp": "c02c6baa57c5980b495d5b8a45ec99ce4d8581f8dddeb8cd2b106838e0abfc44",
+    "arduino/v16/unoq.json": "851721d3b8d97c7a6f03c5ec2f46fc50f5bdad45b4477c0d9d729fe615ecf28f"
+  },
+  "selector_modified": false,
+  "changes": [
+    "Payload CRC computed ahead, combined exactly with send-time header CRC",
+    "Three aligned frame buffers queued by reference, no payload copy; last-fragment physical acknowledgement retains ADC node ownership",
+    "Experimental Linux relay SCHED_FIFO priority10; stable restoration uses original launcher",
+    "SPI requested 38 MHz",
+    "READY userspace spin bounded to 50us before poll; fresh edge/sequence checks preserved",
+    "MCU yields without artificial 5us busy wait while fragment is being prepared",
+    "Timestamp and ADC range validation O3/unroll4; every sample checked",
+    "Fixed SPI DMA configuration reused only after stopped/reset verification",
+    "ADC8 relay boundary validation without per-byte reconstruction",
+    "Read queued READY edge before polling; unchanged edge sequence checks",
+    "Payload CRC computed by output producer; exact fixed-length CRC combination leaves only 48-byte header CRC at send time"
+  ],
+  "queue_peak_observation": "Every decoded frame; sticky peak retained, including startup",
+  "prior_identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v16-main-1",
+    "firmware_sha256": "79b0bd376fe26b11b82cbef98fb1cba57ef752f7528c14434c6fef4de295092c"
+  },
+  "backup": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/respaldos/unoq/osciloscopio_20261013_172135_337026.zip",
+  "experimental_network": {
+    "name": "scope-v16-send1400-experimental_default",
+    "subnet": "10.203.141.0/24"
+  },
+  "candidate_source_hashes": {
+    "app.yaml": "262f3f4fe672b1aa168308e4056f7272cd6ee26706d614afc61df821ce2a17b3",
+    "python/main.py": "47010abf364c29a798e68bb5246cb00d75512ccc4e0f569215adc609757d4918",
+    "sketch/acquisition.h": "65f97e04473989ad35bb0a2c3ecf13973f5554a58225d261d3b0c87fd7f45dd2",
+    "sketch/acquisition_protocol.h": "563c87fff386f630b9741d3eca73546ac55c79bac2c9b553ff69c9f2be813d22",
+    "sketch/benchmark_protocol.h": "8ab078d333b64c9c55e20c8476ce9fbe6a7a17f9dd24582717f263c5c2ea4763",
+    "sketch/control_protocol.h": "1c9ea38fa73b7e6fcfb88bde462077b319b7ebada3eab787c33fdcbbaa84ee3a",
+    "sketch/crc32_fast.h": "994c2247c4fdb7c4863511fe97879fc7597a5a80c23c3aecdcc5c3270cdf6241",
+    "sketch/generator.h": "f4b12229fef4a42c8516e5b32f9ce02b9136cd5213a5c01f696de1ccc202b58c",
+    "sketch/generator_dma.h": "7c70c7c4d09c50b05a2eabc9db291a0d5b64ec73e22a5749b0a080acfa7760a4",
+    "sketch/generator_protocol.h": "5c8bf66a32ae6472477a129688ea84a94ceba4e502724cb404293390d635bf45",
+    "sketch/generator_timing.h": "555c42c3c7229b42ce8c8d43b65d73f7b750eab2b0e7c6187a69017d0a82650e",
+    "sketch/node_validation.h": "b9f2e98686af25f140ac6702d8283d80b095b3808b6a41b3abce357b3d2457d0",
+    "sketch/sample_packing.h": "cf5b74cf073e38e27e32f7b83451d87eee1fe4e1d4615639e85fd3e386b7b59d",
+    "sketch/scope_config.h": "827bb698332fb2405306c57b4ab4e5389c95969185096d780f97c750abcc04b1",
+    "sketch/scope_protocol.h": "c2bf92aed1aac5efc4f6283cd302297d3c8be3ce40e7b838fa8d5bcacef9d612",
+    "sketch/sketch.ino": "1570de97db2f63a072848e8998410602b217912a31a933f5671eaf471ec88b45",
+    "sketch/sketch.yaml": "2ee56ed8561b6ea420885ed62ca804f498a54825ce6df906168e78a014c424ea",
+    "sketch/split_crc.h": "ec4aa324fb2331ef85831aed67bda386c60bb8d087343009a3b4afc10b42ab53",
+    "sketch/wav.h": "d56b86cbcac01c78ef5936ab17c4c04e944137dd575a49470fe60e33e876b2c2",
+    "sketch/wav_dma.h": "4f9a126c193e5bb40672e6c339675fe05b4f0a87eda1ee4aac6131d3cabd214f",
+    "sketch/wav_protocol.h": "2da0fc6c697199d6e432a3997448b07c0bbee00596837551ea8a6d951542dc7a",
+    "sketch/wav_queue.h": "002553b2c58ff1343a218959f58632a394656aeb0f28fc74bb17a97f2793dd83"
+  },
+  "deployment": {
+    "backup": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/respaldos/unoq/osciloscopio_20261011_170619_994241.zip",
+    "stable_relay": "/home/arduino/.cache/serialmonitor/usb-stream-add20708d06894b45d4c/unoq_stream",
+    "candidate_relay": "/home/arduino/.cache/serialmonitor/usb-stream-a96afed9a8cb55f0c05a/unoq_stream"
+  },
+  "error": "Controlled interruption of next trial after repeated regression",
+  "final_adc": {
+    "bits": 10,
+    "rate": 909090
+  },
+  "final_generator": {
+    "wave": 0,
+    "enabled": 0,
+    "mode": 0,
+    "frequency": 2500,
+    "final_frequency": 2500,
+    "low": 0,
+    "high": 0,
+    "duration": 1000,
+    "duration_us": 0,
+    "duty": 50
+  },
+  "restore_samples": 9087712,
+  "restore_integrity_ok": true,
+  "final_identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v16-main-1",
+    "firmware_sha256": "79b0bd376fe26b11b82cbef98fb1cba57ef752f7528c14434c6fef4de295092c"
+  },
+  "stopped_reason": "Controlled stop after 60s and independent120s confirmed mean-send headroom regression below10%; further acceptance not performed.",
+  "experiment_label": "V16 isolated send experiment, trial9; not monitor version9"
+}

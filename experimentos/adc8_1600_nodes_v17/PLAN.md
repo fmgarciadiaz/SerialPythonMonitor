@@ -1,0 +1,3 @@
+# 1,6000 MS/s: reserva temporal por nodo
+
+Pico4 anterior observado55,854s después del primer frame100ticks, asentamientopico2. Probar N4320 y5184 (5/6frames864) con100ticks,CPU2/performance/SPI40,warm112/2s bombeando. No cambiar MCU/relay ni cantidadslots4 ni definicióncola. Orden4320/5184/5184/4320,30s por reinicio independiente. Elegible sólo ambos íntegros,margen>=10%,pico<4desdearranque,slackpositivo. Mejor mínimo margen ->60+3x120, cortar primerfallo y probar segundo si elegible. Sin reintentos selectivos. Restauración exacta governor/firmware/relay/ADC/generador,reloj ycontinuidad10s. Respaldo106protegido.

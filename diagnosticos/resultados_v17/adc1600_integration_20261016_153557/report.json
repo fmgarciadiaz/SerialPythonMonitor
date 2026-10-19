@@ -1,0 +1,814 @@
+{
+  "ok": true,
+  "restored": true,
+  "cases": [
+    {
+      "adc": {
+        "bits": 14,
+        "rate": 40000
+      },
+      "period": 25,
+      "node_pairs": 2048,
+      "actual_rate": 40000.0,
+      "stage": "legacy_before",
+      "requested_seconds": 10,
+      "ok": true,
+      "scheduler": {
+        "policy": 0,
+        "priority": 0
+      },
+      "seconds": 10.000481021008454,
+      "samples": 399360,
+      "observed_rate": 39934.079086900594,
+      "status": {
+        "ack": 7901,
+        "rate": 40000,
+        "bits": 14,
+        "dropped": 0,
+        "fatal": 0,
+        "epoch": 1,
+        "prepare_us": 106,
+        "check_us": 80
+      },
+      "wall_monotonic_drift_seconds": -0.00047625263687223196
+    },
+    {
+      "adc": {
+        "bits": 8,
+        "rate": 1600000
+      },
+      "period": 100,
+      "node_pairs": 3456,
+      "actual_rate": 1600000.0,
+      "stage": "finalist",
+      "requested_seconds": 60,
+      "ok": true,
+      "boot_warmup": {
+        "seconds": 5.001303908997215,
+        "samples": 198656,
+        "status": {
+          "ack": 3600,
+          "rate": 40000,
+          "bits": 14,
+          "dropped": 0,
+          "fatal": 0,
+          "epoch": 1,
+          "prepare_us": 106,
+          "check_us": 87
+        }
+      },
+      "scheduler": {
+        "policy": 1,
+        "priority": 10
+      },
+      "scheduler_verification": "Relay kernel getters checked before forwarding APPLIED; logs persisted",
+      "seconds": 60.0003599319607,
+      "samples": 95944608,
+      "observed_rate": 1599067.207410079,
+      "status": {
+        "ack": 119819,
+        "rate": 1600000,
+        "bits": 8,
+        "dropped": 0,
+        "fatal": 0,
+        "epoch": 3,
+        "prepare_us": 34,
+        "check_us": 79,
+        "queue_slots": 8,
+        "node_pairs": 3456,
+        "queue": 1,
+        "queue_peak": 3,
+        "copy_ticks": 39261,
+        "poll_ticks": 227286,
+        "slack_ticks": 128450,
+        "send_ticks": 301396,
+        "produced": 28224
+      },
+      "wall_monotonic_drift_seconds": 0.1311181392520666,
+      "metrics": {
+        "mean_send_headroom": 0.07375948990275716,
+        "maxima": {
+          "queue_peak": 3,
+          "copy_ticks": 39261,
+          "poll_ticks": 227286,
+          "slack_ticks": 128450
+        },
+        "send_mean_us": 2000.6795018100445,
+        "send_observations": 111047
+      },
+      "headroom_ok": false
+    },
+    {
+      "adc": {
+        "bits": 10,
+        "rate": 909090
+      },
+      "period": 176,
+      "node_pairs": 8192,
+      "actual_rate": 909090.9090909091,
+      "stage": "normal_after_finalist",
+      "requested_seconds": 3,
+      "ok": true,
+      "scheduler": {
+        "policy": 0,
+        "priority": 0
+      },
+      "seconds": 3.0002929749898612,
+      "samples": 2727240,
+      "observed_rate": 908991.2294345908,
+      "status": {
+        "ack": 126040,
+        "rate": 909090,
+        "bits": 10,
+        "dropped": 0,
+        "fatal": 0,
+        "epoch": 4,
+        "prepare_us": 80,
+        "check_us": 90,
+        "queue_slots": 4,
+        "node_pairs": 8192,
+        "queue": 1,
+        "queue_peak": 2,
+        "copy_ticks": 121442,
+        "poll_ticks": 289296,
+        "slack_ticks": 1145407,
+        "send_ticks": 1188191,
+        "produced": 480
+      },
+      "wall_monotonic_drift_seconds": -0.00010605482384562492,
+      "metrics": {
+        "mean_send_headroom": 0.13070459351738717,
+        "maxima": {
+          "queue_peak": 2,
+          "copy_ticks": 121442,
+          "poll_ticks": 289296,
+          "slack_ticks": 1145407
+        },
+        "send_mean_us": 7833.394766896121,
+        "send_observations": 3995
+      },
+      "headroom_ok": true
+    },
+    {
+      "adc": {
+        "bits": 8,
+        "rate": 1600000
+      },
+      "period": 100,
+      "node_pairs": 3456,
+      "actual_rate": 1600000.0,
+      "stage": "acceptance_1",
+      "requested_seconds": 120,
+      "ok": true,
+      "boot_warmup": {
+        "seconds": 5.00001836696174,
+        "samples": 198656,
+        "status": {
+          "ack": 3600,
+          "rate": 40000,
+          "bits": 14,
+          "dropped": 0,
+          "fatal": 0,
+          "epoch": 1,
+          "prepare_us": 106,
+          "check_us": 80
+        }
+      },
+      "scheduler": {
+        "policy": 1,
+        "priority": 10
+      },
+      "scheduler_verification": "Relay kernel getters checked before forwarding APPLIED; logs persisted",
+      "seconds": 120.0003545510117,
+      "samples": 191889216,
+      "observed_rate": 1599072.0753948158,
+      "status": {
+        "ack": 230863,
+        "rate": 1600000,
+        "bits": 8,
+        "dropped": 0,
+        "fatal": 0,
+        "epoch": 3,
+        "prepare_us": 34,
+        "check_us": 89,
+        "queue_slots": 8,
+        "node_pairs": 3456,
+        "queue": 1,
+        "queue_peak": 4,
+        "copy_ticks": 39259,
+        "poll_ticks": 227267,
+        "slack_ticks": 131566,
+        "send_ticks": 335769,
+        "produced": 55986
+      },
+      "wall_monotonic_drift_seconds": -0.0029835926834493876,
+      "metrics": {
+        "mean_send_headroom": 0.07464385876431945,
+        "maxima": {
+          "queue_peak": 4,
+          "copy_ticks": 39259,
+          "poll_ticks": 227267,
+          "slack_ticks": 131566
+        },
+        "send_mean_us": 1998.7692650690701,
+        "send_observations": 222094
+      },
+      "headroom_ok": false
+    },
+    {
+      "adc": {
+        "bits": 10,
+        "rate": 909090
+      },
+      "period": 176,
+      "node_pairs": 8192,
+      "actual_rate": 909090.9090909091,
+      "stage": "normal_after_acceptance_1",
+      "requested_seconds": 3,
+      "ok": true,
+      "scheduler": {
+        "policy": 0,
+        "priority": 0
+      },
+      "seconds": 3.0013445500517264,
+      "samples": 2725848,
+      "observed_rate": 908208.9558671368,
+      "status": {
+        "ack": 237056,
+        "rate": 909090,
+        "bits": 10,
+        "dropped": 0,
+        "fatal": 0,
+        "epoch": 4,
+        "prepare_us": 72,
+        "check_us": 80,
+        "queue_slots": 4,
+        "node_pairs": 8192,
+        "queue": 1,
+        "queue_peak": 2,
+        "copy_ticks": 121451,
+        "poll_ticks": 289311,
+        "slack_ticks": 1148162,
+        "send_ticks": 1287818,
+        "produced": 479
+      },
+      "wall_monotonic_drift_seconds": -7.854739669710398e-05,
+      "metrics": {
+        "mean_send_headroom": 0.13296870048875042,
+        "maxima": {
+          "queue_peak": 2,
+          "copy_ticks": 121451,
+          "poll_ticks": 289311,
+          "slack_ticks": 1148162
+        },
+        "send_mean_us": 7812.992446155772,
+        "send_observations": 3993
+      },
+      "headroom_ok": true
+    },
+    {
+      "adc": {
+        "bits": 8,
+        "rate": 1600000
+      },
+      "period": 100,
+      "node_pairs": 3456,
+      "actual_rate": 1600000.0,
+      "stage": "acceptance_2",
+      "requested_seconds": 120,
+      "ok": true,
+      "boot_warmup": {
+        "seconds": 5.000789940007962,
+        "samples": 198656,
+        "status": {
+          "ack": 3585,
+          "rate": 40000,
+          "bits": 14,
+          "dropped": 0,
+          "fatal": 0,
+          "epoch": 1,
+          "prepare_us": 113,
+          "check_us": 87
+        }
+      },
+      "scheduler": {
+        "policy": 1,
+        "priority": 10
+      },
+      "scheduler_verification": "Relay kernel getters checked before forwarding APPLIED; logs persisted",
+      "seconds": 120.00047738698777,
+      "samples": 191890944,
+      "observed_rate": 1599084.8384808814,
+      "status": {
+        "ack": 230848,
+        "rate": 1600000,
+        "bits": 8,
+        "dropped": 0,
+        "fatal": 0,
+        "epoch": 3,
+        "prepare_us": 34,
+        "check_us": 79,
+        "queue_slots": 8,
+        "node_pairs": 3456,
+        "queue": 1,
+        "queue_peak": 4,
+        "copy_ticks": 39261,
+        "poll_ticks": 225602,
+        "slack_ticks": 131470,
+        "send_ticks": 335598,
+        "produced": 55986
+      },
+      "wall_monotonic_drift_seconds": -0.0029881730442866683,
+      "metrics": {
+        "mean_send_headroom": 0.07432071261528628,
+        "maxima": {
+          "queue_peak": 4,
+          "copy_ticks": 39261,
+          "poll_ticks": 225602,
+          "slack_ticks": 131470
+        },
+        "send_mean_us": 1999.4672607509815,
+        "send_observations": 222096
+      },
+      "headroom_ok": false
+    },
+    {
+      "adc": {
+        "bits": 10,
+        "rate": 909090
+      },
+      "period": 176,
+      "node_pairs": 8192,
+      "actual_rate": 909090.9090909091,
+      "stage": "normal_after_acceptance_2",
+      "requested_seconds": 3,
+      "ok": true,
+      "scheduler": {
+        "policy": 0,
+        "priority": 0
+      },
+      "seconds": 3.0001956099877134,
+      "samples": 2725848,
+      "observed_rate": 908556.7590745068,
+      "status": {
+        "ack": 237060,
+        "rate": 909090,
+        "bits": 10,
+        "dropped": 0,
+        "fatal": 0,
+        "epoch": 4,
+        "prepare_us": 72,
+        "check_us": 81,
+        "queue_slots": 4,
+        "node_pairs": 8192,
+        "queue": 1,
+        "queue_peak": 2,
+        "copy_ticks": 121434,
+        "poll_ticks": 290366,
+        "slack_ticks": 1146967,
+        "send_ticks": 1347614,
+        "produced": 480
+      },
+      "wall_monotonic_drift_seconds": -7.973855827003717e-05,
+      "metrics": {
+        "mean_send_headroom": 0.14010611345372648,
+        "maxima": {
+          "queue_peak": 2,
+          "copy_ticks": 121434,
+          "poll_ticks": 290366,
+          "slack_ticks": 1146967
+        },
+        "send_mean_us": 7748.67579044578,
+        "send_observations": 3993
+      },
+      "headroom_ok": true
+    },
+    {
+      "adc": {
+        "bits": 8,
+        "rate": 1600000
+      },
+      "period": 100,
+      "node_pairs": 3456,
+      "actual_rate": 1600000.0,
+      "stage": "acceptance_3",
+      "requested_seconds": 120,
+      "ok": true,
+      "boot_warmup": {
+        "seconds": 5.000219278968871,
+        "samples": 198656,
+        "status": {
+          "ack": 3594,
+          "rate": 40000,
+          "bits": 14,
+          "dropped": 0,
+          "fatal": 0,
+          "epoch": 1,
+          "prepare_us": 106,
+          "check_us": 87
+        }
+      },
+      "scheduler": {
+        "policy": 1,
+        "priority": 10
+      },
+      "scheduler_verification": "Relay kernel getters checked before forwarding APPLIED; logs persisted",
+      "seconds": 120.00035560806282,
+      "samples": 191889216,
+      "observed_rate": 1599072.0613090163,
+      "status": {
+        "ack": 230857,
+        "rate": 1600000,
+        "bits": 8,
+        "dropped": 0,
+        "fatal": 0,
+        "epoch": 3,
+        "prepare_us": 34,
+        "check_us": 89,
+        "queue_slots": 8,
+        "node_pairs": 3456,
+        "queue": 1,
+        "queue_peak": 4,
+        "copy_ticks": 39262,
+        "poll_ticks": 227427,
+        "slack_ticks": 128845,
+        "send_ticks": 337611,
+        "produced": 55986
+      },
+      "wall_monotonic_drift_seconds": -0.0029877491760998964,
+      "metrics": {
+        "mean_send_headroom": 0.07461392978957204,
+        "maxima": {
+          "queue_peak": 4,
+          "copy_ticks": 39262,
+          "poll_ticks": 227427,
+          "slack_ticks": 128845
+        },
+        "send_mean_us": 1998.8339116545244,
+        "send_observations": 222094
+      },
+      "headroom_ok": false
+    },
+    {
+      "adc": {
+        "bits": 10,
+        "rate": 909090
+      },
+      "period": 176,
+      "node_pairs": 8192,
+      "actual_rate": 909090.9090909091,
+      "stage": "normal_after_acceptance_3",
+      "requested_seconds": 3,
+      "ok": true,
+      "scheduler": {
+        "policy": 0,
+        "priority": 0
+      },
+      "seconds": 3.0001033559674397,
+      "samples": 2723064,
+      "observed_rate": 907656.7294202092,
+      "status": {
+        "ack": 237173,
+        "rate": 909090,
+        "bits": 10,
+        "dropped": 0,
+        "fatal": 0,
+        "epoch": 4,
+        "prepare_us": 89,
+        "check_us": 80,
+        "queue_slots": 4,
+        "node_pairs": 8192,
+        "queue": 1,
+        "queue_peak": 2,
+        "copy_ticks": 121437,
+        "poll_ticks": 289695,
+        "slack_ticks": 1147927,
+        "send_ticks": 1254728,
+        "produced": 483
+      },
+      "wall_monotonic_drift_seconds": -7.307680789381266e-05,
+      "metrics": {
+        "mean_send_headroom": 0.13780627542670165,
+        "maxima": {
+          "queue_peak": 2,
+          "copy_ticks": 121437,
+          "poll_ticks": 289695,
+          "slack_ticks": 1147927
+        },
+        "send_mean_us": 7769.400090874906,
+        "send_observations": 3989
+      },
+      "headroom_ok": true
+    },
+    {
+      "adc": {
+        "bits": 8,
+        "rate": 1403508
+      },
+      "period": 114,
+      "node_pairs": 3456,
+      "actual_rate": 1403508.7719298245,
+      "stage": "adc8_preserved",
+      "requested_seconds": 10,
+      "ok": true,
+      "boot_warmup": {
+        "seconds": 5.000696619972587,
+        "samples": 198656,
+        "status": {
+          "ack": 3610,
+          "rate": 40000,
+          "bits": 14,
+          "dropped": 0,
+          "fatal": 0,
+          "epoch": 1,
+          "prepare_us": 106,
+          "check_us": 80
+        }
+      },
+      "scheduler": {
+        "policy": 1,
+        "priority": 10
+      },
+      "scheduler_verification": "Relay kernel getters checked before forwarding APPLIED; logs persisted",
+      "seconds": 10.001473757904023,
+      "samples": 14029632,
+      "observed_rate": 1402756.467656837,
+      "status": {
+        "ack": 21487,
+        "rate": 1403508,
+        "bits": 8,
+        "dropped": 0,
+        "fatal": 0,
+        "epoch": 2,
+        "prepare_us": 35,
+        "check_us": 78,
+        "queue_slots": 4,
+        "node_pairs": 3456,
+        "queue": 1,
+        "queue_peak": 3,
+        "copy_ticks": 40602,
+        "poll_ticks": 226674,
+        "slack_ticks": 180208,
+        "send_ticks": 346073,
+        "produced": 4465
+      },
+      "wall_monotonic_drift_seconds": -0.00025567738339304924,
+      "metrics": {
+        "mean_send_headroom": 0.08088029400663632,
+        "maxima": {
+          "queue_peak": 3,
+          "copy_ticks": 40602,
+          "poll_ticks": 226674,
+          "slack_ticks": 180208
+        },
+        "send_mean_us": 2263.240364038059,
+        "send_observations": 16238
+      },
+      "headroom_ok": false
+    },
+    {
+      "adc": {
+        "bits": 14,
+        "rate": 363636
+      },
+      "period": 440,
+      "node_pairs": 3968,
+      "actual_rate": 363636.36363636365,
+      "stage": "dual_after",
+      "requested_seconds": 10,
+      "ok": true,
+      "scheduler": {
+        "policy": 0,
+        "priority": 0
+      },
+      "seconds": 10.000388354063034,
+      "samples": 3634192,
+      "observed_rate": 363405.087015793,
+      "status": {
+        "ack": 38509,
+        "rate": 363636,
+        "bits": 14,
+        "dropped": 0,
+        "fatal": 0,
+        "epoch": 3,
+        "prepare_us": 71,
+        "check_us": 80,
+        "queue_slots": 4,
+        "node_pairs": 3968,
+        "queue": 1,
+        "queue_peak": 2,
+        "copy_ticks": 101024,
+        "poll_ticks": 276229,
+        "slack_ticks": 1472189,
+        "send_ticks": 1567442,
+        "produced": 1039
+      },
+      "wall_monotonic_drift_seconds": -0.00025221705436706543,
+      "metrics": {
+        "mean_send_headroom": 0.05839358968300867,
+        "maxima": {
+          "queue_peak": 2,
+          "copy_ticks": 101024,
+          "poll_ticks": 276229,
+          "slack_ticks": 1472189
+        },
+        "send_mean_us": 10274.809149379009,
+        "send_observations": 14654
+      },
+      "headroom_ok": false
+    },
+    {
+      "adc": {
+        "bits": 16,
+        "rate": 40000
+      },
+      "period": 25,
+      "node_pairs": 2048,
+      "actual_rate": 40000.0,
+      "stage": "adc16_after",
+      "requested_seconds": 10,
+      "ok": true,
+      "scheduler": {
+        "policy": 0,
+        "priority": 0
+      },
+      "seconds": 10.001075277919881,
+      "samples": 399360,
+      "observed_rate": 39931.70623179858,
+      "status": {
+        "ack": 47006,
+        "rate": 40000,
+        "bits": 16,
+        "dropped": 0,
+        "fatal": 0,
+        "epoch": 4,
+        "prepare_us": 106,
+        "check_us": 80
+      },
+      "wall_monotonic_drift_seconds": -0.00028348981868475676
+    }
+  ],
+  "scope": "V17 production CH1 maxima; no analog/dual/GUI acceptance",
+  "acceptance_seconds": [
+    60,
+    120,
+    120,
+    120
+  ],
+  "runner_sha256": "c8c2940158b1be7ff84943487a7d6efe6e6ee9a9a011faf5f53160ce843d6fae",
+  "headroom_only": false,
+  "source_hashes": {
+    "arduino/v17/unoq.json": "9ad1779ac9cc006e423506bc62301f8cd137464e8ca45c5d315369ae85d86977",
+    "arduino/v17/README.md": "b9ad1cc7ec75f52947350d64d1816cc9130d84514a7321bd7333e0ac057d6378",
+    "arduino/v17/manifest.json": "a4c7e0de5eca2f26b7727b272ebca0683dd1dcf0dd021d3ee563ce1caec559b7",
+    "arduino/v17/tests/checker.c": "0c1f45738c0db95044fc6142f1a90f440abc0d9e875b75b77ac12b1763dd8d29",
+    "arduino/v17/tests/radio_test_table.cpp": "1689733948e9202ff147108ce16cb1ec7b45f02c60a852e624745bc0a5571a20",
+    "arduino/v17/tests/radio_test_backend.h": "50d598c43b615cdd798ac0f59b8de4a94dba6d4076d8658c5b0b6d2aff8f55df",
+    "arduino/v17/tests/node_validation.cpp": "c02c6baa57c5980b495d5b8a45ec99ce4d8581f8dddeb8cd2b106838e0abfc44",
+    "arduino/v17/tests/generator_duty.cpp": "066442d3bc9987368b4c6e1f75408ac1c397ca2ff8cabeea71847db0a09e2ab2",
+    "arduino/v17/tests/golden.cpp": "ee219a48fd6dc8049b6e22f73def305701fa039c47764b56e7b24c8c7f6b5588",
+    "arduino/v17/tests/generator_timing.cpp": "c53c9f2a8dbf8117700baba40d3aee15e2f08c234055f43abe20712352c67fd7",
+    "arduino/v17/relay/frame_send_queue.h": "e1a158fac306a098ade76464ca813a33d27e785bd7874c7fc7e21673bec388ca",
+    "arduino/v17/relay/unoq_config_stream.c": "198fc842f9e58d8181bcac8754ee53e0d7818f7186a07c1a93923bd7a35f8185",
+    "arduino/v17/relay/base_verifier.c": "66499e8bbec8ae3058a0624c9377c9fad6d5ef6a0fbb3f8de70d0c58eaab5bb0",
+    "arduino/v17/relay/additional_profiles.h": "b8d94095548a562807ba48fd08b6f9cb6c4148e9926ee80cf0e46bc6142e5591",
+    "arduino/v17/relay/native_profiles.h": "98f963207cb2e2b04327849feea65a2aee2ec8194532f54aef1a5e30cc3aeadb",
+    "arduino/v17/relay/config_relay_protocol.h": "376ea2a997b4ef835751db802186b77355bf2b20a10eec5d777e681afdea545a",
+    "arduino/v17/relay/transport_policy.h": "7da1fd18188fc13925a6ceea12a1bd107299c155c2d1322425f92a24425527b2",
+    "arduino/v17/relay/high_rate_profile.h": "5c85e4717fbab394989c1342bd1c8f40fc993194c498b602d80676336cd805b7",
+    "arduino/v17/relay/spi40_runtime.h": "9d23aa411d533b8dd4e890393616a19d1b1e903943b17c582192d880c01c296c",
+    "arduino/v17/oscilloscope/app.yaml": "f5c6c3b2263d221cd7e0753cd21aa2fd97de2f16bd1f0090b942f423552dfb03",
+    "arduino/v17/oscilloscope/python/main.py": "b3bfd0d2c5282d4a3e84cb47d9b2c565721c7dda41f1c253a42908e0ae18587b",
+    "arduino/v17/oscilloscope/sketch/scope_protocol.h": "c2bf92aed1aac5efc4f6283cd302297d3c8be3ce40e7b838fa8d5bcacef9d612",
+    "arduino/v17/oscilloscope/sketch/node_validation.h": "f0c38dae55f9fbfb2d4aece35643df6264fbc0c7b054c14ef301a2dd750cfa38",
+    "arduino/v17/oscilloscope/sketch/generator_timing.h": "dc0079e0eb590188d3aa5f64b02a6b792bc2af1e62217ea2c26dcd339fd1b505",
+    "arduino/v17/oscilloscope/sketch/acquisition_storage.h": "1163149e643ef92592d63b0f79f86f58988086aa345f0d2d17095813452d2c66",
+    "arduino/v17/oscilloscope/sketch/wav_queue.h": "002553b2c58ff1343a218959f58632a394656aeb0f28fc74bb17a97f2793dd83",
+    "arduino/v17/oscilloscope/sketch/generator_dma.h": "faec31f7ebb7cb64ec04d3c9c8e94225cd66a7513535f7eca9b4be6d282e697c",
+    "arduino/v17/oscilloscope/sketch/control_protocol.h": "1c9ea38fa73b7e6fcfb88bde462077b319b7ebada3eab787c33fdcbbaa84ee3a",
+    "arduino/v17/oscilloscope/sketch/sketch.yaml": "2ee56ed8561b6ea420885ed62ca804f498a54825ce6df906168e78a014c424ea",
+    "arduino/v17/oscilloscope/sketch/sketch.ino": "619fea280dd7fdea7aeaebeffc928acdfc2e2eaeb584bbff869c16f70d8bfe21",
+    "arduino/v17/oscilloscope/sketch/wav_dma.h": "919e3d2254486e531d021a54b66d854550ed1de4591ed1993a9650a377b8a40d",
+    "arduino/v17/oscilloscope/sketch/wav.h": "d56b86cbcac01c78ef5936ab17c4c04e944137dd575a49470fe60e33e876b2c2",
+    "arduino/v17/oscilloscope/sketch/sample_packing.h": "969227ee4db1ed2be4edafacf616d327fad996b117098d4413d3fed76ec05c43",
+    "arduino/v17/oscilloscope/sketch/additional_profiles.h": "b8d94095548a562807ba48fd08b6f9cb6c4148e9926ee80cf0e46bc6142e5591",
+    "arduino/v17/oscilloscope/sketch/generator_protocol.h": "801afcce5eff4565644bae21c1fbc494746aa674ebb321981eb728a2d1407ba9",
+    "arduino/v17/oscilloscope/sketch/native_profiles.h": "98f963207cb2e2b04327849feea65a2aee2ec8194532f54aef1a5e30cc3aeadb",
+    "arduino/v17/oscilloscope/sketch/radio_test.h": "fb56e0ccac1a0bd0c1e4dab23a9f236bb6fe5aae40e6a66890319d4e7e1c725e",
+    "arduino/v17/oscilloscope/sketch/node_validation_fast.h": "5e582042ee500b79946b0e4ca5e238abfee3bdc08752b5d16b639a0e193c046a",
+    "arduino/v17/oscilloscope/sketch/high_rate_profile.h": "5c85e4717fbab394989c1342bd1c8f40fc993194c498b602d80676336cd805b7",
+    "arduino/v17/oscilloscope/sketch/crc32_fast.h": "994c2247c4fdb7c4863511fe97879fc7597a5a80c23c3aecdcc5c3270cdf6241",
+    "arduino/v17/oscilloscope/sketch/benchmark_protocol.h": "8ab078d333b64c9c55e20c8476ce9fbe6a7a17f9dd24582717f263c5c2ea4763",
+    "arduino/v17/oscilloscope/sketch/scope_config.h": "827bb698332fb2405306c57b4ab4e5389c95969185096d780f97c750abcc04b1",
+    "arduino/v17/oscilloscope/sketch/acquisition.h": "0c5c9f660665964edaca383dd1bab813c664125d460afda9ab02b46d04a2e90b",
+    "arduino/v17/oscilloscope/sketch/frame_buffer.h": "ac0d1d25cbfd5db0ea629d6990a919bb72de07c116fa23f9689f7db1e32c37f5",
+    "arduino/v17/oscilloscope/sketch/wav_protocol.h": "b321c16d3938a97acf624f0f49c05b0db3717764c46e482424e3e24c371f59d9",
+    "arduino/v17/oscilloscope/sketch/generator.h": "db57bffce56330a1a6f4099a744ee93d50646545d7d1b1453292132a86579345",
+    "arduino/v17/oscilloscope/sketch/acquisition_protocol.h": "83838fb7388aa6b837757b83b963f5951b174dd58b49d6b3be93c8c3aa51c376"
+  },
+  "prior_identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v17-main-1",
+    "firmware_sha256": "3e275a52cb560bf08bca481972a18ff21debc9442236b65f55b74c566c9cac8c"
+  },
+  "prior": {
+    "adc": {
+      "bits": 8,
+      "rate": 1403508
+    },
+    "generator": {
+      "wave": 0,
+      "enabled": 0,
+      "mode": 0,
+      "frequency": 2500,
+      "final_frequency": 2500,
+      "low": 0,
+      "high": 0,
+      "duration": 1000,
+      "duration_us": 0,
+      "duty": 50
+    }
+  },
+  "old_relay": "/home/arduino/.cache/serialmonitor/usb-stream-7393a3881378dfea90dc/unoq_stream",
+  "old_cap_add": [
+    "SYS_NICE"
+  ],
+  "old_scope_environment": [],
+  "backup": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/respaldos/unoq/osciloscopio_20261016_153558_039440.zip",
+  "compile_sections": {
+    ".rodata": 1496,
+    ".llext.rodata.noreloc": 10197,
+    ".text": 41356,
+    ".static_thread_data_area": 0,
+    ".data": 124,
+    "._k_msgq.static.settings_replies_": 52,
+    "._k_msgq.static.generator_replies_": 52,
+    "._k_msgq.static.wav_replies_": 52,
+    "._k_msgq.static.control_replies_": 52,
+    ".bss": 214992,
+    ".exported_sym": 8,
+    ".init_array": 16,
+    ".fini_array": 8,
+    ".debug_info": 561820,
+    ".debug_abbrev": 28989,
+    ".debug_loclists": 114911,
+    ".debug_aranges": 4808,
+    ".debug_rnglists": 17149,
+    ".debug_line": 134748,
+    ".debug_str": 349875,
+    ".debug_frame": 28560
+  },
+  "text_reduction_vs_failed_bytes": 1264,
+  "relay": "/home/arduino/.cache/serialmonitor/usb-stream-2c7a13b19bc7c90dcaf2/unoq_stream",
+  "remote_backup": "/home/arduino/.cache/serialmonitor/v17-before-optimized-adc1600_integration_20261016_153557",
+  "final_settings": {
+    "adc": {
+      "bits": 8,
+      "rate": 1403508
+    },
+    "generator": {
+      "wave": 0,
+      "enabled": 0,
+      "mode": 0,
+      "frequency": 2500,
+      "final_frequency": 2500,
+      "low": 0,
+      "high": 0,
+      "duration": 1000,
+      "duration_us": 0,
+      "duty": 50
+    }
+  },
+  "recovery": {
+    "ok": true,
+    "samples": 14031360,
+    "status": {
+      "ack": 63451,
+      "rate": 1403508,
+      "bits": 8,
+      "dropped": 0,
+      "fatal": 0,
+      "epoch": 5,
+      "prepare_us": 36,
+      "check_us": 78,
+      "queue_slots": 4,
+      "node_pairs": 3456,
+      "queue": 1,
+      "queue_peak": 3,
+      "copy_ticks": 40609,
+      "poll_ticks": 225747,
+      "slack_ticks": 180253,
+      "send_ticks": 342033,
+      "produced": 4062
+    }
+  },
+  "final_scheduler": {
+    "policy": 1,
+    "priority": 10
+  },
+  "final_identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v17-main-1",
+    "firmware_sha256": "23bc0e28212ea8c44de498f58a471a480e43feaa55899924b80d304f347de8ac"
+  }
+}

@@ -1,5 +1,6 @@
 #pragma once
 #include "native_profiles.h"
+#include "high_rate_profile.h"
 static bool acquisition_valid(unsigned bits,uint32_t period) {
     if(scope_native_find(bits,period)) return true;
     if(period==133) return bits==8;
@@ -31,6 +32,15 @@ static bool native_feed(DualChecker *d,const uint8_t *p,const ScopeNativeProfile
     if(!count) return !index && !get32(p+72) && !get32(p+80);
     if(d->expect_boundary && index!=d->boundary) return false;
     d->expect_boundary=false;
+    if(scope_high_rate(d->bits,native->channels,ticks,n)) {
+        // ADC8 is byte-wide; CRC/padding and range already cover every byte.
+        const uint32_t first=get32(p+80);
+        if(d->adc.have_sample && (index-d->adc.previous_sample!=1 || first-d->adc.previous_timestamp!=ticks)) return false;
+        d->adc.previous_sample=index+count-1;
+        d->adc.previous_timestamp=first+(count-1)*ticks;
+        d->adc.have_sample=true;
+        return true;
+    }
     uint64_t accumulator=0;unsigned available=0,pos=116;
     for(unsigned i=0;i<count;++i) {
         for(unsigned channel=0;channel<native->channels;++channel) {
@@ -61,17 +71,19 @@ static bool dual_feed(DualChecker *d,const uint8_t *p) {
         uint32_t rid=get32(p+16);
         unsigned phase=p[20],reason=p[21];
         if(rid<UINT32_C(0x80000000) || rid==UINT32_MAX || phase<1 || phase>3 || reason>4 ||
-            ((phase==3)!=(reason!=0)) || p[22]>1 || p[23]>1) return false;
+            ((phase==3)!=(reason!=0)) || p[22]>1 || p[23]>3) return false;
         for(unsigned base=24;base<=44;base+=20) {
             if(base==44 && phase==3) break;
             const uint8_t *c=p+base;
+            unsigned duty=p[base==24?64:65];
+            if(duty && (duty>99 || c[0] || c[2] || !(p[23]&2))) return false;
             if(c[0]>4 || c[1]>1 || c[2]>2 || c[3]>1 || (c[3] && (c[0]!=4 || c[2])) || get32(c+4)<100 || get32(c+4)>50000000 ||
                 get32(c+8)<100 || get32(c+8)>50000000 || get16(c+12)>get16(c+14) || get16(c+14)>4095 ||
                 !get32(c+16) || (c[3] ? (get32(c+16)<100 || get32(c+16)>65535) : get32(c+16)>600000) || (c[0]==4 && c[2])) return false;
         }
         if(p[22] && !p[25]) return false;
-        if(phase==2 && memcmp(p+24,p+44,20)) return false;
-        for(unsigned i=64;i<988;++i) if(p[i]) return false;
+        if(phase==2 && (memcmp(p+24,p+44,20) || p[64]!=p[65])) return false;
+        for(unsigned i=66;i<988;++i) if(p[i]) return false;
         return true;
     }
     if(kind==5 || kind==7) {
@@ -160,7 +172,8 @@ static bool dual_command(const uint8_t *p) {
         for(unsigned i=end;i<988;++i) if(p[i]) return false;
     } else if(kind==8 || kind==10) {
         if(kind==8 && (p[19]>1 || (p[19] && (p[16]!=4 || p[18])))) return false;
-        for(unsigned i=kind==10?16:36;i<988;++i) if(p[i]) return false;
+        if(kind==8 && p[36] && (p[36]>99 || p[16] || p[18])) return false;
+        for(unsigned i=kind==10?16:37;i<988;++i) if(p[i]) return false;
     } else if(kind==6) {
         if(p[17] || p[18] || p[19]) return false;
         for(unsigned i=24;i<988;++i) if(p[i]) return false;

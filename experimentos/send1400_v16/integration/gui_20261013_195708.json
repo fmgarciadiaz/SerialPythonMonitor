@@ -1,0 +1,87 @@
+{
+  "scope": "Production V16 GUI live ADC8/CH1 1403508 and ordinary ADC14/dual40000 PCM16 WAV;6s each",
+  "cases": [
+    {
+      "configuration": {
+        "bits": 8,
+        "rate": 1403508
+      },
+      "stage": "live",
+      "status": "PASS",
+      "elapsed_s": 6.307556429004762,
+      "samples": 8832672,
+      "continuity_errors": [],
+      "applied": {
+        "bits": 8,
+        "rate": 1403508
+      },
+      "dt_us": 0.7124999999992534,
+      "ch2_enabled": false,
+      "wav_allowed": false,
+      "ok": true
+    },
+    {
+      "configuration": {
+        "bits": 14,
+        "rate": 40000
+      },
+      "repetition": 1,
+      "status": "PASS",
+      "elapsed_s": 5.869404733006377,
+      "samples": 233730,
+      "filename": "capturas/v16/log_20261013_195721_14bit_40kHz.wav",
+      "bytes": 934964,
+      "record_status": "Guardado: log_20261013_195721.wav",
+      "status_before_stop": "\u25cf WAV 5,8/30.0 s | 229.634 muestras",
+      "recording_before_stop": true,
+      "rate": 40000,
+      "channels": 2,
+      "sample_width": 2,
+      "frames": 233730,
+      "auto_limit": false,
+      "ok": true
+    }
+  ],
+  "errors": [],
+  "restored": true,
+  "ok": true,
+  "source_sha256": {
+    "monitor/v16/app.py": "c1f1810c8461d12318d1a3f0a85db0bbf3b0d08df30852feb42b4ee9391e1ee3",
+    "monitor/v16/receiver/unoq_config_decoder.py": "97dca061295225391226cc3dd7ea1e2559a0af69ccd9e19d37eea66f9f915dda"
+  },
+  "profiles": [
+    {
+      "bits": 8,
+      "rate": 1403508
+    },
+    {
+      "bits": 14,
+      "rate": 40000
+    }
+  ],
+  "prior": {
+    "configuration": {
+      "bits": 8,
+      "rate": 1221374
+    },
+    "generator": {
+      "wave": 0,
+      "enabled": 0,
+      "mode": 0,
+      "frequency": 2500,
+      "final_frequency": 2500,
+      "low": 0,
+      "high": 0,
+      "duration": 1000,
+      "duration_us": 0,
+      "duty": 50
+    },
+    "wav_state": "IDLE",
+    "mode": "SPI"
+  },
+  "restoration_integrity": {
+    "seconds": 3.0002300229971297,
+    "samples": 3664224,
+    "ok": true
+  }
+}

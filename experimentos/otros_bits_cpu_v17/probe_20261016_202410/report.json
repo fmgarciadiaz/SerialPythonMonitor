@@ -1,0 +1,64 @@
+{
+  "ok": false,
+  "restored": true,
+  "cases": [],
+  "scope": "CPU policy screening only; accepted rates; ADC16 dual x16",
+  "identity_before": {
+    "board_serial": "1060031107",
+    "app": "scope-v17-main-1",
+    "firmware_sha256": "23bc0e28212ea8c44de498f58a471a480e43feaa55899924b80d304f347de8ac"
+  },
+  "prior": {
+    "adc": {
+      "bits": 8,
+      "rate": 1600000
+    },
+    "generator": {
+      "wave": 0,
+      "enabled": 0,
+      "mode": 0,
+      "frequency": 2500,
+      "final_frequency": 2500,
+      "low": 0,
+      "high": 0,
+      "duration": 1000,
+      "duration_us": 0,
+      "duty": 50
+    }
+  },
+  "normal_policy": {
+    "governor": "schedutil",
+    "cpus": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "backup": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/respaldos/unoq/osciloscopio_20261016_202411_216614.zip",
+  "error": "Command '['/Users/fmgarciadiaz/Library/Arduino15/packages/arduino/tools/adb/32.0.0/adb', '-s', '1060031107', 'shell', 'python3 -c \\'import os,json,sys;from pathlib import Path;p=int(sys.argv[1]);g=Path(\\'\"\\'\"\\'/sys/devices/system/cpu/cpufreq/policy0/scaling_governor\\'\"\\'\"\\');g.write_text(sys.argv[2]);os.sched_setaffinity(p,json.loads(sys.argv[3]));print(json.dumps({\\'\"\\'\"\\'governor\\'\"\\'\"\\':g.read_text().strip(),\\'\"\\'\"\\'cpus\\'\"\\'\"\\':sorted(os.sched_getaffinity(p))}))\\' 955929 schedutil \\'[0, 1, 2, 3]\\'']' returned non-zero exit status 1.",
+  "traceback": "Traceback (most recent call last):\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/experimentos/otros_bits_cpu_v17/run.py\", line 62, in run\n    r.configure(Configuration(14,40000));actual=self.pumping(r,lambda:self.policy(variant))\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/experimentos/otros_bits_cpu_v17/run.py\", line 36, in pumping\n    return future.result()\n  File \"/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_10_DataScience/lib/python3.10/concurrent/futures/_base.py\", line 451, in result\n    return self.__get_result()\n  File \"/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_10_DataScience/lib/python3.10/concurrent/futures/_base.py\", line 403, in __get_result\n    raise self._exception\n  File \"/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_10_DataScience/lib/python3.10/concurrent/futures/thread.py\", line 58, in run\n    result = self.fn(*self.args, **self.kwargs)\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/experimentos/otros_bits_cpu_v17/run.py\", line 62, in <lambda>\n    r.configure(Configuration(14,40000));actual=self.pumping(r,lambda:self.policy(variant))\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/experimentos/otros_bits_cpu_v17/run.py\", line 29, in policy\n    actual=json.loads(self.remote(code,self.pid,governor,json.dumps(cpus)))\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/experimentos/otros_bits_cpu_v17/run.py\", line 25, in remote\n    def remote(self,code,*args):return self.board.shell('python3','-c',code,*map(str,args),capture=True).stdout\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/tools/unoq.py\", line 54, in shell\n    return self.run('shell', shlex.join(str(a) for a in args), capture=capture)\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/tools/unoq.py\", line 50, in run\n    return subprocess.run([self.adb, '-s', self.serial, *args], check=True,\n  File \"/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_10_DataScience/lib/python3.10/subprocess.py\", line 526, in run\n    raise CalledProcessError(retcode, process.args,\nsubprocess.CalledProcessError: Command '['/Users/fmgarciadiaz/Library/Arduino15/packages/arduino/tools/adb/32.0.0/adb', '-s', '1060031107', 'shell', 'python3 -c \\'import os,json,sys;from pathlib import Path;p=int(sys.argv[1]);g=Path(\\'\"\\'\"\\'/sys/devices/system/cpu/cpufreq/policy0/scaling_governor\\'\"\\'\"\\');g.write_text(sys.argv[2]);os.sched_setaffinity(p,json.loads(sys.argv[3]));print(json.dumps({\\'\"\\'\"\\'governor\\'\"\\'\"\\':g.read_text().strip(),\\'\"\\'\"\\'cpus\\'\"\\'\"\\':sorted(os.sched_getaffinity(p))}))\\' 955929 schedutil \\'[0, 1, 2, 3]\\'']' returned non-zero exit status 1.\n",
+  "late_recovery": {
+    "ok": true,
+    "samples": 15990048,
+    "status": {
+      "ack": 27559597,
+      "rate": 1600000,
+      "bits": 8,
+      "dropped": 0,
+      "fatal": 0,
+      "epoch": 75,
+      "prepare_us": 34,
+      "check_us": 88,
+      "queue_slots": 8,
+      "node_pairs": 3456,
+      "queue": 1,
+      "queue_peak": 2,
+      "copy_ticks": 39264,
+      "poll_ticks": 216463,
+      "slack_ticks": 131723,
+      "send_ticks": 298011,
+      "produced": 4628
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "protocol": "SCP1",
+  "version": 4,
+  "frame_bytes": 992,
+  "payload_bytes": 972,
+  "crc_offset": 988,
+  "samples_offset": 84,
+  "maximum_pairs": 226,
+  "node_pairs": 2048,
+  "fragments_per_node": 10,
+  "last_fragment_pairs": 14,
+  "full_padding_bytes": 0,
+  "last_padding_bytes": 848,
+  "spi_hz": 32000000,
+  "queue_slots": 4,
+  "tcp_port": 8766,
+  "negotiation": false,
+  "paired_firmware": "oscilloscope",
+  "paired_relay": "relay/unoq_config_stream.c",
+  "paired_receiver": "receiver",
+  "timestamp_offset": 80,
+  "sample_codecs": {
+    "3": {
+      "bits": [
+        8,
+        10,
+        12,
+        14,
+        16
+      ],
+      "maximum_pairs": 226,
+      "fragments_per_node": 10
+    },
+    "15": {
+      "bits": [
+        14
+      ],
+      "maximum_pairs": 258,
+      "fragments_per_node": 8,
+      "last_fragment_pairs": 242,
+      "packing": "4 x 14 bits in 7 little-endian bytes"
+    },
+    "16": {
+      "bits": [
+        14
+      ],
+      "channels": 1,
+      "maximum_pairs": 516,
+      "fragments_per_node": 4,
+      "last_fragment_pairs": 500,
+      "timestamp_hz": 160000000,
+      "period_ticks": 267,
+      "rate_nominal": 599250
+    }
+  }
+}

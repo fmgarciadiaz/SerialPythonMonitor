@@ -1,0 +1,3 @@
+# Subir moderadamente desde1,5094MS/s
+
+Sondear104/102/100ticks (1,5385/1,5686/1,6000MS/s), dos15s con reinicios independientes cada uno. Receta protegida:CPU2,performance,N3456,SPI40,preparación112/2s bombeando, fuentes MCU/relay idénticas. CRC/continuidad/epoch/timestamps/rango/DMA íntegros. Elegible sólo si ambos sondeos cumplen margen>=10%,cola<4incluidoarranque yslackpositivo. Calificar másrápido elegible60+3x120,cortar primerfallo yseguir siguiente elegible;sinreintentosselectivos. No superar100ticks enesta campaña. Restaurar governororiginal,firmware/relay/entorno/ADC/generador,reloj ycontinuidad10s. No producción. El106 aceptado permanece intacto.

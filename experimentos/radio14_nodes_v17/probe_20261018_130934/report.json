@@ -1,0 +1,157 @@
+{
+  "ok": false,
+  "restored": true,
+  "cases": [],
+  "scope": "ADC14 CH1 RADIO+A0; CPU/send + burst16 + loop correlation outside audio lock",
+  "host_hashes": {
+    "radio_source.py": "2e98b33ed7abc3c01ccca0b93dc541c854793f034ebf1324bc5cc78be7888e29",
+    "radio_guard.py": "d654fcbb92302a1893a0b5177930dd8cee3b264d3639c5b17919592100342e67"
+  },
+  "mcu_hashes": {
+    "native_profiles.h": "f6bd00bb325beb1f1ed9243fc7b506103f008541a1780b5b59873d55711cf1ba",
+    "high_rate_profile.h": "f63bf48fbacd71a068a39fd8d692b5e7fe09cd7b810b393fa0a0194dc4320872"
+  },
+  "profile": {
+    "bits": 14,
+    "channels": 1,
+    "ticks": 188,
+    "node_pairs": 5952,
+    "optimized_transport": true,
+    "internal_only": true,
+    "headroom": false
+  },
+  "source_hashes": {
+    "additional_profiles.h": "b8d94095548a562807ba48fd08b6f9cb6c4148e9926ee80cf0e46bc6142e5591",
+    "base_verifier.c": "66499e8bbec8ae3058a0624c9377c9fad6d5ef6a0fbb3f8de70d0c58eaab5bb0",
+    "config_relay_protocol.h": "4c9083c55a9ce039732dc7fd21efe74a947f292ef854dbf6ae802490d4b24724",
+    "cpu_profile.h": "eb93c114b26a67e33befc0ea03561d6cad36170c990162ad97d29b3fc82369d2",
+    "cpu_runtime.h": "bd5afdb012a41a8decdfd015352ae391e05786f2075115d13087925819e735ea",
+    "frame_send_queue.h": "e1a158fac306a098ade76464ca813a33d27e785bd7874c7fc7e21673bec388ca",
+    "high_rate_profile.h": "f63bf48fbacd71a068a39fd8d692b5e7fe09cd7b810b393fa0a0194dc4320872",
+    "native_profiles.h": "f6bd00bb325beb1f1ed9243fc7b506103f008541a1780b5b59873d55711cf1ba",
+    "spi40_runtime.h": "9d23aa411d533b8dd4e890393616a19d1b1e903943b17c582192d880c01c296c",
+    "transport_policy.h": "7da1fd18188fc13925a6ceea12a1bd107299c155c2d1322425f92a24425527b2",
+    "unoq_config_stream.c": "0ef9e678c86cd850e4700cceb2ee1623180ae81f66be1372e153c4a21aa55152"
+  },
+  "prior": {
+    "adc": {
+      "bits": 14,
+      "rate": 599250
+    },
+    "generator": {
+      "wave": 0,
+      "enabled": 0,
+      "mode": 0,
+      "frequency": 2500,
+      "final_frequency": 2500,
+      "low": 0,
+      "high": 4095,
+      "duration": 1000,
+      "duration_us": 0,
+      "duty": 50
+    }
+  },
+  "prior_identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v17-main-1",
+    "firmware_sha256": "42cff22046d3dbebc4678bd18c62b36e2ee8e4dc6d2d2eb39d69adf2cae30e29"
+  },
+  "old_relay": "/home/arduino/.cache/serialmonitor/usb-stream-1041f7c9ce459f0ec43a/unoq_stream",
+  "old_cap_add": [
+    "SYS_NICE"
+  ],
+  "old_scope_environment": [],
+  "backup": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/respaldos/unoq/osciloscopio_20261018_130934_866347.zip",
+  "old_mounts": [
+    {
+      "Type": "bind",
+      "Source": "/sys/devices/system/cpu/cpufreq/policy0/scaling_governor",
+      "Destination": "/scope_cpu_governor",
+      "Mode": "",
+      "RW": true,
+      "Propagation": "rprivate"
+    },
+    {
+      "Type": "bind",
+      "Source": "/home/arduino/.cache/serialmonitor/usb-stream-1041f7c9ce459f0ec43a/unoq_stream",
+      "Destination": "/work/unoq_stream",
+      "Mode": "",
+      "RW": false,
+      "Propagation": "rprivate"
+    }
+  ],
+  "old_cpuset": "",
+  "normal_policy": {
+    "governor": "schedutil",
+    "cpus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "scheduler": 0,
+    "priority": 0
+  },
+  "prior_header_presence": {
+    "native_profiles.h": true,
+    "high_rate_profile.h": true
+  },
+  "candidate_relay": "/home/arduino/.cache/serialmonitor/cpu-relay-a1e53970626c3a8b5704/unoq_stream",
+  "candidate_relay_sha256": "7a95247c9b51619843a58ae01021ca5f595a093f00a95604b10c677c3bdaff68",
+  "candidate_identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v17-main-1",
+    "firmware_sha256": "f3cab6f48a0d6b45fb7c1329ceee7e485f6cf32baadac1c9578533d1f5090bf5"
+  },
+  "error": "StopIteration()",
+  "traceback": "Traceback (most recent call last):\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/experimentos/radio14_nodes_v17/run.py\", line 65, in main\n    trial('screen60',851063,60)\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/experimentos/radio14_nodes_v17/run.py\", line 42, in trial\n    report,folder=audio_trial(owner_context=nullcontext())\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/validar_generador_radio_v17.py\", line 94, in main\n    with patch('monitor.v17.app.usb_devices',return_value=[]):w=SerialMonitorWindow()\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v17/app.py\", line 978, in __init__\n    self._build_ui()\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v17/app.py\", line 1413, in _build_ui\n    label = _rate_label(rate) + ' \u00b7 ' + _period_label(next(Configuration(bits, rate) for bits in BITS if _configuration_supported(bits, rate)).dt_us)\nStopIteration\n",
+  "restored_low_policy": {
+    "governor": "schedutil",
+    "cpus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "scheduler": 0,
+    "priority": 0
+  },
+  "final_settings": {
+    "adc": {
+      "bits": 14,
+      "rate": 599250
+    },
+    "generator": {
+      "wave": 0,
+      "enabled": 0,
+      "mode": 0,
+      "frequency": 2500,
+      "final_frequency": 2500,
+      "low": 0,
+      "high": 4095,
+      "duration": 1000,
+      "duration_us": 0,
+      "duty": 50
+    }
+  },
+  "final_identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v17-main-1",
+    "firmware_sha256": "42cff22046d3dbebc4678bd18c62b36e2ee8e4dc6d2d2eb39d69adf2cae30e29"
+  },
+  "recovery": {
+    "ok": true,
+    "samples": 5989884,
+    "status": {
+      "ack": 17587,
+      "rate": 599250,
+      "bits": 14,
+      "dropped": 0,
+      "fatal": 0,
+      "epoch": 2,
+      "prepare_us": 46,
+      "check_us": 48
+    },
+    "method": "No administrative Q calls after final high-rate configuration"
+  }
+}

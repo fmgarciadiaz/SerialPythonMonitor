@@ -8,6 +8,7 @@
 #include <arpa/inet.h>
 #include <netinet/tcp.h>
 #include <signal.h>
+#include <sched.h>
 #include <sys/socket.h>
 static volatile sig_atomic_t running=1;
 static void stopping(int sig) { (void)sig; running=0; }
@@ -73,6 +74,21 @@ int main(void) {
             for (unsigned i=0;i<BLOCK;++i) fprintf(stderr,"%02x",rx[i]);
             fputc('\n',stderr);
             goto done;
+        }
+        const ScopeNativeProfile *profile=scope_native_find(checker.bits,checker.period);
+        bool fast=profile && !checker.mode && scope_high_rate(profile->bits,profile->channels,profile->ticks,profile->node_pairs);
+        if(fast!=high_rate_ready) {
+            struct sched_param priority={.sched_priority=fast?10:0};
+            if(sched_setscheduler(0,fast?SCHED_FIFO:SCHED_OTHER,&priority)<0) {perror("profile scheduler");goto done;}
+            struct sched_param actual={0};
+            int policy=sched_getscheduler(0);
+            if(sched_getparam(0,&actual)<0 || policy!=(fast?SCHED_FIFO:SCHED_OTHER) || actual.sched_priority!=(fast?10:0)) {
+                fprintf(stderr,"profile scheduler did not apply\n");goto done;
+            }
+            hz=fast?38000000U:32000000U;
+            if(ioctl(fd,SPI_IOC_WR_MAX_SPEED_HZ,&hz)<0) {perror("profile SPI clock");goto done;}
+            transfer.speed_hz=hz;high_rate_ready=fast;
+            fprintf(stderr,"V16 transport: SPI %u MHz, %s (policy=%d priority=%d), READY %s\n",hz/1000000U,fast?"FIFO10":"normal",policy,actual.sched_priority,fast?"spin50us":"poll");
         }
         previous_tx=get32(tx+8);
         ++command;

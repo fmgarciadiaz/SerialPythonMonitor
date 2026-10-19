@@ -1,3 +1,5 @@
+> Guía de implementación histórica. Para los límites productivos V17 usar [Generador ampliado](GENERADOR_200K_V17.md) y [Estado vigente](ESTADO_ACTUAL_V17.md). La descripción heredada de tablas y frecuencias de esta página corresponde a sus ensayos originales.
+
 # Paso cuatro: generador de ondas
 
 El conjunto V13 / V12 Audio conserva la base ADC de V12 / V11 P992. El kernel ADC/DAC usa PLL2 a 50 MHz;

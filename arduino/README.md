@@ -11,9 +11,9 @@ usa lo instalado y comprueba/inicia app y relay cuando el enlace no responde.
 Para administrar manualmente el conjunto de audio:
 
 ```sh
-python tools/unoq.py status --version v16
-python tools/unoq.py compile --version v16
-python tools/usb_stream.py start --firmware v16
+python tools/unoq.py status --version v17
+python tools/unoq.py compile --version v17
+python tools/usb_stream.py start --firmware v17
 ```
 
 Compile valida sin cargar. Antes de cambiar firmware, cerrar el monitor y
@@ -23,7 +23,8 @@ detener la pareja anterior. [Instalación y respaldo](historico/v12_audio/README
 
 ## Versiones
 
-- [V16](v16/README.md): pareja actual del monitor V16, CH1/dual y SCP1 V4.
+- [V17](v17/README.md): pareja activa, RADIO AM y Radio Test F1/F2.
+- [V16](v16/README.md): respaldo local, retirado del Q y exportado el 19/10/2026.
 
 - [V12 Audio](historico/v12_audio/README.md): variante anterior de audio, conservada para selección explícita.
 - [V11 P992](historico/v11_p992/README.md): archivada con Monitor V12; selección explícita de consola.

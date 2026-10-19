@@ -1,0 +1,168 @@
+{
+  "ok": true,
+  "restored": true,
+  "errors": [],
+  "seconds": 120.0,
+  "scope": "Live ADC8/CH1 1.4035MHz RADIO40 FILTER RADIO FFT65536. Generator off; no known AM/analog acceptance.",
+  "identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v17-main-1",
+    "firmware_sha256": "bc150efba8fe229838c65a2dc9945aee020455ce8592c77fefb97772bdac592b"
+  },
+  "source_sha256": {
+    "app.py": "a68e2a33f02fa07ad7898aae9dc612a0a55dc4cd7c81873f2ed7e69d748068b1",
+    "processing.py": "2549c9715888ec9851e80142ee5407d5b14bfe0d1229dbc0aa1e673e84441151",
+    "radio_stream.py": "18ddf631f8b9a8547bd4e7de898c692b889a8309316d071790a09534f1e1061f",
+    "radio_am.py": "d5cf8d29cbdf4d4e8435dc245386d8c06dd75e9191f96842c62878daa184fafd",
+    "spectral_analysis.py": "5237d0e8255f8632e5fc9e8ebf7a374efcc8350f46b1f6b8c3fba5de0e7d6825"
+  },
+  "prior": {
+    "adc": {
+      "bits": 10,
+      "rate": 909090
+    },
+    "generator": {
+      "wave": 0,
+      "enabled": 0,
+      "mode": 0,
+      "frequency": 2500,
+      "final_frequency": 2500,
+      "low": 0,
+      "high": 0,
+      "duration": 1000,
+      "duration_us": 0,
+      "duty": 50
+    }
+  },
+  "elapsed_seconds": 121.84863583405968,
+  "rf_samples": 170943264,
+  "audio_samples": 4871850,
+  "batches": 4752,
+  "pending_peak": 8,
+  "stages": {
+    "radio_demod_ms": {
+      "count": 4751,
+      "mean_ms": 2.1384343941015973,
+      "p50_p95_p99_max_ms": [
+        1.7609959468245506,
+        4.141857963986695,
+        6.0981944552622736,
+        65.99110702518374
+      ]
+    },
+    "radio_resample_ms": {
+      "count": 4751,
+      "mean_ms": 0.6979716000247334,
+      "p50_p95_p99_max_ms": [
+        0.4969820147380233,
+        1.6546925180591643,
+        2.561748493462801,
+        10.377922910265625
+      ]
+    },
+    "audio_filter_ms": {
+      "count": 4751,
+      "mean_ms": 0.14975205180651763,
+      "p50_p95_p99_max_ms": [
+        0.134594039991498,
+        0.24555099662393332,
+        0.3873140085488558,
+        0.8170150686055422
+      ]
+    },
+    "rf_filter_ms": {
+      "count": 4751,
+      "mean_ms": 0.0011818418047978762,
+      "p50_p95_p99_max_ms": [
+        0.0009459909051656723,
+        0.0022399472072720528,
+        0.003815046511590481,
+        0.06861798465251923
+      ]
+    },
+    "dsp_total_ms": {
+      "count": 4751,
+      "mean_ms": 3.65675566347982,
+      "p50_p95_p99_max_ms": [
+        3.0145299388095737,
+        6.965480512008071,
+        10.61591348843649,
+        68.79894400481135
+      ]
+    },
+    "publish_to_consume_ms": {
+      "count": 4751,
+      "mean_ms": 17.68707337682795,
+      "p50_p95_p99_max_ms": [
+        9.637795039452612,
+        47.80824849149212,
+        86.81606251047924,
+        320.11403189972043
+      ]
+    },
+    "fft_render_ms": {
+      "count": 658,
+      "mean_ms": 21.125209729023005,
+      "p50_p95_p99_max_ms": [
+        17.17389654368162,
+        52.45191931026055,
+        70.18402710440566,
+        152.9977039899677
+      ]
+    },
+    "fft_paint_ms": {
+      "count": 27,
+      "mean_ms": 17.302562926757943,
+      "p50_p95_p99_max_ms": [
+        16.20450196787715,
+        25.340981211047616,
+        31.626655079890032,
+        33.35142694413662
+      ]
+    }
+  },
+  "paints": 0,
+  "fft_paints": 27,
+  "fft_viewport_paints": 27,
+  "fft_paint_fps": 0.22158639540921998,
+  "viewport_paints": 0,
+  "paint_fps": 0.0,
+  "viewport_paint_fps": 0.0,
+  "exposed_fraction": 0.05726872246696035,
+  "deferred_spectral_timer_calls": 65,
+  "processing_backend": "process",
+  "transport": {
+    "mean_send_headroom": 0.08698185370336609,
+    "queue_peak": 2,
+    "slack_min_us": 1125.65625,
+    "dropped": 0,
+    "fatal": 0
+  },
+  "visible_painting_valid": false,
+  "recovery": {
+    "samples": 9105488,
+    "status": {
+      "ack": 3582650,
+      "rate": 909090,
+      "bits": 10,
+      "dropped": 0,
+      "fatal": 0,
+      "epoch": 23,
+      "prepare_us": 72,
+      "check_us": 81,
+      "node_pairs": 8192,
+      "queue": 1,
+      "queue_peak": 2,
+      "copy_ticks": 121477,
+      "poll_ticks": 289312,
+      "slack_ticks": 1147414,
+      "send_ticks": 1234255,
+      "produced": 1112
+    }
+  },
+  "final_identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v17-main-1",
+    "firmware_sha256": "bc150efba8fe229838c65a2dc9945aee020455ce8592c77fefb97772bdac592b"
+  }
+}

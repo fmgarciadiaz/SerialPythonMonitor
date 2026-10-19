@@ -81,7 +81,7 @@ class Board:
             self.shell('mkdir', '-p', target.rsplit('/', 1)[0])
             self.run('push', str(path), target)
 
-    def compile(self):
+    def compile(self, artifacts=None):
         files = self.check_sources()
         stage = '/tmp/serialmonitor-build-' + uuid.uuid4().hex
         try:
@@ -92,6 +92,11 @@ class Board:
                        '[ast.parse(p.read_text(), filename=str(p)) for p in root.rglob("*.py")]', stage)
             self.shell('arduino-cli', 'compile', '--fqbn', self.config['fqbn'],
                        '--profile', 'default', '--build-path', stage + '/build', stage + '/sketch')
+            if artifacts is not None:
+                artifacts = Path(artifacts)
+                artifacts.mkdir(parents=True, exist_ok=True)
+                for name in ('sketch.ino_debug.elf','sketch.ino.elf','sketch.ino.map'):
+                    self.run('pull',stage+'/build/'+name,str(artifacts/name))
         finally:
             # Sólo eliminar la carpeta temporal creada por esta invocación.
             self.shell('python3', '-c',
@@ -158,7 +163,7 @@ class Board:
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('command', choices=('status', 'compile', 'backup', 'deploy', 'start', 'stop', 'logs', 'create'))
-    parser.add_argument('--version', choices=('v4', 'v5', 'v6', 'v6_polling', 'v6_dma', 'v6_irq', 'v6_adc', 'v7_dual', 'v8_config', 'v9_fast', 'v10_diag', 'v11_p992', 'v12_audio', 'v13_pulse', 'v16'), default='v16',
+    parser.add_argument('--version', choices=('v4', 'v5', 'v6', 'v6_polling', 'v6_dma', 'v6_irq', 'v6_adc', 'v7_dual', 'v8_config', 'v9_fast', 'v10_diag', 'v11_p992', 'v12_audio', 'v13_pulse', 'v16', 'v17'), default='v16',
                         help='v16 actual (default); anteriores seleccionables explícitamente')
     parser.add_argument('--follow', action='store_true', help='Seguir logs hasta Ctrl+C')
     args = parser.parse_args()

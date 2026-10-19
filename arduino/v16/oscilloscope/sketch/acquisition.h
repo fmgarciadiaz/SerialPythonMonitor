@@ -2,6 +2,8 @@
 #include "scope_config.h"
 #include "scope_protocol.h"
 #include "node_validation.h"
+#include "node_validation_fast.h"
+#include "high_rate_profile.h"
 #include "native_profiles.h"
 #include "acquisition_storage.h"
 #include "generator.h"
@@ -379,7 +381,10 @@ static void producer(void *, void *, void *) {
             if(native()) queue_peak=max(uint32_t(queue_peak),uint32_t(QUEUE_SLOTS-k_sem_count_get(&empty_slots)));
             if (reserved) slot.timestamp = timestamps[0];
             bool valid;
-            if(native() && single()) valid = reserved
+            if(scope_high_rate(bits,single()?1U:2U,period,node_pairs())) valid=reserved
+                ? scope_validation_fast::validate_node<true,true>(adc,timestamps,node_pairs(),bits,period,have_timestamp,previous_timestamp,slot.single_samples)
+                : scope_validation_fast::validate_node<false,true>(adc,timestamps,node_pairs(),bits,period,have_timestamp,previous_timestamp,slot.single_samples);
+            else if(native() && single()) valid = reserved
                 ? scope_validation::validate_node<true,true>(adc,timestamps,node_pairs(),bits,period,have_timestamp,previous_timestamp,slot.single_samples)
                 : scope_validation::validate_node<false,true>(adc,timestamps,node_pairs(),bits,period,have_timestamp,previous_timestamp,slot.single_samples);
             else if(single()) valid = reserved

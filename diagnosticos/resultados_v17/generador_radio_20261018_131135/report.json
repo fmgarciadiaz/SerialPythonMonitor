@@ -1,0 +1,71 @@
+{
+  "ok": false,
+  "restored": true,
+  "errors": [
+    "StopIteration()",
+    "Traceback (most recent call last):\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/experimentos/radio14_nodes_v17/run.py\", line 80, in <module>\n    if __name__=='__main__':main()\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/experimentos/radio14_nodes_v17/run.py\", line 65, in main\n    trial('screen60',851063,60)\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/experimentos/radio14_nodes_v17/run.py\", line 42, in trial\n    report,folder=audio_trial(owner_context=nullcontext())\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/validar_generador_radio_v17.py\", line 94, in main\n    with patch('monitor.v17.app.usb_devices',return_value=[]):w=SerialMonitorWindow()\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v17/app.py\", line 978, in __init__\n    self._build_ui()\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v17/app.py\", line 1413, in _build_ui\n    label = _rate_label(rate) + ' \u00b7 ' + _period_label(next(Configuration(bits, rate) for bits in BITS if _configuration_supported(bits, rate)).dt_us)\nStopIteration\n"
+  ],
+  "samples": 0,
+  "wav_states": [],
+  "requested_audio_seconds": 60.0,
+  "source_hashes": {
+    "monitor/v17/radio_output.py": "dd734395439ab4c992782d4cf633d47ac5d43b90c9f53dde74d87151bc6bfb4d",
+    "monitor/v17/radio_output_panel.py": "419866f94f80fbca569c2fb732a3ee12a2d79c2a4e39c725a815e66ed5a1f06f",
+    "monitor/v17/receiver/unoq_config_receiver.py": "2574f2deff41bf9d3521cef0583ed94047dc3654c11789450e4213e863133ac3",
+    "monitor/v17/radio_loop_guard.py": "e125a02b64148947c67d941e0db4765c836c63627b45d74e7a69718c4f504235",
+    "monitor/v17/processing.py": "0723f5f79f886ec50a532e8f0e9d9c6ac7e8c1902944b37569e9c508c1ea807e",
+    "monitor/v17/radio_am.py": "e133619dd8f47190fc4c3aa7d764388f5cc28f7d1786185084bb6e2501bd991d",
+    "monitor/v17/app.py": "8514957fa2ff25fe484e2db45561337db96ee708a85c87ace646d26e7786e376"
+  },
+  "audio_transport": {
+    "rate": 40000,
+    "poll_interval": 0.04,
+    "credits": 30,
+    "chunk_interval": 0.006,
+    "chunk_burst": 16,
+    "prebuffer_samples": 20000
+  },
+  "qt_platform": "offscreen",
+  "prior": {
+    "adc": {
+      "bits": 14,
+      "rate": 31250
+    },
+    "generator": {
+      "wave": 0,
+      "enabled": 0,
+      "mode": 0,
+      "frequency": 2500,
+      "final_frequency": 2500,
+      "low": 0,
+      "high": 4095,
+      "duration": 1000,
+      "duration_us": 0,
+      "duty": 50
+    }
+  },
+  "identity_before": {
+    "board_serial": "1060031107",
+    "app": "scope-v17-main-1",
+    "firmware_sha256": "f3cab6f48a0d6b45fb7c1329ceee7e485f6cf32baadac1c9578533d1f5090bf5"
+  },
+  "traceback": "Traceback (most recent call last):\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/validar_generador_radio_v17.py\", line 94, in main\n    with patch('monitor.v17.app.usb_devices',return_value=[]):w=SerialMonitorWindow()\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v17/app.py\", line 978, in __init__\n    self._build_ui()\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v17/app.py\", line 1413, in _build_ui\n    label = _rate_label(rate) + ' \u00b7 ' + _period_label(next(Configuration(bits, rate) for bits in BITS if _configuration_supported(bits, rate)).dt_us)\nStopIteration\n",
+  "identity_after": {
+    "board_serial": "1060031107",
+    "app": "scope-v17-main-1",
+    "firmware_sha256": "f3cab6f48a0d6b45fb7c1329ceee7e485f6cf32baadac1c9578533d1f5090bf5"
+  },
+  "recovery": {
+    "samples": 311296,
+    "status": {
+      "ack": 8235,
+      "rate": 31250,
+      "bits": 14,
+      "dropped": 0,
+      "fatal": 0,
+      "epoch": 2,
+      "prepare_us": 81,
+      "check_us": 48
+    }
+  }
+}

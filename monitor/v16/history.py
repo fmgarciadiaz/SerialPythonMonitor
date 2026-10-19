@@ -6,6 +6,13 @@ class SampleHistory:
         self.maxlen = maxlen
         self.data = np.empty(maxlen, dtype=float)
         self.count = self.head = 0
+    def resize(self, maxlen):
+        if maxlen == self.maxlen: return
+        values = self.window(max(0, self.count-maxlen), self.count)
+        data = np.empty(maxlen, dtype=float)
+        self.maxlen, self.data = maxlen, data
+        self.count = self.head = 0
+        self.extend(values)
     def __len__(self): return self.count
     def clear(self): self.count = self.head = 0
     def append(self, value):

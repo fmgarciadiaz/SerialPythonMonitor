@@ -12,21 +12,22 @@ struct Config {
     uint16_t low, high;
     uint32_t duration;
     uint8_t duration_us=0;
+    uint8_t duty=50;
 };
 inline Config defaults() { return {0,1,0,2500,2500,0,4095,1000}; }
 inline bool equal(const Config &a,const Config &b) {
     return a.wave==b.wave && a.enabled==b.enabled && a.mode==b.mode &&
         a.frequency==b.frequency && a.final_frequency==b.final_frequency &&
-        a.low==b.low && a.high==b.high && a.duration==b.duration && a.duration_us==b.duration_us;
+        a.low==b.low && a.high==b.high && a.duration==b.duration && a.duration_us==b.duration_us && a.duty==b.duty;
 }
 inline bool valid(const Config &c) {
     return c.wave<=4 && c.enabled<=1 && c.mode<=2 && c.frequency>=100 && c.frequency<=MAX_FREQUENCY_MHZ &&
         c.final_frequency>=100 && c.final_frequency<=MAX_FREQUENCY_MHZ && c.low<=c.high && c.high<=4095 &&
-        (c.duration_us ? (c.duration_us==1 && c.wave==4 && !c.mode && c.duration>=100 && c.duration<=65535) : (c.duration>=1 && c.duration<=600000)) && (c.wave!=4 || c.mode==0);
+        (c.duration_us ? (c.duration_us==1 && c.wave==4 && !c.mode && c.duration>=100 && c.duration<=65535) : (c.duration>=1 && c.duration<=600000)) && (c.wave!=4 || c.mode==0) && c.duty>=1 && c.duty<=99 && (c.duty==50 || (!c.wave && !c.mode));
 }
-inline Config read(const uint8_t *p) {
+inline Config read(const uint8_t *p,uint8_t duty=0) {
     return {p[0],p[1],p[2],scope_control::get32(p+4),scope_control::get32(p+8),
-        uint16_t(p[12]|uint16_t(p[13])<<8),uint16_t(p[14]|uint16_t(p[15])<<8),scope_control::get32(p+16),p[3]};
+        uint16_t(p[12]|uint16_t(p[13])<<8),uint16_t(p[14]|uint16_t(p[15])<<8),scope_control::get32(p+16),p[3],uint8_t(duty?duty:50)};
 }
 inline void write(uint8_t *p,const Config &c) {
     p[0]=c.wave; p[1]=c.enabled; p[2]=c.mode;p[3]=c.duration_us;
@@ -42,12 +43,13 @@ inline bool decode(const uint8_t *p,size_t size,Request &r) {
         scope_control::get32(p+988)!=scope_control::crc(p,988)) return false;
     const bool query=p[6]==10;
     if(!query && (p[19]>1 || (p[19] && (p[16]!=4 || p[18])))) return false;
-    for(unsigned i=query?16:36;i<988;++i) if(p[i]) return false;
-    r={scope_control::get32(p+8),query?defaults():read(p+16),query};return true;
+    for(unsigned i=query?16:37;i<988;++i) if(p[i]) return false;
+    r={scope_control::get32(p+8),query?defaults():read(p+16,p[36]),query};return true;
 }
 inline void encode(uint8_t *p,uint32_t seq,const Reply &r) {
     memset(p,0,992);memcpy(p,"SCP1",4);p[4]=4;p[6]=9;scope_control::put32(p+8,seq);scope_control::put32(p+12,972);
-    scope_control::put32(p+16,r.id);p[20]=r.phase;p[21]=r.reason;p[22]=r.running;p[23]=1;
-    write(p+24,r.active);write(p+44,r.requested);scope_control::put32(p+988,scope_control::crc(p,988));
+    scope_control::put32(p+16,r.id);p[20]=r.phase;p[21]=r.reason;p[22]=r.running;p[23]=3;
+    write(p+24,r.active);write(p+44,r.requested);
+    p[64]=r.active.duty==50?0:r.active.duty;p[65]=r.requested.duty==50?0:r.requested.duty;scope_control::put32(p+988,scope_control::crc(p,988));
 }
 }

@@ -11,6 +11,7 @@
 #include <stm32u5xx_ll_dma.h>
 #include <stm32u5xx_ll_dcache.h>
 #include "benchmark_protocol.h"
+#include "frame_buffer.h"
 
 #if !defined(CONFIG_SOC_STM32U585XX)
 #error "Sólo UNO Q STM32U585"
@@ -32,8 +33,10 @@ static constexpr uint32_t CLEAR_FLAGS = SPI_IFCR_EOTC | SPI_IFCR_TXTFC |
     SPI_IFCR_MODFC | SPI_IFCR_SUSPC;
 static constexpr uint32_t ACTIVE_TIMEOUT_US = 50000;
 static_assert(BLOCK_BYTES % CONFIG_DCACHE_LINE_SIZE == 0, "DMA cache alignment");
-static uint8_t tx[BLOCK_BYTES] __attribute__((aligned(CONFIG_DCACHE_LINE_SIZE)));
-static uint8_t rx[BLOCK_BYTES] __attribute__((aligned(CONFIG_DCACHE_LINE_SIZE)));
+static uint8_t *tx;
+static uint8_t *active_tx;
+static bool high_rate_transport();
+static uint8_t *rx;
 static DMA_Channel_TypeDef *const tx_dma = GPDMA1_Channel2;
 static DMA_Channel_TypeDef *const rx_dma = GPDMA1_Channel3;
 static constexpr uint32_t DMA_ERRORS = DMA_CSR_DTEF | DMA_CSR_ULEF | DMA_CSR_USEF | DMA_CSR_TOF;
@@ -135,10 +138,30 @@ static bool reset_dma(DMA_Channel_TypeDef *channel, uint32_t timeout_us = ACTIVE
     return true;
 }
 
+struct SpiDmaConfig { uint32_t ctr1, ctr2, ccr; bool initialized; };
+static SpiDmaConfig spi_dma_config[2]{};
 static int configure_dma(DMA_Channel_TypeDef *channel, bool transmit) {
+    const uint8_t *tx_buffer=high_rate_transport()?active_tx:tx;
+    auto &saved = spi_dma_config[transmit ? 0 : 1];
+    if (high_rate_transport() && saved.initialized) {
+        // Fixed single-block geometry and callbacks. Both channels have been
+        // stopped/reset before reaching this point; do not rewrite live DMA.
+        if (channel->CCR & (DMA_CCR_EN | DMA_CCR_RESET)) return -EBUSY;
+        channel->CTR1 = saved.ctr1;
+        channel->CTR2 = saved.ctr2;
+        channel->CBR1 = BLOCK_BYTES;
+        channel->CSAR = transmit ? reinterpret_cast<uint32_t>(tx_buffer)
+                                : reinterpret_cast<uint32_t>(&SPI3->RXDR);
+        channel->CDAR = transmit ? reinterpret_cast<uint32_t>(&SPI3->TXDR)
+                                : reinterpret_cast<uint32_t>(rx);
+        channel->CLLR = 0;
+        channel->CCR = saved.ccr;
+        __DSB();
+        return 0;
+    }
     struct dma_block_config block = {};
     block.block_size = BLOCK_BYTES;
-    block.source_address = transmit ? reinterpret_cast<uint32_t>(tx)
+    block.source_address = transmit ? reinterpret_cast<uint32_t>(tx_buffer)
                                     : reinterpret_cast<uint32_t>(&SPI3->RXDR);
     block.dest_address = transmit ? reinterpret_cast<uint32_t>(&SPI3->TXDR)
                                   : reinterpret_cast<uint32_t>(rx);
@@ -158,6 +181,10 @@ static int configure_dma(DMA_Channel_TypeDef *channel, bool transmit) {
     // Mantener los puertos RAM/SPI del ensayo anterior, transferencias de byte.
     channel->CTR1 = transmit ? (DMA_CTR1_SINC | DMA_CTR1_SAP)
                              : (DMA_CTR1_DINC | DMA_CTR1_DAP);
+    saved.ctr1 = channel->CTR1;
+    saved.ctr2 = channel->CTR2;
+    saved.ccr = channel->CCR & ~(DMA_CCR_EN | DMA_CCR_RESET | DMA_CCR_SUSP);
+    saved.initialized = high_rate_transport();
     return 0;
 }
 
@@ -178,8 +205,8 @@ static int exchange() {
         ready = false; // No reutilizar RAM mientras un DMA no se detuvo.
         return -ETIMEDOUT;
     }
-    cache_flush_invalidate(tx, sizeof(tx));
-    cache_flush_invalidate(rx, sizeof(rx));
+    cache_flush_invalidate(high_rate_transport()?active_tx:tx, BLOCK_BYTES);
+    cache_flush_invalidate(rx, BLOCK_BYTES);
     if (configure_dma(rx_dma, false) < 0 || configure_dma(tx_dma, true) < 0) {
         ready = false;
         return -EIO;
@@ -223,18 +250,36 @@ static int exchange() {
     const bool tx_stopped = reset_dma(tx_dma);
     const bool rx_stopped = reset_dma(rx_dma);
     if (!tx_stopped || !rx_stopped) { ready = false; return -ETIMEDOUT; }
-    cache_invalidate(rx, sizeof(rx));
+    cache_invalidate(rx, BLOCK_BYTES);
     return result;
 }
 
 #include "acquisition.h"
+#include "high_rate_profile.h"
+static bool high_rate_transport() {
+    return scope_high_rate(acquisition::bits,acquisition::single()?1U:2U,
+        acquisition::period,acquisition::node_pairs());
+}
 #include "wav.h"
 
 // SPI owns tx/rx exclusively. Output worker owns acquisition::take/release.
-// A one-frame handoff keeps borrowed ADC RAM alive until SPI has sent it.
+// Legacy rates retain one-frame acknowledgement; only high-rate ADC8 pipelines.
 static k_mutex output_lock;
+static constexpr unsigned FRAME_SLOTS=3;
 static k_sem frame_available, frame_sent;
-static uint8_t sample_frame[BLOCK_BYTES];
+static SampleFrame ordinary_frame;
+static_assert(sizeof(SampleFrame)==BLOCK_BYTES,"No frame padding");
+static_assert(3456U*2U*sizeof(uint32_t)+(FRAME_SLOTS-1U)*BLOCK_BYTES <= sizeof(scope_storage::SingleMemory::timestamps),"Fast DMA nodes and frame scratch must not overlap");
+static SampleFrame *frame_slot(unsigned slot) {
+    if(!slot) return &ordinary_frame;
+    // Only the high-rate profile borrows unused timestamp RAM. Its two DMA
+    // nodes occupy 27648 bytes; the aligned buffers start at byte 63552.
+    // Reconfiguration occurs after the last physical ACK, before union rebinding.
+    auto *end=reinterpret_cast<uint8_t *>(acquisition::timestampBuffer)+acquisition::timestamp_storage_bytes();
+    return new (end-(FRAME_SLOTS-slot)*BLOCK_BYTES) SampleFrame;
+}
+static SampleFrame *sample_ready[FRAME_SLOTS];
+static unsigned read_frame=0;
 K_MSGQ_DEFINE(control_replies, sizeof(scope_control::Reply), 8, 4);
 static scope_control::Switch output_switch;
 static scope_acq::Settings settings;
@@ -336,6 +381,7 @@ static void build_samples(uint8_t *frame, acquisition::Node *node, unsigned offs
     }
 }
 static void output_worker(void *, void *, void *) {
+    unsigned next_frame=0;
     for (;;) {
         k_mutex_lock(&output_lock, K_FOREVER);
         if (settings.pending()) {
@@ -377,13 +423,25 @@ static void output_worker(void *, void *, void *) {
             // APPLIED must follow the last stop bit, not just the final register write.
             while (!uart_irq_tx_complete(scope_uart)) k_yield();
         } else {
+            const bool pipelined=high_rate_transport();
+            unsigned in_flight=0;
             for (unsigned offset = 0; offset < acquisition::node_pairs();) {
                 const unsigned count = min(acquisition::native()?(acquisition::single()?(acquisition::bits==8?864U:acquisition::bits==10?696U:496U):acquisition::bits==8?432U:((872U*8U/(acquisition::bits*2U))&~3U)):acquisition::period==133U?904U:acquisition::single()?516U:acquisition::bits==14 ? 258U : 226U, unsigned(acquisition::node_pairs() - offset));
-                build_samples(sample_frame, node, offset, count);
+                if(pipelined && in_flight==FRAME_SLOTS) {
+                    k_sem_take(&frame_sent,K_FOREVER);--in_flight;
+                }
+                auto *frame=frame_slot(pipelined?next_frame:0);
+                build_samples(frame->bytes,node,offset,count);
+                offset+=count;
+                if(pipelined) {
+                    sample_ready[next_frame]=frame;
+                    next_frame=(next_frame+1U)%FRAME_SLOTS;
+                    ++in_flight;
+                }
                 k_sem_give(&frame_available);
-                k_sem_take(&frame_sent, K_FOREVER);
-                offset += count;
+                if(!pipelined) k_sem_take(&frame_sent,K_FOREVER);
             }
+            while(in_flight) {k_sem_take(&frame_sent,K_FOREVER);--in_flight;}
         }
         acquisition::release();
     }
@@ -429,8 +487,8 @@ void setup() {
     uart_irq_tx_disable(scope_uart);
     uart_irq_rx_disable(scope_uart);
     k_mutex_init(&output_lock);
-    k_sem_init(&frame_available, 0, 1);
-    k_sem_init(&frame_sent, 0, 1);
+    k_sem_init(&frame_available,0,FRAME_SLOTS);
+    k_sem_init(&frame_sent, 0, FRAME_SLOTS);
     ready = acquisition::start();
     if (ready) k_thread_create(&output_thread_data, output_stack,
         K_THREAD_STACK_SIZEOF(output_stack), output_worker, nullptr, nullptr, nullptr,
@@ -442,12 +500,16 @@ __attribute__((optimize("O2")))
 #endif
 void loop() {
     if (!ready) { k_sleep(K_MSEC(100)); return; }
+    // The core main thread has a 32 KiB stack outside the sketch arena.
+    // These buffers remain alive until exchange stops/resets both DMA channels.
+    alignas(CONFIG_DCACHE_LINE_SIZE) uint8_t tx_storage[BLOCK_BYTES],rx_storage[BLOCK_BYTES];
+    tx=tx_storage;rx=rx_storage;
     wav::service();
     if ((acquisition::native() || acquisition::period==133U) && acquisition::threads_started &&
         !acquisition::fatal_errors && !acquisition::dropped_nodes &&
         !k_sem_count_get(&frame_available) && !k_msgq_num_used_get(&wav_replies) &&
         !k_msgq_num_used_get(&generator_replies) && !k_msgq_num_used_get(&settings_replies) &&
-        !k_msgq_num_used_get(&control_replies)) { k_busy_wait(5); k_yield(); return; }
+        !k_msgq_num_used_get(&control_replies)) { if(!high_rate_transport()) k_busy_wait(5); k_yield(); return; }
     scope_wav::Reply wav_reply{};
     scope_control::Reply reply{};
     scope_acq::Reply config_reply{};
@@ -457,23 +519,31 @@ void loop() {
     const bool have_generator = !have_wav && k_msgq_get(&generator_replies, &generator_reply, K_NO_WAIT) == 0;
     const bool have_config = !have_wav && !have_generator && k_msgq_get(&settings_replies, &config_reply, K_NO_WAIT) == 0;
     const bool have_reply = !have_wav && !have_generator && !have_config && k_msgq_get(&control_replies, &reply, K_NO_WAIT) == 0;
-    const bool have_samples = !have_wav && !have_generator && !have_config && !have_reply && k_sem_take(&frame_available, K_NO_WAIT) == 0;
+    const bool pipelined=high_rate_transport();
+    const bool have_samples = !have_wav && !have_generator && !have_config && !have_reply &&
+        k_sem_take(&frame_available,K_NO_WAIT)==0;
+    uint8_t *packet=tx;
+    if(have_samples && pipelined) {
+        packet=sample_ready[read_frame]->bytes;
+        read_frame=(read_frame+1U)%FRAME_SLOTS;
+    }
+    active_tx=packet;
     uint32_t started = k_cycle_get_32();
-    if (have_wav) scope_wav::encode(tx, sequence, wav_reply);
-    else if (have_generator) scope_gen::encode(tx, sequence, generator_reply);
-    else if (have_config) scope_acq::encode(tx, sequence, config_reply);
-    else if (have_reply) scope_control::encode(tx, sequence, reply);
+    if (have_wav) scope_wav::encode(packet, sequence, wav_reply);
+    else if (have_generator) scope_gen::encode(packet, sequence, generator_reply);
+    else if (have_config) scope_acq::encode(packet, sequence, config_reply);
+    else if (have_reply) scope_control::encode(packet, sequence, reply);
     else {
-        data_frame(tx, sequence, last_ping, spi_errors, bad_ping, short_transfers,
+        data_frame(packet, sequence, last_ping, spi_errors, bad_ping, short_transfers,
                    last_result, last_error, prepare_us, check_us);
-        put16(tx + 6, acquisition::native()?20:acquisition::period==133U?19:acquisition::single()?16:acquisition::bits==14 ? 15 : 3);
-        if (have_samples) memcpy(tx + 48, sample_frame + 48, BLOCK_BYTES - 48 - CRC_BYTES);
-        else {
+        put16(packet + 6, acquisition::native()?20:acquisition::period==133U?19:acquisition::single()?16:acquisition::bits==14 ? 15 : 3);
+        if (have_samples && !pipelined) memcpy(packet+48,ordinary_frame.bytes+48,BLOCK_BYTES-48-CRC_BYTES);
+        else if(!have_samples) {
             uint8_t idle[BLOCK_BYTES];
             build_samples(idle, nullptr, 0, 0);
-            memcpy(tx + 48, idle + 48, BLOCK_BYTES - 48 - CRC_BYTES);
+            memcpy(packet + 48, idle + 48, BLOCK_BYTES - 48 - CRC_BYTES);
         }
-        seal(tx);
+        seal(packet);
     }
     prepare_us = elapsed_us(started);
     k_mutex_unlock(&output_lock);
@@ -531,7 +601,12 @@ void loop() {
     }
     check_us = elapsed_us(started);
     ++sequence;
-    if (have_samples && ready) k_sem_give(&frame_sent);
+    // Physical completion acknowledges every fragment. The producer drains all
+    // acknowledgements before releasing the node; no reuse after an error.
+    if(have_samples && ready) k_sem_give(&frame_sent);
+    // Never unwind stack-owned DMA buffers after an unsuccessful stop/reset.
+    // A failed acquisition already requires the validated board restart path.
+    if(!ready) for(;;) k_sleep(K_MSEC(100));
     // Idle status traffic is bounded; SPI remains available during UART output.
     if (!have_wav && !have_generator && !have_config && !have_reply && !have_samples) k_sleep(K_MSEC(1));
 }
