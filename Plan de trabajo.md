@@ -6,7 +6,7 @@
 
 1. **Bode:** validar Tonos/Pulso con referencia del generador; repetir los tres métodos con cableado de circuito. Sweep CH2/CH2 ya dibuja. Validar físicamente el rango ampliado: seno 150 kHz, análisis de Pulso hasta 200 kHz según Fs. No usar CH1/antena como referencia del estímulo.
 2. **RADIO/Scan:** capturar la pila GUI instrumentada cuando vuelva «GUI atrasada», especialmente ADC8/1,6 MS/s y US ADC10/1,25 MS/s. Los ensayos sin reproducción del fallo no cierran la incidencia.
-3. **RADIO→A0:** completar estabilidad sostenida en los perfiles relevantes. Mantener seguimiento del underrun intermitente ADC14/851 kS/s y distinguir transporte ADC de alimentación DAC.
+3. **RADIO→A0:** nuevo underrun real ADC8/1,6 MS/s con 11 resintonías; completar estabilidad sostenida en los perfiles relevantes. [Diagnóstico e instrumentación](docs/DIAGNOSTICO_RADIO_A0_ADC8_1600_V17.md). Mantener seguimiento del underrun intermitente ADC14/851 kS/s y distinguir transporte ADC de alimentación DAC.
 4. **WAV:** investigar las pausas de transporte/refill y calificar a largo plazo el candidato aislado de servicio por tramas. Ventana de dos bloques y buffer ampliado no calificaron por sí solos; no promoverlos.
 5. **Etapa IV RADIO:** escucha y recepción selectiva US con antena real; mejorar confianza de banda sugerida; información de emisora si es inferible. A0 a 48 kHz requiere resolver reloj efectivo y validación; hoy no está implementado.
 6. **Tasas por bits:** no aumentar ni declarar calificadas nuevas tasas sin evidencia física y restauración. Los ajustes de UI no sustituyen esa aceptación.

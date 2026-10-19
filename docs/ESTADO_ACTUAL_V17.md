@@ -36,6 +36,8 @@ Las herramientas de consola conservan V16 como valor predeterminado por compatib
 
 ## Validación y pendientes
 
+- [Corte real RADIO/A0 ADC8/1,6 MS/s](DIAGNOSTICO_RADIO_A0_ADC8_1600_V17.md): underrun confirmado; registro ampliado, causa abierta.
+
 - [Generador ampliado](GENERADOR_200K_V17.md): evidencia física e instalación, con límites analógicos explícitos.
 - [Bode sin curvas](DIAGNOSTICO_BODE_SIN_CURVAS_V17.md): referencia, corrección y alcance de pruebas.
 - [Scan y GUI atrasada](DIAGNOSTICO_SCAN_GUI_V17.md): fallos reales todavía no reproducidos consistentemente; instrumentación conservada.

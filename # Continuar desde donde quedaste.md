@@ -4,6 +4,8 @@ La pareja activa es **V17**. Leer primero el [estado actual](docs/ESTADO_ACTUAL_
 
 ## Último trabajo
 
+Nuevo corte real RADIO/A0 a ADC8/1,6 MS/s (18:39:17): DAC UNDERRUN, fuente sin error ni hits de lazo. Se incorporó registro acotado de huecos DSP/chunks y pausas de transporte, con tasa de salida explícita. No se cambiaron reservas ni política de entrega. [Seguimiento y pruebas](docs/DIAGNOSTICO_RADIO_A0_ADC8_1600_V17.md). Causa todavía abierta.
+
 Se ordenó documentación sin cambiar la lógica: el README anterior y los registros acumulados se conservaron en `docs/historico`. Las fuentes activas siguen en sus rutas; experimentos, capturas y respaldos se mantienen.
 
 Q: sólo Scope V17 como app de usuario, activa. V16 y Send1400 se retiraron después de exportar/verificar ZIP y SHA256. Los ejemplos Arduino se conservan. Firmware antes/después idéntico: `96685eb64cc722adebc7f345f40c3500e22642814bbfc6f182c66c0f992a7ec9`. [Limpieza](diagnosticos/resultados_v17/cleanup_apps_20261019_160438.json).

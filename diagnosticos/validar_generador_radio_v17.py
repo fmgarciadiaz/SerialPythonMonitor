@@ -68,6 +68,7 @@ def main(owner_context=None):
    self.last_wav_seen=None;self.recent=deque(maxlen=256);self.trace=deque(maxlen=3000)
    self.last_pump=None;self.seen_produced=None
   def _trace_transport(self,stage,start,end,rid=None,cpu_seconds=None,process_cpu_seconds=None):
+   super()._trace_transport(stage,start,end,rid,cpu_seconds,process_cpu_seconds)
    self.trace.append((stage,start,end,rid))
    maxima=report.setdefault('transport_max_ms',{})
    maxima[stage]=max(maxima.get(stage,0),(end-start)*1000)
@@ -222,6 +223,11 @@ def main(owner_context=None):
       w.radio_auto_gain.setChecked(True);changed.add('auto_gain')
      if elapsed>8 and 'volume' not in changed:w.radio_output_panel.volume.setValue(50);changed.add('volume')
      if elapsed>12 and 'retune' not in changed:w.radio_frequency.setValue(retuned);changed.add('retune')
+     if '--retune-stress' in sys.argv:
+      step=int(elapsed//10)
+      if step>0 and step!=report.get('retune_step'):
+       report['retune_step']=step
+       w.radio_frequency.setValue(tuned if step%2 else retuned)
      if not deferred and elapsed>17 and 'snapshot' not in changed:
       w.grab().save(str(folder/'radio_mode.png'));changed.add('snapshot')
      if elapsed>duration and 'stop' not in changed:w.radio_output_panel.stop();changed.add('stop')
