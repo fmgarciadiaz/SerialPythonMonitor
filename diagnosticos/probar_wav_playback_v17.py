@@ -15,7 +15,10 @@ from monitor.v17.receiver.unoq_switch import Mode
 from monitor.v17.bode_calibration import instrument_identity
 def main():
  receivers=[]
- if '--pcm-window2' in sys.argv or '--pcm-buffer30' in sys.argv:
+ import inspect
+ native_pcm='pcm=isinstance(self.wav_codes,np.ndarray)' in inspect.getsource(OutputReceiver.service_wav)
+ thread_clock_available=hasattr(time,'thread_time')
+ if not native_pcm and ('--pcm-window2' in sys.argv or '--pcm-buffer30' in sys.argv):
   # Isolated experiments: confirmed PCM window and/or advertised queue capacity.
   import inspect,textwrap
   import monitor.v17.receiver.unoq_config_receiver as receiver_module
@@ -30,7 +33,8 @@ def main():
    code=code.replace(old,"target=max(2,min(capacity,getattr(self.wav_codes,'target_blocks',30 if isinstance(self.wav_codes,np.ndarray) else 16)))",1)
   namespace=dict(vars(receiver_module));exec(code,namespace)
   OutputReceiver.service_wav=namespace['service_wav']
- if '--pcm-frame-service' in sys.argv:
+ native_frames='or isinstance(self.wav_codes,np.ndarray)' in inspect.getsource(OutputReceiver.pump)
+ if '--pcm-frame-service' in sys.argv and not native_frames:
   import inspect,textwrap
   import monitor.v17.receiver.unoq_config_receiver as receiver_module
   code=textwrap.dedent(inspect.getsource(OutputReceiver.pump))
@@ -59,12 +63,18 @@ def main():
  app=QtWidgets.QApplication([])
  folder=ROOT/'diagnosticos/resultados_v17'/('wav_playback_'+time.strftime('%Y%m%d_%H%M%S'));folder.mkdir()
  report={'cases':[],'errors':[],'restored':False,'platform':app.platformName(),'experimental_pcm_frame_service':'--pcm-frame-service' in sys.argv,'experimental_pcm_buffer30':'--pcm-buffer30' in sys.argv,'experimental_pcm_window2':'--pcm-window2' in sys.argv,'trace_cpu_clock':'process_time fallback; use wall timestamps for causal analysis'};prior=None
+ report.update(native_pcm_delivery=native_pcm,native_pcm_frame_service=native_frames,
+     trace_cpu_clock='thread_time' if thread_clock_available else 'process_time fallback; use wall timestamps for causal analysis')
  config=None;duration=float(sys.argv[sys.argv.index('--seconds')+1]) if '--seconds' in sys.argv else 120 if '--long' in sys.argv else 18
  matrix=((16,76226,50000),(16,76226,40000),(16,76226,20000)) if '--adc16' in sys.argv else ((14,100000,50000),) if '--long' in sys.argv else ((8,40000,20000),(8,40000,40000),(8,40000,50000),(14,100000,20000),(14,100000,40000),(14,100000,50000))
  if '--case16' in sys.argv:matrix=((16,76226,50000),)
  if '--critical-pair' in sys.argv:matrix=((16,76226,50000),(14,100000,50000))
  if '--qualify16' in sys.argv:matrix=((16,76226,50000),)*3;duration=120
  if '--controls' in sys.argv:matrix=((16,76226,50000),);duration=35
+ if '--select-only' in sys.argv:matrix=((8,1600000,50000),);duration=10
+ source=Path(sys.argv[sys.argv.index('--source')+1]).resolve() if '--source' in sys.argv else ROOT/'audios/imperial.wav'
+ report['source']=str(source)
+ report['selection_only']='--select-only' in sys.argv
  def save():(folder/'report.json').write_text(json.dumps(report,indent=2)+'\n')
  sys.excepthook=lambda kind,value,tb:report['errors'].append(''.join(traceback.format_exception(kind,value,tb)))
  with board_owner('1060031107','Diagnosticar cortes WAV hacia A0'):
@@ -76,7 +86,7 @@ def main():
     prior={'adc':asdict(r.config),'generator':asdict(g)};report['prior']=prior;r.configure(Configuration(14,40000))
    report['identity_before']=instrument_identity('1060031107');save()
    for bits,adc_rate,audio_rate in matrix:
-    config=Configuration(bits,adc_rate);radio=False
+    config=Configuration(bits,adc_rate);radio='--radio' in sys.argv
     w=worker=thread=None
     row={'bits':bits,'adc_rate':adc_rate,'audio_rate':audio_rate,'radio':radio,'samples':0,'errors':[],'states':[]};report['cases'].append(row)
     try:
@@ -109,9 +119,19 @@ def main():
       app.processEvents();time.sleep(.001)
       if not selected and time.monotonic()-start>6 and w.applied_configuration==config:
        selected=True
-       w._wav_file_selected(str(ROOT/'audios/imperial.wav'))
        w.wav_rate.setCurrentIndex(w.wav_rate.findData(audio_rate))
-       w._play_wav();row['play_requested']=True
+       if '--select-only' in sys.argv:
+        w._choose_wav();row['dialog_opened']=True
+       else:
+        w._wav_file_selected(str(source))
+        w._play_wav();row['play_requested']=True
+      if '--select-only' in sys.argv and selected:
+       age=time.monotonic()-start
+       if age>7 and not row.get('file_chosen'):
+        w._wav_file_dialog.findChild(QtWidgets.QLineEdit,'fileNameEdit').setText(str(source));row['file_chosen']=True
+       if age>8 and not row.get('dialog_accepted'):
+        w._wav_file_dialog.accept();row['dialog_accepted']=True
+       if age>16:break
       if '--controls' in sys.argv and selected:
        actions=row.setdefault('actions',[]);age=time.monotonic()-start
        if age>8 and 'forward' not in actions and w._wav_active:w._seek_wav(10);actions.append('forward')
@@ -127,6 +147,9 @@ def main():
       if row['errors']:break
      row['generator_status']=w.generator_status.text()
      row.update(metadata=w._wav_metadata,selected=selected and w._wav_metadata is not None,pending_peak=worker.pending_batches_peak,dsp_peak=worker.pending_dsp_peak,gui_delay_max_ms=w.batch_queue_delay_max_ms,ok=selected and not row['errors'] and row.get('max_played',0)>=audio_rate*duration)
+     if '--select-only' in sys.argv:
+      row.update(dialog_closed=w._wav_file_dialog is None,delivery_failure=getattr(worker,'delivery_failure_snapshot',None))
+      row['ok']=bool(row['selected'] and row['dialog_closed'] and not row['errors'] and not w._wav_preparing and not w._wav_active)
     finally:
      if '--controls' in sys.argv:row['ok']=not row['errors'] and set(row.get('actions',[]))=={'forward','backward','stop','replay','near_eof','eof','restart_after_eof','final_stop'}
      if worker:worker.stop()

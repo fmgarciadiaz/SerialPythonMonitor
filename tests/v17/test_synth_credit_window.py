@@ -22,9 +22,9 @@ class SynthCreditWindowTests(unittest.TestCase):
         self.assertEqual(struct.unpack_from('<I',socket.sendall.call_args.args[0],20)[0],1440)
         r.wav_request(3);self.assertEqual(len(r.wav_inflight),1)
         r.pump();self.assertEqual(len(r.wav_inflight),1)
-    def test_file_wav_still_serializes_and_target_bounds_reservations(self):
+    def test_file_wav_uses_two_credits_and_synth_target_bounds_reservations(self):
         r,socket=self.receiver(np.zeros(4800,dtype='<u2'));r.service_wav();r.service_wav()
-        self.assertEqual(len(r.wav_inflight),1)
+        self.assertEqual(len(r.wav_inflight),2)
         r,socket=self.receiver(FMSource(rate=20000));r.wav_status.free_blocks=12
         r.service_wav();r.service_wav();self.assertEqual(len(r.wav_inflight),1)
         self.assertEqual(r.wav_codes.target_blocks,5)

@@ -32,10 +32,10 @@ class RadioTests(unittest.TestCase):
         self.w.meas_channel_combo.setCurrentText('RADIO')
         return audio
 
-    def mixed_history(self):
+    def mixed_history(self,config=None):
         from monitor.v17.processing import BatchProcessor
         from monitor.v17.numeric_batch import NumericBatch,SampleClock
-        config=Configuration(8,1403508)
+        config=config or Configuration(8,1403508)
         self.w._acquisition_confirmed(config.bits,config.rate)
         self.w.radio_frequency.setValue(50)
         self.w.radio_enabled.setChecked(True)
@@ -53,6 +53,20 @@ class RadioTests(unittest.TestCase):
         self.w.trigger_checkbox.setChecked(False)
         for name,action in self.w.graph_channel_actions.items():action.setChecked(name in ('CH1','RADIO','FILTER'))
         return config
+
+    def test_radio_demodulates_and_draws_at_1600_without_generator_a0(self):
+        self.mixed_history(Configuration(8,1600000))
+        self.assertTrue(self.w.radio_enabled.isChecked())
+        self.assertIsNone(self.w.radio_output_panel.source)
+        self.assertFalse(self.w._wav_active)
+        self.assertGreater(self.w.radio_stream.counter,1000)
+        self.w.render_frame()
+        curve=self.w.line_items['RADIO']
+        self.assertTrue(curve.isVisible())
+        x,y=curve.getData()
+        self.assertGreater(len(y),100)
+        self.assertTrue(np.isfinite(y).all())
+        self.assertGreater(np.ptp(y),.1)
 
     def test_mixed_rf_audio_are_visible_on_common_time_without_resampling(self):
         config=self.mixed_history();self.w.render_frame()

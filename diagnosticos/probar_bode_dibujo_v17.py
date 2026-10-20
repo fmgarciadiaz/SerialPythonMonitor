@@ -46,8 +46,9 @@ def main():
    for index in (0,1,2):
     w.spectral.bode.tabs.setCurrentIndex(index);p=w.spectral.bode.panels[index]
     p.reference_channel.setCurrentText('CH2');p.response_channel.setCurrentText('CH2');p.start.setValue(20);p.end.setValue(1000)
-    if index==0:p.points.setValue(2);p.settle.setValue(20);p.cycles.setValue(4)
-    else:p.capture.setValue(.5);p.averages.setValue(1);p.width.setValue(1000)
+    if index==0:
+     p.points.setValue(2);p.settle.setValue(int(sys.argv[sys.argv.index('--settle-ms')+1]) if '--settle-ms' in sys.argv else 200);p.cycles.setValue(4)
+    else:p.capture.setValue(.5);p.averages.setValue(1);p.width.setValue(int(sys.argv[sys.argv.index('--pulse-us')+1]) if '--pulse-us' in sys.argv else 1000)
     end=time.monotonic()+2
     while time.monotonic()<end:app.processEvents();time.sleep(.002)
     w._auto_apply_timer.stop();w._generator_timer.stop();p.begin();start=time.monotonic()
@@ -57,6 +58,8 @@ def main():
      x,y=curve.getData();curves.append({'visible':curve.isVisible(),'points':len(x) if x is not None else 0,'finite':int(np.isfinite(y).sum()) if y is not None else 0})
     row={'method':index,'status':p.status.text(),'active':p.active,'result_points':len(data),'valid_gain':int(np.isfinite(data[:,1]).sum()) if len(data) else 0,'curves':curves,'invalid_points':getattr(p,'invalid_points',None)}
     row['pair']=p.pair()
+    row['settle_ms']=p.settle.value()
+    if index!=0:row['pulse_width_us']=p.width.value()
     row['generator']=asdict(p.config)
     if p.buffer:
      captured=np.asarray(p.buffer);np.save(folder/f'method{index}_capture.npy',captured)

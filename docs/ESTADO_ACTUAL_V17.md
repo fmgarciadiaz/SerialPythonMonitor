@@ -8,12 +8,12 @@ V17 es la pareja activa: `monitor/v17`, `arduino/v17` y `tests/v17`. V16 se cons
 |---|---|
 | Adquisición | A2/CH1 y A3/CH2, 8/10/12/14 bits y 16 por oversampling. Perfiles CH1 y dual según resolución. ADC8 CH1 llega a 1,6 MS/s; integridad sostenida no implica holgura ni ancho de banda analógico. |
 | Generador A0 | Seno hasta 150 kHz; cuadrada hasta 200 kHz; triángulo/rampa hasta 50 kHz. Frecuencias intermedias, amplitud y offset. La frecuencia efectiva depende del timer. |
-| RADIO | Recepción AM, banda RF predeterminada 8 kHz, gain manual/automático hasta ×80. US con dial extendido, alias y Scan multitasa; sin US, mapeo directo. |
+| RADIO | Play activa demodulación y análisis sin necesitar A0; no hay salida a los parlantes del PC implementada. Recepción AM, banda RF predeterminada 8 kHz, gain manual/automático hasta ×80. US con dial extendido, alias y Scan multitasa; sin US, mapeo directo. |
 | Generador Radio | Entrada RADIO o FILTER, volumen y offset en generador; salida de la señal procesada hacia A0. Protección de lazo. Estabilidad global todavía en seguimiento. |
 | FILTER | Selector propio de entrada; OFF sin procesamiento de filtro. Incluye rechazo de banda y presets. |
 | Análisis | Temporal, FFT, heatmap y Bode. CH1 puede permanecer visible junto a RADIO. |
 | Bode | Tonos y Sweep/Chirp hasta 150 kHz; Pulso hasta 200 kHz. Final menor que 0,45 × Fs. Necesita una referencia coherente del estímulo. |
-| WAV | Selector no modal que abre en `audios/`. A0 a 20/40/50 kHz con restricciones de adquisición; cortes variables siguen abiertos. |
+| WAV | Selector no modal en `audios/`; A0 a 20/40/50 kHz con restricciones ADC. Entrega PCM con dos créditos, cola anunciada hasta 30 y servicio por tramas incorporada tras 3×120 s a ADC16/76226→50 kHz. Otras combinaciones y cierre Qt siguen en seguimiento. |
 
 El volumen modifica la amplitud visual de RADIO en temporal cuando se usa Generador Radio. Auto gain conserva la continuidad visual al ajustar la ganancia. El rótulo «s/holg.» se retiró de la interfaz; la limitación física sigue documentada.
 
@@ -21,7 +21,7 @@ El volumen modifica la amplitud visual de RADIO en temporal cuando se usa Genera
 
 A0 a la entrada del circuito y CH1/A2; salida del circuito a CH2/A3, masa común. CH1 conectado a antena no sirve como referencia del estímulo. CH2/CH2 permite una autocomprobación unitaria si A0 llega a CH2.
 
-Pulso/Sweep ahora detectan el inicio usando la referencia seleccionada. Sweep dibujó 2545 y 2546 puntos válidos en pruebas físicas CH2/CH2. Tonos y Pulso no quedaron validados por esos ensayos; la ampliación de selectores de frecuencia sólo tiene comprobación local, no aceptación física de Bode a 150/200 kHz.
+Pulso/Sweep ahora detectan el inicio usando la referencia seleccionada. Sweep dibujó 2545 y 2546 puntos válidos en pruebas físicas CH2/CH2. En un seguimiento, Tonos CH2/CH2 dibujó 5/5 puntos entre 20 y 1000 Hz con asentamiento de 200 ms; Pulso sigue sin detectar el estímulo. Se corrigió el orden de entrega de las confirmaciones del generador respecto a muestras pendientes. La ampliación de selectores sólo tiene comprobación local, no aceptación física de Bode a 150/200 kHz.
 
 ## Q instalado
 
@@ -41,7 +41,8 @@ Las herramientas de consola conservan V16 como valor predeterminado por compatib
 - [Generador ampliado](GENERADOR_200K_V17.md): evidencia física e instalación, con límites analógicos explícitos.
 - [Bode sin curvas](DIAGNOSTICO_BODE_SIN_CURVAS_V17.md): referencia, corrección y alcance de pruebas.
 - [Scan y GUI atrasada](DIAGNOSTICO_SCAN_GUI_V17.md): fallos reales todavía no reproducidos consistentemente; instrumentación conservada.
-- [Cortes WAV](DIAGNOSTICO_CORTES_WAV_V17.md): candidatos aislados, sin promoción de variantes no calificadas.
+- [Estabilidad y clics](ESTABILIDAD_RADIO_WAV_CLICS_V17.md): WAV incorporado, resintonía suave, duración de audio obsoleto conservada y transitorios Sweep medidos.
+- [Historial de cortes WAV](DIAGNOSTICO_CORTES_WAV_V17.md): fallos y variantes parciales conservados como evidencia.
 - [RADIO/A0 sostenido](VALIDACION_DESACOPLE_RADIO_V17.md): resultados mixtos y controles posteriores; no declarar aceptación global.
 - [RADIO y US](RADIO_ANTENA_US_V17.md): recepción selectiva y escucha real pendientes.
 

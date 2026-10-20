@@ -40,3 +40,7 @@ Segundo intento151624usa procesoPythonnuevo para comprobaciónfísica,terminó
 ok/installed/restored=true. Conservar informes delintento interrumpido.
 
 ReiniciarV17para usar nuevos límites.
+
+## Transitorios en Sweep/Chirp
+
+Los extremos de los barridos pueden producir clics por saltos de nivel. Se midieron en A0→CH2 sin modificar firmware; el suavizado sigue pendiente. Ver [medición y seguimiento](ESTABILIDAD_RADIO_WAV_CLICS_V17.md). No confundir la frecuencia verificada con una garantía de ausencia de transitorios.

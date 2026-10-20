@@ -1,3 +1,5 @@
+> Actualización posterior del 19/10/2026: la combinación completa de dos créditos PCM, cola anunciada y servicio por tramas pasó 3×120 s y fue incorporada. Los fallos de variantes parciales que siguen se conservan. Ver [resultado vigente](ESTABILIDAD_RADIO_WAV_CLICS_V17.md).
+
 # Cortes variables WAV→A0 — 19/10/2026
 
 Archivo audios/imperial.wav, GUI Cocoa, RADIO OFF, firmware/productivo sin

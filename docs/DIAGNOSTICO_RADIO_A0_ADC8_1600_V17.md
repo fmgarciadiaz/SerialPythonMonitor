@@ -36,3 +36,7 @@ La causa y la corrección funcional siguen pendientes; un pase de 120 s no elimi
 Configuración previa restaurada, ADC8/1,6 MS/s y generador OFF, firmware idéntico. Recuperación 10 s: 15991776 muestras, dropped/fatal=0. Los dos pases no identifican la causa ni constituyen una corrección del corte real. [Resumen de ambos](../diagnosticos/resultados_v17/radio_chain_audit/adc8_1600_underrun_followup_20261019.json).
 
 Reiniciar V17 para cargar el registro ampliado en una sesión normal. No hace falta Preparar Q ni cargar firmware.
+
+## Control RADIO/A0 tras corregir el orden de ACK
+
+`diagnosticos/resultados_v17/generador_radio_20261019_200206/report.json`: Python 3.13/Cocoa, ADC8/1,6 MS/s y A0 40 kHz, 60 s con resintonías, sin underrun ni dropped/fatal. Se restauró la configuración previa, ADC8/1,6 MS/s y generador OFF; firmware idéntico. Recuperación posterior de 10 s: 15991776 muestras íntegras. Este control comprueba compatibilidad del cambio, no resuelve el corte intermitente previo ni califica el rango ampliado de Bode.

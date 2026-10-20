@@ -1,4 +1,4 @@
-"""Bounded live RADIO audio source for the existing 40 kHz A0 DAC stream."""
+"""Bounded live RADIO audio source for the existing 20/40 kHz A0 DAC stream."""
 from collections import deque
 from threading import Lock
 import time
@@ -47,10 +47,12 @@ class RadioDacSource:
         self._key = None
         self._volume = self._previous_volume = float(volume)
         self._fade_in_end=0;self._fade_out_start=None;self._fade_out_end=None
+        self._last_signal=0.;self._retune_transition=None
         self.closed = False
         self.error = None
         self.clipped_samples = 0
         self.retunes = 0
+        self.transition_silence_samples = 0
         self.played = 0
         self.accepted = 0
         self.loop_guard = RadioLoopGuard(rate)
@@ -94,6 +96,18 @@ class RadioDacSource:
                 self._delivery_event('dac_underrun',time.monotonic(),
                     remaining_samples=self.accepted-self.played)
 
+    def feed_transition_silence(self,count):
+        """Keep the duration of intentionally discarded old-tuning audio."""
+        with self._lock:
+            if self.closed or self.error or self._key is None or count<=0:return
+            if self._available+count>self.rate:
+                self.error='Radio A0 atrasada: buffer de audio completo'
+                self._chunks.clear();self._available=0;return
+            reserve=self._available+count
+            self._chunks.clear();self._chunks.append(np.zeros(reserve));self._available=reserve
+            if self._position:self._retune_transition=(self._position,reserve,self._last_signal)
+            self.transition_silence_samples+=count
+
     def feed_result(self, result):
         settings=result['settings']
         config=getattr(settings,'acquisition',None)
@@ -127,6 +141,8 @@ class RadioDacSource:
                 # Retuning discards old station audio, preserving the time reserve
                 # with neutral output while the new DSP generation catches up.
                 reserve=self._available if self._key is not None else 0
+                if self._key is not None and self._position:
+                    self._retune_transition=(self._position,reserve,self._last_signal)
                 self._chunks.clear()
                 if reserve:self._chunks.append(np.zeros(reserve))
                 self._key = key
@@ -179,7 +195,22 @@ class RadioDacSource:
             volume=(self._volume if self._previous_volume==self._volume else
                     np.linspace(self._previous_volume,self._volume,count))
             signal=np.concatenate(parts)*volume
-            indices=np.arange(start,end) if self._fade_in_end or self._fade_out_end is not None else None
+            indices=np.arange(start,end) if self._fade_in_end or self._fade_out_end is not None or self._retune_transition is not None else None
+            if self._retune_transition is not None:
+                began,reserve,previous=self._retune_transition
+                fade_out=max(2,round(self.rate*.005));fade_in=max(2,round(self.rate*.02))
+                if reserve>=fade_out:
+                    split=began+reserve;old=indices<split
+                    signal[old]=previous*np.clip(1-(indices[old]-began)/(fade_out-1),0,1)
+                    signal[~old]*=np.clip((indices[~old]-split)/(fade_in-1),0,1)
+                    finished=split+fade_in
+                else:
+                    # With little/no reserve, crossfade directly from the last
+                    # emitted DAC level instead of inserting an abrupt zero.
+                    mix=np.clip((indices-began)/(fade_in-1),0,1)
+                    signal=previous*(1-mix)+signal*mix
+                    finished=began+fade_in
+                if end>=finished:self._retune_transition=None
             if self._fade_in_end:
                 signal*=np.clip(indices/self._fade_in_end,0,1)
                 if end>=self._fade_in_end:self._fade_in_end=0
@@ -189,6 +220,7 @@ class RadioDacSource:
             self._previous_volume=self._volume
             self.clipped_samples+=int(np.count_nonzero((signal<0)|(signal>3.3)))
             codes=np.rint(np.clip(signal,0,3.3)*(4095/3.3)).astype('<u2')
+            self._last_signal=float(codes[-1])*3.3/4095-1.65
             self.loop_guard.sent(codes,start)
             return codes
 
@@ -205,6 +237,7 @@ class RadioDacSource:
                             events=list(self._delivery_events)),
                         buffered_samples=self._available,buffer_minimum=self.buffer_minimum,
                         retunes=self.retunes,error=self.error,closed=self.closed,
+                        transition_silence_samples=self.transition_silence_samples,
                         loop_score=self.loop_guard.score,loop_hits=self.loop_guard.hits)
 
     def close(self):

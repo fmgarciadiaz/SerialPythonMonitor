@@ -24,6 +24,35 @@ class ContinuityTests(unittest.TestCase):
         return ProcessingSettings(acquisition=Configuration(14,100000),radio_enabled=True,radio_frequency=20000,
             filter=FilterConfig(source='RADIO',mode='highpass'))
 
+    def test_retune_preserves_discarded_duration_as_neutral_not_old_station(self):
+        from monitor.v17.radio_output import RadioDacSource
+        s=self.settings();w=OutputWorker('offline',Mode.SPI,processing_settings=s)
+        source=RadioDacSource(1,buffer_seconds=0);w.set_radio_output_source(source)
+        result=dict(settings=s,generation=0,audio=np.full(480,2.15),
+            radio_key=(s.acquisition.actual_rate,s.radio_frequency,s.audio_rate,8000))
+        b=SimpleNamespace(processing=result,columns={},radio_output_session=w._radio_output_session)
+        w._feed_radio_output(b);previous=int(source.try_codes(0,480)[-1])
+        w.set_processing_settings(replace(s,generation=1,continuity_epoch=1,radio_frequency=22000))
+        w._feed_radio_output(b)
+        self.assertEqual(source.diagnostics()['transition_silence_samples'],480)
+        muted=source.try_codes(480,960).astype(int)
+        self.assertEqual(muted[0],previous)
+        np.testing.assert_array_equal(muted[200:],np.full(280,2048))
+        self.assertLessEqual(np.abs(np.diff(muted)).max(),4)
+        # Old-session or old-clock work cannot pad a new output session.
+        w.set_processing_settings(replace(s,generation=2,acquisition=Configuration(14,40000)))
+        w._feed_radio_output(b)
+        self.assertEqual(source.diagnostics()['transition_silence_samples'],480)
+        w.set_radio_output_source(None);new=RadioDacSource(1,buffer_seconds=0);w.set_radio_output_source(new)
+        w._feed_radio_output(b)
+        self.assertEqual(new.diagnostics()['transition_silence_samples'],0)
+
+    def test_transition_silence_before_first_audio_does_not_break_queue(self):
+        from monitor.v17.radio_output import RadioDacSource
+        source=RadioDacSource(1,buffer_seconds=0)
+        source.feed_transition_silence(480)
+        self.assertEqual(source.diagnostics()['buffered_samples'],0)
+
     def test_multiple_gain_edits_preserve_resampler_filter_and_sample_clock(self):
         p=BatchProcessor();s=self.settings();r=p.process(batch(),s)
         radio=p.radio;fstate=p.audio_filter.state;count=radio.resampler.output_count

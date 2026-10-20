@@ -13,7 +13,7 @@ Guías del monitor, hardware, transporte y audio. [Descripción del proyecto](..
 | Flujo, FFT, Bode y registro | [Monitor técnico](MONITOR_TECNICO.md) |
 | Cableado, temporizadores y DMA | [UNO Q técnico](UNO_Q_TECNICO.md) |
 | Relay y USB/SPI/UART | [Transporte](TRANSPORTE_TECNICO.md) |
-| Audio y tasas de reproducción | [WAV](WAV_TASAS.md) |
+| Audio y tasas de reproducción | [WAV](WAV_TASAS.md) · [Estabilidad RADIO/WAV y clics](ESTABILIDAD_RADIO_WAV_CLICS_V17.md) |
 | Bits, tasas y ventanas ADC | [Adquisición](CONFIGURACION_ADQUISICION.md) |
 | Formas de onda y DAC | [Generador V17](GENERADOR_200K_V17.md) · [Base histórica](GENERADOR_PASO4.md) |
 | FFT, heatmap y Bode | [Análisis espectral](FFT_V10.md) |

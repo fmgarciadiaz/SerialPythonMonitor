@@ -68,6 +68,23 @@ class RadioOutputSourceTests(unittest.TestCase):
   np.testing.assert_array_equal(s.try_codes(0,4),np.full(4,2048,dtype='<u2'))
   np.testing.assert_array_equal(s.try_codes(4,8),np.full(4,round(1.15*4095/3.3),dtype='<u2'))
   s.close();s.feed_result(self.result([1]*10));self.assertIsNone(s.try_codes(4,8))
+ def test_retune_bridges_last_output_and_fades_new_station_across_chunks(self):
+  for reserve in (0,1920):
+   with self.subTest(reserve=reserve):
+    s=RadioDacSource(1,buffer_seconds=0)
+    s.feed_result(self.result(np.full(480+reserve,.6)))
+    previous=int(s.try_codes(0,480)[-1])
+    s.feed_result(self.result(np.full(2000,-.6),frequency=600000))
+    available=s.diagnostics()['buffered_samples']
+    self.assertEqual(available,reserve+2000)
+    # Fragment the transition to verify that it does not restart per chunk.
+    a=s.try_codes(480,617).astype(int)
+    b=s.try_codes(617,480+available).astype(int)
+    out=np.r_[a,b]
+    self.assertEqual(out[0],previous)
+    self.assertLessEqual(np.max(np.abs(np.diff(out))),5)
+    self.assertEqual(out[-1],round(1.05*4095/3.3))
+    self.assertEqual(s.retunes,1)
  def test_requires_demodulated_40k_without_resampling_and_bounds(self):
   s=RadioDacSource(1,buffer_seconds=0);s.feed_result(self.result(np.ones(4800)*.2,rate=48000))
   self.assertIn('40 kHz',s.error);self.assertIsNone(s.try_codes(0,480))

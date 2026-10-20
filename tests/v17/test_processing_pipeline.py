@@ -177,6 +177,35 @@ class WorkerPipelineTests(unittest.TestCase):
                 self.assertEqual(errors,[])
                 self.assertEqual(worker.pending_batches,0)
 
+    def test_generator_ack_follows_accumulated_samples_even_under_pressure(self):
+        for active in (False,True):
+            with self.subTest(dsp_active=active):
+                settings=ProcessingSettings(filter=FilterConfig(source='CH1' if active else 'OFF',mode='bypass'))
+                worker=OutputWorker('offline',Mode.SPI,processing_settings=settings)
+                events=[];errors=[]
+                class Receiver:
+                    def __init__(self,connection,collect,status,running):
+                        self.collect=collect;self.config=worker.config
+                        self.decoder=SimpleNamespace(numeric=False);self.wav_candidate=False
+                    def configure(self,config):return False
+                    def select(self,*args):pass
+                    def generator(self,*args):
+                        self.collect([(0,10,20,0),(32,11,21,1)])
+                        self.on_generator('new stimulus')
+                        worker.stop()
+                    def shutdown_output(self):pass
+                    def close(self):pass
+                def delivered(batch):events.append('samples');worker.batch_consumed(batch)
+                worker.batch_ready.connect(delivered,QtCore.Qt.ConnectionType.DirectConnection)
+                worker.generator_confirmed.connect(lambda _:events.append('ack'),QtCore.Qt.ConnectionType.DirectConnection)
+                worker.error_occurred.connect(errors.append,QtCore.Qt.ConnectionType.DirectConnection)
+                connection=MagicMock();connection.__enter__.return_value=connection
+                with patch('monitor.v17.app.Connection',return_value=connection),patch('monitor.v17.app.OutputReceiver',Receiver),patch('monitor.v17.bode_calibration.instrument_identity',return_value=None),patch('monitor.v17.app.time.monotonic',return_value=10.),patch.object(worker,'delivery_pressure',return_value=4):
+                    worker.run()
+                self.assertEqual(errors,[])
+                self.assertEqual(events,['samples','ack'])
+                self.assertEqual(worker.pending_batches,0)
+
     def test_shutdown_failure_preserves_original_acquisition_error(self):
         worker=OutputWorker('offline',Mode.SPI)
         receiver=MagicMock();receiver.config=worker.config

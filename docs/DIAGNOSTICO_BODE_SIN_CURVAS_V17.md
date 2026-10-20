@@ -17,3 +17,28 @@ Para medir un circuito: A0 a su entrada y CH1; salida a CH2, masa común. CH2/CH
 ## Ampliación posterior de selectores
 
 Tonos y Sweep/Chirp permiten hasta 150 kHz; Pulso hasta 200 kHz. Se mantiene el límite final <0,45×Fs. Se comprobó localmente cada máximo y una frecuencia intermedia de 123456,7 Hz. Esto no agrega aceptación física del rango ampliado ni resuelve por sí solo la referencia del montaje.
+
+## Orden de confirmaciones y muestras · 19/10/2026, bloque 20:00
+
+Se reprodujo localmente un defecto de entrega: si quedaba un bloque ADC acumulado, el callback del generador emitía la confirmación antes de publicar esas muestras. Con DSP activo también podía adelantar el trabajo pendiente. Bode podía comenzar el intervalo de asentamiento con muestras anteriores todavía pendientes.
+
+`OutputWorker` ahora publica el bloque acumulado al recibir la confirmación del generador y utiliza la misma barrera de orden del executor que las confirmaciones de adquisición. No descarta muestras, no amplía presupuestos y no espera al DSP bloqueando la recepción. El bloque de frontera puede publicarse aunque la agrupación normal esté reteniendo lotes por presión; se conservan los límites de entrega.
+
+La regresión nueva falló antes del cambio, tanto con FILTER OFF como con DSP activo; después pasó. Suites de procesamiento, RADIO UI y fuente A0: 69 pruebas correctas. Además, nueva prueba de recepción/dibujo RADIO a ADC8/1,6 MS/s sin fuente A0: correcta (70 pruebas en total entre ambas ejecuciones).
+
+Resultados físicos CH2/CH2 a ADC14/40 kHz, sin cambiar firmware:
+
+| Informe | Tonos | Pulso | Sweep/Chirp |
+|---|---|---|---|
+| `gui_v17_20261019_200007/report.json` | Asentamiento 20 ms: 1/5 válido | 1000 µs: estímulo no detectado | 2547 ganancias válidas, curvas con datos |
+| `gui_v17_20261019_200109/report.json` | Asentamiento normal 200 ms: 5/5 válidos, ambas curvas dibujadas | 10000 µs: estímulo no detectado | 2546 ganancias válidas, curvas con datos |
+
+Informes y capturas en `diagnosticos/resultados_bode/`. Ambos restauraron la configuración previa y verificaron firmware idéntico. La prueba de Tonos cubre 20–1000 Hz, no 150 kHz ni un circuito distinto. Cambiar el asentamiento entre corridas impide atribuir toda la diferencia de puntos al cambio de orden; la regresión local sí aísla ese defecto. La confirmación no incluye un timestamp físico del cambio DAC, por lo que esta barrera no certifica que todo el pipeline del Q ya contenga muestras posteriores al cambio.
+
+Pulso sigue abierto. No reducir controles de referencia ni inventar puntos para llenar la curva. El caso de asentamiento corto tampoco queda cerrado como válido.
+
+Se inspeccionó la captura real `gui_v17_20261019_200109/method0.png`: cinco marcadores visibles y líneas de ganancia 0 dB/fase 0° en CH2/CH2. Esto confirma dibujo visible en esa captura, no una medición de FPS.
+
+## Control RADIO/A0 tras corregir el orden de ACK
+
+`diagnosticos/resultados_v17/generador_radio_20261019_200206/report.json`: Python 3.13/Cocoa, ADC8/1,6 MS/s y A0 40 kHz, 60 s con resintonías, sin underrun ni dropped/fatal. Se restauró la configuración previa, ADC8/1,6 MS/s y generador OFF; firmware idéntico. Recuperación posterior de 10 s: 15991776 muestras íntegras. Este control comprueba compatibilidad del cambio, no resuelve el corte intermitente previo ni califica el rango ampliado de Bode.

@@ -1,0 +1,35 @@
+{
+  "playback_report": "diagnosticos/resultados_v17/wav_playback_20261019_202000/report.json",
+  "when": "after report and verified Q restoration, interpreter finalization",
+  "exception": {
+    "codes": "0x0000000000000002, 0x00007fdf7bf3e9d0",
+    "rawCodes": [
+      2,
+      140597834017232
+    ],
+    "type": "EXC_BAD_ACCESS",
+    "signal": "SIGBUS",
+    "subtype": "KERN_PROTECTION_FAILURE at 0x00007fdf7bf3e9d0"
+  },
+  "termination": {
+    "flags": 0,
+    "code": 10,
+    "namespace": "SIGNAL",
+    "indicator": "Bus error: 10",
+    "byProc": "exc handler",
+    "byPid": 18448
+  },
+  "symbols": [
+    null,
+    "sip_api_visit_wrappers",
+    "cleanup_on_exit(_object*, _object*)",
+    "cfunction_vectorcall_NOARGS",
+    "atexit_callfuncs",
+    "_Py_Finalize",
+    "Py_RunMain",
+    "pymain_main",
+    "main",
+    "start"
+  ],
+  "interpretation": "Observed Qt/SIP interpreter-exit failure; not a DAC underrun during the 60-second capture."
+}

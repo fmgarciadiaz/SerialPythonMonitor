@@ -639,11 +639,22 @@ class OutputWorker(QtCore.QObject):
         with self._batch_lock:
             source=self.radio_output_source;settings=self.processing_settings
             session=self._radio_output_session
-        if source is not None and result is not None and settings is not None and settings.radio_enabled and getattr(batch,'radio_output_session',None)==session and same_audio_continuity(result['settings'],settings):
+        if source is None or result is None or settings is None or not settings.radio_enabled or getattr(batch,'radio_output_session',None)!=session:
+            return
+        if same_audio_continuity(result['settings'],settings):
             columns=getattr(batch,'columns',{})
             if 'CH1' in columns:
                 source.observe_input(columns['CH1'],settings.acquisition.actual_rate)
             source.feed_result(result)
+        else:
+            previous=result['settings']
+            # A retune intentionally rejects the old station's samples, but
+            # losing their duration drains the live DAC reserve on every edit.
+            # Only compensate within the same output session and sample clocks.
+            if (previous.radio_enabled and previous.acquisition==settings.acquisition
+                    and previous.audio_rate==settings.audio_rate==source.rate):
+                audio=result.get('audio_filter' if source.input_source=='FILTER' else 'audio')
+                if audio is not None:source.feed_transition_silence(len(audio))
 
     def _processed(self, future, original=None):
         try:
@@ -659,7 +670,7 @@ class OutputWorker(QtCore.QObject):
             with self._batch_lock:self.pending_dsp=max(0,self.pending_dsp-1)
 
     def _emit_after_processing(self, signal, *args):
-        # Configuration acknowledgements cannot overtake old-clock batches.
+        # Control acknowledgements cannot overtake their preceding samples.
         if self._processing_executor is None:
             signal.emit(*args)
         else:
@@ -737,10 +748,10 @@ class OutputWorker(QtCore.QObject):
             if retained+batch_samples/batch_config.actual_rate>1.+1e-9:
                 raise RuntimeError('DSP/GUI atrasado: buffer RF pendiente supera un segundo; adquisición detenida sin descartar muestras silenciosamente.')
             flush()
-        def flush():
+        def flush(force=False):
             nonlocal batch, batch_samples, emitted
-            if batch and time.monotonic()-emitted >= 0.02:
-                if self.delivery_pressure()>=4:
+            if batch and (force or time.monotonic()-emitted >= 0.02):
+                if not force and self.delivery_pressure()>=4:
                     # Absorb a short GUI stall by grouping input, rather than
                     # flooding Qt with more deliveries. RF remains continuous
                     # and bounded to one second, with eight admitted batches.
@@ -755,6 +766,11 @@ class OutputWorker(QtCore.QObject):
         def progress(text):
             flush()
             self.status_changed.emit(text)
+        def generator_applied(reply):
+            # A short/pressured ADC batch may still contain the previous tone.
+            # Publish it, then preserve DSP order before exposing the ACK to Bode.
+            flush(force=True)
+            self._emit_after_processing(self.generator_confirmed,reply)
         def settings_applied(config):
             nonlocal batch, batch_samples, emitted, batch_clock, batch_channels, batch_config
             if batch:
@@ -789,7 +805,7 @@ class OutputWorker(QtCore.QObject):
                     receiver = OutputReceiver(connection, collect, progress, lambda: self.running)
                     receiver.decoder.numeric = True
                     receiver.on_configuration = settings_applied
-                    receiver.on_generator = self.generator_confirmed.emit
+                    receiver.on_generator = generator_applied
                     wav_source_codes = None
                     wav_origin = 0
                     last_fm_status = None
@@ -2655,7 +2671,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self.radio_gain_dial.setProperty('redColor',True)
         self.radio_gain_dial.valueChanged.connect(lambda value:self.radio_gain.setValue(value/10))
         self.radio_gain.valueChanged.connect(self._sync_radio_gain_dial)
-        self.radio_auto_gain=QtWidgets.QPushButton('Manual');self.radio_auto_gain.setCheckable(True)
+        self.radio_auto_gain=QtWidgets.QPushButton('  Manual');self.radio_auto_gain.setCheckable(True)
         gain_mode_icons={False:QtGui.QIcon(str(ROOT/'monitor/v17/assets/instrument_manual.svg')),
                          True:QtGui.QIcon(str(ROOT/'monitor/v17/assets/gain_auto.svg'))}
         self.radio_auto_gain.setIconSize(QtCore.QSize(18,18))
@@ -2663,7 +2679,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self.radio_auto_gain.toggled.connect(lambda checked:self.radio_auto_gain.setIcon(gain_mode_icons[checked]))
         self.radio_auto_gain.setAccessibleName('Auto gain')
         self.radio_auto_gain.setToolTip('Mide como máximo una vez por segundo; objetivo 0,5–2,8 V. También amplifica ruido.')
-        self.radio_auto_gain.toggled.connect(lambda checked:self.radio_auto_gain.setText('Auto' if checked else 'Manual'))
+        self.radio_auto_gain.toggled.connect(lambda checked:self.radio_auto_gain.setText('  Auto' if checked else '  Manual'))
         self.radio_auto_gain.toggled.connect(lambda _:setattr(self,'_radio_auto_gain_at',0.))
         self.radio_offset=VoltageSpinBox()
         self.radio_offset.setRange(-3.3,3.3);self.radio_offset.setDecimals(2)
@@ -3583,6 +3599,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self.wav_info.setText(source + f'Salida: {number(self.wav_rate.currentData()/1000, formats.ng)} kHz · 12 bits · mono')
 
     def _choose_wav(self):
+        began = time.perf_counter()
         dialog = getattr(self, '_wav_file_dialog', None)
         if dialog is not None:
             dialog.raise_()
@@ -3598,6 +3615,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         dialog.finished.connect(lambda _result: self._wav_file_dialog_finished(dialog))
         self._wav_file_dialog = dialog
         dialog.show()
+        self._note_gui_callback('WAV: abrir selector', began)
 
     def _wav_file_dialog_finished(self, dialog):
         if getattr(self, '_wav_file_dialog', None) is dialog:
@@ -3605,6 +3623,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         dialog.deleteLater()
 
     def _wav_file_selected(self, path):
+        began = time.perf_counter()
         if path:
             try:
                 metadata = inspect_wav(path)
@@ -3614,6 +3633,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
                 self.wav_info.setText(f'WAV inválido: {exc}')
                 self.generator_status.setText(f'WAV inválido: {exc}')
                 self._sync_wav_transport()
+                self._note_gui_callback('WAV: inspeccionar archivo', began)
                 return
             self.wav_path = path
             self._wav_metadata = metadata
@@ -3623,6 +3643,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             self._sync_wav_transport()
             self.wav_file.setText(self.wav_file.fontMetrics().elidedText(Path(path).name, QtCore.Qt.TextElideMode.ElideMiddle, 210))
             self.wav_file.setToolTip(path)
+        self._note_gui_callback('WAV: inspeccionar archivo', began)
 
     def _play_wav(self):
         if self._wav_preparing or self._wav_active or not self.wav_path or not self.serial_worker or not self._wav_capable:
@@ -5432,6 +5453,9 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             fft_size=self.spectral.size.currentText(),heatmap_size=self.spectral.heatmap_size.currentText(),
             filter_source=self.filter_source.currentText(),gui_delay_max_ms=self.batch_queue_delay_max_ms,
             window_visible=self.isVisible(),window_minimized=self.isMinimized(),
+            wav_path=self.wav_path,wav_rate=self.wav_rate.currentData(),
+            wav_preparing=self._wav_preparing,wav_active=self._wav_active,
+            wav_dialog_open=getattr(self,'_wav_file_dialog',None) is not None,
             slow_gui_callbacks=list(getattr(self,'_gui_slow_callbacks',())),
             selected_columns=dict(self.selected_columns),horizontal_samples=self.h_scale,
             trigger_enabled=self.trigger_enabled,trigger_source=self.trigger_source,

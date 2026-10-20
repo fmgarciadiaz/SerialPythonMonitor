@@ -224,7 +224,9 @@ def main(owner_context=None):
      if elapsed>8 and 'volume' not in changed:w.radio_output_panel.volume.setValue(50);changed.add('volume')
      if elapsed>12 and 'retune' not in changed:w.radio_frequency.setValue(retuned);changed.add('retune')
      if '--retune-stress' in sys.argv:
-      step=int(elapsed//10)
+      interval=float(sys.argv[sys.argv.index('--retune-interval')+1]) if '--retune-interval' in sys.argv else 10.
+      if interval<=0:raise ValueError('Intervalo de resintonía debe ser positivo')
+      step=int(elapsed//interval)
       if step>0 and step!=report.get('retune_step'):
        report['retune_step']=step
        w.radio_frequency.setValue(tuned if step%2 else retuned)
@@ -237,7 +239,7 @@ def main(owner_context=None):
    report.update(changed=sorted(changed),pending_peak=worker.pending_batches_peak,
      max_queue_delay_ms=w.batch_queue_delay_max_ms,radio_enabled_after_stop=w.radio_enabled.isChecked(),
      output_source_detached=w.radio_output_panel.source is None,adc=asdict(w.applied_configuration))
-   if source is not None:report.update(retunes=source.retunes,source_error=source.error,clipped=source.clipped_samples,source_buffer_minimum=source.buffer_minimum)
+   if source is not None:report.update(retunes=source.retunes,source_error=source.error,clipped=source.clipped_samples,source_buffer_minimum=source.buffer_minimum,transition_silence_samples=source.transition_silence_samples)
    report['ok']=(not report['errors'] and report.get('max_played',0)>audio_rate*max(10,duration-4) and report.get('source_error') is None and report['output_source_detached'] and 'stop' in changed and report.get('retunes',0)>=1 and w.applied_configuration==config)
   except BaseException as exc:
    report['errors'].append(repr(exc));report['traceback']=traceback.format_exc();save();raise

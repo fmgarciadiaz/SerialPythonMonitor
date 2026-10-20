@@ -298,7 +298,7 @@ class OutputReceiver:
         self._trace_transport('read',began,time.monotonic(),cpu_seconds=(time.thread_time()-cpu_start) if cpu_start is not None else None,process_cpu_seconds=(time.process_time()-process_start) if process_start is not None else None)
         # Bound ADC decoding ahead of an audio ACK to one wire frame.
         # Preserve every event in wire order, including configuration boundaries.
-        stride=992 if getattr(self.wav_codes,'live',False) else max(1,len(data))
+        stride=992 if getattr(self.wav_codes,'live',False) or isinstance(self.wav_codes,np.ndarray) else max(1,len(data))
         statuses=[]
         for offset in range(0,max(1,len(data)),stride):
             cpu_start=time.thread_time() if self.transport_trace is not None else None
@@ -560,18 +560,17 @@ class OutputReceiver:
         return result
 
     def service_wav(self):
-        live=getattr(self.wav_codes,'live',False)
-        # RADIO may use the larger advertised DAC queue; other sources retain
-        # their existing limit. Never infer capacity from the requested window.
+        pcm=isinstance(self.wav_codes,np.ndarray)
+        live=getattr(self.wav_codes,'live',False) or pcm
+        # The window bounds unconfirmed sends, independently of DAC capacity.
         limit=min(30,getattr(self.wav_status,'queue_slots',16)) if getattr(self.wav_codes,'radio_audio',False) else 16
-        window=max(1,min(limit,int(getattr(self.wav_codes,'credit_window',min(4,self.wav_live_credits)))))
+        window=2 if pcm else max(1,min(limit,int(getattr(self.wav_codes,'credit_window',min(4,self.wav_live_credits)))))
         if self.wav_pending:
             if time.monotonic()-self.wav_pending[1] > 3:
                 self.wav_codes=None;self.wav_pending=None;self.wav_inflight.clear()
                 self.on_status('WAV: sin confirmación del Q; salida incierta')
                 return
-            # WAV keeps its single-request contract. Only running live audio chunks
-            # use a bounded window (two by default); BEGIN/PLAY/QUERY/STOP
+            # Only running audio chunks use a bounded window; BEGIN/PLAY/QUERY/STOP
             # remain serialized, including experimental credit overrides.
             if (not live or not self.wav_started or len(self.wav_inflight)>=window or
                     any(entry[1]!=13 for entry in self.wav_inflight.values())):
@@ -580,8 +579,8 @@ class OutputReceiver:
         if self.wav_codes is None or s is None or s.session != self.wav_session:
             return
         slots=getattr(s,'queue_slots',16)
-        capacity=min(slots,getattr(self.wav_codes,'maximum_blocks',16))
-        target=max(2,min(capacity,getattr(self.wav_codes,'target_blocks',16)))
+        capacity=min(slots,getattr(self.wav_codes,'maximum_blocks',30 if pcm else 16))
+        target=max(2,min(capacity,getattr(self.wav_codes,'target_blocks',30 if pcm else 16)))
         reserved=len(self.wav_inflight)
         queued=slots-s.free_blocks+reserved
         if self.wav_started and getattr(self.wav_codes,'live',False):
@@ -605,7 +604,7 @@ class OutputReceiver:
             self._wav_send(wav.command(self._id(), self.wav_session, 2))
         elif max(s.accepted,self.wav_next_offset) < len(self.wav_codes) and s.free_blocks>reserved and queued < target:
             # Fill available credits in this turn, before another blocking read.
-            # Startup and file WAV retain their serialized request contract.
+            # Startup and control commands retain their serialized contract.
             credits=min((window-reserved if live and self.wav_started else 1),s.free_blocks-reserved,target-queued)
             for _ in range(credits):
                 interval=max(0,float(getattr(self.wav_codes,'chunk_interval',0)))

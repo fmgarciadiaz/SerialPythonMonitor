@@ -19,7 +19,7 @@ Se mantuvieron las rutas del código, los experimentos y la evidencia para no ro
 
 El [estado vigente](ESTADO_ACTUAL_V17.md), el [plan](../Plan%20de%20trabajo.md) y la [continuidad](../%23%20Continuar%20desde%20donde%20quedaste.md) son las entradas para retomar. Las guías de monitor/firmware enlazan ese estado antes de sus informes fechados.
 
-Se archivaron sin perder su contenido la presentación V16 y los registros acumulados de plan/continuidad. Se ajustaron sus enlaces Markdown relativos desde la raíz original:
+El README raíz conserva la presentación del proyecto: badges, imágenes y explicaciones por módulo. No debe reemplazarse por un índice de pendientes. La presentación anterior V16 se conserva como referencia y el README fue recuperado y actualizado a V17 el 19/10/2026, tras corregir esa sustitución. Los registros acumulados de plan/continuidad se archivaron sin perder su contenido. Se ajustaron sus enlaces Markdown relativos desde la raíz original:
 
 - [Presentación anterior](historico/README_v16_20261019.md).
 - [Plan acumulado](historico/PLAN_ACUMULADO_20261019.md).
