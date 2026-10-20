@@ -1,6 +1,8 @@
 """Generator Radio: shared RADIO tuning/audio, independent A0 volume."""
 import queue
 import json,logging
+import math,time
+import numpy as np
 from PyQt6 import QtCore,QtWidgets
 from monitor.v17.radio_output import RadioDacSource,HighRateRadioDacSource,acquisition_error
 from monitor.v17.radio_am import radio_input_supported,radio_tuning_max
@@ -43,6 +45,9 @@ class RadioOutputPanel(QtWidgets.QWidget):
         self.volume=dial_type();self.volume.setRange(0,100);self.volume.setValue(25)
         self.volume.setFixedSize(64,64);self.volume.setNotchesVisible(True)
         self.volume.setProperty('redColor',True)
+        self.volume.audio_meter_level=0.
+        self._meter_peak=0.;self._meter_at=0.;self._meter_level=0.
+        self._meter_audio_at=0.
         volume_box.addWidget(self.volume,0,QtCore.Qt.AlignmentFlag.AlignCenter)
         self.value=QtWidgets.QLabel('25 %');self.value.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter);volume_box.addWidget(self.value)
         offset_label=QtWidgets.QLabel('Offset');offset_label.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
@@ -58,6 +63,33 @@ class RadioOutputPanel(QtWidgets.QWidget):
         self.value.setText(f'{value} %')
         if self.source is not None:self.source.set_volume(value/100)
         self._refresh_generator_status()
+
+    def observe_audio(self,result):
+        """Accumulate a bounded audio peak; no FFT, timer or full-buffer copy."""
+        filtered=self.input_source.currentText()=='FILTER'
+        audio=result.get('audio_filter' if filtered else 'audio')
+        if audio is None or not len(audio):return
+        settings=result['settings']
+        offset=result.get('audio_filter_offset',0.) if filtered else settings.radio_offset
+        # At most 256 audio samples per batch; this is a visual meter, not clip detection.
+        values=np.asarray(audio)[::max(1,math.ceil(len(audio)/256))]
+        peak=float(np.max(np.abs(values-offset)))
+        if math.isfinite(peak):
+            self._meter_peak=max(self._meter_peak,peak)
+            self._meter_audio_at=time.monotonic()
+
+    def refresh_meter(self,now):
+        if now-self._meter_at<.1:return
+        elapsed=min(1.,now-self._meter_at);self._meter_at=now
+        live=self.owner.radio_enabled.isChecked() and now-self._meter_audio_at<.3
+        target=min(1.,self._meter_peak*(self.volume.value()/100)/1.15) if live else 0.
+        self._meter_peak=0.
+        # Fast attack and a short release, quantized to avoid redundant repaints.
+        self._meter_level=max(target,self._meter_level-elapsed*2.) if live and self.volume.value() else 0.
+        level=round(self._meter_level*100)/100
+        if self.volume.audio_meter_level!=level:
+            self.volume.audio_meter_level=level
+            self.volume.update()
 
     def sync(self):
         owner=self.owner

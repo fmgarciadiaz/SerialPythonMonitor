@@ -179,6 +179,21 @@ class InstrumentDial(QtWidgets.QDial):
         end=center+QtCore.QPointF((radius-9)*math.cos(angle),-(radius-9)*math.sin(angle))
         painter.setPen(QtGui.QPen(accent,2.5,QtCore.Qt.PenStyle.SolidLine,QtCore.Qt.PenCapStyle.RoundCap))
         painter.drawLine(center,end)
+        meter=getattr(self,'audio_meter_level',None)
+        if meter is not None:
+            ring=box.adjusted(-4,-4,4,4)
+            painter.setPen(QtGui.QPen(QtGui.QColor('#263d36'),2,QtCore.Qt.PenStyle.SolidLine,QtCore.Qt.PenCapStyle.RoundCap))
+            painter.drawArc(ring,start_angle*16,-sweep*16)
+            level=max(0.,min(1.,meter))
+            stops=((0.,'#55dfc4'),(.5,'#ffd166'),(1.,'#ff5757'))
+            for (low,left),(high,right) in zip(stops,stops[1:]):
+                if level<=high:
+                    fraction=max(0.,min(1.,(level-low)/(high-low)))
+                    first,last=QtGui.QColor(left),QtGui.QColor(right)
+                    color=QtGui.QColor(*(round(a+(b-a)*fraction) for a,b in zip(first.getRgb()[:3],last.getRgb()[:3])))
+                    break
+            painter.setPen(QtGui.QPen(color,2,QtCore.Qt.PenStyle.SolidLine,QtCore.Qt.PenCapStyle.RoundCap))
+            painter.drawArc(ring,start_angle*16,round(-sweep*level*16))
         painter.setPen(QtCore.Qt.PenStyle.NoPen)
         for frequency,color in zip(getattr(self, 'peak_frequencies', ()),getattr(self,'peak_colors',())):
             painter.setBrush(QtGui.QColor(color))
@@ -1101,6 +1116,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self.render_timer.start(RENDER_INTERVAL_MS)
 
         self.setWindowTitle('Scope V17 · PyQt6 · protocolo 4 · candidato')
+        self.setWindowIcon(QtGui.QIcon(str(ROOT / 'monitor/v17/assets/scope_app.svg')))
         self.baud_input.setText('—')
         self.baud_input.setReadOnly(True)
         self.baud_input.setToolTip('Destino confirmado por el Q. UART hacia R4: 3.000.000 baudios.')
@@ -2987,6 +3003,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             worker.set_processing_settings(self._processing_settings())
 
     def _accept_processed_radio(self, result):
+        self.radio_output_panel.observe_audio(result)
         if result['radio_status'] is not None:
             self.radio_stream=None;self.radio_key=None
             self.radio_status.setText(result['radio_status'])
@@ -5410,6 +5427,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             if ring is not None:ring.append((name,time.monotonic(),elapsed*1000))
 
     def _render_with_diagnostics(self):
+        self.radio_output_panel.refresh_meter(time.monotonic())
         began=time.perf_counter()
         try:self.render_frame()
         finally:self._note_gui_callback('render_frame',began)
@@ -6376,6 +6394,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
 def main():
     prepare_platform_plugins()
     app = QtWidgets.QApplication([])
+    app.setWindowIcon(QtGui.QIcon(str(ROOT / 'monitor/v17/assets/scope_app.svg')))
     app.setStyle("Fusion")
     app.setFont(QtGui.QFontDatabase.systemFont(QtGui.QFontDatabase.SystemFont.GeneralFont))
     window = SerialMonitorWindow()
