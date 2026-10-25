@@ -5,9 +5,9 @@ from dataclasses import replace
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
 import numpy as np
 from diagnosticos.synth_presets_v16 import panel_presets
-from monitor.v16.fm_source import FMSource,PRESETS
-from monitor.v16.virtual_instruments import warmup
-from monitor.v16.fm_feedback import warmup as feedback_warmup
+from monitor.historico.v16.fm_source import FMSource,PRESETS
+from monitor.historico.v16.virtual_instruments import warmup
+from monitor.historico.v16.fm_feedback import warmup as feedback_warmup
 
 def main():
     warmup();feedback_warmup();cases=[]

@@ -6,21 +6,21 @@ import tempfile
 import unittest
 from pathlib import Path
 from unittest.mock import patch
-from tests.v16.test_ch1_fast import extract
+from tests.historico.v16.test_ch1_fast import extract
 from experimentos.maxfreq_dual_v16.contract import Decoder,CAPACITY
-from monitor.v16.receiver import unoq_native
-from monitor.v16.receiver.unoq_config_decoder import ConfigurationDecoder
+from monitor.historico.v16.receiver import unoq_native
+from monitor.historico.v16.receiver.unoq_config_decoder import ConfigurationDecoder
 
 EXP=Path(__file__).resolve().parent
 
 
 class ProductionFrameTests(unittest.TestCase):
     def test_actual_firmware_full_nodes_all_bits(self):
-        sketch=EXP.parents[1]/'arduino/v16/oscilloscope/sketch'
+        sketch=EXP.parents[1]/'arduino/historico/v16/oscilloscope/sketch'
         body=extract(sketch/'sketch.ino','build_native_samples')
         text=(sketch/'sketch.ino').read_text()
         count_line=next(line.strip() for line in text.splitlines() if 'const unsigned count = min(' in line)
-        base=EXP.parents[1]/'arduino/v16/relay/base_verifier.c'
+        base=EXP.parents[1]/'arduino/historico/v16/relay/base_verifier.c'
         relay=base.with_name('config_relay_protocol.h')
         source=f'''#include "{sketch/'benchmark_protocol.h'}"
 #include "{sketch/'sample_packing.h'}"

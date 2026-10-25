@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-21",
+  "phase": "offline_preparation",
+  "cases": [
+    [
+      8,
+      100000,
+      50000
+    ],
+    [
+      10,
+      100000,
+      50000
+    ],
+    [
+      12,
+      100000,
+      50000
+    ],
+    [
+      14,
+      100000,
+      50000
+    ],
+    [
+      16,
+      76226,
+      50000
+    ]
+  ],
+  "tests": {
+    "command": "QT_QPA_PLATFORM=offscreen Python3.13 -m unittest discover -s tests/v17 -p 'test_wav_*.py' -v",
+    "passed": 13
+  },
+  "physical_run": false,
+  "blocking_observation": "V17 PID66442 remains open; async closure question pending",
+  "production_playback_changed": false
+}

@@ -3,7 +3,7 @@ import importlib.util,sys,json
 from pathlib import Path
 from unittest.mock import patch
 import numpy as np
-from monitor.v16 import fm_source,virtual_instruments as vi
+from monitor.historico.v16 import fm_source,virtual_instruments as vi
 from diagnosticos.synth_presets_v16 import panel_presets
 from diagnosticos.benchmark_cache_instrumentos_v16 import render
 spec=importlib.util.spec_from_file_location('old_radiation',Path('respaldos/synth/20261010_guitar_radiation/virtual_instruments.py'))

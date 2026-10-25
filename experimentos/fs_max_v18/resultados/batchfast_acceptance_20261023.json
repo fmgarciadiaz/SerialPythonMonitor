@@ -1,0 +1,175 @@
+{
+  "candidate": "BatchFast",
+  "bits": 8,
+  "channels": 1,
+  "ticks": 88,
+  "rate_sps": 1818181.8181818181,
+  "candidate_identity": {
+    "firmware_sha256": "a1056565c91f533215ae69075d3cf7755f2634dc2ddefa85eaec96502825c720",
+    "relay_sha256": "9b8baa1a435838a33bca651669f5b64f0ca17066e53d567b9d1eaa6972cba114",
+    "app": "/home/arduino/ArduinoApps/scope-v18-rate-probe-batchfast"
+  },
+  "isolated_transport_qualified": true,
+  "combined_qualified_under_test_conditions": true,
+  "test_conditions": {
+    "macos_activity": "user",
+    "temporary_display_guard": true,
+    "render_interval_ms": 16,
+    "radio_audio_hz": 40000,
+    "synth_voices": 20
+  },
+  "analog_acceptance": false,
+  "public_promotion": false,
+  "remaining": [
+    "regression of existing profiles",
+    "validation under stock application activity conditions",
+    "versioned pair preservation and production integration"
+  ],
+  "evidence": [
+    {
+      "path": "experimentos/fs_max_v18/resultados/20261023_194020/report.json",
+      "sha256": "4a7e0938b7bae7af77d653ac5966965436b63f1e7ef61ac73b6072a6e66e4ffc",
+      "ok": true,
+      "hardware_restored": true,
+      "cases": [
+        {
+          "bits": 8,
+          "ticks": 88,
+          "node_pairs": 3488,
+          "elapsed": 60.000607734022196,
+          "queue_peak": 2,
+          "mean_send_margin": 0.20371901313987217,
+          "headroom_ok": true
+        }
+      ]
+    },
+    {
+      "path": "experimentos/fs_max_v18/resultados/20261023_201814/report.json",
+      "sha256": "6adc1fa313ae03b31acf151eff31031e59d2b6632f73882f4aa52ea437b4642a",
+      "ok": true,
+      "hardware_restored": true,
+      "cases": [
+        {
+          "bits": 8,
+          "ticks": 88,
+          "node_pairs": 3488,
+          "elapsed": 120.00052360002883,
+          "queue_peak": 2,
+          "mean_send_margin": 0.2027445752118131,
+          "headroom_ok": true
+        },
+        {
+          "bits": 8,
+          "ticks": 88,
+          "node_pairs": 3488,
+          "elapsed": 120.00059797195718,
+          "queue_peak": 2,
+          "mean_send_margin": 0.2038237144716436,
+          "headroom_ok": true
+        },
+        {
+          "bits": 8,
+          "ticks": 88,
+          "node_pairs": 3488,
+          "elapsed": 120.00008146499749,
+          "queue_peak": 2,
+          "mean_send_margin": 0.20338117046680515,
+          "headroom_ok": true
+        }
+      ]
+    },
+    {
+      "path": "diagnosticos/resultados_v18/gui_private_20261023_201315/report.json",
+      "sha256": "f9e8ac16faadd35ac39ce45ef3b4c5f810829265a2a10e41eb5942b0a5ae5fb2",
+      "ok": true,
+      "hardware_restored": true,
+      "gui_sha256": "ab5c0f8303e9902c779262cd472ade093e743474c521750f603e5478ae87797f",
+      "assertions": {
+        "radio_playing_40k": true,
+        "radio_stop_confirmed": true,
+        "radio_progress": true,
+        "radio_hold_completed": true,
+        "scan_completed": true,
+        "wav_playing": true,
+        "wav_progress": true,
+        "wav_stop_confirmed": true,
+        "fm_playing": true,
+        "fm_progress": true,
+        "fm_stop_confirmed": true,
+        "shutdown_confirmed": true,
+        "worker_released": true
+      },
+      "radio_hold_seconds": 120.16380197601393,
+      "paint_events": 4250,
+      "render_metrics": {
+        "frames": 4356,
+        "wall_seconds": 101.06395249586785,
+        "cpu_seconds": 84.10106157299998,
+        "max_wall_ms": 97.05326001858339,
+        "heartbeat_gap_max_ms": 542.7043019444682
+      }
+    },
+    {
+      "path": "diagnosticos/resultados_v18/gui_private_20261023_202710/report.json",
+      "sha256": "b3c97c7ca3643497c6fefe8f06f501b287da48ecbfe123efc2747c8422bbd24e",
+      "ok": true,
+      "hardware_restored": true,
+      "gui_sha256": "489939d8615c5dfb4593088b82ec36119c8b70fb80976a556b13198ad93a0fe9",
+      "assertions": {
+        "radio_playing_40k": true,
+        "radio_stop_confirmed": true,
+        "radio_progress": true,
+        "radio_hold_completed": true,
+        "scan_completed": true,
+        "wav_playing": true,
+        "wav_progress": true,
+        "wav_stop_confirmed": true,
+        "fm_playing": true,
+        "fm_progress": true,
+        "fm_stop_confirmed": true,
+        "shutdown_confirmed": true,
+        "worker_released": true
+      },
+      "radio_hold_seconds": 120.14794469403569,
+      "paint_events": 4153,
+      "render_metrics": {
+        "frames": 4259,
+        "wall_seconds": 100.18408556422219,
+        "cpu_seconds": 83.29972737000017,
+        "max_wall_ms": 111.7538059479557,
+        "heartbeat_gap_max_ms": 584.3092509894632
+      }
+    },
+    {
+      "path": "diagnosticos/resultados_v18/gui_private_20261023_203208/report.json",
+      "sha256": "66152d36406fbebb7ec4453776f1b2a135587e492f4372f5e306e8f1c19f3ec1",
+      "ok": true,
+      "hardware_restored": true,
+      "gui_sha256": "789ed270e35a5949622a44969dc9273fa1e7d509287c0909a0da87ff89df8db9",
+      "assertions": {
+        "radio_playing_40k": true,
+        "radio_stop_confirmed": true,
+        "radio_progress": true,
+        "radio_hold_completed": true,
+        "scan_completed": true,
+        "wav_playing": true,
+        "wav_progress": true,
+        "wav_stop_confirmed": true,
+        "fm_playing": true,
+        "fm_progress": true,
+        "fm_stop_confirmed": true,
+        "shutdown_confirmed": true,
+        "worker_released": true
+      },
+      "radio_hold_seconds": 120.22983321198262,
+      "paint_events": 4272,
+      "render_metrics": {
+        "frames": 4374,
+        "wall_seconds": 100.29861307935789,
+        "cpu_seconds": 83.04463897499997,
+        "max_wall_ms": 87.2458849917166,
+        "heartbeat_gap_max_ms": 556.9357899948955
+      }
+    }
+  ]
+}

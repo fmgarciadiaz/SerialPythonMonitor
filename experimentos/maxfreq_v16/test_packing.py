@@ -6,7 +6,7 @@ from pathlib import Path
 
 class PackingTests(unittest.TestCase):
     def test_cpp_matches_independent_bitstream(self):
-        header = Path(__file__).resolve().parent / 'arduino/v16/oscilloscope/sketch/sample_packing.h'
+        header = Path(__file__).resolve().parent / 'arduino/historico/v16/oscilloscope/sketch/sample_packing.h'
         source = '#include <cstdio>\n#include "' + str(header) + '"\nstruct Sample { uint16_t ch1; };\nint main(){unsigned bits,n; while(scanf("%u %u",&bits,&n)==2){Sample s[864]; uint8_t out[872]; for(unsigned i=0;i<n;i++) scanf("%hu",&s[i].ch1); unsigned used=maxfreq_packing::pack(out,s,n,bits); fwrite(out,1,used,stdout);}}\n'
         rng = random.Random(113)
         commands, expected = [], bytearray()

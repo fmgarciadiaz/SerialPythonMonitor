@@ -70,7 +70,7 @@ int main(int argc,char **argv) {
  return 0;
 }
 ''')
-        subprocess.run(['cc','-O2','-std=c11','-Wall','-fsanitize=address,undefined','-fno-omit-frame-pointer','-I',str(HERE/'arduino/v16/relay'),str(source),'-lm','-o',str(cls.binary)],check=True,capture_output=True)
+        subprocess.run(['cc','-O2','-std=c11','-Wall','-fsanitize=address,undefined','-fno-omit-frame-pointer','-I',str(HERE/'arduino/historico/v16/relay'),str(source),'-lm','-o',str(cls.binary)],check=True,capture_output=True)
 
     @classmethod
     def tearDownClass(cls):cls.tmp.cleanup()
@@ -147,7 +147,7 @@ int main(int argc,char **argv) {
         legacy=seal(canonical(count=864)[:992])
         self.assertEqual(self.run_c('single',legacy),b'\1')
         d=Decoder();d.feed(legacy);self.assertEqual(d.pairs,864)
-        copies=[HERE/'compact_adc8.h',HERE/'arduino/v16/relay/compact_adc8.h',HERE/'arduino/v16/oscilloscope/sketch/compact_adc8.h']
+        copies=[HERE/'compact_adc8.h',HERE/'arduino/historico/v16/relay/compact_adc8.h',HERE/'arduino/historico/v16/oscilloscope/sketch/compact_adc8.h']
         self.assertEqual(len({p.read_bytes() for p in copies}),1)
 
 

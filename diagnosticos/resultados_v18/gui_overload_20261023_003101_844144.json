@@ -1,0 +1,102 @@
+{
+  "error": "RuntimeError: DSP/GUI atrasado: RF V18 pendiente supera un segundo",
+  "monotonic": 297087.516699746,
+  "bits": 14,
+  "rate": 40000,
+  "pending_gui": 0,
+  "pending_gui_peak": 4,
+  "pending_dsp": 0,
+  "pending_dsp_peak": 4,
+  "retained_samples": 0,
+  "retained_seconds": 0.0,
+  "retained_bytes": 0,
+  "retained_batches": 0,
+  "rf_pending_samples": 0,
+  "radio_enabled": false,
+  "receiver_failure_snapshot": {
+    "error": "DSP/GUI atrasado: RF V18 pendiente supera un segundo",
+    "monotonic_s": 297076.844739065,
+    "wall_time_s": 1792726251.055417,
+    "retained_batches": [
+      {
+        "id": 1041,
+        "duration_s": 0.00645
+      },
+      {
+        "id": 1042,
+        "duration_s": 0.04475
+      },
+      {
+        "id": 1043,
+        "duration_s": 0.00645
+      },
+      {
+        "id": 1044,
+        "duration_s": 0.04475
+      }
+    ],
+    "retained_duration_s": 0.10239999999999999,
+    "buffered_samples": 36106,
+    "buffered_chunks": 141,
+    "buffered_duration_s": 0.90265,
+    "pending_duration_s": 1.00505,
+    "actual_rate": 40000.0,
+    "bits": 14,
+    "last_credit_monotonic_s": 297075.84499349,
+    "last_credit_age_s": 0.9997455749544315
+  },
+  "gui_thread_stack_at_notification": [
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/tools/gui_live_smoke_v18.py\", line 251, in <module>\n    raise SystemExit(main())\n",
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/tools/gui_live_smoke_v18.py\", line 245, in main\n    app.exec()\n",
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v18/app.py\", line 5518, in _render_with_diagnostics\n    try:self.render_frame()\n",
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v18/app.py\", line 6126, in render_frame\n    self._render_mixed_temporal(active_columns,audio_names);return\n",
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v18/app.py\", line 5958, in _render_mixed_temporal\n    values={name:self.series[name].window(start,end) for name in channels if name not in audio_names and name in self.series and len(self.series[name])==total}\n",
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v18/history.py\", line 40, in window\n    if first == n: return self.data[offset:offset+n].copy()\n"
+  ],
+  "gui_thread_stack_at_failure": [
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/tools/gui_live_smoke_v18.py\", line 251, in <module>\n    raise SystemExit(main())\n",
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/tools/gui_live_smoke_v18.py\", line 245, in main\n    app.exec()\n",
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v18/app.py\", line 5518, in _render_with_diagnostics\n    try:self.render_frame()\n",
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v18/app.py\", line 6126, in render_frame\n    self._render_mixed_temporal(active_columns,audio_names);return\n",
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v18/app.py\", line 5958, in _render_mixed_temporal\n    values={name:self.series[name].window(start,end) for name in channels if name not in audio_names and name in self.series and len(self.series[name])==total}\n",
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v18/history.py\", line 40, in window\n    if first == n: return self.data[offset:offset+n].copy()\n"
+  ],
+  "time": "2026-10-23T00:31:01.844063",
+  "radio_playing": false,
+  "us": false,
+  "scan_pending": false,
+  "multiscan_active": false,
+  "scan_status": "RADIO apagada",
+  "a0_active": false,
+  "analysis_mode": 0,
+  "fft_mode": "Spectre",
+  "fft_size": "2048",
+  "heatmap_size": "2048",
+  "filter_source": "OFF",
+  "gui_delay_max_ms": 3898.054082004819,
+  "window_visible": true,
+  "window_minimized": false,
+  "wav_path": "",
+  "wav_rate": 40000,
+  "wav_preparing": false,
+  "wav_active": false,
+  "wav_dialog_open": false,
+  "slow_gui_callbacks": [
+    [
+      "render_frame",
+      297070.729560752,
+      27.1442859666422
+    ]
+  ],
+  "selected_columns": {
+    "CH1": true,
+    "CH2": true,
+    "FILTER": false,
+    "RADIO": true
+  },
+  "horizontal_samples": 9000,
+  "trigger_enabled": false,
+  "trigger_source": "CH1",
+  "detail": 50,
+  "trace_style": "R\u00e1pido"
+}

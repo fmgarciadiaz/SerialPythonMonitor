@@ -4,7 +4,7 @@ try:
  from .packed_decoder import PackedDecoder as ConfigurationDecoder
 except ImportError:
  from packed_decoder import PackedDecoder as ConfigurationDecoder
-from monitor.v16.receiver.unoq_usb import ProtocolError
+from monitor.historico.v16.receiver.unoq_usb import ProtocolError
 KEYS=('magic','nodes','node_last_us','node_max_us','node_sum_us','frames','prep_sum_us','setup_sum_us','wait_sum_us','check_sum_us','queued','queued_max','free')
 class TransferDecoder(ConfigurationDecoder):
  def __init__(self):

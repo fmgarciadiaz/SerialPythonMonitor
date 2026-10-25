@@ -46,8 +46,13 @@ def _fft(blocks, fs, window, remove_dc):
     if blocks.ndim != 2 or not np.all(np.isfinite(blocks)): raise ValueError('Muestras inválidas')
     n = blocks.shape[1]
     w,c,_,_ = _window_factors(n,window)
-    data = blocks-blocks.mean(axis=1, keepdims=True) if remove_dc else blocks
-    ft = np.fft.rfft(data*w, axis=1)
+    # One private workspace preserves caller data and avoids a second full
+    # windowed temporary when removing DC from large multisegment transforms.
+    data = np.array(blocks, copy=True)
+    if remove_dc:
+        data -= blocks.mean(axis=1, keepdims=True)
+    data *= w
+    ft = np.fft.rfft(data, axis=1)
     return ft, w, c
 
 

@@ -5,12 +5,12 @@ from dataclasses import asdict
 ROOT=Path(__file__).resolve().parents[2];EXP=Path(__file__).resolve().parent
 sys.path[:0]=[str(ROOT),str(ROOT/'tools')]
 from experimentos.ch1_600_v16.support import load
-from monitor.v16.receiver.unoq_usb import Connection
-from monitor.v16.receiver.unoq_config_receiver import OutputReceiver
-import monitor.v16.receiver.unoq_config_receiver as receiver_module
-from monitor.v16.receiver.unoq_switch import Mode
-from monitor.v16.receiver.unoq_generator import GeneratorConfig
-from monitor.v16.receiver.unoq_wav import State
+from monitor.historico.v16.receiver.unoq_usb import Connection
+from monitor.historico.v16.receiver.unoq_config_receiver import OutputReceiver
+import monitor.historico.v16.receiver.unoq_config_receiver as receiver_module
+from monitor.historico.v16.receiver.unoq_switch import Mode
+from monitor.historico.v16.receiver.unoq_generator import GeneratorConfig
+from monitor.historico.v16.receiver.unoq_wav import State
 from diagnosticos.probar_audio_owner_v16 import require_exclusive_monitor
 from unoq import Board,config_path
 import usb_stream
@@ -30,7 +30,7 @@ def start_relay(board,target):
 def main():
  require_exclusive_monitor()
  stable=Board(json.loads(config_path('v16').read_text()));config=dict(stable.config)
- config.update(name='Scope V16 CH1 600 Experimental',remote_app='/home/arduino/ArduinoApps/scope-v16-ch1-600-experimental',local_app='experimentos/ch1_600_v16/arduino/v16/oscilloscope')
+ config.update(name='Scope V16 CH1 600 Experimental',remote_app='/home/arduino/ArduinoApps/scope-v16-ch1-600-experimental',local_app='experimentos/ch1_600_v16/arduino/historico/v16/oscilloscope')
  candidate=Board(config);report={'cases':[],'restored':False,'ok':False,'analog':'No evaluado','timestamp_hz':160000000,'period_ticks':267,'actual_rate':160000000/267}
  path=EXP/'results.json'
  def save():path.write_text(json.dumps(report,indent=2)+'\n')

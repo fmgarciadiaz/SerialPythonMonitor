@@ -2,9 +2,9 @@
 import importlib.util,sys,time,json
 from pathlib import Path
 import numpy as np
-from monitor.v16.receiver.unoq_config_receiver import OutputReceiver
-from monitor.v16.receiver.unoq_acquisition import Configuration
-from monitor.v16.receiver.unoq_switch import Mode
+from monitor.historico.v16.receiver.unoq_config_receiver import OutputReceiver
+from monitor.historico.v16.receiver.unoq_acquisition import Configuration
+from monitor.historico.v16.receiver.unoq_switch import Mode
 from diagnosticos.benchmark_latencia_host_v16 import adc_payload
 
 def main():

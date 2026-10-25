@@ -1,0 +1,114 @@
+{
+  "restored": true,
+  "instrumented_relay_sha256": "06849050607d4d2532ba94df3765cbd4dbeeea02c594e14e8d9a944bf7ba69aa",
+  "profiles": [
+    {
+      "ticks": 100,
+      "iterations": 113229,
+      "completed": 113229,
+      "socket_queue_peak": 0,
+      "stages": {
+        "ready_wait": {
+          "count": 113229,
+          "mean_us": 172.2286736790045,
+          "max_us": 3129.854,
+          "over_1ms": 77
+        },
+        "command_policy": {
+          "count": 113229,
+          "mean_us": 0.3324879492002932,
+          "max_us": 47.708,
+          "over_1ms": 0
+        },
+        "spi_ioctl": {
+          "count": 113229,
+          "mean_us": 278.9007458248329,
+          "max_us": 470.522,
+          "over_1ms": 0
+        },
+        "checker_policy": {
+          "count": 113229,
+          "mean_us": 7.4869761280237395,
+          "max_us": 536.876,
+          "over_1ms": 0
+        },
+        "socket_control_send": {
+          "count": 113229,
+          "mean_us": 73.5077252205707,
+          "max_us": 796.981,
+          "over_1ms": 0
+        },
+        "heartbeat": {
+          "count": 113229,
+          "mean_us": 0.3797337342906853,
+          "max_us": 55.417,
+          "over_1ms": 0
+        },
+        "frame_wall": {
+          "count": 113229,
+          "mean_us": 539.9127581096716,
+          "max_us": 3918.606,
+          "over_1ms": 15849
+        }
+      },
+      "clock_pair_mean_ns": 41.0859375
+    },
+    {
+      "ticks": 98,
+      "iterations": 115533,
+      "completed": 115533,
+      "socket_queue_peak": 0,
+      "stages": {
+        "ready_wait": {
+          "count": 115533,
+          "mean_us": 168.87230908052246,
+          "max_us": 3060.582,
+          "over_1ms": 50
+        },
+        "command_policy": {
+          "count": 115533,
+          "mean_us": 0.32170261310621207,
+          "max_us": 70.469,
+          "over_1ms": 0
+        },
+        "spi_ioctl": {
+          "count": 115533,
+          "mean_us": 279.4597200540106,
+          "max_us": 530.991,
+          "over_1ms": 0
+        },
+        "checker_policy": {
+          "count": 115533,
+          "mean_us": 6.971765201284482,
+          "max_us": 493.803,
+          "over_1ms": 0
+        },
+        "socket_control_send": {
+          "count": 115533,
+          "mean_us": 65.9456493642509,
+          "max_us": 349.584,
+          "over_1ms": 0
+        },
+        "heartbeat": {
+          "count": 115533,
+          "mean_us": 0.2786357923710109,
+          "max_us": 72.031,
+          "over_1ms": 0
+        },
+        "frame_wall": {
+          "count": 115533,
+          "mean_us": 529.0362278136982,
+          "max_us": 4104.231,
+          "over_1ms": 13913
+        }
+      },
+      "clock_pair_mean_ns": 41.0859375
+    }
+  ],
+  "limitations": [
+    "ADC only, one60s case per rate",
+    "Histograms span active profile including entry/exit, not exactly ADC sample window",
+    "Instrumented relay is a different binary; original-candidate queue peaks are not a controlled overhead A/B",
+    "Maxima are not correlated individual-frame traces; no source of delay established"
+  ]
+}

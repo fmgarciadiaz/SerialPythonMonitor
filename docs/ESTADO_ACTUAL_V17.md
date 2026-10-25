@@ -17,6 +17,10 @@ V17 es la pareja activa: `monitor/v17`, `arduino/v17` y `tests/v17`. V16 se cons
 
 El volumen modifica la amplitud visual de RADIO en temporal cuando se usa Generador Radio. Auto gain conserva la continuidad visual al ajustar la ganancia. El rótulo «s/holg.» se retiró de la interfaz; la limitación física sigue documentada.
 
+La [calificación aislada de tasas superiores](EXPLORACION_FS_MAXIMA_V17.md) cerró60s+3×120s: ADC8/1,633MS/s yADC10/1,290MS/s pasan integridad sin holgura estricta; ADC14/909kS/s yADC16CH1/145,45kS/s pasan ambas. ADC12/1,096MS/s perdió un nodo y no se acepta. Producción quedó restaurada y las tasas públicas no cambiaron. La calidad analógica y la estabilidad conjunta prolongada siguen pendientes antes de incorporar.
+
+La [prueba conjunta posterior](CARGA_CONJUNTA_FS_V17.md) pasó en14/909kS/s y16CH1/145,45kS/s (FFT60s por entrada y temporal30s).8/1,633MS/s perdió un nodo y10/1,290MS/s cerró el flujo conFILTER; no se aceptan para uso conjunto. Producción restaurada; las tasas públicas permanecen iguales y falta aceptación conjunta prolongada de los finalistas.
+
 ## Cableado para Bode
 
 A0 a la entrada del circuito y CH1/A2; salida del circuito a CH2/A3, masa común. CH1 conectado a antena no sirve como referencia del estímulo. CH2/CH2 permite una autocomprobación unitaria si A0 llega a CH2.
@@ -47,3 +51,7 @@ Las herramientas de consola conservan V16 como valor predeterminado por compatib
 - [RADIO y US](RADIO_ANTENA_US_V17.md): recepción selectiva y escucha real pendientes.
 
 [Plan vigente](../Plan%20de%20trabajo.md) · [Continuidad](../%23%20Continuar%20desde%20donde%20quedaste.md).
+
+## Tasas experimentales · cierre prolongado20/10
+
+16CH1/145,455kS/s pasó audio/transporte60s+3×120s con FILTER→A0 y FFT, margen77,88–77,92% y cola1. Una corrida parcialmente oculta impide acreditar dibujo prolongado completo.14/909kS/s perdió un nodo en la tercera corrida;8/1,633MS/s y10/1,290MS/s ya fallaron en carga conjunta,12/1,096MS/s aislado. No se incorporaron tasas. Q restaurado a firmware original y10s sin pérdidas. [Informe y evidencia](CARGA_CONJUNTA_FS_V17.md).

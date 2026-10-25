@@ -10,18 +10,18 @@ EXP = Path(__file__).resolve().parent
 
 
 def main():
-    installed=json.loads((ROOT/'monitor/v16/receiver/native_profiles.json').read_text())
+    installed=json.loads((ROOT/'monitor/historico/v16/receiver/native_profiles.json').read_text())
     if any(p['channels']==2 or p['ticks']==114 for p in installed):
         raise RuntimeError('One-time CH1 incorporation already completed; preserve the current whitelist. Use tools/sync_high_rate_profile.py for the scoped extension.')
     report = json.loads((EXP/'sweep.json').read_text())
     profiles = accepted_profiles(report)
     header = firmware_header(profiles)
-    for folder in ('arduino/v16/oscilloscope/sketch', 'arduino/v16/relay'):
+    for folder in ('arduino/historico/v16/oscilloscope/sketch', 'arduino/historico/v16/relay'):
         (ROOT/folder/'native_profiles.h').write_text(header)
-    (ROOT/'monitor/v16/receiver/native_profiles.json').write_text(
+    (ROOT/'monitor/historico/v16/receiver/native_profiles.json').write_text(
         json.dumps([asdict(p) for p in profiles], indent=2)+'\n')
-    shutil.copy2(EXP/'arduino/v16/oscilloscope/sketch/sample_packing.h',
-                 ROOT/'arduino/v16/oscilloscope/sketch/sample_packing.h')
+    shutil.copy2(EXP/'arduino/historico/v16/oscilloscope/sketch/sample_packing.h',
+                 ROOT/'arduino/historico/v16/oscilloscope/sketch/sample_packing.h')
     print(json.dumps([asdict(p) | {'rate':p.rate} for p in profiles], indent=2))
 
 

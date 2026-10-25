@@ -16,9 +16,9 @@ from scipy.signal import stft
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
-from monitor.v16 import piano_calibration as calibration
-from monitor.v16.fm_source import FMSource,FMParameters
-from monitor.v16.virtual_instruments import warmup
+from monitor.historico.v16 import piano_calibration as calibration
+from monitor.historico.v16.fm_source import FMSource,FMParameters
+from monitor.historico.v16.virtual_instruments import warmup
 
 SAMPLES=ROOT/'diagnosticos/referencias_piano/liberacion'
 RATE=20000

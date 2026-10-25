@@ -1,0 +1,62 @@
+{
+  "ok": true,
+  "fft_hz": 0.0,
+  "adaptive": false,
+  "argv": [
+    "experimentos/radio_ipc_compact_v17/render_probe.py",
+    "--probe-fft-hz",
+    "0",
+    "--stage-audit",
+    "--bits",
+    "8",
+    "--rate",
+    "1600000",
+    "--seconds",
+    "120",
+    "--audio-rate",
+    "40000",
+    "--bandwidth",
+    "8000",
+    "--analysis-audit",
+    "--keep-visible",
+    "--refill-ring",
+    "--defer-diagnostics",
+    "--host-cpu-trace",
+    "--retune-stress",
+    "--retune-interval",
+    "10"
+  ],
+  "stats": {
+    "calls": 5561,
+    "skipped": 0,
+    "executed": 5561,
+    "thread_cpu_seconds": 17.123635793999885,
+    "wall_seconds": 21.82660174171906,
+    "max_wall_ms": 40.26718399836682
+  },
+  "stages": {
+    "analysis_pipeline": {
+      "calls": 1252,
+      "thread_cpu_seconds": 15.050473989999894,
+      "wall_seconds": 17.990487442264566,
+      "max_wall_ms": 37.531150999711826
+    },
+    "draw_submission": {
+      "calls": 1233,
+      "thread_cpu_seconds": 1.943813414999914,
+      "wall_seconds": 2.9953094016818795,
+      "max_wall_ms": 7.37827701959759
+    },
+    "fft_numeric": {
+      "calls": 1232,
+      "thread_cpu_seconds": 3.6988131010000074,
+      "wall_seconds": 3.898112605937058,
+      "max_wall_ms": 9.66544501716271
+    }
+  },
+  "policy_sha256": "1ac043d35e16cd681f81ed6da2aafc82b876f5ee6f17b9123710a01750d6a21d",
+  "source_sha256": "2470dafe026ffc28811138774c39637c5dc5e1ff13291ccf3849ba35e3c11325",
+  "limitation": "Diagnostic refresh reduction, not a production fix or proof of GIL causality.",
+  "stage_limitation": "Inclusive nested method timings; do not sum stages. Draw submission excludes later Qt painting. Counters span lifecycle.",
+  "physical_report": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v17/generador_radio_20261021_150332/report.json"
+}

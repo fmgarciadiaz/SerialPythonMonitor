@@ -1,0 +1,799 @@
+{
+  "ok": true,
+  "restored": true,
+  "serial": "1060031107",
+  "errors": [],
+  "stages": [
+    {
+      "name": "connect_live_base",
+      "generation": 1,
+      "adc": {
+        "bits": 14,
+        "rate": 40000
+      },
+      "requested_monotonic": 76550.19329408,
+      "first_delivery_monotonic": 76552.431366623,
+      "samples": 398328,
+      "batches": 391,
+      "ok": true,
+      "requested_seconds_after_delivery": 10,
+      "last_delivery_monotonic": 76562.423826981,
+      "finished_monotonic": 76562.432337862,
+      "requested_to_first_delivery_seconds": 2.2380725429975428,
+      "trace": [
+        {
+          "generation": 1,
+          "kind": "connection_start",
+          "bits": 14,
+          "rate": 40000,
+          "events": [
+            {
+              "event": "request_begin",
+              "monotonic": 76550.193383567
+            },
+            {
+              "event": "connection_begin",
+              "monotonic": 76550.193400486,
+              "autoload": true
+            },
+            {
+              "event": "connection_ready",
+              "monotonic": 76550.263726651,
+              "scope_restarted": false
+            },
+            {
+              "event": "identity_begin",
+              "monotonic": 76550.263743124
+            },
+            {
+              "event": "identity_end",
+              "monotonic": 76550.549643197
+            },
+            {
+              "event": "configure_begin",
+              "monotonic": 76550.550042783
+            },
+            {
+              "event": "configure_end",
+              "monotonic": 76550.575273468,
+              "changed": false
+            },
+            {
+              "event": "target_configuration_confirmed",
+              "monotonic": 76550.575314985,
+              "bits": 14,
+              "rate": 40000
+            },
+            {
+              "event": "startup_gui_wait_begin",
+              "monotonic": 76550.575741716,
+              "required": true
+            },
+            {
+              "event": "gui_configuration_installed",
+              "monotonic": 76550.71023098
+            },
+            {
+              "event": "startup_gui_wait_end",
+              "monotonic": 76550.710725335
+            },
+            {
+              "event": "dsp_prewarm_begin",
+              "monotonic": 76550.710733301
+            },
+            {
+              "event": "dsp_prewarm_end",
+              "monotonic": 76552.422228113
+            },
+            {
+              "event": "first_target_samples_admitted",
+              "monotonic": 76552.422754472
+            },
+            {
+              "event": "first_batch_reserved",
+              "monotonic": 76552.422984845
+            },
+            {
+              "event": "first_batch_ready_signal",
+              "monotonic": 76552.430253782
+            },
+            {
+              "event": "first_gui_batch_accepted",
+              "monotonic": 76552.431323279
+            }
+          ]
+        }
+      ],
+      "status": {
+        "ack": 3567977,
+        "rate": 40000,
+        "bits": 14,
+        "dropped": 0,
+        "fatal": 0,
+        "epoch": 31,
+        "prepare_us": 81,
+        "check_us": 48
+      }
+    },
+    {
+      "name": "control_1403508",
+      "generation": 2,
+      "adc": {
+        "bits": 8,
+        "rate": 1403508
+      },
+      "requested_monotonic": 76562.432641858,
+      "first_delivery_monotonic": 76562.538242525,
+      "samples": 14099616,
+      "batches": 440,
+      "ok": true,
+      "requested_seconds_after_delivery": 10,
+      "last_delivery_monotonic": 76572.546170362,
+      "finished_monotonic": 76572.596334883,
+      "requested_to_first_delivery_seconds": 0.10560066699690651,
+      "trace": [
+        {
+          "generation": 2,
+          "kind": "active_change",
+          "bits": 8,
+          "rate": 1403508,
+          "events": [
+            {
+              "event": "request_begin",
+              "monotonic": 76562.432833849
+            },
+            {
+              "event": "configure_begin",
+              "monotonic": 76562.43284509
+            },
+            {
+              "event": "target_configuration_confirmed",
+              "monotonic": 76562.468876035,
+              "bits": 8,
+              "rate": 1403508
+            },
+            {
+              "event": "configure_end",
+              "monotonic": 76562.46892061,
+              "changed": true
+            },
+            {
+              "event": "first_target_samples_admitted",
+              "monotonic": 76562.475484945
+            },
+            {
+              "event": "first_batch_reserved",
+              "monotonic": 76562.489060697
+            },
+            {
+              "event": "first_batch_ready_signal",
+              "monotonic": 76562.507340218
+            },
+            {
+              "event": "gui_configuration_installed",
+              "monotonic": 76562.521037182
+            },
+            {
+              "event": "first_gui_batch_accepted",
+              "monotonic": 76562.538215397
+            }
+          ]
+        }
+      ],
+      "status": {
+        "ack": 3584450,
+        "rate": 1403508,
+        "bits": 8,
+        "dropped": 0,
+        "fatal": 0,
+        "epoch": 32,
+        "prepare_us": 12,
+        "check_us": 49,
+        "queue_slots": 4,
+        "node_pairs": 3456,
+        "queue": 1,
+        "queue_peak": 2,
+        "copy_ticks": 40228,
+        "poll_ticks": 214479,
+        "slack_ticks": 180054,
+        "send_ticks": 308102,
+        "produced": 4109
+      }
+    },
+    {
+      "name": "base_after_control",
+      "generation": 3,
+      "adc": {
+        "bits": 14,
+        "rate": 40000
+      },
+      "requested_monotonic": 76572.596589731,
+      "first_delivery_monotonic": 76572.706736021,
+      "samples": 401666,
+      "batches": 393,
+      "ok": true,
+      "requested_seconds_after_delivery": 10,
+      "last_delivery_monotonic": 76582.716215311,
+      "finished_monotonic": 76582.721325158,
+      "requested_to_first_delivery_seconds": 0.11014629001147114,
+      "trace": [
+        {
+          "generation": 3,
+          "kind": "active_change",
+          "bits": 14,
+          "rate": 40000,
+          "events": [
+            {
+              "event": "request_begin",
+              "monotonic": 76572.596703687
+            },
+            {
+              "event": "configure_begin",
+              "monotonic": 76572.596708222
+            },
+            {
+              "event": "target_configuration_confirmed",
+              "monotonic": 76572.604060334,
+              "bits": 14,
+              "rate": 40000
+            },
+            {
+              "event": "configure_end",
+              "monotonic": 76572.604103199,
+              "changed": true
+            },
+            {
+              "event": "first_target_samples_admitted",
+              "monotonic": 76572.675326126
+            },
+            {
+              "event": "first_batch_reserved",
+              "monotonic": 76572.678591611
+            },
+            {
+              "event": "first_batch_ready_signal",
+              "monotonic": 76572.691381156
+            },
+            {
+              "event": "gui_configuration_installed",
+              "monotonic": 76572.696398681
+            },
+            {
+              "event": "first_gui_batch_accepted",
+              "monotonic": 76572.706705941
+            }
+          ]
+        }
+      ],
+      "status": {
+        "ack": 3591598,
+        "rate": 40000,
+        "bits": 14,
+        "dropped": 0,
+        "fatal": 0,
+        "epoch": 33,
+        "prepare_us": 81,
+        "check_us": 54
+      }
+    },
+    {
+      "name": "target_1600000",
+      "generation": 4,
+      "adc": {
+        "bits": 8,
+        "rate": 1600000
+      },
+      "requested_monotonic": 76582.721434199,
+      "first_delivery_monotonic": 76583.338893445,
+      "samples": 191947104,
+      "batches": 5344,
+      "ok": true,
+      "requested_seconds_after_delivery": 120,
+      "last_delivery_monotonic": 76703.34504837,
+      "finished_monotonic": 76703.36541579,
+      "requested_to_first_delivery_seconds": 0.6174592460010899,
+      "trace": [
+        {
+          "generation": 4,
+          "kind": "active_change",
+          "bits": 8,
+          "rate": 1600000,
+          "events": [
+            {
+              "event": "request_begin",
+              "monotonic": 76582.723125643
+            },
+            {
+              "event": "configure_begin",
+              "monotonic": 76582.723133799
+            },
+            {
+              "event": "preparation_14_40000_begin",
+              "monotonic": 76582.723618792
+            },
+            {
+              "event": "preparation_14_40000_end",
+              "monotonic": 76582.723638589
+            },
+            {
+              "event": "preparation_8_1428571_begin",
+              "monotonic": 76582.723640844
+            },
+            {
+              "event": "preparation_8_1428571_end",
+              "monotonic": 76582.763000144
+            },
+            {
+              "event": "settle_2s_begin",
+              "monotonic": 76582.763005597
+            },
+            {
+              "event": "settle_2s_end",
+              "monotonic": 76583.264007795
+            },
+            {
+              "event": "target_request",
+              "monotonic": 76583.264017972,
+              "bits": 8,
+              "rate": 1600000
+            },
+            {
+              "event": "target_applied",
+              "monotonic": 76583.27360549,
+              "bits": 8,
+              "rate": 1600000
+            },
+            {
+              "event": "target_configuration_confirmed",
+              "monotonic": 76583.273623299,
+              "bits": 8,
+              "rate": 1600000
+            },
+            {
+              "event": "configure_end",
+              "monotonic": 76583.273726046,
+              "changed": true
+            },
+            {
+              "event": "first_target_samples_admitted",
+              "monotonic": 76583.274827316
+            },
+            {
+              "event": "first_batch_reserved",
+              "monotonic": 76583.294821445
+            },
+            {
+              "event": "first_batch_ready_signal",
+              "monotonic": 76583.312030144
+            },
+            {
+              "event": "gui_configuration_installed",
+              "monotonic": 76583.324798215
+            },
+            {
+              "event": "first_gui_batch_accepted",
+              "monotonic": 76583.338859248
+            }
+          ]
+        }
+      ],
+      "status": {
+        "ack": 3814826,
+        "rate": 1600000,
+        "bits": 8,
+        "dropped": 0,
+        "fatal": 0,
+        "epoch": 35,
+        "prepare_us": 12,
+        "check_us": 49,
+        "queue_slots": 8,
+        "node_pairs": 3456,
+        "queue": 1,
+        "queue_peak": 3,
+        "copy_ticks": 39186,
+        "poll_ticks": 225959,
+        "slack_ticks": 131420,
+        "send_ticks": 277443,
+        "produced": 55565
+      }
+    },
+    {
+      "name": "base_after_target",
+      "generation": 5,
+      "adc": {
+        "bits": 14,
+        "rate": 40000
+      },
+      "requested_monotonic": 76703.365719558,
+      "first_delivery_monotonic": 76703.44767465,
+      "samples": 402182,
+      "batches": 395,
+      "ok": true,
+      "requested_seconds_after_delivery": 10,
+      "last_delivery_monotonic": 76713.507459279,
+      "finished_monotonic": 76713.458872784,
+      "requested_to_first_delivery_seconds": 0.08195509199867956,
+      "trace": [
+        {
+          "generation": 5,
+          "kind": "active_change",
+          "bits": 14,
+          "rate": 40000,
+          "events": [
+            {
+              "event": "request_begin",
+              "monotonic": 76703.365900347
+            },
+            {
+              "event": "configure_begin",
+              "monotonic": 76703.365905933
+            },
+            {
+              "event": "target_configuration_confirmed",
+              "monotonic": 76703.377219766,
+              "bits": 14,
+              "rate": 40000
+            },
+            {
+              "event": "configure_end",
+              "monotonic": 76703.377267205,
+              "changed": true
+            },
+            {
+              "event": "first_target_samples_admitted",
+              "monotonic": 76703.425691787
+            },
+            {
+              "event": "first_batch_reserved",
+              "monotonic": 76703.425760842
+            },
+            {
+              "event": "first_batch_ready_signal",
+              "monotonic": 76703.436845726
+            },
+            {
+              "event": "gui_configuration_installed",
+              "monotonic": 76703.438627594
+            },
+            {
+              "event": "first_gui_batch_accepted",
+              "monotonic": 76703.447644877
+            }
+          ]
+        }
+      ],
+      "status": {
+        "ack": 3821952,
+        "rate": 40000,
+        "bits": 14,
+        "dropped": 0,
+        "fatal": 0,
+        "epoch": 36,
+        "prepare_us": 81,
+        "check_us": 48
+      }
+    }
+  ],
+  "autoload_hook": "live_only",
+  "scope_restarted": false,
+  "cold_not_measured": true,
+  "measurement": "GUI batch delivery; no paint or visible FPS claim",
+  "stage_seconds_after_first_delivery": 10,
+  "stage_timeout_seconds": 45,
+  "filter": "OFF",
+  "radio_enabled": true,
+  "candidate_settle_seconds": 0.5,
+  "target_seconds": 120,
+  "qt_platform": "cocoa",
+  "original_configure_sha256": "77b862c0b6328026c194a3b892fed98914cb6b405f5b17edc259ea7e0559f195",
+  "trace_note": "settle_2s event names identify the existing phase; candidate duration is recorded separately",
+  "prior": {
+    "adc": {
+      "bits": 8,
+      "rate": 632411
+    },
+    "generator": {
+      "wave": 0,
+      "enabled": 0,
+      "mode": 0,
+      "frequency": 2500,
+      "final_frequency": 2500,
+      "low": 0,
+      "high": 0,
+      "duration": 1000,
+      "duration_us": 0,
+      "duty": 50
+    }
+  },
+  "identity_before": {
+    "board_serial": "1060031107",
+    "app": "scope-v17-main-1",
+    "firmware_sha256": "96685eb64cc722adebc7f345f40c3500e22642814bbfc6f182c66c0f992a7ec9"
+  },
+  "shutdown": {
+    "ok": true,
+    "message": "Salida apagada confirmada"
+  },
+  "worker_exited": true,
+  "trace_final": [
+    {
+      "generation": 2,
+      "kind": "active_change",
+      "bits": 8,
+      "rate": 1403508,
+      "events": [
+        {
+          "event": "request_begin",
+          "monotonic": 76562.432833849
+        },
+        {
+          "event": "configure_begin",
+          "monotonic": 76562.43284509
+        },
+        {
+          "event": "target_configuration_confirmed",
+          "monotonic": 76562.468876035,
+          "bits": 8,
+          "rate": 1403508
+        },
+        {
+          "event": "configure_end",
+          "monotonic": 76562.46892061,
+          "changed": true
+        },
+        {
+          "event": "first_target_samples_admitted",
+          "monotonic": 76562.475484945
+        },
+        {
+          "event": "first_batch_reserved",
+          "monotonic": 76562.489060697
+        },
+        {
+          "event": "first_batch_ready_signal",
+          "monotonic": 76562.507340218
+        },
+        {
+          "event": "gui_configuration_installed",
+          "monotonic": 76562.521037182
+        },
+        {
+          "event": "first_gui_batch_accepted",
+          "monotonic": 76562.538215397
+        }
+      ]
+    },
+    {
+      "generation": 3,
+      "kind": "active_change",
+      "bits": 14,
+      "rate": 40000,
+      "events": [
+        {
+          "event": "request_begin",
+          "monotonic": 76572.596703687
+        },
+        {
+          "event": "configure_begin",
+          "monotonic": 76572.596708222
+        },
+        {
+          "event": "target_configuration_confirmed",
+          "monotonic": 76572.604060334,
+          "bits": 14,
+          "rate": 40000
+        },
+        {
+          "event": "configure_end",
+          "monotonic": 76572.604103199,
+          "changed": true
+        },
+        {
+          "event": "first_target_samples_admitted",
+          "monotonic": 76572.675326126
+        },
+        {
+          "event": "first_batch_reserved",
+          "monotonic": 76572.678591611
+        },
+        {
+          "event": "first_batch_ready_signal",
+          "monotonic": 76572.691381156
+        },
+        {
+          "event": "gui_configuration_installed",
+          "monotonic": 76572.696398681
+        },
+        {
+          "event": "first_gui_batch_accepted",
+          "monotonic": 76572.706705941
+        }
+      ]
+    },
+    {
+      "generation": 4,
+      "kind": "active_change",
+      "bits": 8,
+      "rate": 1600000,
+      "events": [
+        {
+          "event": "request_begin",
+          "monotonic": 76582.723125643
+        },
+        {
+          "event": "configure_begin",
+          "monotonic": 76582.723133799
+        },
+        {
+          "event": "preparation_14_40000_begin",
+          "monotonic": 76582.723618792
+        },
+        {
+          "event": "preparation_14_40000_end",
+          "monotonic": 76582.723638589
+        },
+        {
+          "event": "preparation_8_1428571_begin",
+          "monotonic": 76582.723640844
+        },
+        {
+          "event": "preparation_8_1428571_end",
+          "monotonic": 76582.763000144
+        },
+        {
+          "event": "settle_2s_begin",
+          "monotonic": 76582.763005597
+        },
+        {
+          "event": "settle_2s_end",
+          "monotonic": 76583.264007795
+        },
+        {
+          "event": "target_request",
+          "monotonic": 76583.264017972,
+          "bits": 8,
+          "rate": 1600000
+        },
+        {
+          "event": "target_applied",
+          "monotonic": 76583.27360549,
+          "bits": 8,
+          "rate": 1600000
+        },
+        {
+          "event": "target_configuration_confirmed",
+          "monotonic": 76583.273623299,
+          "bits": 8,
+          "rate": 1600000
+        },
+        {
+          "event": "configure_end",
+          "monotonic": 76583.273726046,
+          "changed": true
+        },
+        {
+          "event": "first_target_samples_admitted",
+          "monotonic": 76583.274827316
+        },
+        {
+          "event": "first_batch_reserved",
+          "monotonic": 76583.294821445
+        },
+        {
+          "event": "first_batch_ready_signal",
+          "monotonic": 76583.312030144
+        },
+        {
+          "event": "gui_configuration_installed",
+          "monotonic": 76583.324798215
+        },
+        {
+          "event": "first_gui_batch_accepted",
+          "monotonic": 76583.338859248
+        }
+      ]
+    },
+    {
+      "generation": 5,
+      "kind": "active_change",
+      "bits": 14,
+      "rate": 40000,
+      "events": [
+        {
+          "event": "request_begin",
+          "monotonic": 76703.365900347
+        },
+        {
+          "event": "configure_begin",
+          "monotonic": 76703.365905933
+        },
+        {
+          "event": "target_configuration_confirmed",
+          "monotonic": 76703.377219766,
+          "bits": 14,
+          "rate": 40000
+        },
+        {
+          "event": "configure_end",
+          "monotonic": 76703.377267205,
+          "changed": true
+        },
+        {
+          "event": "first_target_samples_admitted",
+          "monotonic": 76703.425691787
+        },
+        {
+          "event": "first_batch_reserved",
+          "monotonic": 76703.425760842
+        },
+        {
+          "event": "first_batch_ready_signal",
+          "monotonic": 76703.436845726
+        },
+        {
+          "event": "gui_configuration_installed",
+          "monotonic": 76703.438627594
+        },
+        {
+          "event": "first_gui_batch_accepted",
+          "monotonic": 76703.447644877
+        },
+        {
+          "event": "worker_finished",
+          "monotonic": 76713.750480045,
+          "stopped": true
+        }
+      ]
+    }
+  ],
+  "pending_batches_peak": 7,
+  "pending_dsp_peak": 3,
+  "delivery_failure": null,
+  "identity_after": {
+    "board_serial": "1060031107",
+    "app": "scope-v17-main-1",
+    "firmware_sha256": "96685eb64cc722adebc7f345f40c3500e22642814bbfc6f182c66c0f992a7ec9"
+  },
+  "final_settings": {
+    "adc": {
+      "bits": 8,
+      "rate": 632411
+    },
+    "generator": {
+      "wave": 0,
+      "enabled": 0,
+      "mode": 0,
+      "frequency": 2500,
+      "final_frequency": 2500,
+      "low": 0,
+      "high": 0,
+      "duration": 1000,
+      "duration_us": 0,
+      "duty": 50
+    }
+  },
+  "recovery": {
+    "seconds": 10.000566261995118,
+    "samples": 6321456,
+    "status": {
+      "ack": 3837262,
+      "rate": 632411,
+      "bits": 8,
+      "dropped": 0,
+      "fatal": 0,
+      "epoch": 37,
+      "prepare_us": 46,
+      "check_us": 48,
+      "queue_slots": 4,
+      "node_pairs": 3888,
+      "queue": 1,
+      "queue_peak": 2,
+      "copy_ticks": 78895,
+      "poll_ticks": 261209,
+      "slack_ticks": 731310,
+      "send_ticks": 842350,
+      "produced": 1627
+    },
+    "ok": true
+  }
+}

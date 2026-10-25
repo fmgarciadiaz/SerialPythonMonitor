@@ -14,14 +14,14 @@ from tools.unoq import Board
 EXP=Path(__file__).resolve().parent
 optimized.EXP=EXP
 optimized.send.EXP=EXP
-HEADER=EXP/'arduino/v16/oscilloscope/sketch/spi_word_experiment.h'
+HEADER=EXP/'arduino/historico/v16/oscilloscope/sketch/spi_word_experiment.h'
 
 
 class WordProbe(optimized.OptimizedSweep):
     def __init__(self):
         super().__init__()
         config=dict(self.candidate.config)
-        config['local_app']='experimentos/adc8_spi_word_v17/arduino/v16/oscilloscope'
+        config['local_app']='experimentos/adc8_spi_word_v17/arduino/historico/v16/oscilloscope'
         self.candidate=Board(config)
         self.report.update(revision='adc8_spi_dma_byte_word_ab_v17',variants={},
             plan={'bits':[8],'nodes':[3456],'ticks':[114,113,112],

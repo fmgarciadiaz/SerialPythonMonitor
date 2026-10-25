@@ -4,7 +4,7 @@ from pathlib import Path
 from dataclasses import replace,asdict
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
 import numpy as np
-from monitor.v16 import fm_source as current
+from monitor.historico.v16 import fm_source as current
 from diagnosticos.synth_presets_v16 import panel_presets
 
 def render(module,p,rate,blocks=180):

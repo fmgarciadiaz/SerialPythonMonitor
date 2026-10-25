@@ -12,11 +12,11 @@ sys.path[:0]=[str(ROOT),str(ROOT/'tools')]
 from experimentos.maxfreq_dual_v16.prepare import boards
 from experimentos.maxfreq_dual_v16.contract import Session
 from experimentos.megaboom_ch1_3584_v16.run import start_relay
-from monitor.v16.receiver.unoq_usb import Connection
-from monitor.v16.receiver.unoq_config_receiver import OutputReceiver
-from monitor.v16.receiver.unoq_acquisition import Configuration
-from monitor.v16.receiver.unoq_generator import GeneratorConfig
-from monitor.v16.receiver.unoq_switch import Mode
+from monitor.historico.v16.receiver.unoq_usb import Connection
+from monitor.historico.v16.receiver.unoq_config_receiver import OutputReceiver
+from monitor.historico.v16.receiver.unoq_acquisition import Configuration
+from monitor.historico.v16.receiver.unoq_generator import GeneratorConfig
+from monitor.historico.v16.receiver.unoq_switch import Mode
 from diagnosticos.probar_audio_owner_v16 import require_exclusive_monitor
 import usb_stream
 TICKS=[1600,1200,960,800,640,560,480,400,360,320,288,267,256,242,224,208,192,176,160,156]

@@ -2,8 +2,8 @@
 from dataclasses import dataclass
 import struct
 import zlib
-from monitor.v16.receiver.unoq_switch import Phase, Reason
-from monitor.v16.receiver.unoq_usb import ProtocolError
+from monitor.historico.v16.receiver.unoq_switch import Phase, Reason
+from monitor.historico.v16.receiver.unoq_usb import ProtocolError
 
 BITS = (8,)
 CHANNELS = 2

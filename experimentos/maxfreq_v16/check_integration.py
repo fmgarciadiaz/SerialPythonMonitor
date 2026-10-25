@@ -4,9 +4,9 @@ import subprocess
 import tempfile
 from pathlib import Path
 from unittest.mock import patch
-from monitor.v16.receiver import unoq_native
-from monitor.v16.receiver.unoq_config_decoder import ConfigurationDecoder
-from tests.v16.test_ch1_fast import extract
+from monitor.historico.v16.receiver import unoq_native
+from monitor.historico.v16.receiver.unoq_config_decoder import ConfigurationDecoder
+from tests.historico.v16.test_ch1_fast import extract
 from experimentos.maxfreq_v16 import integrate_firmware as integration
 from experimentos.maxfreq_v16.accepted import AcceptedProfile, firmware_header
 
@@ -17,21 +17,21 @@ EXP = integration.EXP
 def main():
     with tempfile.TemporaryDirectory(prefix='v16-native-') as folder:
         root=Path(folder)
-        for path in ('arduino/v16/oscilloscope/sketch','arduino/v16/relay'):
+        for path in ('arduino/historico/v16/oscilloscope/sketch','arduino/historico/v16/relay'):
             shutil.copytree(ROOT/path,root/path)
         shutil.copytree(EXP/'arduino',root/'experiment/arduino')
         header=firmware_header([AcceptedProfile(8,131,6912,1,False),
                                AcceptedProfile(10,176,8192,1,True),
                                AcceptedProfile(14,214,7936,1,False)])
-        for path in ('arduino/v16/oscilloscope/sketch','arduino/v16/relay'):
+        for path in ('arduino/historico/v16/oscilloscope/sketch','arduino/historico/v16/relay'):
             (root/path/'native_profiles.h').write_text(header)
-        shutil.copy2(EXP/'arduino/v16/oscilloscope/sketch/sample_packing.h',
-                     root/'arduino/v16/oscilloscope/sketch/sample_packing.h')
+        shutil.copy2(EXP/'arduino/historico/v16/oscilloscope/sketch/sample_packing.h',
+                     root/'arduino/historico/v16/oscilloscope/sketch/sample_packing.h')
         integration.ROOT=root;integration.EXP=root/'experiment'
-        integration.SKETCH=root/'arduino/v16/oscilloscope/sketch'
+        integration.SKETCH=root/'arduino/historico/v16/oscilloscope/sketch'
         if 'static bool native()' not in (integration.SKETCH/'acquisition.h').read_text():
             integration.main()
-        base=root/'arduino/v16/relay/base_verifier.c'
+        base=root/'arduino/historico/v16/relay/base_verifier.c'
         relay=base.with_name('config_relay_protocol.h')
         source=root/'relay.c'
         source.write_text(f'#define main baseline_main\n#include "{base}"\n#undef main\n#include "{relay}"\nint main(int argc,char **argv){{(void)argc;init_crc();DualChecker d={{.bits=(unsigned)atoi(argv[1]),.period=(uint32_t)strtoul(argv[2],0,10)}};uint8_t p[BLOCK];while(fread(p,1,BLOCK,stdin)==BLOCK)if(!dual_feed(&d,p))return 1;return 0;}}\n')
@@ -76,7 +76,7 @@ build_native_samples(p,&node,off,count);data_frame(p,seq++,0,0,0,0,992);put16(p+
                 assert [r[3] for r in rows]==[(node_index*n+i)&0xffffffff for i in range(n)]
                 subprocess.run([str(root/'relay'),str(bits),str((n<<16)|ticks)],input=packets,check=True)
         print('Exact staged MCU packer, relay and Python decoder agree for ADC8/10/14')
-    integration.ROOT=ROOT;integration.EXP=EXP;integration.SKETCH=ROOT/'arduino/v16/oscilloscope/sketch'
+    integration.ROOT=ROOT;integration.EXP=EXP;integration.SKETCH=ROOT/'arduino/historico/v16/oscilloscope/sketch'
 
 
 if __name__=='__main__':

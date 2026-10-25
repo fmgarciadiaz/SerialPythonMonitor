@@ -17,8 +17,8 @@ from experimentos.adc8_ping_word_v17.run import PingProbe,optimized,TimingDecode
 import experimentos.maxfreq_v16.contract as original_contract
 from experimentos.adc8_compact_o2_v17.contract import Decoder as CompactDecoder
 from experimentos.maxfreq_v16.contract import Session
-from monitor.v16.receiver.unoq_usb import Connection
-from monitor.v16.receiver.unoq_generator import GeneratorConfig
+from monitor.historico.v16.receiver.unoq_usb import Connection
+from monitor.historico.v16.receiver.unoq_generator import GeneratorConfig
 from tools.unoq import Board
 from spi_benchmark import IMAGE
 
@@ -54,10 +54,10 @@ def start_relay(board,target):
 
 class CompactProbe(PingProbe):
     def __init__(self):
-        (EXP/'arduino/v16/oscilloscope/sketch/compact_variant.h').write_text('#pragma once\n#define SCOPE_COMPACT_ADC8 0\n')
+        (EXP/'arduino/historico/v16/oscilloscope/sketch/compact_variant.h').write_text('#pragma once\n#define SCOPE_COMPACT_ADC8 0\n')
         super().__init__()
         cfg=dict(self.candidate.config)
-        cfg.update(local_app='experimentos/adc8_compact_o2_v17/arduino/v16/oscilloscope',
+        cfg.update(local_app='experimentos/adc8_compact_o2_v17/arduino/historico/v16/oscilloscope',
                    experiment_compact=True)
         self.candidate=Board(cfg)
         self.report['runner_sha256']=hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
@@ -79,7 +79,7 @@ class CompactProbe(PingProbe):
     def load(self,variant):
         optimized.send.usb_stream.stop(self.candidate)
         self.candidate.stop()
-        (EXP/'arduino/v16/oscilloscope/sketch/compact_variant.h').write_text(
+        (EXP/'arduino/historico/v16/oscilloscope/sketch/compact_variant.h').write_text(
             '#pragma once\n#define SCOPE_COMPACT_ADC8 '+('1' if variant=='B' else '0')+'\n')
         files=self.candidate.check_sources()
         self.candidate.push_sources(files,self.candidate.remote)

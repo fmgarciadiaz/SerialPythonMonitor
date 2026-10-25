@@ -4,7 +4,7 @@ from pathlib import Path
 from unittest.mock import patch
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
 import numpy as np
-from monitor.v16 import fm_source,virtual_string
+from monitor.historico.v16 import fm_source,virtual_string
 from diagnosticos.synth_presets_v16 import panel_presets
 from diagnosticos.benchmark_cache_instrumentos_v16 import render
 

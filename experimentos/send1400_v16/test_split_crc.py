@@ -7,7 +7,7 @@ import tempfile
 import unittest
 import zlib
 
-SKETCH=Path(__file__).resolve().parent/'arduino/v16/oscilloscope/sketch'
+SKETCH=Path(__file__).resolve().parent/'arduino/historico/v16/oscilloscope/sketch'
 class SplitCrcTests(unittest.TestCase):
     def test_all_positions_and_reused_payloads(self):
         source=f'''#include "{SKETCH.parents[3]/'rejected_split_crc/split_crc.h'}"

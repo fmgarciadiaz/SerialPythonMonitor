@@ -18,7 +18,7 @@ def main():
     target=usb_stream.binary(stable,p992=True,audio=True)
     manifest={'ready':False,'relay':target,'backup':str(stable.backup()),
               'source_hashes':{str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest()
-                              for folder in (stable.local,ROOT/'arduino/v16/relay')
+                              for folder in (stable.local,ROOT/'arduino/historico/v16/relay')
                               for p in sorted(folder.rglob('*')) if p.is_file() and
                               p.suffix in ('.h','.ino','.c','.py','.yaml')}}
     path=EXP/'production_deployment.json'

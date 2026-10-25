@@ -1,7 +1,7 @@
 import unittest,struct
-from tests.v16.test_compact_protocol import packet,seal
+from tests.historico.v16.test_compact_protocol import packet,seal
 from experimentos.adc_transfer_v16.decoder import TransferDecoder
-from monitor.v16.receiver.unoq_usb import ProtocolError
+from monitor.historico.v16.receiver.unoq_usb import ProtocolError
 class TransferDecoderTests(unittest.TestCase):
  def diagnostic(self):
   p=bytearray(packet(index=1806,count=0,t0=100));struct.pack_into('<H',p,6,15);struct.pack_into('<H',p,64,242)

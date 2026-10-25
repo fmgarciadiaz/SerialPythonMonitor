@@ -1,0 +1,78 @@
+{
+  "ok": true,
+  "python": "3.13.5 | packaged by Anaconda, Inc. | (main, Jun 12 2025, 11:09:21) [Clang 14.0.6 ]",
+  "parent_pid": 85378,
+  "rounds": [
+    {
+      "trial": 1,
+      "tests": 100,
+      "ok": true
+    },
+    {
+      "trial": 2,
+      "tests": 100,
+      "ok": true
+    },
+    {
+      "trial": 3,
+      "tests": 100,
+      "ok": true
+    },
+    {
+      "trial": 4,
+      "tests": 100,
+      "ok": true
+    },
+    {
+      "trial": 5,
+      "tests": 100,
+      "ok": true
+    }
+  ],
+  "sources": {
+    "prototype.py": "780f72ec59958c6703404edaee65a4f8c99475ca02ea7f403b7461d7d86d41d2",
+    "test_prototype.py": "cc0bb174c6fef74ccf564392e31be50e82067ddb32781ae3500d905225a0ec42",
+    "validate_offline.py": "9d9ba1485e039f9ab587bfd3c6a104b70bb73bafbcab57c811c31d1edb82946a",
+    "wire_adapter.py": "c879bc9be8d51bbe402f23f9c6c908ab2084a30f11daf31bc607ccec8568b21a",
+    "test_wire_adapter.py": "b80e1020280b03daea555542775a206de2f98aa4ac6dc81640f951591cf9107f",
+    "audio_control.py": "6ab376982561df3222b25285f82cbcd9861b87f51ea0a45abf35b8cf2566eccb",
+    "test_audio_control.py": "137afa35e112cfe3837d606a582c50effd8babe55192d40e78688ecb04905eec",
+    "audio_pump.py": "21c131350da2100259973595cd02a4d414d13d7a1a2bd7bc0e7c47f9940883e8",
+    "test_audio_pump.py": "5db600550fea8077da21ee87e33baffe05e4164b0a0989d0e2207ab62d4dca29",
+    "local_transport.py": "e51b326120b7fe2b6c14a31f4b102e7864217b91fe0b6db93300e275780cd94c",
+    "process_audio.py": "246e0eb6bad91bf80cb680a9c4a6d3619c2b75792f1a68bc334a5a691a1312e2",
+    "test_process_audio.py": "85fa7215276279ffc64e56dedf8a5b8c8ae0e58e8fc707be6683e0a7be24281b",
+    "acquisition_path.py": "3db968dee47abb2f506f0ce94ce14f47faff1bfa8cde014aacf60982c8b478ef",
+    "test_acquisition_process.py": "224d1c6a45194712b1ac33a6f2b911682071a4e59d8f07f4bcd4a16d2ff1436b",
+    "socket_transport.py": "826e3ef7900c38fcc1a9a2a8e763674c0b242e056156d4e582f4292ce1e37a39",
+    "test_socket_transport.py": "757ab7db7206e5af705adecb58bec6643920c995b48b115a1d2856d149370df8",
+    "socket_model_peer.py": "66a54b40541cfd1e4ed436e7cdd5949e2509e933211f770be367a5442f60e9fd",
+    "tcp_model_server.py": "cdedff9d13f57abe25d737ab5b16ec12fd9e4c9f09855b1f81218a16f90ed10e",
+    "test_socket_process.py": "ef14982a2e60c6ec23c0bb7d1563f3b89eb06a88a3c89d440c9bc9fd6b2b2925",
+    "adb_tunnel.py": "b177904eeef6511a2845b270659fe93278c73d44361d4e6d3a5fa0f520ee53a5",
+    "test_adb_tunnel.py": "766b34d079a380710f5f458fa12462faf14b962274d979948bfc573fc6bd5cbf"
+  },
+  "limitations": [
+    "Emulated device only: no Q, USB/ADB link, DSP, GUI or analog audio; TCP is local.",
+    "GIL-stall tests prove process separation in this model, not hardware stability."
+  ],
+  "dependencies": {
+    "monitor/v17/receiver/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "monitor/v17/receiver/native_unpack.py": "483eb7a63b5ca4f59ec789189b3ab986b1dede53ea6f8691f6b2eb6cd2ac99eb",
+    "monitor/v17/receiver/unoq_acquisition.py": "283bf63b1ec48c91b0661667fb1a166aff525bd6089ab736c2d48395a57c2ff7",
+    "monitor/v17/receiver/unoq_autoload.py": "dca8f333e7086e9c5fbe7f646145767390791b65924098b93176bf80afdf31ec",
+    "monitor/v17/receiver/unoq_config_decoder.py": "29ded0003ea0a976f67fa49ea69822e9d6c6666ea288c0ea75f49b2a00670a03",
+    "monitor/v17/receiver/unoq_config_receiver.py": "ea35c6f18a0bedd34bf964d672e2bba1ff199f66e06e6c5249329d16317bd463",
+    "monitor/v17/receiver/unoq_control.py": "a20c30c6ea283fb80dd714cdc65f5c1de11a9dd8e870c4998439bcab3e3fd6e2",
+    "monitor/v17/receiver/unoq_dual.py": "b03ef35715fd00f87f1b9820c6810b18b20e12a262e0eb60e88e82acfd23d117",
+    "monitor/v17/receiver/unoq_generator.py": "a951a9fbcb31754706039ac0015fd24b2854d82ae4af3e288bea038d230d88cd",
+    "monitor/v17/receiver/unoq_native.py": "66d5bb5d1f5a6a7a5dc9ba3a5047ec43d63f514503d0f7562b62e6513eb00f92",
+    "monitor/v17/receiver/unoq_receiver.py": "9848b8a46d599d780b14d2be06321605f641c6e9d836a6a345a5b7a41d5a0f63",
+    "monitor/v17/receiver/unoq_switch.py": "25d2e05069db6732a4416ea511f3e76ffd7b9e59649eb61528a88dcd704c78b1",
+    "monitor/v17/receiver/unoq_usb.py": "882c0c33df665f2935a583552001c2ee69177c4081890de13eb51feaef704bf9",
+    "monitor/v17/receiver/unoq_wav.py": "8acaafdd4eed74a0096eb7f30e7bde13f9ac149ff5a609273b985d13fd334926",
+    "monitor/v17/receiver/additional_profiles.json": "36d2d228aa430bdfded3d5ab16bb4c8aa3b31deca1a28c546cca84b30acbf586",
+    "monitor/v17/receiver/native_profiles.json": "6d5ca8f8a7c2888a86729d0d95cf2d2ed6780a473a1bb0204823509c37fe1011",
+    "tests/v17/test_compact_protocol.py": "f015e9e34abe69054f265557d64ce88a2db5346e8a13dcda80c0c79e03d1d833"
+  }
+}

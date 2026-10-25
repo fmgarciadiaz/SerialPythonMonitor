@@ -4,7 +4,7 @@ from pathlib import Path
 from types import SimpleNamespace
 import numpy as np
 from PyQt6 import QtWidgets
-from monitor.v16.fm_panel import FMPanel
+from monitor.historico.v16.fm_panel import FMPanel
 
 class RecordingSource:
     def __init__(self):self.started=0;self.wait=0;self.parameters=None

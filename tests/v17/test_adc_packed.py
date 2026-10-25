@@ -1,6 +1,6 @@
 import unittest,struct,tempfile,subprocess,random
 from pathlib import Path
-from tests.v16.test_compact_protocol import packet,seal
+from tests.historico.v16.test_compact_protocol import packet,seal
 from monitor.v17.receiver.unoq_config_decoder import ConfigurationDecoder as PackedDecoder
 from monitor.v17.receiver.unoq_config_decoder import ConfigurationDecoder
 from monitor.v17.receiver.unoq_usb import ProtocolError

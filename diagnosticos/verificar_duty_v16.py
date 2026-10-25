@@ -2,11 +2,11 @@
 import sys,json,time
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
-from monitor.v16.receiver.unoq_autoload import connect_scope
-from monitor.v16.receiver.unoq_config_receiver import OutputReceiver
-from monitor.v16.receiver.unoq_acquisition import Configuration
-from monitor.v16.receiver.unoq_generator import GeneratorConfig
-from monitor.v16.receiver.unoq_switch import Mode
+from monitor.historico.v16.receiver.unoq_autoload import connect_scope
+from monitor.historico.v16.receiver.unoq_config_receiver import OutputReceiver
+from monitor.historico.v16.receiver.unoq_acquisition import Configuration
+from monitor.historico.v16.receiver.unoq_generator import GeneratorConfig
+from monitor.historico.v16.receiver.unoq_switch import Mode
 prior=json.loads((ROOT/'diagnosticos/resultados_v16/duty_prior_20261012.json').read_text())
 report={'cases':[],'scope':'Physical generator ACK and ADC protocol integrity; LUT duty effective, analog duty not certified.'}
 path=ROOT/'diagnosticos/resultados_v16/duty_live_20261012.json'

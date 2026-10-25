@@ -11,7 +11,7 @@ from datetime import datetime,timezone
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
 import numpy as np
 from dataclasses import asdict,replace
-from monitor.v16.fm_source import FMSource,FMParameters
+from monitor.historico.v16.fm_source import FMSource,FMParameters
 
 def monitor_processes(process_text, own_pid=None):
     """Conservative preflight: an open monitor may own the Q."""
@@ -34,7 +34,7 @@ def require_exclusive_monitor():
 
 
 def require_available_wav(receiver,generator):
-    from monitor.v16.receiver.unoq_wav import State
+    from monitor.historico.v16.receiver.unoq_wav import State
     status=receiver.wav_status
     # Firmware BEGIN accepts completed playback; no STOP of another session.
     available=status.state==State.IDLE or (status.state==State.DONE and not status.reason)
@@ -51,14 +51,14 @@ def validate_adc_batch(data,last_index=None,last_timestamp=None,period_us=10):
     return int(indices[-1]),int(timestamp[-1]),len(data)
 
 def owner(control,adc,target,seconds,freeze,trace_path=None,adc_rate=100000,qos=False,socket_probe=False,amplitude=1.0,parameters=None,scheduler=False,read_timeout_ms=100,probe_process=False,credits=2,async_synth=False,worker_wakeup=False,chunk_size=480):
-    from monitor.v16.receiver.unoq_usb import Connection
-    from monitor.v16.receiver.unoq_config_receiver import OutputReceiver
-    from monitor.v16.receiver.unoq_switch import Mode
-    from monitor.v16.receiver.unoq_acquisition import Configuration
-    from monitor.v16.receiver.unoq_generator import GeneratorConfig
-    from monitor.v16.receiver.unoq_wav import State
-    from monitor.v16.virtual_instruments import warmup
-    from monitor.v16.fm_feedback import warmup as feedback_warmup
+    from monitor.historico.v16.receiver.unoq_usb import Connection
+    from monitor.historico.v16.receiver.unoq_config_receiver import OutputReceiver
+    from monitor.historico.v16.receiver.unoq_switch import Mode
+    from monitor.historico.v16.receiver.unoq_acquisition import Configuration
+    from monitor.historico.v16.receiver.unoq_generator import GeneratorConfig
+    from monitor.historico.v16.receiver.unoq_wav import State
+    from monitor.historico.v16.virtual_instruments import warmup
+    from monitor.historico.v16.fm_feedback import warmup as feedback_warmup
     report=dict(dac_levels=dict(amplitude=amplitude,offset=1.65),queue_growth=[],target=target,adc_rate=adc_rate,freeze_worker=freeze,restored=False,sent_samples=0,max_target=target,min_blocks=16)
     if scheduler:
         import resource
@@ -86,7 +86,7 @@ def owner(control,adc,target,seconds,freeze,trace_path=None,adc_rate=100000,qos=
         if r.wav_pending:raise TimeoutError('Sin confirmación WAV')
     try:
         if qos:
-            from monitor.v16.audio_qos import audio_qos
+            from monitor.historico.v16.audio_qos import audio_qos
             qos_context=audio_qos("user_interactive")
             report["qos"]=qos_context.__enter__()
         warmup();feedback_warmup()
@@ -100,7 +100,7 @@ def owner(control,adc,target,seconds,freeze,trace_path=None,adc_rate=100000,qos=
         report['async_synth']=async_synth
         report['worker_wakeup']=worker_wakeup
         if async_synth:
-            from monitor.v16.synth_process import SynthProcess
+            from monitor.historico.v16.synth_process import SynthProcess
             source=SynthProcess(20000,p)
         else:source=FMSource(20000,p)
         source.prepare_audio();source.target_blocks=target
@@ -109,7 +109,7 @@ def owner(control,adc,target,seconds,freeze,trace_path=None,adc_rate=100000,qos=
             original_timeout=c.socket.gettimeout()
             c.socket.settimeout(read_timeout_ms/1000)
             if worker_wakeup:
-                from monitor.v16.synth_process import read_with_audio_wakeup
+                from monitor.historico.v16.synth_process import read_with_audio_wakeup
                 from types import SimpleNamespace
                 raw_connection=SimpleNamespace(socket=c.socket,read=c.read)
                 c.read=lambda:read_with_audio_wakeup(raw_connection,source)
@@ -125,7 +125,7 @@ def owner(control,adc,target,seconds,freeze,trace_path=None,adc_rate=100000,qos=
                 c.read=observed_read
             r=OutputReceiver(c,lambda records:None);r.wav_live_credits=credits;r.wav_chunk_points=chunk_size;receiver=r
             if trace_path:
-                from monitor.v16.transport_trace import NumericTransportTrace
+                from monitor.historico.v16.transport_trace import NumericTransportTrace
                 r.transport_trace=NumericTransportTrace();gc.callbacks.append(gc_trace)
                 source.audio_trace=r._trace_transport
             r.select(Mode.SPI);prior=r.config;gen=r.generator().active
@@ -136,7 +136,7 @@ def owner(control,adc,target,seconds,freeze,trace_path=None,adc_rate=100000,qos=
             try:
                 r.configure(Configuration(14,adc_rate));r.on_samples=collect
                 if socket_probe:
-                    from monitor.v16.socket_probe import SocketProbe,ProcessSocketProbe
+                    from monitor.historico.v16.socket_probe import SocketProbe,ProcessSocketProbe
                     probe=(ProcessSocketProbe if probe_process else SocketProbe)(c.socket);probe.start()
                 def status(s):
                     source.observe_status(s)
@@ -210,7 +210,7 @@ def owner(control,adc,target,seconds,freeze,trace_path=None,adc_rate=100000,qos=
 
 def run_case(target,seconds,freeze,pause_ms=75,trace_path=None,shared_adc=False,adc_rate=100000,qos=False,socket_probe=False,amplitude=1.0,parameters=None,scheduler=False,read_timeout_ms=100,probe_process=False,credits=2,voices=11,async_synth=False,worker_wakeup=False,chunk_size=480):
     context=mp.get_context('spawn');parent,child=context.Pipe()
-    from monitor.v16.adc_ipc import SharedAdcRing
+    from monitor.historico.v16.adc_ipc import SharedAdcRing
     adc=SharedAdcRing(context) if shared_adc else context.Queue(maxsize=32)
     process=context.Process(target=owner,args=(child,adc,target,seconds,freeze,trace_path,adc_rate,qos,socket_probe,amplitude,parameters,scheduler,read_timeout_ms,probe_process,credits,async_synth,worker_wakeup,chunk_size))
     process.start();child.close()
@@ -271,7 +271,7 @@ def main():
     path=folder/(datetime.now(timezone.utc).strftime('%Y%m%d_%H%M%S')+'_audio_owner.json')
     presets=[(None,None)]
     if args.presets:
-        from monitor.v16.fm_source import PRESETS
+        from monitor.historico.v16.fm_source import PRESETS
         if any(name not in PRESETS for name in args.presets):p.error('Preset desconocido')
         from diagnosticos.synth_presets_v16 import panel_presets
         snapshots=panel_presets(args.presets)

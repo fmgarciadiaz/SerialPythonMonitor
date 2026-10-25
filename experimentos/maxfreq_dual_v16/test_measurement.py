@@ -1,8 +1,8 @@
 import struct
 import unittest
 from unittest.mock import patch
-from monitor.v16.receiver.unoq_acquisition import Configuration
-from monitor.v16.receiver.unoq_usb import Connection
+from monitor.historico.v16.receiver.unoq_acquisition import Configuration
+from monitor.historico.v16.receiver.unoq_usb import Connection
 from experimentos.maxfreq_dual_v16.verify_production import MeasuredConnection
 
 

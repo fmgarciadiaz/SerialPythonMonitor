@@ -2,7 +2,7 @@
 import importlib.util,sys,json
 from pathlib import Path
 import numpy as np
-from monitor.v16 import fm_source
+from monitor.historico.v16 import fm_source
 from diagnosticos.synth_presets_v16 import panel_presets
 from diagnosticos.benchmark_cache_instrumentos_v16 import render
 

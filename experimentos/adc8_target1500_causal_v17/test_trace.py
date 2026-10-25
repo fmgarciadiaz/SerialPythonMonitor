@@ -5,7 +5,7 @@ from pathlib import Path
 
 class TraceTests(unittest.TestCase):
     def test_bounded_ring_trigger_replacement_and_slowest_order(self):
-        header=Path(__file__).parent/'arduino/v16/relay/causal_trace.h'
+        header=Path(__file__).parent/'arduino/historico/v16/relay/causal_trace.h'
         code=r'''
 #include <stdint.h>
 #include <inttypes.h>

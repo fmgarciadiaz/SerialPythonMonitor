@@ -8,7 +8,7 @@ from experimentos.adc8_spi_clock_v17.run import nss_summary
 
 class ClockTests(unittest.TestCase):
     def test_actual_pair_statistics_keep_negative_residuals(self):
-        s=(Path(__file__).parent/'arduino/v16/relay/unoq_config_stream.c').read_text()
+        s=(Path(__file__).parent/'arduino/historico/v16/relay/unoq_config_stream.c').read_text()
         helper=s[s.index('struct NssStats'):s.index('static void prof_dump')]
         code='#include <stdint.h>\n#include <assert.h>\n'+helper+'''
 int main(void) {

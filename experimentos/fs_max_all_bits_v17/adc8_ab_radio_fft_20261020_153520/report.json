@@ -1,0 +1,354 @@
+{
+  "ok": false,
+  "restored": true,
+  "cases": [
+    {
+      "adc": {
+        "bits": 14,
+        "rate": 40000
+      },
+      "period": 25,
+      "node_pairs": 2048,
+      "actual_rate": 40000.0,
+      "stage": "candidate_boot_low",
+      "requested_seconds": 10,
+      "ok": true,
+      "scheduler": {
+        "policy": 0,
+        "priority": 0
+      },
+      "seconds": 10.000004136003554,
+      "samples": 400908,
+      "observed_rate": 40090.78341843773,
+      "status": {
+        "ack": 8371,
+        "rate": 40000,
+        "bits": 14,
+        "dropped": 0,
+        "fatal": 0,
+        "epoch": 1,
+        "prepare_us": 46,
+        "check_us": 48
+      },
+      "wall_monotonic_drift_seconds": -0.0001920098438858986
+    },
+    {
+      "stage": "adc8_ab_1632653_radio_fft",
+      "adc": {
+        "bits": 8,
+        "rate": 1632653
+      },
+      "requested_seconds": 60,
+      "child_exit": 1,
+      "child_report": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/experimentos/fs_max_all_bits_v17/adc8_ab_radio_fft_20261020_153520/adc8_ab_1632653_radio_fft.json",
+      "ok": false,
+      "restored": true,
+      "audio_integrity_ok": true,
+      "visual_ok": false,
+      "actual_radio_settings": {
+        "first": {
+          "frequency_hz": 15999.0,
+          "bandwidth_hz": 8000,
+          "radio_enabled": true,
+          "filter_source": "OFF"
+        },
+        "last": {
+          "frequency_hz": 15999.0,
+          "bandwidth_hz": 8000,
+          "radio_enabled": true,
+          "filter_source": "OFF"
+        }
+      },
+      "metrics": {
+        "unique_observations": 28375,
+        "sum_send_ticks": 7486892727,
+        "mean_send_margin": 0.22094892558712176,
+        "maximum_send_ticks": 541392,
+        "queue_peak": 5,
+        "maximum_copy_ticks": 39176,
+        "minimum_slack_ticks": 124487,
+        "sampling": "Deduplicated observed (epoch, produced); unobserved nodes are not reconstructed"
+      },
+      "paint": {
+        "fft_paints": 440,
+        "exposure_checks": 563,
+        "exposed_checks": 219,
+        "fft_fps": 7.333309698075129,
+        "exposed_fraction": 0.38898756660746003
+      },
+      "errors": []
+    },
+    {
+      "adc": {
+        "bits": 14,
+        "rate": 40000
+      },
+      "period": 25,
+      "node_pairs": 2048,
+      "actual_rate": 40000.0,
+      "stage": "adc8_ab_1632653_normal",
+      "requested_seconds": 10,
+      "ok": true,
+      "scheduler": {
+        "policy": 0,
+        "priority": 0
+      },
+      "seconds": 10.001336779998383,
+      "samples": 400634,
+      "observed_rate": 40058.045120650844,
+      "status": {
+        "ack": 143611,
+        "rate": 40000,
+        "bits": 14,
+        "dropped": 0,
+        "fatal": 0,
+        "epoch": 4,
+        "prepare_us": 81,
+        "check_us": 48
+      },
+      "wall_monotonic_drift_seconds": -0.0001856950984802097
+    }
+  ],
+  "scope": "Two ADC8 RADIO + FFT65536 cases on the same cc46 binary; no A0",
+  "source_hashes": {
+    "sketch/wav_protocol.h": "78e788ab24dac52eff1d79cc15d08ac730451316e28050f461d5f4febf2cd223",
+    "sketch/wav_dma.h": "82bf749b289b5dfc4907e751ac1c1dd146d2ab1b0fe92c046d7492b3cc15cc10",
+    "sketch/wav.h": "0dc2b88b7d25de037fc0598c85b70b3903caaa3c2d6a92ea84b23ab680ddb1f2",
+    "sketch/crc32_fast.h": "5d80da2df5d483bb028cf98abdaa2aed0a12da1be7f2ceb8591269debee81959",
+    "sketch/generator.h": "e853fca473f9c13df50912a54fc621cee9f2fcb125ffe6f810670e93a17ebc77",
+    "sketch/wav_storage.h": "a06e48b8192d2674dfa3ce1f57e601f523244c1016b5ecc899607d48fb1cce69",
+    "sketch/native_profiles.h": "e68771583a177d527c6c84c1ca52d3934d3f4a4f91d4d4a1a79106262650f21b",
+    "sketch/high_rate_profile.h": "76dd73f2303281a77aa8b0f3520ac358195bf3d93a0bf4e1ba49b8f2e8d1caa1",
+    "sketch/sample_packing.h": "84823758ded381d3168e452893d86eeed6a05c73f96196514f5ec0d9115c3e76",
+    "sketch/sketch.ino": "2e8592e4daedbc1664c93b62a6f18a0eea7776385e1c260d93d5ba99f701d3c5",
+    "relay/additional_profiles.h": "b8d94095548a562807ba48fd08b6f9cb6c4148e9926ee80cf0e46bc6142e5591",
+    "relay/base_verifier.c": "66499e8bbec8ae3058a0624c9377c9fad6d5ef6a0fbb3f8de70d0c58eaab5bb0",
+    "relay/config_relay_protocol.h": "d8cd4803cc005677e3e41188c3e276aba81789ca74fde96ad3d1245d089e89b1",
+    "relay/cpu_profile.h": "c67764a253a309fe07c2db698d99235796a31bbb2e8f5dc7554dbad347e5874b",
+    "relay/cpu_runtime.h": "bd5afdb012a41a8decdfd015352ae391e05786f2075115d13087925819e735ea",
+    "relay/frame_send_queue.h": "e1a158fac306a098ade76464ca813a33d27e785bd7874c7fc7e21673bec388ca",
+    "relay/high_rate_profile.h": "76dd73f2303281a77aa8b0f3520ac358195bf3d93a0bf4e1ba49b8f2e8d1caa1",
+    "relay/native_profiles.h": "e68771583a177d527c6c84c1ca52d3934d3f4a4f91d4d4a1a79106262650f21b",
+    "relay/spi40_runtime.h": "9d23aa411d533b8dd4e890393616a19d1b1e903943b17c582192d880c01c296c",
+    "relay/transport_policy.h": "7da1fd18188fc13925a6ceea12a1bd107299c155c2d1322425f92a24425527b2",
+    "relay/unoq_config_stream.c": "0ef9e678c86cd850e4700cceb2ee1623180ae81f66be1372e153c4a21aa55152"
+  },
+  "candidate_profiles_sha256": "47173607c97b57358408524011cf790e621139e3e4edeb90f83d59f453fe7ead",
+  "host_profiles": [
+    {
+      "bits": 8,
+      "ticks": 100,
+      "node_pairs": 3456,
+      "channels": 1,
+      "headroom": false,
+      "isolated_headroom": false,
+      "optimized_transport": true,
+      "integrity_only": true,
+      "internal_only": false,
+      "validation": "production_60s_3x120s",
+      "evidence": "diagnosticos/resultados_v17/adc1600_integration_20261016_153557/report.json",
+      "warmup_rate": 1428571,
+      "integration_pending": false,
+      "integration_status": "V17 integrated physical acceptance passed; integrity only",
+      "queue_slots": 8,
+      "acceptance_seconds": [
+        60,
+        120,
+        120,
+        120
+      ]
+    },
+    {
+      "bits": 8,
+      "channels": 1,
+      "ticks": 98,
+      "node_pairs": 3456,
+      "headroom": false,
+      "internal_only": true,
+      "validation": "unmeasured",
+      "queue_slots": 8,
+      "optimized_transport": true,
+      "integrity_only": true,
+      "warmup_rate": 1428571
+    }
+  ],
+  "actual_rates": [
+    1632653.0612244897
+  ],
+  "requested_seconds": 60,
+  "source_evidence": [
+    "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/experimentos/fs_max_all_bits_v17/qualification_20261019_235429/report.json",
+    "experimentos/fs_max_all_bits_v17/qualification_20261019_234111/report.json",
+    "experimentos/fs_max_all_bits_v17/qualification_20261019_224818/report.json"
+  ],
+  "queue_slots": 8,
+  "node_pairs": 3456,
+  "transport": "SPI40 / MCU WORD / SCHED_FIFO10 / CPU2 / performance",
+  "entry": "Both use integrity_only: low14/40000 -> private8/1428571 -> live0.5s -> target",
+  "metrics_limitation": "RADIO child deduplicates observed target (epoch, produced); not all nodes are observed. Paint events are not distinct newly acquired frames.",
+  "runner_sha256": "8d1639426abf9399488f5e32f8d9a1918a61a01093c864daf65b3a3bb0edce99",
+  "radio_fft": true,
+  "selected_rates": [
+    1632653
+  ],
+  "child_runner_sha256": "087f54b80f8c6da77723fc61d049e769e7c1c41652dfe6834fc40ed048dad650",
+  "prior": {
+    "adc": {
+      "bits": 16,
+      "rate": 40000
+    },
+    "generator": {
+      "wave": 0,
+      "enabled": 0,
+      "mode": 0,
+      "frequency": 2500,
+      "final_frequency": 2500,
+      "low": 0,
+      "high": 0,
+      "duration": 1000,
+      "duration_us": 0,
+      "duty": 50
+    }
+  },
+  "prior_identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v17-main-1",
+    "firmware_sha256": "96685eb64cc722adebc7f345f40c3500e22642814bbfc6f182c66c0f992a7ec9"
+  },
+  "old_relay": "/home/arduino/.cache/serialmonitor/usb-stream-08430aaec88ca9c16496/unoq_stream",
+  "old_cap_add": [
+    "SYS_NICE"
+  ],
+  "old_scope_environment": [],
+  "backup": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/respaldos/unoq/osciloscopio_20261020_153520_675158.zip",
+  "old_mounts": [
+    {
+      "Type": "bind",
+      "Source": "/sys/devices/system/cpu/cpufreq/policy0/scaling_governor",
+      "Destination": "/scope_cpu_governor",
+      "Mode": "",
+      "RW": true,
+      "Propagation": "rprivate"
+    },
+    {
+      "Type": "bind",
+      "Source": "/home/arduino/.cache/serialmonitor/usb-stream-08430aaec88ca9c16496/unoq_stream",
+      "Destination": "/work/unoq_stream",
+      "Mode": "",
+      "RW": false,
+      "Propagation": "rprivate"
+    }
+  ],
+  "old_cpuset": "",
+  "normal_policy": {
+    "governor": "schedutil",
+    "cpus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "scheduler": 0,
+    "priority": 0
+  },
+  "prior_header_presence": {
+    "wav_protocol.h": true,
+    "wav_dma.h": true,
+    "wav.h": true,
+    "crc32_fast.h": true,
+    "generator.h": true,
+    "wav_storage.h": true,
+    "native_profiles.h": true,
+    "high_rate_profile.h": true,
+    "sample_packing.h": true,
+    "sketch.ino": true
+  },
+  "candidate_relay": "/home/arduino/.cache/serialmonitor/cpu-relay-11452bfdcbe65adf7366/unoq_stream",
+  "candidate_relay_sha256": "b9d750e75bee9a9945f6c575abba35fd13dcf4e0a6fd7265436341181f58f79b",
+  "candidate_identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v17-main-1",
+    "firmware_sha256": "cc46e4f798a39edfb8e5bd2db8ecd510dd40fee3f10e89c69978de4191156223"
+  },
+  "normal_policy_checks": [
+    {
+      "stage": "candidate_boot_low",
+      "policy": {
+        "governor": "schedutil",
+        "cpus": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "scheduler": 0,
+        "priority": 0
+      }
+    },
+    {
+      "stage": "adc8_ab_1632653_normal",
+      "policy": {
+        "governor": "schedutil",
+        "cpus": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "scheduler": 0,
+        "priority": 0
+      }
+    }
+  ],
+  "audio_integrity_ok": true,
+  "visual_ok": false,
+  "restored_low_policy": {
+    "governor": "schedutil",
+    "cpus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "scheduler": 0,
+    "priority": 0
+  },
+  "final_settings": {
+    "adc": {
+      "bits": 16,
+      "rate": 40000
+    },
+    "generator": {
+      "wave": 0,
+      "enabled": 0,
+      "mode": 0,
+      "frequency": 2500,
+      "final_frequency": 2500,
+      "low": 0,
+      "high": 0,
+      "duration": 1000,
+      "duration_us": 0,
+      "duty": 50
+    }
+  },
+  "final_identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v17-main-1",
+    "firmware_sha256": "96685eb64cc722adebc7f345f40c3500e22642814bbfc6f182c66c0f992a7ec9"
+  },
+  "recovery": {
+    "ok": true,
+    "samples": 399360,
+    "status": {
+      "ack": 11402,
+      "rate": 40000,
+      "bits": 16,
+      "dropped": 0,
+      "fatal": 0,
+      "epoch": 2,
+      "prepare_us": 81,
+      "check_us": 71
+    },
+    "method": "No administrative Q calls after final high-rate configuration"
+  }
+}

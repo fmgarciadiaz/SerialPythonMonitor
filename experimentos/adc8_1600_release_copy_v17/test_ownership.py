@@ -5,7 +5,7 @@ from pathlib import Path
 
 class OwnershipTests(unittest.TestCase):
     def test_node_reuse_preserves_pending_frames_and_physical_send_timing(self):
-        folder=Path(__file__).parent/'arduino/v16/oscilloscope/sketch'
+        folder=Path(__file__).parent/'arduino/historico/v16/oscilloscope/sketch'
         source=(folder/'acquisition.h').read_text()
         functions=source[source.index('static void release_copied()'):source.index('static bool start()')]
         code='''#include <stdint.h>

@@ -1,0 +1,51 @@
+{
+  "ok": false,
+  "restored": false,
+  "cases": [],
+  "target_bits": [
+    8,
+    10,
+    12,
+    14,
+    16
+  ],
+  "source_hashes": {
+    "sketch/wav_protocol.h": "78e788ab24dac52eff1d79cc15d08ac730451316e28050f461d5f4febf2cd223",
+    "sketch/wav_dma.h": "82bf749b289b5dfc4907e751ac1c1dd146d2ab1b0fe92c046d7492b3cc15cc10",
+    "sketch/wav.h": "0dc2b88b7d25de037fc0598c85b70b3903caaa3c2d6a92ea84b23ab680ddb1f2",
+    "sketch/crc32_fast.h": "5d80da2df5d483bb028cf98abdaa2aed0a12da1be7f2ceb8591269debee81959",
+    "sketch/generator.h": "e853fca473f9c13df50912a54fc621cee9f2fcb125ffe6f810670e93a17ebc77",
+    "sketch/wav_storage.h": "a06e48b8192d2674dfa3ce1f57e601f523244c1016b5ecc899607d48fb1cce69",
+    "sketch/native_profiles.h": "e68771583a177d527c6c84c1ca52d3934d3f4a4f91d4d4a1a79106262650f21b",
+    "sketch/high_rate_profile.h": "76dd73f2303281a77aa8b0f3520ac358195bf3d93a0bf4e1ba49b8f2e8d1caa1",
+    "sketch/sample_packing.h": "84823758ded381d3168e452893d86eeed6a05c73f96196514f5ec0d9115c3e76",
+    "sketch/sketch.ino": "2e8592e4daedbc1664c93b62a6f18a0eea7776385e1c260d93d5ba99f701d3c5",
+    "relay/additional_profiles.h": "b8d94095548a562807ba48fd08b6f9cb6c4148e9926ee80cf0e46bc6142e5591",
+    "relay/base_verifier.c": "66499e8bbec8ae3058a0624c9377c9fad6d5ef6a0fbb3f8de70d0c58eaab5bb0",
+    "relay/config_relay_protocol.h": "d8cd4803cc005677e3e41188c3e276aba81789ca74fde96ad3d1245d089e89b1",
+    "relay/cpu_profile.h": "c67764a253a309fe07c2db698d99235796a31bbb2e8f5dc7554dbad347e5874b",
+    "relay/cpu_runtime.h": "bd5afdb012a41a8decdfd015352ae391e05786f2075115d13087925819e735ea",
+    "relay/frame_send_queue.h": "e1a158fac306a098ade76464ca813a33d27e785bd7874c7fc7e21673bec388ca",
+    "relay/high_rate_profile.h": "76dd73f2303281a77aa8b0f3520ac358195bf3d93a0bf4e1ba49b8f2e8d1caa1",
+    "relay/native_profiles.h": "e68771583a177d527c6c84c1ca52d3934d3f4a4f91d4d4a1a79106262650f21b",
+    "relay/spi40_runtime.h": "9d23aa411d533b8dd4e890393616a19d1b1e903943b17c582192d880c01c296c",
+    "relay/transport_policy.h": "7da1fd18188fc13925a6ceea12a1bd107299c155c2d1322425f92a24425527b2",
+    "relay/unoq_config_stream.c": "0ef9e678c86cd850e4700cceb2ee1623180ae81f66be1372e153c4a21aa55152"
+  },
+  "phase": "qualification",
+  "acceptance_seconds": [
+    60,
+    120,
+    120,
+    120
+  ],
+  "runner_sha256": "30fddcadecf4deefcc741fe0978738dbe523e7089f1a5b370a1d72cf73d4e030",
+  "screening_evidence": "experimentos/fs_max_all_bits_v17/qualification_20261019_221603/report.json",
+  "qualification": {},
+  "helper_hashes": {
+    "diagnosticos/incorporar_adc1600_v17.py": "82784acb5be47e66d40e65c22c19d95d8f6b0d23b5a1eb60923b55e61b558412",
+    "experimentos/otros_bits_cpu_relay_v17/run.py": "26408ab625cf4b6b515be3ba2ece83d974218814189097b7c2fa1febe5241540"
+  },
+  "error": "RuntimeError('El Q cerr\u00f3 el flujo. Revisar el relay, la adquisici\u00f3n y el cable USB.')",
+  "traceback": "Traceback (most recent call last):\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/experimentos/fs_max_all_bits_v17/run.py\", line 50, in main\n    x.snapshot()\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/experimentos/otros_bits_cpu_relay_v17/run.py\", line 35, in snapshot\n    r=OutputReceiver(c,lambda b:None);r.decoder.numeric=True;r.select(Mode.SPI)\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v17/receiver/unoq_config_receiver.py\", line 359, in select\n    self._switch(Mode.SPI)\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v17/receiver/unoq_config_receiver.py\", line 343, in _switch\n    self.pump()\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v17/receiver/unoq_config_receiver.py\", line 297, in pump\n    began=time.monotonic();data=self.connection.read()\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v17/receiver/unoq_usb.py\", line 149, in read\n    raise RuntimeError('El Q cerr\u00f3 el flujo. Revisar el relay, la adquisici\u00f3n y el cable USB.')\nRuntimeError: El Q cerr\u00f3 el flujo. Revisar el relay, la adquisici\u00f3n y el cable USB.\n"
+}

@@ -1,8 +1,8 @@
 import unittest,struct,zlib,tempfile,subprocess
 from pathlib import Path
 from experimentos.megaboom_ch1_1120_v16.support import load
-from monitor.v16.receiver.unoq_usb import ProtocolError
-from tests.v16.test_ch1_fast import extract
+from monitor.historico.v16.receiver.unoq_usb import ProtocolError
+from tests.historico.v16.test_ch1_fast import extract
 EXP=Path(__file__).resolve().parent
 contract,Decoder=load()
 def packet(values,index=0,seq=0,t0=0):
@@ -23,7 +23,7 @@ class MegaboomTests(unittest.TestCase):
   self.assertEqual(rows[-1][0],(0xfffffff0+2047*133)&0xffffffff)
   bad=bytearray(frames[0]);bad[84]^=1
   with self.assertRaises(ProtocolError):Decoder().feed(bad)
-  base=EXP/'arduino/v16/relay/base_verifier.c';header=base.with_name('config_relay_protocol.h')
+  base=EXP/'arduino/historico/v16/relay/base_verifier.c';header=base.with_name('config_relay_protocol.h')
   source=f'#define main baseline_main\n#include "{base}"\n#undef main\n#include "{header}"\nint main(void){{uint8_t p[BLOCK];init_crc();DualChecker d={{.period=133,.bits=8}};while(fread(p,1,BLOCK,stdin)==BLOCK)printf("%d\\n",dual_feed(&d,p));}}'
   with tempfile.TemporaryDirectory() as folder:
    src=Path(folder)/'check.c';src.write_text(source);exe=src.with_suffix('')
@@ -31,7 +31,7 @@ class MegaboomTests(unittest.TestCase):
    result=subprocess.run([str(exe)],input=b''.join(frames),capture_output=True,check=True).stdout
    self.assertEqual(result,b'1\n'*len(frames))
  def test_actual_mcu_packer(self):
-  body=extract(EXP/'arduino/v16/oscilloscope/sketch/sketch.ino','build_samples');header=EXP/'arduino/v16/oscilloscope/sketch/benchmark_protocol.h'
+  body=extract(EXP/'arduino/historico/v16/oscilloscope/sketch/sketch.ino','build_samples');header=EXP/'arduino/historico/v16/oscilloscope/sketch/benchmark_protocol.h'
   source=f'''#include "{header}"
 #include <algorithm>
 #include <cstring>
@@ -48,7 +48,7 @@ uint32_t seq=0;for(unsigned offset=0;offset<2048;offset+=1024/{contract.CHANNELS
    rows=Decoder().feed(subprocess.run([str(exe)],check=True,capture_output=True).stdout)
    self.assertEqual(len(rows),2048);self.assertEqual(rows[-1][1],255)
  def test_actual_adc8_validator_rejects_range_and_timestamp_errors(self):
-  header=EXP/'arduino/v16/oscilloscope/sketch/node_validation.h'
+  header=EXP/'arduino/historico/v16/oscilloscope/sketch/node_validation.h'
   source=f'''#include "{header}"
 struct Pair{{uint16_t ch1,ch2;}};
 int main(){{uint16_t adc[4096];uint32_t t[2048];Pair out[2048];

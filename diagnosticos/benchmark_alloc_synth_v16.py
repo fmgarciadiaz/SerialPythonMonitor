@@ -4,9 +4,9 @@ from pathlib import Path
 from dataclasses import replace
 import numpy as np
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
-from monitor.v16 import fm_source as current
-from monitor.v16.virtual_instruments import warmup
-from monitor.v16.fm_feedback import warmup as feedback_warmup
+from monitor.historico.v16 import fm_source as current
+from monitor.historico.v16.virtual_instruments import warmup
+from monitor.historico.v16.fm_feedback import warmup as feedback_warmup
 
 
 def run(module,rate,kind,blocks):

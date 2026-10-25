@@ -1,0 +1,28 @@
+{
+  "scenario": "V18 conectado al Q, ADC14/40 kS/s, sin reproducción",
+  "before": {
+    "close_seconds": 0.9403154510073364,
+    "confirmation_seconds": 0.8808874620008282,
+    "shutdown_confirmed": true
+  },
+  "after": {
+    "window_hidden_seconds": 0.02384055103175342,
+    "hidden": true,
+    "confirmed": true,
+    "status": "Salida apagada confirmada",
+    "confirmation_seconds": 0.8478131780284457,
+    "close_seconds": 0.9518412460456602,
+    "shutdown": [
+      true,
+      "Salida apagada confirmada"
+    ],
+    "worker_released": true
+  },
+  "changes": [
+    "Ocultar ventana y detener dibujo al primer cierre",
+    "Enviar cancelación al hijo receptor desde stop inmediatamente",
+    "Cancelar trabajos PCM/DSP aún no iniciados",
+    "Salir de Qt sólo después de liberar trabajadores"
+  ],
+  "limits": "No es medición de cierre con RADIO/WAV/Synth activos."
+}

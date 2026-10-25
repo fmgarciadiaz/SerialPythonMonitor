@@ -1,0 +1,63 @@
+{
+  "fault_id": 2619281318,
+  "last_success": {
+    "id": 2619281317,
+    "kind": 13,
+    "session": 2619269288,
+    "op": 0,
+    "offset": 4490400,
+    "count": 480,
+    "first_byte_ns": 157659788234116,
+    "complete_ns": 157659788240522,
+    "spi_start_ns": 157659788508491,
+    "spi_end_ns": 157659788790836,
+    "ack_rx_ns": 157659789290421,
+    "ack_state": 2,
+    "ack_reason": 0,
+    "ack_free": 17,
+    "accepted": 4490880,
+    "played": 4484640,
+    "ack_enqueue_return_ns": 157659789326880,
+    "enqueue_queue_count": 0
+  },
+  "first_fault": {
+    "id": 2619281318,
+    "kind": 13,
+    "session": 2619269288,
+    "op": 0,
+    "offset": 4490880,
+    "count": 480,
+    "first_byte_ns": 157659966454908,
+    "complete_ns": 157659966461522,
+    "spi_start_ns": 157659966629439,
+    "spi_end_ns": 157659966917305,
+    "ack_rx_ns": 157659967355536,
+    "ack_state": 4,
+    "ack_reason": 2,
+    "ack_free": 29,
+    "accepted": 4490880,
+    "played": 4490400,
+    "ack_enqueue_return_ns": 157659967523922,
+    "enqueue_queue_count": 0
+  },
+  "q_command_complete_gap_ms": 178.221,
+  "q_last_accepted_reserve_ms": 156.0,
+  "q_complete_to_ack_max_ms": 2.805634,
+  "limitation": "Q-local gap between commands, not host/Q clock subtraction. Last accepted-played snapshot reserve excludes analog/DMA accounting details. Does not separate host send scheduling from outbound USB/ADB delay.",
+  "restored": true,
+  "recovery": {
+    "ok": true,
+    "samples": 399360,
+    "status": {
+      "ack": 11427,
+      "rate": 40000,
+      "bits": 16,
+      "dropped": 0,
+      "fatal": 0,
+      "epoch": 2,
+      "prepare_us": 81,
+      "check_us": 48
+    },
+    "method": "No administrative Q calls after final high-rate configuration"
+  }
+}

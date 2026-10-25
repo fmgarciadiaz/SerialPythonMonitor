@@ -13,7 +13,7 @@ class FrameTests(unittest.TestCase):
  def test_optimized_padding_produces_identical_wire_frames(self):
   old=extract(EXP/'baseline_sketch/sketch.ino','build_samples').replace('build_samples(','build_old(',1)
   new=extract(EXP/'fast8_sketch/sketch.ino','build_samples').replace('build_samples(','build_new(',1)
-  header=EXP/'arduino/v16/oscilloscope/sketch/benchmark_protocol.h'
+  header=EXP/'arduino/historico/v16/oscilloscope/sketch/benchmark_protocol.h'
   source=f'''#include "{header}"\n#include <algorithm>\n#include <cstring>\nusing namespace scope_bench;using std::max;
 constexpr unsigned DMA_NODE_PAIRS=2048;
 struct Pair{{uint16_t ch1,ch2;}};using ChannelPair=Pair;

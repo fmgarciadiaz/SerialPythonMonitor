@@ -6,11 +6,11 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path[:0]=[str(ROOT),str(ROOT/'tools')]
 from unoq import Board,config_path
 from usb_stream import CONTAINER,stop
-from monitor.v16.receiver.unoq_usb import Connection
-from monitor.v16.receiver.unoq_config_receiver import OutputReceiver
-from monitor.v16.receiver.unoq_switch import Mode
-from monitor.v16.receiver.unoq_acquisition import Configuration
-from monitor.v16.receiver.unoq_generator import GeneratorConfig
+from monitor.historico.v16.receiver.unoq_usb import Connection
+from monitor.historico.v16.receiver.unoq_config_receiver import OutputReceiver
+from monitor.historico.v16.receiver.unoq_switch import Mode
+from monitor.historico.v16.receiver.unoq_acquisition import Configuration
+from monitor.historico.v16.receiver.unoq_generator import GeneratorConfig
 
 def state(restore=None):
     with Connection('1060031107') as c:

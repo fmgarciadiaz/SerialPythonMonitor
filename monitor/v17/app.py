@@ -40,6 +40,7 @@ from monitor.v17.processing import (BatchProcessor, ProcessingSettings,
 from monitor.v17.history import SampleHistory
 from monitor.v17.trigger import last_trigger_crossing
 from monitor.v17.numeric_batch import NumericBatch, SampleClock
+from monitor.v17.startup_trace import StartupTrace
 from monitor.v17.spectrum import SpectralDisplay
 from monitor.v17.receiver.unoq_usb import Connection, usb_devices
 from monitor.v17.receiver.unoq_switch import Mode
@@ -512,6 +513,7 @@ class OutputWorker(QtCore.QObject):
     status_changed = QtCore.pyqtSignal(str)
     output_confirmed = QtCore.pyqtSignal(int, str)
     acquisition_confirmed = QtCore.pyqtSignal(int, int)
+    trace_configuration_ready = QtCore.pyqtSignal(object)
     generator_confirmed = QtCore.pyqtSignal(object)
     instrument_confirmed = QtCore.pyqtSignal(object)
     wav_confirmed = QtCore.pyqtSignal(object)
@@ -528,6 +530,7 @@ class OutputWorker(QtCore.QObject):
         self.mode = Mode(mode)
         self.r4_port = r4_port
         self.config = config
+        self.trace = StartupTrace()
         self._batch_lock=Lock()
         from monitor.v17.radio_delivery_budget import DeliveryBudget
         self.delivery_budget=DeliveryBudget()
@@ -583,14 +586,21 @@ class OutputWorker(QtCore.QObject):
             batch.pending_batches=self.pending_batches
             settings = self.processing_settings
             batch.radio_output_session = self._radio_output_session
+        if self.trace.enabled:
+            self.trace.record(getattr(batch,'startup_trace_generation',None), 'first_batch_reserved', once=True)
         try:self._dispatch_reserved_batch(batch,settings)
         except Exception:
             self.batch_consumed(batch)
             raise
 
+    def _emit_batch_ready(self,batch):
+        if self.trace.enabled:
+            self.trace.record(getattr(batch,'startup_trace_generation',None),'first_batch_ready_signal',once=True)
+        self.batch_ready.emit(batch)
+
     def _dispatch_reserved_batch(self,batch,settings):
         if settings is None:
-            self.batch_ready.emit(batch)
+            self._emit_batch_ready(batch)
         elif settings.active and self.processing_backend=='process' and not self._ensure_process().done():
             # Lazy startup after OFF: RF delivery remains live and bounded;
             # audio/filter activation waits for its state owner to be ready.
@@ -598,11 +608,11 @@ class OutputWorker(QtCore.QObject):
                 audio=None,audio_filter=None,radio_key=None,radio_status='Preparando DSP…',timings={})
             if settings.filter.source in ('CH1','CH2'):
                 batch.columns['FILTER']=np.full(len(batch),np.nan)
-            self.batch_ready.emit(batch)
+            self._emit_batch_ready(batch)
         elif not settings.active and self._processing_executor is None:
             batch.processing = dict(generation=settings.generation, settings=settings,
                 audio=None, audio_filter=None, radio_key=None, radio_status=None, timings={})
-            self.batch_ready.emit(batch)
+            self._emit_batch_ready(batch)
         else:
             if self._processing_executor is None:
                 self._processing_executor = ThreadPoolExecutor(max_workers=1, thread_name_prefix='v17-dsp')
@@ -680,7 +690,7 @@ class OutputWorker(QtCore.QObject):
             self.error_occurred.emit(f'Procesamiento DSP: {exc}')
             self.running = False
         else:
-            self.batch_ready.emit(batch)
+            self._emit_batch_ready(batch)
         finally:
             with self._batch_lock:self.pending_dsp=max(0,self.pending_dsp-1)
 
@@ -750,9 +760,17 @@ class OutputWorker(QtCore.QObject):
         batch_clock=SampleClock()
         batch_channels=2
         batch_config=self.config
+        trace_generation=self.trace.begin('connection_start',self.config)
+        batch_trace_generation=None
+        sample_trace_generation=None
+        def trace(event, **details):
+            self.trace.record(trace_generation,event,**details)
         def collect(samples):
-            nonlocal batch_maximum,batch_samples
+            nonlocal batch_maximum,batch_samples,batch_trace_generation
             if not published: return
+            if self.trace.enabled and len(samples):
+                self.trace.record(sample_trace_generation,'first_target_samples_admitted',once=True)
+                if not batch:batch_trace_generation=sample_trace_generation
             batch_maximum=receiver.config.maximum
             batch.append(samples.array if hasattr(samples, "array") else np.asarray(samples))
             batch_samples+=len(samples)
@@ -774,6 +792,7 @@ class OutputWorker(QtCore.QObject):
                     return
                 block=NumericBatch(np.concatenate(batch),batch_maximum,batch_clock,batch_channels)
                 block.acquisition=batch_config
+                if self.trace.enabled:block.startup_trace_generation=batch_trace_generation
                 batch = []
                 batch_samples=0
                 self.publish_batch(block)
@@ -787,22 +806,33 @@ class OutputWorker(QtCore.QObject):
             flush(force=True)
             self._emit_after_processing(self.generator_confirmed,reply)
         def settings_applied(config):
-            nonlocal batch, batch_samples, emitted, batch_clock, batch_channels, batch_config
+            nonlocal batch, batch_samples, emitted, batch_clock, batch_channels, batch_config, sample_trace_generation
             if batch:
                 block=NumericBatch(np.concatenate(batch),batch_maximum,batch_clock,batch_channels)
                 block.acquisition=batch_config
+                if self.trace.enabled:block.startup_trace_generation=batch_trace_generation
                 self.publish_batch(block); batch = []
                 batch_samples=0
             emitted = time.monotonic()
             batch_clock=SampleClock(config.timestamp_hz);batch_channels=config.channels
             batch_config=config
+            sample_trace_generation=trace_generation
+            trace('target_configuration_confirmed',bits=config.bits,rate=config.rate)
             self._emit_after_processing(self.acquisition_confirmed, config.bits, config.rate)
+            if self.trace.enabled:
+                self._emit_after_processing(self.trace_configuration_ready,(trace_generation,config.bits,config.rate))
         def apply(mode, r4_port, config):
+            nonlocal trace_generation,sample_trace_generation
+            if published:
+                trace_generation=self.trace.begin('active_change',config)
+            trace('configure_begin')
             if int(mode) == int(Mode.UART) and config.rate not in UART_RATES:
                 raise ValueError('UART admite hasta 31,25 kHz')
             self.switching.emit(True)
             changed=receiver.configure(config)
+            trace('configure_end',changed=bool(changed))
             if not changed and not published: settings_applied(config)
+            elif not changed:sample_trace_generation=trace_generation
             receiver.select(mode, r4_port)
             flush()
             self.output_confirmed.emit(int(mode), r4_port if mode == Mode.UART else '')
@@ -810,14 +840,19 @@ class OutputWorker(QtCore.QObject):
         try:
             if not self.running:
                 return
+            trace('connection_begin',autoload=self.autoload)
             transport = connect_scope(self.port, progress, lambda: self.running) if self.autoload else Connection(self.port)
             with transport as connection:
+                trace('connection_ready',scope_restarted=getattr(connection,'scope_restarted',None))
                 acquisition_failure=None
                 try:
                     from monitor.v17.bode_calibration import instrument_identity
+                    trace('identity_begin')
                     self.instrument_confirmed.emit(instrument_identity(self.port))
+                    trace('identity_end')
                     connection.socket.settimeout(0.01)
                     receiver = OutputReceiver(connection, collect, progress, lambda: self.running)
+                    if self.trace.enabled:receiver.startup_trace=trace
                     receiver.decoder.numeric = True
                     receiver.on_configuration = settings_applied
                     receiver.on_generator = generator_applied
@@ -846,11 +881,14 @@ class OutputWorker(QtCore.QObject):
                         progress('Preparando adquisición…')
                         confirmed_callback=receiver.on_configuration
                         receiver.on_configuration=lambda active:None
+                        trace('warmup_preparation_begin')
                         try:
                             receiver.configure(Configuration(14,40000))
+                            trace('warmup_5s_begin')
                             until=time.monotonic()+5
                             while self.running and time.monotonic()<until:
                                 receiver.pump()
+                            trace('warmup_5s_end')
                         finally:
                             receiver.on_configuration=confirmed_callback
                     apply(self.mode, self.r4_port, self.config)
@@ -858,16 +896,20 @@ class OutputWorker(QtCore.QObject):
                     # confirmation. Keep startup samples outside the live GUI
                     # until it has installed the matching histories/settings.
                     deadline=time.monotonic()+10
+                    trace('startup_gui_wait_begin',required=self.startup_gui_ack)
                     while self.startup_gui_ack and not self._startup_ready.is_set():
                         if time.monotonic()>deadline:
                             raise RuntimeError('La GUI no confirmó la configuración inicial de adquisición')
                         receiver.pump()
+                    trace('startup_gui_wait_end')
                     if (self.processing_backend=='process' and self.processing_settings is not None and
                             self.processing_settings.active):
+                        trace('dsp_prewarm_begin')
                         future=self._ensure_process()
                         while not future.done():
                             receiver.pump()
                         future.result()
+                        trace('dsp_prewarm_end')
                     published = True
                     if receiver.wav_candidate:
                         receiver.reset_wav_output()
@@ -918,6 +960,7 @@ class OutputWorker(QtCore.QObject):
                             apply(mode, r4_port, config)
                         flush()
                 except Exception as exc:
+                    trace('acquisition_error',error=str(exc))
                     acquisition_failure=exc
                     self._capture_delivery_failure(exc,batch_samples)
                     published=False
@@ -937,6 +980,7 @@ class OutputWorker(QtCore.QObject):
                     try:
                         block=NumericBatch(np.concatenate(batch),batch_maximum,batch_clock,batch_channels)
                         block.acquisition=batch_config
+                        if self.trace.enabled:block.startup_trace_generation=batch_trace_generation
                         self.publish_batch(block)
                     except RuntimeError:pass  # Original error reports the bounded-delivery failure.
                     batch = []
@@ -946,12 +990,14 @@ class OutputWorker(QtCore.QObject):
                 try:
                     block=NumericBatch(np.concatenate(batch),batch_maximum,batch_clock,batch_channels)
                     block.acquisition=batch_config
+                    if self.trace.enabled:block.startup_trace_generation=batch_trace_generation
                     self.publish_batch(block)
                 except RuntimeError as exc:self.error_occurred.emit(str(exc))
             if self._processing_executor is not None:
                 self._processing_executor.shutdown(wait=True)
             if self._processing_process is not None:
                 self._processing_process.shutdown(wait=True)
+            trace('worker_finished',stopped=not self.running)
             self.finished.emit()
 
 
@@ -5398,6 +5444,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self.serial_worker.status_changed.connect(lambda text: self._from_worker(worker, self._set_connection_status, text))
         self.serial_worker.output_confirmed.connect(lambda mode, r4: self._from_worker(worker, self._output_confirmed, mode, r4))
         self.serial_worker.acquisition_confirmed.connect(lambda bits, rate: self._from_worker(worker, self._acquisition_confirmed, bits, rate))
+        self.serial_worker.trace_configuration_ready.connect(lambda event: self._from_worker(worker,self._trace_configuration_installed,worker,event))
         self.serial_worker.generator_confirmed.connect(lambda reply: self._from_worker(worker, self._generator_confirmed, reply))
         self.serial_worker.instrument_confirmed.connect(lambda identity: self._from_worker(worker, self.spectral.bode.set_instrument, identity))
         self.serial_worker.wav_confirmed.connect(lambda reply: self._from_worker(worker, self._wav_confirmed, reply))
@@ -5420,6 +5467,11 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         if worker is self.serial_worker:
             callback(*args)
 
+    def _trace_configuration_installed(self,worker,event):
+        generation,bits,rate=event
+        if (self.applied_configuration.bits,self.applied_configuration.rate)==(bits,rate):
+            worker.trace.record(generation,'gui_configuration_installed',once=True)
+
     def _note_gui_callback(self, name, began):
         elapsed=time.perf_counter()-began
         if elapsed>=.02:
@@ -5441,6 +5493,10 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             if worker is self.serial_worker:
                 self.batch_pending_peak=max(getattr(self,'batch_pending_peak',0),getattr(batch,'pending_batches',0))
                 self._from_worker(worker,self.handle_batch,batch)
+                trace=getattr(worker,'trace',None)
+                if (trace is not None and trace.enabled and
+                        getattr(batch,'acquisition',None)==getattr(self,'applied_configuration',None)):
+                    trace.record(getattr(batch,'startup_trace_generation',None),'first_gui_batch_accepted',once=True)
         finally:
             worker.batch_consumed(batch)
             SerialMonitorWindow._note_gui_callback(self,'handle_batch',started)

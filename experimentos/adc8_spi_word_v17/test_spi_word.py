@@ -5,7 +5,7 @@ import tempfile
 import unittest
 
 EXP=Path(__file__).resolve().parent
-SKETCH=EXP/'arduino/v16/oscilloscope/sketch'
+SKETCH=EXP/'arduino/historico/v16/oscilloscope/sketch'
 
 
 class SpiWordTests(unittest.TestCase):

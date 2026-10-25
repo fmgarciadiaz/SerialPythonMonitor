@@ -10,13 +10,13 @@ import numpy as np
 
 ROOT=Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT))
-from monitor.v16.receiver.unoq_native import PROFILES
-from monitor.v16.receiver.unoq_acquisition import Configuration
-from monitor.v16.receiver.unoq_generator import GeneratorConfig
-from monitor.v16.receiver.unoq_config_receiver import OutputReceiver
-from monitor.v16.receiver.unoq_switch import Mode
-from monitor.v16.receiver.unoq_usb import Connection
-from monitor.v16.numeric_batch import NumericBatch,SampleClock
+from monitor.historico.v16.receiver.unoq_native import PROFILES
+from monitor.historico.v16.receiver.unoq_acquisition import Configuration
+from monitor.historico.v16.receiver.unoq_generator import GeneratorConfig
+from monitor.historico.v16.receiver.unoq_config_receiver import OutputReceiver
+from monitor.historico.v16.receiver.unoq_switch import Mode
+from monitor.historico.v16.receiver.unoq_usb import Connection
+from monitor.historico.v16.numeric_batch import NumericBatch,SampleClock
 from diagnosticos.probar_audio_owner_v16 import require_exclusive_monitor
 
 EXP=Path(__file__).resolve().parent
@@ -53,8 +53,8 @@ def main():
     prior=json.loads((EXP/'sweep.json').read_text())['prior']
     report={'ok':False,'restored':False,'cases':[],'scope':'Production firmware/relay/receiver/scaled timestamps; analog not measured',
             'source_hashes':{str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest()
-                             for p in [Path(__file__),ROOT/'monitor/v16/numeric_batch.py',
-                                       *sorted((ROOT/'monitor/v16/receiver').glob('*.py'))]}}
+                             for p in [Path(__file__),ROOT/'monitor/historico/v16/numeric_batch.py',
+                                       *sorted((ROOT/'monitor/historico/v16/receiver').glob('*.py'))]}}
     path=EXP/'production_integration.json'
     def save():path.write_text(json.dumps(report,indent=2)+'\n')
     clock=SampleClock();last_time=None

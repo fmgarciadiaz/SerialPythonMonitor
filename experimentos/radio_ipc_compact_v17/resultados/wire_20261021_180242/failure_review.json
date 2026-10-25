@@ -1,0 +1,84 @@
+{
+  "fault_states": [
+    {
+      "state": 4,
+      "reason": 2,
+      "played": 374400,
+      "accepted": 374880,
+      "queue_slots": 30
+    }
+  ],
+  "audio_position_seconds": 9.36,
+  "slowest_same_rid": {
+    "request_id": 2874850373,
+    "session": 2874849378,
+    "completed_recv_at": 187407.310954356,
+    "read_number": 16801,
+    "frame_number": 22796,
+    "ack_start_offset_in_last_recv": 59328,
+    "ack_end_offset_in_last_recv": 60320,
+    "callback_at": 187407.340407639,
+    "complete_recv_to_callback_ms": 29.45328300120309,
+    "more_reads_before_callback": 0,
+    "sent_at": 187407.098355315,
+    "send_to_complete_recv_ms": 212.5990409986116,
+    "send_to_callback_ms": 242.0523239998147
+  },
+  "read_spans": [
+    [
+      "read",
+      187407.282598305,
+      187407.282807608,
+      null,
+      0.00020029499999996148,
+      0.00020000000000131024
+    ],
+    [
+      "read",
+      187407.296867739,
+      187407.297088326,
+      null,
+      0.0001668089999995459,
+      0.0002429999999993271
+    ],
+    [
+      "read",
+      187407.310676776,
+      187407.311065828,
+      null,
+      0.00020430299999940615,
+      0.0005410000000001247
+    ]
+  ],
+  "slow_io_spans": [
+    [
+      "decode",
+      187407.109562869,
+      187407.116631283,
+      null,
+      0.00030793600000045274,
+      0.007298999999999722
+    ],
+    [
+      "decode",
+      187407.244849875,
+      187407.255774785,
+      null,
+      0.00038997700000020785,
+      0.017255000000000464
+    ],
+    [
+      "decode",
+      187407.255883647,
+      187407.277426334,
+      null,
+      0.00046687399999978396,
+      0.038009000000000626
+    ]
+  ],
+  "limitations": [
+    "send_to_recv includes transport, Q/relay work and host attention before recv completion; not cable latency.",
+    "recv_to_callback includes intervening frame processing and scheduling, not unique GIL attribution.",
+    "Bounded recent spans do not instrument all receiver callbacks in this source version."
+  ]
+}

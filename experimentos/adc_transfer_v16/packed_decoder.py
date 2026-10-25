@@ -3,11 +3,11 @@ import secrets
 import struct
 import time
 import zlib
-from monitor.v16.receiver.unoq_usb import BLOCK, MASK, SAMPLE, ProtocolError
-from monitor.v16.receiver.unoq_generator import generator_reply
-from monitor.v16.receiver.unoq_wav import status as wav_status
-from monitor.v16.receiver.unoq_acquisition import Configuration, acquisition_reply
-from monitor.v16.receiver.unoq_switch import Mode, Phase, switch_request, switch_reply
+from monitor.historico.v16.receiver.unoq_usb import BLOCK, MASK, SAMPLE, ProtocolError
+from monitor.historico.v16.receiver.unoq_generator import generator_reply
+from monitor.historico.v16.receiver.unoq_wav import status as wav_status
+from monitor.historico.v16.receiver.unoq_acquisition import Configuration, acquisition_reply
+from monitor.historico.v16.receiver.unoq_switch import Mode, Phase, switch_request, switch_reply
 
 
 class PackedDecoder:

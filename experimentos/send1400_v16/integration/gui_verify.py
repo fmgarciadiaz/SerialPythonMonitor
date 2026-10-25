@@ -4,8 +4,8 @@ from pathlib import Path
 os.environ.setdefault('QT_QPA_PLATFORM','offscreen')
 ROOT=Path(__file__).resolve().parents[3];sys.path.insert(0,str(ROOT))
 import diagnosticos.validar_grabacion_wav_v16 as check
-from monitor.v16.receiver.unoq_acquisition import Configuration
-from monitor.v16.receiver.unoq_config_receiver import OutputReceiver
+from monitor.historico.v16.receiver.unoq_acquisition import Configuration
+from monitor.historico.v16.receiver.unoq_config_receiver import OutputReceiver
 from diagnosticos.probar_audio_owner_v16 import require_exclusive_monitor
 class NumericReceiver(OutputReceiver):
  def __init__(self,*args,**kwargs):

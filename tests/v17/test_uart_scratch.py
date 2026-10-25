@@ -3,7 +3,7 @@ import subprocess
 import tempfile
 import unittest
 from pathlib import Path
-from tests.v16.test_ch1_fast import extract
+from tests.historico.v16.test_ch1_fast import extract
 
 ROOT=Path(__file__).resolve().parents[2]
 

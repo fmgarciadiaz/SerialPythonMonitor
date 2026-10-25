@@ -1,3 +1,9 @@
+# Versiones anteriores
+
+La versión activa es [V18](../v18/README.md). V17 permanece congelada fuera de este directorio.
+
+- [V16](v16/README.md): pareja anterior archivada.
+
 # Versiones anteriores de Arduino
 
 Estas carpetas conservan las fuentes anteriores sin cambiar su funcionamiento.

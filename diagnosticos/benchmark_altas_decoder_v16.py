@@ -2,9 +2,9 @@ import sys,time,struct,zlib,json
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 import numpy as np
-from monitor.v16.receiver.unoq_native import PROFILES
-from monitor.v16.receiver.unoq_acquisition import Configuration
-from monitor.v16.receiver.unoq_config_decoder import ConfigurationDecoder
+from monitor.historico.v16.receiver.unoq_native import PROFILES
+from monitor.historico.v16.receiver.unoq_acquisition import Configuration
+from monitor.historico.v16.receiver.unoq_config_decoder import ConfigurationDecoder
 path=Path('diagnosticos/resultados_v16/highrate_host_20261012.json');report=json.loads(path.read_text());results=[]
 for profile in PROFILES:
  c=Configuration(profile['bits'],160000000//profile['ticks']);frames=[];offset=0;seq=0;capacity=(872*8//(c.bits*c.channels))&~3

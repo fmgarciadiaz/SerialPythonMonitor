@@ -50,13 +50,13 @@ def main():
     super().__init__(*args,**kwargs);self.transport_trace=deque(maxlen=12000);self.wav_trace=deque(maxlen=6000);receivers.append(self)
    def _wav_send(self,frame):
     status=self.wav_status
-    self.wav_trace.append(('send',time.monotonic(),struct.unpack_from('<H',frame,6)[0],status.accepted if status else None,status.played if status else None,len(self.wav_inflight)))
+    self.wav_trace.append(('send',time.monotonic(),struct.unpack_from('<H',frame,6)[0],status.accepted if status else None,status.played if status else None,len(self.wav_inflight),struct.unpack_from('<I',frame,8)[0]))
     return super()._wav_send(frame)
    def _process_decoder_events(self):
     before=self.wav_status
     outcome=super()._process_decoder_events()
     if self.wav_status is not before and self.wav_status is not None:
-     s=self.wav_status;self.wav_trace.append(('ack',time.monotonic(),int(s.state),s.accepted,s.played,s.free_blocks))
+     s=self.wav_status;self.wav_trace.append(('ack',time.monotonic(),int(s.state),s.accepted,s.played,s.free_blocks,s.request_id,int(s.reason)))
     return outcome
   import monitor.v17.app as app_module
   app_module.OutputReceiver=TraceReceiver
@@ -65,18 +65,25 @@ def main():
  report={'cases':[],'errors':[],'restored':False,'platform':app.platformName(),'experimental_pcm_frame_service':'--pcm-frame-service' in sys.argv,'experimental_pcm_buffer30':'--pcm-buffer30' in sys.argv,'experimental_pcm_window2':'--pcm-window2' in sys.argv,'trace_cpu_clock':'process_time fallback; use wall timestamps for causal analysis'};prior=None
  report.update(native_pcm_delivery=native_pcm,native_pcm_frame_service=native_frames,
      trace_cpu_clock='thread_time' if thread_clock_available else 'process_time fallback; use wall timestamps for causal analysis')
- config=None;duration=float(sys.argv[sys.argv.index('--seconds')+1]) if '--seconds' in sys.argv else 120 if '--long' in sys.argv else 18
- matrix=((16,76226,50000),(16,76226,40000),(16,76226,20000)) if '--adc16' in sys.argv else ((14,100000,50000),) if '--long' in sys.argv else ((8,40000,20000),(8,40000,40000),(8,40000,50000),(14,100000,20000),(14,100000,40000),(14,100000,50000))
- if '--case16' in sys.argv:matrix=((16,76226,50000),)
- if '--critical-pair' in sys.argv:matrix=((16,76226,50000),(14,100000,50000))
- if '--qualify16' in sys.argv:matrix=((16,76226,50000),)*3;duration=120
- if '--controls' in sys.argv:matrix=((16,76226,50000),);duration=35
- if '--select-only' in sys.argv:matrix=((8,1600000,50000),);duration=10
+ from diagnosticos.wav_cases_v17 import select_cases,near_eof_delta,select_window_configuration
+ matrix,duration=select_cases(sys.argv)
+ # Validate every case before establishing board ownership or changing Q.
+ for bits,adc_rate,audio_rate in matrix:Configuration(bits,adc_rate)
+ config=None;thread=None;report['requested_cases']=list(matrix);report['requested_seconds']=duration
  source=Path(sys.argv[sys.argv.index('--source')+1]).resolve() if '--source' in sys.argv else ROOT/'audios/imperial.wav'
- report['source']=str(source)
+ from monitor.v17.wav_source import inspect_wav
+ report['source']=str(source);report['source_metadata']=inspect_wav(source)
+ if '--controls' not in sys.argv and '--select-only' not in sys.argv and duration>=report['source_metadata']['duration']:raise ValueError('El WAV debe durar más que el ensayo solicitado')
  report['selection_only']='--select-only' in sys.argv
+ report['wav_trace_schema']=dict(send='stage,time,kind,accepted,played,inflight,RID',ack='stage,time,state,accepted,played,free,RID,reason')
  def save():(folder/'report.json').write_text(json.dumps(report,indent=2)+'\n')
- sys.excepthook=lambda kind,value,tb:report['errors'].append(''.join(traceback.format_exception(kind,value,tb)))
+ def gui_exception(kind,value,tb):
+  detail=''.join(traceback.format_exception(kind,value,tb))
+  report['errors'].append(detail)
+  if report['cases']:
+   report['cases'][-1]['errors'].append('GUI: '+detail)
+   report['cases'][-1]['ok']=False
+ sys.excepthook=gui_exception
  with board_owner('1060031107','Diagnosticar cortes WAV hacia A0'):
   require_exclusive_monitor()
   try:
@@ -85,22 +92,37 @@ def main():
     if g.enabled:raise RuntimeError('Generator occupied')
     prior={'adc':asdict(r.config),'generator':asdict(g)};report['prior']=prior;r.configure(Configuration(14,40000))
    report['identity_before']=instrument_identity('1060031107');save()
+   if report['identity_before'] is None:raise RuntimeError('Identidad de firmware desconocida')
    for bits,adc_rate,audio_rate in matrix:
     config=Configuration(bits,adc_rate);radio='--radio' in sys.argv
-    w=worker=thread=None
+    w=worker=thread=audit=None
     row={'bits':bits,'adc_rate':adc_rate,'audio_rate':audio_rate,'radio':radio,'samples':0,'errors':[],'states':[]};report['cases'].append(row)
     try:
      with patch('monitor.v17.app.usb_devices',return_value=[]):w=SerialMonitorWindow()
+     original_selection=w._wav_file_selected
+     def measured_selection(path,row=row,original=original_selection):
+      began=time.monotonic()
+      try:return original(path)
+      finally:row['selection_callback_ms']=(time.monotonic()-began)*1000
+     w._wav_file_selected=measured_selection
      w.generator_mode.setCurrentIndex(4)
-     w.config_bits_combo.setCurrentIndex(w.config_bits_combo.findData(bits));w.config_rate_combo.setCurrentIndex(w.config_rate_combo.findData(adc_rate))
+     select_window_configuration(w,config)
      w.radio_enabled.setChecked(radio)
+     w._auto_apply_timer.stop()
      worker=OutputWorker('1060031107',Mode.SPI,config=config,processing_settings=w._processing_settings(),startup_gui_ack=True,processing_backend='process')
      worker._ensure_process().result(timeout=45)
+     if '--keep-visible' in sys.argv:w.setWindowFlag(QtCore.Qt.WindowType.WindowStaysOnTopHint,True)
      w.serial_worker=worker;w.is_running=True;w.show()
-     def confirmed(bits,rate):w._acquisition_confirmed(bits,rate);worker.confirm_startup(bits,rate)
+     if '--analysis-audit' in sys.argv and '--select-only' not in sys.argv:
+      from diagnosticos.wav_visual_audit_v17 import WavVisualAudit
+      audit=WavVisualAudit(w)
+      w.raise_();w.activateWindow()
+     def confirmed(bits,rate,w=w,worker=worker):w._acquisition_confirmed(bits,rate);worker.confirm_startup(bits,rate)
      worker.acquisition_confirmed.connect(confirmed)
-     def collect(batch):row['samples']+=len(batch);w._deliver_worker_batch(worker,batch)
-     def wav_status(status):
+     def collect(batch,row=row,w=w,worker=worker):row['samples']+=len(batch);w._deliver_worker_batch(worker,batch)
+     def wav_status(status,row=row,w=w,audit=audit):
+      if audit:audit.playing(int(status.state)==2)
+      row['last_played']=status.played
       if not row['states'] or row['states'][-1]['state']!=int(status.state):row['states'].append({'state':int(status.state),'reason':status.reason,'played':status.played,'accepted':status.accepted})
       if int(status.state)==2:
        row['max_played']=max(row.get('max_played',0),status.played)
@@ -117,6 +139,7 @@ def main():
      start=time.monotonic();selected=False
      while thread.isRunning() and time.monotonic()-start<duration+15:
       app.processEvents();time.sleep(.001)
+      if audit:audit.sample_exposure()
       if not selected and time.monotonic()-start>6 and w.applied_configuration==config:
        selected=True
        w.wav_rate.setCurrentIndex(w.wav_rate.findData(audio_rate))
@@ -138,20 +161,26 @@ def main():
        if age>10 and 'backward' not in actions and w._wav_active:w._seek_wav(-5);actions.append('backward')
        if age>12 and 'stop' not in actions and w._wav_active:w._stop_wav();actions.append('stop')
        if age>14 and 'stop' in actions and 'replay' not in actions and not w._wav_active and not w._wav_preparing:w._play_wav();actions.append('replay')
-       if age>17 and 'replay' in actions and 'near_eof' not in actions and w._wav_active:w._seek_wav(175);actions.append('near_eof')
+       if age>17 and 'replay' in actions and 'near_eof' not in actions and w._wav_active:w._seek_wav(near_eof_delta(report['source_metadata']['duration'],row.get('last_played',0),audio_rate));actions.append('near_eof')
        if any(state['state']==3 for state in row['states']) and 'eof' not in actions:actions.append('eof')
        if 'eof' in actions and 'restart_after_eof' not in actions and not w._wav_active and not w._wav_preparing:w._play_wav();actions.append('restart_after_eof');row['restart_at']=time.monotonic()
        if 'restart_after_eof' in actions and time.monotonic()-row['restart_at']>2 and w._wav_active and 'final_stop' not in actions:w._stop_wav();actions.append('final_stop')
        if 'final_stop' in actions and not w._wav_active:break
       elif row.get('max_played',0)>=audio_rate*duration:break
-      if row['errors']:break
+      if row['errors'] or report['errors']:break
      row['generator_status']=w.generator_status.text()
+     row['slow_gui_callbacks']=list(getattr(w,'_gui_slow_callbacks',()))
+     row['delivery_failure']=getattr(worker,'delivery_failure_snapshot',None)
      row.update(metadata=w._wav_metadata,selected=selected and w._wav_metadata is not None,pending_peak=worker.pending_batches_peak,dsp_peak=worker.pending_dsp_peak,gui_delay_max_ms=w.batch_queue_delay_max_ms,ok=selected and not row['errors'] and row.get('max_played',0)>=audio_rate*duration)
      if '--select-only' in sys.argv:
       row.update(dialog_closed=w._wav_file_dialog is None,delivery_failure=getattr(worker,'delivery_failure_snapshot',None))
       row['ok']=bool(row['selected'] and row['dialog_closed'] and not row['errors'] and not w._wav_preparing and not w._wav_active)
     finally:
      if '--controls' in sys.argv:row['ok']=not row['errors'] and set(row.get('actions',[]))=={'forward','backward','stop','replay','near_eof','eof','restart_after_eof','final_stop'}
+     if audit:
+      audit.playing(False);row['paint_audit']=audit.snapshot()
+      row['audio_integrity_ok']=row.get('ok',False)
+      row['ok']=row.get('ok',False) and row['paint_audit']['visual_ok']
      if worker:worker.stop()
      if thread:
       deadline=time.monotonic()+15
@@ -163,16 +192,34 @@ def main():
     print('CASE',json.dumps({k:v for k,v in row.items() if not k.endswith('_trace')}),flush=True)
     with Connection('1060031107') as c:
      r=OutputReceiver(c,lambda b:None);r.decoder.numeric=True;r.select(Mode.SPI);r.configure(Configuration(14,40000))
-    if '--qualify16' in sys.argv and not row['ok']:break
+    if not row['ok'] or report['errors']:break
   except BaseException:
    report['errors'].append(traceback.format_exc());raise
   finally:
-   if prior:
-    with Connection('1060031107') as c:
-     r=OutputReceiver(c,lambda b:None);r.decoder.numeric=True;r.select(Mode.SPI);r.configure(Configuration(14,40000));r.configure(Configuration(**prior['adc']));r.generator(GeneratorConfig(**prior['generator']))
-     report['restored']=asdict(r.config)==prior['adc'] and asdict(r.generator().active)==prior['generator'];end=time.monotonic()+5;before=r.decoder.pairs
-     while time.monotonic()<end:r.pump()
-     report['recovery']={'samples':r.decoder.pairs-before,'status':r.decoder.status}
-    report['identity_after']=instrument_identity('1060031107')
-   save();print('REPORT',folder/'report.json',flush=True)
-if __name__=='__main__':main()
+   try:
+    if prior:
+     if thread is not None and thread.isRunning():
+      report.update(restored=False,restore_error='Worker sigue activo; no abrir una conexión competidora')
+      save()
+      raise RuntimeError(report['restore_error'])
+     with Connection('1060031107') as c:
+      r=OutputReceiver(c,lambda b:None);r.decoder.numeric=True;r.select(Mode.SPI);r.configure(Configuration(14,40000))
+     report['identity_after']=instrument_identity('1060031107')
+     if report['identity_after']!=report['identity_before']:raise RuntimeError('Cambió la identidad del firmware')
+     # No administrative Q calls after restoring a potentially high-rate prior.
+     with Connection('1060031107') as c:
+      r=OutputReceiver(c,lambda b:None);r.decoder.numeric=True;r.select(Mode.SPI);r.configure(Configuration(14,40000));r.configure(Configuration(**prior['adc']));r.generator(GeneratorConfig(**prior['generator']))
+      report['restored']=asdict(r.config)==prior['adc'] and asdict(r.generator().active)==prior['generator'];end=time.monotonic()+10;before=r.decoder.pairs
+      while time.monotonic()<end:r.pump()
+      report['recovery']={'samples':r.decoder.pairs-before,'status':r.decoder.status}
+   except BaseException as exc:
+    report.update(restored=False,restore_error=repr(exc))
+    report['errors'].append(traceback.format_exc())
+    raise
+   finally:
+    report['ok']=bool(report['restored'] and not report['errors'] and len(report['cases'])==len(matrix) and all(row.get('ok',False) for row in report['cases']) and report.get('identity_before') is not None and report.get('identity_after')==report.get('identity_before'))
+    save();print('REPORT',folder/'report.json',flush=True)
+ return report
+if __name__=='__main__':
+ result=main()
+ raise SystemExit(0 if result['ok'] else 1)

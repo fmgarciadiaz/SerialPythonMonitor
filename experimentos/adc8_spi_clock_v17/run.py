@@ -41,7 +41,7 @@ class ClockProbe(RelayProfile):
     def __init__(self):
         super().__init__()
         cfg=dict(self.candidate.config)
-        cfg['local_app']='experimentos/adc8_spi_clock_v17/arduino/v16/oscilloscope'
+        cfg['local_app']='experimentos/adc8_spi_clock_v17/arduino/historico/v16/oscilloscope'
         self.candidate=Board(cfg)
         self.report.update(revision='adc8_spi_clock_nss_diagnostic_v17',
             plan=dict(ticks=[114,112],node_pairs=3456,seconds=30,rate_qualification=False),

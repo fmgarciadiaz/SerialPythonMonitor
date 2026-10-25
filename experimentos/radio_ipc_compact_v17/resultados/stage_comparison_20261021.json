@@ -1,0 +1,268 @@
+{
+  "rows": [
+    {
+      "experiment_report": "experimentos/radio_ipc_compact_v17/resultados/render_20261021_150332/report.json",
+      "physical_report": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v17/generador_radio_20261021_150332/report.json",
+      "adaptive": false,
+      "stats": {
+        "calls": 5561,
+        "skipped": 0,
+        "executed": 5561,
+        "thread_cpu_seconds": 17.123635793999885,
+        "wall_seconds": 21.82660174171906,
+        "max_wall_ms": 40.26718399836682
+      },
+      "stages": {
+        "analysis_pipeline": {
+          "calls": 1252,
+          "thread_cpu_seconds": 15.050473989999894,
+          "wall_seconds": 17.990487442264566,
+          "max_wall_ms": 37.531150999711826
+        },
+        "draw_submission": {
+          "calls": 1233,
+          "thread_cpu_seconds": 1.943813414999914,
+          "wall_seconds": 2.9953094016818795,
+          "max_wall_ms": 7.37827701959759
+        },
+        "fft_numeric": {
+          "calls": 1232,
+          "thread_cpu_seconds": 3.6988131010000074,
+          "wall_seconds": 3.898112605937058,
+          "max_wall_ms": 9.66544501716271
+        }
+      },
+      "policy": null,
+      "ok": true,
+      "restored": true,
+      "errors": [],
+      "adc_queue_peak": 5,
+      "adc_status": {
+        "ack": 22469151,
+        "rate": 1600000,
+        "bits": 8,
+        "dropped": 0,
+        "fatal": 0,
+        "epoch": 141,
+        "prepare_us": 12,
+        "check_us": 49,
+        "queue_slots": 8,
+        "node_pairs": 3456,
+        "queue": 1,
+        "queue_peak": 5,
+        "copy_ticks": 39664,
+        "poll_ticks": 228786,
+        "slack_ticks": 120475,
+        "send_ticks": 280100,
+        "produced": 56943
+      },
+      "retunes": 11,
+      "paint_audit": {
+        "scope_paints": 0,
+        "fft_paints": 2299,
+        "exposure_checks": 1174,
+        "exposed_checks": 1174,
+        "seconds": 120.00891420402331,
+        "scope_fps": 0.0,
+        "fft_fps": 19.156910261612264,
+        "exposed_fraction": 1.0
+      },
+      "transport_max_ms": {
+        "read": 36.28177402424626,
+        "decode": 26.09821199439466,
+        "send": 17.197234003106132,
+        "ack": 0.03856199327856302,
+        "ack_latency": 31.066052004462108,
+        "generate": 2.9437740158755332
+      },
+      "source_buffer_minimum": 8516,
+      "recovery": {
+        "samples": 15991776,
+        "status": {
+          "ack": 22489419,
+          "rate": 1600000,
+          "bits": 8,
+          "dropped": 0,
+          "fatal": 0,
+          "epoch": 144,
+          "prepare_us": 10,
+          "check_us": 49,
+          "queue_slots": 8,
+          "node_pairs": 3456,
+          "queue": 1,
+          "queue_peak": 2,
+          "copy_ticks": 39181,
+          "poll_ticks": 213285,
+          "slack_ticks": 131442,
+          "send_ticks": 258902,
+          "produced": 4629
+        }
+      },
+      "identity_before": {
+        "board_serial": "1060031107",
+        "app": "scope-v17-main-1",
+        "firmware_sha256": "96685eb64cc722adebc7f345f40c3500e22642814bbfc6f182c66c0f992a7ec9"
+      },
+      "identity_after": {
+        "board_serial": "1060031107",
+        "app": "scope-v17-main-1",
+        "firmware_sha256": "96685eb64cc722adebc7f345f40c3500e22642814bbfc6f182c66c0f992a7ec9"
+      }
+    },
+    {
+      "experiment_report": "experimentos/radio_ipc_compact_v17/resultados/render_20261021_150605/report.json",
+      "physical_report": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v17/generador_radio_20261021_150605/report.json",
+      "adaptive": true,
+      "stats": {
+        "calls": 5741,
+        "skipped": 579,
+        "executed": 5162,
+        "thread_cpu_seconds": 16.323067024000203,
+        "wall_seconds": 20.617336586670717,
+        "max_wall_ms": 28.948958992259577
+      },
+      "stages": {
+        "analysis_pipeline": {
+          "calls": 1217,
+          "thread_cpu_seconds": 14.417976081000072,
+          "wall_seconds": 17.20122141597676,
+          "max_wall_ms": 26.47550098481588
+        },
+        "draw_submission": {
+          "calls": 1197,
+          "thread_cpu_seconds": 1.832710910999889,
+          "wall_seconds": 2.802621461916715,
+          "max_wall_ms": 8.464707992970943
+        },
+        "fft_numeric": {
+          "calls": 1196,
+          "thread_cpu_seconds": 3.5393348889999983,
+          "wall_seconds": 3.716556613246212,
+          "max_wall_ms": 5.554811010370031
+        }
+      },
+      "policy": {
+        "entries": 3,
+        "exits": 3,
+        "reduced_seconds": 14.160750639013713,
+        "reduced": false,
+        "reasons": {
+          "delivery": 6,
+          "ack": 2
+        },
+        "transitions": [
+          {
+            "at": 176870.679047933,
+            "state": "reduced",
+            "reason": "delivery"
+          },
+          {
+            "at": 176875.821400054,
+            "state": "normal",
+            "reason": "quiet"
+          },
+          {
+            "at": 176878.879975432,
+            "state": "reduced",
+            "reason": "ack"
+          },
+          {
+            "at": 176881.932800439,
+            "state": "normal",
+            "reason": "quiet"
+          },
+          {
+            "at": 176898.846470834,
+            "state": "reduced",
+            "reason": "delivery"
+          },
+          {
+            "at": 176904.812044345,
+            "state": "normal",
+            "reason": "quiet"
+          }
+        ]
+      },
+      "ok": true,
+      "restored": true,
+      "errors": [],
+      "adc_queue_peak": 6,
+      "adc_status": {
+        "ack": 22760871,
+        "rate": 1600000,
+        "bits": 8,
+        "dropped": 0,
+        "fatal": 0,
+        "epoch": 147,
+        "prepare_us": 10,
+        "check_us": 49,
+        "queue_slots": 8,
+        "node_pairs": 3456,
+        "queue": 1,
+        "queue_peak": 6,
+        "copy_ticks": 39671,
+        "poll_ticks": 228172,
+        "slack_ticks": 120019,
+        "send_ticks": 263685,
+        "produced": 56942
+      },
+      "retunes": 10,
+      "paint_audit": {
+        "scope_paints": 0,
+        "fft_paints": 2269,
+        "exposure_checks": 1166,
+        "exposed_checks": 1166,
+        "seconds": 120.00757951798732,
+        "scope_fps": 0.0,
+        "fft_fps": 18.90713910832533,
+        "exposed_fraction": 1.0
+      },
+      "transport_max_ms": {
+        "read": 32.773920975159854,
+        "decode": 42.2199770109728,
+        "send": 15.417229005834088,
+        "ack": 0.004101020749658346,
+        "ack_latency": 71.2776119762566,
+        "generate": 0.5498699902091175
+      },
+      "source_buffer_minimum": 7113,
+      "recovery": {
+        "samples": 15991776,
+        "status": {
+          "ack": 22781081,
+          "rate": 1600000,
+          "bits": 8,
+          "dropped": 0,
+          "fatal": 0,
+          "epoch": 150,
+          "prepare_us": 17,
+          "check_us": 49,
+          "queue_slots": 8,
+          "node_pairs": 3456,
+          "queue": 1,
+          "queue_peak": 2,
+          "copy_ticks": 39178,
+          "poll_ticks": 216106,
+          "slack_ticks": 131386,
+          "send_ticks": 262901,
+          "produced": 4629
+        }
+      },
+      "identity_before": {
+        "board_serial": "1060031107",
+        "app": "scope-v17-main-1",
+        "firmware_sha256": "96685eb64cc722adebc7f345f40c3500e22642814bbfc6f182c66c0f992a7ec9"
+      },
+      "identity_after": {
+        "board_serial": "1060031107",
+        "app": "scope-v17-main-1",
+        "firmware_sha256": "96685eb64cc722adebc7f345f40c3500e22642814bbfc6f182c66c0f992a7ec9"
+      }
+    }
+  ],
+  "limitations": [
+    "One sequential120s pair, control then adaptive. No proof of underrun correction.",
+    "Inclusive nested stage timings cannot be added. Counters include lifecycle, not exact PLAYING interval.",
+    "Draw submission excludes subsequent Qt Paint. Thread CPU is not GIL hold duration."
+  ]
+}

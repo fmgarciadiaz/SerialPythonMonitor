@@ -8,7 +8,7 @@ from experimentos.adc8_relay_profile_v17.run import summarize,NAMES
 
 class RelayProfileTests(unittest.TestCase):
     def test_actual_c_counters_and_json(self):
-        source=(Path(__file__).parent/'arduino/v16/relay/unoq_config_stream.c').read_text()
+        source=(Path(__file__).parent/'arduino/historico/v16/relay/unoq_config_stream.c').read_text()
         helpers=source[source.index('struct StageStats'):source.index('static volatile sig_atomic_t')]
         code='''#include <stdint.h>
 #include <inttypes.h>

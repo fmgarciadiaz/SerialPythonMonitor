@@ -1,3 +1,9 @@
+# Versiones anteriores
+
+La versión activa es [V18](../v18/README.md). V17 permanece congelada fuera de este directorio.
+
+- [V16](v16/README.md): pareja anterior archivada.
+
 # Monitores históricos
 
 La versión actual está en [V17](../v17/README.md). V15 y las versiones de esta carpeta son históricas.

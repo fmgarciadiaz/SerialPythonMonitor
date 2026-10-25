@@ -13,7 +13,7 @@ def sync(path):
   if not r['ok'] or r['seconds']<seconds or r['status']['dropped'] or r['status']['fatal']:
    raise ValueError('Invalid physical acceptance')
  headroom=all(r.get('headroom_ok',False) for r in rows)
- target=ROOT/'monitor/v16/receiver/native_profiles.json';profiles=json.loads(target.read_text())
+ target=ROOT/'monitor/historico/v16/receiver/native_profiles.json';profiles=json.loads(target.read_text())
  profile={'bits':8,'ticks':114,'node_pairs':3456,'channels':1,'headroom':headroom,
           'isolated_headroom':True,'historical_queue_peak':4,
           'evidence':str(path.relative_to(ROOT))}
@@ -21,7 +21,7 @@ def sync(path):
  if position==len(profiles):profiles.append(profile)
  else:profiles[position]=profile
  target.write_text(json.dumps(profiles,indent=2)+'\n')
- for folder in ('arduino/v16/oscilloscope/sketch','arduino/v16/relay'):
+ for folder in ('arduino/historico/v16/oscilloscope/sketch','arduino/historico/v16/relay'):
   header=ROOT/folder/'native_profiles.h';text=header.read_text()
   if not re.search(r'\{\s*8\s*,\s*1\s*,\s*114\s*,\s*3456\s*\}',text):
    text=text.replace('static const ScopeNativeProfile scope_native_profiles[] = {','static const ScopeNativeProfile scope_native_profiles[] = {\n    {8, 1, 114, 3456},')

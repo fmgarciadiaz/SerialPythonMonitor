@@ -17,7 +17,7 @@ class RelayTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as folder:
             programs = []
             for name in ('maxfreq_v16', 'send1400_v16'):
-                relay = ROOT/'experimentos'/name/'arduino/v16/relay'
+                relay = ROOT/'experimentos'/name/'arduino/historico/v16/relay'
                 source = f'''#define main old_main
 #include "{relay/'base_verifier.c'}"
 #undef main

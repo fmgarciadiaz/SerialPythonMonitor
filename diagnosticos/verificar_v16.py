@@ -5,12 +5,12 @@ from dataclasses import asdict,replace
 from datetime import datetime
 import numpy as np
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
-from monitor.v16.receiver.unoq_usb import Connection
-from monitor.v16.receiver.unoq_config_receiver import OutputReceiver
-from monitor.v16.receiver.unoq_switch import Mode
-from monitor.v16.receiver.unoq_acquisition import Configuration
-from monitor.v16.receiver.unoq_generator import GeneratorConfig
-from monitor.v16.receiver.unoq_wav import State
+from monitor.historico.v16.receiver.unoq_usb import Connection
+from monitor.historico.v16.receiver.unoq_config_receiver import OutputReceiver
+from monitor.historico.v16.receiver.unoq_switch import Mode
+from monitor.historico.v16.receiver.unoq_acquisition import Configuration
+from monitor.historico.v16.receiver.unoq_generator import GeneratorConfig
+from monitor.historico.v16.receiver.unoq_wav import State
 
 def main():
  parser=argparse.ArgumentParser();parser.add_argument('--seconds',type=float,default=120);parser.add_argument('--serial',default='1060031107');args=parser.parse_args()

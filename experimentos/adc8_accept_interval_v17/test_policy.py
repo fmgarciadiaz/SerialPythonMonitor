@@ -6,7 +6,7 @@ import unittest
 
 class AcceptPolicyTests(unittest.TestCase):
     def test_active_idle_and_counter_wrap(self):
-        folder=Path(__file__).resolve().parent/'arduino/v16/relay'
+        folder=Path(__file__).resolve().parent/'arduino/historico/v16/relay'
         code='''#include <assert.h>
 #include "accept_policy.h"
 int main(void) {

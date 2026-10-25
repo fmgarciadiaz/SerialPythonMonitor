@@ -5,7 +5,7 @@ from pathlib import Path
 from experimentos.send1400_v16.run import SendProbe, Probe, ROOT, EXP
 import experimentos.maxfreq_v16.contract as contract
 from experimentos.maxfreq_v16.sweep import usb_stream
-from monitor.v16.bode_calibration import instrument_identity
+from monitor.historico.v16.bode_calibration import instrument_identity
 from diagnosticos.probar_audio_owner_v16 import require_exclusive_monitor
 
 OriginalDecoder=contract.Decoder

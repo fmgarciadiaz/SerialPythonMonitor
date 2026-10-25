@@ -4,12 +4,12 @@ from pathlib import Path
 from dataclasses import asdict
 ROOT=Path(__file__).resolve().parents[2];sys.path.insert(0,str(ROOT))
 from diagnosticos.probar_audio_owner_v16 import require_exclusive_monitor
-from monitor.v16.receiver.unoq_usb import Connection
-from monitor.v16.receiver.unoq_config_receiver import OutputReceiver
-from monitor.v16.receiver.unoq_acquisition import Configuration
-from monitor.v16.receiver.unoq_generator import GeneratorConfig
-from monitor.v16.receiver.unoq_switch import Mode
-from monitor.v16.receiver.unoq_wav import State
+from monitor.historico.v16.receiver.unoq_usb import Connection
+from monitor.historico.v16.receiver.unoq_config_receiver import OutputReceiver
+from monitor.historico.v16.receiver.unoq_acquisition import Configuration
+from monitor.historico.v16.receiver.unoq_generator import GeneratorConfig
+from monitor.historico.v16.receiver.unoq_switch import Mode
+from monitor.historico.v16.receiver.unoq_wav import State
 EXP=Path(__file__).resolve().parent
 require_exclusive_monitor()
 report={'ok':False,'restored':False,'cases':[]}

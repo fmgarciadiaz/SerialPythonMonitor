@@ -1,0 +1,64 @@
+{
+  "node_period_ms": 2.1168,
+  "eight_slot_span_ms": 16.9344,
+  "last_observed_consumer_ms": 2.316875,
+  "consumer_semantics": "take(full_slots) through release, includes whole node physical transmission and control work",
+  "host_recent": {
+    "ack": {
+      "count": 89,
+      "maximum_ms": 8.699134923517704e-05,
+      "slowest_event": [
+        "ack",
+        71421.151142941,
+        71421.151143028,
+        2610591844
+      ]
+    },
+    "decode": {
+      "count": 1622,
+      "maximum_ms": 15.969854008289985,
+      "slowest_event": [
+        "decode",
+        71421.317553056,
+        71421.33352291,
+        null
+      ]
+    },
+    "generate": {
+      "count": 68,
+      "maximum_ms": 0.95040698943194,
+      "slowest_event": [
+        "generate",
+        71421.14945351,
+        71421.150403917,
+        null
+      ]
+    },
+    "read": {
+      "count": 1133,
+      "maximum_ms": 16.37513500463683,
+      "slowest_event": [
+        "read",
+        71421.388133845,
+        71421.40450898,
+        null
+      ]
+    },
+    "send": {
+      "count": 88,
+      "maximum_ms": 0.5561069992836565,
+      "slowest_event": [
+        "send",
+        71421.148879354,
+        71421.149435461,
+        2610591844
+      ]
+    }
+  },
+  "limitations": [
+    "Recent ring only, not full acquisition",
+    "Host and MCU observations do not prove which delay initiated the backlog",
+    "No matched production-rate control in this campaign"
+  ],
+  "conclusion": "Confirmed full acquisition queue and one lost node; positive mean send margin does not bound transient consumer stalls"
+}

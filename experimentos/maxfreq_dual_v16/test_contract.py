@@ -24,7 +24,7 @@ def packet(bits,ticks,n,index,seq):
 
 class DualContractTests(unittest.TestCase):
     def test_channels_clock_and_native_relay(self):
-        base=EXP/'arduino/v16/relay/base_verifier.c'
+        base=EXP/'arduino/historico/v16/relay/base_verifier.c'
         header=base.with_name('config_relay_protocol.h')
         source=f'#define main baseline_main\n#include "{base}"\n#undef main\n#include "{header}"\nint main(int argc,char**argv){{(void)argc;init_crc();DualChecker d={{.bits=(unsigned)atoi(argv[1]),.period=(uint32_t)strtoul(argv[2],0,10)}};uint8_t p[BLOCK];while(fread(p,1,BLOCK,stdin)==BLOCK)if(!dual_feed(&d,p))return 1;return 0;}}'
         with tempfile.TemporaryDirectory() as folder:

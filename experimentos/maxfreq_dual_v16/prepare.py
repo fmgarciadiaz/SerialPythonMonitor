@@ -7,7 +7,7 @@ from unoq import Board,config_path
 import usb_stream
 def boards():
  stable=Board(json.loads(config_path('v16').read_text()));config=dict(stable.config)
- config.update(name='Scope V16 Max Frequency Dual Experimental',remote_app='/home/arduino/ArduinoApps/scope-v16-maxfreq-dual-experimental',local_app='experimentos/maxfreq_dual_v16/arduino/v16/oscilloscope')
+ config.update(name='Scope V16 Max Frequency Dual Experimental',remote_app='/home/arduino/ArduinoApps/scope-v16-maxfreq-dual-experimental',local_app='experimentos/maxfreq_dual_v16/arduino/historico/v16/oscilloscope')
  return stable,Board(config)
 def main():
  stable,candidate=boards()

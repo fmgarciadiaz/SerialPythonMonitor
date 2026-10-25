@@ -4,9 +4,9 @@ from dataclasses import replace
 from pathlib import Path
 import numpy as np
 from diagnosticos.synth_presets_v16 import panel_presets
-from monitor.v16.fm_source import FMSource
-from monitor.v16.receiver.unoq_config_receiver import OutputReceiver
-from monitor.v16.receiver.unoq_wav import chunk
+from monitor.historico.v16.fm_source import FMSource
+from monitor.historico.v16.receiver.unoq_config_receiver import OutputReceiver
+from monitor.historico.v16.receiver.unoq_wav import chunk
 
 def run():
     notes=(57,64)  # Quinta de la captura más reciente del usuario.

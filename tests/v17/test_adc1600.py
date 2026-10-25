@@ -15,27 +15,33 @@ class ADC1600Tests(unittest.TestCase):
             with self.assertRaises(ValueError):Configuration(bits,1600000)
 
     def test_preparation_pumps_and_never_publishes_private_samples(self):
-        receiver=OutputReceiver(Mock(),Mock())
-        receiver.mode=Mode.SPI
-        samples,confirmed=receiver.on_samples,Mock()
-        receiver.on_configuration=confirmed
-        receiver.generator=Mock()
-        applied=[]
-        def configure(config):
-            applied.append(config.rate)
-            receiver.on_configuration(config)
-            return True
-        receiver._configure_once=configure
-        receiver.pump=Mock(side_effect=lambda: receiver.on_samples(['private']))
-        with patch('monitor.v17.receiver.unoq_config_receiver.time.monotonic',side_effect=[0,.1,1,2.1]):
-            self.assertTrue(receiver.configure(Configuration(8,1600000)))
-        self.assertEqual(applied,[40000,1428571,1600000])
-        self.assertEqual(receiver.pump.call_count,2)
-        samples.assert_not_called()
-        confirmed.assert_called_once_with(Configuration(8,1600000))
-        self.assertIs(receiver.on_samples,samples)
-        self.assertIs(receiver.on_configuration,confirmed)
-        receiver.generator.assert_not_called()
+        for connected,seconds in ((False,2.),(True,.5)):
+            with self.subTest(connected=connected):
+                receiver=OutputReceiver(Mock(),Mock())
+                receiver.mode=Mode.SPI if connected else None
+                receiver.select=Mock(side_effect=lambda mode:setattr(receiver,'mode',mode))
+                samples,confirmed=receiver.on_samples,Mock()
+                receiver.on_configuration=confirmed
+                receiver.generator=Mock()
+                applied=[];now=[0.]
+                def configure(config):
+                    applied.append(config.rate)
+                    receiver.on_configuration(config)
+                    return True
+                def pump():
+                    receiver.on_samples(['private']);now[0]+=.25
+                receiver._configure_once=configure
+                receiver.pump=Mock(side_effect=pump)
+                with patch('monitor.v17.receiver.unoq_config_receiver.time.monotonic',side_effect=lambda:now[0]):
+                    self.assertTrue(receiver.configure(Configuration(8,1600000)))
+                self.assertEqual(now[0],seconds)
+                self.assertEqual(applied,[40000,1428571,1600000])
+                self.assertEqual(receiver.pump.call_count,int(seconds/.25))
+                samples.assert_not_called()
+                confirmed.assert_called_once_with(Configuration(8,1600000))
+                self.assertIs(receiver.on_samples,samples)
+                self.assertIs(receiver.on_configuration,confirmed)
+                receiver.generator.assert_not_called()
 
     def test_preparation_failure_restores_callbacks_without_requesting_target(self):
         receiver=OutputReceiver(Mock(),Mock());receiver.mode=Mode.SPI
@@ -99,12 +105,13 @@ class ADC1600SelectorTests(unittest.TestCase):
                 event.accept.assert_called_once()
             index=window.config_rate_combo.findData(1600000)
             self.assertGreaterEqual(index,0)
-            self.assertTrue(window.config_rate_combo.itemText(index).endswith('(CH1) (s/holg.)'))
+            self.assertTrue(window.config_rate_combo.itemText(index).endswith('(CH1)'))
+            self.assertNotIn('s/holg',window.config_rate_combo.itemText(index))
             self.assertTrue(window.config_rate_combo.model().item(index).isEnabled())
             self.assertEqual(window.config_rate_combo.findData(1428571),-1)
             window.applied_configuration=Configuration(8,1600000)
             window._refresh_applied_summary()
-            self.assertIn('(s/holg.)',window.confirmed_output_label.text())
+            self.assertNotIn('s/holg',window.confirmed_output_label.text())
             window.config_bits_combo.setCurrentIndex(window.config_bits_combo.findData(14))
             window._destination_changed()
             self.assertFalse(window.config_rate_combo.model().item(index).isEnabled())

@@ -4,11 +4,11 @@ sys.path.insert(0,str(Path(__file__).resolve().parents[1]));os.environ['QT_QPA_P
 import numpy as np
 from unittest.mock import patch
 from PyQt6 import QtWidgets
-from monitor.v16.app import SerialMonitorWindow
-from monitor.v16.receiver.unoq_native import PROFILES
-from monitor.v16.numeric_batch import NumericBatch,SampleClock
+from monitor.historico.v16.app import SerialMonitorWindow
+from monitor.historico.v16.receiver.unoq_native import PROFILES
+from monitor.historico.v16.numeric_batch import NumericBatch,SampleClock
 app=QtWidgets.QApplication([]);results=[]
-with patch('monitor.v16.app.usb_devices',return_value=[]):w=SerialMonitorWindow()
+with patch('monitor.historico.v16.app.usb_devices',return_value=[]):w=SerialMonitorWindow()
 w.render_timer.stop()
 for p in PROFILES:
  rate=160000000//p['ticks'];w._acquisition_confirmed(p['bits'],rate);config=w.applied_configuration

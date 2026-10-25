@@ -1,0 +1,172 @@
+import ctypes
+import queue
+import struct
+import time
+import unittest
+from experimentos.radio_io_process_v17.prototype import Prototype,Credits,Audio
+
+
+def event(owner,op):
+    deadline=time.monotonic()+2
+    while time.monotonic()<deadline:
+        value=owner.events.get(timeout=max(.001,deadline-time.monotonic()))
+        if value['op']==op:return value
+    raise AssertionError('Missing event '+op)
+
+
+def snapshot(owner,predicate):
+    deadline=time.monotonic()+2
+    while time.monotonic()<deadline:
+        try:value=owner.progress.get(timeout=max(.001,deadline-time.monotonic()))
+        except queue.Empty:
+            raise AssertionError('No progress: '+str(owner.close()['error']))
+        if predicate(value):return value
+    raise AssertionError('Missing progress condition')
+
+
+def hold_parent_gil(seconds):
+    """PyDLL C call retains the parent GIL; child has a different interpreter."""
+    library=ctypes.PyDLL(None)
+    call=library.usleep;call.argtypes=[ctypes.c_uint];call.restype=ctypes.c_int
+    call(round(seconds*1e6))
+
+
+class ContractTests(unittest.TestCase):
+    def test_confirmed_credits_do_not_return_with_wall_time_or_duplicate_ack(self):
+        credits=Credits(2);credits.reserve(1,480);credits.reserve(2,960)
+        self.assertEqual(credits.available,0)
+        with self.assertRaises(ValueError):credits.reserve(3,1440)
+        credits.acknowledge(1,1,480,0)
+        self.assertEqual(credits.available,0)
+        with self.assertRaises(ValueError):credits.acknowledge(1,2,480,0)
+        self.assertEqual(len(credits.pending),1)
+
+    def test_contradictory_ack_preserves_pending(self):
+        credits=Credits(30);credits.reserve(1,480)
+        with self.assertRaises(ValueError):credits.acknowledge(1,30,0,0)
+        self.assertIn(1,credits.pending)
+
+    def test_audio_ipc_payload_bound_and_dac_codes(self):
+        for data in (bytearray(2),b'0',bytes(962),struct.pack('<H',4096)):
+            with self.assertRaises(ValueError):Audio(1,1,0,data).validate()
+        Audio(1,1,0,bytes(960)).validate()
+
+    def test_query_requires_no_pending_commands_and_confirms_consumed_space(self):
+        credits=Credits(2);credits.reserve(1,480)
+        with self.assertRaises(ValueError):credits.query(2,480,480)
+        credits.acknowledge(1,1,480,0)
+        self.assertEqual(credits.available,1)
+        credits.query(2,480,480)
+        self.assertEqual(credits.available,2)
+
+
+class OwnerTests(unittest.TestCase):
+    def owner(self,**kwargs):
+        owner=Prototype(**kwargs)
+        self.addCleanup(owner.close)
+        event(owner,'READY')
+        owner.command('CONFIG');event(owner,'CONFIG')
+        return owner
+
+    def test_child_advances_during_parent_gil_hold_and_rf_closes_without_gaps(self):
+        owner=self.owner();before=snapshot(owner,lambda row:True)
+        hold_parent_gil(.35)
+        after=snapshot(owner,lambda row:row['at']>before['at']+.3)
+        self.assertGreater(after['pumps'],before['pumps']+100)
+        result=owner.close()
+        self.assertEqual(result['reason'],'shutdown');self.assertTrue(result['restored'])
+        frames=result['rf_drained_on_close']
+        self.assertEqual(len(frames),result['stats']['rf_blocks'])
+        self.assertEqual([frame.first for frame in frames],list(range(0,len(frames)*864,864)))
+        self.assertIs(owner.close(),result)
+
+    def test_audio_model_keeps_consuming_while_parent_is_blocked(self):
+        owner=self.owner();owner.command('BEGIN',1,11);event(owner,'BEGIN')
+        for i in range(48):owner.send_audio(Audio(1,11,i*480,bytes(960)))
+        snapshot(owner,lambda row:row['accepted']>=960)
+        owner.command('PLAY',1,11);event(owner,'PLAY')
+        before=snapshot(owner,lambda row:row['playing'])
+        hold_parent_gil(.25)
+        after=snapshot(owner,lambda row:row['at']>before['at']+.2)
+        self.assertGreater(after['played'],before['played']+6000)
+        owner.command('STOP',1,11);event(owner,'STOP')
+        result=owner.close();self.assertTrue(result['restored']);self.assertEqual(result['reason'],'shutdown')
+
+    def test_rf_consumer_stall_is_explicit_overload_with_model_restore(self):
+        owner=self.owner(rf_capacity=2)
+        time.sleep(.03)
+        result=owner.close()
+        self.assertEqual(result['reason'],'fault')
+        self.assertIn('rf_backpressure',result['error'])
+        self.assertTrue(result['restored'])
+        self.assertEqual(len(result['rf_drained_on_close']),result['stats']['rf_blocks'])
+
+    def test_session_and_control_order_and_old_audio_are_explicit(self):
+        owner=self.owner();owner.command('BEGIN',1,11);event(owner,'BEGIN')
+        owner.command('STOP',1,11);event(owner,'STOP')
+        owner.send_audio(Audio(1,11,0,bytes(960)))
+        snapshot(owner,lambda row:row['cancelled_audio']>=1)
+        owner.command('BEGIN',2,22);reply=event(owner,'BEGIN')
+        self.assertEqual((reply['sequence'],reply['epoch'],reply['session']),(4,2,22))
+        result=owner.close();self.assertTrue(result['restored'])
+
+    def test_bad_offset_faults_instead_of_silent_gap_or_repetition(self):
+        owner=self.owner();owner.command('BEGIN',1,11);event(owner,'BEGIN')
+        owner.send_audio(Audio(1,11,480,bytes(960)))
+        time.sleep(.02)
+        result=owner.close()
+        self.assertEqual(result['reason'],'fault');self.assertIn('offset',result['error'])
+        self.assertTrue(result['restored'])
+
+    def test_configuration_is_rejected_during_active_session_and_restores_exact_original(self):
+        owner=self.owner();owner.command('BEGIN',1,11);event(owner,'BEGIN')
+        owner.command('CONFIG')
+        time.sleep(.02)
+        result=owner.close()
+        self.assertEqual(result['reason'],'fault');self.assertIn('CONFIG',result['error'])
+        self.assertEqual(result['config'],dict(bits=14,rate=40000,generator=False))
+
+    def test_stop_preempts_audio_waiting_for_confirmed_credit(self):
+        owner=self.owner();owner.command('BEGIN',1,11);event(owner,'BEGIN')
+        for i in range(48):owner.send_audio(Audio(1,11,i*480,bytes(960)))
+        snapshot(owner,lambda row:row['accepted']==14400 and row['pending']==0)
+        owner.command('STOP',1,11);event(owner,'STOP')
+        result=owner.close()
+        self.assertEqual(result['reason'],'shutdown');self.assertTrue(result['restored'])
+
+    def test_delayed_ack_of_old_epoch_cannot_credit_new_session(self):
+        owner=self.owner(ack_delay=.08);owner.command('BEGIN',1,11);event(owner,'BEGIN')
+        owner.send_audio(Audio(1,11,0,bytes(960)))
+        snapshot(owner,lambda row:row['chunks']>=1)
+        owner.command('STOP',1,11);event(owner,'STOP')
+        owner.command('BEGIN',2,22);event(owner,'BEGIN')
+        owner.send_audio(Audio(2,22,0,bytes(960)))
+        snapshot(owner,lambda row:row['cancelled_acks']>=1 and row['acks']>=1)
+        result=owner.close();self.assertEqual(result['reason'],'shutdown')
+
+    def test_missing_ack_times_out_without_creating_credits(self):
+        owner=self.owner(drop_acks=True);owner.command('BEGIN',1,11);event(owner,'BEGIN')
+        owner.send_audio(Audio(1,11,0,bytes(960)))
+        deadline=time.monotonic()+1.5
+        while not owner.terminal.poll() and time.monotonic()<deadline:
+            for _ in range(64):
+                try:owner.rf.get_nowait()
+                except queue.Empty:break
+            time.sleep(.001)
+        result=owner.close()
+        self.assertEqual(result['reason'],'fault');self.assertIn('ACK_timeout',result['error'])
+        self.assertEqual(result['stats']['acks'],0);self.assertEqual(result['stats']['chunks'],1)
+        self.assertTrue(result['restored'])
+
+    def test_play_without_required_confirmed_prebuffer_fails_closed(self):
+        owner=self.owner();owner.command('BEGIN',1,11);event(owner,'BEGIN')
+        owner.send_audio(Audio(1,11,0,bytes(960)))
+        snapshot(owner,lambda row:row['accepted']>=480)
+        owner.command('PLAY',1,11)
+        time.sleep(.02)
+        result=owner.close()
+        self.assertEqual(result['reason'],'fault');self.assertIn('PLAY',result['error'])
+        self.assertTrue(result['restored'])
+
+
+if __name__=='__main__':unittest.main()

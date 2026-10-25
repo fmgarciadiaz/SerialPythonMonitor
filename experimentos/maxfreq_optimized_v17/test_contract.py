@@ -11,8 +11,8 @@ EXP = Path(__file__).resolve().parent
 
 class OptimizedContractTests(unittest.TestCase):
     def test_actual_packing_and_validators(self):
-        sketch = EXP/'arduino/v16/oscilloscope/sketch'
-        relay = EXP/'arduino/v16/relay'
+        sketch = EXP/'arduino/historico/v16/oscilloscope/sketch'
+        relay = EXP/'arduino/historico/v16/relay'
         source = f'''#include "{sketch/'sample_packing.h'}"
 #include <cassert>
 #include <vector>

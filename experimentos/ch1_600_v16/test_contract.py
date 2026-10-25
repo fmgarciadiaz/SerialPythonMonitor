@@ -1,7 +1,7 @@
 import unittest,struct,zlib,random,tempfile,subprocess
 from pathlib import Path
 from experimentos.ch1_600_v16.support import load
-from monitor.v16.receiver.unoq_usb import ProtocolError
+from monitor.historico.v16.receiver.unoq_usb import ProtocolError
 EXP=Path(__file__).resolve().parent
 contract,SingleDecoder=load()
 def seal(p):struct.pack_into('<I',p,988,zlib.crc32(p[:988]));return bytes(p)
@@ -37,7 +37,7 @@ class ContractTests(unittest.TestCase):
   d=SingleDecoder();d.feed(p)
   with self.assertRaises(ProtocolError):d.feed(packet([1]*516,516,516*267+1,1))
  def test_native_relay_matches_decoder(self):
-  base=EXP/'arduino/v16/relay/base_verifier.c';header=base.with_name('config_relay_protocol.h')
+  base=EXP/'arduino/historico/v16/relay/base_verifier.c';header=base.with_name('config_relay_protocol.h')
   source=f'''#define main baseline_main\n#include "{base}"\n#undef main\n#include "{header}"\nint main(void){{uint8_t p[BLOCK];init_crc();DualChecker d={{.period=267,.bits=14}};while(fread(p,1,BLOCK,stdin)==BLOCK)printf("%d\\n",dual_feed(&d,p));}}'''
   values=[i%16384 for i in range(2048)];frames=[packet(values[i:i+516],i,i*267,n) for n,i in enumerate(range(0,2048,516))]
   bad=bytearray(packet([1]*516,2048,2048*267,4));bad[987]=1
@@ -47,7 +47,7 @@ class ContractTests(unittest.TestCase):
    out=subprocess.run([str(exe)],input=b''.join(frames)+seal(bad),check=True,capture_output=True).stdout
    self.assertEqual(out,b'1\n'*4+b'0\n')
  def test_actual_mcu_packer(self):
-  body=extract(EXP/'arduino/v16/oscilloscope/sketch/sketch.ino','build_samples');header=EXP/'arduino/v16/oscilloscope/sketch/benchmark_protocol.h'
+  body=extract(EXP/'arduino/historico/v16/oscilloscope/sketch/sketch.ino','build_samples');header=EXP/'arduino/historico/v16/oscilloscope/sketch/benchmark_protocol.h'
   source=f'''#include "{header}"\n#include <algorithm>\n#include <cstring>\n#include <cstdio>\nusing namespace scope_bench;
 constexpr unsigned DMA_NODE_PAIRS=2048;struct Pair{{uint16_t ch1,ch2;}};
 namespace acquisition{{struct Node{{uint32_t index,timestamp;Pair samples[2048];}};uint32_t period=267,bits=14,epoch=0,dropped_nodes=0,fatal_errors=0;}}
@@ -61,11 +61,11 @@ uint32_t seq=0;for(unsigned offset=0;offset<2048;offset+=516){{uint8_t p[992];bu
    self.assertEqual(len(out),4*992);rows=SingleDecoder().feed(out)
    self.assertEqual([r[1] for r in rows],[i*13%16384 for i in range(2048)])
  def test_tick_contract_does_not_replace_stable(self):
-  from monitor.v16.receiver.unoq_acquisition import Configuration
+  from monitor.historico.v16.receiver.unoq_acquisition import Configuration
   self.assertEqual(Configuration(14,250000).period,4)
   self.assertEqual(contract.Configuration().period,267)
  def test_actual_single_channel_node_validator(self):
-  header=EXP/'arduino/v16/oscilloscope/sketch/node_validation.h'
+  header=EXP/'arduino/historico/v16/oscilloscope/sketch/node_validation.h'
   source=f'''#include "{header}"\nstruct Pair{{uint16_t ch1,ch2;}};
 int main(){{uint16_t adc[2048];uint32_t t[2048];Pair out[2048];
 for(unsigned i=0;i<2048;++i){{adc[i]=i;t[i]=0xfffffff0U+i*267U;}}

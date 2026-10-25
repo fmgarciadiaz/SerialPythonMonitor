@@ -18,11 +18,11 @@ para el análisis y audio, Numba para los cálculos recurrentes del sinte, C/C++
 sobre Linux. Los temporizadores fijan los tiempos de ADC/DAC y DMA mueve los
 bloques; USB/ADB conecta el instrumento con la computadora.
 
-**[Arquitectura completa del proyecto](docs/ARQUITECTURA.md)** — recorrido
+**[Arquitectura completa del proyecto](docs/ARQUITECTURA_V18.md)** — recorrido
 ordenado por el monitor, relay Linux, aplicación App Lab y sketch MCU;
 flujos de muestras y órdenes, temporizadores, DMA, IRQ, mutex, colas y carga del Q.
 
-**V17 es la versión activa.** [Estado actual, validación y límites](docs/ESTADO_ACTUAL_V17.md) · [Plan de trabajo](Plan%20de%20trabajo.md). Las imágenes ilustran cada función; algunas son demostraciones de versiones anteriores y no acreditan una nueva validación física.
+**V18 es la versión de trabajo; V17 queda congelada con su pareja del Q.** [Parejas y respaldo](docs/PAREJAS_V17_V18.md). [Validación y límites V18](docs/VALIDACION_V18.md) · [Plan de trabajo](Plan%20de%20trabajo.md). Las imágenes ilustran cada función; algunas son demostraciones de versiones anteriores y no acreditan una nueva validación física.
 
 ## V(t) · osciloscopio
 
@@ -40,7 +40,7 @@ La imagen muestra una cuadrada y la respuesta de un filtro RC simulado.
 |---|---|
 | Entradas | Dos canales: A2/V_IN y A3/V_OUT, rango nominal 0–3,3 V |
 | Resolución ADC | 8/10/12/14 bits; 16 bits por oversampling ×16, sin implicar 16 bits de precisión efectiva |
-| Muestreo SPI V17 | Dual hasta 632,41 kHz por canal (ADC8) y 76,23 kHz (ADC16 OS); CH1 hasta 1,6 MHz (ADC8) |
+| Muestreo SPI V18 | Dual hasta 632,41 kHz por canal (ADC8) y 76,23 kHz (ADC16 OS); CH1 hasta 1,818 MHz (ADC8) |
 | Salida DAC | A0, 12 bits, rango nominal 0–3,3 V; amplitud y offset ajustables dentro de esos límites |
 | Generador | Seno, cuadrada, triángulo, rampa; modos Sweep, Chirp y Pulso; seno hasta 150 kHz, cuadrada hasta 200 kHz; triángulo/rampa hasta 50 kHz, con frecuencias intermedias |
 | Audio de salida | WAV mono por A0, L/R/Mix, tasas negociadas de 20/40/50 ksps; 40 ksps por defecto |
@@ -55,18 +55,18 @@ Las tasas indicadas son tasas de muestras, no ancho de banda analógico ni
 precisión garantizada. El DAC pierde linealidad cerca de sus extremos: el ajuste
 inicial de 2 Vpp/1,65 V deja margen. WAV50 con ADC125 está bloqueado. La estabilidad concurrente RADIO/WAV sigue
 en evaluación por cortes intermitentes; los ensayos y límites se enlazan en
-el [estado vigente](docs/ESTADO_ACTUAL_V17.md).
-[Perfiles ADC](docs/CONFIGURACION_ADQUISICION.md) · [Límites del generador](docs/GENERADOR_200K_V17.md) ·
+la [validación vigente V18](docs/VALIDACION_V18.md).
+[Perfiles ADC](docs/CONFIGURACION_ADQUISICION.md) · [Límites del generador](docs/GUIA_V18.md) ·
 [Ensayos de audio](docs/WAV_TASAS.md).
 
-### Frecuencias de adquisición V17
+### Frecuencias de adquisición V18
 
 Las tasas son por canal. En dual se leen A2 y A3; CH1 utiliza sólo A2.
 El selector ofrece tasas bajas, intermedias y máximos según resolución y modo.
 
 | Bits | Máximo CH1 (kHz) | Máximo dual (kHz por canal) |
 |---|---:|---:|
-| 8 | 1600 | 632,411 |
+| 8 | 1818,182 | 632,411 |
 | 10 | 1250 | 519,481 |
 | 12 | 1066,667 | 437,158 |
 | 14 | 851,064 | 363,636 |
@@ -74,7 +74,7 @@ El selector ofrece tasas bajas, intermedias y máximos según resolución y modo
 
 Son máximos disponibles, no una calificación universal de holgura ni de carga
 simultánea RADIO/WAV. UART conserva hasta 31,25 kHz por canal; Synth tiene
-sus restricciones de adquisición. [Perfiles y evidencia](docs/ESTADO_ACTUAL_V17.md).
+sus restricciones de adquisición. [Perfiles y evidencia V18](docs/VALIDACION_V18.md).
 
 ## FFT · espectro de frecuencia
 
@@ -114,7 +114,7 @@ o Agregar. Los pulsos de 100 µs requieren el firmware experimental.
 Estas capturas usan señales sintéticas; FFT muestra la nueva variante
 y las otras vistas muestran la versión conservada;
 Bode ilustra tres filtros RC, sin representar una medición física.
-[Controles del monitor](monitor/v17/README.md) · [Análisis y Bode](docs/MONITOR_TECNICO.md).
+[Controles del monitor](monitor/v18/README.md) · [Análisis y Bode](docs/MONITOR_TECNICO.md).
 
 ## Generador · señales por A0
 
@@ -125,7 +125,7 @@ Permite trabajar con una frecuencia fija, recorrer un rango con Sweep/Chirp
 o aplicar un pulso para observar la respuesta de un circuito.
 Seno llega a 150 kHz y cuadrada a 200 kHz; admite frecuencias intermedias.
 La imagen ilustra el panel integrado con el osciloscopio.
-[Límites y mediciones](docs/GENERADOR_200K_V17.md).
+[Límites y mediciones](docs/GUIA_V18.md).
 
 ## RADIO · recepción AM y sintonía
 
@@ -140,8 +140,8 @@ La imagen muestra una señal AM de demostración y su audio demodulado.
 Play de RADIO activa la recepción y el análisis. Generador Radio permite
 llevar el resultado a A0, con entrada RADIO o FILTER, volumen y offset.
 La escucha se realiza por esa salida; no hay reproducción por parlantes PC
-implementada. [Recepción, antena y US](docs/RADIO_ANTENA_US_V17.md) ·
-[Salida a A0](docs/GENERADOR_RADIO_V17.md).
+implementada. [Recepción, antena y US](docs/GUIA_V18.md) ·
+[Salida a A0](docs/GUIA_V18.md).
 
 ## FILTER · procesamiento y comparación
 
@@ -153,7 +153,7 @@ Generador Radio también puede tomar FILTER como entrada de A0.
 Incluye rechazo de banda y presets, como el rechazo de 50 Hz para reducir
 interferencia de red. OFF deja el filtro sin procesamiento.
 La captura muestra el selector de entrada y los controles del filtro.
-[Guía del monitor](monitor/v17/README.md).
+[Guía del monitor](monitor/v18/README.md).
 
 ## Wav · grabación y reproducción
 
@@ -174,7 +174,7 @@ terminar queda en silencio. Play activa la adquisición y bloquea cambios ADC.
 
 La ruta es PC → USB/ADB → relay Linux → SPI → MCU → temporizador/DMA → A0.
 Es reproducción de archivos; no crea una salida de audio del sistema operativo.
-[Uso del monitor](monitor/v17/README.md) ·
+[Uso del monitor](monitor/v18/README.md) ·
 [Tasas y ensayos físicos](docs/WAV_TASAS.md).
 
 ## Synth · FM, ondas y modelos físicos
@@ -206,7 +206,7 @@ envolventes y los modelos físicos; la preparación ocurre antes de Play.
 El buffer aporta al menos 120 ms a 20 kHz y 192 ms a 40 kHz y puede crecer.
 40 kHz sigue siendo experimental: las pruebas locales de cálculo no garantizan
 continuidad física con adquisición y transporte activos.
-[Guía y controles](monitor/v17/README.md) ·
+[Guía y controles](monitor/v18/README.md) ·
 [Motor, modelos físicos y límites](docs/SYNTH.md).
 
 ## Qué hace
@@ -220,26 +220,26 @@ distorsión y respuesta entre entradas. [Definiciones y límites](docs/FFT_ANALI
 - Grabación CSV o WAV estéreo de A2/A3, con eliminación de DC opcional.
 - Reproducción de archivos WAV por A0: selección L/R/Mix, remuestreo,
   conversión a 12 bits y ajuste de amplitud/offset entre 0 y 3,3 V.
-- Synth con MIDI, nueve voces, FM, ondas clásicas y guitarra/piano físicos.
+- Synth con MIDI, hasta veinte voces, FM, ondas clásicas y guitarra/piano físicos.
 - Adquisición configurable: 8/10/12/14 bits o 16 bits por oversampling.
   SPI dual hasta632,41kHz por canal (ADC8), ADC16 hasta76,23kHz y
-  CH1 hasta1,221MHz (ADC8); ver tabla de frecuencias.
+  CH1 hasta 1,818 MHz (ADC8); ver tabla de frecuencias.
 
 ## Empezar
 
 Desde la raíz del repositorio:
 
 ```sh
-conda env create -f monitor/v17/environment.yml
+conda env create -f monitor/v18/environment.yml
 conda activate Python_3_13_DataScience
-python monitor/v17/app.py
+python -m monitor.v18 --gui
 ```
 
 Si el entorno ya existe, omitir su creación. Demo permite probar la interfaz
-sin placa. V17 requiere la pareja MCU/relay V17. Conectar verifica esa app instalada y, si el enlace no responde,
-comprueba la app instalada y el relay e inicia lo que falte.
-Preparar Q instala o actualiza la app MCU y el relay desde las fuentes del
-proyecto; requiere un UNO Q con Linux, ADB y las herramientas Arduino operativas.
+sin placa. V18 requiere su pareja `Scope V18` y el relay V18 ya activos. La conexión verifica esa app y no instala ni reinicia programas automáticamente.
+Preparar Q está habilitado: verifica la pareja aceptada sin reinstalarla si ya
+coincide, o actualiza una instalación existente con respaldo y recuperación.
+No actúa mientras hay adquisición ni sobrescribe otras aplicaciones activas.
 
 Valores iniciales: ADC 14 bits/40 kHz, amplitud 2 Vpp, offset 1,65 V y salida
 apagada. Sweep y Chirp: 20 Hz→2 kHz en 2 s; se lanzan con Disparar.
@@ -247,7 +247,7 @@ Wav usa 40 mil muestras/s por defecto si el firmware lo admite.
 Durante Play se activa la adquisición y se bloquea el cambio de perfil ADC;
 la amplitud se puede ajustar durante la reproducción. Desconectar solicita y espera el apagado; si falta su confirmación, lo informa.
 
-[Guía del monitor](monitor/v17/README.md) · [Instalación del Q](arduino/v17/README.md)
+[Guía del monitor](monitor/v18/README.md) · [Pareja del Q V18](arduino/v18/README.md)
 
 ## Cómo se conectan los componentes
 
@@ -280,7 +280,7 @@ la cantidad de puntos dibujados a la pantalla. Python prepara WAV, remuestrea
 con filtro antialias y ajusta códigos de salida; el hardware mantiene su ritmo.
 
 [Arquitectura, historial, FFT y Bode](docs/MONITOR_TECNICO.md) ·
-[Receptor y comandos del PC](monitor/v17/receiver/README.md).
+[Receptor y comandos del PC](monitor/v18/receiver/README.md).
 
 ## Relay C · Linux del MPU
 
@@ -290,7 +290,7 @@ ADC/generador y bloques WAV en sentido inverso. Corre en Linux y es distinto
 del pequeño Python que mantiene viva la app de App Lab.
 
 [Detalles: GPIO READY, SPI, tramas, créditos y recuperación](docs/TRANSPORTE_TECNICO.md) ·
-[Fuentes del relay](arduino/v17/relay/unoq_config_stream.c).
+[Fuentes del relay](arduino/v18/relay/unoq_config_stream.c).
 
 ## C/C++ Arduino · firmware del MCU
 
@@ -301,8 +301,8 @@ A0. Las IRQ del DMA SPI notifican fin/error mediante el driver Zephyr; la
 adquisición comprueba flags y buffers sin una ISR por muestra.
 
 [Detalles: relojes, timers, DMA, IRQ y propiedad de buffers](docs/UNO_Q_TECNICO.md) ·
-[Sketch Arduino](arduino/v17/oscilloscope/sketch/sketch.ino) ·
-[Instalación y compilación](arduino/v17/README.md).
+[Sketch Arduino](arduino/v18/oscilloscope/sketch/sketch.ino) ·
+[Instalación y compilación](arduino/v18/README.md).
 
 ## Carpetas
 
@@ -338,8 +338,9 @@ identifican por separado en los informes.
 
 | Conjunto | Estado y documentación |
 |---|---|
-| [Monitor V17 + MCU/relay V17](monitor/v17/README.md) | Actual: RADIO, FILTER, CH1/dual, generador ampliado y SCP1 V4; [estado y evidencia](docs/ESTADO_ACTUAL_V17.md) |
-| [Monitor V16](monitor/v16/README.md) | Respaldo local anterior, app exportada y retirada del Q |
+| [Monitor V18 + Scope V18](monitor/v18/README.md) | Actual: ADC8 CH1 hasta 1,818 MS/s, RADIO/FILTER, WAV y Synth20; [validación](docs/VALIDACION_V18.md) |
+| [Pareja V17 congelada](monitor/v17/README.md) | Conservada con sus fuentes y respaldos, sin desarrollo activo |
+| [Monitor V16](monitor/historico/v16/README.md) | Respaldo local anterior, app exportada y retirada del Q |
 | [Monitor V15 · Synth](monitor/historico/v15/README.md) | Synth: tres osciladores, feedback, FM/ondas/Virtual, guitarra y piano físicos, nueve voces y MIDI; estabilidad de cada perfil pendiente de validación física |
 | [Monitor V14 · PyQt6](monitor/historico/v14/README.md) | Archivado: cuatro modos FFT; firmware existente |
 | [Monitor V13 · PyQt6](monitor/historico/v13/README.md) + [Q V12 Audio](arduino/historico/v12_audio/README.md) | Archivado: grabación y reproducción WAV |
@@ -349,10 +350,9 @@ identifican por separado en los informes.
 | [Firmware histórico](arduino/historico/README.md) | Sketches y puentes anteriores |
 | [Historia completa](docs/HISTORIA.md) | Evolución y catálogo del proyecto |
 
-Las herramientas de consola conservan V16 por defecto por compatibilidad.
-Para la versión activa indicar **`--version v17`** o **`--firmware v17`**.
-Sólo Scope V17 queda instalada como app de usuario; los respaldos anteriores
-se conservan. [Apps y recuperación](arduino/APPS_APPLAB.md).
+Los accesos activos y Preparar Q utilizan V18. Las versiones anteriores están
+archivadas y sus respaldos pareados se conservan. Scope V18 está activa en el Q;
+Scope V17 queda detenida. [Organización](docs/ORGANIZACION_V18.md).
 
-[Arquitectura](docs/ARQUITECTURA.md) · [Organización](docs/ORGANIZACION.md) ·
-[Estado vigente](docs/ESTADO_ACTUAL_V17.md) · [Documentación](docs/README.md).
+[Arquitectura](docs/ARQUITECTURA_V18.md) · [Organización](docs/ORGANIZACION.md) ·
+[Estado vigente](docs/VALIDACION_V18.md) · [Documentación](docs/README.md).

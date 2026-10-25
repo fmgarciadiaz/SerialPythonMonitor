@@ -5,17 +5,17 @@ from dataclasses import asdict
 ROOT=Path(__file__).resolve().parents[2]; EXP=Path(__file__).resolve().parent
 sys.path[:0]=[str(ROOT),str(ROOT/'tools')]
 # Only this process uses the experimental period/rate contract.
-name='monitor.v16.receiver.unoq_acquisition'
+name='monitor.historico.v16.receiver.unoq_acquisition'
 spec=importlib.util.spec_from_file_location(name,EXP/'acquisition.py')
 module=importlib.util.module_from_spec(spec);sys.modules[name]=module;spec.loader.exec_module(module)
-from monitor.v16.receiver.unoq_acquisition import Configuration
-import monitor.v16.receiver.unoq_config_receiver as receiver_module
+from monitor.historico.v16.receiver.unoq_acquisition import Configuration
+import monitor.historico.v16.receiver.unoq_config_receiver as receiver_module
 from decoder import TransferDecoder
 receiver_module.ConfigurationDecoder=TransferDecoder
-from monitor.v16.receiver.unoq_config_receiver import OutputReceiver
-from monitor.v16.receiver.unoq_usb import Connection
-from monitor.v16.receiver.unoq_switch import Mode
-from monitor.v16.receiver.unoq_generator import GeneratorConfig
+from monitor.historico.v16.receiver.unoq_config_receiver import OutputReceiver
+from monitor.historico.v16.receiver.unoq_usb import Connection
+from monitor.historico.v16.receiver.unoq_switch import Mode
+from monitor.historico.v16.receiver.unoq_generator import GeneratorConfig
 from diagnosticos.probar_audio_owner_v16 import require_exclusive_monitor
 from unoq import Board,config_path
 import usb_stream
@@ -61,7 +61,7 @@ def main():
  parser=argparse.ArgumentParser();parser.add_argument('--restore-only',action='store_true');parser.add_argument('--reuse',action='store_true');args=parser.parse_args()
  require_exclusive_monitor()
  stable=Board(json.loads(config_path('v16').read_text()));config=dict(stable.config)
- config.update(name='Scope V16 Transfer Experimental',remote_app='/home/arduino/ArduinoApps/scope-v16-transfer-experimental',local_app='experimentos/adc_transfer_v16/arduino/v16/oscilloscope')
+ config.update(name='Scope V16 Transfer Experimental',remote_app='/home/arduino/ArduinoApps/scope-v16-transfer-experimental',local_app='experimentos/adc_transfer_v16/arduino/historico/v16/oscilloscope')
  candidate=Board(config)
  report={'cases':[],'restored':False,'analog':'No evaluado','queue_margin':'TDG1: ocupación y tiempo de vaciado por nodo; sobrecosto de instrumentación presente','timestamp_validation':'DMA TIM5 y node_validation originales, sin cambios'}
  path=EXP/'results.json'

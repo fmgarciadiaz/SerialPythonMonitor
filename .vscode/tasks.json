@@ -2,177 +2,28 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Monitor V16: Etapa II · CH1/CH2 compacto",
+      "label": "V18: pruebas del n\u00facleo (localhost, sin Q)",
       "type": "process",
       "command": "/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/bin/python",
       "args": [
-        "${workspaceFolder}/monitor/v16/app.py"
-      ],
-      "options": {
-        "cwd": "${workspaceFolder}",
-        "env": {
-          "MONITOR_V16_WAV_FIRMWARE": "v16"
-        }
-      },
-      "problemMatcher": []
-    },
-    {
-      "label": "Monitor V17: Etapa III AM · CH1/CH2 compacto",
-      "type": "process",
-      "command": "/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/bin/python",
-      "args": [
-        "${workspaceFolder}/monitor/v17/app.py"
-      ],
-      "options": {
-        "cwd": "${workspaceFolder}",
-        "env": {
-          "MONITOR_V17_WAV_FIRMWARE": "v17"
-        }
-      },
-      "problemMatcher": []
-    },
-    {
-      "label": "Histórico V15: Synth y análisis",
-      "type": "process",
-      "command": "/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/bin/python",
-      "args": [
-        "${workspaceFolder}/monitor/historico/v15/app.py"
-      ],
-      "options": {
-        "cwd": "${workspaceFolder}",
-        "env": {
-          "MONITOR_V13_WAV_FIRMWARE": "v13_pulse"
-        }
-      },
-      "problemMatcher": []
-    },
-    {
-      "label": "Histórico V14: Abrir WAV A0 (V12 Audio)",
-      "type": "process",
-      "command": "/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/bin/python",
-      "args": [
-        "${workspaceFolder}/monitor/historico/v14/app.py"
-      ],
-      "options": {
-        "cwd": "${workspaceFolder}",
-        "env": {
-          "MONITOR_V13_WAV_FIRMWARE": "v12_audio"
-        }
-      },
-      "problemMatcher": []
-    },
-    {
-      "label": "Histórico V14: Abrir PyQt6 SPI P992",
-      "type": "process",
-      "command": "/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/bin/python",
-      "args": [
-        "${workspaceFolder}/monitor/historico/v14/app.py"
+        "-m",
+        "monitor.v18",
+        "--self-test"
       ],
       "options": {
         "cwd": "${workspaceFolder}"
       },
-      "problemMatcher": []
+      "problemMatcher": [],
+      "group": "test"
     },
     {
-      "label": "Histórico V13: Abrir WAV A0 (V12 Audio)",
+      "label": "V18: abrir monitor",
       "type": "process",
       "command": "/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/bin/python",
       "args": [
-        "${workspaceFolder}/monitor/historico/v13/app.py"
-      ],
-      "options": {
-        "cwd": "${workspaceFolder}",
-        "env": {
-          "MONITOR_V13_WAV_FIRMWARE": "v12_audio"
-        }
-      },
-      "problemMatcher": []
-    },
-    {
-      "label": "Histórico V13: Abrir PyQt6 SPI P992",
-      "type": "process",
-      "command": "/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/bin/python",
-      "args": [
-        "${workspaceFolder}/monitor/historico/v13/app.py"
-      ],
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "problemMatcher": []
-    },
-    {
-      "label": "Histórico V12: Abrir SPI P992 125 kHz",
-      "type": "process",
-      "command": "/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_10_DataScience/bin/python",
-      "args": [
-        "${workspaceFolder}/monitor/historico/v12/app.py"
-      ],
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "problemMatcher": []
-    },
-    {
-      "label": "Histórico V12: Iniciar relay P992 del Q",
-      "type": "process",
-      "command": "python3",
-      "args": [
-        "${workspaceFolder}/tools/usb_stream.py",
-        "start",
-        "--firmware",
-        "v11_p992"
-      ],
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "problemMatcher": []
-    },
-    {
-      "label": "UNO Q actual (V8 config): Estado",
-      "type": "process",
-      "command": "python3",
-      "args": [
-        "${workspaceFolder}/tools/unoq.py",
-        "status"
-      ],
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "problemMatcher": []
-    },
-    {
-      "label": "UNO Q actual (V8 config): Compilar",
-      "type": "process",
-      "command": "python3",
-      "args": [
-        "${workspaceFolder}/tools/unoq.py",
-        "compile"
-      ],
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "problemMatcher": []
-    },
-    {
-      "label": "UNO Q actual (V8 config): Desplegar e iniciar",
-      "type": "process",
-      "command": "python3",
-      "args": [
-        "${workspaceFolder}/tools/unoq.py",
-        "deploy"
-      ],
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "problemMatcher": []
-    },
-    {
-      "label": "UNO Q actual (V8 config): Logs",
-      "type": "process",
-      "command": "python3",
-      "args": [
-        "${workspaceFolder}/tools/unoq.py",
-        "logs"
+        "-m",
+        "monitor.v18",
+        "--gui"
       ],
       "options": {
         "cwd": "${workspaceFolder}"

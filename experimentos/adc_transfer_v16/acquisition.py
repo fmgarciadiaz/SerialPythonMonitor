@@ -2,8 +2,8 @@
 from dataclasses import dataclass
 import struct
 import zlib
-from monitor.v16.receiver.unoq_switch import Phase, Reason
-from monitor.v16.receiver.unoq_usb import ProtocolError
+from monitor.historico.v16.receiver.unoq_switch import Phase, Reason
+from monitor.historico.v16.receiver.unoq_usb import ProtocolError
 
 BITS = (8, 10, 12, 14, 16)
 UART_RATES = (1000, 2000, 4000, 5000, 8000, 10000, 12500, 15625, 20000, 25000, 31250)

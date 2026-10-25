@@ -1,0 +1,78 @@
+{
+  "ok": true,
+  "argv": [
+    "experimentos/radio_ipc_compact_v17/coalesce_probe.py",
+    "--bits",
+    "8",
+    "--rate",
+    "1600000",
+    "--seconds",
+    "60",
+    "--audio-rate",
+    "40000",
+    "--bandwidth",
+    "8000",
+    "--analysis-audit",
+    "--keep-visible",
+    "--refill-ring",
+    "--defer-diagnostics",
+    "--host-cpu-trace",
+    "--retune-stress",
+    "--retune-interval",
+    "10"
+  ],
+  "source_hashes": {
+    "coalesce_probe.py": "7f32246461da7aecd4897e86a75b87450f6fea6d327e8bacb0dfa47b12449a78",
+    "sample_coalescer.py": "0832046e754d360b4e3a26aa2abe8811626ebb440e1fb5fac17474396349dfcb",
+    "wire_probe.py": "494040ef1aee805e0508ce88d21d6c200d32aa8c62989a4b9b4f1dd7249b158d",
+    "wire_ack_audit.py": "5d8c04746d3122dd5a7e48d2399c176e5623118d99f5587f9a586aaf0cd82229"
+  },
+  "limitations": [
+    "Experimental ADC8/1.6M RADIO only, bounded16000samples and32parts.",
+    "10ms deadline checked cooperatively; blocked read/callback scheduling can exceed it.",
+    "Standard receiver validates every frame; control events and shutdown flush older samples first.",
+    "No codec, adaptive refresh, firmware or credit modifications. Passive observer adds overhead."
+  ],
+  "coalescers": [
+    {
+      "inputs": 0,
+      "outputs": 0,
+      "samples": 0,
+      "peak_samples": 0,
+      "peak_parts": 0,
+      "max_age_ms": 0.0,
+      "pending_samples": 0,
+      "pending_parts": 0
+    },
+    {
+      "inputs": 111052,
+      "outputs": 8432,
+      "samples": 95948928,
+      "peak_samples": 15552,
+      "peak_parts": 18,
+      "max_age_ms": 34.41638799267821,
+      "pending_samples": 0,
+      "pending_parts": 0
+    },
+    {
+      "inputs": 0,
+      "outputs": 0,
+      "samples": 0,
+      "peak_samples": 0,
+      "peak_parts": 0,
+      "max_age_ms": 0.0,
+      "pending_samples": 0,
+      "pending_parts": 0
+    },
+    {
+      "inputs": 0,
+      "outputs": 0,
+      "samples": 0,
+      "peak_samples": 0,
+      "peak_parts": 0,
+      "max_age_ms": 0.0,
+      "pending_samples": 0,
+      "pending_parts": 0
+    }
+  ]
+}

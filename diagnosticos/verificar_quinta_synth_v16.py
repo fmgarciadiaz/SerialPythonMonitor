@@ -2,7 +2,7 @@
 from dataclasses import replace
 import numpy as np
 from diagnosticos.synth_presets_v16 import panel_presets
-from monitor.v16.fm_source import FMSource
+from monitor.historico.v16.fm_source import FMSource
 p=panel_presets(['Seno limpio'])['Seno limpio']
 for vol in (.5,.97,2.5):
  s=FMSource(20000,replace(p,notes=((48,90),(55,94)),gate=True))

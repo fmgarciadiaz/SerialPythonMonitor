@@ -12,7 +12,7 @@ EXP = Path(__file__).resolve().parent
 def main():
     dual = accepted_profiles(json.loads((EXP/'sweep.json').read_text()))
     ch1 = accepted_profiles(json.loads((ROOT/'experimentos/maxfreq_v16/sweep.json').read_text()))
-    path = ROOT/'monitor/v16/receiver/native_profiles.json'
+    path = ROOT/'monitor/historico/v16/receiver/native_profiles.json'
     existing = [AcceptedProfile(**p) for p in json.loads(path.read_text())]
     if set(existing) != set(ch1):
         raise RuntimeError('Production whitelist differs from the accepted CH1 baseline')
@@ -21,17 +21,17 @@ def main():
     if backup.exists():
         raise RuntimeError('Integration backup already exists; inspect before repeating')
     for folder in ('oscilloscope/sketch', 'relay'):
-        shutil.copytree(ROOT/'arduino/v16'/folder, backup/folder)
+        shutil.copytree(ROOT/'arduino/historico/v16'/folder, backup/folder)
     shutil.copy2(path, backup/'native_profiles.json')
     header = firmware_header(profiles)
     for folder in ('oscilloscope/sketch', 'relay'):
-        (ROOT/'arduino/v16'/folder/'native_profiles.h').write_text(header)
+        (ROOT/'arduino/historico/v16'/folder/'native_profiles.h').write_text(header)
 
-    packing = ROOT/'arduino/v16/oscilloscope/sketch/sample_packing.h'
-    dual_packing = (EXP/'arduino/v16/oscilloscope/sketch/sample_packing.h').read_text()
+    packing = ROOT/'arduino/historico/v16/oscilloscope/sketch/sample_packing.h'
+    dual_packing = (EXP/'arduino/historico/v16/oscilloscope/sketch/sample_packing.h').read_text()
     packing.write_text(packing.read_text()+'\n'+dual_packing[dual_packing.index('namespace maxfreq_packing'):].replace('unsigned pack(', 'unsigned pack_dual(', 1))
 
-    sketch = ROOT/'arduino/v16/oscilloscope/sketch/sketch.ino'
+    sketch = ROOT/'arduino/historico/v16/oscilloscope/sketch/sketch.ino'
     text = sketch.read_text()
     changes = {
         'const unsigned used=(count*acquisition::bits+7U)/8U;':

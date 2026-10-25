@@ -14,12 +14,12 @@ sys.path.insert(0, str(ROOT))
 
 from PyQt6 import QtCore, QtWidgets
 
-from monitor.v16.app import SerialMonitorWindow
-from monitor.v16.receiver.unoq_acquisition import Configuration
-from monitor.v16.receiver.unoq_config_receiver import OutputReceiver
-from monitor.v16.receiver.unoq_switch import Mode
-from monitor.v16.receiver.unoq_usb import Connection
-from monitor.v16.receiver.unoq_wav import State
+from monitor.historico.v16.app import SerialMonitorWindow
+from monitor.historico.v16.receiver.unoq_acquisition import Configuration
+from monitor.historico.v16.receiver.unoq_config_receiver import OutputReceiver
+from monitor.historico.v16.receiver.unoq_switch import Mode
+from monitor.historico.v16.receiver.unoq_usb import Connection
+from monitor.historico.v16.receiver.unoq_wav import State
 
 SERIAL = '1060031107'
 PROFILES = [Configuration(16, rate) for rate in (44101, 48004, 76226)]
@@ -32,8 +32,8 @@ report = {'scope': 'Production GUI stereo PCM16 recorder, 3 x 29 s per ADC16 rat
           'cases': [], 'errors': [],
           'restored': False, 'ok': False,
           'source_sha256': {str(path.relative_to(ROOT)): hashlib.sha256(path.read_bytes()).hexdigest()
-                            for path in (ROOT/'monitor/v16/app.py',
-                                         ROOT/'monitor/v16/receiver/unoq_config_decoder.py')}}
+                            for path in (ROOT/'monitor/historico/v16/app.py',
+                                         ROOT/'monitor/historico/v16/receiver/unoq_config_decoder.py')}}
 
 
 def save():

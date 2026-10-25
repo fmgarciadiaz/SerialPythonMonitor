@@ -3,7 +3,7 @@ import sys,time,gc,json,argparse,queue,multiprocessing as mp
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
 import numpy as np
-from monitor.v16.adc_ipc import SharedAdcRing
+from monitor.historico.v16.adc_ipc import SharedAdcRing
 
 
 def produce(channel,result,batches,rows):

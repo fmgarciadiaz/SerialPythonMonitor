@@ -5,12 +5,12 @@ from dataclasses import asdict
 ROOT=Path(__file__).resolve().parents[2];EXP=Path(__file__).resolve().parent
 sys.path[:0]=[str(ROOT),str(ROOT/'tools')]
 from experimentos.megaboom_ch1_3584_v16.support import load
-from monitor.v16.receiver.unoq_usb import Connection
-from monitor.v16.receiver.unoq_config_receiver import OutputReceiver
-import monitor.v16.receiver.unoq_config_receiver as receiver_module
-from monitor.v16.receiver.unoq_switch import Mode
-from monitor.v16.receiver.unoq_generator import GeneratorConfig
-from monitor.v16.receiver.unoq_wav import State
+from monitor.historico.v16.receiver.unoq_usb import Connection
+from monitor.historico.v16.receiver.unoq_config_receiver import OutputReceiver
+import monitor.historico.v16.receiver.unoq_config_receiver as receiver_module
+from monitor.historico.v16.receiver.unoq_switch import Mode
+from monitor.historico.v16.receiver.unoq_generator import GeneratorConfig
+from monitor.historico.v16.receiver.unoq_wav import State
 from diagnosticos.probar_audio_owner_v16 import require_exclusive_monitor
 from unoq import Board,config_path
 import usb_stream
@@ -18,7 +18,7 @@ from spi_benchmark import IMAGE
 
 def start_relay(board,target):
  usb_stream.stop(board)
- board.shell('docker','run','-d','--name',usb_stream.CONTAINER,'--network','host','--read-only','--cap-drop','ALL',*(['--cap-add','SYS_NICE'] if board.config.get('local_app')=='arduino/v16/oscilloscope' else []),'--security-opt','no-new-privileges','--user','0:0','--device','/dev/spidev0.0:/dev/spidev0.0:rw','--device','/dev/gpiochip1:/dev/gpiochip1:rw','--mount',f'type=bind,src={target},dst=/work/unoq_stream,readonly','--entrypoint','/work/unoq_stream',IMAGE)
+ board.shell('docker','run','-d','--name',usb_stream.CONTAINER,'--network','host','--read-only','--cap-drop','ALL',*(['--cap-add','SYS_NICE'] if board.config.get('local_app')=='arduino/historico/v16/oscilloscope' else []),'--security-opt','no-new-privileges','--user','0:0','--device','/dev/spidev0.0:/dev/spidev0.0:rw','--device','/dev/gpiochip1:/dev/gpiochip1:rw','--mount',f'type=bind,src={target},dst=/work/unoq_stream,readonly','--entrypoint','/work/unoq_stream',IMAGE)
  end=time.monotonic()+15
  while time.monotonic()<end:
   logs=board.run('shell','docker logs '+usb_stream.CONTAINER+' 2>&1',capture=True).stdout
@@ -30,7 +30,7 @@ def start_relay(board,target):
 def main():
  require_exclusive_monitor()
  stable=Board(json.loads(config_path('v16').read_text()));config=dict(stable.config)
- config.update(name='Scope V16 Megaboom CH1 3584 Experimental',remote_app='/home/arduino/ArduinoApps/scope-v16-megaboom-ch1-3584-experimental',local_app='experimentos/megaboom_ch1_3584_v16/arduino/v16/oscilloscope')
+ config.update(name='Scope V16 Megaboom CH1 3584 Experimental',remote_app='/home/arduino/ArduinoApps/scope-v16-megaboom-ch1-3584-experimental',local_app='experimentos/megaboom_ch1_3584_v16/arduino/historico/v16/oscilloscope')
  candidate=Board(config);report={'cases':[],'restored':False,'ok':False,'analog':'No evaluado','channels':1,'timestamp_hz':160000000,'period_ticks':133,'actual_rate':160000000/133}
  path=EXP/'results.json'
  def save():path.write_text(json.dumps(report,indent=2)+'\n')

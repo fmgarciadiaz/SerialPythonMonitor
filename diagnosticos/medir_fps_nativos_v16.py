@@ -4,13 +4,13 @@ from datetime import datetime
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
 from PyQt6 import QtCore,QtWidgets
-from monitor.v16.app import SerialMonitorWindow
-from monitor.v16.receiver.unoq_autoload import connect_scope
-from monitor.v16.receiver.unoq_config_receiver import OutputReceiver
-from monitor.v16.receiver.unoq_config_decoder import ConfigurationDecoder
-from monitor.v16.receiver.unoq_switch import Mode
-from monitor.v16.receiver.unoq_acquisition import Configuration
-from monitor.v16.receiver.unoq_native import PROFILES
+from monitor.historico.v16.app import SerialMonitorWindow
+from monitor.historico.v16.receiver.unoq_autoload import connect_scope
+from monitor.historico.v16.receiver.unoq_config_receiver import OutputReceiver
+from monitor.historico.v16.receiver.unoq_config_decoder import ConfigurationDecoder
+from monitor.historico.v16.receiver.unoq_switch import Mode
+from monitor.historico.v16.receiver.unoq_acquisition import Configuration
+from monitor.historico.v16.receiver.unoq_native import PROFILES
 SERIAL='1060031107';OUT=ROOT/'diagnosticos/resultados_v16'/('fps_nativos_live_remaining_20261012.json' if os.environ.get('V16_FPS_REMAINING')=='1' else 'fps_nativos_live_5khz_20261012.json')
 if os.environ.get('V16_FPS_QUICK')=='1':OUT=ROOT/'diagnosticos/resultados_v16/fps_numeric_20261012.json'
 if os.environ.get('V16_FPS_SLIDER')=='1':OUT=ROOT/'diagnosticos/resultados_v16/slider_live_20261012.json'
@@ -22,7 +22,7 @@ MEASURE_MS=120000 if SUSTAINED else 5000
 report={'scope':'Live Q + Qt native temporal painting; 5 kHz normal generator verified in millihertz, 1 ms window, 2 s warmup + 5 s screening. No periodic raster captures during measurement.','cases':[],'errors':[]}
 if SUSTAINED:
  report['scope']='Live visible Qt painting with production numeric receiver; 120 s per CH1 profile, 2 s warmup, one Q reader; prior generator state preserved.'
- report['source_sha256']={str(path.relative_to(ROOT)):hashlib.sha256(path.read_bytes()).hexdigest() for path in (ROOT/'monitor/v16/app.py',ROOT/'monitor/v16/receiver/unoq_config_decoder.py',ROOT/'monitor/v16/receiver/native_unpack.py')}
+ report['source_sha256']={str(path.relative_to(ROOT)):hashlib.sha256(path.read_bytes()).hexdigest() for path in (ROOT/'monitor/historico/v16/app.py',ROOT/'monitor/historico/v16/receiver/unoq_config_decoder.py',ROOT/'monitor/historico/v16/receiver/native_unpack.py')}
 if SMOKE:report['scope']='5 s Qt paint instrumentation smoke on ADC8 CH1; generator preserved.'
 def save():OUT.write_text(json.dumps(report,indent=2)+'\n')
 with connect_scope(SERIAL) as c:

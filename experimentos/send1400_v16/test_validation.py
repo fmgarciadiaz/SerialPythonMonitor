@@ -4,7 +4,7 @@ import subprocess
 import tempfile
 import unittest
 
-SKETCH = Path(__file__).resolve().parent/'arduino/v16/oscilloscope/sketch'
+SKETCH = Path(__file__).resolve().parent/'arduino/historico/v16/oscilloscope/sketch'
 
 class ValidationTests(unittest.TestCase):
     def test_single_validation_and_adc8_packing(self):

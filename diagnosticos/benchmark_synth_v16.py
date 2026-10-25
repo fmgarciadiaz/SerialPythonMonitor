@@ -10,7 +10,7 @@ from scipy.signal import fftconvolve
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
-from monitor.v16 import virtual_instruments as instruments
+from monitor.historico.v16 import virtual_instruments as instruments
 
 def fft_envelope(force,count,pole):
     return fftconvolve(force,np.exp(np.log(pole)*np.arange(count)))[:count]

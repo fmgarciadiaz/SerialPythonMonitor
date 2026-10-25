@@ -2,17 +2,17 @@
 import sys,json,time,hashlib
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
-from monitor.v16.receiver.unoq_autoload import connect_scope
-from monitor.v16.receiver.unoq_config_receiver import OutputReceiver
-from monitor.v16.receiver.unoq_acquisition import Configuration
-from monitor.v16.receiver.unoq_generator import GeneratorConfig
-from monitor.v16.receiver.unoq_switch import Mode
-from monitor.v16.receiver.unoq_native import PROFILES
+from monitor.historico.v16.receiver.unoq_autoload import connect_scope
+from monitor.historico.v16.receiver.unoq_config_receiver import OutputReceiver
+from monitor.historico.v16.receiver.unoq_acquisition import Configuration
+from monitor.historico.v16.receiver.unoq_generator import GeneratorConfig
+from monitor.historico.v16.receiver.unoq_switch import Mode
+from monitor.historico.v16.receiver.unoq_native import PROFILES
 prior=json.loads((ROOT/'diagnosticos/resultados_v16/additional_rates_prior_20261012.json').read_text())
 profiles=[p for p in PROFILES if p.get('purpose')]
 path=ROOT/'diagnosticos/resultados_v16/additional_rates_60s_20261012.json'
 report={'scope':'60 s per added profile, normal square generator 5 kHz, strict ADC CRC/sequence/epoch/index/timestamps/loss checks; no sustained-margin or analog acceptance','cases':[],'restored':False,'ok':False}
-report['profile_sha256']=hashlib.sha256((ROOT/'monitor/v16/receiver/additional_profiles.json').read_bytes()).hexdigest()
+report['profile_sha256']=hashlib.sha256((ROOT/'monitor/historico/v16/receiver/additional_profiles.json').read_bytes()).hexdigest()
 def save():path.write_text(json.dumps(report,indent=2)+'\n')
 count=[0]
 def samples(rows):count[0]+=len(rows)

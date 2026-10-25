@@ -43,7 +43,7 @@ class StageProfile(optimized.OptimizedSweep):
     def __init__(self,control):
         super().__init__()
         config=dict(self.candidate.config)
-        config['local_app']='experimentos/adc8_stage_profile_v17/arduino/v16/oscilloscope'
+        config['local_app']='experimentos/adc8_stage_profile_v17/arduino/historico/v16/oscilloscope'
         self.candidate=Board(config)
         self.control=control
         self.report.update(revision='adc8_stage_profile_v17',instrumentation=not control,
@@ -96,6 +96,6 @@ if __name__=='__main__':
     signal.signal(signal.SIGTERM,interrupted)
     control='--control' in sys.argv
     for folder in ('oscilloscope/sketch','relay'):
-        (EXP/'arduino/v16'/folder/'profile_config.h').write_text(
+        (EXP/'arduino/historico/v16'/folder/'profile_config.h').write_text(
             '#pragma once\n#define SCOPE_STAGE_PROFILE '+('0' if control else '1')+'\n')
     raise SystemExit(StageProfile(control).run_probe())

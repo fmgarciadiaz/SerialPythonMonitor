@@ -4,10 +4,10 @@ from pathlib import Path
 from unittest.mock import patch
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
 import numpy as np
-from monitor.v16 import virtual_instruments as instruments
-from monitor.v16.fm_feedback import njit
+from monitor.historico.v16 import virtual_instruments as instruments
+from monitor.historico.v16.fm_feedback import njit
 from diagnosticos.benchmark_alloc_synth_v16 import run
-from monitor.v16 import fm_source
+from monitor.historico.v16 import fm_source
 
 
 def reference(signal,coefficients,state,weights):

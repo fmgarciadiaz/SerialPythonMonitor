@@ -6,10 +6,10 @@ import numpy as np
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
 os.environ.setdefault('QT_QPA_PLATFORM','offscreen')
 from PyQt6 import QtWidgets
-from monitor.v16.app import SerialMonitorWindow,MAX_BUFFER_SAMPLES
-from monitor.v16.history import SampleHistory
-from monitor.v16.numeric_batch import NumericBatch
-from monitor.v16.receiver.unoq_acquisition import Configuration
+from monitor.historico.v16.app import SerialMonitorWindow,MAX_BUFFER_SAMPLES
+from monitor.historico.v16.history import SampleHistory
+from monitor.historico.v16.numeric_batch import NumericBatch
+from monitor.historico.v16.receiver.unoq_acquisition import Configuration
 
 def legacy(w,batch):
  rate=w.applied_configuration.rate
@@ -27,7 +27,7 @@ def legacy(w,batch):
 app=QtWidgets.QApplication.instance() or QtWidgets.QApplication([])
 results={}
 for mode in ('legacy','numeric'):
- with patch('monitor.v16.app.usb_devices',return_value=[]):w=SerialMonitorWindow()
+ with patch('monitor.historico.v16.app.usb_devices',return_value=[]):w=SerialMonitorWindow()
  w.applied_configuration=Configuration(14,200000)
  elapsed=[];renders=[]
  for block in range(100):

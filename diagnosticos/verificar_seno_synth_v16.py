@@ -4,7 +4,7 @@ from dataclasses import replace
 from pathlib import Path
 import numpy as np
 from diagnosticos.synth_presets_v16 import panel_presets
-from monitor.v16.fm_source import FMSource
+from monitor.historico.v16.fm_source import FMSource
 
 def measure(rate,vol):
     p=panel_presets(['Seno limpio'],rate)['Seno limpio']

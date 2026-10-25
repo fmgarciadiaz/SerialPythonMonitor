@@ -1,0 +1,1830 @@
+{
+  "ok": false,
+  "argv": [
+    "experimentos/radio_ipc_compact_v17/coalesce_probe.py",
+    "--gc-audit",
+    "--bits",
+    "8",
+    "--rate",
+    "1600000",
+    "--seconds",
+    "120",
+    "--audio-rate",
+    "40000",
+    "--bandwidth",
+    "8000",
+    "--analysis-audit",
+    "--keep-visible",
+    "--refill-ring",
+    "--defer-diagnostics",
+    "--host-cpu-trace",
+    "--retune-stress",
+    "--retune-interval",
+    "10"
+  ],
+  "source_hashes": {
+    "wire_probe.py": "4674270703eaab7982120ad3828ca7de8f12505ab26a4810d42230c38ac7ce03",
+    "wire_ack_audit.py": "5d8c04746d3122dd5a7e48d2399c176e5623118d99f5587f9a586aaf0cd82229",
+    "gc_audit.py": "5e615be6dec838be8acfef67d545d6720588e4e4d9beb2a3f16222ec67554302"
+  },
+  "limitations": [
+    "Measures host recv completion to callback, not time of arrival at kernel or physical Q ACK generation.",
+    "Passive observer adds overhead; CPU is reported. No wire reordering or command generation.",
+    "Only RADIO ACK callbacks are matched; parser observes all fixed992byte frames on each connection.",
+    "Does not attribute waiting to GIL uniquely; includes intervening decoding, callbacks and scheduling."
+  ],
+  "gc_policy_before": {
+    "enabled": true,
+    "thresholds": [
+      2000,
+      10,
+      10
+    ]
+  },
+  "physical_report": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v17/generador_radio_20261021_185937/report.json",
+  "gc": {
+    "generations": {
+      "0": {
+        "count": 58,
+        "wall_ms": 35.641810041852295,
+        "max_ms": 10.983913001837209,
+        "over20ms": 0,
+        "over100ms": 0
+      },
+      "1": {
+        "count": 6,
+        "wall_ms": 13.592614035587758,
+        "max_ms": 4.440774995600805,
+        "over20ms": 0,
+        "over100ms": 0
+      },
+      "2": {
+        "count": 1,
+        "wall_ms": 48.643243993865326,
+        "max_ms": 48.643243993865326,
+        "over20ms": 1,
+        "over100ms": 0
+      }
+    },
+    "top": [
+      {
+        "start": 190808.097134681,
+        "end": 190808.145777925,
+        "wall_ms": 48.643243993865326,
+        "thread_cpu_ms": 48.62794100000012,
+        "thread": 140704377764992,
+        "generation": 2,
+        "collected": 10,
+        "uncollectable": 0
+      },
+      {
+        "start": 190896.894557499,
+        "end": 190896.905541412,
+        "wall_ms": 10.983913001837209,
+        "thread_cpu_ms": 10.346071999997264,
+        "thread": 123145353150464,
+        "generation": 0,
+        "collected": 1728,
+        "uncollectable": 0
+      },
+      {
+        "start": 190807.973079275,
+        "end": 190807.97752005,
+        "wall_ms": 4.440774995600805,
+        "thread_cpu_ms": 4.4415529999999315,
+        "thread": 140704377764992,
+        "generation": 1,
+        "collected": 0,
+        "uncollectable": 0
+      },
+      {
+        "start": 190824.226917673,
+        "end": 190824.229098936,
+        "wall_ms": 2.181263000238687,
+        "thread_cpu_ms": 2.1815829999995984,
+        "thread": 123145353150464,
+        "generation": 1,
+        "collected": 460,
+        "uncollectable": 0
+      },
+      {
+        "start": 190808.328970187,
+        "end": 190808.330917248,
+        "wall_ms": 1.9470610131975263,
+        "thread_cpu_ms": 1.9469500000000028,
+        "thread": 140704377764992,
+        "generation": 1,
+        "collected": 0,
+        "uncollectable": 0
+      },
+      {
+        "start": 190808.093403249,
+        "end": 190808.095161375,
+        "wall_ms": 1.7581260181032121,
+        "thread_cpu_ms": 1.7585059999998265,
+        "thread": 140704377764992,
+        "generation": 1,
+        "collected": 0,
+        "uncollectable": 0
+      },
+      {
+        "start": 190808.058837378,
+        "end": 190808.060574295,
+        "wall_ms": 1.7369170091114938,
+        "thread_cpu_ms": 1.7377229999999688,
+        "thread": 140704377764992,
+        "generation": 1,
+        "collected": 0,
+        "uncollectable": 0
+      },
+      {
+        "start": 190836.492535915,
+        "end": 190836.494087996,
+        "wall_ms": 1.552080997498706,
+        "thread_cpu_ms": 1.527181000000044,
+        "thread": 123145412640768,
+        "generation": 0,
+        "collected": 584,
+        "uncollectable": 0
+      },
+      {
+        "start": 190878.080130674,
+        "end": 190878.081659146,
+        "wall_ms": 1.528471999336034,
+        "thread_cpu_ms": 1.529328000000163,
+        "thread": 140704377764992,
+        "generation": 1,
+        "collected": 584,
+        "uncollectable": 0
+      },
+      {
+        "start": 190883.72201999,
+        "end": 190883.723447735,
+        "wall_ms": 1.4277450100053102,
+        "thread_cpu_ms": 1.428565999997744,
+        "thread": 123145353150464,
+        "generation": 0,
+        "collected": 728,
+        "uncollectable": 0
+      },
+      {
+        "start": 190873.675153684,
+        "end": 190873.676469243,
+        "wall_ms": 1.315558998612687,
+        "thread_cpu_ms": 1.3159240000000239,
+        "thread": 123145353150464,
+        "generation": 0,
+        "collected": 648,
+        "uncollectable": 0
+      },
+      {
+        "start": 190864.507503111,
+        "end": 190864.508750426,
+        "wall_ms": 1.2473149981815368,
+        "thread_cpu_ms": 1.247399000000371,
+        "thread": 140704377764992,
+        "generation": 0,
+        "collected": 592,
+        "uncollectable": 0
+      },
+      {
+        "start": 190813.923736727,
+        "end": 190813.924980276,
+        "wall_ms": 1.243548991624266,
+        "thread_cpu_ms": 1.2438850000000556,
+        "thread": 123145353150464,
+        "generation": 0,
+        "collected": 224,
+        "uncollectable": 0
+      },
+      {
+        "start": 190855.284345637,
+        "end": 190855.285579174,
+        "wall_ms": 1.2335370120126754,
+        "thread_cpu_ms": 1.2340950000009343,
+        "thread": 123145353150464,
+        "generation": 0,
+        "collected": 664,
+        "uncollectable": 0
+      },
+      {
+        "start": 190859.694240473,
+        "end": 190859.695462177,
+        "wall_ms": 1.221704005729407,
+        "thread_cpu_ms": 1.221719000000121,
+        "thread": 140704377764992,
+        "generation": 0,
+        "collected": 584,
+        "uncollectable": 0
+      },
+      {
+        "start": 190846.107049559,
+        "end": 190846.108244127,
+        "wall_ms": 1.194568001665175,
+        "thread_cpu_ms": 1.1951079999992231,
+        "thread": 123145353150464,
+        "generation": 0,
+        "collected": 680,
+        "uncollectable": 0
+      }
+    ],
+    "recent": [
+      {
+        "start": 190807.973079275,
+        "end": 190807.97752005,
+        "wall_ms": 4.440774995600805,
+        "thread_cpu_ms": 4.4415529999999315,
+        "thread": 140704377764992,
+        "generation": 1,
+        "collected": 0,
+        "uncollectable": 0
+      },
+      {
+        "start": 190808.024172167,
+        "end": 190808.024524873,
+        "wall_ms": 0.3527060034684837,
+        "thread_cpu_ms": 0.35161299999986184,
+        "thread": 140704377764992,
+        "generation": 0,
+        "collected": 390,
+        "uncollectable": 0
+      },
+      {
+        "start": 190808.028421867,
+        "end": 190808.028559128,
+        "wall_ms": 0.13726099859923124,
+        "thread_cpu_ms": 0.13638600000009937,
+        "thread": 140704377764992,
+        "generation": 0,
+        "collected": 0,
+        "uncollectable": 0
+      },
+      {
+        "start": 190808.030789476,
+        "end": 190808.030852083,
+        "wall_ms": 0.06260699592530727,
+        "thread_cpu_ms": 0.062148000000039616,
+        "thread": 140704377764992,
+        "generation": 0,
+        "collected": 0,
+        "uncollectable": 0
+      },
+      {
+        "start": 190808.033605435,
+        "end": 190808.03371685,
+        "wall_ms": 0.11141502181999385,
+        "thread_cpu_ms": 0.11048000000002389,
+        "thread": 140704377764992,
+        "generation": 0,
+        "collected": 0,
+        "uncollectable": 0
+      },
+      {
+        "start": 190808.036381679,
+        "end": 190808.036486891,
+        "wall_ms": 0.10521200601942837,
+        "thread_cpu_ms": 0.10451200000005656,
+        "thread": 140704377764992,
+        "generation": 0,
+        "collected": 0,
+        "uncollectable": 0
+      },
+      {
+        "start": 190808.038777124,
+        "end": 190808.038926385,
+        "wall_ms": 0.1492610026616603,
+        "thread_cpu_ms": 0.14845400000007558,
+        "thread": 140704377764992,
+        "generation": 0,
+        "collected": 0,
+        "uncollectable": 0
+      },
+      {
+        "start": 190808.041238911,
+        "end": 190808.041354981,
+        "wall_ms": 0.11606997577473521,
+        "thread_cpu_ms": 0.11566900000015146,
+        "thread": 140704377764992,
+        "generation": 0,
+        "collected": 0,
+        "uncollectable": 0
+      },
+      {
+        "start": 190808.044264412,
+        "end": 190808.044394776,
+        "wall_ms": 0.13036400196142495,
+        "thread_cpu_ms": 0.12941499999996608,
+        "thread": 140704377764992,
+        "generation": 0,
+        "collected": 0,
+        "uncollectable": 0
+      },
+      {
+        "start": 190808.047050554,
+        "end": 190808.047154786,
+        "wall_ms": 0.10423199273645878,
+        "thread_cpu_ms": 0.10398199999994695,
+        "thread": 140704377764992,
+        "generation": 0,
+        "collected": 0,
+        "uncollectable": 0
+      },
+      {
+        "start": 190808.049827858,
+        "end": 190808.04994369,
+        "wall_ms": 0.11583202285692096,
+        "thread_cpu_ms": 0.11519300000006893,
+        "thread": 140704377764992,
+        "generation": 0,
+        "collected": 0,
+        "uncollectable": 0
+      },
+      {
+        "start": 190808.052385628,
+        "end": 190808.052495685,
+        "wall_ms": 0.1100570079870522,
+        "thread_cpu_ms": 0.10959599999993408,
+        "thread": 140704377764992,
+        "generation": 0,
+        "collected": 0,
+        "uncollectable": 0
+      },
+      {
+        "start": 190808.058837378,
+        "end": 190808.060574295,
+        "wall_ms": 1.7369170091114938,
+        "thread_cpu_ms": 1.7377229999999688,
+        "thread": 140704377764992,
+        "generation": 1,
+        "collected": 0,
+        "uncollectable": 0
+      },
+      {
+        "start": 190808.062731654,
+        "end": 190808.062822048,
+        "wall_ms": 0.0903939944691956,
+        "thread_cpu_ms": 0.08992299999999176,
+        "thread": 140704377764992,
+        "generation": 0,
+        "collected": 0,
+        "uncollectable": 0
+      },
+      {
+        "start": 190808.066169262,
+        "end": 190808.066286168,
+        "wall_ms": 0.11690601240843534,
+        "thread_cpu_ms": 0.11662699999992476,
+        "thread": 140704377764992,
+        "generation": 0,
+        "collected": 0,
+        "uncollectable": 0
+      },
+      {
+        "start": 190808.068472916,
+        "end": 190808.068586811,
+        "wall_ms": 0.11389498831704259,
+        "thread_cpu_ms": 0.11361200000004068,
+        "thread": 140704377764992,
+        "generation": 0,
+        "collected": 0,
+        "uncollectable": 0
+      },
+      {
+        "start": 190808.070556101,
+        "end": 190808.070633258,
+        "wall_ms": 0.07715699030086398,
+        "thread_cpu_ms": 0.07665999999995066,
+        "thread": 140704377764992,
+        "generation": 0,
+        "collected": 0,
+        "uncollectable": 0
+      },
+      {
+        "start": 190808.072343332,
+        "end": 190808.072410512,
+        "wall_ms": 0.06717999349348247,
+        "thread_cpu_ms": 0.06689000000004164,
+        "thread": 140704377764992,
+        "generation": 0,
+        "collected": 0,
+        "uncollectable": 0
+      },
+      {
+        "start": 190808.074551299,
+        "end": 190808.074626979,
+        "wall_ms": 0.0756800000090152,
+        "thread_cpu_ms": 0.07537400000012795,
+        "thread": 140704377764992,
+        "generation": 0,
+        "collected": 0,
+        "uncollectable": 0
+      },
+      {
+        "start": 190808.077037297,
+        "end": 190808.077127581,
+        "wall_ms": 0.09028401109389961,
+        "thread_cpu_ms": 0.09005100000014643,
+        "thread": 140704377764992,
+        "generation": 0,
+        "collected": 0,
+        "uncollectable": 0
+      },
+      {
+        "start": 190808.079927007,
+        "end": 190808.080012991,
+        "wall_ms": 0.08598400745540857,
+        "thread_cpu_ms": 0.08574199999999976,
+        "thread": 140704377764992,
+        "generation": 0,
+        "collected": 0,
+        "uncollectable": 0
+      },
+      {
+        "start": 190808.082932008,
+        "end": 190808.083047778,
+        "wall_ms": 0.11577000259421766,
+        "thread_cpu_ms": 0.11543599999996879,
+        "thread": 140704377764992,
+        "generation": 0,
+        "collected": 0,
+        "uncollectable": 0
+      },
+      {
+        "start": 190808.086317158,
+        "end": 190808.086439044,
+        "wall_ms": 0.1218859979417175,
+        "thread_cpu_ms": 0.12159099999986545,
+        "thread": 140704377764992,
+        "generation": 0,
+        "collected": 0,
+        "uncollectable": 0
+      },
+      {
+        "start": 190808.089237757,
+        "end": 190808.089327321,
+        "wall_ms": 0.08956401143223047,
+        "thread_cpu_ms": 0.08891000000010862,
+        "thread": 140704377764992,
+        "generation": 0,
+        "collected": 0,
+        "uncollectable": 0
+      },
+      {
+        "start": 190808.093403249,
+        "end": 190808.095161375,
+        "wall_ms": 1.7581260181032121,
+        "thread_cpu_ms": 1.7585059999998265,
+        "thread": 140704377764992,
+        "generation": 1,
+        "collected": 0,
+        "uncollectable": 0
+      },
+      {
+        "start": 190808.097134681,
+        "end": 190808.145777925,
+        "wall_ms": 48.643243993865326,
+        "thread_cpu_ms": 48.62794100000012,
+        "thread": 140704377764992,
+        "generation": 2,
+        "collected": 10,
+        "uncollectable": 0
+      },
+      {
+        "start": 190808.147789557,
+        "end": 190808.147889731,
+        "wall_ms": 0.10017398744821548,
+        "thread_cpu_ms": 0.09991099999995257,
+        "thread": 140704377764992,
+        "generation": 0,
+        "collected": 0,
+        "uncollectable": 0
+      },
+      {
+        "start": 190808.149271124,
+        "end": 190808.14936011,
+        "wall_ms": 0.08898598025552928,
+        "thread_cpu_ms": 0.08850799999993164,
+        "thread": 140704377764992,
+        "generation": 0,
+        "collected": 0,
+        "uncollectable": 0
+      },
+      {
+        "start": 190808.152689182,
+        "end": 190808.152804432,
+        "wall_ms": 0.1152500044554472,
+        "thread_cpu_ms": 0.11488000000015042,
+        "thread": 140704377764992,
+        "generation": 0,
+        "collected": 0,
+        "uncollectable": 0
+      },
+      {
+        "start": 190808.15508691,
+        "end": 190808.155262988,
+        "wall_ms": 0.17607799964025617,
+        "thread_cpu_ms": 0.175714000000049,
+        "thread": 140704377764992,
+        "generation": 0,
+        "collected": 0,
+        "uncollectable": 0
+      },
+      {
+        "start": 190808.156161898,
+        "end": 190808.15628435,
+        "wall_ms": 0.12245200923644006,
+        "thread_cpu_ms": 0.12224600000010355,
+        "thread": 140704377764992,
+        "generation": 0,
+        "collected": 0,
+        "uncollectable": 0
+      },
+      {
+        "start": 190808.157948957,
+        "end": 190808.158059327,
+        "wall_ms": 0.11036999057978392,
+        "thread_cpu_ms": 0.11016800000018812,
+        "thread": 140704377764992,
+        "generation": 0,
+        "collected": 0,
+        "uncollectable": 0
+      },
+      {
+        "start": 190808.15901607,
+        "end": 190808.15907491,
+        "wall_ms": 0.05883999983780086,
+        "thread_cpu_ms": 0.05865900000001645,
+        "thread": 140704377764992,
+        "generation": 0,
+        "collected": 0,
+        "uncollectable": 0
+      },
+      {
+        "start": 190808.169946651,
+        "end": 190808.170119239,
+        "wall_ms": 0.1725879847072065,
+        "thread_cpu_ms": 0.17108299999990528,
+        "thread": 140704377764992,
+        "generation": 0,
+        "collected": 0,
+        "uncollectable": 0
+      },
+      {
+        "start": 190808.197957428,
+        "end": 190808.198169789,
+        "wall_ms": 0.2123609883710742,
+        "thread_cpu_ms": 0.21179199999998843,
+        "thread": 140704377764992,
+        "generation": 0,
+        "collected": 7,
+        "uncollectable": 0
+      },
+      {
+        "start": 190808.245311195,
+        "end": 190808.245465076,
+        "wall_ms": 0.15388100291602314,
+        "thread_cpu_ms": 0.15317799999992054,
+        "thread": 140704377764992,
+        "generation": 0,
+        "collected": 7,
+        "uncollectable": 0
+      },
+      {
+        "start": 190808.290888024,
+        "end": 190808.291086253,
+        "wall_ms": 0.19822901231236756,
+        "thread_cpu_ms": 0.1971160000000527,
+        "thread": 140704377764992,
+        "generation": 0,
+        "collected": 0,
+        "uncollectable": 0
+      },
+      {
+        "start": 190808.328970187,
+        "end": 190808.330917248,
+        "wall_ms": 1.9470610131975263,
+        "thread_cpu_ms": 1.9469500000000028,
+        "thread": 140704377764992,
+        "generation": 1,
+        "collected": 0,
+        "uncollectable": 0
+      },
+      {
+        "start": 190808.38540912,
+        "end": 190808.38560409,
+        "wall_ms": 0.19496999448165298,
+        "thread_cpu_ms": 0.19398699999984004,
+        "thread": 140704377764992,
+        "generation": 0,
+        "collected": 0,
+        "uncollectable": 0
+      },
+      {
+        "start": 190808.51605908,
+        "end": 190808.516234152,
+        "wall_ms": 0.1750719966366887,
+        "thread_cpu_ms": 0.17412299999985947,
+        "thread": 140704377764992,
+        "generation": 0,
+        "collected": 88,
+        "uncollectable": 0
+      },
+      {
+        "start": 190810.002131531,
+        "end": 190810.002654686,
+        "wall_ms": 0.5231550021562725,
+        "thread_cpu_ms": 0.52248999999982,
+        "thread": 140704377764992,
+        "generation": 0,
+        "collected": 153,
+        "uncollectable": 0
+      },
+      {
+        "start": 190810.321142278,
+        "end": 190810.321415815,
+        "wall_ms": 0.2735370071604848,
+        "thread_cpu_ms": 0.2737400000000084,
+        "thread": 123145353150464,
+        "generation": 0,
+        "collected": 232,
+        "uncollectable": 0
+      },
+      {
+        "start": 190810.564558903,
+        "end": 190810.564674803,
+        "wall_ms": 0.11590000940486789,
+        "thread_cpu_ms": 0.11607199999999485,
+        "thread": 123145353150464,
+        "generation": 0,
+        "collected": 68,
+        "uncollectable": 0
+      },
+      {
+        "start": 190810.804347832,
+        "end": 190810.804412953,
+        "wall_ms": 0.06512101390399039,
+        "thread_cpu_ms": 0.06516300000000697,
+        "thread": 123145353150464,
+        "generation": 0,
+        "collected": 0,
+        "uncollectable": 0
+      },
+      {
+        "start": 190811.043989811,
+        "end": 190811.044062209,
+        "wall_ms": 0.0723979901522398,
+        "thread_cpu_ms": 0.07243299999998287,
+        "thread": 123145353150464,
+        "generation": 0,
+        "collected": 0,
+        "uncollectable": 0
+      },
+      {
+        "start": 190812.338122234,
+        "end": 190812.338504807,
+        "wall_ms": 0.38257299456745386,
+        "thread_cpu_ms": 0.38293799999999933,
+        "thread": 123145353150464,
+        "generation": 0,
+        "collected": 32,
+        "uncollectable": 0
+      },
+      {
+        "start": 190813.923736727,
+        "end": 190813.924980276,
+        "wall_ms": 1.243548991624266,
+        "thread_cpu_ms": 1.2438850000000556,
+        "thread": 123145353150464,
+        "generation": 0,
+        "collected": 224,
+        "uncollectable": 0
+      },
+      {
+        "start": 190817.126313049,
+        "end": 190817.127460621,
+        "wall_ms": 1.147572009358555,
+        "thread_cpu_ms": 1.137422000000221,
+        "thread": 123145353150464,
+        "generation": 0,
+        "collected": 416,
+        "uncollectable": 0
+      },
+      {
+        "start": 190820.680891801,
+        "end": 190820.681777466,
+        "wall_ms": 0.8856650092639029,
+        "thread_cpu_ms": 0.8862370000000119,
+        "thread": 123145353150464,
+        "generation": 0,
+        "collected": 448,
+        "uncollectable": 0
+      },
+      {
+        "start": 190824.226917673,
+        "end": 190824.229098936,
+        "wall_ms": 2.181263000238687,
+        "thread_cpu_ms": 2.1815829999995984,
+        "thread": 123145353150464,
+        "generation": 1,
+        "collected": 460,
+        "uncollectable": 0
+      },
+      {
+        "start": 190827.916206352,
+        "end": 190827.91709753,
+        "wall_ms": 0.8911780023481697,
+        "thread_cpu_ms": 0.8916760000001744,
+        "thread": 123145353150464,
+        "generation": 0,
+        "collected": 480,
+        "uncollectable": 0
+      },
+      {
+        "start": 190832.077339487,
+        "end": 190832.078510827,
+        "wall_ms": 1.1713400017470121,
+        "thread_cpu_ms": 1.1713489999998217,
+        "thread": 140704377764992,
+        "generation": 0,
+        "collected": 584,
+        "uncollectable": 0
+      },
+      {
+        "start": 190836.492535915,
+        "end": 190836.494087996,
+        "wall_ms": 1.552080997498706,
+        "thread_cpu_ms": 1.527181000000044,
+        "thread": 123145412640768,
+        "generation": 0,
+        "collected": 584,
+        "uncollectable": 0
+      },
+      {
+        "start": 190840.790107764,
+        "end": 190840.791209498,
+        "wall_ms": 1.1017340002581477,
+        "thread_cpu_ms": 1.1017569999989263,
+        "thread": 140704377764992,
+        "generation": 0,
+        "collected": 624,
+        "uncollectable": 0
+      },
+      {
+        "start": 190846.107049559,
+        "end": 190846.108244127,
+        "wall_ms": 1.194568001665175,
+        "thread_cpu_ms": 1.1951079999992231,
+        "thread": 123145353150464,
+        "generation": 0,
+        "collected": 680,
+        "uncollectable": 0
+      },
+      {
+        "start": 190850.5218834,
+        "end": 190850.523057173,
+        "wall_ms": 1.1737729946617037,
+        "thread_cpu_ms": 1.174208000000121,
+        "thread": 123145353150464,
+        "generation": 0,
+        "collected": 576,
+        "uncollectable": 0
+      },
+      {
+        "start": 190855.284345637,
+        "end": 190855.285579174,
+        "wall_ms": 1.2335370120126754,
+        "thread_cpu_ms": 1.2340950000009343,
+        "thread": 123145353150464,
+        "generation": 0,
+        "collected": 664,
+        "uncollectable": 0
+      },
+      {
+        "start": 190859.694240473,
+        "end": 190859.695462177,
+        "wall_ms": 1.221704005729407,
+        "thread_cpu_ms": 1.221719000000121,
+        "thread": 140704377764992,
+        "generation": 0,
+        "collected": 584,
+        "uncollectable": 0
+      },
+      {
+        "start": 190864.507503111,
+        "end": 190864.508750426,
+        "wall_ms": 1.2473149981815368,
+        "thread_cpu_ms": 1.247399000000371,
+        "thread": 140704377764992,
+        "generation": 0,
+        "collected": 592,
+        "uncollectable": 0
+      },
+      {
+        "start": 190868.910754795,
+        "end": 190868.91188939,
+        "wall_ms": 1.1345949897076935,
+        "thread_cpu_ms": 1.135140000002366,
+        "thread": 123145353150464,
+        "generation": 0,
+        "collected": 592,
+        "uncollectable": 0
+      },
+      {
+        "start": 190873.675153684,
+        "end": 190873.676469243,
+        "wall_ms": 1.315558998612687,
+        "thread_cpu_ms": 1.3159240000000239,
+        "thread": 123145353150464,
+        "generation": 0,
+        "collected": 648,
+        "uncollectable": 0
+      },
+      {
+        "start": 190878.080130674,
+        "end": 190878.081659146,
+        "wall_ms": 1.528471999336034,
+        "thread_cpu_ms": 1.529328000000163,
+        "thread": 140704377764992,
+        "generation": 1,
+        "collected": 584,
+        "uncollectable": 0
+      },
+      {
+        "start": 190883.72201999,
+        "end": 190883.723447735,
+        "wall_ms": 1.4277450100053102,
+        "thread_cpu_ms": 1.428565999997744,
+        "thread": 123145353150464,
+        "generation": 0,
+        "collected": 728,
+        "uncollectable": 0
+      },
+      {
+        "start": 190896.894557499,
+        "end": 190896.905541412,
+        "wall_ms": 10.983913001837209,
+        "thread_cpu_ms": 10.346071999997264,
+        "thread": 123145353150464,
+        "generation": 0,
+        "collected": 1728,
+        "uncollectable": 0
+      }
+    ],
+    "unfinished": 0,
+    "unmatched_stops": 0
+  },
+  "gc_policy_after": {
+    "enabled": true,
+    "thresholds": [
+      2000,
+      10,
+      10
+    ]
+  },
+  "gc_limitation": "Parent process only; natural collections over lifecycle including restore. No GC policy modifications. Snapshot covers top16 and last64, not all event timestamps.",
+  "observer_cpu_seconds": 1.2465831440001534,
+  "connections": [
+    {
+      "reads": 21,
+      "frames": 21,
+      "acks": 0,
+      "matches": 0,
+      "disabled": null,
+      "pending": 0,
+      "evicted": 0,
+      "buffered_bytes": 0,
+      "top": [],
+      "top_total": [],
+      "recent": []
+    },
+    {
+      "reads": 120271,
+      "frames": 170713,
+      "acks": 8995,
+      "matches": 8981,
+      "disabled": null,
+      "pending": 14,
+      "evicted": 0,
+      "buffered_bytes": 0,
+      "top": [
+        {
+          "request_id": 2968901814,
+          "session": 2968892833,
+          "completed_recv_at": 190897.476693743,
+          "read_number": 120254,
+          "frame_number": 169586,
+          "ack_start_offset_in_last_recv": 29152,
+          "ack_end_offset_in_last_recv": 30144,
+          "callback_at": 190897.532476018,
+          "complete_recv_to_callback_ms": 55.78227501246147,
+          "more_reads_before_callback": 0,
+          "sent_at": 190897.177022519,
+          "send_to_complete_recv_ms": 299.6712239983026,
+          "send_to_callback_ms": 355.45349901076406
+        },
+        {
+          "request_id": 2968901764,
+          "session": 2968892833,
+          "completed_recv_at": 190896.312582079,
+          "read_number": 120228,
+          "frame_number": 167875,
+          "ack_start_offset_in_last_recv": 30752,
+          "ack_end_offset_in_last_recv": 31744,
+          "callback_at": 190896.360961952,
+          "complete_recv_to_callback_ms": 48.37987301289104,
+          "more_reads_before_callback": 0,
+          "sent_at": 190896.287074788,
+          "send_to_complete_recv_ms": 25.50729099311866,
+          "send_to_callback_ms": 73.8871640060097
+        },
+        {
+          "request_id": 2968901810,
+          "session": 2968892833,
+          "completed_recv_at": 190897.140019384,
+          "read_number": 120247,
+          "frame_number": 169125,
+          "ack_start_offset_in_last_recv": 30592,
+          "ack_end_offset_in_last_recv": 31584,
+          "callback_at": 190897.188072431,
+          "complete_recv_to_callback_ms": 48.053046979475766,
+          "more_reads_before_callback": 0,
+          "sent_at": 190896.938892304,
+          "send_to_complete_recv_ms": 201.1270800139755,
+          "send_to_callback_ms": 249.18012699345127
+        },
+        {
+          "request_id": 2968901809,
+          "session": 2968892833,
+          "completed_recv_at": 190897.140019384,
+          "read_number": 120247,
+          "frame_number": 169124,
+          "ack_start_offset_in_last_recv": 29600,
+          "ack_end_offset_in_last_recv": 30592,
+          "callback_at": 190897.187967004,
+          "complete_recv_to_callback_ms": 47.947619983460754,
+          "more_reads_before_callback": 0,
+          "sent_at": 190896.938537989,
+          "send_to_complete_recv_ms": 201.48139502271079,
+          "send_to_callback_ms": 249.42901500617154
+        },
+        {
+          "request_id": 2968901808,
+          "session": 2968892833,
+          "completed_recv_at": 190897.140019384,
+          "read_number": 120247,
+          "frame_number": 169123,
+          "ack_start_offset_in_last_recv": 28608,
+          "ack_end_offset_in_last_recv": 29600,
+          "callback_at": 190897.187845956,
+          "complete_recv_to_callback_ms": 47.82657200121321,
+          "more_reads_before_callback": 0,
+          "sent_at": 190896.938199,
+          "send_to_complete_recv_ms": 201.82038401253521,
+          "send_to_callback_ms": 249.64695601374842
+        },
+        {
+          "request_id": 2968901807,
+          "session": 2968892833,
+          "completed_recv_at": 190897.140019384,
+          "read_number": 120247,
+          "frame_number": 169122,
+          "ack_start_offset_in_last_recv": 27616,
+          "ack_end_offset_in_last_recv": 28608,
+          "callback_at": 190897.187574483,
+          "complete_recv_to_callback_ms": 47.555098979501054,
+          "more_reads_before_callback": 0,
+          "sent_at": 190896.937920236,
+          "send_to_complete_recv_ms": 202.09914800943807,
+          "send_to_callback_ms": 249.65424698893912
+        },
+        {
+          "request_id": 2968901806,
+          "session": 2968892833,
+          "completed_recv_at": 190897.140019384,
+          "read_number": 120247,
+          "frame_number": 169121,
+          "ack_start_offset_in_last_recv": 26624,
+          "ack_end_offset_in_last_recv": 27616,
+          "callback_at": 190897.187103404,
+          "complete_recv_to_callback_ms": 47.08401998504996,
+          "more_reads_before_callback": 0,
+          "sent_at": 190896.937653489,
+          "send_to_complete_recv_ms": 202.3658950056415,
+          "send_to_callback_ms": 249.44991499069147
+        },
+        {
+          "request_id": 2968901763,
+          "session": 2968892833,
+          "completed_recv_at": 190896.312582079,
+          "read_number": 120228,
+          "frame_number": 167874,
+          "ack_start_offset_in_last_recv": 29760,
+          "ack_end_offset_in_last_recv": 30752,
+          "callback_at": 190896.359234282,
+          "complete_recv_to_callback_ms": 46.65220298920758,
+          "more_reads_before_callback": 0,
+          "sent_at": 190896.286725256,
+          "send_to_complete_recv_ms": 25.856822991045192,
+          "send_to_callback_ms": 72.50902598025277
+        }
+      ],
+      "top_total": [
+        {
+          "request_id": 2968901814,
+          "session": 2968892833,
+          "completed_recv_at": 190897.476693743,
+          "read_number": 120254,
+          "frame_number": 169586,
+          "ack_start_offset_in_last_recv": 29152,
+          "ack_end_offset_in_last_recv": 30144,
+          "callback_at": 190897.532476018,
+          "complete_recv_to_callback_ms": 55.78227501246147,
+          "more_reads_before_callback": 0,
+          "sent_at": 190897.177022519,
+          "send_to_complete_recv_ms": 299.6712239983026,
+          "send_to_callback_ms": 355.45349901076406
+        },
+        {
+          "request_id": 2968901813,
+          "session": 2968892833,
+          "completed_recv_at": 190897.232915721,
+          "read_number": 120248,
+          "frame_number": 169212,
+          "ack_start_offset_in_last_recv": 51360,
+          "ack_end_offset_in_last_recv": 52352,
+          "callback_at": 190897.27928341,
+          "complete_recv_to_callback_ms": 46.36768900672905,
+          "more_reads_before_callback": 0,
+          "sent_at": 190896.982143818,
+          "send_to_complete_recv_ms": 250.77190299634822,
+          "send_to_callback_ms": 297.13959200307727
+        },
+        {
+          "request_id": 2968901812,
+          "session": 2968892833,
+          "completed_recv_at": 190897.232915721,
+          "read_number": 120248,
+          "frame_number": 169188,
+          "ack_start_offset_in_last_recv": 27552,
+          "ack_end_offset_in_last_recv": 28544,
+          "callback_at": 190897.251407058,
+          "complete_recv_to_callback_ms": 18.491337017621845,
+          "more_reads_before_callback": 0,
+          "sent_at": 190896.969532422,
+          "send_to_complete_recv_ms": 263.3832989959046,
+          "send_to_callback_ms": 281.87463601352647
+        },
+        {
+          "request_id": 2968901811,
+          "session": 2968892833,
+          "completed_recv_at": 190897.232915721,
+          "read_number": 120248,
+          "frame_number": 169185,
+          "ack_start_offset_in_last_recv": 24576,
+          "ack_end_offset_in_last_recv": 25568,
+          "callback_at": 190897.238037386,
+          "complete_recv_to_callback_ms": 5.121665017213672,
+          "more_reads_before_callback": 0,
+          "sent_at": 190896.968603094,
+          "send_to_complete_recv_ms": 264.3126269977074,
+          "send_to_callback_ms": 269.4342920149211
+        },
+        {
+          "request_id": 2968901807,
+          "session": 2968892833,
+          "completed_recv_at": 190897.140019384,
+          "read_number": 120247,
+          "frame_number": 169122,
+          "ack_start_offset_in_last_recv": 27616,
+          "ack_end_offset_in_last_recv": 28608,
+          "callback_at": 190897.187574483,
+          "complete_recv_to_callback_ms": 47.555098979501054,
+          "more_reads_before_callback": 0,
+          "sent_at": 190896.937920236,
+          "send_to_complete_recv_ms": 202.09914800943807,
+          "send_to_callback_ms": 249.65424698893912
+        },
+        {
+          "request_id": 2968901808,
+          "session": 2968892833,
+          "completed_recv_at": 190897.140019384,
+          "read_number": 120247,
+          "frame_number": 169123,
+          "ack_start_offset_in_last_recv": 28608,
+          "ack_end_offset_in_last_recv": 29600,
+          "callback_at": 190897.187845956,
+          "complete_recv_to_callback_ms": 47.82657200121321,
+          "more_reads_before_callback": 0,
+          "sent_at": 190896.938199,
+          "send_to_complete_recv_ms": 201.82038401253521,
+          "send_to_callback_ms": 249.64695601374842
+        },
+        {
+          "request_id": 2968901806,
+          "session": 2968892833,
+          "completed_recv_at": 190897.140019384,
+          "read_number": 120247,
+          "frame_number": 169121,
+          "ack_start_offset_in_last_recv": 26624,
+          "ack_end_offset_in_last_recv": 27616,
+          "callback_at": 190897.187103404,
+          "complete_recv_to_callback_ms": 47.08401998504996,
+          "more_reads_before_callback": 0,
+          "sent_at": 190896.937653489,
+          "send_to_complete_recv_ms": 202.3658950056415,
+          "send_to_callback_ms": 249.44991499069147
+        },
+        {
+          "request_id": 2968901809,
+          "session": 2968892833,
+          "completed_recv_at": 190897.140019384,
+          "read_number": 120247,
+          "frame_number": 169124,
+          "ack_start_offset_in_last_recv": 29600,
+          "ack_end_offset_in_last_recv": 30592,
+          "callback_at": 190897.187967004,
+          "complete_recv_to_callback_ms": 47.947619983460754,
+          "more_reads_before_callback": 0,
+          "sent_at": 190896.938537989,
+          "send_to_complete_recv_ms": 201.48139502271079,
+          "send_to_callback_ms": 249.42901500617154
+        }
+      ],
+      "recent": [
+        {
+          "request_id": 2968901783,
+          "session": 2968892833,
+          "completed_recv_at": 190896.712387021,
+          "read_number": 120238,
+          "frame_number": 168503,
+          "ack_start_offset_in_last_recv": 3392,
+          "ack_end_offset_in_last_recv": 4384,
+          "callback_at": 190896.725237719,
+          "complete_recv_to_callback_ms": 12.850697996327654,
+          "more_reads_before_callback": 0,
+          "sent_at": 190896.614375192,
+          "send_to_complete_recv_ms": 98.01182898809202,
+          "send_to_callback_ms": 110.86252698441967
+        },
+        {
+          "request_id": 2968901784,
+          "session": 2968892833,
+          "completed_recv_at": 190896.712387021,
+          "read_number": 120238,
+          "frame_number": 168509,
+          "ack_start_offset_in_last_recv": 9344,
+          "ack_end_offset_in_last_recv": 10336,
+          "callback_at": 190896.726993184,
+          "complete_recv_to_callback_ms": 14.606163022108376,
+          "more_reads_before_callback": 0,
+          "sent_at": 190896.617595386,
+          "send_to_complete_recv_ms": 94.79163499781862,
+          "send_to_callback_ms": 109.397798019927
+        },
+        {
+          "request_id": 2968901785,
+          "session": 2968892833,
+          "completed_recv_at": 190896.712387021,
+          "read_number": 120238,
+          "frame_number": 168518,
+          "ack_start_offset_in_last_recv": 18272,
+          "ack_end_offset_in_last_recv": 19264,
+          "callback_at": 190896.729132198,
+          "complete_recv_to_callback_ms": 16.74517701030709,
+          "more_reads_before_callback": 0,
+          "sent_at": 190896.62281141,
+          "send_to_complete_recv_ms": 89.57561099668965,
+          "send_to_callback_ms": 106.32078800699674
+        },
+        {
+          "request_id": 2968901786,
+          "session": 2968892833,
+          "completed_recv_at": 190896.712387021,
+          "read_number": 120238,
+          "frame_number": 168519,
+          "ack_start_offset_in_last_recv": 19264,
+          "ack_end_offset_in_last_recv": 20256,
+          "callback_at": 190896.729719124,
+          "complete_recv_to_callback_ms": 17.332103016087785,
+          "more_reads_before_callback": 0,
+          "sent_at": 190896.623260176,
+          "send_to_complete_recv_ms": 89.12684497772716,
+          "send_to_callback_ms": 106.45894799381495
+        },
+        {
+          "request_id": 2968901787,
+          "session": 2968892833,
+          "completed_recv_at": 190896.712387021,
+          "read_number": 120238,
+          "frame_number": 168520,
+          "ack_start_offset_in_last_recv": 20256,
+          "ack_end_offset_in_last_recv": 21248,
+          "callback_at": 190896.729882878,
+          "complete_recv_to_callback_ms": 17.495856998721138,
+          "more_reads_before_callback": 0,
+          "sent_at": 190896.623661685,
+          "send_to_complete_recv_ms": 88.72533598332666,
+          "send_to_callback_ms": 106.2211929820478
+        },
+        {
+          "request_id": 2968901788,
+          "session": 2968892833,
+          "completed_recv_at": 190896.772058263,
+          "read_number": 120240,
+          "frame_number": 168681,
+          "ack_start_offset_in_last_recv": 48896,
+          "ack_end_offset_in_last_recv": 49888,
+          "callback_at": 190896.798967288,
+          "complete_recv_to_callback_ms": 26.90902497852221,
+          "more_reads_before_callback": 0,
+          "sent_at": 190896.708538819,
+          "send_to_complete_recv_ms": 63.51944402558729,
+          "send_to_callback_ms": 90.4284690041095
+        },
+        {
+          "request_id": 2968901789,
+          "session": 2968892833,
+          "completed_recv_at": 190896.772058263,
+          "read_number": 120240,
+          "frame_number": 168682,
+          "ack_start_offset_in_last_recv": 49888,
+          "ack_end_offset_in_last_recv": 50880,
+          "callback_at": 190896.802244959,
+          "complete_recv_to_callback_ms": 30.186695978045464,
+          "more_reads_before_callback": 0,
+          "sent_at": 190896.708918828,
+          "send_to_complete_recv_ms": 63.139435020275414,
+          "send_to_callback_ms": 93.32613099832088
+        },
+        {
+          "request_id": 2968901790,
+          "session": 2968892833,
+          "completed_recv_at": 190896.772058263,
+          "read_number": 120240,
+          "frame_number": 168683,
+          "ack_start_offset_in_last_recv": 50880,
+          "ack_end_offset_in_last_recv": 51872,
+          "callback_at": 190896.803124109,
+          "complete_recv_to_callback_ms": 31.065845978446305,
+          "more_reads_before_callback": 0,
+          "sent_at": 190896.709189636,
+          "send_to_complete_recv_ms": 62.868627021089196,
+          "send_to_callback_ms": 93.9344729995355
+        },
+        {
+          "request_id": 2968901791,
+          "session": 2968892833,
+          "completed_recv_at": 190896.772058263,
+          "read_number": 120240,
+          "frame_number": 168684,
+          "ack_start_offset_in_last_recv": 51872,
+          "ack_end_offset_in_last_recv": 52864,
+          "callback_at": 190896.80369146,
+          "complete_recv_to_callback_ms": 31.633196980692446,
+          "more_reads_before_callback": 0,
+          "sent_at": 190896.709492642,
+          "send_to_complete_recv_ms": 62.56562101771124,
+          "send_to_callback_ms": 94.19881799840368
+        },
+        {
+          "request_id": 2968901792,
+          "session": 2968892833,
+          "completed_recv_at": 190896.772058263,
+          "read_number": 120240,
+          "frame_number": 168685,
+          "ack_start_offset_in_last_recv": 52864,
+          "ack_end_offset_in_last_recv": 53856,
+          "callback_at": 190896.80433916,
+          "complete_recv_to_callback_ms": 32.280896994052455,
+          "more_reads_before_callback": 0,
+          "sent_at": 190896.709786678,
+          "send_to_complete_recv_ms": 62.27158501860686,
+          "send_to_callback_ms": 94.55248201265931
+        },
+        {
+          "request_id": 2968901793,
+          "session": 2968892833,
+          "completed_recv_at": 190896.772058263,
+          "read_number": 120240,
+          "frame_number": 168686,
+          "ack_start_offset_in_last_recv": 53856,
+          "ack_end_offset_in_last_recv": 54848,
+          "callback_at": 190896.804955987,
+          "complete_recv_to_callback_ms": 32.897723984206095,
+          "more_reads_before_callback": 0,
+          "sent_at": 190896.710112427,
+          "send_to_complete_recv_ms": 61.945836001541466,
+          "send_to_callback_ms": 94.84355998574756
+        },
+        {
+          "request_id": 2968901794,
+          "session": 2968892833,
+          "completed_recv_at": 190896.772058263,
+          "read_number": 120240,
+          "frame_number": 168687,
+          "ack_start_offset_in_last_recv": 54848,
+          "ack_end_offset_in_last_recv": 55840,
+          "callback_at": 190896.805340806,
+          "complete_recv_to_callback_ms": 33.282542979577556,
+          "more_reads_before_callback": 0,
+          "sent_at": 190896.71054189,
+          "send_to_complete_recv_ms": 61.516373010817915,
+          "send_to_callback_ms": 94.79891599039547
+        },
+        {
+          "request_id": 2968901795,
+          "session": 2968892833,
+          "completed_recv_at": 190896.814746328,
+          "read_number": 120241,
+          "frame_number": 168725,
+          "ack_start_offset_in_last_recv": 27008,
+          "ack_end_offset_in_last_recv": 28000,
+          "callback_at": 190896.829053874,
+          "complete_recv_to_callback_ms": 14.307546021882445,
+          "more_reads_before_callback": 0,
+          "sent_at": 190896.729577632,
+          "send_to_complete_recv_ms": 85.16869597951882,
+          "send_to_callback_ms": 99.47624200140126
+        },
+        {
+          "request_id": 2968901796,
+          "session": 2968892833,
+          "completed_recv_at": 190896.924676983,
+          "read_number": 120243,
+          "frame_number": 168856,
+          "ack_start_offset_in_last_recv": 25888,
+          "ack_end_offset_in_last_recv": 26880,
+          "callback_at": 190896.936778162,
+          "complete_recv_to_callback_ms": 12.101178988814354,
+          "more_reads_before_callback": 0,
+          "sent_at": 190896.79942234,
+          "send_to_complete_recv_ms": 125.25464300415479,
+          "send_to_callback_ms": 137.35582199296914
+        },
+        {
+          "request_id": 2968901797,
+          "session": 2968892833,
+          "completed_recv_at": 190896.924676983,
+          "read_number": 120243,
+          "frame_number": 168857,
+          "ack_start_offset_in_last_recv": 26880,
+          "ack_end_offset_in_last_recv": 27872,
+          "callback_at": 190896.939180575,
+          "complete_recv_to_callback_ms": 14.503591984976083,
+          "more_reads_before_callback": 0,
+          "sent_at": 190896.799814724,
+          "send_to_complete_recv_ms": 124.86225899192505,
+          "send_to_callback_ms": 139.36585097690113
+        },
+        {
+          "request_id": 2968901798,
+          "session": 2968892833,
+          "completed_recv_at": 190896.924676983,
+          "read_number": 120243,
+          "frame_number": 168858,
+          "ack_start_offset_in_last_recv": 27872,
+          "ack_end_offset_in_last_recv": 28864,
+          "callback_at": 190896.939350525,
+          "complete_recv_to_callback_ms": 14.673541998490691,
+          "more_reads_before_callback": 0,
+          "sent_at": 190896.800475847,
+          "send_to_complete_recv_ms": 124.20113600092009,
+          "send_to_callback_ms": 138.87467799941078
+        },
+        {
+          "request_id": 2968901799,
+          "session": 2968892833,
+          "completed_recv_at": 190896.924676983,
+          "read_number": 120243,
+          "frame_number": 168859,
+          "ack_start_offset_in_last_recv": 28864,
+          "ack_end_offset_in_last_recv": 29856,
+          "callback_at": 190896.939452895,
+          "complete_recv_to_callback_ms": 14.775911986362189,
+          "more_reads_before_callback": 0,
+          "sent_at": 190896.800684039,
+          "send_to_complete_recv_ms": 123.99294401984662,
+          "send_to_callback_ms": 138.7688560062088
+        },
+        {
+          "request_id": 2968901800,
+          "session": 2968892833,
+          "completed_recv_at": 190896.924676983,
+          "read_number": 120243,
+          "frame_number": 168860,
+          "ack_start_offset_in_last_recv": 29856,
+          "ack_end_offset_in_last_recv": 30848,
+          "callback_at": 190896.939528695,
+          "complete_recv_to_callback_ms": 14.851711981464177,
+          "more_reads_before_callback": 0,
+          "sent_at": 190896.800864775,
+          "send_to_complete_recv_ms": 123.81220801034942,
+          "send_to_callback_ms": 138.6639199918136
+        },
+        {
+          "request_id": 2968901801,
+          "session": 2968892833,
+          "completed_recv_at": 190896.924676983,
+          "read_number": 120243,
+          "frame_number": 168861,
+          "ack_start_offset_in_last_recv": 30848,
+          "ack_end_offset_in_last_recv": 31840,
+          "callback_at": 190896.939598125,
+          "complete_recv_to_callback_ms": 14.92114199209027,
+          "more_reads_before_callback": 0,
+          "sent_at": 190896.801036716,
+          "send_to_complete_recv_ms": 123.64026700379327,
+          "send_to_callback_ms": 138.56140899588354
+        },
+        {
+          "request_id": 2968901802,
+          "session": 2968892833,
+          "completed_recv_at": 190896.924676983,
+          "read_number": 120243,
+          "frame_number": 168862,
+          "ack_start_offset_in_last_recv": 31840,
+          "ack_end_offset_in_last_recv": 32832,
+          "callback_at": 190896.939665741,
+          "complete_recv_to_callback_ms": 14.988757990067825,
+          "more_reads_before_callback": 0,
+          "sent_at": 190896.801430425,
+          "send_to_complete_recv_ms": 123.24655801057816,
+          "send_to_callback_ms": 138.23531600064598
+        },
+        {
+          "request_id": 2968901803,
+          "session": 2968892833,
+          "completed_recv_at": 190896.959634251,
+          "read_number": 120244,
+          "frame_number": 168928,
+          "ack_start_offset_in_last_recv": 31776,
+          "ack_end_offset_in_last_recv": 32768,
+          "callback_at": 190896.968049554,
+          "complete_recv_to_callback_ms": 8.415303018409759,
+          "more_reads_before_callback": 0,
+          "sent_at": 190896.829524371,
+          "send_to_complete_recv_ms": 130.10988000314683,
+          "send_to_callback_ms": 138.5251830215566
+        },
+        {
+          "request_id": 2968901804,
+          "session": 2968892833,
+          "completed_recv_at": 190896.959634251,
+          "read_number": 120244,
+          "frame_number": 168936,
+          "ack_start_offset_in_last_recv": 39712,
+          "ack_end_offset_in_last_recv": 40704,
+          "callback_at": 190896.981569808,
+          "complete_recv_to_callback_ms": 21.935557015240192,
+          "more_reads_before_callback": 0,
+          "sent_at": 190896.837477226,
+          "send_to_complete_recv_ms": 122.15702497633174,
+          "send_to_callback_ms": 144.09258199157193
+        },
+        {
+          "request_id": 2968901805,
+          "session": 2968892833,
+          "completed_recv_at": 190897.140019384,
+          "read_number": 120247,
+          "frame_number": 169120,
+          "ack_start_offset_in_last_recv": 25632,
+          "ack_end_offset_in_last_recv": 26624,
+          "callback_at": 190897.175155412,
+          "complete_recv_to_callback_ms": 35.13602798921056,
+          "more_reads_before_callback": 0,
+          "sent_at": 190896.937271764,
+          "send_to_complete_recv_ms": 202.74762000190094,
+          "send_to_callback_ms": 237.8836479911115
+        },
+        {
+          "request_id": 2968901806,
+          "session": 2968892833,
+          "completed_recv_at": 190897.140019384,
+          "read_number": 120247,
+          "frame_number": 169121,
+          "ack_start_offset_in_last_recv": 26624,
+          "ack_end_offset_in_last_recv": 27616,
+          "callback_at": 190897.187103404,
+          "complete_recv_to_callback_ms": 47.08401998504996,
+          "more_reads_before_callback": 0,
+          "sent_at": 190896.937653489,
+          "send_to_complete_recv_ms": 202.3658950056415,
+          "send_to_callback_ms": 249.44991499069147
+        },
+        {
+          "request_id": 2968901807,
+          "session": 2968892833,
+          "completed_recv_at": 190897.140019384,
+          "read_number": 120247,
+          "frame_number": 169122,
+          "ack_start_offset_in_last_recv": 27616,
+          "ack_end_offset_in_last_recv": 28608,
+          "callback_at": 190897.187574483,
+          "complete_recv_to_callback_ms": 47.555098979501054,
+          "more_reads_before_callback": 0,
+          "sent_at": 190896.937920236,
+          "send_to_complete_recv_ms": 202.09914800943807,
+          "send_to_callback_ms": 249.65424698893912
+        },
+        {
+          "request_id": 2968901808,
+          "session": 2968892833,
+          "completed_recv_at": 190897.140019384,
+          "read_number": 120247,
+          "frame_number": 169123,
+          "ack_start_offset_in_last_recv": 28608,
+          "ack_end_offset_in_last_recv": 29600,
+          "callback_at": 190897.187845956,
+          "complete_recv_to_callback_ms": 47.82657200121321,
+          "more_reads_before_callback": 0,
+          "sent_at": 190896.938199,
+          "send_to_complete_recv_ms": 201.82038401253521,
+          "send_to_callback_ms": 249.64695601374842
+        },
+        {
+          "request_id": 2968901809,
+          "session": 2968892833,
+          "completed_recv_at": 190897.140019384,
+          "read_number": 120247,
+          "frame_number": 169124,
+          "ack_start_offset_in_last_recv": 29600,
+          "ack_end_offset_in_last_recv": 30592,
+          "callback_at": 190897.187967004,
+          "complete_recv_to_callback_ms": 47.947619983460754,
+          "more_reads_before_callback": 0,
+          "sent_at": 190896.938537989,
+          "send_to_complete_recv_ms": 201.48139502271079,
+          "send_to_callback_ms": 249.42901500617154
+        },
+        {
+          "request_id": 2968901810,
+          "session": 2968892833,
+          "completed_recv_at": 190897.140019384,
+          "read_number": 120247,
+          "frame_number": 169125,
+          "ack_start_offset_in_last_recv": 30592,
+          "ack_end_offset_in_last_recv": 31584,
+          "callback_at": 190897.188072431,
+          "complete_recv_to_callback_ms": 48.053046979475766,
+          "more_reads_before_callback": 0,
+          "sent_at": 190896.938892304,
+          "send_to_complete_recv_ms": 201.1270800139755,
+          "send_to_callback_ms": 249.18012699345127
+        },
+        {
+          "request_id": 2968901811,
+          "session": 2968892833,
+          "completed_recv_at": 190897.232915721,
+          "read_number": 120248,
+          "frame_number": 169185,
+          "ack_start_offset_in_last_recv": 24576,
+          "ack_end_offset_in_last_recv": 25568,
+          "callback_at": 190897.238037386,
+          "complete_recv_to_callback_ms": 5.121665017213672,
+          "more_reads_before_callback": 0,
+          "sent_at": 190896.968603094,
+          "send_to_complete_recv_ms": 264.3126269977074,
+          "send_to_callback_ms": 269.4342920149211
+        },
+        {
+          "request_id": 2968901812,
+          "session": 2968892833,
+          "completed_recv_at": 190897.232915721,
+          "read_number": 120248,
+          "frame_number": 169188,
+          "ack_start_offset_in_last_recv": 27552,
+          "ack_end_offset_in_last_recv": 28544,
+          "callback_at": 190897.251407058,
+          "complete_recv_to_callback_ms": 18.491337017621845,
+          "more_reads_before_callback": 0,
+          "sent_at": 190896.969532422,
+          "send_to_complete_recv_ms": 263.3832989959046,
+          "send_to_callback_ms": 281.87463601352647
+        },
+        {
+          "request_id": 2968901813,
+          "session": 2968892833,
+          "completed_recv_at": 190897.232915721,
+          "read_number": 120248,
+          "frame_number": 169212,
+          "ack_start_offset_in_last_recv": 51360,
+          "ack_end_offset_in_last_recv": 52352,
+          "callback_at": 190897.27928341,
+          "complete_recv_to_callback_ms": 46.36768900672905,
+          "more_reads_before_callback": 0,
+          "sent_at": 190896.982143818,
+          "send_to_complete_recv_ms": 250.77190299634822,
+          "send_to_callback_ms": 297.13959200307727
+        },
+        {
+          "request_id": 2968901814,
+          "session": 2968892833,
+          "completed_recv_at": 190897.476693743,
+          "read_number": 120254,
+          "frame_number": 169586,
+          "ack_start_offset_in_last_recv": 29152,
+          "ack_end_offset_in_last_recv": 30144,
+          "callback_at": 190897.532476018,
+          "complete_recv_to_callback_ms": 55.78227501246147,
+          "more_reads_before_callback": 0,
+          "sent_at": 190897.177022519,
+          "send_to_complete_recv_ms": 299.6712239983026,
+          "send_to_callback_ms": 355.45349901076406
+        }
+      ]
+    },
+    {
+      "reads": 26,
+      "frames": 28,
+      "acks": 0,
+      "matches": 0,
+      "disabled": null,
+      "pending": 0,
+      "evicted": 0,
+      "buffered_bytes": 0,
+      "top": [],
+      "top_total": [],
+      "recent": []
+    },
+    {
+      "reads": 19095,
+      "frames": 19394,
+      "acks": 0,
+      "matches": 0,
+      "disabled": null,
+      "pending": 0,
+      "evicted": 0,
+      "buffered_bytes": 0,
+      "top": [],
+      "top_total": [],
+      "recent": []
+    }
+  ],
+  "play_windows": [
+    {
+      "session": 2968892833,
+      "first_playing_ack": 190813.016810519,
+      "last_playing_ack": 190897.27928341,
+      "playing_acks": 8949,
+      "end_ack": 190897.532476018,
+      "end_state": 4
+    }
+  ],
+  "callback_stages": {
+    "pump": {
+      "calls": 139416,
+      "wall_seconds": 94.19663481929456,
+      "thread_cpu_seconds": 34.076157995000216,
+      "slow_top": [
+        {
+          "start": 190897.139139412,
+          "end": 190897.232494688,
+          "wall_ms": 93.35527601069771,
+          "thread_cpu_ms": 44.65803200000096
+        },
+        {
+          "start": 190897.289613379,
+          "end": 190897.370061259,
+          "wall_ms": 80.44787999824621,
+          "thread_cpu_ms": 40.15677900000014
+        },
+        {
+          "start": 190877.104112978,
+          "end": 190877.177824786,
+          "wall_ms": 73.71180798509158,
+          "thread_cpu_ms": 2.1531109999983755
+        },
+        {
+          "start": 190897.476639633,
+          "end": 190897.540675007,
+          "wall_ms": 64.03537400183268,
+          "thread_cpu_ms": 46.20194200000327
+        },
+        {
+          "start": 190897.022940037,
+          "end": 190897.086735966,
+          "wall_ms": 63.7959290179424,
+          "thread_cpu_ms": 33.4793729999987
+        },
+        {
+          "start": 190896.95945971,
+          "end": 190897.022555166,
+          "wall_ms": 63.09545601834543,
+          "thread_cpu_ms": 38.87118699999803
+        },
+        {
+          "start": 190896.814639047,
+          "end": 190896.87764477,
+          "wall_ms": 63.00572300096974,
+          "thread_cpu_ms": 24.969531000003542
+        },
+        {
+          "start": 190896.580370155,
+          "end": 190896.639141255,
+          "wall_ms": 58.7711000116542,
+          "thread_cpu_ms": 36.22630099999924
+        }
+      ]
+    },
+    "_process_decoder_events": {
+      "calls": 188453,
+      "wall_seconds": 10.347471613553353,
+      "thread_cpu_seconds": 6.936079987000143,
+      "slow_top": [
+        {
+          "start": 190818.693918761,
+          "end": 190818.743451457,
+          "wall_ms": 49.53269599354826,
+          "thread_cpu_ms": 1.7893190000002335
+        },
+        {
+          "start": 190896.894525451,
+          "end": 190896.923228801,
+          "wall_ms": 28.703349991701543,
+          "thread_cpu_ms": 22.49529600000244
+        },
+        {
+          "start": 190824.995593721,
+          "end": 190825.023054687,
+          "wall_ms": 27.46096599730663,
+          "thread_cpu_ms": 1.7439279999997837
+        },
+        {
+          "start": 190893.489648491,
+          "end": 190893.515702232,
+          "wall_ms": 26.053740992210805,
+          "thread_cpu_ms": 0.49573900000154936
+        },
+        {
+          "start": 190897.477530029,
+          "end": 190897.503381164,
+          "wall_ms": 25.85113499662839,
+          "thread_cpu_ms": 25.04496499999931
+        },
+        {
+          "start": 190893.904841755,
+          "end": 190893.926363306,
+          "wall_ms": 21.521551010664552,
+          "thread_cpu_ms": 0.598017000001505
+        },
+        {
+          "start": 190890.001717051,
+          "end": 190890.022178479,
+          "wall_ms": 20.461428008275107,
+          "thread_cpu_ms": 0.21355400000189206
+        }
+      ]
+    },
+    "_emit": {
+      "calls": 180865,
+      "wall_seconds": 6.168719588546082,
+      "thread_cpu_seconds": 4.200248582000938,
+      "slow_top": [
+        {
+          "start": 190896.894530539,
+          "end": 190896.92321998,
+          "wall_ms": 28.689441009191796,
+          "thread_cpu_ms": 22.481245999998123
+        },
+        {
+          "start": 190897.477541222,
+          "end": 190897.503347262,
+          "wall_ms": 25.806040008319542,
+          "thread_cpu_ms": 25.000398999999618
+        }
+      ]
+    },
+    "on_samples_0": {
+      "calls": 8,
+      "wall_seconds": 7.419002940878272e-06,
+      "thread_cpu_seconds": 6.666999999627166e-06,
+      "slow_top": []
+    },
+    "on_samples_1": {
+      "calls": 13185,
+      "wall_seconds": 1.1669819507515058,
+      "thread_cpu_seconds": 0.8616380580000674,
+      "slow_top": [
+        {
+          "start": 190897.477627928,
+          "end": 190897.503100606,
+          "wall_ms": 25.47267801128328,
+          "thread_cpu_ms": 24.670702000001654
+        }
+      ]
+    },
+    "on_samples_2": {
+      "calls": 4,
+      "wall_seconds": 1.2551987310871482e-05,
+      "thread_cpu_seconds": 1.430799999724286e-05,
+      "slow_top": []
+    },
+    "on_samples_3": {
+      "calls": 18516,
+      "wall_seconds": 0.021622250700602308,
+      "thread_cpu_seconds": 0.019947966000295025,
+      "slow_top": []
+    }
+  },
+  "callback_limitation": "Inclusive nested spans over lifecycle and restoration. Wall minus threadCPU is not proof of GIL wait."
+}

@@ -1,0 +1,28 @@
+LIVE audio=15s played=573120 pendingGUI=1 pendingDSP=1
+LIVE audio=30s played=1173600 pendingGUI=1 pendingDSP=1
+Traceback (most recent call last):
+  File "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/experimentos/fs_max_all_bits_v17/joint.py", line 155, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/experimentos/fs_max_all_bits_v17/joint.py", line 153, in main
+    child(args)
+    ~~~~~^^^^^^
+  File "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/experimentos/fs_max_all_bits_v17/joint.py", line 36, in child
+    report,folder=audio_trial(owner_context=nullcontext())
+                  ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/validar_generador_radio_v17.py", line 293, in main
+    r=OutputReceiver(c,lambda b:None);r.decoder.numeric=True;r.select(Mode.SPI);r.configure(Configuration(14,40000))
+                                                             ~~~~~~~~^^^^^^^^^^
+  File "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v17/receiver/unoq_config_receiver.py", line 359, in select
+    self._switch(Mode.SPI)
+    ~~~~~~~~~~~~^^^^^^^^^^
+  File "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v17/receiver/unoq_config_receiver.py", line 343, in _switch
+    self.pump()
+    ~~~~~~~~~^^
+  File "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v17/receiver/unoq_config_receiver.py", line 297, in pump
+    began=time.monotonic();data=self.connection.read()
+                                ~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v17/receiver/unoq_usb.py", line 149, in read
+    raise RuntimeError('El Q cerró el flujo. Revisar el relay, la adquisición y el cable USB.')
+RuntimeError: El Q cerró el flujo. Revisar el relay, la adquisición y el cable USB.
+

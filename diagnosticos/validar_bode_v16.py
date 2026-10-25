@@ -22,14 +22,14 @@ import numpy as np
 from scipy.signal import sosfreqz, butter
 from PyQt6 import QtWidgets
 
-import monitor.v16.bode as bode_module
-from monitor.v16.app import SerialMonitorWindow
-from monitor.v16.bode_calibration import instrument_identity
-from monitor.v16.receiver.unoq_acquisition import Configuration
-from monitor.v16.receiver.unoq_config_receiver import OutputReceiver
-from monitor.v16.receiver.unoq_switch import Mode
-from monitor.v16.receiver.unoq_usb import Connection
-from monitor.v16.receiver.unoq_wav import State
+import monitor.historico.v16.bode as bode_module
+from monitor.historico.v16.app import SerialMonitorWindow
+from monitor.historico.v16.bode_calibration import instrument_identity
+from monitor.historico.v16.receiver.unoq_acquisition import Configuration
+from monitor.historico.v16.receiver.unoq_config_receiver import OutputReceiver
+from monitor.historico.v16.receiver.unoq_switch import Mode
+from monitor.historico.v16.receiver.unoq_usb import Connection
+from monitor.historico.v16.receiver.unoq_wav import State
 
 SERIAL = '1060031107'
 PROFILE = Configuration(16, 76226)
@@ -40,10 +40,10 @@ report = {'scope': 'V16 production Bode tones; A0 wired directly to A2/A3; '
           'serial': SERIAL, 'profile': asdict(PROFILE), 'cases': [], 'errors': [],
           'restored': False, 'reference_written': False,
           'source_sha256': {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
-                            for p in (ROOT/'monitor/v16/bode.py', ROOT/'monitor/v16/digital_filter.py',
-                                      ROOT/'monitor/v16/app.py',
-                                      ROOT/'monitor/v16/bode_timing.py',
-                                      ROOT/'monitor/v16/receiver/unoq_config_decoder.py')}}
+                            for p in (ROOT/'monitor/historico/v16/bode.py', ROOT/'monitor/historico/v16/digital_filter.py',
+                                      ROOT/'monitor/historico/v16/app.py',
+                                      ROOT/'monitor/historico/v16/bode_timing.py',
+                                      ROOT/'monitor/historico/v16/receiver/unoq_config_decoder.py')}}
 
 
 def save():

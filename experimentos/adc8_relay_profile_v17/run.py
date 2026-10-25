@@ -42,7 +42,7 @@ class RelayProfile(optimized.OptimizedSweep):
     def __init__(self):
         super().__init__()
         cfg=dict(self.candidate.config)
-        cfg['local_app']='experimentos/adc8_relay_profile_v17/arduino/v16/oscilloscope'
+        cfg['local_app']='experimentos/adc8_relay_profile_v17/arduino/historico/v16/oscilloscope'
         self.candidate=Board(cfg)
         self.report.update(revision='adc8_relay_syscall_profile_v17',
             plan=dict(ticks=[114,112,112,114],node_pairs=3456,seconds=30,

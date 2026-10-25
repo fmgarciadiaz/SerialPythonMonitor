@@ -2,7 +2,7 @@
 import struct,zlib,time,secrets
 from collections import Counter
 from dataclasses import dataclass
-from monitor.v16.receiver.unoq_generator import generator_request,generator_reply
+from monitor.historico.v16.receiver.unoq_generator import generator_request,generator_reply
 MASK=0xffffffff
 CAPACITY={8:864,10:696,12:576,14:496}
 def valid(bits,ticks,n):

@@ -8,18 +8,18 @@ ROOT=Path(__file__).resolve().parents[3];sys.path[:0]=[str(ROOT),str(ROOT/'tools
 from tools.unoq import Board,config_path
 import usb_stream
 from experimentos.megaboom_ch1_3584_v16.run import start_relay
-from monitor.v16.receiver.unoq_usb import Connection
-from monitor.v16.receiver.unoq_config_receiver import OutputReceiver
-from monitor.v16.receiver.unoq_acquisition import Configuration
-from monitor.v16.receiver.unoq_generator import GeneratorConfig
-from monitor.v16.receiver.unoq_switch import Mode
-from monitor.v16.receiver.unoq_wav import State
-from monitor.v16.bode_calibration import instrument_identity
-from monitor.v16.numeric_batch import NumericBatch,SampleClock
+from monitor.historico.v16.receiver.unoq_usb import Connection
+from monitor.historico.v16.receiver.unoq_config_receiver import OutputReceiver
+from monitor.historico.v16.receiver.unoq_acquisition import Configuration
+from monitor.historico.v16.receiver.unoq_generator import GeneratorConfig
+from monitor.historico.v16.receiver.unoq_switch import Mode
+from monitor.historico.v16.receiver.unoq_wav import State
+from monitor.historico.v16.bode_calibration import instrument_identity
+from monitor.historico.v16.numeric_batch import NumericBatch,SampleClock
 from diagnosticos.probar_audio_owner_v16 import require_exclusive_monitor
 
 FOLDER=Path(__file__).resolve().parent/('physical_'+time.strftime('%Y%m%d_%H%M%S'));FOLDER.mkdir()
-report={'ok':False,'restored':False,'cases':[],'scope':'V16 scoped ADC8/CH1 1403508 integration; existing transport on every other profile','source_hashes':{str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in [*sorted((ROOT/'arduino/v16').rglob('*.h')),*sorted((ROOT/'arduino/v16').rglob('*.ino')),*sorted((ROOT/'arduino/v16/relay').glob('*.c')),ROOT/'tools/usb_stream.py',ROOT/'monitor/v16/receiver/native_profiles.json']}}
+report={'ok':False,'restored':False,'cases':[],'scope':'V16 scoped ADC8/CH1 1403508 integration; existing transport on every other profile','source_hashes':{str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in [*sorted((ROOT/'arduino/historico/v16').rglob('*.h')),*sorted((ROOT/'arduino/historico/v16').rglob('*.ino')),*sorted((ROOT/'arduino/historico/v16/relay').glob('*.c')),ROOT/'tools/usb_stream.py',ROOT/'monitor/historico/v16/receiver/native_profiles.json']}}
 board=Board(json.loads(config_path('v16').read_text()));old_relay=None;changed=False;remote_backup=None
 
 def save():(FOLDER/'report.json').write_text(json.dumps(report,indent=2)+'\n')
@@ -130,7 +130,7 @@ def main():
     report['prior_recovered_from']=sys.argv[1]
   info=json.loads(board.shell('docker','inspect',usb_stream.CONTAINER,capture=True).stdout)[0];old_relay=next(m['Source'] for m in info['Mounts'] if m['Destination']=='/work/unoq_stream');report['old_relay']=old_relay
   report['backup']=str(board.backup());save();usb_stream.stop(board);board.stop()
-  remote_backup='/home/arduino/.cache/serialmonitor/v16-before-send1400-'+time.strftime('%Y%m%d%H%M%S');report['remote_backup']=remote_backup
+  remote_backup='/home/arduino/.cache/serialmonitor/historico/v16-before-send1400-'+time.strftime('%Y%m%d%H%M%S');report['remote_backup']=remote_backup
   board.run('push',report['backup'],'/tmp/v16-before-send1400.zip')
   board.shell('python3','-c','import zipfile,pathlib,sys; root=pathlib.Path(sys.argv[1]); root.mkdir(parents=True); z=zipfile.ZipFile("/tmp/v16-before-send1400.zip"); [(root.joinpath(*pathlib.PurePosixPath(n).parts[1:]).parent.mkdir(parents=True,exist_ok=True),root.joinpath(*pathlib.PurePosixPath(n).parts[1:]).write_bytes(z.read(n))) for n in z.namelist() if not n.endswith("/")]',remote_backup)
   changed=True;report['relay']=usb_stream.binary(board,build=True,p992=True,audio=True);save()

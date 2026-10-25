@@ -1,0 +1,85 @@
+{
+  "ok": false,
+  "fft_hz": 0.0,
+  "adaptive": false,
+  "argv": [
+    "experimentos/radio_ipc_compact_v17/render_probe.py",
+    "--probe-fft-hz",
+    "0",
+    "--peak-select",
+    "--stage-audit",
+    "--bits",
+    "8",
+    "--rate",
+    "1600000",
+    "--seconds",
+    "120",
+    "--audio-rate",
+    "40000",
+    "--bandwidth",
+    "8000",
+    "--analysis-audit",
+    "--keep-visible",
+    "--refill-ring",
+    "--defer-diagnostics",
+    "--host-cpu-trace",
+    "--retune-stress",
+    "--retune-interval",
+    "10"
+  ],
+  "stats": {
+    "calls": 1621,
+    "skipped": 0,
+    "executed": 1621,
+    "thread_cpu_seconds": 4.591562448000031,
+    "wall_seconds": 5.858745321718743,
+    "max_wall_ms": 67.2828629903961
+  },
+  "stages": {
+    "analysis_pipeline": {
+      "calls": 362,
+      "thread_cpu_seconds": 4.030125172999984,
+      "wall_seconds": 4.832293131592451,
+      "max_wall_ms": 62.11555501795374
+    },
+    "draw_submission": {
+      "calls": 341,
+      "thread_cpu_seconds": 0.5367757299999947,
+      "wall_seconds": 0.8381080901599489,
+      "max_wall_ms": 34.568271978059784
+    },
+    "fft_numeric": {
+      "calls": 0,
+      "thread_cpu_seconds": 0.0,
+      "wall_seconds": 0.0,
+      "max_wall_ms": 0.0
+    },
+    "analysis_numeric_and_metrics": {
+      "calls": 340,
+      "thread_cpu_seconds": 2.047167878000021,
+      "wall_seconds": 2.3264666609757114,
+      "max_wall_ms": 28.21964499889873
+    },
+    "spectral_annotations": {
+      "calls": 341,
+      "thread_cpu_seconds": 0.2917569519999992,
+      "wall_seconds": 0.2917195188929327,
+      "max_wall_ms": 1.6224549908656627
+    },
+    "measurement_panel": {
+      "calls": 672,
+      "thread_cpu_seconds": 0.3325469980000162,
+      "wall_seconds": 0.33252714268746786,
+      "max_wall_ms": 6.457057985244319
+    }
+  },
+  "policy_sha256": "1ac043d35e16cd681f81ed6da2aafc82b876f5ee6f17b9123710a01750d6a21d",
+  "source_sha256": "1058c45ff64276a33a82de6ce61a109f1690bb6b2970add97d1cb1ddfb0186a2",
+  "limitation": "Diagnostic refresh reduction, not a production fix or proof of GIL causality.",
+  "peak_candidate": {
+    "helper_sha256": "dac3ef281665e81a23c8d3e96159b4f7597dd732908dd7cb890c46a26c6f939a",
+    "original_source_sha256": "04ea139d7f4994db87cdc6e437d81ea53d3eb5e0ccac306d908838c252b57881"
+  },
+  "stage_limitation": "Inclusive nested method timings; do not sum stages. Draw submission excludes later Qt painting. Counters span lifecycle.",
+  "physical_report": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v17/generador_radio_20261021_151218/report.json"
+}

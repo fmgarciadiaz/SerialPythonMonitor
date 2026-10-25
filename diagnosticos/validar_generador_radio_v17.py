@@ -25,9 +25,12 @@ def main(owner_context=None):
  report={'ok':False,'restored':False,'errors':[],'samples':0,'wav_states':[]};receivers=[]
  refill_ring=deque(maxlen=20000);deferred='--defer-diagnostics' in sys.argv
  trace_refill='--refill-ring' in sys.argv
+ host_cpu_trace='--host-cpu-trace' in sys.argv
+ if host_cpu_trace:
+  from experimentos.adc8_a0_host_timing_v17.host_trace import HostTiming,RollingTrace
  original_try_codes=None
  report['requested_audio_seconds']=duration
- report['source_hashes']={name:hashlib.sha256((ROOT/name).read_bytes()).hexdigest() for name in ('monitor/v17/radio_output.py','monitor/v17/radio_output_panel.py','monitor/v17/receiver/unoq_config_receiver.py','monitor/v17/radio_loop_guard.py','monitor/v17/processing.py','monitor/v17/radio_am.py','monitor/v17/app.py')}
+ report['source_hashes']={name:hashlib.sha256((ROOT/name).read_bytes()).hexdigest() for name in ('monitor/v17/spectral_analysis.py','monitor/v17/radio_output.py','monitor/v17/radio_output_panel.py','monitor/v17/receiver/unoq_config_receiver.py','monitor/v17/radio_loop_guard.py','monitor/v17/processing.py','monitor/v17/radio_am.py','monitor/v17/app.py')}
  from monitor.v17.radio_output import RadioDacSource
  if trace_refill:
   original_try_codes=RadioDacSource.try_codes
@@ -67,7 +70,14 @@ def main(owner_context=None):
    receivers.append(self)
    self.last_wav_seen=None;self.recent=deque(maxlen=256);self.trace=deque(maxlen=3000)
    self.last_pump=None;self.seen_produced=None
+   if host_cpu_trace:
+    self.transport_trace=RollingTrace(maxlen=3000)
+    self.host_timing=HostTiming()
   def _trace_transport(self,stage,start,end,rid=None,cpu_seconds=None,process_cpu_seconds=None):
+   if host_cpu_trace:
+    pending=self.wav_inflight.get(rid) if stage=='ack' else None
+    self.host_timing.observe(stage,start,end,rid,cpu_seconds,process_cpu_seconds,
+      sent=pending[0] if pending is not None else None)
    super()._trace_transport(stage,start,end,rid,cpu_seconds,process_cpu_seconds)
    self.trace.append((stage,start,end,rid))
    maxima=report.setdefault('transport_max_ms',{})
@@ -171,12 +181,33 @@ def main(owner_context=None):
     w.config_rate_combo.addItem(f'{config.rate} Hz (diagnóstico)',config.rate)
    w.config_rate_combo.setCurrentIndex(w.config_rate_combo.findData(config.rate))
    w.radio_enabled.setChecked(True)
+   paint_active=[False];paint_started=[None];paint_stopped=[None]
+   if '--analysis-audit' in sys.argv:
+    for name,action in w.graph_channel_actions.items():action.setChecked(name in ('CH1','RADIO','FILTER') if '--filter-input' in sys.argv else name in ('CH1','RADIO'))
+    w.spectral.set_mode(0 if '--analysis-scope' in sys.argv else 1);w.spectral.size.setCurrentText('65536')
+    w.spectral.channels[0].setCurrentText('CH1')
+    w.spectral.channels[1].setCurrentText('FILTER' if '--filter-input' in sys.argv else 'RADIO')
+    w.h_scale=max(400,round(config.actual_rate*.002))
+    report['analysis']=dict(mode='Temporal' if '--analysis-scope' in sys.argv else 'FFT',fft_size=65536,channels=['CH1','FILTER' if '--filter-input' in sys.argv else 'RADIO'],temporal_window_ms=2)
+    report['paint_audit']=dict(scope_paints=0,fft_paints=0,exposure_checks=0,exposed_checks=0)
+    class PaintObserver(QtCore.QObject):
+     def eventFilter(self,obj,event):
+      if paint_active[0] and event.type()==QtCore.QEvent.Type.Paint:
+       key='fft_paints' if obj.property('fs_joint_fft') else 'scope_paints'
+       report['paint_audit'][key]+=1
+      return False
+    observer=PaintObserver(w)
+    w.plot_widget.viewport().installEventFilter(observer)
+    w.spectral.widget.viewport().setProperty('fs_joint_fft',True)
+    w.spectral.widget.viewport().installEventFilter(observer)
    worker=MeasuredWorker('1060031107',Mode.SPI,config=config,processing_settings=w._processing_settings(),startup_gui_ack=True,processing_backend='process')
    # Warm the process while the Q remains at low load; exclude cold filesystem
    # and spawn stalls from the sustained qualification, but retain failures.
    worker._ensure_process().result(timeout=45)
    report['dsp_prewarmed']=True
+   if '--keep-visible' in sys.argv:w.setWindowFlag(QtCore.Qt.WindowType.WindowStaysOnTopHint,True)
    w.serial_worker=worker;w.is_running=True;w.show()
+   if '--analysis-audit' in sys.argv:w.raise_();w.activateWindow()
    def confirmed(bits,rate):w._acquisition_confirmed(bits,rate);worker.confirm_startup(bits,rate)
    worker.acquisition_confirmed.connect(confirmed)
    worker.generator_confirmed.connect(w._generator_confirmed)
@@ -190,6 +221,10 @@ def main(owner_context=None):
    def collect(batch):report['samples']+=len(batch);w._deliver_worker_batch(worker,batch)
    worker.batch_ready.connect(collect);worker.error_occurred.connect(report['errors'].append)
    thread=QtCore.QThread();worker.moveToThread(thread);thread.started.connect(worker.run);worker.finished.connect(thread.quit)
+   if '--receiver-qos-high' in sys.argv:
+    if not hasattr(thread,'setServiceLevel'):raise RuntimeError('Qt no ofrece QualityOfService en este entorno')
+    thread.setServiceLevel(QtCore.QThread.QualityOfService.High)
+    report['receiver_qos']=dict(requested='High',qt_value=thread.serviceLevel().name,limitation='Qt property; not an OS scheduling guarantee')
    thread.start();start=time.monotonic();wall_start=time.time();played_at=None;changed=set();source=None
    while time.monotonic()-start<duration+30 and thread.isRunning():
     app.processEvents();time.sleep(.001)
@@ -198,11 +233,16 @@ def main(owner_context=None):
      source=w.radio_output_panel.source
      if source is not None:
       played_at=time.monotonic();report['play_started_seconds']=played_at-start
+      paint_started[0]=played_at;paint_active[0]=True
       report['audio_source_type']=type(source).__name__
       report['audio_transport'].update(chunk_burst=source.chunk_burst,chunk_interval=source.chunk_interval)
     if played_at is not None:
      if report['errors'] or (source is not None and source.error):break
      elapsed=time.monotonic()-played_at
+     if '--analysis-audit' in sys.argv and paint_active[0] and elapsed-report.get('_exposure_at',-1)>.1:
+      report['_exposure_at']=elapsed
+      report['paint_audit']['exposure_checks']+=1
+      report['paint_audit']['exposed_checks']+=int(w.windowHandle().isExposed())
      if '--gui-stress' in sys.argv:
       epoch=int(elapsed//10)
       if epoch>0 and epoch!=report.get('gui_epoch',0):
@@ -232,15 +272,25 @@ def main(owner_context=None):
        w.radio_frequency.setValue(tuned if step%2 else retuned)
      if not deferred and elapsed>17 and 'snapshot' not in changed:
       w.grab().save(str(folder/'radio_mode.png'));changed.add('snapshot')
-     if elapsed>duration and 'stop' not in changed:w.radio_output_panel.stop();changed.add('stop')
+     if elapsed>duration and 'stop' not in changed:
+      paint_active[0]=False;paint_stopped[0]=time.monotonic()
+      w.radio_output_panel.stop();changed.add('stop')
      if elapsed>duration+3 and not w._wav_active:break
    report['wall_monotonic_drift_seconds']=time.time()-wall_start-(time.monotonic()-start)
    if abs(report['wall_monotonic_drift_seconds'])>2:report['errors'].append('Discontinuidad del reloj del host')
    report.update(changed=sorted(changed),pending_peak=worker.pending_batches_peak,
      max_queue_delay_ms=w.batch_queue_delay_max_ms,radio_enabled_after_stop=w.radio_enabled.isChecked(),
      output_source_detached=w.radio_output_panel.source is None,adc=asdict(w.applied_configuration))
+   report['delivery_failure']=getattr(worker,'delivery_failure_snapshot',None)
    if source is not None:report.update(retunes=source.retunes,source_error=source.error,clipped=source.clipped_samples,source_buffer_minimum=source.buffer_minimum,transition_silence_samples=source.transition_silence_samples)
    report['ok']=(not report['errors'] and report.get('max_played',0)>audio_rate*max(10,duration-4) and report.get('source_error') is None and report['output_source_detached'] and 'stop' in changed and report.get('retunes',0)>=1 and w.applied_configuration==config)
+   if '--analysis-audit' in sys.argv:
+    seconds=(paint_stopped[0] or time.monotonic())-(paint_started[0] or time.monotonic())
+    audit=report['paint_audit'];audit['seconds']=max(0.,seconds)
+    audit['scope_fps']=audit['scope_paints']/seconds if seconds>0 else 0.
+    audit['fft_fps']=audit['fft_paints']/seconds if seconds>0 else 0.
+    audit['exposed_fraction']=audit['exposed_checks']/max(1,audit['exposure_checks'])
+    report.pop('_exposure_at',None)
   except BaseException as exc:
    report['errors'].append(repr(exc));report['traceback']=traceback.format_exc();save();raise
   finally:
@@ -251,19 +301,27 @@ def main(owner_context=None):
     if thread.isRunning():raise RuntimeError('Worker did not exit; no competing connection opened')
    if receivers:
     report['transport_recent']=list(receivers[-1].trace);report['wav_recent']=list(receivers[-1].recent)
+    if host_cpu_trace:
+     report['host_timing']=receivers[-1].host_timing.snapshot()
+     report['host_cpu_recent']=list(receivers[-1].transport_trace)
    if w:w.serial_worker=None;w.close()
    if prior is not None:
-    with Connection('1060031107') as c:
-     r=OutputReceiver(c,lambda b:None);r.decoder.numeric=True;r.select(Mode.SPI);r.configure(Configuration(14,40000))
-    report['identity_after']=instrument_identity('1060031107');assert report['identity_after']==report['identity_before']
-    with Connection('1060031107') as c:
-     r=OutputReceiver(c,lambda b:None);r.decoder.numeric=True;r.select(Mode.SPI);r.configure(Configuration(**prior['adc']));r.generator(GeneratorConfig(**prior['generator']))
-     final={'adc':asdict(r.config),'generator':asdict(r.generator().active)};before=r.decoder.pairs;end=time.monotonic()+10
-     while time.monotonic()<end:r.pump()
-     report.update(restored=final==prior,recovery={'samples':r.decoder.pairs-before,'status':r.decoder.status})
+    try:
+     with Connection('1060031107') as c:
+      r=OutputReceiver(c,lambda b:None);r.decoder.numeric=True;r.select(Mode.SPI);r.configure(Configuration(14,40000))
+     report['identity_after']=instrument_identity('1060031107');assert report['identity_after']==report['identity_before']
+     with Connection('1060031107') as c:
+      r=OutputReceiver(c,lambda b:None);r.decoder.numeric=True;r.select(Mode.SPI);r.configure(Configuration(**prior['adc']));r.generator(GeneratorConfig(**prior['generator']))
+      final={'adc':asdict(r.config),'generator':asdict(r.generator().active)};before=r.decoder.pairs;end=time.monotonic()+10
+      while time.monotonic()<end:r.pump()
+      report.update(restored=final==prior,recovery={'samples':r.decoder.pairs-before,'status':r.decoder.status})
+    except BaseException as exc:
+     report.update(ok=False,restored=False,restore_error=repr(exc));save();raise
    if original_try_codes is not None:RadioDacSource.try_codes=original_try_codes
    if trace_refill:report['refill_ring_schema']='feed: start,end,audio_len,host,played,accepted,rendered,dsp; codes_none: start,end,reason,offset,endoffset,host,rendered; service: time,reason,state,accepted,played,free,inflight,tokens,host,next; chunk: time,next,inflight';report['refill_ring']=list(refill_ring)
    report['diagnostics_deferred']=deferred
    save();print(json.dumps({k:v for k,v in report.items() if k not in ('transport_recent','wav_recent','refill_ring')},indent=2),flush=True)
  return report,folder
-if __name__=='__main__':main()
+if __name__=='__main__':
+ report,folder=main()
+ raise SystemExit(0 if report['ok'] and report['restored'] else 1)

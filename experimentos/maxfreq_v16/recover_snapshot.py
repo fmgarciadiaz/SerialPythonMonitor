@@ -7,9 +7,9 @@ sys.path[:0]=[str(ROOT),str(ROOT/'tools')]
 from unoq import Board,config_path
 import usb_stream
 from experimentos.megaboom_ch1_3584_v16.run import start_relay
-from monitor.v16.receiver.unoq_usb import Connection
-from monitor.v16.receiver.unoq_generator import generator_request,generator_reply
-from monitor.v16.receiver.unoq_wav import command as wav_command,status as wav_status
+from monitor.historico.v16.receiver.unoq_usb import Connection
+from monitor.historico.v16.receiver.unoq_generator import generator_request,generator_reply
+from monitor.historico.v16.receiver.unoq_wav import command as wav_command,status as wav_status
 from diagnosticos.probar_audio_owner_v16 import require_exclusive_monitor
 require_exclusive_monitor()
 b=Board(json.loads(config_path('v16').read_text()))

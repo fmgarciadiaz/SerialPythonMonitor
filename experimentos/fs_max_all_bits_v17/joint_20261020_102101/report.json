@@ -1,0 +1,606 @@
+{
+  "ok": false,
+  "restored": true,
+  "cases": [
+    {
+      "stage": "adc14_filter_fft_sustained_1",
+      "bits": 14,
+      "input": "FILTER",
+      "view": "fft",
+      "seconds": 120,
+      "child_exit": 0,
+      "child": {
+        "report": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v17/generador_radio_20261020_102204/report.json",
+        "ok": true,
+        "restored": true
+      },
+      "ok": true,
+      "audio_ok": true,
+      "restored": true,
+      "errors": [],
+      "queue_peak": 3,
+      "send_statistics": {
+        "sum_ticks": 14639697302,
+        "observations": 16372,
+        "minimum_slack_ticks": 806342,
+        "mean_margin": 0.1463992838257594
+      },
+      "paint": {
+        "scope_paints": 0,
+        "fft_paints": 2004,
+        "exposure_checks": 1170,
+        "exposed_checks": 1170,
+        "seconds": 120.0302412279998,
+        "scope_fps": 0.0,
+        "fft_fps": 16.69579248943908,
+        "exposed_fraction": 1.0
+      },
+      "source_buffer_minimum": 5080,
+      "delivery_failure": null,
+      "audio_source_type": "HighRateRadioDacSource",
+      "headroom_ok": true
+    },
+    {
+      "adc": {
+        "bits": 14,
+        "rate": 40000
+      },
+      "period": 25,
+      "node_pairs": 2048,
+      "actual_rate": 40000.0,
+      "stage": "adc14_filter_fft_sustained_1_normal",
+      "requested_seconds": 10,
+      "ok": true,
+      "scheduler": {
+        "policy": 0,
+        "priority": 0
+      },
+      "seconds": 10.001175080004032,
+      "samples": 399360,
+      "observed_rate": 39931.30775187259,
+      "status": {
+        "ack": 259502,
+        "rate": 40000,
+        "bits": 14,
+        "dropped": 0,
+        "fatal": 0,
+        "epoch": 5,
+        "prepare_us": 81,
+        "check_us": 54
+      },
+      "wall_monotonic_drift_seconds": -0.00017801350622903556
+    },
+    {
+      "stage": "adc14_filter_fft_sustained_2",
+      "bits": 14,
+      "input": "FILTER",
+      "view": "fft",
+      "seconds": 120,
+      "child_exit": 0,
+      "child": {
+        "report": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v17/generador_radio_20261020_102437/report.json",
+        "ok": true,
+        "restored": true
+      },
+      "ok": true,
+      "audio_ok": true,
+      "restored": true,
+      "errors": [],
+      "queue_peak": 3,
+      "send_statistics": {
+        "sum_ticks": 14624519106,
+        "observations": 16368,
+        "minimum_slack_ticks": 805171,
+        "mean_margin": 0.1470758968783279
+      },
+      "paint": {
+        "scope_paints": 0,
+        "fft_paints": 1972,
+        "exposure_checks": 1162,
+        "exposed_checks": 1162,
+        "seconds": 120.00071278199903,
+        "scope_fps": 0.0,
+        "fft_fps": 16.43323572237826,
+        "exposed_fraction": 1.0
+      },
+      "source_buffer_minimum": 975,
+      "delivery_failure": null,
+      "audio_source_type": "HighRateRadioDacSource",
+      "headroom_ok": true
+    },
+    {
+      "adc": {
+        "bits": 14,
+        "rate": 40000
+      },
+      "period": 25,
+      "node_pairs": 2048,
+      "actual_rate": 40000.0,
+      "stage": "adc14_filter_fft_sustained_2_normal",
+      "requested_seconds": 10,
+      "ok": true,
+      "scheduler": {
+        "policy": 0,
+        "priority": 0
+      },
+      "seconds": 10.00110873900121,
+      "samples": 401408,
+      "observed_rate": 40136.349926347044,
+      "status": {
+        "ack": 518911,
+        "rate": 40000,
+        "bits": 14,
+        "dropped": 0,
+        "fatal": 0,
+        "epoch": 7,
+        "prepare_us": 81,
+        "check_us": 48
+      },
+      "wall_monotonic_drift_seconds": -0.00017294607823714614
+    },
+    {
+      "stage": "adc14_filter_fft_sustained_3",
+      "bits": 14,
+      "input": "FILTER",
+      "view": "fft",
+      "seconds": 120,
+      "child_exit": 1,
+      "child": {
+        "ok": false,
+        "restored": false,
+        "report": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v17/generador_radio_20261020_102709/report.json",
+        "error": "RuntimeError('El Q cerr\u00f3 el flujo. Revisar el relay, la adquisici\u00f3n y el cable USB.')",
+        "traceback": "Traceback (most recent call last):\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/experimentos/fs_max_all_bits_v17/joint.py\", line 46, in child\n    report,folder=audio_trial(owner_context=nullcontext())\n                  ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/validar_generador_radio_v17.py\", line 293, in main\n    r=OutputReceiver(c,lambda b:None);r.decoder.numeric=True;r.select(Mode.SPI);r.configure(Configuration(14,40000))\n                                                             ~~~~~~~~^^^^^^^^^^\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v17/receiver/unoq_config_receiver.py\", line 359, in select\n    self._switch(Mode.SPI)\n    ~~~~~~~~~~~~^^^^^^^^^^\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v17/receiver/unoq_config_receiver.py\", line 343, in _switch\n    self.pump()\n    ~~~~~~~~~^^\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v17/receiver/unoq_config_receiver.py\", line 297, in pump\n    began=time.monotonic();data=self.connection.read()\n                                ~~~~~~~~~~~~~~~~~~~~^^\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v17/receiver/unoq_usb.py\", line 149, in read\n    raise RuntimeError('El Q cerr\u00f3 el flujo. Revisar el relay, la adquisici\u00f3n y el cable USB.')\nRuntimeError: El Q cerr\u00f3 el flujo. Revisar el relay, la adquisici\u00f3n y el cable USB.\n"
+      },
+      "ok": false,
+      "audio_ok": false,
+      "restored": false,
+      "errors": [
+        "El Q cerr\u00f3 el flujo. Revisar el relay, la adquisici\u00f3n y el cable USB.",
+        "Traceback (most recent call last):\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/experimentos/fs_max_all_bits_v17/joint.py\", line 192, in <module>\n    if __name__=='__main__':main()\n                            ~~~~^^\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/experimentos/fs_max_all_bits_v17/joint.py\", line 190, in main\n    child(args)\n    ~~~~~^^^^^^\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/experimentos/fs_max_all_bits_v17/joint.py\", line 46, in child\n    report,folder=audio_trial(owner_context=nullcontext())\n                  ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/validar_generador_radio_v17.py\", line 293, in main\n    r=OutputReceiver(c,lambda b:None);r.decoder.numeric=True;r.select(Mode.SPI);r.configure(Configuration(14,40000))\n                                                             ~~~~~~~~^^^^^^^^^^\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v17/receiver/unoq_config_receiver.py\", line 359, in select\n    self._switch(Mode.SPI)\n    ~~~~~~~~~~~~^^^^^^^^^^\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v17/receiver/unoq_config_receiver.py\", line 343, in _switch\n    self.pump()\n    ~~~~~~~~~^^\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v17/receiver/unoq_config_receiver.py\", line 297, in pump\n    began=time.monotonic();data=self.connection.read()\n                                ~~~~~~~~~~~~~~~~~~~~^^\n  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v17/receiver/unoq_usb.py\", line 149, in read\n    raise RuntimeError('El Q cerr\u00f3 el flujo. Revisar el relay, la adquisici\u00f3n y el cable USB.')\nRuntimeError: El Q cerr\u00f3 el flujo. Revisar el relay, la adquisici\u00f3n y el cable USB.\n"
+      ],
+      "queue_peak": 4,
+      "send_statistics": {
+        "sum_ticks": 8666812741,
+        "observations": 9653,
+        "minimum_slack_ticks": 804641,
+        "mean_margin": 0.14291969287524287
+      },
+      "paint": {
+        "scope_paints": 0,
+        "fft_paints": 1188,
+        "exposure_checks": 693,
+        "exposed_checks": 693,
+        "seconds": 71.54764574900037,
+        "scope_fps": 0.0,
+        "fft_fps": 16.59034322616526,
+        "exposed_fraction": 1.0
+      },
+      "source_buffer_minimum": 4965,
+      "delivery_failure": null,
+      "audio_source_type": "HighRateRadioDacSource",
+      "headroom_ok": false,
+      "candidate_recovery_ok": true
+    },
+    {
+      "adc": {
+        "bits": 14,
+        "rate": 40000
+      },
+      "period": 25,
+      "node_pairs": 2048,
+      "actual_rate": 40000.0,
+      "stage": "adc14_filter_fft_sustained_3_recovery",
+      "requested_seconds": 10,
+      "ok": true,
+      "scheduler": {
+        "policy": 0,
+        "priority": 0
+      },
+      "seconds": 10.000039267004468,
+      "samples": 401408,
+      "observed_rate": 40140.642379721634,
+      "status": {
+        "ack": 8383,
+        "rate": 40000,
+        "bits": 14,
+        "dropped": 0,
+        "fatal": 0,
+        "epoch": 1,
+        "prepare_us": 81,
+        "check_us": 48
+      },
+      "wall_monotonic_drift_seconds": -0.00017421192023903131
+    },
+    {
+      "stage": "adc16_filter_fft_sustained_2",
+      "bits": 16,
+      "input": "FILTER",
+      "view": "fft",
+      "seconds": 120,
+      "child_exit": 0,
+      "child": {
+        "report": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v17/generador_radio_20261020_102854/report.json",
+        "ok": true,
+        "restored": true
+      },
+      "ok": true,
+      "audio_ok": true,
+      "restored": true,
+      "errors": [],
+      "queue_peak": 1,
+      "send_statistics": {
+        "sum_ticks": 4202304413,
+        "observations": 4954,
+        "minimum_slack_ticks": 3609653,
+        "mean_margin": 0.7789134383176769
+      },
+      "paint": {
+        "scope_paints": 0,
+        "fft_paints": 2338,
+        "exposure_checks": 1182,
+        "exposed_checks": 1182,
+        "seconds": 120.00067983201006,
+        "scope_fps": 0.0,
+        "fft_fps": 19.48322295567813,
+        "exposed_fraction": 1.0
+      },
+      "source_buffer_minimum": 18109,
+      "delivery_failure": null,
+      "audio_source_type": "RadioDacSource",
+      "headroom_ok": true
+    },
+    {
+      "adc": {
+        "bits": 14,
+        "rate": 40000
+      },
+      "period": 25,
+      "node_pairs": 2048,
+      "actual_rate": 40000.0,
+      "stage": "adc16_filter_fft_sustained_2_normal",
+      "requested_seconds": 10,
+      "ok": true,
+      "scheduler": {
+        "policy": 0,
+        "priority": 0
+      },
+      "seconds": 10.001284415004193,
+      "samples": 399360,
+      "observed_rate": 39930.87121898758,
+      "status": {
+        "ack": 82136,
+        "rate": 40000,
+        "bits": 14,
+        "dropped": 0,
+        "fatal": 0,
+        "epoch": 3,
+        "prepare_us": 81,
+        "check_us": 48
+      },
+      "wall_monotonic_drift_seconds": -0.00017338442557957023
+    },
+    {
+      "stage": "adc16_filter_fft_sustained_3",
+      "bits": 16,
+      "input": "FILTER",
+      "view": "fft",
+      "seconds": 120,
+      "child_exit": 0,
+      "child": {
+        "report": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v17/generador_radio_20261020_103127/report.json",
+        "ok": true,
+        "restored": true
+      },
+      "ok": true,
+      "audio_ok": true,
+      "restored": true,
+      "errors": [],
+      "queue_peak": 1,
+      "send_statistics": {
+        "sum_ticks": 4205970505,
+        "observations": 4960,
+        "minimum_slack_ticks": 3609699,
+        "mean_margin": 0.778988239054639
+      },
+      "paint": {
+        "scope_paints": 0,
+        "fft_paints": 2346,
+        "exposure_checks": 1183,
+        "exposed_checks": 1183,
+        "seconds": 120.00033261199133,
+        "scope_fps": 0.0,
+        "fft_fps": 19.549945812113275,
+        "exposed_fraction": 1.0
+      },
+      "source_buffer_minimum": 17325,
+      "delivery_failure": null,
+      "audio_source_type": "RadioDacSource",
+      "headroom_ok": true
+    },
+    {
+      "adc": {
+        "bits": 14,
+        "rate": 40000
+      },
+      "period": 25,
+      "node_pairs": 2048,
+      "actual_rate": 40000.0,
+      "stage": "adc16_filter_fft_sustained_3_normal",
+      "requested_seconds": 10,
+      "ok": true,
+      "scheduler": {
+        "policy": 0,
+        "priority": 0
+      },
+      "seconds": 10.0012091230019,
+      "samples": 399360,
+      "observed_rate": 39931.171830164734,
+      "status": {
+        "ack": 156266,
+        "rate": 40000,
+        "bits": 14,
+        "dropped": 0,
+        "fatal": 0,
+        "epoch": 5,
+        "prepare_us": 81,
+        "check_us": 48
+      },
+      "wall_monotonic_drift_seconds": -0.00017414795001968741
+    }
+  ],
+  "scope": "Private GUI/RADIO/FILTER/A0 matrix; exact candidate binary and production rollback.",
+  "source_hashes": {
+    "sketch/wav_protocol.h": "78e788ab24dac52eff1d79cc15d08ac730451316e28050f461d5f4febf2cd223",
+    "sketch/wav_dma.h": "82bf749b289b5dfc4907e751ac1c1dd146d2ab1b0fe92c046d7492b3cc15cc10",
+    "sketch/wav.h": "0dc2b88b7d25de037fc0598c85b70b3903caaa3c2d6a92ea84b23ab680ddb1f2",
+    "sketch/crc32_fast.h": "5d80da2df5d483bb028cf98abdaa2aed0a12da1be7f2ceb8591269debee81959",
+    "sketch/generator.h": "e853fca473f9c13df50912a54fc621cee9f2fcb125ffe6f810670e93a17ebc77",
+    "sketch/wav_storage.h": "a06e48b8192d2674dfa3ce1f57e601f523244c1016b5ecc899607d48fb1cce69",
+    "sketch/native_profiles.h": "e68771583a177d527c6c84c1ca52d3934d3f4a4f91d4d4a1a79106262650f21b",
+    "sketch/high_rate_profile.h": "76dd73f2303281a77aa8b0f3520ac358195bf3d93a0bf4e1ba49b8f2e8d1caa1",
+    "sketch/sample_packing.h": "84823758ded381d3168e452893d86eeed6a05c73f96196514f5ec0d9115c3e76",
+    "sketch/sketch.ino": "2e8592e4daedbc1664c93b62a6f18a0eea7776385e1c260d93d5ba99f701d3c5",
+    "relay/additional_profiles.h": "b8d94095548a562807ba48fd08b6f9cb6c4148e9926ee80cf0e46bc6142e5591",
+    "relay/base_verifier.c": "66499e8bbec8ae3058a0624c9377c9fad6d5ef6a0fbb3f8de70d0c58eaab5bb0",
+    "relay/config_relay_protocol.h": "d8cd4803cc005677e3e41188c3e276aba81789ca74fde96ad3d1245d089e89b1",
+    "relay/cpu_profile.h": "c67764a253a309fe07c2db698d99235796a31bbb2e8f5dc7554dbad347e5874b",
+    "relay/cpu_runtime.h": "bd5afdb012a41a8decdfd015352ae391e05786f2075115d13087925819e735ea",
+    "relay/frame_send_queue.h": "e1a158fac306a098ade76464ca813a33d27e785bd7874c7fc7e21673bec388ca",
+    "relay/high_rate_profile.h": "76dd73f2303281a77aa8b0f3520ac358195bf3d93a0bf4e1ba49b8f2e8d1caa1",
+    "relay/native_profiles.h": "e68771583a177d527c6c84c1ca52d3934d3f4a4f91d4d4a1a79106262650f21b",
+    "relay/spi40_runtime.h": "9d23aa411d533b8dd4e890393616a19d1b1e903943b17c582192d880c01c296c",
+    "relay/transport_policy.h": "7da1fd18188fc13925a6ceea12a1bd107299c155c2d1322425f92a24425527b2",
+    "relay/unoq_config_stream.c": "0ef9e678c86cd850e4700cceb2ee1623180ae81f66be1372e153c4a21aa55152"
+  },
+  "adc_evidence": [
+    "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/experimentos/fs_max_all_bits_v17/qualification_20261019_235429/report.json",
+    "experimentos/fs_max_all_bits_v17/qualification_20261019_234111/report.json",
+    "experimentos/fs_max_all_bits_v17/qualification_20261019_224818/report.json"
+  ],
+  "seconds": 60,
+  "host_hashes": {
+    "diagnosticos/validar_generador_radio_v17.py": "31e2d8fde8c3cdf76ab18a6e7d0e260334815aa3188212aeb55dc2c98b69214e",
+    "monitor/v17/app.py": "5e2fee9a3174186bd044e02dd2663994d9ce582a923ce887e1c6b9dce056d7d9",
+    "monitor/v17/radio_output.py": "0dbfe175d0dc8340e42a71e6acc23f2c31c71d36a2ede8a7576e86ae48a0dfac",
+    "monitor/v17/radio_output_panel.py": "faa1cc9ec6ed0a7518473074ff784771b23aac3d3e30630f20f52857fac8b573"
+  },
+  "sustained": true,
+  "sustained_from": "experimentos/fs_max_all_bits_v17/joint_20261020_101254/report.json",
+  "selected_bits": [
+    14,
+    16
+  ],
+  "continuation_of": null,
+  "excluded_real_failures": [],
+  "guard_blocked_attempts": [],
+  "visible_paint_gate": "Only the active view must repaint; hidden stacked widget is not a failure",
+  "prior": {
+    "adc": {
+      "bits": 8,
+      "rate": 632411
+    },
+    "generator": {
+      "wave": 0,
+      "enabled": 0,
+      "mode": 0,
+      "frequency": 2500,
+      "final_frequency": 2500,
+      "low": 0,
+      "high": 0,
+      "duration": 1000,
+      "duration_us": 0,
+      "duty": 50
+    }
+  },
+  "prior_identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v17-main-1",
+    "firmware_sha256": "96685eb64cc722adebc7f345f40c3500e22642814bbfc6f182c66c0f992a7ec9"
+  },
+  "old_relay": "/home/arduino/.cache/serialmonitor/usb-stream-08430aaec88ca9c16496/unoq_stream",
+  "old_cap_add": [
+    "SYS_NICE"
+  ],
+  "old_scope_environment": [],
+  "backup": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/respaldos/unoq/osciloscopio_20261020_102102_440930.zip",
+  "old_mounts": [
+    {
+      "Type": "bind",
+      "Source": "/sys/devices/system/cpu/cpufreq/policy0/scaling_governor",
+      "Destination": "/scope_cpu_governor",
+      "Mode": "",
+      "RW": true,
+      "Propagation": "rprivate"
+    },
+    {
+      "Type": "bind",
+      "Source": "/home/arduino/.cache/serialmonitor/usb-stream-08430aaec88ca9c16496/unoq_stream",
+      "Destination": "/work/unoq_stream",
+      "Mode": "",
+      "RW": false,
+      "Propagation": "rprivate"
+    }
+  ],
+  "old_cpuset": "",
+  "normal_policy": {
+    "governor": "schedutil",
+    "cpus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "scheduler": 0,
+    "priority": 0
+  },
+  "prior_header_presence": {
+    "wav_protocol.h": true,
+    "wav_dma.h": true,
+    "wav.h": true,
+    "crc32_fast.h": true,
+    "generator.h": true,
+    "wav_storage.h": true,
+    "native_profiles.h": true,
+    "high_rate_profile.h": true,
+    "sample_packing.h": true,
+    "sketch.ino": true
+  },
+  "candidate_relay": "/home/arduino/.cache/serialmonitor/cpu-relay-11452bfdcbe65adf7366/unoq_stream",
+  "candidate_relay_sha256": "b9d750e75bee9a9945f6c575abba35fd13dcf4e0a6fd7265436341181f58f79b",
+  "candidate_identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v17-main-1",
+    "firmware_sha256": "cc46e4f798a39edfb8e5bd2db8ecd510dd40fee3f10e89c69978de4191156223"
+  },
+  "normal_policy_checks": [
+    {
+      "stage": "adc14_filter_fft_sustained_1_normal",
+      "policy": {
+        "governor": "schedutil",
+        "cpus": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "scheduler": 0,
+        "priority": 0
+      }
+    },
+    {
+      "stage": "adc14_filter_fft_sustained_2_normal",
+      "policy": {
+        "governor": "schedutil",
+        "cpus": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "scheduler": 0,
+        "priority": 0
+      }
+    },
+    {
+      "stage": "adc14_filter_fft_sustained_3_recovery",
+      "policy": {
+        "governor": "schedutil",
+        "cpus": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "scheduler": 0,
+        "priority": 0
+      }
+    },
+    {
+      "stage": "adc16_filter_fft_sustained_2_normal",
+      "policy": {
+        "governor": "schedutil",
+        "cpus": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "scheduler": 0,
+        "priority": 0
+      }
+    },
+    {
+      "stage": "adc16_filter_fft_sustained_3_normal",
+      "policy": {
+        "governor": "schedutil",
+        "cpus": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "scheduler": 0,
+        "priority": 0
+      }
+    }
+  ],
+  "restored_low_policy": {
+    "governor": "schedutil",
+    "cpus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "scheduler": 0,
+    "priority": 0
+  },
+  "final_settings": {
+    "adc": {
+      "bits": 8,
+      "rate": 632411
+    },
+    "generator": {
+      "wave": 0,
+      "enabled": 0,
+      "mode": 0,
+      "frequency": 2500,
+      "final_frequency": 2500,
+      "low": 0,
+      "high": 0,
+      "duration": 1000,
+      "duration_us": 0,
+      "duty": 50
+    }
+  },
+  "final_identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v17-main-1",
+    "firmware_sha256": "96685eb64cc722adebc7f345f40c3500e22642814bbfc6f182c66c0f992a7ec9"
+  },
+  "recovery": {
+    "ok": true,
+    "samples": 6321024,
+    "status": {
+      "ack": 18732,
+      "rate": 632411,
+      "bits": 8,
+      "dropped": 0,
+      "fatal": 0,
+      "epoch": 2,
+      "prepare_us": 46,
+      "check_us": 48,
+      "queue_slots": 4,
+      "node_pairs": 3888,
+      "queue": 1,
+      "queue_peak": 2,
+      "copy_ticks": 78838,
+      "poll_ticks": 262296,
+      "slack_ticks": 731451,
+      "send_ticks": 823243,
+      "produced": 1627
+    },
+    "method": "No administrative Q calls after final high-rate configuration"
+  }
+}

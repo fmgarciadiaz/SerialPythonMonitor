@@ -82,7 +82,7 @@ def main():
     def old_levels():return np.linspace(.7,.7,480),np.linspace(1.65,1.65,480)
     def scalar_levels():return .7,1.65
     report['constant_levels']=dict(before=measure(old_levels),after=measure(scalar_levels))
-    from monitor.v16.receiver.unoq_config_decoder import ConfigurationDecoder
+    from monitor.historico.v16.receiver.unoq_config_decoder import ConfigurationDecoder
     baseline=None
     if args.decoder_baseline:
         import importlib.util

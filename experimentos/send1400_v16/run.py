@@ -53,7 +53,7 @@ class SendProbe(Probe):
         config = dict(self.stable.config)
         config.update(name='Scope V16 Send1400 Experimental',
                       remote_app='/home/arduino/ArduinoApps/scope-v16-send1400-experimental',
-                      local_app='experimentos/send1400_v16/arduino/v16/oscilloscope')
+                      local_app='experimentos/send1400_v16/arduino/historico/v16/oscilloscope')
         self.candidate = Board(config)
         self.report['revision'] = 'send1400_spi38_fifo10_pointer_pipeline_v8'
         self.report['source_hashes'] = {

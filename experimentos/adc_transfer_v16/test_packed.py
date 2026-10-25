@@ -1,9 +1,9 @@
 import unittest,struct,tempfile,subprocess,random
 from pathlib import Path
-from tests.v16.test_compact_protocol import packet,seal
+from tests.historico.v16.test_compact_protocol import packet,seal
 from experimentos.adc_transfer_v16.packed_decoder import PackedDecoder
-from monitor.v16.receiver.unoq_config_decoder import ConfigurationDecoder
-from monitor.v16.receiver.unoq_usb import ProtocolError
+from monitor.historico.v16.receiver.unoq_config_decoder import ConfigurationDecoder
+from monitor.historico.v16.receiver.unoq_usb import ProtocolError
 EXP=Path(__file__).resolve().parent
 
 def packed_packet(pairs,index=0,t0=100,seq=0):
@@ -34,7 +34,7 @@ class PackedTests(unittest.TestCase):
    d=PackedDecoder();d.feed(p)
    with self.assertRaises(ProtocolError):d.feed(packed_packet([(3,4)]*258,index,t0,1))
  def test_native_relay_matches_python(self):
-  base=EXP/'arduino/v16/relay/base_verifier.c';header=base.with_name('config_relay_protocol.h')
+  base=EXP/'arduino/historico/v16/relay/base_verifier.c';header=base.with_name('config_relay_protocol.h')
   src=f'''#define main baseline_main\n#include "{base}"\n#undef main\n#include "{header}"\nint main(void){{uint8_t p[BLOCK];init_crc();DualChecker d={{.period=8,.bits=14}};while(fread(p,1,BLOCK,stdin)==BLOCK){{printf("%d\\n",dual_feed(&d,p));}}}}'''
   rng=random.Random(258);pairs=[(rng.randrange(16384),rng.randrange(16384)) for _ in range(2048)]
   frames=[packed_packet(pairs[o:o+258],o,100+o*8,n) for n,o in enumerate(range(0,2048,258))]
@@ -47,8 +47,8 @@ class PackedTests(unittest.TestCase):
  def test_actual_mcu_packer_matches_original_adc_values(self):
   from experimentos.adc_transfer_v16.test_frames import extract
   from experimentos.adc_transfer_v16.decoder import TransferDecoder
-  body=extract(EXP/'arduino/v16/oscilloscope/sketch/sketch.ino','build_samples')
-  header=EXP/'arduino/v16/oscilloscope/sketch/benchmark_protocol.h'
+  body=extract(EXP/'arduino/historico/v16/oscilloscope/sketch/sketch.ino','build_samples')
+  header=EXP/'arduino/historico/v16/oscilloscope/sketch/benchmark_protocol.h'
   source=f'''#include "{header}"\n#include <algorithm>\n#include <cstring>\n#include <cstdio>\nusing namespace scope_bench;using std::max;
 constexpr unsigned DMA_NODE_PAIRS=2048;struct ChannelPair{{uint16_t ch1,ch2;}};
 namespace acquisition {{struct Node{{uint32_t index,timestamp;ChannelPair samples[2048];}};

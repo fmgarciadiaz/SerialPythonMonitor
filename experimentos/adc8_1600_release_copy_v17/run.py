@@ -15,8 +15,8 @@ from experimentos.adc8_ping_word_v17.run import PingProbe,optimized,TimingDecode
 import experimentos.maxfreq_v16.contract as original_contract
 import struct
 from experimentos.maxfreq_v16.contract import Session
-from monitor.v16.receiver.unoq_usb import Connection
-from monitor.v16.receiver.unoq_generator import GeneratorConfig
+from monitor.historico.v16.receiver.unoq_usb import Connection
+from monitor.historico.v16.receiver.unoq_generator import GeneratorConfig
 from tools.unoq import Board
 from spi_benchmark import IMAGE
 
@@ -109,7 +109,7 @@ class Target1500Probe(PingProbe):
     def __init__(self):
         super().__init__()
         cfg=dict(self.candidate.config)
-        cfg.update(local_app='experimentos/adc8_1600_release_copy_v17/arduino/v16/oscilloscope',
+        cfg.update(local_app='experimentos/adc8_1600_release_copy_v17/arduino/historico/v16/oscilloscope',
                    experiment_spi_hz=40000000)
         self.candidate=Board(cfg)
         self.report['runner_sha256']=hashlib.sha256(Path(__file__).read_bytes()).hexdigest()

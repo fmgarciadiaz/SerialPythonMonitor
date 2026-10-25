@@ -13,8 +13,8 @@ ROOT=Path(__file__).resolve().parents[2]
 sys.path[:0]=[str(ROOT),str(ROOT/'tools')]
 from experimentos.adc8_ping_word_v17.run import PingProbe,optimized
 from experimentos.maxfreq_v16.contract import Session
-from monitor.v16.receiver.unoq_usb import Connection
-from monitor.v16.receiver.unoq_generator import GeneratorConfig
+from monitor.historico.v16.receiver.unoq_usb import Connection
+from monitor.historico.v16.receiver.unoq_generator import GeneratorConfig
 from tools.unoq import Board
 from spi_benchmark import IMAGE
 
@@ -51,7 +51,7 @@ class ClockSearch(PingProbe):
     def __init__(self):
         super().__init__()
         cfg=dict(self.candidate.config)
-        cfg.update(local_app='experimentos/adc8_spi40_search_v17/arduino/v16/oscilloscope',
+        cfg.update(local_app='experimentos/adc8_spi40_search_v17/arduino/historico/v16/oscilloscope',
                    experiment_spi_hz=40000000)
         self.candidate=Board(cfg)
         self.report['runner_sha256']=hashlib.sha256(Path(__file__).read_bytes()).hexdigest()

@@ -6,7 +6,7 @@ import unittest
 
 class ReadyTests(unittest.TestCase):
     def test_ready_credit_and_timeout(self):
-        path=Path(__file__).resolve().parent/'arduino/v16/relay/base_verifier.c'
+        path=Path(__file__).resolve().parent/'arduino/historico/v16/relay/base_verifier.c'
         text=path.read_text();function=text[text.index('static int ready_event('):text.index('static int ready_initial(')]
         source='''#include <stdint.h>
 #include <stddef.h>

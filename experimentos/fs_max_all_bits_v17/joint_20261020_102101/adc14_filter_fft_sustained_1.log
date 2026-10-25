@@ -1,0 +1,225 @@
+LIVE audio=15s played=574560 pendingGUI=1 pendingDSP=1
+LIVE audio=30s played=1175520 pendingGUI=2 pendingDSP=1
+LIVE audio=45s played=1774080 pendingGUI=1 pendingDSP=0
+LIVE audio=60s played=2374560 pendingGUI=2 pendingDSP=1
+LIVE audio=75s played=2975040 pendingGUI=2 pendingDSP=1
+LIVE audio=90s played=3574080 pendingGUI=1 pendingDSP=1
+LIVE audio=105s played=4175040 pendingGUI=2 pendingDSP=1
+LIVE audio=120s played=4774080 pendingGUI=1 pendingDSP=0
+{
+  "ok": true,
+  "restored": true,
+  "errors": [],
+  "samples": 111840560,
+  "wav_states": [
+    {
+      "state": 0,
+      "reason": 0,
+      "played": 0,
+      "accepted": 0,
+      "queue_slots": 30
+    },
+    {
+      "state": 1,
+      "reason": 0,
+      "played": 0,
+      "accepted": 0,
+      "queue_slots": 30
+    },
+    {
+      "state": 2,
+      "reason": 0,
+      "played": 0,
+      "accepted": 14400,
+      "queue_slots": 30
+    },
+    {
+      "state": 0,
+      "reason": 0,
+      "played": 4774080,
+      "accepted": 4788480,
+      "queue_slots": 30
+    }
+  ],
+  "requested_audio_seconds": 120.0,
+  "source_hashes": {
+    "monitor/v17/radio_output.py": "0dbfe175d0dc8340e42a71e6acc23f2c31c71d36a2ede8a7576e86ae48a0dfac",
+    "monitor/v17/radio_output_panel.py": "faa1cc9ec6ed0a7518473074ff784771b23aac3d3e30630f20f52857fac8b573",
+    "monitor/v17/receiver/unoq_config_receiver.py": "49a3fc467906e95d0342560fc6597c67dfbd337b8e8b14f14f477ced30f0fb36",
+    "monitor/v17/radio_loop_guard.py": "adef914886364e88a20dbaf8600fa7f75e607d69abc6565efaa3beea9dee056f",
+    "monitor/v17/processing.py": "950d97645ddbc3590d8c1d1c60a3e58173dd2172498084e830b62af09094aba9",
+    "monitor/v17/radio_am.py": "4b4e80342d36212f6eae2086c5fe4fc78e15c54e1b1a98fcdd9f5508fb23c4f1",
+    "monitor/v17/app.py": "5e2fee9a3174186bd044e02dd2663994d9ce582a923ce887e1c6b9dce056d7d9"
+  },
+  "audio_transport": {
+    "rate": 40000,
+    "poll_interval": 0.04,
+    "credits": 30,
+    "chunk_interval": 0.006,
+    "chunk_burst": 16,
+    "prebuffer_samples": 20000
+  },
+  "qt_platform": "cocoa",
+  "prior": {
+    "adc": {
+      "bits": 14,
+      "rate": 31250
+    },
+    "generator": {
+      "wave": 0,
+      "enabled": 0,
+      "mode": 0,
+      "frequency": 2500,
+      "final_frequency": 2500,
+      "low": 0,
+      "high": 4095,
+      "duration": 1000,
+      "duration_us": 0,
+      "duty": 50
+    }
+  },
+  "identity_before": {
+    "board_serial": "1060031107",
+    "app": "scope-v17-main-1",
+    "firmware_sha256": "cc46e4f798a39edfb8e5bd2db8ecd510dd40fee3f10e89c69978de4191156223"
+  },
+  "radio_bandwidth": 8000,
+  "output_input": "FILTER",
+  "filter_preset": "reject_50",
+  "analysis": {
+    "mode": "FFT",
+    "fft_size": 65536,
+    "channels": [
+      "CH1",
+      "FILTER"
+    ],
+    "temporal_window_ms": 2
+  },
+  "paint_audit": {
+    "scope_paints": 0,
+    "fft_paints": 2004,
+    "exposure_checks": 1170,
+    "exposed_checks": 1170,
+    "seconds": 120.0302412279998,
+    "scope_fps": 0.0,
+    "fft_fps": 16.69579248943908,
+    "exposed_fraction": 1.0
+  },
+  "dsp_prewarmed": true,
+  "transport_max_ms": {
+    "read": 62.29243100096937,
+    "decode": 22.2602680005366,
+    "send": 20.136646999162622,
+    "ack": 0.010155999916605651,
+    "ack_latency": 53.70065198803786,
+    "generate": 0.30394400528166443
+  },
+  "adc_queue_peak": 3,
+  "adc_status": {
+    "ack": 242567,
+    "rate": 909090,
+    "bits": 14,
+    "dropped": 0,
+    "fatal": 0,
+    "epoch": 2,
+    "prepare_us": 10,
+    "check_us": 48,
+    "queue_slots": 4,
+    "node_pairs": 5952,
+    "queue": 1,
+    "queue_peak": 3,
+    "copy_ticks": 66740,
+    "poll_ticks": 253493,
+    "slack_ticks": 806342,
+    "send_ticks": 832940,
+    "produced": 18816
+  },
+  "pump_gap_max_ms": 102.17473399825394,
+  "adc_peak_events": [
+    {
+      "time": 73361.845654208,
+      "peak": 1,
+      "wav_played": null,
+      "wav_state": null
+    },
+    {
+      "time": 73362.01572782,
+      "peak": 2,
+      "wav_played": 0,
+      "wav_state": 0
+    },
+    {
+      "time": 73413.859674793,
+      "peak": 3,
+      "wav_played": 2044800,
+      "wav_state": 2
+    }
+  ],
+  "send_statistics": {
+    "sum_ticks": 15089359077,
+    "observations": 16906,
+    "minimum_slack_ticks": 806342,
+    "mean_margin": 0.1479710753212714
+  },
+  "wav_commands": {
+    "op_0": 2807,
+    "op_1": 1,
+    "chunks": 9976,
+    "op_2": 1,
+    "op_3": 1
+  },
+  "play_started_seconds": 0.7644412230001763,
+  "audio_source_type": "HighRateRadioDacSource",
+  "dsp_pending_peak": 3,
+  "retained_bytes_peak": 3763328,
+  "old_generation_audio_batches": 2,
+  "old_generation_audio_samples": 2532,
+  "joint_send_statistics": {
+    "sum_ticks": 14639697302,
+    "observations": 16372,
+    "minimum_slack_ticks": 806342,
+    "mean_margin": 0.1463992838257594
+  },
+  "max_played": 4767360,
+  "elapsed_audio_seconds": 120.04981623399362,
+  "wall_monotonic_drift_seconds": -0.0021584140486083925,
+  "changed": [
+    "retune",
+    "stop",
+    "volume"
+  ],
+  "pending_peak": 4,
+  "max_queue_delay_ms": 107.95081499963999,
+  "radio_enabled_after_stop": true,
+  "output_source_detached": true,
+  "adc": {
+    "bits": 14,
+    "rate": 909090
+  },
+  "delivery_failure": null,
+  "retunes": 1,
+  "source_error": null,
+  "clipped": 0,
+  "source_buffer_minimum": 5080,
+  "transition_silence_samples": 742,
+  "identity_after": {
+    "board_serial": "1060031107",
+    "app": "scope-v17-main-1",
+    "firmware_sha256": "cc46e4f798a39edfb8e5bd2db8ecd510dd40fee3f10e89c69978de4191156223"
+  },
+  "recovery": {
+    "samples": 311296,
+    "status": {
+      "ack": 250577,
+      "rate": 31250,
+      "bits": 14,
+      "dropped": 0,
+      "fatal": 0,
+      "epoch": 4,
+      "prepare_us": 86,
+      "check_us": 48
+    }
+  },
+  "refill_ring_schema": "feed: start,end,audio_len,host,played,accepted,rendered,dsp; codes_none: start,end,reason,offset,endoffset,host,rendered; service: time,reason,state,accepted,played,free,inflight,tokens,host,next; chunk: time,next,inflight",
+  "diagnostics_deferred": true
+}

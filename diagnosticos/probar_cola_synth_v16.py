@@ -4,13 +4,13 @@ from pathlib import Path
 from dataclasses import asdict,replace
 from datetime import datetime,timezone
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
-from monitor.v16.receiver.unoq_usb import Connection
-from monitor.v16.receiver.unoq_config_receiver import OutputReceiver
-from monitor.v16.receiver.unoq_switch import Mode
-from monitor.v16.receiver.unoq_acquisition import Configuration
-from monitor.v16.receiver.unoq_wav import State
-from monitor.v16.fm_source import FMSource,FMParameters
-from monitor.v16.virtual_instruments import warmup
+from monitor.historico.v16.receiver.unoq_usb import Connection
+from monitor.historico.v16.receiver.unoq_config_receiver import OutputReceiver
+from monitor.historico.v16.receiver.unoq_switch import Mode
+from monitor.historico.v16.receiver.unoq_acquisition import Configuration
+from monitor.historico.v16.receiver.unoq_wav import State
+from monitor.historico.v16.fm_source import FMSource,FMParameters
+from monitor.historico.v16.virtual_instruments import warmup
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
@@ -19,7 +19,7 @@ def main():
     parser.add_argument('--freeze-startup',action='store_true',help='Experimental scoped freeze of initialized objects; new objects retain normal GC')
     parser.add_argument('--process',action='store_true',help='Experimental separate generation process; receiver remains here')
     args=parser.parse_args();warmup()
-    from monitor.v16.fm_feedback import warmup as warmup_feedback
+    from monitor.historico.v16.fm_feedback import warmup as warmup_feedback
     warmup_feedback()
     folder=ROOT/'diagnosticos/resultados_piano/eficiencia_v16';folder.mkdir(exist_ok=True)
     path=folder/(datetime.now(timezone.utc).strftime('%Y%m%d_%H%M%S')+'_cola_fisica.json')
@@ -54,7 +54,7 @@ def main():
                     string_decay=4.,string_position=.12,string_brightness=.78,
                     oscillator_levels=(1.,0.,0.),notes=())
                 if args.process:
-                    from monitor.v16.synth_process import SynthProcess
+                    from monitor.historico.v16.synth_process import SynthProcess
                     source=SynthProcess(20000,params,wait_ready=False)
                     deadline=time.monotonic()+30
                     while not source.is_ready():

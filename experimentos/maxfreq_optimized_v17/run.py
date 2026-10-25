@@ -41,7 +41,7 @@ class OptimizedSweep(send.SendProbe):
         # Dedicated experimental app; never push sources into scope-v17.
         config.update(name='Scope V16 Send1400 Experimental',
             remote_app='/home/arduino/ArduinoApps/scope-v16-send1400-experimental',
-            local_app='experimentos/maxfreq_optimized_v17/arduino/v16/oscilloscope')
+            local_app='experimentos/maxfreq_optimized_v17/arduino/historico/v16/oscilloscope')
         self.candidate = Board(config)
         self.report.update(revision='optimized_ch1_adc10_12_14_v17', cases=[], winners={},
             plan={'bits': [10, 12, 14], 'nodes': NODES, 'ticks_bounds': [78, 640],

@@ -6,6 +6,23 @@ from monitor.v17 import spectral_analysis as a
 
 
 class SpectralAnalysisTests(unittest.TestCase):
+    def test_fft_workspace_preserves_readonly_strided_inputs_and_exact_results(self):
+        rng = np.random.default_rng(71)
+        for n in (255,256,65536):
+            storage = rng.normal(size=(4,n*2)) + 2
+            blocks = storage[:,::2]
+            blocks = np.asfortranarray(blocks) if n == 256 else blocks
+            before = blocks.copy()
+            blocks.setflags(write=False)
+            for window in a.WINDOWS:
+                weights = a.WINDOWS[window](n)
+                for remove_dc in (False,True):
+                    centered = blocks-blocks.mean(axis=1,keepdims=True) if remove_dc else blocks
+                    expected = np.fft.rfft(centered*weights,axis=1)
+                    actual,_,_ = a._fft(blocks,40000,window,remove_dc)
+                    np.testing.assert_array_equal(actual,expected)
+                    np.testing.assert_array_equal(blocks,before)
+
     def test_window_and_rate_changes_preserve_odd_even_normalization(self):
         rng = np.random.default_rng(561)
         for n in (255,256,511):

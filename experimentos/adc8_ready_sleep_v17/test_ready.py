@@ -7,7 +7,7 @@ import unittest
 class ReadyTests(unittest.TestCase):
     def test_actual_wait_preserves_fresh_edge_and_errors(self):
         folder = Path(__file__).resolve().parent
-        source = (folder/'arduino/v16/relay/base_verifier.c').read_text()
+        source = (folder/'arduino/historico/v16/relay/base_verifier.c').read_text()
         start = source.index('static unsigned ready_spin_us=50;')
         end = source.index('static int ready_initial(', start)
         function = source[start:end]

@@ -6,7 +6,7 @@ import unittest
 
 class BatchTests(unittest.TestCase):
     def test_real_c_buffer_order_flush_and_backpressure(self):
-        folder=Path(__file__).resolve().parent/'arduino/v16/relay'
+        folder=Path(__file__).resolve().parent/'arduino/historico/v16/relay'
         code=r'''
 #include <assert.h>
 #include <errno.h>

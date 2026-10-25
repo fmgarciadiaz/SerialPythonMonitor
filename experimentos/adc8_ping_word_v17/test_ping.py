@@ -3,7 +3,7 @@ import subprocess
 import tempfile
 import unittest
 
-SKETCH=Path(__file__).resolve().parent/'arduino/v16/oscilloscope/sketch'
+SKETCH=Path(__file__).resolve().parent/'arduino/historico/v16/oscilloscope/sketch'
 
 
 class PingEquivalenceTests(unittest.TestCase):

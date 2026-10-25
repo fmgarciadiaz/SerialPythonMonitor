@@ -2,15 +2,15 @@
 from pathlib import Path
 import importlib.util,sys,struct,zlib,unittest,tempfile,subprocess
 ROOT=Path(__file__).resolve().parents[2];EXP=Path(__file__).resolve().parent
-from monitor.v16.receiver.unoq_acquisition import Configuration as Stable
+from monitor.historico.v16.receiver.unoq_acquisition import Configuration as Stable
 name='adc333_contract_test'
 spec=importlib.util.spec_from_file_location(name,EXP/'acquisition.py');acq=importlib.util.module_from_spec(spec);sys.modules[name]=acq;spec.loader.exec_module(acq)
-from tests.v16.test_compact_protocol import packet,seal
+from tests.historico.v16.test_compact_protocol import packet,seal
 class ContractTests(unittest.TestCase):
  def test_stable_stays_unchanged(self):
   with self.assertRaises(ValueError):Stable(14,333333)
   for filename in ('acquisition.h','node_validation.h'):
-   self.assertEqual((EXP/'arduino/v16/oscilloscope/sketch'/filename).read_bytes(),(ROOT/'arduino/v16/oscilloscope/sketch'/filename).read_bytes())
+   self.assertEqual((EXP/'arduino/historico/v16/oscilloscope/sketch'/filename).read_bytes(),(ROOT/'arduino/historico/v16/oscilloscope/sketch'/filename).read_bytes())
  def test_period_and_bit_contract(self):
   self.assertEqual(acq.Configuration(14,333333).period,3)
   self.assertEqual(acq.Configuration(14,333333).sampling_us,.72)
@@ -22,7 +22,7 @@ class ContractTests(unittest.TestCase):
    else:
     with self.assertRaises(ValueError):acq.acquisition_reply(p)
  def test_c_relay_accepts_new_command_and_samples(self):
-  header=EXP/'arduino/v16/relay/config_relay_protocol.h';base=header.with_name('base_verifier.c')
+  header=EXP/'arduino/historico/v16/relay/config_relay_protocol.h';base=header.with_name('base_verifier.c')
   source=f'''#define main baseline_main\n#include "{base}"\n#undef main\n#include "{header}"\nint main(void){{ uint8_t p[BLOCK];init_crc();while(fread(p,1,BLOCK,stdin)==BLOCK){{DualChecker d={{.period=3,.bits=14}};printf("%d\\n",get16(p+6)==6?dual_command(p):dual_feed(&d,p));}}}}'''
   p=bytearray(packet(t0=100));struct.pack_into('<I',p,48,333333);struct.pack_into('<I',p,68,3)
   invalid=bytearray(p);struct.pack_into('<H',invalid,84+113*4,16384)

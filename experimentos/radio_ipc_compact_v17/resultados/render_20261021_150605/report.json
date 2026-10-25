@@ -1,0 +1,103 @@
+{
+  "ok": true,
+  "fft_hz": null,
+  "adaptive": true,
+  "argv": [
+    "experimentos/radio_ipc_compact_v17/render_probe.py",
+    "--adaptive-refresh",
+    "--stage-audit",
+    "--bits",
+    "8",
+    "--rate",
+    "1600000",
+    "--seconds",
+    "120",
+    "--audio-rate",
+    "40000",
+    "--bandwidth",
+    "8000",
+    "--analysis-audit",
+    "--keep-visible",
+    "--refill-ring",
+    "--defer-diagnostics",
+    "--host-cpu-trace",
+    "--retune-stress",
+    "--retune-interval",
+    "10"
+  ],
+  "stats": {
+    "calls": 5741,
+    "skipped": 579,
+    "executed": 5162,
+    "thread_cpu_seconds": 16.323067024000203,
+    "wall_seconds": 20.617336586670717,
+    "max_wall_ms": 28.948958992259577
+  },
+  "stages": {
+    "analysis_pipeline": {
+      "calls": 1217,
+      "thread_cpu_seconds": 14.417976081000072,
+      "wall_seconds": 17.20122141597676,
+      "max_wall_ms": 26.47550098481588
+    },
+    "draw_submission": {
+      "calls": 1197,
+      "thread_cpu_seconds": 1.832710910999889,
+      "wall_seconds": 2.802621461916715,
+      "max_wall_ms": 8.464707992970943
+    },
+    "fft_numeric": {
+      "calls": 1196,
+      "thread_cpu_seconds": 3.5393348889999983,
+      "wall_seconds": 3.716556613246212,
+      "max_wall_ms": 5.554811010370031
+    }
+  },
+  "policy_sha256": "1ac043d35e16cd681f81ed6da2aafc82b876f5ee6f17b9123710a01750d6a21d",
+  "source_sha256": "2470dafe026ffc28811138774c39637c5dc5e1ff13291ccf3849ba35e3c11325",
+  "limitation": "Diagnostic refresh reduction, not a production fix or proof of GIL causality.",
+  "stage_limitation": "Inclusive nested method timings; do not sum stages. Draw submission excludes later Qt painting. Counters span lifecycle.",
+  "physical_report": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v17/generador_radio_20261021_150605/report.json",
+  "policy": {
+    "entries": 3,
+    "exits": 3,
+    "reduced_seconds": 14.160750639013713,
+    "reduced": false,
+    "reasons": {
+      "delivery": 6,
+      "ack": 2
+    },
+    "transitions": [
+      {
+        "at": 176870.679047933,
+        "state": "reduced",
+        "reason": "delivery"
+      },
+      {
+        "at": 176875.821400054,
+        "state": "normal",
+        "reason": "quiet"
+      },
+      {
+        "at": 176878.879975432,
+        "state": "reduced",
+        "reason": "ack"
+      },
+      {
+        "at": 176881.932800439,
+        "state": "normal",
+        "reason": "quiet"
+      },
+      {
+        "at": 176898.846470834,
+        "state": "reduced",
+        "reason": "delivery"
+      },
+      {
+        "at": 176904.812044345,
+        "state": "normal",
+        "reason": "quiet"
+      }
+    ]
+  }
+}

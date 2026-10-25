@@ -5,10 +5,10 @@ ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT));os.environ
 import numpy as np
 from unittest.mock import patch
 from PyQt6 import QtWidgets
-from monitor.v16.app import SerialMonitorWindow
-from monitor.v16.numeric_batch import NumericBatch,SampleClock
+from monitor.historico.v16.app import SerialMonitorWindow
+from monitor.historico.v16.numeric_batch import NumericBatch,SampleClock
 app=QtWidgets.QApplication([])
-with patch('monitor.v16.app.usb_devices',return_value=[]):w=SerialMonitorWindow()
+with patch('monitor.historico.v16.app.usb_devices',return_value=[]):w=SerialMonitorWindow()
 w.render_timer.stop();w._acquisition_confirmed(8,1221374);w.resize(1320,860);w.show();app.processEvents();c=w.applied_configuration
 n=40000;i=np.arange(n);raw=np.column_stack((i*c.period,127.5+100*np.sin(2*np.pi*5000*i/c.actual_rate),np.zeros(n),i))
 w.handle_batch(NumericBatch(raw,c.maximum,SampleClock(c.timestamp_hz),1));app.processEvents();results=[]

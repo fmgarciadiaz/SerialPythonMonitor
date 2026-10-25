@@ -4,7 +4,7 @@ from pathlib import Path
 from dataclasses import replace
 import numpy as np
 from diagnosticos.synth_presets_v16 import panel_presets
-from monitor.v16.fm_source import FMSource
+from monitor.historico.v16.fm_source import FMSource
 parser=argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--baseline',default='respaldos/synth/20261010_output_limiter/fm_source.py')
 parser.add_argument('--output',default='diagnosticos/resultados_piano/eficiencia_v16/20261010_output_limiter_comparison.json')

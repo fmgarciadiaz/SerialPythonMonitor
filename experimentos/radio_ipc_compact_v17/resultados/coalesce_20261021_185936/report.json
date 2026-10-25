@@ -1,0 +1,151 @@
+{
+  "ok": false,
+  "enabled": true,
+  "argv": [
+    "experimentos/radio_ipc_compact_v17/coalesce_probe.py",
+    "--gc-audit",
+    "--bits",
+    "8",
+    "--rate",
+    "1600000",
+    "--seconds",
+    "120",
+    "--audio-rate",
+    "40000",
+    "--bandwidth",
+    "8000",
+    "--analysis-audit",
+    "--keep-visible",
+    "--refill-ring",
+    "--defer-diagnostics",
+    "--host-cpu-trace",
+    "--retune-stress",
+    "--retune-interval",
+    "10"
+  ],
+  "source_hashes": {
+    "coalesce_probe.py": "4fa7b46d8bc104c9a2fc80ecb3ab4ad089a36e1e043be5f364fac3fd9ecfc281",
+    "sample_coalescer.py": "31771a09807879cb28fb66124b210c8391b99c7882c50b9f216c8db812cfdac0",
+    "wire_probe.py": "4674270703eaab7982120ad3828ca7de8f12505ab26a4810d42230c38ac7ce03",
+    "wire_ack_audit.py": "5d8c04746d3122dd5a7e48d2399c176e5623118d99f5587f9a586aaf0cd82229"
+  },
+  "limitations": [
+    "Experimental ADC8/1.6M RADIO only, bounded16000samples and32parts.",
+    "10ms deadline checked cooperatively; blocked read/callback scheduling can exceed it.",
+    "Standard receiver validates every frame; control events and shutdown flush older samples first.",
+    "No codec, adaptive refresh, firmware or credit modifications. Passive observer adds overhead."
+  ],
+  "wire_report": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/experimentos/radio_ipc_compact_v17/resultados/wire_20261021_185937/report.json",
+  "physical_report": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v17/generador_radio_20261021_185937/report.json",
+  "coalescers": [
+    {
+      "inputs": 0,
+      "outputs": 0,
+      "samples": 0,
+      "peak_samples": 0,
+      "peak_parts": 0,
+      "max_age_ms": 0.0,
+      "pending_samples": 0,
+      "pending_parts": 0,
+      "slow_top": []
+    },
+    {
+      "inputs": 156933,
+      "outputs": 11929,
+      "samples": 135590112,
+      "peak_samples": 15552,
+      "peak_parts": 18,
+      "max_age_ms": 76.43997500417754,
+      "pending_samples": 0,
+      "pending_parts": 0,
+      "slow_top": [
+        {
+          "start": 190877.098915912,
+          "flushed_at": 190877.175355887,
+          "age_ms": 76.43997500417754,
+          "reason": "deadline",
+          "samples": 9504,
+          "parts": 11
+        },
+        {
+          "start": 190896.116493777,
+          "flushed_at": 190896.159966532,
+          "age_ms": 43.47275500185788,
+          "reason": "deadline",
+          "samples": 12096,
+          "parts": 14
+        },
+        {
+          "start": 190892.370755886,
+          "flushed_at": 190892.414214476,
+          "age_ms": 43.45859002205543,
+          "reason": "deadline",
+          "samples": 10368,
+          "parts": 12
+        },
+        {
+          "start": 190812.456897182,
+          "flushed_at": 190812.490241919,
+          "age_ms": 33.34473699214868,
+          "reason": "deadline",
+          "samples": 14688,
+          "parts": 17
+        },
+        {
+          "start": 190895.9893057,
+          "flushed_at": 190896.021777779,
+          "age_ms": 32.47207900858484,
+          "reason": "deadline",
+          "samples": 2592,
+          "parts": 3
+        },
+        {
+          "start": 190896.321382749,
+          "flushed_at": 190896.353270527,
+          "age_ms": 31.88777799368836,
+          "reason": "deadline",
+          "samples": 3456,
+          "parts": 4
+        },
+        {
+          "start": 190892.495531597,
+          "flushed_at": 190892.527155661,
+          "age_ms": 31.62406399496831,
+          "reason": "deadline",
+          "samples": 14688,
+          "parts": 17
+        },
+        {
+          "start": 190824.985346251,
+          "flushed_at": 190825.016505181,
+          "age_ms": 31.158930010860786,
+          "reason": "events:wav",
+          "samples": 14688,
+          "parts": 17
+        }
+      ]
+    },
+    {
+      "inputs": 0,
+      "outputs": 0,
+      "samples": 0,
+      "peak_samples": 0,
+      "peak_parts": 0,
+      "max_age_ms": 0.0,
+      "pending_samples": 0,
+      "pending_parts": 0,
+      "slow_top": []
+    },
+    {
+      "inputs": 0,
+      "outputs": 0,
+      "samples": 0,
+      "peak_samples": 0,
+      "peak_parts": 0,
+      "max_age_ms": 0.0,
+      "pending_samples": 0,
+      "pending_parts": 0,
+      "slow_top": []
+    }
+  ]
+}

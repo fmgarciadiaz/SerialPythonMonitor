@@ -4,7 +4,7 @@ import subprocess
 import tempfile
 import unittest
 
-SKETCH = Path(__file__).resolve().parent/'arduino/v16/oscilloscope/sketch/sketch.ino'
+SKETCH = Path(__file__).resolve().parent/'arduino/historico/v16/oscilloscope/sketch/sketch.ino'
 
 class PipelineTests(unittest.TestCase):
     def test_ownership_order_tails_and_control_delays(self):

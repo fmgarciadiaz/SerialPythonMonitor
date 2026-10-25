@@ -20,7 +20,7 @@ class ContractTests(unittest.TestCase):
   for args in ((12,133,3584),(14,77,3584),(8,133,1025),(8,133,8256)):
    with self.assertRaises(ValueError):request(0x80000001,*args)
  def test_python_and_c_nodes_wrap_and_rejections(self):
-  base=EXP/'arduino/v16/relay/base_verifier.c';header=base.with_name('config_relay_protocol.h')
+  base=EXP/'arduino/historico/v16/relay/base_verifier.c';header=base.with_name('config_relay_protocol.h')
   source=f'''#define main old_main
 #include "{base}"
 #undef main

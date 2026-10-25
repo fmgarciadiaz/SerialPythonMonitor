@@ -4,7 +4,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-SKETCH=Path(__file__).resolve().parents[2]/'arduino/v16/oscilloscope/sketch'
+SKETCH=Path(__file__).resolve().parents[2]/'arduino/historico/v16/oscilloscope/sketch'
 
 
 class StorageTests(unittest.TestCase):

@@ -4,7 +4,7 @@ import shutil
 
 ROOT = Path(__file__).resolve().parents[2]
 EXP = Path(__file__).resolve().parent
-SKETCH = ROOT/'arduino/v16/oscilloscope/sketch'
+SKETCH = ROOT/'arduino/historico/v16/oscilloscope/sketch'
 
 
 def main():
@@ -14,7 +14,7 @@ def main():
     if backup.exists():
         raise RuntimeError('Integration already prepared; inspect existing files')
     shutil.copytree(SKETCH, backup/'sketch')
-    shutil.copytree(ROOT/'arduino/v16/relay', backup/'relay')
+    shutil.copytree(ROOT/'arduino/historico/v16/relay', backup/'relay')
     p = SKETCH/'acquisition.h'; s = p.read_text()
     s = s.replace('#include "node_validation.h"', '#include "node_validation.h"\n#include "native_profiles.h"')
     s = s.replace('static bool single() { return (period == 267U || period == 242U || period == 133U); }', '''static const ScopeNativeProfile *native_profile = nullptr;
@@ -61,7 +61,7 @@ static uint32_t consumer_started=0;
     p = SKETCH/'node_validation.h'; s = p.read_text().replace('if constexpr (Copy) output[i] = {a, b};', 'if constexpr (Copy) { if constexpr (Single) { output[i] = {}; output[i].ch1 = a; } else output[i] = {a,b}; }'); p.write_text(s)
     p = SKETCH/'acquisition_protocol.h'; s = p.read_text().replace('#include "control_protocol.h"', '#include "control_protocol.h"\n#include "native_profiles.h"').replace('    if(period==133)', '    if(scope_native_find(bits,period)) return true;\n    if(period==133)'); p.write_text(s)
     p = SKETCH/'sketch.ino'; s = p.read_text()
-    source = (EXP/'arduino/v16/oscilloscope/sketch/sketch.ino').read_text()
+    source = (EXP/'arduino/historico/v16/oscilloscope/sketch/sketch.ino').read_text()
     begin = source.index('static void build_samples('); end = source.index('\nstatic void output_worker', begin)
     native = source[begin:end].replace('build_samples(', 'build_native_samples(', 1).replace('node->samples+offset', 'node->single_samples+offset')
     # Native dual packing is added only after its independent physical campaign.
@@ -75,10 +75,10 @@ static uint32_t consumer_started=0;
     p.write_text(s)
 
 
-    p = ROOT/'arduino/v16/relay/config_relay_protocol.h'; s = p.read_text()
+    p = ROOT/'arduino/historico/v16/relay/config_relay_protocol.h'; s = p.read_text()
     s = s.replace('#pragma once', '#pragma once\n#include "native_profiles.h"',1)
     s = s.replace('    if(period==133)', '    if(scope_native_find(bits,period)) return true;\n    if(period==133)',1)
-    source = (EXP/'arduino/v16/relay/config_relay_protocol.h').read_text()
+    source = (EXP/'arduino/historico/v16/relay/config_relay_protocol.h').read_text()
     begin = source.index('    const uint32_t ticks=d->period')
     end = source.index('\n}\nstatic bool dual_command',begin)
     body = source[begin:end]

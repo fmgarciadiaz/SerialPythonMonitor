@@ -117,6 +117,7 @@ class OutputReceiver:
         self.wav_live_credits = 2 # Experimental override; keep production window.
         self.wav_chunk_points = wav.CHUNK # Explicit paired experimental firmware only.
         self.transport_trace = None # Opt-in bounded diagnostic; no wire changes.
+        self.startup_trace = None # Optional milestone callback, never sample I/O.
         self.wav_next_offset = 0
         self.wav_low_ack = None
         self.wav_low_episode = False
@@ -378,9 +379,17 @@ class OutputReceiver:
         self.last_samples = time.monotonic()
         return self.applied
 
+    def _startup_event(self, event, **details):
+        callback=self.startup_trace
+        if callback is not None:callback(event,**details)
+
     def configure(self, config):
-        if self.mode is not None and config == self.config: return False
+        if self.mode is not None and config == self.config:
+            self._startup_event('configure_noop')
+            return False
         if config._native and config._native.get('integrity_only'):
+            connected = self.mode is not None
+            settle_seconds = .5 if connected else 2.0
             if self.mode is None: self.select(Mode.SPI)
             self.on_status('Preparando 1,60 MHz…')
             # Acquisition changes must not rewrite DAC levels, frequency or
@@ -392,19 +401,27 @@ class OutputReceiver:
                 # Governor/affinity setup can stall the relay while the old
                 # profile is still producing. Drain that high-rate epoch first,
                 # using the same low-load entry as physical qualification.
+                self._startup_event('preparation_14_40000_begin')
                 self._configure_once(Configuration(14, 40000))
+                self._startup_event('preparation_14_40000_end')
+                self._startup_event('preparation_8_1428571_begin')
                 self._configure_once(Configuration(8, 1428571))
-                end = time.monotonic() + 2
+                self._startup_event('preparation_8_1428571_end')
+                self._startup_event('settle_2s_begin',seconds=settle_seconds,connected=connected)
+                end = time.monotonic() + settle_seconds
                 while time.monotonic() < end:
                     self.pump()
+                self._startup_event('settle_2s_end',seconds=settle_seconds,connected=connected)
                 def final_configuration(active):
                     # A read may contain APPLIED followed by target samples.
                     # Publish the boundary first, then admit those samples in
                     # this same pump instead of waiting for configure to return.
+                    self._startup_event('target_applied',bits=active.bits,rate=active.rate)
                     confirmed(active)
                     self.on_samples = samples
                     self.on_configuration = confirmed
                 self.on_configuration = final_configuration
+                self._startup_event('target_request',bits=config.bits,rate=config.rate)
                 return self._configure_once(config)
             finally:
                 self.on_samples, self.on_configuration = samples, confirmed
@@ -415,9 +432,11 @@ class OutputReceiver:
             try:
                 self.on_samples=lambda rows:None
                 self.on_configuration=lambda active:None
+                self._startup_event('high_rate_bridge_begin')
                 self._configure_once(Configuration(14,40000))
                 end=time.monotonic()+.15
                 while time.monotonic()<end:self.pump()
+                self._startup_event('high_rate_bridge_end')
                 def applied(active):
                     confirmed(active)
                     self.on_samples=samples
