@@ -41,6 +41,7 @@ def main():
                     w.config_rate_combo.setCurrentIndex(w.config_rate_combo.findData(1860465))
                     w._auto_apply_timer.stop()
                     w.applied_configuration=Configuration(8,1860465)
+                    w._sync_radio_input_controls()
                     d.size.setCurrentText('16384');d.channels[1].setCurrentText('Ninguno')
                     d.fft_mode.setCurrentText('Radio')
                     w.radio_frequency.setValue(710)
@@ -73,9 +74,12 @@ def main():
                     if radio:
                         w._auto_apply_timer.stop()
                         w.applied_configuration=Configuration(8,1860465)
+                        w._sync_radio_input_controls()
                         with QtCore.QSignalBlocker(w.radio_frequency):
                             w.radio_frequency.setRange(1,930)
                             w.radio_frequency.setValue(710)
+                        w._sync_radio_dials()
+                        w._refresh_status_boxes()
                         fs=w.applied_configuration.actual_rate
                         frequency=np.fft.rfftfreq(16384,1/fs)
                         rng=np.random.default_rng(frame)
@@ -117,11 +121,13 @@ def main():
                 # Render text at 2x device resolution; keep that lossless PNG.
                 # GIF uses logical resolution and a full shared 256-color palette.
                 frames=[image.resize((image.width//2,image.height//2),Image.Resampling.LANCZOS) for image in frames]
-                samples=Image.new('RGB',(320,220*len(frames)))
-                for i,image in enumerate(frames):samples.paste(image.resize((320,220)),(0,i*220))
-                palette=samples.quantize(colors=256)
+                # Preserve antialiased text: reserve 64 neutral shades instead
+                # of building the palette from tiny thumbnails that lose glyphs.
+                colors=frames[len(frames)//2].quantize(colors=192).getpalette()[:576]
+                grayscale=[channel for value in range(0,256,4) for channel in (value,value,value)]
+                palette=Image.new('P',(1,1));palette.putpalette(colors+grayscale)
                 compact=[image.quantize(palette=palette,dither=Image.Dither.NONE) for image in frames]
-                compact[0].save(gif,save_all=True,append_images=compact[1:],duration=125,loop=0,optimize=True)
+                compact[0].save(gif,save_all=True,append_images=compact[1:],duration=80,loop=0,optimize=True)
                 manifest.append(dict(name=name,source='V18 GUI, offline synthetic demo; no Q',frames=len(frames),gif_size=list(frames[0].size),png_scale=2,palette_colors=256,gif_bytes=gif.stat().st_size))
                 print(name,gif.stat().st_size,flush=True)
             finally:

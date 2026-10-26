@@ -35,8 +35,8 @@ por la demostración simulada de mayor resolución; su ensayo y restauración es
 ## Calidad de exportación
 
 PNG sin pérdidas a doble resolución de dispositivo (3.200 × 2.200 para vistas
-completas), GIF a 1.600 × 1.100 con una paleta compartida de 256 colores
-muestreada de todos los cuadros. El detalle de Generador Radio conserva su
+completas), GIF a 1.600 × 1.100 con una paleta de 256 colores que reserva 64 tonos neutros para conservar
+el suavizado de los textos y 192 colores de la vista. El detalle de Generador Radio conserva su
 proporción y resolución correspondiente. No se amplían los archivos pequeños
 anteriores: se vuelve a renderizar la GUI V18. La calidad tiene prioridad sobre
 el mínimo tamaño del GIF; consultar dimensiones y pesos en el manifiesto.

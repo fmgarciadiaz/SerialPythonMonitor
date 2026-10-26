@@ -1,3 +1,14 @@
+## 26/10 · Calidad HD y presentación totalmente simulada
+
+Por pedido del usuario TODAS las imágenes principales de landing son ahora
+simulaciones V18, incluida Radio710. No esperar cambio de cables para Bode
+de presentación. PNG3200x2200 y GIF1600x1100 (detalle Radio proporcional),
+paleta256 con64 grises reservados para texto, 12,5FPS, PNG alternativo.
+Diez pares verificados, script `tools/capture_landing_v18.py`, manifiesto
+`assets/landing_v18_manifest.json`. README/guía/procedencia actualizados.
+Sin Q, fuentes runtime ni V17 modificados en esta tarea. No confundir
+los medios simulados con la evidencia física histórica conservada.
+
 ## 26/10 · Landing renovada con V18
 
 Ocho pares GIF/PNG nuevos generados offline por `tools/capture_landing_v18.py`;
