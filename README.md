@@ -22,7 +22,7 @@ bloques; USB/ADB conecta el instrumento con la computadora.
 ordenado por el monitor, relay Linux, aplicación App Lab y sketch MCU;
 flujos de muestras y órdenes, temporizadores, DMA, IRQ, mutex, colas y carga del Q.
 
-**V18 es la versión de trabajo; V17 queda congelada con su pareja del Q.** [Parejas y respaldo](docs/PAREJAS_V17_V18.md). [Validación y límites V18](docs/VALIDACION_V18.md) · [Plan de trabajo](Plan%20de%20trabajo.md). Las imágenes y animaciones principales muestran V18: Radio usa recepción real; las demás son demostraciones sintéticas y no acreditan validación física.
+**V18 es la versión de trabajo; V17 queda congelada con su pareja del Q.** [Parejas y respaldo](docs/PAREJAS_V17_V18.md). [Validación y límites V18](docs/VALIDACION_V18.md) · [Plan de trabajo](Plan%20de%20trabajo.md). Las imágenes y animaciones principales muestran V18: todas son demostraciones sintéticas y no acreditan validación física.
 
 ## V(t) · osciloscopio
 
@@ -116,7 +116,7 @@ visible y comparar los dos canales.
 
 <picture>
   <source media="(prefers-reduced-motion: reduce)" srcset="assets/monitor_bode.png">
-  <img src="assets/monitor_bode.gif" alt="V18 · Bode de un filtro RC simulado; pendiente de captura física">
+  <img src="assets/monitor_bode.gif" alt="V18 · Bode de un filtro RC simulado">
 </picture>
 
 [Ver imagen estática](assets/monitor_bode.png).
@@ -132,8 +132,7 @@ método. Elegir el modo prepara el panel; la medición empieza con Repetir
 o Agregar. Los pulsos de 100 µs requieren el firmware experimental.
 
 Las demostraciones muestran la interfaz V18 actual y señales sintéticas.
-Bode ilustra un filtro RC; su captura física está pendiente de reconectar
-el circuito. No representan mediciones de hardware. Los GIF tienen PNG
+Bode ilustra un filtro RC calculado. No representan mediciones de hardware. Los GIF tienen PNG
 alternativo y respetan la preferencia de reducir movimiento cuando el lector
 la admite.
 [Controles del monitor](monitor/v18/README.md) · [Análisis y Bode](docs/MONITOR_TECNICO.md).
@@ -158,21 +157,19 @@ La imagen ilustra el panel integrado con el osciloscopio.
 
 <picture>
   <source media="(prefers-reduced-motion: reduce)" srcset="assets/monitor_radio_710.png">
-  <img src="assets/monitor_radio_710.gif" alt="V18 · recepción real a 710 kHz y FFT recortada">
+  <img src="assets/monitor_radio_710.gif" alt="V18 · simulación AM a 710 kHz y FFT recortada">
 </picture>
 
 [Ver imagen estática](assets/monitor_radio_710.png).
-
-[Ver captura estática de la recepción a 710 kHz](assets/monitor_radio_710.png).
 
 Toma CH1 como entrada de radio, sintoniza una portadora y demodula AM.
 El panel permite escanear emisoras, ajustar la banda RF y trabajar con gain
 manual o automático hasta ×80. US extiende la sintonía aprovechando alias y
 compara detecciones entre tasas para estimar la frecuencia real.
-La animación muestra una captura real de CH1, con 710 kHz seleccionada,
-FFT de 16.384 puntos y zoom en «Recortar radios». Se ven el Generador Radio
-con sus barras LED y la solapa Radio. Los candidatos de Scan son detecciones espectrales;
-la captura no certifica la identidad de una emisora.
+La animación simula portadoras AM, con 710 kHz seleccionada y FFT de
+16.384 puntos en «Recortar radios». Se ven el Generador Radio con sus barras
+LED y la solapa Radio. Las portadoras y el audio son sintéticos; no es una
+grabación de recepción ni una prueba de salida A0.
 
 Play de RADIO activa la recepción y el análisis. Generador Radio permite
 llevar el resultado a A0, con entrada RADIO o FILTER, volumen y offset.

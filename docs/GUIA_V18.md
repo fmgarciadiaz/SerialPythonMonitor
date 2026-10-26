@@ -38,10 +38,10 @@ Generador Radio puede tomar RADIO o FILTER y mantiene detector de realimentació
 
 ### Indicadores de audio del Generador Radio
 
-[Recepción real a 710 kHz con FFT recortada (animación)](../assets/monitor_radio_710.gif)
-· [Captura estática](../assets/monitor_radio_710.png). Capturada en V18 con
-CH1 real y Scan; las marcas representan candidatos espectrales, no nombres
-de emisoras verificados.
+[Simulación AM a 710 kHz con FFT recortada (animación)](../assets/monitor_radio_710.gif)
+· [Captura estática](../assets/monitor_radio_710.png). Generada con la interfaz V18 y
+portadoras/audio sintéticos, sin conexión al Q. Las marcas ilustran emisoras
+para mostrar el recorte; no representan un Scan real.
 
 ![Panel Radio V18, demostración de sus indicadores LED](../assets/monitor_radio_equ.png)
 
