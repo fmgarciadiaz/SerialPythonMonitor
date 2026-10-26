@@ -1,3 +1,67 @@
+## 26/10 · Revisión general de procesos y tasas
+
+- [x] Revisión con Astra de adquisición, relay, IPC, DSP, GUI y A0.
+- [x] Identificar huecos entre evidencia histórica y pareja actual.
+- [x] Identificar candidatos medibles: correlación pasiva y telemetría de colas.
+- [x] Separar alcance e identidad de las aceptaciones en informes/UI.
+- [x] Registrar el presupuesto host concreto que se agota.
+- [x] Preparar telemetría relay aislada, comparar coste y restaurar (sin promover).
+- [x] Repetir ADC8 máximo con dibujo visible y carga RADIO/A0 en pareja aceptada; fallo original no reproducido.
+- [ ] Optimizar sólo las etapas que las mediciones justifiquen.
+
+[Informe y orden propuesto](docs/REVISION_PROCESOS_TASAS_V18_20261026.md).
+Sin cambios de firmware ni tasas durante la revisión.
+
+## 25/10 · Catálogo de tasas V18 completado
+
+- [x] Revisión con Astra; anclajes 44,1/48/96/192 kHz respetando límites.
+- [x] Distribución de tasas intermedias sin cambiar los métodos existentes.
+- [x] 32 perfiles incorporados con evidencia física y restauración.
+- [x] Catálogo compacto; acceso contextual a todas las tasas históricas.
+- [x] 32/32 regresiones instaladas y 10/10 recorridos de GUI visible.
+- [x] Rollback exacto, prebuild, respaldo previo y update transaccional.
+- [x] 237 pruebas V18 y 30 adicionales; 148 rutas Scan conservadas.
+- [x] Preparar Q final; V17 intacta.
+
+Detalle: [Catálogo y evidencia](docs/CATALOGO_TASAS_V18_PLAN_20261025.md).
+
+## 25/10 · Segunda tanda incorporada y verificada
+
+Máximos CH1: 8 bits 1.860.465,116 S/s; 10 bits 1.355.932,203 S/s;
+12 bits 1.103.448,276 S/s; 14 bits 1.000.000 S/s; 16 bits 150.943,396 S/s.
+Dual y tasas anteriores conservados. Métodos de ADC/SPI/DMA/DSP sin cambios.
+8 bits/85 ticks (1.882.352,941 S/s) fue retirado tras UNDERRUN instalado:
+el informe privado PASS no anula ese fallo. Control 8/86 instalado120PASS.
+
+60 + 3×120 s y GUI privada completados. Rollback/prebuild/respaldo antes de
+update transaccional. Regresión instalada aceptada9/9 (3nuevos,control8,
+5anteriores incluyendo16simple/dual);342tests offlinePASS. PrepararQfinal
+verificó fuentes, identidad y10s de adquisición. Qlibre,sincampañasactivas.
+Pareja MCU540c1674… / relayecccdbcd… . V17:175hashes intactos. Archivos
+centrales app.py/processing.py/numeric_batch.py/radio_am.py/radio_stream.py/
+digital_filter.py sin cambios respecto del respaldo anterior.
+
+Respaldo final: `respaldos/parejas/v18_tasas_rateonly2_20261025_193958/manifest.json`.
+Detalle: `docs/SONDEO_TASAS_V18_20261025.md`.
+Regresión: `diagnosticos/resultados_v18/rateonly2_installed_remainder_20261025_191207/report.json`.
+Verificación: `diagnosticos/resultados_v18/rateonly2_final_prepare_20261025.json`.
+El informe fallido190204 se conserva; no reintroducir8/85ni otrosperfilesprivados
+sin resolver/validar el fallo.145Scanseleccionesanterioresintactas.
+
+Cierre 25/10: 334 pruebas offline aprobadas; Preparar Q y adquisición final
+verificados. Respaldo pareado `respaldos/parejas/v18_tasas_rateonly_20261025_173359/manifest.json`.
+Q libre para uso normal; V17 intacta.
+
+## 25/10 · Incorporación de tasas con métodos constantes
+
+Monitor V18 + Scope V18 incorporan CH1 ADC8 a 1.860.465,116 S/s, ADC10 a
+1.333.333,333 S/s y ADC14 a 941.176,471 S/s. ADC12/16 y las tasas anteriores
+se conservan. Aislamiento, 60 + 3×120 s, GUI/audio, rollback same-app y prebuild
+exacto precedieron al despliegue transaccional. Regresión instalada 9/9,
+incluidos 16 bits simple/dual. Los 142 perfiles previos conservan sus auxiliares
+Scan US. No se cambiaron relojes, DMA, packing ni métodos de tasas existentes.
+Detalle y evidencia: [campaña](docs/SONDEO_TASAS_V18_20261025.md).
+
 Respaldo final tras limpieza y Preparar Q: `respaldos/parejas/v18_ordenada_20261024_234412/manifest.json`.
 Q V18 activo y libre; V17 detenido/intacto. Sin campañas activas.
 Resumen: `docs/CIERRE_ORGANIZACION_V18_20261024.json`.

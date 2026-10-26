@@ -10,9 +10,9 @@ from monitor.v18.receiver.unoq_config_receiver import OutputReceiver
 from monitor.v18.receiver.unoq_acquisition import Configuration
 
 
-def run(seconds=15,bits_filter=None,channels_filter=None,repeats=1):
+def run(seconds=15,bits_filter=None,channels_filter=None,repeats=1,qualify=False):
  folder=Path(__file__).parent/time.strftime('%Y%m%d_%H%M%S');folder.mkdir()
- report={'ok':False,'seconds_per_case':seconds,'repeats':repeats,'deployment':False,'cases':[]}
+ report={'ok':False,'seconds_per_case':seconds,'repeats':repeats,'deployment':False,'qualification':qualify,'cases':[]}
  def save(): (folder/'report.json').write_text(json.dumps(report,indent=2)+'\n')
  save();print(folder,flush=True)
  with private_profiles():
@@ -25,16 +25,17 @@ def run(seconds=15,bits_filter=None,channels_filter=None,repeats=1):
     cases=[(10,122,5568),(12,146,7488),(14,176,5952),(16,1100,3488),(16,None,None)]
     cases=[case for case in cases if bits_filter is None or case[0] in bits_filter]
     cases=[case for case in cases if channels_filter is None or (1 if case[1] else 2) in channels_filter]
-    for repetition,bits,ticks,pairs in [(rep,*case) for rep in range(1,repeats+1) for case in cases]:
+    sequence=([(rep,duration,*case) for case in cases for rep,duration in enumerate((60,120,120,120),1)] if qualify else [(rep,seconds,*case) for rep in range(1,repeats+1) for case in cases])
+    for repetition,duration,bits,ticks,pairs in sequence:
      receiver.configure(Configuration(14,40000))
      config=Configuration.from_wire(bits,(pairs<<16)|ticks) if ticks else Configuration(16,76226)
-     row={'repetition':repetition,'bits':bits,'channels':config.channels,'rate':config.actual_rate,'ticks':config.period,'node_pairs':config.node_pairs,'ok':False}
+     row={'seconds':duration,'repetition':repetition,'bits':bits,'channels':config.channels,'rate':config.actual_rate,'ticks':config.period,'node_pairs':config.node_pairs,'ok':False}
      report['cases'].append(row);save();print('BEGIN',row,flush=True)
      receiver.configure(config)
      deadline=time.monotonic()+1
      while time.monotonic()<deadline:receiver.pump()
      before=receiver.decoder.pairs;start=time.monotonic();metrics=FrameMetrics()
-     while time.monotonic()-start<seconds:
+     while time.monotonic()-start<duration:
       receiver.pump();metrics.observe(receiver.decoder.statuses)
      elapsed=time.monotonic()-start;samples=receiver.decoder.pairs-before
      budget=config.node_pairs*config.period
@@ -59,9 +60,9 @@ def run(seconds=15,bits_filter=None,channels_filter=None,repeats=1):
   save();print('FINAL',report['ok'],folder,flush=True)
  return 0 if report['ok'] else 1
 if __name__=='__main__':
- parser=argparse.ArgumentParser();parser.add_argument('--seconds',type=float,default=15)
+ parser=argparse.ArgumentParser();parser.add_argument('--qualify',action='store_true');parser.add_argument('--seconds',type=float,default=15)
  parser.add_argument('--bits',nargs='+',type=int);parser.add_argument('--channels',nargs='+',type=int)
  parser.add_argument('--repeats',type=int,choices=(1,2,3),default=1)
  args=parser.parse_args()
  if not 0<args.seconds<=120:parser.error('seconds must be in (0,120]')
- raise SystemExit(run(args.seconds,args.bits,args.channels,args.repeats))
+ raise SystemExit(run(args.seconds,args.bits,args.channels,args.repeats,args.qualify))

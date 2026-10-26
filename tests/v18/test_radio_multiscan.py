@@ -14,6 +14,22 @@ class MultiscanTests(unittest.TestCase):
                              {(88,3488),(100,3456),(114,3456)})
             self.assertNotIn(1118881,[c.rate for c in configs])
 
+    def test_other_high_rate_formats_avoid_legacy_auxiliaries(self):
+        import json
+        from pathlib import Path
+        from unittest.mock import patch
+        from monitor.v18.receiver import unoq_native
+        from monitor.v18.receiver.unoq_acquisition import Configuration
+        from monitor.v18.radio_multiscan import scan_profiles
+        profiles=json.loads(Path('experimentos/fs_max_v18/candidate_profiles.json').read_text())
+        with patch.object(unoq_native,'PROFILES',unoq_native.PROFILES+tuple(profiles)):
+            for bits,ticks,excluded in ((10,122,176),(12,146,None),(14,176,228)):
+                p=next(p for p in profiles if p['bits']==bits and p['ticks']==ticks)
+                configs=scan_profiles(Configuration.from_wire(bits,unoq_native.code(p)))
+                self.assertEqual(len(set(configs)),3)
+                self.assertTrue(all(c.channels==1 and c.bits==bits for c in configs))
+                if excluded:self.assertNotIn(excluded,[c.period for c in configs])
+
     def test_fast_auxiliary_rates_resolve_in_band_and_aliased_stations(self):
         from monitor.v18.radio_multiscan import scan_profiles
         from monitor.v18.receiver.unoq_acquisition import Configuration
@@ -91,3 +107,59 @@ class MultiscanTests(unittest.TestCase):
             self.assertFalse(scan.restoring)
         finally:
             scan.timer.stop();scan.active=False;w.series=old;w.serial_worker=None;w.close();app.processEvents()
+
+    def test_failed_scan_resumes_pending_window_close(self):
+        from unittest.mock import MagicMock,patch
+        from PyQt6 import QtWidgets
+        from monitor.v18.app import SerialMonitorWindow
+        from monitor.v18.radio_multiscan import MultirateScan
+        app=QtWidgets.QApplication.instance() or QtWidgets.QApplication([])
+        with patch('monitor.v18.app.usb_devices',return_value=[]):w=SerialMonitorWindow()
+        try:
+            w._acquisition_confirmed(8,1600000);w.serial_worker=MagicMock()
+            scan=MultirateScan(w);scan.start();w._close_pending=True;w.serial_worker=None
+            scan.error='Flujo cerrado'
+            with patch.object(w,'close') as close:
+                scan.finish();app.processEvents();close.assert_called_once()
+            self.assertFalse(scan.active)
+        finally:w._close_pending=False;w.serial_worker=None;w.close();app.processEvents()
+
+    def test_restore_timeout_keeps_radio_paused_even_with_matching_configuration(self):
+        from unittest.mock import MagicMock,patch
+        from PyQt6 import QtWidgets
+        from monitor.v18.app import SerialMonitorWindow
+        from monitor.v18.radio_multiscan import MultirateScan
+        app=QtWidgets.QApplication.instance() or QtWidgets.QApplication([])
+        with patch('monitor.v18.app.usb_devices',return_value=[]):w=SerialMonitorWindow()
+        try:
+            w._acquisition_confirmed(8,1600000);w.serial_worker=MagicMock()
+            w.radio_enabled.setChecked(True)
+            scan=MultirateScan(w);w._radio_multiscan=scan;scan.start();scan.restore()
+            scan.tick()  # Matching settings alone are not fresh RF confirmation.
+            self.assertTrue(scan.active)
+            self.assertFalse(w.radio_enabled.isChecked())
+            scan.deadline=0
+            with patch.object(w,'_finish_radio_scan_a0') as finish:
+                scan.tick();finish.assert_called_once_with(False)
+            self.assertFalse(scan.active)
+            self.assertFalse(scan.restore_confirmed)
+            self.assertFalse(w.radio_enabled.isChecked())
+            self.assertIn('Restauración no confirmada',w.radio_status.text())
+        finally:w.serial_worker=None;w.close();app.processEvents()
+
+    def test_disconnect_during_restore_does_not_resume_radio(self):
+        from unittest.mock import MagicMock,patch
+        from PyQt6 import QtWidgets
+        from monitor.v18.app import SerialMonitorWindow
+        from monitor.v18.radio_multiscan import MultirateScan
+        app=QtWidgets.QApplication.instance() or QtWidgets.QApplication([])
+        with patch('monitor.v18.app.usb_devices',return_value=[]):w=SerialMonitorWindow()
+        try:
+            w._acquisition_confirmed(8,1600000);w.serial_worker=MagicMock()
+            w.radio_enabled.setChecked(True)
+            scan=MultirateScan(w);w._radio_multiscan=scan;scan.start();scan.restore()
+            w.serial_worker=None;scan.tick()
+            self.assertFalse(scan.active)
+            self.assertFalse(w.radio_enabled.isChecked())
+            self.assertFalse(scan.restore_confirmed)
+        finally:w.serial_worker=None;w.close();app.processEvents()

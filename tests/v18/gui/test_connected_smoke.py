@@ -20,6 +20,7 @@ class SyntheticBackend:
         type(self).instance = self
         self.mode, self.config = mode, config
         self.events = queue.Queue()
+        self.pcm_requests = queue.Queue()
         self.sent, self.released = [], []
         self.cancelled = self.started = False
         self.sequence = self.sample = 0
@@ -36,7 +37,7 @@ class SyntheticBackend:
         self.emit('acquisition_confirmed', self.config.bits, self.config.rate)
         self.emit('output_confirmed', int(self.mode), '')
         self.emit('switching', False)
-        self.emit('instrument_confirmed', dict(board_serial='synthetic', app='scope-v17-main-1',
+        self.emit('instrument_confirmed', dict(board_serial='synthetic', app='scope-v18-main-1',
             firmware_sha256='a'*64, relay_sha256='b'*64))
         self.emit('generator_confirmed', GeneratorReply(0x80000001, Phase.APPLIED,
             Reason.OK, True, self.generator, self.generator, True, True, True, True))
@@ -69,6 +70,8 @@ class SyntheticBackend:
         result = []
         while not self.events.empty(): result.append(self.events.get_nowait())
         return result
+    def receive_pcm_request(self,timeout=.05):
+        return self.pcm_requests.get(timeout=timeout)
     def release(self, identifier): self.released.append(identifier)
     def poll_terminal(self):
         return dict(ok=True, error=None, shutdown_confirmed=True) if self.cancelled else None
@@ -136,7 +139,7 @@ class ConnectedSmokeTests(unittest.TestCase):
                 hardware.assert_not_called()
             finally:
                 window.close()
-                self.wait_for(lambda: not window.isVisible())
+                self.wait_for(lambda: not window.isVisible() and window.serial_worker is None)
             self.assertIsNone(window.serial_worker)
             self.assertIsNone(window.serial_thread)
             self.assertFalse(window.render_timer.isActive())

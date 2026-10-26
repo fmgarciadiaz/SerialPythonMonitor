@@ -1,0 +1,75 @@
+{
+  "ok": false,
+  "deployment": false,
+  "profile": {
+    "bits": 10,
+    "channels": 1,
+    "ticks": 122,
+    "node_pairs": 5568,
+    "headroom": false,
+    "internal_only": false,
+    "validation": "unmeasured",
+    "queue_slots": 4,
+    "integration_pending": false
+  },
+  "baseline": {
+    "schema": 1,
+    "identity": {
+      "board_serial": "1060031107",
+      "app": "scope-v18-main-1",
+      "firmware_sha256": "cad37ccd079ff7905863e9f826ba956abe47d13ddeb85634698e44f4930325c7",
+      "relay_sha256": "9b8baa1a435838a33bca651669f5b64f0ca17066e53d567b9d1eaa6972cba114"
+    },
+    "adc_bits": 14,
+    "adc_period": 32,
+    "generator": {
+      "wave": 0,
+      "enabled": 0,
+      "mode": 0,
+      "frequency": 2500,
+      "final_frequency": 2500,
+      "low": 0,
+      "high": 4095,
+      "duration": 1000,
+      "duration_us": 0,
+      "duty": 50
+    }
+  },
+  "identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v18-main-1",
+    "firmware_sha256": "cad37ccd079ff7905863e9f826ba956abe47d13ddeb85634698e44f4930325c7",
+    "relay_sha256": "9b8baa1a435838a33bca651669f5b64f0ca17066e53d567b9d1eaa6972cba114"
+  },
+  "display_guard": {
+    "pid": 94158,
+    "timeout_seconds": 600,
+    "released": true
+  },
+  "command": [
+    "/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/bin/python",
+    "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/tools/gui_experimental_v18.py",
+    "--serial",
+    "1060031107",
+    "--output",
+    "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v18/gui_installed_private_20261025_095355/gui.json",
+    "--bits",
+    "10",
+    "--rate",
+    "1311475",
+    "--frequency-khz",
+    "400",
+    "--duration",
+    "150.0",
+    "--hold-radio-seconds",
+    "120.0",
+    "--scan",
+    "--wav",
+    "--fm",
+    "--voices",
+    "20",
+    "--us"
+  ],
+  "error": "TimeoutExpired(['/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/bin/python', '/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/tools/gui_experimental_v18.py', '--serial', '1060031107', '--output', '/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v18/gui_installed_private_20261025_095355/gui.json', '--bits', '10', '--rate', '1311475', '--frequency-khz', '400', '--duration', '150.0', '--hold-radio-seconds', '120.0', '--scan', '--wav', '--fm', '--voices', '20', '--us'], 270.0)",
+  "restore_error": "RuntimeError('V18 requiere Scope V18 y su relay ya activos; no se inicia ni instala autom\u00e1ticamente.')"
+}

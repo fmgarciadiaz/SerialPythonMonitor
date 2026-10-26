@@ -1,0 +1,20 @@
+........E...................................................................................................................................................................................................Verificando pareja V18 y adquisición…
+.qt.qpa.fonts: Populating font family aliases took 168 ms. Replace uses of missing font family "Sans Serif" with one that exists to avoid this cost. 
+..........................................
+======================================================================
+ERROR: test_rf_overflow_is_fault_without_silent_loss_or_false_restore (tests.v18.io.test_acquisition_process.AcquisitionProcessTests.test_rf_overflow_is_fault_without_silent_loss_or_false_restore)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/tests/v18/io/test_acquisition_process.py", line 63, in test_rf_overflow_is_fault_without_silent_loss_or_false_restore
+    owner,_=self.owner(rf_capacity=2)
+            ~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/tests/v18/io/test_acquisition_process.py", line 17, in owner
+    row=owner.events.get(timeout=2)
+  File "/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/lib/python3.13/multiprocessing/queues.py", line 112, in get
+    raise Empty
+_queue.Empty
+
+----------------------------------------------------------------------
+Ran 247 tests in 41.074s
+
+FAILED (errors=1)

@@ -2,7 +2,7 @@
 
 Cada carpeta conserva fuentes, configuración, capturas y resultados de su campaña. Las rutas permanecen estables porque los runners y los informes las referencian. Un candidato aquí no se considera incorporado por existir ni por pasar una prueba corta.
 
-[Estado productivo](../docs/ESTADO_ACTUAL_V17.md) · [Plan](../Plan%20de%20trabajo.md).
+[Uso actual V18](../docs/GUIA_V18.md) · [Validación V18](../docs/VALIDACION_V18.md) · [Plan](../Plan%20de%20trabajo.md).
 
 | Entrada | Uso |
 |---|---|

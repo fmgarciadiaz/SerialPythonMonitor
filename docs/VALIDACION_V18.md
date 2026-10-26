@@ -1,3 +1,110 @@
+## 26/10 · Comparación privada del relay diagnóstico
+
+Compilación Linux y restauración aprobadas. Doce casos A/B de adquisición
+pasaron: ADC8 máximo120s por relay y cinco controles30s. Dos recorridos
+RADIO/A0 a ADC8 máximo120s pasaron funcionalidad/restauración. El control
+aceptado cumplió GUI visible; el instrumentado quedó2393paintfrentea2400,
+aunque expuesto100%, por eso su criterioGUI sigue falso.
+
+Relay privado retirado, misma pareja aceptada y estado inicial restaurados;
+Preparar Q final aprobó10s. No se modificaron fuentesQ ni V17. No se considera
+resuelto el dropped1original ni se promueve el candidato. Se preserva un
+intento previo fallido de arranque y su recuperación posterior.
+[Resultados y límites](../experimentos/relay_telemetry_v18/RESULTADOS_20261026.md).
+
+## 26/10 · Revisión por cierre ADC8 máximo con RADIO/A0
+
+Se confirmó pérdida de1 nodo con cola8/8 y cierre deliberado del relay,
+CRC correcto y sin error fatal del ADC. No atribuirlo a las etiquetas UI.
+La pareja catálogo sí cambió binarios por tablas/predicados ampliados, aunque
+los perfiles previos conservan configuración y métodos.
+
+Regresión ampliada:32/32 tasas nuevas con RADIO/A0≥30s, y5/5 máximos previos
+con RADIO/A0≥120s, todos con restauración e identidad verificadas. No se
+reprodujo el fallo. Corrida mayormente en segundo plano; sólo6/37 casos
+cumplen GUI visible, sin calificar visualmente ADC8 máximo. No se cambiaron
+firmware ni tasas, ni se certifica holgura con esta matriz.
+Informe: `diagnosticos/resultados_v18/radio_rates_review_20261026_130257/report.json`.
+[Diagnóstico y límites](DIAGNOSTICO_ADC8_MAX_20261026.md).
+
+## 25/10 · Catálogo de tasas incorporado y validado
+
+Nueva pareja: firmware `37f049fa…`, relay `27da0bc4…`.
+Los máximos anteriores y sus métodos se conservan. Se incorporan 17 perfiles
+de audio y 15 intermedios CH1, con catálogo visible de 17 opciones en 8–14 bits
+y 15 en 16 bits. Los perfiles históricos siguen accesibles.
+
+Aceptación privada: audio 17×60 s, intermedios 15×60 s, audio integrado
+17×15 s y GUI visible 10/10. Rollback exacto, prebuild, respaldo y update
+transaccional aprobados. Regresión posterior: 237 pruebas V18 y 30 adicionales.
+Regresión instalada: 32/32 perfiles, 15 s cada uno, holgura aprobada,
+cola máxima 2, sin pérdidas/fatales y restauración verificada.
+Informe: `experimentos/fs_max_v18/installed_campaign/20261025_223730/report.json`.
+148 rutas históricas de Scan permanecen idénticas. V17: 175 archivos protegidos
+verificados intactos. GUI instalada visible: 10/10 aprobadas y restauradas. Preparar Q final verificó
+identidad y adquisición durante 10 s. Informe GUI:
+`diagnosticos/resultados_v18/catalog_installed_gui_20261025_224618/report.json`.
+[Detalle del catálogo](CATALOGO_TASAS_V18_PLAN_20261025.md).
+
+## 25/10 · Segunda tanda incorporada y verificada
+
+Máximos CH1: 8 bits 1.860.465,116 S/s; 10 bits 1.355.932,203 S/s;
+12 bits 1.103.448,276 S/s; 14 bits 1.000.000 S/s; 16 bits 150.943,396 S/s.
+Dual y tasas anteriores conservados. Métodos de ADC/SPI/DMA/DSP sin cambios.
+8 bits/85 ticks (1.882.352,941 S/s) fue retirado tras UNDERRUN instalado:
+el informe privado PASS no anula ese fallo. Control 8/86 instalado120PASS.
+
+60 + 3×120 s y GUI privada completados. Rollback/prebuild/respaldo antes de
+update transaccional. Regresión instalada aceptada9/9 (3nuevos,control8,
+5anteriores incluyendo16simple/dual);342tests offlinePASS. PrepararQfinal
+verificó fuentes, identidad y10s de adquisición. Qlibre,sincampañasactivas.
+Pareja MCU540c1674… / relayecccdbcd… . V17:175hashes intactos. Archivos
+centrales app.py/processing.py/numeric_batch.py/radio_am.py/radio_stream.py/
+digital_filter.py sin cambios respecto del respaldo anterior.
+
+Respaldo final: `respaldos/parejas/v18_tasas_rateonly2_20261025_193958/manifest.json`.
+Detalle: `docs/SONDEO_TASAS_V18_20261025.md`.
+Regresión: `diagnosticos/resultados_v18/rateonly2_installed_remainder_20261025_191207/report.json`.
+Verificación: `diagnosticos/resultados_v18/rateonly2_final_prepare_20261025.json`.
+El informe fallido190204 se conserva; no reintroducir8/85ni otrosperfilesprivados
+sin resolver/validar el fallo.145Scanseleccionesanterioresintactas.
+
+Cierre 25/10: 334 pruebas offline aprobadas; Preparar Q y adquisición final
+verificados. Respaldo pareado `respaldos/parejas/v18_tasas_rateonly_20261025_173359/manifest.json`.
+Q libre para uso normal; V17 intacta.
+
+## 25/10 · Incorporación de tasas con métodos constantes
+
+Monitor V18 + Scope V18 incorporan CH1 ADC8 a 1.860.465,116 S/s, ADC10 a
+1.333.333,333 S/s y ADC14 a 941.176,471 S/s. ADC12/16 y las tasas anteriores
+se conservan. Aislamiento, 60 + 3×120 s, GUI/audio, rollback same-app y prebuild
+exacto precedieron al despliegue transaccional. Regresión instalada 9/9,
+incluidos 16 bits simple/dual. Los 142 perfiles previos conservan sus auxiliares
+Scan US. No se cambiaron relojes, DMA, packing ni métodos de tasas existentes.
+Detalle y evidencia: [campaña](SONDEO_TASAS_V18_20261025.md).
+
+## 25/10 · Tasas incorporadas y regresión final aprobada
+
+| Formato CH1 | Máximo público |
+|---|---:|
+| 8 bits | 1.818.181,818 S/s |
+| 10 bits | 1.311.475,410 S/s |
+| 12 bits | 1.095.890,411 S/s |
+| 14 bits | 909.090,909 S/s |
+| 16 bits (sobremuestreo x16) | 150.943,396 S/s |
+
+16 bits dual conserva 76.226,775 S/s por canal: el siguiente candidato falló.
+10/12/14/16 pasaron calificación física 60 + 3×120 s y GUI combinada de
+120 s; integridad y margen se documentan por separado en la campaña.
+La pareja Scope V18 instalada es MCU `7f8de38c…` / relay `f43923b0…`.
+Regresión instalada final 8/10/12/14: RADIO/A0, Scan US, WAV, Synth 20 voces
+y cierre aprobados, sin errores. 16 pasó su GUI pública de 120 s.
+Evidencia: `diagnosticos/resultados_v18/installed_rates_regression_20261025_104120/report.json`
+y `diagnosticos/resultados_v18/adc16_installed_public_gui120_20261025.json`.
+No se certifica ENOB analógico con estas pruebas. V17 permanece congelada.
+Detalle: [campaña de tasas](TASAS_ALTAS_V18_20261025.md).
+No quedan procesos de campaña activos; continuar desde esta pareja aceptada.
+
 ## 25/10 · Cierre visual inmediato
 
 Al cerrar V18 se oculta la ventana y se detiene el dibujo inmediatamente;
@@ -619,3 +726,5 @@ y el clamp digital final de A0. No equivale a protección eléctrica ante cargas
 
 11tests offline de AGC y GUI RADIO PASS. Sin intervención en Q ni cambios V17;
 los175hashes congelados siguen iguales. Validación auditiva/manual pendiente.
+
+Respaldo pareado final: `respaldos/parejas/v18_catalogo_20261025_230123/manifest.json`.

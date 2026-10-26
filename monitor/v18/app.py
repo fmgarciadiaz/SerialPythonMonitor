@@ -42,6 +42,8 @@ from monitor.v18.processing import (BatchProcessor, ProcessingSettings,
 from monitor.v18.history import SampleHistory
 from monitor.v18.trigger import last_trigger_crossing
 from monitor.v18.numeric_batch import NumericBatch, SampleClock
+from monitor.v18.rate_catalog import catalog_rates, label as catalog_rate_label
+from monitor.v18.rate_evidence import load_evidence, evidence_text
 from monitor.v18.startup_trace import StartupTrace
 from monitor.v18.spectrum import SpectralDisplay
 from monitor.v18.receiver.unoq_usb import Connection, usb_devices
@@ -72,9 +74,9 @@ def _period_label(dt_us):
 
 
 COMMON_RATES = (1000, 5000, 10000, 20000, 31250, 40000)
-RATES = tuple(rate for rate in RECEIVER_RATES if rate in COMMON_RATES or any(
-    _configuration_supported(bits, rate) and Configuration(bits, rate)._native
-    for bits in BITS))
+# Keep every recognised rate addressable; the recommended catalogue controls
+# visibility only, never protocol identity or restoration.
+RATES = tuple(RECEIVER_RATES)
 import queue
 from serial.tools import list_ports
 
@@ -148,7 +150,7 @@ class InstrumentDial(QtWidgets.QDial):
         box=QtCore.QRectF(center.x()-radius,center.y()-radius,2*radius,2*radius)
         ratio=(self.value()-self.minimum())/max(1,self.maximum()-self.minimum())
         accent=QtGui.QColor(('#62d9c4' if self.property('radioStyle') else '#55dfc4') if self.isEnabled() else '#505968')
-        if self.isEnabled() and (self.property('redColor') or self.property('orangeColor') or self.property('virtualColor') or isinstance(self,AmplitudeDial)):
+        if self.isEnabled() and (self.property('redColor') or self.property('orangeColor') or self.property('virtualColor') or self.property('amplitudeColor') or isinstance(self,AmplitudeDial)):
             stops=((0.0,'#55dfc4'),(0.5,'#659fea'),(0.75,'#9a80ed'),(1.0,'#bc6fff'))
             if self.property('redColor'):
                 stops=((0.0,'#55dfc4'),(0.5,'#ffd166'),(1.0,'#ff5757'))
@@ -188,7 +190,7 @@ class InstrumentDial(QtWidgets.QDial):
             painter.setPen(QtGui.QPen(QtGui.QColor('#263d36'),2,QtCore.Qt.PenStyle.SolidLine,QtCore.Qt.PenCapStyle.RoundCap))
             painter.drawArc(ring,start_angle*16,-sweep*16)
             level=max(0.,min(1.,meter))
-            stops=((0.,'#55dfc4'),(.5,'#ffd166'),(1.,'#ff5757'))
+            stops=((0.,'#55dfc4'),(.65,'#55dfc4'),(.85,'#ffd166'),(1.,'#ff5757'))
             for (low,left),(high,right) in zip(stops,stops[1:]):
                 if level<=high:
                     fraction=max(0.,min(1.,(level-low)/(high-low)))
@@ -583,7 +585,9 @@ class OutputWorker(QtCore.QObject):
                 pending_dsp=self.pending_dsp,pending_dsp_peak=self.pending_dsp_peak,
                 retained_samples=budget.samples,retained_seconds=budget.seconds,
                 retained_bytes=budget.bytes,retained_batches=len(budget.entries),
+                delivery_limits=budget.limits(),delivery_peaks=budget.peaks(),
                 rf_pending_samples=rf_pending,radio_enabled=bool(getattr(self.processing_settings,'radio_enabled',False)))
+            if hasattr(error,'details'):self.delivery_failure_snapshot['limit_details']=error.details
             if self._receiver_failure_snapshot is not None:
                 self.delivery_failure_snapshot['receiver_failure_snapshot']=self._receiver_failure_snapshot
             # The child snapshot records the exact receiver failure. This host
@@ -1723,19 +1727,22 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self.config_bits_combo = GeneratorComboBox()
         self.config_bits_combo.setProperty("centerInWholeBox", True)
         for bits in BITS: self.config_bits_combo.addItem('16 bits · (OS)' if bits == 16 else f'{bits} bits', bits)
-        self.config_bits_combo.setToolTip('16 bits: oversampling por hardware de 16 conversiones de 14 bits.\nMáximo 76,23 kHz SPI / 31,25 kHz UART; promedia ruido y señales rápidas.\nNo garantiza 16 bits de precisión analógica.')
+        self.config_bits_combo.setToolTip('16 bits: oversampling por hardware de 16 conversiones de 14 bits.\nMáximo dual 76,23 kHz y CH1 150,94 kHz por SPI; UART hasta 31,25 kHz. Promedia ruido y señales rápidas.\nNo garantiza 16 bits de precisión analógica.')
         self.config_bits_combo.setCurrentIndex(self.config_bits_combo.findData(14))
         destination_layout.addWidget(self.config_bits_combo, 3, 1, 1, 2)
         destination_layout.addWidget(QtWidgets.QLabel('TASA'), 4, 0)
         self.config_rate_combo = GeneratorComboBox()
         self.config_rate_combo.setProperty("centerInWholeBox", True)
+        self._show_all_rates = False
+        self.config_rate_combo.setContextMenuPolicy(QtCore.Qt.ContextMenuPolicy.CustomContextMenu)
+        self.config_rate_combo.customContextMenuRequested.connect(self._rate_catalog_menu)
         self.config_rate_combo.setToolTip('T: período entre pares de muestras.\nAdq: tiempo de carga del capacitor por canal y subconversión.\nUna ventana más corta exige menor impedancia de fuente para conservar el asentamiento.\nEn 16 bits se realizan 16 subconversiones por canal.')
         for rate in RATES:
             label = _rate_label(rate) + ' · ' + _period_label(next(Configuration(bits, rate) for bits in BITS if _configuration_supported(bits, rate)).dt_us)
             config = next(Configuration(bits, rate) for bits in (14,8,10,12,16)
                           if _configuration_supported(bits, rate))
             if rate > 31250: label += f' · SPI · ADC {number(config.sampling_us, formats.n_1f)} µs'
-            if config.channels==1: label=_rate_label(rate) + ' (CH1)'
+            label=catalog_rate_label(config, lambda value:number(value, '.1f').rstrip('0').rstrip(','))
             self.config_rate_combo.addItem(label, rate)
         self.config_rate_combo.setCurrentIndex(self.config_rate_combo.findData(40000))
         destination_layout.addWidget(self.config_rate_combo, 4, 1, 1, 2)
@@ -2821,8 +2828,11 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self.radio_frequency_dial.setSingleStep(100);self.radio_frequency_dial.setPageStep(1000)
         self.radio_frequency_dial.setValue(550000)
         self.radio_frequency_dial.setToolTip('Sintonía AM · rueda: 100 Hz · flechas: picos de FFT RF')
-        self.radio_peak_previous=QtWidgets.QPushButton('<<')
-        self.radio_peak_next=QtWidgets.QPushButton('>>')
+        self.radio_peak_previous=QtWidgets.QPushButton()
+        self.radio_peak_next=QtWidgets.QPushButton()
+        for button,direction in ((self.radio_peak_previous,'previous'),(self.radio_peak_next,'next')):
+            button.setIcon(QtGui.QIcon(str(ROOT/f'monitor/v18/assets/radio_{direction}.svg')))
+            button.setIconSize(QtCore.QSize(18,18))
         self.radio_peak_previous.setEnabled(False);self.radio_peak_next.setEnabled(False)
         self.radio_peak_previous.setToolTip('Candidato anterior de la última búsqueda Scan')
         self.radio_peak_next.setToolTip('Candidato siguiente de la última búsqueda Scan')
@@ -2866,7 +2876,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self.radio_us.toggled.connect(self._radio_us_changed)
         self.radio_bandwidth=GeneratorComboBox()
         self.radio_bandwidth.setProperty('centerInWholeBox',True)
-        for width in (6000,8000,10000,12000,20000):self.radio_bandwidth.addItem(f'{width//1000} kHz',width)
+        for width in (6000,8000,10000,12000,15000,20000):self.radio_bandwidth.addItem(f'{width//1000} kHz',width)
         self.radio_bandwidth.setCurrentIndex(self.radio_bandwidth.findData(8000))
         self.radio_bandwidth.setToolTip('Ancho total del canal RF: cada banda lateral ocupa la mitad. No cambia FS SALIDA.')
         for column,(title,dial,control) in enumerate((
@@ -5165,10 +5175,10 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
     def _wav_recording_allowed(self):
         config = self.applied_configuration
         common = config.rate in (1000, 5000, 10000, 20000, 31250, 40000)
-        audio = (config.bits == 16 and config._native and
+        audio = (config._native and
                  ((config._native.get('purpose') == 'audio' and
                    config._native.get('validation') == '60s') or
-                  (config.rate == 76226 and config._native.get('headroom'))))
+                  (config.bits == 16 and config.rate == 76226 and config._native.get('headroom'))))
         return not self.demo_mode and bool(common or audio)
 
     def _sync_record_availability(self):
@@ -5192,7 +5202,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         if self.recording:
             return
         if self.record_format_combo.currentText() == "WAV" and not self._wav_recording_allowed():
-            QtWidgets.QMessageBox.warning(self, "Grabación WAV", "WAV admite FS comunes hasta 40 kHz en todos los bits y ADC16 a 44,1/48/76,226 kHz. Para otras FS usá CSV.")
+            QtWidgets.QMessageBox.warning(self, "Grabación WAV", "WAV admite las tasas comunes y los perfiles de audio validados. La cabecera usa la tasa real aproximada a Hz enteros; no la nominal. Para otras FS usá CSV.")
             return
         if self.serial_worker is None and not self.demo_mode:
             QtWidgets.QMessageBox.warning(self, "Grabación", "Conectá el Q de control o iniciá Demo antes de grabar.")
@@ -5446,17 +5456,32 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self.confirmed_output_label.setText(f'{name} · '+f'{config.bits} bits' + (' OS ×16' if config.bits == 16 else '') + ' · ' + _rate_label(config.rate) + (' (CH1)' if config.channels==1 else ''))
         self._set_connection_status('Adquisición en vivo' if self.is_running else 'Pantalla congelada (STOP)')
 
+    def _rate_catalog_menu(self, position):
+        menu=QtWidgets.QMenu(self.config_rate_combo)
+        action=menu.addAction('Mostrar todas las tasas')
+        action.setCheckable(True);action.setChecked(self._show_all_rates)
+        def choose(checked):
+            self._show_all_rates=checked
+            self._destination_changed()
+        action.toggled.connect(choose)
+        menu.exec(self.config_rate_combo.mapToGlobal(position))
+
     def _destination_changed(self):
         if hasattr(self, 'config_rate_combo'):
             uart = self.destination_combo.currentData() == int(Mode.UART)
             synth=hasattr(self,'generator_mode') and self.generator_mode.currentIndex()==5
+            recommended = catalog_rates(self.config_bits_combo.currentData())
+            current_rate = self.config_rate_combo.currentData()
+            rate_evidence = load_evidence()
             for i in range(self.config_rate_combo.count()):
                 rate = self.config_rate_combo.itemData(i)
                 bits = self.config_bits_combo.currentData()
                 valid = _configuration_supported(bits, rate)
                 allowed = valid and (not uart or rate in UART_RATES) and (not synth or rate<=40000)
                 self.config_rate_combo.model().item(i).setEnabled(allowed)
-                self.config_rate_combo.view().setRowHidden(i, not allowed)
+                visible = allowed and (getattr(self,'_show_all_rates',False) or
+                    recommended is None or rate in recommended or rate == current_rate)
+                self.config_rate_combo.view().setRowHidden(i, not visible)
                 label = _rate_label(rate)
                 if valid:
                     label += ' · ' + _period_label(Configuration(bits, rate).dt_us)
@@ -5468,27 +5493,21 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
                                f'({profile.sampling_cycles} ciclos ADC).\n'
                                + ('16 subconversiones por canal.\n' if bits == 16 else '')
                                + 'Menor tiempo de adquisición exige menor impedancia de fuente.')
-                    if profile._native and profile._native.get('purpose'):
-                        tooltip += f'\nTasa real: {number(profile.actual_rate, formats.n_2f)} Hz por canal.'
-                        tooltip += '\nPerfil adicional: ensayo físico de 60 s; aceptación prolongada y precisión analógica pendientes.' if profile._native.get('validation')=='60s' else '\nPerfil adicional: validación física pendiente.'
-                    elif profile._native and profile._native.get('validation')=='isolated_60s_3x120s':
-                        tooltip += ('\nCH1: integridad validada en firmware aislado (60 s + 3×120 s). '
-                                    + ('Holgura aislada validada.' if profile._native.get('isolated_headroom') else 'Sin holgura aislada validada.')
-                                    + '\nValidación integrada y precisión analógica pendientes.')
-                    elif profile._native:
-                        tooltip += ('\nIntegridad física validada; '
-                                    + ('margen validado.' if profile._native['headroom'] else 'sin margen validado.')
-                                    + '\nPrecisión analógica pendiente.')
-                        if profile._native.get('validation')=='production_60s_3x120s':
-                            tooltip += '\nValidación integrada: 60 s + 3×120 s, sin ensayo de 600 s.'
-                    elif rate > 125000:
-                        tooltip += '\nIntegridad física ensayada; precisión analógica y margen de cola pendientes.'
+                    tooltip += '\n' + evidence_text(profile, rate_evidence)
                     if profile.channels==1:
                         label=_rate_label(rate) + ' (CH1)'
                     if profile._native and profile._native.get('integrity_only'):
-                        tooltip += '\nSin holgura validada. Cola de 8 nodos; preparación automática de 2 s.'
+                        tooltip += '\nCola de 8 nodos; preparación automática de 2 s.'
                 else:
                     tooltip = 'Esta tasa no admite la resolución seleccionada.'
+                if valid:
+                    label = catalog_rate_label(profile, lambda value:number(value, '.1f').rstrip('0').rstrip(','))
+                    tooltip += f'\nTasa real: {number(profile.actual_rate, '.3f')} S/s por canal.'
+                    if profile._native and profile._native.get('nominal_rate'):
+                        nominal = profile._native['nominal_rate']
+                        ppm=(profile.actual_rate/nominal-1)*1e6
+                        tooltip += f'\nNominal de audio: {number(nominal/1000, formats.ng)} kHz; error {number(ppm,formats.n_2f)} ppm.'
+                    tooltip += '\nClic derecho en Tasa: mostrar también las tasas anteriores.'
                 self.config_rate_combo.setItemText(i, label)
                 self.config_rate_combo.setItemData(i, tooltip, QtCore.Qt.ItemDataRole.ToolTipRole)
             if not _configuration_supported(self.config_bits_combo.currentData(), self.config_rate_combo.currentData()):

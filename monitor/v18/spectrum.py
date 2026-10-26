@@ -1,5 +1,7 @@
 from monitor.v18.number_format import number, formats
 from monitor.v18.locale_axis import LocaleAxis
+from monitor.v18.radio_fft_crop import columns as radio_columns, crop_arrays, frequency_at
+from monitor.v18.fft_cadence import live_interval
 """Live one-sided spectra and bounded scrolling spectrograms."""
 import os
 os.environ["PYQTGRAPH_QT_LIB"] = "PyQt6"
@@ -47,7 +49,7 @@ class RadioTuneDrag(QtCore.QObject):
         if kind==QtCore.QEvent.Type.KeyPress and event.key()==QtCore.Qt.Key.Key_Escape and self.plot is not None:
             self.clear();return True
         if kind not in (QtCore.QEvent.Type.MouseButtonPress,QtCore.QEvent.Type.MouseMove,QtCore.QEvent.Type.MouseButtonRelease):return False
-        enabled=(d.mode==1 and d.radio_fft_view and not getattr(getattr(d.owner,'_radio_multiscan',None),'active',False))
+        enabled=(d.mode==1 and d.radio_fft_view and not d.radio_crop.isChecked() and not getattr(getattr(d.owner,'_radio_multiscan',None),'active',False))
         if not enabled:
             self.clear();return False
         point=d.widget.mapToScene(event.position().toPoint())
@@ -102,6 +104,54 @@ class FrequencyAxis(LocaleAxis):
         super().__init__(orientation)
         self.setStyle(maxTextLevel=0)
 
+    def setTickRotation(self,angle):
+        angle=angle if angle in (-90,45,90) else 0
+        if getattr(self,'tick_rotation',0)==angle:return
+        self.tick_rotation=angle
+        self.setHeight(70 if angle else None)
+        self.picture=None;self.update()
+
+    def drawPicture(self,p,axisSpec,tickSpecs,textSpecs):
+        if not getattr(self,'tick_rotation',0):
+            return super().drawPicture(p,axisSpec,tickSpecs,textSpecs)
+        super().drawPicture(p,axisSpec,tickSpecs,[])
+        if self.style['tickFont'] is not None:p.setFont(self.style['tickFont'])
+        p.setPen(self.textPen())
+        metrics=QtGui.QFontMetricsF(p.font())
+        for rect,flags,text in textSpecs:
+            p.save()
+            text_width=metrics.horizontalAdvance(text)+4
+            p.translate(rect.center().x(),rect.top()+6+(text_width if self.tick_rotation<0 else 0))
+            p.rotate(self.tick_rotation)
+            p.drawText(QtCore.QRectF(0,-metrics.height()/2,text_width,metrics.height()),
+                       int(QtCore.Qt.AlignmentFlag.AlignLeft|QtCore.Qt.AlignmentFlag.AlignVCenter),text)
+            p.restore()
+
+    def tickValues(self,minVal,maxVal,size):
+        radio_ticks=getattr(self,'_radio_ticks',())
+        if not getattr(self,'tick_rotation',0) or not radio_ticks:
+            return super().tickValues(minVal,maxVal,size)
+        visible=[(i,x) for i,(x,_) in enumerate(radio_ticks) if minVal<=x<=maxVal]
+        if not visible or maxVal<=minVal or size<=0:return []
+        # Account for the horizontal footprint of rotated text. Recalculate at
+        # paint time so zoom, pan and resize also work while acquisition is off.
+        font=self.style['tickFont'] or QtWidgets.QApplication.font()
+        metrics=QtGui.QFontMetricsF(font)
+        angle=np.deg2rad(self.tick_rotation)
+        width=max(metrics.horizontalAdvance(text) for _,text in radio_ticks)
+        minimum=abs(np.cos(angle))*width+abs(np.sin(angle))*metrics.height()+12
+        pitch=(radio_ticks[1][0]-radio_ticks[0][0]) if len(radio_ticks)>1 else maxVal-minVal
+        step=max(1,int(np.ceil(minimum*(maxVal-minVal)/(size*pitch))))
+        chosen=[x for i,x in visible if i%step==0]
+        if not chosen:chosen=[visible[len(visible)//2][1]]
+        return [(pitch*step,chosen)]
+
+    def tickStrings(self,values,scale,spacing):
+        if getattr(self,'tick_rotation',0) and getattr(self,'_radio_ticks',()):
+            labels=dict(self._radio_ticks)
+            return [labels.get(value,'') for value in values]
+        return super().tickStrings(values,scale,spacing)
+
     def logTickValues(self, minVal, maxVal, size, stdTicks):
         major, minor = [], []
         factors = (1, 2, 5) if size >= 300 else (1,)
@@ -124,6 +174,9 @@ class SpectralDisplay:
         self.radio_overlay_items = []
         self.last_end = None
         self.last_fast_render = 0.0
+        self._fft_resume_pending=False
+        self._last_fft_started=0.
+        self._fft_render_costs = deque(maxlen=8)
         self.deferred_live_timer_calls = 0
         self.context = None
         self.frames = deque(maxlen=512)
@@ -316,6 +369,11 @@ class SpectralDisplay:
             grid.addRow(label, control)
             signal = control.valueChanged if isinstance(control, (QtWidgets.QSpinBox, QtWidgets.QDoubleSpinBox)) else control.currentIndexChanged
             signal.connect(self.reset)
+        self.radio_crop = QtWidgets.QCheckBox('Recortar radios')
+        self.radio_crop.setEnabled(False)
+        self.radio_crop.setToolTip('Sólo bandas de las emisoras detectadas por Scan, ordenadas por frecuencia. Ancho sugerido por Scan o banda RADIO seleccionada.')
+        grid.addRow(self.radio_crop)
+        self.radio_crop.toggled.connect(self._radio_crop_changed)
         self.fft_mode.currentIndexChanged.connect(self._fft_mode_changed)
         for label, control in [('Ventana',self.window), ('Solapamiento',self.overlap),
                                ('Escala',self.scale),
@@ -415,6 +473,7 @@ class SpectralDisplay:
         if clear_snapshot: self._single_snapshot = None
 
     def reset(self, *args):
+        self._fft_render_costs.clear()
         self._fft_trace_cache = {}
         self._distortion_generation += 1
         self._distortion_cache = {}
@@ -507,13 +566,13 @@ class SpectralDisplay:
             tooltip = self.metrics.text() + '\n' + self.metrics.toolTip()
             if kind == 'Power': tooltip += '\nPiso de ruido: dB re 1 V²/Hz.'
             if kind == 'Spectre':
-                titles = ['F DOMINANTE','AMPLITUD PICO','FASE','PICOS','Δf','ENBW']
+                titles = ['F DOM','AMPL P/P','FASE','PICOS','Δf','ENBW']
                 rows = ['N/A']*6
                 if result is not None:
                     peak = result.peaks[0] if result.peaks else None
-                    rows = [f(peak['frequency'],'Hz') if peak else 'N/A', f(peak['amplitude'],'V') if peak else 'N/A',
+                    rows = [f(peak['frequency'],'Hz') if peak else 'N/A', f(2*peak['amplitude'],'V') if peak else 'N/A',
                         f(result.phase[peak['bin']],'°') if peak else 'N/A',str(len(result.peaks)),f(result.df,'Hz'),f(result.enbw,'Hz')]
-                    tooltip = 'Picos '+ ' · '.join(f(p['frequency'],'Hz') for p in result.peaks)+'\nFase del último bloque, respecto de su inicio.'
+                    tooltip = 'Picos '+ ' · '.join(f(p['frequency'],'Hz') for p in result.peaks)+'\nAMPL P/P: doble de la amplitud pico de la componente dominante.\nFase del último bloque, respecto de su inicio.'
             elif kind == 'Power':
                 titles = ['V RMS','P BANDA','PISO RUIDO','SNR','20-200Hz','200Hz-2kHz','2kHz-Nq']
                 rows = ['N/A']*7
@@ -622,6 +681,7 @@ class SpectralDisplay:
             self.settings_form.setRowVisible(control, self.mode == 2 or (self.mode == 1 and kind != 'Transfer' and (control != self.scale or kind in ('Spectre','Distort'))))
         self.settings_form.setRowVisible(self.seconds, self.mode == 2)
         self.settings_form.setRowVisible(self.metrics, False)
+        self.settings_form.setRowVisible(self.radio_crop,self.mode==1 and self.radio_fft_view)
 
     def select_bode(self, method):
         self.bode.tabs.setCurrentIndex(method)
@@ -726,6 +786,7 @@ class SpectralDisplay:
         if hasattr(self.owner,"scope_cursors"):self.owner.scope_cursors.analysis_changed()
 
     def _position_headers(self, *args):
+        self._equal_radio_rows()
         for i, spacer in enumerate(self.plot_headers):
             header=self.header_widgets[i]
             visible=i in self.header_attached and self.mode in (1,2)
@@ -734,6 +795,24 @@ class SpectralDisplay:
                 rect=self.widget.mapFromScene(spacer.sceneBoundingRect()).boundingRect()
                 header.setGeometry(rect.x(),rect.y(),max(1,rect.width()),header.height())
                 header.raise_()
+
+    def _equal_radio_rows(self):
+        # Equal stretch alone splits only the extra space; different bottom
+        # axes (notably cropped, vertical labels) otherwise bias the heights.
+        equal=self.mode==1 and self.radio_fft_view and len(self.attached)==2
+        grid=self.widget.ci.layout
+        margins=grid.getContentsMargins()
+        available=grid.geometry().height()-margins[1]-margins[3]
+        available-=sum(self.plot_headers[i].geometry().height() for i in self.header_attached)
+        available-=grid.verticalSpacing()*(1+len(self.header_attached))
+        height=max(0,available/2) if equal else 0
+        key=(equal,height)
+        if getattr(self,'_radio_row_sizes',None)==key:return
+        self._radio_row_sizes=key
+        for row in (1,3):
+            grid.setRowMinimumHeight(row,height)
+            grid.setRowMaximumHeight(row,height if equal else 16777215)
+            grid.setRowPreferredHeight(row,height if equal else -1)
 
     def configure_plots(self):
         heat = self.mode == 2
@@ -767,7 +846,12 @@ class SpectralDisplay:
             plot.setTitle(channel + (' · evolución espectral' if heat else ' · espectro actual'))
             plot.setLabel('bottom', 'Tiempo relativo al último bloque' if heat else 'Frecuencia', units='s' if heat else 'Hz')
             plot.setLabel('left', 'Frecuencia' if heat else 'Amplitud', units='Hz' if heat else self.scale.currentText())
+            plot.getAxis('bottom')._radio_crop_key=None
+            plot.getAxis('bottom').setTicks(None)
+            plot.getAxis('bottom').setTickRotation(0)
+            plot.getAxis('bottom').enableAutoSIPrefix(True)
             x_log = (self.mode == 3 and self.bode.log_frequency.isChecked()) or (self.mode == 1 and self.log_frequency.isChecked())
+            if self.radio_crop_active(i):x_log=False
             y_log = heat and self.log_frequency.isChecked()
             # AxisItem treats its range as exponents as soon as log mode is enabled.
             if x_log and not plot.getAxis('bottom').logMode:
@@ -815,7 +899,7 @@ class SpectralDisplay:
         if filter_source is not None and filter_source.currentText()=='RADIO':audio_names.add('FILTER')
         mixed_domains=bool({c.currentText() for c in self.channels}&audio_names) and bool(
             {c.currentText() for c in self.channels}-audio_names-{'Ninguno'})
-        if self.mode == 1 and kind != 'Transfer' and self.lock_axes.isChecked() and self.attached == {0, 1} and not mixed_domains:
+        if self.mode == 1 and kind != 'Transfer' and self.lock_axes.isChecked() and self.attached == {0, 1} and not mixed_domains and not self.radio_crop.isChecked():
             self.plots[1].setXLink(self.plots[0]); self.plots[1].setYLink(self.plots[0])
 
         self.refresh_radio_overlay()
@@ -831,6 +915,13 @@ class SpectralDisplay:
             if i not in self.attached or self.channels[i].currentText()!='CH1' or not view.sceneBoundingRect().contains(event.scenePos()):
                 continue
             x=view.mapSceneToView(event.scenePos()).x()
+            if self.radio_crop_active(i):
+                station=next((column for column in self.radio_crop_columns()
+                              if column.left<=x<=column.left+1),None)
+                if station is not None:
+                    self.owner.radio_frequency.setValue(station.carrier/1000)
+                    event.accept()
+                return
             frequency=10**x if self.log_frequency.isChecked() else x
             if self._tune_radio_fft_frequency(frequency):event.accept()
             return
@@ -855,11 +946,50 @@ class SpectralDisplay:
         owner.radio_frequency.setValue(rf/1000)
         return True
 
+    def radio_crop_columns(self):
+        owner=self.owner
+        if not hasattr(owner,'radio_bandwidth'):return ()
+        return radio_columns(getattr(owner,'radio_candidates',()),owner.applied_configuration.actual_rate,
+                             owner.radio_bandwidth.currentData(),owner.radio_us.isChecked())
+
+    def radio_crop_active(self,index):
+        return (hasattr(self,'radio_crop') and self.radio_crop.isChecked() and self.mode==1
+                and self.radio_fft_view and self.channels[index].currentText()=='CH1'
+                and bool(self.radio_crop_columns()))
+
+    def _radio_crop_changed(self,*args):
+        frame=getattr(self,'_radio_fft_last_frame',None)
+        frame_key=getattr(self,'_radio_fft_frame_key',None)
+        self.reset();self.configure_plots();self._render_frozen()
+        key=(self.owner.applied_configuration,tuple(c.currentText() for c in self.channels),self.spectrum_view.currentIndex(),self.scale.currentIndex(),self.size.currentText(),self.window.currentText())
+        if frame is not None and frame_key==key and self.mode==1 and self.radio_fft_view:
+            self._draw_fft_arrays(*frame)
+        if hasattr(self.owner,'scope_cursors'):self.owner.scope_cursors.analysis_changed()
+
+    def _crop_axis(self,index,layout):
+        plot=self.plots[index];axis=plot.getAxis('bottom')
+        if getattr(axis,'_radio_crop_key',None)==layout and not axis.logMode:return
+        plot.setLogMode(x=False)
+        plot.setLabel('bottom','Radios · kHz',units=None)
+        ticks=[]
+        for column in layout:
+            ticks.append((column.center,number(column.carrier/1000,'.1f')))
+        plot.getAxis('bottom').setTickRotation(-90)
+        plot.getAxis('bottom').enableAutoSIPrefix(False)
+        axis._radio_ticks=tuple(ticks)
+        axis.setTicks(None)
+        axis._radio_crop_key=layout
+
     def refresh_radio_overlay(self):
         """RF carriers and channel sidebands; never mix these with demodulated audio."""
         for plot, item in self.radio_overlay_items:
             plot.removeItem(item)
         self.radio_overlay_items.clear()
+        available=bool(self.radio_crop_columns())
+        self.radio_crop.setEnabled(available and any(c.currentText()=='CH1' for c in self.channels))
+        if (not available or not any(c.currentText()=='CH1' for c in self.channels)) and self.radio_crop.isChecked():
+            self.radio_crop.setChecked(False)
+            return
         if not self.radio_fft_view or self.mode != 1 or self._fft_kind() != 'Spectre':
             return
         owner = self.owner
@@ -877,6 +1007,17 @@ class SpectralDisplay:
             return np.log10(max(value, 1)) if logarithmic else value
         for i, plot in enumerate(self.plots):
             if self.channels[i].currentText() != 'CH1':
+                continue
+            if self.radio_crop_active(i):
+                layout=self.radio_crop_columns();self._crop_axis(i,layout)
+                self.header_labels[i].setText('· FFT Radio · emisoras detectadas / CH1')
+                for column in layout:
+                    tuned=abs(column.carrier-selected)<=tolerance
+                    band=pg.LinearRegionItem((column.left,column.left+1),movable=False,
+                        brush=pg.mkBrush(0,229,255,18) if tuned else pg.mkBrush(255,255,255,8),pen=pg.mkPen('#46515a'))
+                    band.setZValue(-5);plot.addItem(band,ignoreBounds=True);self.radio_overlay_items.append((plot,band))
+                    line=pg.InfiniteLine(column.center,angle=90,movable=False,pen=pg.mkPen('#00e5ff' if tuned else '#89949c'))
+                    plot.addItem(line,ignoreBounds=True);self.radio_overlay_items.append((plot,line))
                 continue
             self.header_labels[i].setText('· FFT Radio · alias / CH1' if us else '· FFT Radio · RF / CH1')
             for frequency, tuned in frequencies:
@@ -1176,6 +1317,7 @@ class SpectralDisplay:
             label.hide();self.harmonic_points[i].setData([],[])
             band,floor,caption = self.power_annotations[i]
             for item in (band,floor,caption): item.hide()
+            if self.radio_crop_active(i):continue
             if result is None: continue
             view = self.plots[i].getViewBox()
             xr,yr = view.viewRange()
@@ -1266,7 +1408,7 @@ class SpectralDisplay:
         self._redrawing_fft=True
         try:
             owner,frequency,values,options=cached
-            log=self.log_frequency.isChecked()
+            log=self.log_frequency.isChecked() and not self.radio_crop_active(index)
             x=frequency[1:] if log else frequency
             y=values[1:] if log else values
             axis_x=np.log10(x) if log else x
@@ -1282,8 +1424,11 @@ class SpectralDisplay:
         finally:self._redrawing_fft=False
 
     def _draw_fft_arrays(self,owner,fs,arrays,frequency,kind):
+        if self.mode==1 and self.radio_fft_view:
+            self._radio_fft_last_frame=(owner,fs,arrays,frequency,kind)
+            self._radio_fft_frame_key=(self.owner.applied_configuration,tuple(c.currentText() for c in self.channels),self.spectrum_view.currentIndex(),self.scale.currentIndex(),self.size.currentText(),self.window.currentText())
         log = self.log_frequency.isChecked()
-        share = self.lock_axes.isChecked() and kind != 'Transfer'
+        share = self.lock_axes.isChecked() and kind != 'Transfer' and not self.radio_crop.isChecked()
         selected = [a[1:] if log else a for a in arrays if a is not None]
         shared = self.stable_range('shared',selected) if share and selected else None
         for i,values in enumerate(arrays):
@@ -1295,14 +1440,24 @@ class SpectralDisplay:
             channel = self.transfer_pair()[i] if kind=='Transfer' else self.channels[i].currentText()
             color = owner.channel_colors.get(channel,'#00e5ff')
             brush=self._fft_style(i,color)
-            yrange = shared or self.stable_range(i,[values[1:] if log else values])
+            if self.radio_crop_active(i):
+                layout=self.radio_crop_columns()
+                cropped_x,cropped_y=crop_arrays(panel_frequency,values,layout)
+                range_values=cropped_y[np.isfinite(cropped_y)]
+            else:range_values=values[1:] if log else values
+            yrange = shared or self.stable_range(i,[range_values])
             fill = kind in ('Spectre','Distort') and not (kind=='Spectre' and self.spectrum_view.currentIndex()==1)
             if not hasattr(self,'_fft_trace_cache'):self._fft_trace_cache={}
             self._fft_trace_cache[i]=(owner,panel_frequency,values,dict(connect='finite',
                 fillLevel=(yrange[0] if self.scale.currentIndex()==0 else 0) if fill and yrange else None,fillBrush=brush))
             if yrange:self._set_view_range(i,'y',*yrange)
             if kind=='Transfer' and i==1 and self.transfer_view.currentIndex()==1:self._set_view_range(i,'y',0,1,padding=.02)
-            self._set_view_range(i,'x',np.log10(panel_fs/(2*(len(panel_frequency)-1))) if log else 0,np.log10(panel_fs/2) if log else panel_fs/2)
+            if self.radio_crop_active(i):
+                self._fft_trace_cache[i]=(owner,cropped_x,cropped_y,self._fft_trace_cache[i][3])
+                self._crop_axis(i,layout)
+                self._set_view_range(i,'x',0,layout[-1].left+1)
+            else:
+                self._set_view_range(i,'x',np.log10(panel_fs/(2*(len(panel_frequency)-1))) if log else 0,np.log10(panel_fs/2) if log else panel_fs/2)
             self._redraw_fft_trace(i)
 
     def _sync_available_channels(self):
@@ -1327,6 +1482,9 @@ class SpectralDisplay:
                 # Coalesce visual analysis only. The bounded DSP/GUI queue
                 # keeps every acquired batch; explicit SINGLE still renders.
                 self.deferred_live_timer_calls+=1
+                if self.mode==1:
+                    self._fft_render_costs.clear()
+                    self._fft_resume_pending=True
                 return
         if single_owner is None: self._single_snapshot = None
         owner = single_owner or self.owner
@@ -1354,17 +1512,19 @@ class SpectralDisplay:
         # to the next 16-ms timer tick (which turns 20 Hz into ~15.6 Hz).
         if single_owner is None:
             now = time.monotonic()
-            interval = 1/30 if self.mode == 1 else .05
-            if (int(self.size.currentText())>=16384 and
-                    getattr(self.owner,'serial_worker',None) is not None):
-                # Large transforms plus Qt painting can occupy a full batch
-                # interval. Keep live updates at 10 Hz; SINGLE and the full
-                # FFT resolution remain unchanged.
-                interval=max(interval,.1)
-            elapsed = now-self.last_fast_render
-            if elapsed < interval:
-                return
-            self.last_fast_render = now if elapsed >= 2*interval else self.last_fast_render+interval
+            interval=live_interval(self.mode,int(self.size.currentText()),
+                getattr(self.owner,'serial_worker',None) is not None,self._fft_render_costs,
+                audio_active=getattr(self.owner,'_wav_active',False))
+            if self.mode==1 and self._fft_resume_pending:
+                if now-self._last_fft_started<interval:return
+                self.last_fast_render=now
+                self._fft_resume_pending=False
+            else:
+                elapsed = now-self.last_fast_render
+                if elapsed < interval:return
+                self.last_fast_render = now if elapsed >= 2*interval else self.last_fast_render+interval
+            if self.mode==1:self._last_fft_started=now
+        frame_started=time.perf_counter()
         n = int(self.size.currentText())
         if self.mode==2:
             self._render_heatmaps(owner,n,domains)
@@ -1383,8 +1543,13 @@ class SpectralDisplay:
         if fs <= 0:
             self.info.setText('Esperando frecuencia de adquisición…'); return
         if self.mode == 1:
-            if domains:self._render_fft_analysis(owner,fs,n,single_owner is not None,domains=domains)
-            else:self._render_fft_analysis(owner,fs,n,single_owner is not None)
+            previous_end=self.last_end
+            try:
+                if domains:self._render_fft_analysis(owner,fs,n,single_owner is not None,domains=domains)
+                else:self._render_fft_analysis(owner,fs,n,single_owner is not None)
+            finally:
+                if single_owner is None and self.last_end is not None and self.last_end!=previous_end:
+                    self._fft_render_costs.append(time.perf_counter()-frame_started)
             return
 
     def _render_heatmaps(self,owner,n,domains=None):

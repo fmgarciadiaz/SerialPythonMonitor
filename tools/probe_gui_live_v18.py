@@ -10,9 +10,11 @@ def main():
     from monitor.v18.board_owner import board_owner
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--run',action='store_true')
-    p.add_argument('--recipe',choices=('spi40_10_12','word14','full8','wordping','spi16','batch2','batchfast','batchstack','batcharena','batchquickack','trace8','trace8time'),required=True)
+    p.add_argument('--recipe',choices=('spi40_10_12','word14','full8','wordping','spi16','batch2','batchfast','batchstack','batcharena','batchquickack','trace8','trace8time','adc16','rateonly','rateonly2','catalog'),required=True)
     p.add_argument('--bits',type=int,required=True);p.add_argument('--ticks',type=int,required=True)
     p.add_argument('--hold',type=float,default=60)
+    p.add_argument('--us',action='store_true',help='Include multirate US Scan in private GUI validation')
+    p.add_argument('--frequency-khz',type=float,default=400)
     p.add_argument('--keep-display-awake',action='store_true',
         help='Diagnostic scoped display/user activity assertions; no preferences changed')
     p.add_argument('--render-interval-ms',type=int,choices=range(16,251))
@@ -38,12 +40,13 @@ def main():
         # No administrative Q I/O while the GUI child holds the acquisition lock.
         env=dict(os.environ,SCOPE_V18_GUI_RECIPE=args.recipe,
                  SCOPE_V18_GUI_TARGET=f'{args.bits}:{args.ticks}')
-        rate=int(rows[0]['rate']);duration=max(50,args.hold+25)
+        rate=int(rows[0]['rate']);duration=max(50,args.hold+(35 if args.recipe=='catalog' else 25))
         command=[sys.executable,str(ROOT/'tools/gui_experimental_v18.py'),
                  '--serial',hw.original.serial,'--output',str(folder/'gui.json'),
-                 '--bits',str(args.bits),'--rate',str(rate),'--frequency-khz','400',
+                 '--bits',str(args.bits),'--rate',str(rate),'--frequency-khz',str(args.frequency_khz),
                  '--duration',str(duration),'--hold-radio-seconds',str(args.hold),
                  '--scan','--wav','--fm','--voices','20']
+        if args.us:command+=['--us']
         if args.render_interval_ms:command+=['--render-interval-ms',str(args.render_interval_ms)]
         if args.profile_render:command+=['--profile-render']
         if args.macos_activity:command+=['--macos-activity',args.macos_activity]
@@ -66,6 +69,10 @@ def main():
         if (folder/'gui.json').exists():
             evidence=json.loads((folder/'gui.json').read_text())
             report['gui_ok']=child.returncode==0 and not evidence['errors'] and all(evidence['assertions'].values())
+            periodic=[stage for stage in evidence['stages'] if stage.get('stage')=='periodic']
+            report['exposed_fraction']=sum(bool(stage.get('exposed')) for stage in periodic)/max(1,len(periodic))
+            report['paint_events']=evidence['paint_events']
+            report['visible_gui_ok']=bool(periodic) and report['exposed_fraction']>=.9 and evidence['paint_events']>=args.hold*20
     except BaseException as exc:report['error']=repr(exc)
     finally:
         if child is not None and child.poll() is None:
@@ -89,7 +96,7 @@ def main():
                     report['restoration']=hw.restore()
                     report['hardware_restored']=report['restoration']['hardware_restored']
             except BaseException as exc:report['restore_error']=repr(exc)
-        report['phase']='closed';report['ok']=report['gui_ok'] and report['hardware_restored'];journal.save()
+        report['phase']='closed';report['ok']=report['gui_ok'] and report.get('visible_gui_ok',False) and report['hardware_restored'];journal.save()
     print(folder/'report.json',flush=True)
     return 0 if report['ok'] else 1
 if __name__=='__main__':raise SystemExit(main())

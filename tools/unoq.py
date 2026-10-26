@@ -95,7 +95,7 @@ class Board:
             if artifacts is not None:
                 artifacts = Path(artifacts)
                 artifacts.mkdir(parents=True, exist_ok=True)
-                for name in ('sketch.ino_debug.elf','sketch.ino.elf','sketch.ino.map'):
+                for name in ('sketch.ino.bin','sketch.ino_debug.elf','sketch.ino.elf','sketch.ino.map'):
                     self.run('pull',stage+'/build/'+name,str(artifacts/name))
         finally:
             # Sólo eliminar la carpeta temporal creada por esta invocación.

@@ -19,10 +19,10 @@ Su firmware fuente está en la pareja `arduino/v18`.
 
 ## Adquisición y análisis
 
-CH1 utiliza A2; dual utiliza A2/A3. ADC8 CH1 alcanza 1.818.181,818 S/s reales
+CH1 utiliza A2; dual utiliza A2/A3. ADC8 CH1 alcanza 1.860.465,116 S/s reales
 (88 ticks), con IPC compacto automático. Los máximos públicos restantes son
-10 bits: 1,25 MS/s; 12 bits: 1,066667 MS/s; 14 bits: 851,064 kS/s.
-ADC16 por oversampling alcanza 76,227 kS/s por canal en dual. Las tasas son
+10 bits: 1,355932 MS/s; 12 bits: 1,103448 MS/s; 14 bits: 1000,000 kS/s.
+ADC16 por oversampling alcanza 150,943 kS/s en CH1 y 76,227 kS/s por canal en dual. Las tasas son
 muestras, no ancho de banda analógico ni precisión efectiva garantizada.
 V(t) conserva trigger/SINGLE; FFT y heatmap analizan los canales seleccionados.
 Bode compara referencia y respuesta: conectar la referencia real del circuito.
@@ -35,6 +35,39 @@ la configuración. El ancho AM inicial es 8 kHz. El gain manual/auto alcanza
 80×; el ajuste automático es gradual salvo clipping extremo. Valores iniciales:
 gain 10× y volumen A0 60%. FILTER tiene su propia entrada, band reject y presets.
 Generador Radio puede tomar RADIO o FILTER y mantiene detector de realimentación.
+
+### Indicadores de audio del Generador Radio
+
+[Recepción real a 710 kHz con FFT recortada (animación)](../assets/monitor_radio_710.gif)
+· [Captura estática](../assets/monitor_radio_710.png). Capturada en V18 con
+CH1 real y Scan; las marcas representan candidatos espectrales, no nombres
+de emisoras verificados.
+
+![Panel Radio V18, demostración de sus indicadores LED](../assets/monitor_radio_equ.png)
+
+El arco exterior del volumen y las diez barras siguen el audio de la entrada
+seleccionada (RADIO o FILTER), escalado por el volumen. Las bandas están centradas
+en 63, 125, 250, 500 Hz y 1, 2, 4, 6, 8 y 12 kHz. Son indicadores visuales de nivel,
+no controles de ecualización. Una banda sin contenido permanece apagada; el ancho
+AM elegido limita el contenido de audio disponible.
+
+El espectro usa una ventana de 2.048 muestras de audio, independiente de la FFT
+principal, con cálculo limitado a unos 13 Hz y suavizado visual de hasta 30 FPS.
+Sólo calcula con el panel visible y audio reciente; no guarda un historial de
+mediciones. Estos valores son límites de actualización, no FPS garantizados con
+adquisición y A0. La medición local anterior al suavizado dio 1,8 ms de CPU de
+mediana incluyendo dibujo; no equivale a una validación física concurrente.
+
+[Animación breve del panel](../assets/monitor_radio_equ.gif), generada con audio
+sintético para mostrar su presentación. El PNG queda como alternativa estática
+para lectores que no reproducen animaciones.
+
+En FFT Radio, «Recortar radios» agrupa las emisoras detectadas en columnas,
+omitiendo los intervalos entre ellas. Un clic dentro de una columna sintoniza su
+portadora. Las etiquetas verticales se espacian según el zoom y el ancho visible;
+con dos gráficos activos se reparte el alto en partes iguales. La anotación de
+pico se oculta en esta vista. En las mediciones, F DOM identifica la componente
+dominante y AMPL P/P muestra el doble de su amplitud pico.
 
 ## Generador, WAV y Synth
 

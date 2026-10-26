@@ -1,0 +1,415 @@
+[
+    {
+        "Id": "fa13a381a70db966f4ca3ba33cd2246420c44c4907ee3897b9b0298350e5c7b3",
+        "Created": "2026-10-23T03:06:40.472950618Z",
+        "Path": "/run.sh",
+        "Args": [],
+        "State": {
+            "Status": "running",
+            "Running": true,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 537618,
+            "ExitCode": 0,
+            "Error": "",
+            "StartedAt": "2026-10-26T01:36:20.076160423Z",
+            "FinishedAt": "2026-10-26T01:34:27.507987223Z"
+        },
+        "Image": "sha256:22b878f2712b7b2fe0fddaa677393886045746819e127615cafca4c63b306015",
+        "ResolvConfPath": "/var/lib/docker/containers/fa13a381a70db966f4ca3ba33cd2246420c44c4907ee3897b9b0298350e5c7b3/resolv.conf",
+        "HostnamePath": "/var/lib/docker/containers/fa13a381a70db966f4ca3ba33cd2246420c44c4907ee3897b9b0298350e5c7b3/hostname",
+        "HostsPath": "/var/lib/docker/containers/fa13a381a70db966f4ca3ba33cd2246420c44c4907ee3897b9b0298350e5c7b3/hosts",
+        "LogPath": "/var/lib/docker/containers/fa13a381a70db966f4ca3ba33cd2246420c44c4907ee3897b9b0298350e5c7b3/fa13a381a70db966f4ca3ba33cd2246420c44c4907ee3897b9b0298350e5c7b3-json.log",
+        "Name": "/scope-v18-main-1",
+        "RestartCount": 0,
+        "Driver": "overlay2",
+        "Platform": "linux",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "",
+        "ExecIDs": null,
+        "HostConfig": {
+            "Binds": null,
+            "ContainerIDFile": "",
+            "LogConfig": {
+                "Type": "json-file",
+                "Config": {
+                    "max-file": "2",
+                    "max-size": "5m"
+                }
+            },
+            "NetworkMode": "scope-v18_default",
+            "PortBindings": {},
+            "RestartPolicy": {
+                "Name": "no",
+                "MaximumRetryCount": 0
+            },
+            "AutoRemove": false,
+            "VolumeDriver": "",
+            "VolumesFrom": null,
+            "ConsoleSize": [
+                0,
+                0
+            ],
+            "CapAdd": null,
+            "CapDrop": null,
+            "CgroupnsMode": "private",
+            "Dns": null,
+            "DnsOptions": null,
+            "DnsSearch": null,
+            "ExtraHosts": [
+                "msgpack-rpc-router:host-gateway"
+            ],
+            "GroupAdd": [
+                "44",
+                "29",
+                "991",
+                "20",
+                "1001"
+            ],
+            "IpcMode": "private",
+            "Cgroup": "",
+            "Links": null,
+            "OomScoreAdj": 0,
+            "PidMode": "",
+            "Privileged": false,
+            "PublishAllPorts": false,
+            "ReadonlyRootfs": false,
+            "SecurityOpt": null,
+            "UTSMode": "",
+            "UsernsMode": "",
+            "ShmSize": 67108864,
+            "Runtime": "runc",
+            "Isolation": "",
+            "CpuShares": 0,
+            "Memory": 0,
+            "NanoCpus": 0,
+            "CgroupParent": "",
+            "BlkioWeight": 0,
+            "BlkioWeightDevice": null,
+            "BlkioDeviceReadBps": null,
+            "BlkioDeviceWriteBps": null,
+            "BlkioDeviceReadIOps": null,
+            "BlkioDeviceWriteIOps": null,
+            "CpuPeriod": 0,
+            "CpuQuota": 0,
+            "CpuRealtimePeriod": 0,
+            "CpuRealtimeRuntime": 0,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "Devices": null,
+            "DeviceCgroupRules": [
+                "c 226:* rmw",
+                "c 250:* rmw",
+                "c 504:* rmw",
+                "c 81:* rmw",
+                "c 116:* rmw"
+            ],
+            "DeviceRequests": null,
+            "MemoryReservation": 0,
+            "MemorySwap": 0,
+            "MemorySwappiness": null,
+            "OomKillDisable": null,
+            "PidsLimit": null,
+            "Ulimits": null,
+            "CpuCount": 0,
+            "CpuPercent": 0,
+            "IOMaximumIOps": 0,
+            "IOMaximumBandwidth": 0,
+            "Mounts": [
+                {
+                    "Type": "bind",
+                    "Source": "/dev/leds/builtin/led1_r",
+                    "Target": "/dev/leds/builtin/led1_r"
+                },
+                {
+                    "Type": "bind",
+                    "Source": "/dev/leds/builtin/led2_g",
+                    "Target": "/dev/leds/builtin/led2_g"
+                },
+                {
+                    "Type": "bind",
+                    "Source": "/dev/leds/builtin/led2_r",
+                    "Target": "/dev/leds/builtin/led2_r"
+                },
+                {
+                    "Type": "bind",
+                    "Source": "/home/arduino/ArduinoApps/scope-v18",
+                    "Target": "/app"
+                },
+                {
+                    "Type": "bind",
+                    "Source": "/dev",
+                    "Target": "/dev"
+                },
+                {
+                    "Type": "bind",
+                    "Source": "/run/udev",
+                    "Target": "/run/udev",
+                    "ReadOnly": true
+                },
+                {
+                    "Type": "bind",
+                    "Source": "/run/arduino-router.sock",
+                    "Target": "/run/arduino-router.sock"
+                },
+                {
+                    "Type": "bind",
+                    "Source": "/run/arduino-cloud-connector",
+                    "Target": "/run/arduino-cloud-connector"
+                },
+                {
+                    "Type": "bind",
+                    "Source": "/dev/leds/builtin/led1_b",
+                    "Target": "/dev/leds/builtin/led1_b"
+                },
+                {
+                    "Type": "bind",
+                    "Source": "/dev/leds/builtin/led2_b",
+                    "Target": "/dev/leds/builtin/led2_b"
+                },
+                {
+                    "Type": "bind",
+                    "Source": "/run/user/1000/pipewire-0",
+                    "Target": "/run/user/1000/pipewire-0"
+                },
+                {
+                    "Type": "bind",
+                    "Source": "/dev/leds/builtin/led1_g",
+                    "Target": "/dev/leds/builtin/led1_g"
+                }
+            ],
+            "MaskedPaths": [
+                "/proc/asound",
+                "/proc/acpi",
+                "/proc/kcore",
+                "/proc/keys",
+                "/proc/latency_stats",
+                "/proc/timer_list",
+                "/proc/timer_stats",
+                "/proc/sched_debug",
+                "/proc/scsi",
+                "/sys/firmware",
+                "/sys/devices/virtual/powercap"
+            ],
+            "ReadonlyPaths": [
+                "/proc/bus",
+                "/proc/fs",
+                "/proc/irq",
+                "/proc/sys",
+                "/proc/sysrq-trigger"
+            ]
+        },
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/316cba01019ab580400aa30965460642ebfabc1940f39352d12fbd4864f1d05a-init/diff:/var/lib/docker/overlay2/d44c10d7f3ead90724c72f7b59db1512e64f2a7df254c38b0a86c7f767485af4/diff:/var/lib/docker/overlay2/fbc34bc221e04b5ec300aa2af7d1113138d9331a8c9e1d89e685345da8483f02/diff:/var/lib/docker/overlay2/22dae50a59d69cfcd7a9bf5471d26697b5e9eb5b5249260e017c0ebdbfa7022c/diff:/var/lib/docker/overlay2/3f556d3c5834855fe06f7d17e3771bc8b5733571ea3af4a763c9841c305517ce/diff:/var/lib/docker/overlay2/8b8ffc0ae644f215db80b120ae6a4dd2b451db561ad5ce3c1b3a63d78f1290a5/diff:/var/lib/docker/overlay2/d9250ffc65e0357bd8b627e189f80c1c86bda6054bd80ae5fac68dd67af5eda3/diff:/var/lib/docker/overlay2/0e975bc62dd242a25184e28a0c0c07c93eb61c837b0f2bed2349c9ba90459f98/diff:/var/lib/docker/overlay2/5840fe07acfc47093da5a207f61653bc8855698a5c64e3f43b55559d33a38e75/diff:/var/lib/docker/overlay2/d4eca522e87bb424e991078151b8d69b4c1ec82d8207f52723cdb0fa50b4499f/diff:/var/lib/docker/overlay2/9706038d1c56e15bfa24105999266de812a9e90d6fdb7fef6db36947e2f4ea8c/diff:/var/lib/docker/overlay2/8555706bd8a2795730097a13efd59e65d120d6f43fa6b1c3a84cb44857086794/diff:/var/lib/docker/overlay2/6f8d80193936dd5de18ad8ce45040037c8ee4a55f7161b1774571cb99d2a566b/diff:/var/lib/docker/overlay2/86881765be623495a3f84360b63ba1a9de5abf07d18e1645acacfb204baba2a7/diff:/var/lib/docker/overlay2/147ce11877e3feec47dc6a0eb9a33bba66f8a88234962b356f0417fa518aff26/diff:/var/lib/docker/overlay2/0f5fd448972f343b2ab00355bb731e47423e8b17bedb44f0957f135561a9d2d3/diff:/var/lib/docker/overlay2/21349ef42547f51c781667f043eb6c1f96e1ba5bf8d9f2229304945c6e85c0a4/diff:/var/lib/docker/overlay2/7f1de31fbf51e091b5491c782d1a15a21ee544e8a75e6bf05168799b14fe2fba/diff:/var/lib/docker/overlay2/e7083cf187ea0246e4ef20e4078298ba380f6ad9b359cd5de26cf77d3413c9d6/diff:/var/lib/docker/overlay2/1d76b401a8120586fc6361b49dbd20cd1502169bf00d4b97606ada324a4d918f/diff:/var/lib/docker/overlay2/31b156ca310f21dcd7c24962137e251580cb1cc2e25baa2da0b2db319c98eaf3/diff",
+                "MergedDir": "/var/lib/docker/overlay2/316cba01019ab580400aa30965460642ebfabc1940f39352d12fbd4864f1d05a/merged",
+                "UpperDir": "/var/lib/docker/overlay2/316cba01019ab580400aa30965460642ebfabc1940f39352d12fbd4864f1d05a/diff",
+                "WorkDir": "/var/lib/docker/overlay2/316cba01019ab580400aa30965460642ebfabc1940f39352d12fbd4864f1d05a/work"
+            },
+            "Name": "overlay2"
+        },
+        "Mounts": [
+            {
+                "Type": "bind",
+                "Source": "/dev/leds/builtin/led2_g",
+                "Destination": "/dev/leds/builtin/led2_g",
+                "Mode": "",
+                "RW": true,
+                "Propagation": "rprivate"
+            },
+            {
+                "Type": "bind",
+                "Source": "/home/arduino/ArduinoApps/scope-v18",
+                "Destination": "/app",
+                "Mode": "",
+                "RW": true,
+                "Propagation": "rprivate"
+            },
+            {
+                "Type": "bind",
+                "Source": "/run/arduino-router.sock",
+                "Destination": "/run/arduino-router.sock",
+                "Mode": "",
+                "RW": true,
+                "Propagation": "rprivate"
+            },
+            {
+                "Type": "bind",
+                "Source": "/dev/leds/builtin/led1_g",
+                "Destination": "/dev/leds/builtin/led1_g",
+                "Mode": "",
+                "RW": true,
+                "Propagation": "rprivate"
+            },
+            {
+                "Type": "bind",
+                "Source": "/dev/leds/builtin/led1_r",
+                "Destination": "/dev/leds/builtin/led1_r",
+                "Mode": "",
+                "RW": true,
+                "Propagation": "rprivate"
+            },
+            {
+                "Type": "bind",
+                "Source": "/dev/leds/builtin/led2_r",
+                "Destination": "/dev/leds/builtin/led2_r",
+                "Mode": "",
+                "RW": true,
+                "Propagation": "rprivate"
+            },
+            {
+                "Type": "bind",
+                "Source": "/dev",
+                "Destination": "/dev",
+                "Mode": "",
+                "RW": true,
+                "Propagation": "rprivate"
+            },
+            {
+                "Type": "bind",
+                "Source": "/run/udev",
+                "Destination": "/run/udev",
+                "Mode": "",
+                "RW": false,
+                "Propagation": "rprivate"
+            },
+            {
+                "Type": "bind",
+                "Source": "/run/arduino-cloud-connector",
+                "Destination": "/run/arduino-cloud-connector",
+                "Mode": "",
+                "RW": true,
+                "Propagation": "rprivate"
+            },
+            {
+                "Type": "bind",
+                "Source": "/dev/leds/builtin/led1_b",
+                "Destination": "/dev/leds/builtin/led1_b",
+                "Mode": "",
+                "RW": true,
+                "Propagation": "rprivate"
+            },
+            {
+                "Type": "bind",
+                "Source": "/dev/leds/builtin/led2_b",
+                "Destination": "/dev/leds/builtin/led2_b",
+                "Mode": "",
+                "RW": true,
+                "Propagation": "rprivate"
+            },
+            {
+                "Type": "bind",
+                "Source": "/run/user/1000/pipewire-0",
+                "Destination": "/run/user/1000/pipewire-0",
+                "Mode": "",
+                "RW": true,
+                "Propagation": "rprivate"
+            }
+        ],
+        "Config": {
+            "Hostname": "fa13a381a70d",
+            "Domainname": "",
+            "User": "1000:1000",
+            "AttachStdin": false,
+            "AttachStdout": true,
+            "AttachStderr": true,
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "BOARD_NAME=unoq",
+                "HOST_IP=192.168.1.33",
+                "MODELS_PATH=/var/lib/arduino-app-cli/models",
+                "XDG_RUNTIME_DIR=/run/user/1000",
+                "APP_HOME=/home/arduino/ArduinoApps/scope-v18",
+                "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "GPG_KEY=7169605F62C751356D054A26A821E680E5FA6305",
+                "PYTHON_VERSION=3.13.14",
+                "PYTHON_SHA256=639e43243c620a308f968213df9e00f2f8f62332f7adbaa7a7eeb9783057c690",
+                "UV_CONSTRAINT=/etc/uv-constraints.txt",
+                "PIP_CONSTRAINT=/etc/uv-constraints.txt",
+                "HOME=/home/app",
+                "USER=arduino",
+                "PIPEWIRE_REMOTE=/run/user/1000/pipewire-0"
+            ],
+            "Cmd": null,
+            "Image": "ghcr.io/arduino/app-bricks/python-apps-base:0.12.0",
+            "Volumes": null,
+            "WorkingDir": "/app",
+            "Entrypoint": [
+                "/run.sh"
+            ],
+            "OnBuild": null,
+            "Labels": {
+                "cc.arduino.app": "true",
+                "cc.arduino.app.main": "true",
+                "cc.arduino.app.path": "/home/arduino/ArduinoApps/scope-v18",
+                "com.docker.compose.config-hash": "96fcb0685cd56b6eec0a73bdedc47fa9073cb75957b06cc106bc3aa8c6ebb6fb",
+                "com.docker.compose.container-number": "1",
+                "com.docker.compose.depends_on": "",
+                "com.docker.compose.image": "sha256:22b878f2712b7b2fe0fddaa677393886045746819e127615cafca4c63b306015",
+                "com.docker.compose.oneoff": "False",
+                "com.docker.compose.project": "scope-v18",
+                "com.docker.compose.project.config_files": "/home/arduino/ArduinoApps/scope-v18/.cache/app-compose.yaml",
+                "com.docker.compose.project.working_dir": "/home/arduino/ArduinoApps/scope-v18/.cache",
+                "com.docker.compose.service": "main",
+                "com.docker.compose.version": "2.26.1",
+                "org.opencontainers.image.created": "2026-08-05T14:13:47.899Z",
+                "org.opencontainers.image.description": "The code of the Arduino App Lab Bricks",
+                "org.opencontainers.image.licenses": "MPL-2.0",
+                "org.opencontainers.image.revision": "7b1504fa79d6d05169aa286d53fe97c318499b2a",
+                "org.opencontainers.image.source": "https://github.com/arduino/app-bricks-py",
+                "org.opencontainers.image.title": "app-bricks-py",
+                "org.opencontainers.image.url": "https://github.com/arduino/app-bricks-py",
+                "org.opencontainers.image.version": "0.12.0"
+            }
+        },
+        "NetworkSettings": {
+            "Bridge": "",
+            "SandboxID": "83b653e4011071147b67d25f9855f4f5530c769541235f467fa26213af67e2ad",
+            "SandboxKey": "/var/run/docker/netns/83b653e40110",
+            "Ports": {},
+            "HairpinMode": false,
+            "LinkLocalIPv6Address": "",
+            "LinkLocalIPv6PrefixLen": 0,
+            "SecondaryIPAddresses": null,
+            "SecondaryIPv6Addresses": null,
+            "EndpointID": "",
+            "Gateway": "",
+            "GlobalIPv6Address": "",
+            "GlobalIPv6PrefixLen": 0,
+            "IPAddress": "",
+            "IPPrefixLen": 0,
+            "IPv6Gateway": "",
+            "MacAddress": "",
+            "Networks": {
+                "scope-v18_default": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": [
+                        "scope-v18-main-1",
+                        "main"
+                    ],
+                    "MacAddress": "02:42:ac:13:00:02",
+                    "NetworkID": "f3f0423df2941216e10645c7f992f0c3e06536d2d0277f28fc772d7c43f6e243",
+                    "EndpointID": "526de14199280ad4d2815678d23d12417f7e48d3968b93941438457f14c66a78",
+                    "Gateway": "172.19.0.1",
+                    "IPAddress": "172.19.0.2",
+                    "IPPrefixLen": 16,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "DriverOpts": null,
+                    "DNSNames": [
+                        "scope-v18-main-1",
+                        "main",
+                        "fa13a381a70d"
+                    ]
+                }
+            }
+        }
+    }
+]

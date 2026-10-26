@@ -51,6 +51,22 @@ class BackendTests(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, 'rehearsal tested another binary pair'):
             backend.preflight(wrong)
 
+    def test_update_existing_sources_without_additions_still_checks_exact_hashes(self):
+        accepted=contract.load_acceptance(RECEIPT);board=FakeBoard()
+        backend=ProductionBackend(accepted,board=board)
+        name='sketch/native_profiles.h'
+        backend._hash=lambda path:accepted['sources']['app'][name]
+        backend._sources=lambda:accepted['sources']['app']
+        backend.install_sources(accepted,dict(added=[],remove=[],replace=[name]))
+        self.assertEqual([call[0] for call in board.commands],['mkdir','push'])
+        for changes in (dict(added=['unreviewed.h'],remove=[],replace=[]),dict(added=[],remove=[name],replace=[])):
+            board.commands.clear()
+            with self.assertRaises(RuntimeError):backend.install_sources(accepted,changes)
+            self.assertEqual(board.commands,[])
+        backend._hash=lambda path:'0'*64
+        with self.assertRaisesRegex(RuntimeError,'Installed source differs'):
+            backend.install_sources(accepted,dict(added=[],remove=[],replace=[name]))
+
     def test_partial_cache_rename_can_restore_exact_original(self):
         with tempfile.TemporaryDirectory() as folder:
             root, backup = Path(folder) / 'scope-v18', Path(folder) / 'backup'

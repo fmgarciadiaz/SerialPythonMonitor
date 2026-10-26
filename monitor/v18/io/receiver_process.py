@@ -5,6 +5,7 @@ A separate pipe carries the final outcome even when the FIFO is full.
 """
 from contextlib import ExitStack
 from collections import deque
+from monitor.v18.flow_limits import FlowLimitExceeded
 from dataclasses import replace
 import multiprocessing as mp
 import os
@@ -234,6 +235,7 @@ def receiver_main(options, commands, pcm, events, credits, terminal, cancel, pcm
             actual_rate=config.actual_rate,bits=config.bits,
             last_credit_monotonic_s=last_credit_monotonic,
             last_credit_age_s=None if last_credit_monotonic is None else now-last_credit_monotonic)
+        if hasattr(error,'details'):failure_snapshot['limit_details']=error.details
         if child_timing is not None:
             failure_snapshot['child_stages']=child_timing.snapshot(detail=True)
         if isinstance(source,RemotePcmSource):
@@ -278,7 +280,9 @@ def receiver_main(options, commands, pcm, events, credits, terminal, cancel, pcm
         if deferred_failure is not None:return
         if not force and len(retained)>=4: return
         if len(retained)>=options['max_batches']:
-            fail(RuntimeError('DSP/GUI atrasado: límite de lotes V18'))
+            fail(FlowLimitExceeded('Receptor DSP/GUI',dict(batches=len(retained)),
+                dict(batches=len(retained)+1),dict(batches=options['max_batches']),['batches'],
+                context=dict(bits=config.bits,channels=config.channels,actual_rate=config.actual_rate,generation=generation)))
             return
         ordinal+=1
         if force:
@@ -304,7 +308,10 @@ def receiver_main(options, commands, pcm, events, credits, terminal, cancel, pcm
         array=samples.array if hasattr(samples,'array') else np.asarray(samples)
         chunks.append(array);count+=len(array)
         if sum(retained.values())+count/config.actual_rate>1.+1e-9:
-            fail(RuntimeError('DSP/GUI atrasado: RF V18 pendiente supera un segundo'))
+            fail(FlowLimitExceeded('RF pendiente',dict(seconds=sum(retained.values())+(count-len(array))/config.actual_rate),
+                dict(seconds=sum(retained.values())+count/config.actual_rate),dict(seconds=1.),['seconds'],
+                context=dict(bits=config.bits,channels=config.channels,actual_rate=config.actual_rate,generation=generation,
+                             buffered_samples_before=count-len(array),buffered_samples=count)))
             chunks.clear();count=0
             return
         flush()

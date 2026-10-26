@@ -22,12 +22,13 @@ from experimentos.fs_max_v18.rehearsal_archive import APP, WORK_PREFIX, EXTRA, d
 from experimentos.fs_max_v18.run_probe import Hardware, EXP, CONTAINER, private_profiles, relay_configuration_equal
 from experimentos.fs_max_v18.probe_journal import ProbeJournal, REMOTE_MANIFEST, source_manifest
 
+RECIPE = 'batcharena'
 NAME = 'Scope V18 Rate Probe BatchArena'
 ANCHOR = 'halves[1].source==scope_batch2::Source::Idle) k_sleep(K_MSEC(1));'
 
 
 def plan():
-    return dict(private=True, recipe='batcharena', app=APP, name=NAME,
+    return dict(private=True, recipe=RECIPE, app=APP, name=NAME,
         default_action='print plan; no Q access', production_update=False,
         baseline=dict(bits=14, rate=40000, generator='OFF', wav='IDLE'),
         mutation=dict(source='sketch/sketch.ino', idle_ms_before=1, idle_ms_after=2,
@@ -44,8 +45,9 @@ def plan():
                'Always Hardware.restore production after successful capture; verify original production identity.'])
 
 
-def verify_export(path, expected, app=APP):
+def verify_export(path, expected, app=None):
     """Validate CLI-exported ZIP bytes without extracting any archive member."""
+    app=APP if app is None else app
     with zipfile.ZipFile(path) as archive:
         files = {}
         for info in archive.infolist():
@@ -71,7 +73,7 @@ class Rehearsal:
     def __init__(self, hardware):
         self.hw = hardware
         self.report = hardware.report
-        if hardware.app != APP or hardware.app_name != NAME or hardware.recipe != 'batcharena':
+        if hardware.app != APP or hardware.app_name != NAME or hardware.recipe != RECIPE:
             raise ValueError('Only the explicit private BatchArena target is allowed')
         token = uuid.uuid4().hex
         self.remote_folder = WORK_PREFIX + token
@@ -347,9 +349,14 @@ def orchestrate(hardware, report, save, rehearsal_factory=Rehearsal):
 
 
 def main(argv=None):
+    global RECIPE,APP,NAME
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--run', action='store_true')
+    parser.add_argument('--recipe',choices=('batcharena','adc16','rateonly','rateonly2','catalog'),default='batcharena')
     args = parser.parse_args(argv)
+    RECIPE=args.recipe
+    APP='/home/arduino/ArduinoApps/scope-v18-rate-probe-'+RECIPE
+    NAME={'adc16':'Scope V18 Rate Probe ADC16','batcharena':'Scope V18 Rate Probe BatchArena','rateonly':'Scope V18 Rate Probe RateOnly','rateonly2':'Scope V18 Rate Probe RateOnly2','catalog':'Scope V18 Rate Probe Catalog'}[RECIPE]
     if not args.run:
         print(json.dumps(plan(), indent=2, ensure_ascii=False))
         return 0
@@ -358,7 +365,7 @@ def main(argv=None):
     folder.mkdir(parents=True)
     (folder / 'runner.py').write_bytes(Path(__file__).read_bytes())
     (folder / 'archive_helper.py').write_bytes((EXP / 'rehearsal_archive.py').read_bytes())
-    report = dict(ok=False, recipe='batcharena', private=True, plan=plan(),
+    report = dict(ok=False, recipe=RECIPE, private=True, plan=plan(),
                   runner_sha256=digest(Path(__file__)), archive_helper_sha256=digest(EXP / 'rehearsal_archive.py'))
     journal = ProbeJournal(folder / 'report.json', report)
     hardware = Hardware(folder, report)

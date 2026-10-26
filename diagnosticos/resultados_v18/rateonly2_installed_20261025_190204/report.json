@@ -1,0 +1,41 @@
+{
+  "ok": false,
+  "cases": [
+    {
+      "label": "new8",
+      "bits": 8,
+      "rate": 1882352,
+      "evidence": "diagnosticos/resultados_v18/rateonly2_installed_20261025_190204/new8.json",
+      "returncode": 1,
+      "errors": [
+        "radio status state=4 reason=2",
+        "Assertion failed: radio_stop_confirmed",
+        "Assertion failed: radio_hold_completed",
+        "Assertion failed: wav_playing",
+        "Assertion failed: wav_progress",
+        "Assertion failed: wav_stop_confirmed",
+        "Assertion failed: fm_playing",
+        "Assertion failed: fm_progress",
+        "Assertion failed: fm_stop_confirmed"
+      ],
+      "assertions": {
+        "radio_playing_40k": true,
+        "radio_stop_confirmed": false,
+        "radio_progress": true,
+        "radio_hold_completed": false,
+        "scan_completed": true,
+        "wav_playing": false,
+        "wav_progress": false,
+        "wav_stop_confirmed": false,
+        "fm_playing": false,
+        "fm_progress": false,
+        "fm_stop_confirmed": false,
+        "shutdown_confirmed": true,
+        "worker_released": true
+      },
+      "exposed_fraction": 1.0,
+      "paint_events": 636,
+      "ok": false
+    }
+  ]
+}

@@ -1,12 +1,12 @@
 {
   "ok": true,
-  "recipe": "batcharena",
+  "recipe": "catalog",
   "private": true,
   "plan": {
     "private": true,
-    "recipe": "batcharena",
-    "app": "/home/arduino/ArduinoApps/scope-v18-rate-probe-batcharena",
-    "name": "Scope V18 Rate Probe BatchArena",
+    "recipe": "catalog",
+    "app": "/home/arduino/ArduinoApps/scope-v18-rate-probe-catalog",
+    "name": "Scope V18 Rate Probe Catalog",
     "default_action": "print plan; no Q access",
     "production_update": false,
     "baseline": {
@@ -35,9 +35,9 @@
       "Always Hardware.restore production after successful capture; verify original production identity."
     ]
   },
-  "runner_sha256": "75b3f3a0c0563befbcaf3ede1ca6ddfeabc97fd2f6090c5df85b8ed4751d0cfa",
-  "archive_helper_sha256": "16a1caf79e2ba9c716f041ea6081536f4ea633d348bb8b1571ac4edad5a36cfc",
-  "saved_relay_name": "serialmonitor-usb-stream-v18-saved-2a39b531ab",
+  "runner_sha256": "7957796cc7e6f5c98adcd9b03b98050f1fd1c1fdbf138070d21c68ed618fae04",
+  "archive_helper_sha256": "20e388c0f4760b68fa43ffd8f064b10f7a8b570c768dfdb8ea33d77ad9e046fc",
+  "saved_relay_name": "serialmonitor-usb-stream-v18-saved-90be5a1a61",
   "cpu_state": {
     "policy": 0,
     "priority": 0,
@@ -51,16 +51,16 @@
   "identity": {
     "board_serial": "1060031107",
     "app": "scope-v18-main-1",
-    "firmware_sha256": "96685eb64cc722adebc7f345f40c3500e22642814bbfc6f182c66c0f992a7ec9",
-    "relay_sha256": "0639869d3184c10b5a0aa70ad54713da5d414069e97209c8c0485c40c77482fe"
+    "firmware_sha256": "540c16745312b53e6aa70e8b288dc9be2e8b98bb1dc88a78bea1aa37551bb071",
+    "relay_sha256": "ecccdbcd340fb018ea341290cb1a7d9197530171f8eef90b4009ca58c94be5b7"
   },
   "snapshot": {
     "schema": 1,
     "identity": {
       "board_serial": "1060031107",
       "app": "scope-v18-main-1",
-      "firmware_sha256": "96685eb64cc722adebc7f345f40c3500e22642814bbfc6f182c66c0f992a7ec9",
-      "relay_sha256": "0639869d3184c10b5a0aa70ad54713da5d414069e97209c8c0485c40c77482fe"
+      "firmware_sha256": "540c16745312b53e6aa70e8b288dc9be2e8b98bb1dc88a78bea1aa37551bb071",
+      "relay_sha256": "ecccdbcd340fb018ea341290cb1a7d9197530171f8eef90b4009ca58c94be5b7"
     },
     "adc_bits": 14,
     "adc_period": 32,
@@ -78,8 +78,8 @@
     }
   },
   "original_relay": {
-    "Id": "222cf1a63b3330466c575008cf1eef780a0bd369238f653db2e08da92d8222e8",
-    "Created": "2026-10-23T03:06:41.284453031Z",
+    "Id": "c0179ec8e28423b28480bdd102060e669e9ab4f679b5c1808621bcbd3881de85",
+    "Created": "2026-10-25T21:58:18.219163156Z",
     "Path": "/work/unoq_stream",
     "Args": [],
     "State": {
@@ -89,17 +89,17 @@
       "Restarting": false,
       "OOMKilled": false,
       "Dead": false,
-      "Pid": 363843,
+      "Pid": 532809,
       "ExitCode": 0,
       "Error": "",
-      "StartedAt": "2026-10-24T22:02:09.017936628Z",
-      "FinishedAt": "2026-10-24T21:57:42.331809117Z"
+      "StartedAt": "2026-10-26T00:15:08.44303668Z",
+      "FinishedAt": "2026-10-26T00:13:09.719021707Z"
     },
     "Image": "sha256:22b878f2712b7b2fe0fddaa677393886045746819e127615cafca4c63b306015",
-    "ResolvConfPath": "/var/lib/docker/containers/222cf1a63b3330466c575008cf1eef780a0bd369238f653db2e08da92d8222e8/resolv.conf",
-    "HostnamePath": "/var/lib/docker/containers/222cf1a63b3330466c575008cf1eef780a0bd369238f653db2e08da92d8222e8/hostname",
-    "HostsPath": "/var/lib/docker/containers/222cf1a63b3330466c575008cf1eef780a0bd369238f653db2e08da92d8222e8/hosts",
-    "LogPath": "/var/lib/docker/containers/222cf1a63b3330466c575008cf1eef780a0bd369238f653db2e08da92d8222e8/222cf1a63b3330466c575008cf1eef780a0bd369238f653db2e08da92d8222e8-json.log",
+    "ResolvConfPath": "/var/lib/docker/containers/c0179ec8e28423b28480bdd102060e669e9ab4f679b5c1808621bcbd3881de85/resolv.conf",
+    "HostnamePath": "/var/lib/docker/containers/c0179ec8e28423b28480bdd102060e669e9ab4f679b5c1808621bcbd3881de85/hostname",
+    "HostsPath": "/var/lib/docker/containers/c0179ec8e28423b28480bdd102060e669e9ab4f679b5c1808621bcbd3881de85/hosts",
+    "LogPath": "/var/lib/docker/containers/c0179ec8e28423b28480bdd102060e669e9ab4f679b5c1808621bcbd3881de85/c0179ec8e28423b28480bdd102060e669e9ab4f679b5c1808621bcbd3881de85-json.log",
     "Name": "/serialmonitor-usb-stream-v18",
     "RestartCount": 0,
     "Driver": "overlay2",
@@ -202,7 +202,7 @@
       "Mounts": [
         {
           "Type": "bind",
-          "Source": "/home/arduino/.cache/serialmonitor/usb-stream-08430aaec88ca9c16496/unoq_stream",
+          "Source": "/home/arduino/.cache/serialmonitor/v18-relay-f3326948649f46bc9ab1937340eb42a0/unoq_stream",
           "Target": "/work/unoq_stream",
           "ReadOnly": true
         },
@@ -235,17 +235,17 @@
     },
     "GraphDriver": {
       "Data": {
-        "LowerDir": "/var/lib/docker/overlay2/27dce39cc9b7cf2c3e146f5115211b76892ad66784edc002aee8d6fb9090dc85-init/diff:/var/lib/docker/overlay2/d44c10d7f3ead90724c72f7b59db1512e64f2a7df254c38b0a86c7f767485af4/diff:/var/lib/docker/overlay2/fbc34bc221e04b5ec300aa2af7d1113138d9331a8c9e1d89e685345da8483f02/diff:/var/lib/docker/overlay2/22dae50a59d69cfcd7a9bf5471d26697b5e9eb5b5249260e017c0ebdbfa7022c/diff:/var/lib/docker/overlay2/3f556d3c5834855fe06f7d17e3771bc8b5733571ea3af4a763c9841c305517ce/diff:/var/lib/docker/overlay2/8b8ffc0ae644f215db80b120ae6a4dd2b451db561ad5ce3c1b3a63d78f1290a5/diff:/var/lib/docker/overlay2/d9250ffc65e0357bd8b627e189f80c1c86bda6054bd80ae5fac68dd67af5eda3/diff:/var/lib/docker/overlay2/0e975bc62dd242a25184e28a0c0c07c93eb61c837b0f2bed2349c9ba90459f98/diff:/var/lib/docker/overlay2/5840fe07acfc47093da5a207f61653bc8855698a5c64e3f43b55559d33a38e75/diff:/var/lib/docker/overlay2/d4eca522e87bb424e991078151b8d69b4c1ec82d8207f52723cdb0fa50b4499f/diff:/var/lib/docker/overlay2/9706038d1c56e15bfa24105999266de812a9e90d6fdb7fef6db36947e2f4ea8c/diff:/var/lib/docker/overlay2/8555706bd8a2795730097a13efd59e65d120d6f43fa6b1c3a84cb44857086794/diff:/var/lib/docker/overlay2/6f8d80193936dd5de18ad8ce45040037c8ee4a55f7161b1774571cb99d2a566b/diff:/var/lib/docker/overlay2/86881765be623495a3f84360b63ba1a9de5abf07d18e1645acacfb204baba2a7/diff:/var/lib/docker/overlay2/147ce11877e3feec47dc6a0eb9a33bba66f8a88234962b356f0417fa518aff26/diff:/var/lib/docker/overlay2/0f5fd448972f343b2ab00355bb731e47423e8b17bedb44f0957f135561a9d2d3/diff:/var/lib/docker/overlay2/21349ef42547f51c781667f043eb6c1f96e1ba5bf8d9f2229304945c6e85c0a4/diff:/var/lib/docker/overlay2/7f1de31fbf51e091b5491c782d1a15a21ee544e8a75e6bf05168799b14fe2fba/diff:/var/lib/docker/overlay2/e7083cf187ea0246e4ef20e4078298ba380f6ad9b359cd5de26cf77d3413c9d6/diff:/var/lib/docker/overlay2/1d76b401a8120586fc6361b49dbd20cd1502169bf00d4b97606ada324a4d918f/diff:/var/lib/docker/overlay2/31b156ca310f21dcd7c24962137e251580cb1cc2e25baa2da0b2db319c98eaf3/diff",
-        "MergedDir": "/var/lib/docker/overlay2/27dce39cc9b7cf2c3e146f5115211b76892ad66784edc002aee8d6fb9090dc85/merged",
-        "UpperDir": "/var/lib/docker/overlay2/27dce39cc9b7cf2c3e146f5115211b76892ad66784edc002aee8d6fb9090dc85/diff",
-        "WorkDir": "/var/lib/docker/overlay2/27dce39cc9b7cf2c3e146f5115211b76892ad66784edc002aee8d6fb9090dc85/work"
+        "LowerDir": "/var/lib/docker/overlay2/cbccf4b467b1befa92c2410cdd939b6e8ee70c081d26fba32742dab5d972d18a-init/diff:/var/lib/docker/overlay2/d44c10d7f3ead90724c72f7b59db1512e64f2a7df254c38b0a86c7f767485af4/diff:/var/lib/docker/overlay2/fbc34bc221e04b5ec300aa2af7d1113138d9331a8c9e1d89e685345da8483f02/diff:/var/lib/docker/overlay2/22dae50a59d69cfcd7a9bf5471d26697b5e9eb5b5249260e017c0ebdbfa7022c/diff:/var/lib/docker/overlay2/3f556d3c5834855fe06f7d17e3771bc8b5733571ea3af4a763c9841c305517ce/diff:/var/lib/docker/overlay2/8b8ffc0ae644f215db80b120ae6a4dd2b451db561ad5ce3c1b3a63d78f1290a5/diff:/var/lib/docker/overlay2/d9250ffc65e0357bd8b627e189f80c1c86bda6054bd80ae5fac68dd67af5eda3/diff:/var/lib/docker/overlay2/0e975bc62dd242a25184e28a0c0c07c93eb61c837b0f2bed2349c9ba90459f98/diff:/var/lib/docker/overlay2/5840fe07acfc47093da5a207f61653bc8855698a5c64e3f43b55559d33a38e75/diff:/var/lib/docker/overlay2/d4eca522e87bb424e991078151b8d69b4c1ec82d8207f52723cdb0fa50b4499f/diff:/var/lib/docker/overlay2/9706038d1c56e15bfa24105999266de812a9e90d6fdb7fef6db36947e2f4ea8c/diff:/var/lib/docker/overlay2/8555706bd8a2795730097a13efd59e65d120d6f43fa6b1c3a84cb44857086794/diff:/var/lib/docker/overlay2/6f8d80193936dd5de18ad8ce45040037c8ee4a55f7161b1774571cb99d2a566b/diff:/var/lib/docker/overlay2/86881765be623495a3f84360b63ba1a9de5abf07d18e1645acacfb204baba2a7/diff:/var/lib/docker/overlay2/147ce11877e3feec47dc6a0eb9a33bba66f8a88234962b356f0417fa518aff26/diff:/var/lib/docker/overlay2/0f5fd448972f343b2ab00355bb731e47423e8b17bedb44f0957f135561a9d2d3/diff:/var/lib/docker/overlay2/21349ef42547f51c781667f043eb6c1f96e1ba5bf8d9f2229304945c6e85c0a4/diff:/var/lib/docker/overlay2/7f1de31fbf51e091b5491c782d1a15a21ee544e8a75e6bf05168799b14fe2fba/diff:/var/lib/docker/overlay2/e7083cf187ea0246e4ef20e4078298ba380f6ad9b359cd5de26cf77d3413c9d6/diff:/var/lib/docker/overlay2/1d76b401a8120586fc6361b49dbd20cd1502169bf00d4b97606ada324a4d918f/diff:/var/lib/docker/overlay2/31b156ca310f21dcd7c24962137e251580cb1cc2e25baa2da0b2db319c98eaf3/diff",
+        "MergedDir": "/var/lib/docker/overlay2/cbccf4b467b1befa92c2410cdd939b6e8ee70c081d26fba32742dab5d972d18a/merged",
+        "UpperDir": "/var/lib/docker/overlay2/cbccf4b467b1befa92c2410cdd939b6e8ee70c081d26fba32742dab5d972d18a/diff",
+        "WorkDir": "/var/lib/docker/overlay2/cbccf4b467b1befa92c2410cdd939b6e8ee70c081d26fba32742dab5d972d18a/work"
       },
       "Name": "overlay2"
     },
     "Mounts": [
       {
         "Type": "bind",
-        "Source": "/home/arduino/.cache/serialmonitor/usb-stream-08430aaec88ca9c16496/unoq_stream",
+        "Source": "/home/arduino/.cache/serialmonitor/v18-relay-f3326948649f46bc9ab1937340eb42a0/unoq_stream",
         "Destination": "/work/unoq_stream",
         "Mode": "",
         "RW": false,
@@ -302,7 +302,7 @@
     },
     "NetworkSettings": {
       "Bridge": "",
-      "SandboxID": "a9c528c2c6b568ee0f4f4d8543ef39a3581850677c269c3f14a379c7e1bbeb0d",
+      "SandboxID": "f3dd03feb7eea786542f2b180e01583183828387f0a4c8366d8713a06bf92a54",
       "SandboxKey": "/var/run/docker/netns/default",
       "Ports": {},
       "HairpinMode": false,
@@ -325,7 +325,7 @@
           "Aliases": null,
           "MacAddress": "",
           "NetworkID": "f9da40f64b25bdd9167bd84f1c507b1245c4bef5d9a11bcfa3b83fa32c85aa64",
-          "EndpointID": "c04866b158afeab667b8726a88be5b105103630405448cc5be3079387bd0fb38",
+          "EndpointID": "3cd0abd9ea5b2906514e30347fb06e50967fc00cac7520725b19a38dfba2ab6c",
           "Gateway": "",
           "IPAddress": "",
           "IPPrefixLen": 0,
@@ -414,10 +414,6 @@
     },
     {
       "operation": "push_private_relay_transport_policy.h",
-      "state": "completed"
-    },
-    {
-      "operation": "build_private_relay",
       "state": "completed"
     },
     {
@@ -611,11 +607,11 @@
       3
     ]
   },
-  "backup": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/respaldos/unoq/osciloscopio_20261024_190242_602352.zip",
+  "backup": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/respaldos/unoq/osciloscopio_20261025_222712_089863.zip",
   "app_list_before_candidate": [
     {
-      "id": "dXNlcjpzY29wZS12MTgtcmF0ZS1wcm9iZS1iYXRjaGFyZW5h",
-      "name": "Scope V18 Rate Probe BatchArena",
+      "id": "dXNlcjpzY29wZS12MTgtcmF0ZS1wcm9iZS1jYXRhbG9n",
+      "name": "Scope V18 Rate Probe Catalog",
       "description": "Etapa II candidate: SCP1 V4 compact CH1/CH2 and block timestamps; ADC, DAC, WAV and Synth retained.",
       "icon": "",
       "status": "stopped",
@@ -623,8 +619,8 @@
       "default": false
     },
     {
-      "id": "dXNlcjpzY29wZS12MTgtcmF0ZS1wcm9iZQ",
-      "name": "Scope V18 Rate Probe",
+      "id": "dXNlcjpzY29wZS12MTgtcmF0ZS1wcm9iZS1hdWRpby1jYXRhbG9n",
+      "name": "Scope V18 Rate Probe AudioCatalog",
       "description": "Etapa II candidate: SCP1 V4 compact CH1/CH2 and block timestamps; ADC, DAC, WAV and Synth retained.",
       "icon": "",
       "status": "stopped",
@@ -632,8 +628,8 @@
       "default": false
     },
     {
-      "id": "dXNlcjpzY29wZS12MTgtcmF0ZS1wcm9iZS13aWRlOA",
-      "name": "Scope V18 Rate Probe Wide8",
+      "id": "dXNlcjpzY29wZS12MTgtcmF0ZS1wcm9iZS1yYXRlb25seTI",
+      "name": "Scope V18 Rate Probe RateOnly2",
       "description": "Etapa II candidate: SCP1 V4 compact CH1/CH2 and block timestamps; ADC, DAC, WAV and Synth retained.",
       "icon": "",
       "status": "stopped",
@@ -641,8 +637,17 @@
       "default": false
     },
     {
-      "id": "dXNlcjpzY29wZS12MTgtcmF0ZS1wcm9iZS1zcGk0MA",
-      "name": "Scope V18 Rate Probe SPI40",
+      "id": "dXNlcjpzY29wZS12MTgtcmF0ZS1wcm9iZS1yYXRlb25seQ",
+      "name": "Scope V18 Rate Probe RateOnly",
+      "description": "Etapa II candidate: SCP1 V4 compact CH1/CH2 and block timestamps; ADC, DAC, WAV and Synth retained.",
+      "icon": "",
+      "status": "stopped",
+      "example": false,
+      "default": false
+    },
+    {
+      "id": "dXNlcjpzY29wZS12MTgtcmF0ZS1wcm9iZS1hZGMxNg",
+      "name": "Scope V18 Rate Probe ADC16",
       "description": "Etapa II candidate: SCP1 V4 compact CH1/CH2 and block timestamps; ADC, DAC, WAV and Synth retained.",
       "icon": "",
       "status": "stopped",
@@ -652,87 +657,6 @@
     {
       "id": "dXNlcjpzY29wZS12MTg",
       "name": "Scope V18",
-      "description": "Etapa II candidate: SCP1 V4 compact CH1/CH2 and block timestamps; ADC, DAC, WAV and Synth retained.",
-      "icon": "",
-      "status": "stopped",
-      "example": false,
-      "default": false
-    },
-    {
-      "id": "dXNlcjpzY29wZS12MTgtcmF0ZS1wcm9iZS1iYXRjaG5hdGl2ZQ",
-      "name": "Scope V18 Rate Probe BatchNative",
-      "description": "Etapa II candidate: SCP1 V4 compact CH1/CH2 and block timestamps; ADC, DAC, WAV and Synth retained.",
-      "icon": "",
-      "status": "stopped",
-      "example": false,
-      "default": false
-    },
-    {
-      "id": "dXNlcjpzY29wZS12MTgtcmF0ZS1wcm9iZS1iYXRjaGZhc3Q",
-      "name": "Scope V18 Rate Probe BatchFast",
-      "description": "Etapa II candidate: SCP1 V4 compact CH1/CH2 and block timestamps; ADC, DAC, WAV and Synth retained.",
-      "icon": "",
-      "status": "stopped",
-      "example": false,
-      "default": false
-    },
-    {
-      "id": "dXNlcjpzY29wZS12MTgtcmF0ZS1wcm9iZS1hbGlnbmVkcGluZw",
-      "name": "Scope V18 Rate Probe AlignedPing",
-      "description": "Etapa II candidate: SCP1 V4 compact CH1/CH2 and block timestamps; ADC, DAC, WAV and Synth retained.",
-      "icon": "",
-      "status": "stopped",
-      "example": false,
-      "default": false
-    },
-    {
-      "id": "dXNlcjpzY29wZS12MTgtcmF0ZS1wcm9iZS10eGNsZWFu",
-      "name": "Scope V18 Rate Probe TXClean",
-      "description": "Etapa II candidate: SCP1 V4 compact CH1/CH2 and block timestamps; ADC, DAC, WAV and Synth retained.",
-      "icon": "",
-      "status": "stopped",
-      "example": false,
-      "default": false
-    },
-    {
-      "id": "dXNlcjpzY29wZS12MTgtcmF0ZS1wcm9iZS1iYXRjaHN0YWNr",
-      "name": "Scope V18 Rate Probe BatchStack",
-      "description": "Etapa II candidate: SCP1 V4 compact CH1/CH2 and block timestamps; ADC, DAC, WAV and Synth retained.",
-      "icon": "",
-      "status": "stopped",
-      "example": false,
-      "default": false
-    },
-    {
-      "id": "dXNlcjpzY29wZS12MTgtcmF0ZS1wcm9iZS1iYXRjaDI",
-      "name": "Scope V18 Rate Probe Batch2",
-      "description": "Etapa II candidate: SCP1 V4 compact CH1/CH2 and block timestamps; ADC, DAC, WAV and Synth retained.",
-      "icon": "",
-      "status": "stopped",
-      "example": false,
-      "default": false
-    },
-    {
-      "id": "dXNlcjpzY29wZS12MTgtcmF0ZS1wcm9iZS1zcGkxNg",
-      "name": "Scope V18 Rate Probe SPI16",
-      "description": "Etapa II candidate: SCP1 V4 compact CH1/CH2 and block timestamps; ADC, DAC, WAV and Synth retained.",
-      "icon": "",
-      "status": "stopped",
-      "example": false,
-      "default": false
-    },
-    {
-      "id": "dXNlcjpzY29wZS12MTgtcmF0ZS1wcm9iZS13b3JkcGluZw",
-      "name": "Scope V18 Rate Probe WordPing",
-      "description": "Etapa II candidate: SCP1 V4 compact CH1/CH2 and block timestamps; ADC, DAC, WAV and Synth retained.",
-      "icon": "",
-      "status": "stopped",
-      "example": false,
-      "default": false
-    },
-    {
-      "id": "dXNlcjpzY29wZS12MTgtcmF0ZS1wcm9iZS1mdWxsOA",
-      "name": "Scope V18 Rate Probe Full8",
       "description": "Etapa II candidate: SCP1 V4 compact CH1/CH2 and block timestamps; ADC, DAC, WAV and Synth retained.",
       "icon": "",
       "status": "stopped",
@@ -1947,26 +1871,27 @@
     }
   ],
   "candidate_app_action": "adopt",
-  "candidate_relay": "/home/arduino/.cache/serialmonitor/v18-rate-probe-e7590471ba7cdc285920",
+  "relay_binary_reused": true,
+  "candidate_relay": "/home/arduino/.cache/serialmonitor/v18-rate-probe-4aedaf8820b6a686bd2c",
   "private_paths": {
-    "app": "/home/arduino/ArduinoApps/scope-v18-rate-probe-batcharena",
-    "archive": "/home/arduino/.cache/serialmonitor/v18-rehearsal-09611b89180c4fa38b54a578e1a88f4f",
-    "helper": "/tmp/v18-rehearsal-09611b89180c4fa38b54a578e1a88f4f.py"
+    "app": "/home/arduino/ArduinoApps/scope-v18-rate-probe-catalog",
+    "archive": "/home/arduino/.cache/serialmonitor/v18-rehearsal-fabc0957dac842a794f6290d5ef47f65",
+    "helper": "/tmp/v18-rehearsal-fabc0957dac842a794f6290d5ef47f65.py"
   },
   "private_baseline": {
     "identity": {
       "board_serial": "1060031107",
-      "app": "scope-v18-rate-probe-batcharena-main-1",
-      "firmware_sha256": "cad37ccd079ff7905863e9f826ba956abe47d13ddeb85634698e44f4930325c7",
-      "relay_sha256": "9b8baa1a435838a33bca651669f5b64f0ca17066e53d567b9d1eaa6972cba114"
+      "app": "scope-v18-rate-probe-catalog-main-1",
+      "firmware_sha256": "37f049fa029ad62a10767c56dc586b2c3697f8d250a0b8a7396570ce8e0c7060",
+      "relay_sha256": "27da0bc4860401df27eef50429f2ec881bfd3b51b1893d1fe3bacb9e922f56ae"
     },
     "snapshot": {
       "schema": 1,
       "identity": {
         "board_serial": "1060031107",
-        "app": "scope-v18-rate-probe-batcharena-main-1",
-        "firmware_sha256": "cad37ccd079ff7905863e9f826ba956abe47d13ddeb85634698e44f4930325c7",
-        "relay_sha256": "9b8baa1a435838a33bca651669f5b64f0ca17066e53d567b9d1eaa6972cba114"
+        "app": "scope-v18-rate-probe-catalog-main-1",
+        "firmware_sha256": "37f049fa029ad62a10767c56dc586b2c3697f8d250a0b8a7396570ce8e0c7060",
+        "relay_sha256": "27da0bc4860401df27eef50429f2ec881bfd3b51b1893d1fe3bacb9e922f56ae"
       },
       "adc_bits": 14,
       "adc_period": 25,
@@ -1984,8 +1909,8 @@
       }
     },
     "relay_inspect": {
-      "Id": "1e9b8783c5b817022bfea3ef4d3d6a279d93133734bebd7ee8125d2ee6d5811b",
-      "Created": "2026-10-24T22:04:05.883711572Z",
+      "Id": "75adb6f8d4a6466ddd252076ff411a34818d3eae38a7d641fbdd31238227fedc",
+      "Created": "2026-10-26T01:27:37.531706186Z",
       "Path": "/work/unoq_stream",
       "Args": [],
       "State": {
@@ -1995,17 +1920,17 @@
         "Restarting": false,
         "OOMKilled": false,
         "Dead": false,
-        "Pid": 365240,
+        "Pid": 533687,
         "ExitCode": 0,
         "Error": "",
-        "StartedAt": "2026-10-24T22:04:06.274073678Z",
+        "StartedAt": "2026-10-26T01:27:37.894882828Z",
         "FinishedAt": "0001-01-01T00:00:00Z"
       },
       "Image": "sha256:22b878f2712b7b2fe0fddaa677393886045746819e127615cafca4c63b306015",
-      "ResolvConfPath": "/var/lib/docker/containers/1e9b8783c5b817022bfea3ef4d3d6a279d93133734bebd7ee8125d2ee6d5811b/resolv.conf",
-      "HostnamePath": "/var/lib/docker/containers/1e9b8783c5b817022bfea3ef4d3d6a279d93133734bebd7ee8125d2ee6d5811b/hostname",
-      "HostsPath": "/var/lib/docker/containers/1e9b8783c5b817022bfea3ef4d3d6a279d93133734bebd7ee8125d2ee6d5811b/hosts",
-      "LogPath": "/var/lib/docker/containers/1e9b8783c5b817022bfea3ef4d3d6a279d93133734bebd7ee8125d2ee6d5811b/1e9b8783c5b817022bfea3ef4d3d6a279d93133734bebd7ee8125d2ee6d5811b-json.log",
+      "ResolvConfPath": "/var/lib/docker/containers/75adb6f8d4a6466ddd252076ff411a34818d3eae38a7d641fbdd31238227fedc/resolv.conf",
+      "HostnamePath": "/var/lib/docker/containers/75adb6f8d4a6466ddd252076ff411a34818d3eae38a7d641fbdd31238227fedc/hostname",
+      "HostsPath": "/var/lib/docker/containers/75adb6f8d4a6466ddd252076ff411a34818d3eae38a7d641fbdd31238227fedc/hosts",
+      "LogPath": "/var/lib/docker/containers/75adb6f8d4a6466ddd252076ff411a34818d3eae38a7d641fbdd31238227fedc/75adb6f8d4a6466ddd252076ff411a34818d3eae38a7d641fbdd31238227fedc-json.log",
       "Name": "/serialmonitor-usb-stream-v18",
       "RestartCount": 0,
       "Driver": "overlay2",
@@ -2108,7 +2033,7 @@
         "Mounts": [
           {
             "Type": "bind",
-            "Source": "/home/arduino/.cache/serialmonitor/v18-rate-probe-e7590471ba7cdc285920/unoq_stream",
+            "Source": "/home/arduino/.cache/serialmonitor/v18-rate-probe-4aedaf8820b6a686bd2c/unoq_stream",
             "Target": "/work/unoq_stream",
             "ReadOnly": true
           },
@@ -2141,17 +2066,17 @@
       },
       "GraphDriver": {
         "Data": {
-          "LowerDir": "/var/lib/docker/overlay2/442a9d20c42de8ffc59d9a0b6ea6f07942ae097ecca5089e0889ce4a9160331a-init/diff:/var/lib/docker/overlay2/d44c10d7f3ead90724c72f7b59db1512e64f2a7df254c38b0a86c7f767485af4/diff:/var/lib/docker/overlay2/fbc34bc221e04b5ec300aa2af7d1113138d9331a8c9e1d89e685345da8483f02/diff:/var/lib/docker/overlay2/22dae50a59d69cfcd7a9bf5471d26697b5e9eb5b5249260e017c0ebdbfa7022c/diff:/var/lib/docker/overlay2/3f556d3c5834855fe06f7d17e3771bc8b5733571ea3af4a763c9841c305517ce/diff:/var/lib/docker/overlay2/8b8ffc0ae644f215db80b120ae6a4dd2b451db561ad5ce3c1b3a63d78f1290a5/diff:/var/lib/docker/overlay2/d9250ffc65e0357bd8b627e189f80c1c86bda6054bd80ae5fac68dd67af5eda3/diff:/var/lib/docker/overlay2/0e975bc62dd242a25184e28a0c0c07c93eb61c837b0f2bed2349c9ba90459f98/diff:/var/lib/docker/overlay2/5840fe07acfc47093da5a207f61653bc8855698a5c64e3f43b55559d33a38e75/diff:/var/lib/docker/overlay2/d4eca522e87bb424e991078151b8d69b4c1ec82d8207f52723cdb0fa50b4499f/diff:/var/lib/docker/overlay2/9706038d1c56e15bfa24105999266de812a9e90d6fdb7fef6db36947e2f4ea8c/diff:/var/lib/docker/overlay2/8555706bd8a2795730097a13efd59e65d120d6f43fa6b1c3a84cb44857086794/diff:/var/lib/docker/overlay2/6f8d80193936dd5de18ad8ce45040037c8ee4a55f7161b1774571cb99d2a566b/diff:/var/lib/docker/overlay2/86881765be623495a3f84360b63ba1a9de5abf07d18e1645acacfb204baba2a7/diff:/var/lib/docker/overlay2/147ce11877e3feec47dc6a0eb9a33bba66f8a88234962b356f0417fa518aff26/diff:/var/lib/docker/overlay2/0f5fd448972f343b2ab00355bb731e47423e8b17bedb44f0957f135561a9d2d3/diff:/var/lib/docker/overlay2/21349ef42547f51c781667f043eb6c1f96e1ba5bf8d9f2229304945c6e85c0a4/diff:/var/lib/docker/overlay2/7f1de31fbf51e091b5491c782d1a15a21ee544e8a75e6bf05168799b14fe2fba/diff:/var/lib/docker/overlay2/e7083cf187ea0246e4ef20e4078298ba380f6ad9b359cd5de26cf77d3413c9d6/diff:/var/lib/docker/overlay2/1d76b401a8120586fc6361b49dbd20cd1502169bf00d4b97606ada324a4d918f/diff:/var/lib/docker/overlay2/31b156ca310f21dcd7c24962137e251580cb1cc2e25baa2da0b2db319c98eaf3/diff",
-          "MergedDir": "/var/lib/docker/overlay2/442a9d20c42de8ffc59d9a0b6ea6f07942ae097ecca5089e0889ce4a9160331a/merged",
-          "UpperDir": "/var/lib/docker/overlay2/442a9d20c42de8ffc59d9a0b6ea6f07942ae097ecca5089e0889ce4a9160331a/diff",
-          "WorkDir": "/var/lib/docker/overlay2/442a9d20c42de8ffc59d9a0b6ea6f07942ae097ecca5089e0889ce4a9160331a/work"
+          "LowerDir": "/var/lib/docker/overlay2/33459157c87b38b3b27a66de0f192466a76e66e5f739657f07aa5e4e61080ffb-init/diff:/var/lib/docker/overlay2/d44c10d7f3ead90724c72f7b59db1512e64f2a7df254c38b0a86c7f767485af4/diff:/var/lib/docker/overlay2/fbc34bc221e04b5ec300aa2af7d1113138d9331a8c9e1d89e685345da8483f02/diff:/var/lib/docker/overlay2/22dae50a59d69cfcd7a9bf5471d26697b5e9eb5b5249260e017c0ebdbfa7022c/diff:/var/lib/docker/overlay2/3f556d3c5834855fe06f7d17e3771bc8b5733571ea3af4a763c9841c305517ce/diff:/var/lib/docker/overlay2/8b8ffc0ae644f215db80b120ae6a4dd2b451db561ad5ce3c1b3a63d78f1290a5/diff:/var/lib/docker/overlay2/d9250ffc65e0357bd8b627e189f80c1c86bda6054bd80ae5fac68dd67af5eda3/diff:/var/lib/docker/overlay2/0e975bc62dd242a25184e28a0c0c07c93eb61c837b0f2bed2349c9ba90459f98/diff:/var/lib/docker/overlay2/5840fe07acfc47093da5a207f61653bc8855698a5c64e3f43b55559d33a38e75/diff:/var/lib/docker/overlay2/d4eca522e87bb424e991078151b8d69b4c1ec82d8207f52723cdb0fa50b4499f/diff:/var/lib/docker/overlay2/9706038d1c56e15bfa24105999266de812a9e90d6fdb7fef6db36947e2f4ea8c/diff:/var/lib/docker/overlay2/8555706bd8a2795730097a13efd59e65d120d6f43fa6b1c3a84cb44857086794/diff:/var/lib/docker/overlay2/6f8d80193936dd5de18ad8ce45040037c8ee4a55f7161b1774571cb99d2a566b/diff:/var/lib/docker/overlay2/86881765be623495a3f84360b63ba1a9de5abf07d18e1645acacfb204baba2a7/diff:/var/lib/docker/overlay2/147ce11877e3feec47dc6a0eb9a33bba66f8a88234962b356f0417fa518aff26/diff:/var/lib/docker/overlay2/0f5fd448972f343b2ab00355bb731e47423e8b17bedb44f0957f135561a9d2d3/diff:/var/lib/docker/overlay2/21349ef42547f51c781667f043eb6c1f96e1ba5bf8d9f2229304945c6e85c0a4/diff:/var/lib/docker/overlay2/7f1de31fbf51e091b5491c782d1a15a21ee544e8a75e6bf05168799b14fe2fba/diff:/var/lib/docker/overlay2/e7083cf187ea0246e4ef20e4078298ba380f6ad9b359cd5de26cf77d3413c9d6/diff:/var/lib/docker/overlay2/1d76b401a8120586fc6361b49dbd20cd1502169bf00d4b97606ada324a4d918f/diff:/var/lib/docker/overlay2/31b156ca310f21dcd7c24962137e251580cb1cc2e25baa2da0b2db319c98eaf3/diff",
+          "MergedDir": "/var/lib/docker/overlay2/33459157c87b38b3b27a66de0f192466a76e66e5f739657f07aa5e4e61080ffb/merged",
+          "UpperDir": "/var/lib/docker/overlay2/33459157c87b38b3b27a66de0f192466a76e66e5f739657f07aa5e4e61080ffb/diff",
+          "WorkDir": "/var/lib/docker/overlay2/33459157c87b38b3b27a66de0f192466a76e66e5f739657f07aa5e4e61080ffb/work"
         },
         "Name": "overlay2"
       },
       "Mounts": [
         {
           "Type": "bind",
-          "Source": "/home/arduino/.cache/serialmonitor/v18-rate-probe-e7590471ba7cdc285920/unoq_stream",
+          "Source": "/home/arduino/.cache/serialmonitor/v18-rate-probe-4aedaf8820b6a686bd2c/unoq_stream",
           "Destination": "/work/unoq_stream",
           "Mode": "",
           "RW": false,
@@ -2209,7 +2134,7 @@
       },
       "NetworkSettings": {
         "Bridge": "",
-        "SandboxID": "6a427d8bc0c2a1343a1024e986fcf2c53159e33be6d978129fb93481ec16258e",
+        "SandboxID": "5f5b6f58fee2fa9d959239fe5604246e3bdf1fdf7749797c6aacf981ddf3a147",
         "SandboxKey": "/var/run/docker/netns/default",
         "Ports": {},
         "HairpinMode": false,
@@ -2232,7 +2157,7 @@
             "Aliases": null,
             "MacAddress": "",
             "NetworkID": "f9da40f64b25bdd9167bd84f1c507b1245c4bef5d9a11bcfa3b83fa32c85aa64",
-            "EndpointID": "ec940fe636c82e212208ea2447afcbb709df7b23fd95ca7251c948eeb259a1b8",
+            "EndpointID": "7a662bcede2e665389bf4a27d2231cff39bff3c1c7e7d4f26abbce3462e297cf",
             "Gateway": "",
             "IPAddress": "",
             "IPPrefixLen": 0,
@@ -2257,8 +2182,8 @@
     },
     "governor": "performance",
     "sources": {
-      "app.yaml": "85fe0812d3d231475afdb2a9c98d03fcf8f2b33445272c7cf5a111013a0ae5ba",
-      "python/main.py": "a06e50bc37e3d5a96afd5b36840ac613e29c0633e753064f16d72b6e799edebb",
+      "app.yaml": "482b6a9bc90e8e7c70c10969d7bd44e95e99be3074d5d49f4d08aeb425db9ddf",
+      "python/main.py": "3f0ebe8813d7ca5ca01f850492981e5f8c52232c497e3fc2ada07c5ecee6c5b0",
       "sketch/acquisition.h": "0c5c9f660665964edaca383dd1bab813c664125d460afda9ab02b46d04a2e90b",
       "sketch/acquisition_protocol.h": "83838fb7388aa6b837757b83b963f5951b174dd58b49d6b3be93c8c3aa51c376",
       "sketch/acquisition_storage.h": "1953242fddb28b6b2315572bf65f1cec207988a1a8be5183f0641379c92176f2",
@@ -2273,8 +2198,8 @@
       "sketch/generator_dma.h": "faec31f7ebb7cb64ec04d3c9c8e94225cd66a7513535f7eca9b4be6d282e697c",
       "sketch/generator_protocol.h": "c241267801e21c326fbd854a324e6c82c01dc6e1ded51a7fbe2442c84299de75",
       "sketch/generator_timing.h": "a2774f18e899e328a988150e46e017b512fd724075e7f24cc6247923093aac9c",
-      "sketch/high_rate_profile.h": "c2c0e5db5d7228d9cbe17b8d5caac20cfb5a957b347522c18ca3dcef2ea11963",
-      "sketch/native_profiles.h": "33ff6c6ca46ad11c05fad92b391d4ee8a34cc4368ecd2652c9f9663bd805773b",
+      "sketch/high_rate_profile.h": "78faa85feb5c17625df5bed00844d7a14c3572aaefcaac836a02186626d315f0",
+      "sketch/native_profiles.h": "cb090dbe2bfa9349c7f69136cd766f0757e1294f97aeb1a62816bcb8844cc74c",
       "sketch/node_validation.h": "f0c38dae55f9fbfb2d4aece35643df6264fbc0c7b054c14ef301a2dd750cfa38",
       "sketch/node_validation_fast.h": "5e582042ee500b79946b0e4ca5e238abfee3bdc08752b5d16b639a0e193c046a",
       "sketch/radio_test.h": "fb56e0ccac1a0bd0c1e4dab23a9f236bb6fe5aae40e6a66890319d4e7e1c725e",
@@ -2299,16 +2224,16 @@
   "private_backup": {
     "export": {
       "exact": true,
-      "sha256": "1cce358b2312948c01a1d8f31f7b4924ddaf3d6ab483ee5ba6393985a0c8d6b0",
-      "archive_prefix": "scope-v18-rate-probe-batcharena/"
+      "sha256": "e6bd82a8256e45fc4d72001137ee316419c50c2eadf8c50e5406860245538877",
+      "archive_prefix": "scope-v18-rate-probe-catalog/"
     },
     "archives": {
-      "manifest_sha256": "0f03af486ea165f8d3cec91bab14a1119978629a686726bc28b9869235003022",
-      "sources_tar_sha256": "36b078202f58e0ad6d9a770226d0034a1e9868dcba00f3c91599ddb53a2332ba",
-      "cache_tar_sha256": "9006909ca3c9b9e23ee8aa5b9991745801a2fea1c4d0dd34cfb64806c13ae8a3",
+      "manifest_sha256": "b843d95848cf109e82199fe116c360923e614882f461eedfaf8a9e319853435e",
+      "sources_tar_sha256": "d3ae982927b28e340c8a785f889d7d386b2aa591759782285b7aff97872973fa",
+      "cache_tar_sha256": "5da4f233318e22abf0af5a9ddb60d897b086211aed6e308f3a1d21db3db1c1e3",
       "source_files": {
-        "app.yaml": "85fe0812d3d231475afdb2a9c98d03fcf8f2b33445272c7cf5a111013a0ae5ba",
-        "python/main.py": "a06e50bc37e3d5a96afd5b36840ac613e29c0633e753064f16d72b6e799edebb",
+        "app.yaml": "482b6a9bc90e8e7c70c10969d7bd44e95e99be3074d5d49f4d08aeb425db9ddf",
+        "python/main.py": "3f0ebe8813d7ca5ca01f850492981e5f8c52232c497e3fc2ada07c5ecee6c5b0",
         "sketch/acquisition.h": "0c5c9f660665964edaca383dd1bab813c664125d460afda9ab02b46d04a2e90b",
         "sketch/acquisition_protocol.h": "83838fb7388aa6b837757b83b963f5951b174dd58b49d6b3be93c8c3aa51c376",
         "sketch/acquisition_storage.h": "1953242fddb28b6b2315572bf65f1cec207988a1a8be5183f0641379c92176f2",
@@ -2323,8 +2248,8 @@
         "sketch/generator_dma.h": "faec31f7ebb7cb64ec04d3c9c8e94225cd66a7513535f7eca9b4be6d282e697c",
         "sketch/generator_protocol.h": "c241267801e21c326fbd854a324e6c82c01dc6e1ded51a7fbe2442c84299de75",
         "sketch/generator_timing.h": "a2774f18e899e328a988150e46e017b512fd724075e7f24cc6247923093aac9c",
-        "sketch/high_rate_profile.h": "c2c0e5db5d7228d9cbe17b8d5caac20cfb5a957b347522c18ca3dcef2ea11963",
-        "sketch/native_profiles.h": "33ff6c6ca46ad11c05fad92b391d4ee8a34cc4368ecd2652c9f9663bd805773b",
+        "sketch/high_rate_profile.h": "78faa85feb5c17625df5bed00844d7a14c3572aaefcaac836a02186626d315f0",
+        "sketch/native_profiles.h": "cb090dbe2bfa9349c7f69136cd766f0757e1294f97aeb1a62816bcb8844cc74c",
         "sketch/node_validation.h": "f0c38dae55f9fbfb2d4aece35643df6264fbc0c7b054c14ef301a2dd750cfa38",
         "sketch/node_validation_fast.h": "5e582042ee500b79946b0e4ca5e238abfee3bdc08752b5d16b639a0e193c046a",
         "sketch/radio_test.h": "fb56e0ccac1a0bd0c1e4dab23a9f236bb6fe5aae40e6a66890319d4e7e1c725e",
@@ -2344,15 +2269,15 @@
         "sources": {
           "exact": true,
           "stage": "verify_sources",
-          "archive_sha256": "36b078202f58e0ad6d9a770226d0034a1e9868dcba00f3c91599ddb53a2332ba",
-          "manifest_sha256": "f132933a2e172ddb451e5919bc56c71fbbaff6565465b43de5944cae312d975e",
+          "archive_sha256": "d3ae982927b28e340c8a785f889d7d386b2aa591759782285b7aff97872973fa",
+          "manifest_sha256": "4ccb7f1a9963020b6554bfcf12bd1f75129f4932f5a3d67d5227725dcab0fbfd",
           "entries": 35
         },
         "cache": {
           "exact": true,
           "stage": "verify_cache",
-          "archive_sha256": "9006909ca3c9b9e23ee8aa5b9991745801a2fea1c4d0dd34cfb64806c13ae8a3",
-          "manifest_sha256": "08a795ac9e6e04a6f794cc32ec3d7cec09101a421219c508c26ee75da0d42a0d",
+          "archive_sha256": "5da4f233318e22abf0af5a9ddb60d897b086211aed6e308f3a1d21db3db1c1e3",
+          "manifest_sha256": "2a06438183e4d7c993832766f456f6d904ecb0bbe14a5f999a1c039fd2e85d52",
           "entries": 155
         }
       },
@@ -2367,19 +2292,19 @@
       ]
     },
     "artifact_hashes": {
-      ".cache/sketch/sketch.ino.bin": "cad37ccd079ff7905863e9f826ba956abe47d13ddeb85634698e44f4930325c7",
-      ".cache/sketch/sketch.ino.elf": "bcf5182ab60e928f8026a17bf43bcfb710cf94517f827a8b8f3d02876d1676e8",
-      ".cache/sketch/sketch.ino_debug.elf": "4ba9ae44bd273c58d804b9b787d950b19573545698cbc0e81c332e54104ea6e5",
-      ".cache/sketch/sketch.ino_temp.elf": "c69ea588bb83a4b52d606ce55a5eb5e25db16d5569670ca6cdd31567f10d1989"
+      ".cache/sketch/sketch.ino.bin": "37f049fa029ad62a10767c56dc586b2c3697f8d250a0b8a7396570ce8e0c7060",
+      ".cache/sketch/sketch.ino.elf": "f9250aa3984ac352671f5203e45e1ab2be01d61b0076c87b6cd5f2ecb65d0205",
+      ".cache/sketch/sketch.ino_debug.elf": "9611754ac64324e6003548bcebe0cb539f2b91e0d937ae7b5b4d6b3558cc6bee",
+      ".cache/sketch/sketch.ino_temp.elf": "5deae715e930c6728e34d1659d538088d6cf073673dc66402a4ad7979a3523b8"
     },
-    "relay_sha256": "9b8baa1a435838a33bca651669f5b64f0ca17066e53d567b9d1eaa6972cba114",
+    "relay_sha256": "27da0bc4860401df27eef50429f2ec881bfd3b51b1893d1fe3bacb9e922f56ae",
     "stopped": true,
     "cli_version": "Arduino App CLI version 0.13.0\ndaemon version: 0.13.0\n",
     "app_start_help": "Start an Arduino App\n\nUsage:\n  arduino-app-cli app start app_path [flags]\n\nFlags:\n  -h, --help      help for start\n  -v, --verbose   Enable verbose output\n\nGlobal Flags:\n      --format string      Output format (text, json, json-lines) (default \"text\")\n      --log-level string   Set the log level (debug, info, warn, error) (default \"error\")\n"
   },
   "private_mutated_sources": {
-    "app.yaml": "85fe0812d3d231475afdb2a9c98d03fcf8f2b33445272c7cf5a111013a0ae5ba",
-    "python/main.py": "a06e50bc37e3d5a96afd5b36840ac613e29c0633e753064f16d72b6e799edebb",
+    "app.yaml": "482b6a9bc90e8e7c70c10969d7bd44e95e99be3074d5d49f4d08aeb425db9ddf",
+    "python/main.py": "3f0ebe8813d7ca5ca01f850492981e5f8c52232c497e3fc2ada07c5ecee6c5b0",
     "sketch/acquisition.h": "0c5c9f660665964edaca383dd1bab813c664125d460afda9ab02b46d04a2e90b",
     "sketch/acquisition_protocol.h": "83838fb7388aa6b837757b83b963f5951b174dd58b49d6b3be93c8c3aa51c376",
     "sketch/acquisition_storage.h": "1953242fddb28b6b2315572bf65f1cec207988a1a8be5183f0641379c92176f2",
@@ -2394,8 +2319,8 @@
     "sketch/generator_dma.h": "faec31f7ebb7cb64ec04d3c9c8e94225cd66a7513535f7eca9b4be6d282e697c",
     "sketch/generator_protocol.h": "c241267801e21c326fbd854a324e6c82c01dc6e1ded51a7fbe2442c84299de75",
     "sketch/generator_timing.h": "a2774f18e899e328a988150e46e017b512fd724075e7f24cc6247923093aac9c",
-    "sketch/high_rate_profile.h": "c2c0e5db5d7228d9cbe17b8d5caac20cfb5a957b347522c18ca3dcef2ea11963",
-    "sketch/native_profiles.h": "33ff6c6ca46ad11c05fad92b391d4ee8a34cc4368ecd2652c9f9663bd805773b",
+    "sketch/high_rate_profile.h": "78faa85feb5c17625df5bed00844d7a14c3572aaefcaac836a02186626d315f0",
+    "sketch/native_profiles.h": "cb090dbe2bfa9349c7f69136cd766f0757e1294f97aeb1a62816bcb8844cc74c",
     "sketch/node_validation.h": "f0c38dae55f9fbfb2d4aece35643df6264fbc0c7b054c14ef301a2dd750cfa38",
     "sketch/node_validation_fast.h": "5e582042ee500b79946b0e4ca5e238abfee3bdc08752b5d16b639a0e193c046a",
     "sketch/radio_test.h": "fb56e0ccac1a0bd0c1e4dab23a9f236bb6fe5aae40e6a66890319d4e7e1c725e",
@@ -2414,15 +2339,15 @@
   },
   "private_mutated_identity": {
     "board_serial": "1060031107",
-    "app": "scope-v18-rate-probe-batcharena-main-1",
-    "firmware_sha256": "aff42c2e0bd11db04c8fe896dcdfe87b3e60809d7049979dcc96f2f3bfcc3410",
-    "relay_sha256": "9b8baa1a435838a33bca651669f5b64f0ca17066e53d567b9d1eaa6972cba114"
+    "app": "scope-v18-rate-probe-catalog-main-1",
+    "firmware_sha256": "54befc4620ed21264cef37903da395d60b68c5a290809cb15ede2bf453ba6ce4",
+    "relay_sha256": "27da0bc4860401df27eef50429f2ec881bfd3b51b1893d1fe3bacb9e922f56ae"
   },
   "private_mutated_recovery": {
     "hardware_restored": true,
     "errors": [],
     "recovery": {
-      "seconds": 1.0001680119894445,
+      "seconds": 1.000446159974672,
       "samples": 40960,
       "dropped": 0,
       "fatal": 0,
@@ -2433,16 +2358,16 @@
   "private_before_restart": {
     "identity": {
       "board_serial": "1060031107",
-      "app": "scope-v18-rate-probe-batcharena-main-1",
-      "firmware_sha256": "cad37ccd079ff7905863e9f826ba956abe47d13ddeb85634698e44f4930325c7",
-      "relay_sha256": "9b8baa1a435838a33bca651669f5b64f0ca17066e53d567b9d1eaa6972cba114"
+      "app": "scope-v18-rate-probe-catalog-main-1",
+      "firmware_sha256": "37f049fa029ad62a10767c56dc586b2c3697f8d250a0b8a7396570ce8e0c7060",
+      "relay_sha256": "27da0bc4860401df27eef50429f2ec881bfd3b51b1893d1fe3bacb9e922f56ae"
     },
     "material": {
       "sources_exact": true,
       "cache_exact": true,
       "source_files": {
-        "app.yaml": "85fe0812d3d231475afdb2a9c98d03fcf8f2b33445272c7cf5a111013a0ae5ba",
-        "python/main.py": "a06e50bc37e3d5a96afd5b36840ac613e29c0633e753064f16d72b6e799edebb",
+        "app.yaml": "482b6a9bc90e8e7c70c10969d7bd44e95e99be3074d5d49f4d08aeb425db9ddf",
+        "python/main.py": "3f0ebe8813d7ca5ca01f850492981e5f8c52232c497e3fc2ada07c5ecee6c5b0",
         "sketch/acquisition.h": "0c5c9f660665964edaca383dd1bab813c664125d460afda9ab02b46d04a2e90b",
         "sketch/acquisition_protocol.h": "83838fb7388aa6b837757b83b963f5951b174dd58b49d6b3be93c8c3aa51c376",
         "sketch/acquisition_storage.h": "1953242fddb28b6b2315572bf65f1cec207988a1a8be5183f0641379c92176f2",
@@ -2457,8 +2382,8 @@
         "sketch/generator_dma.h": "faec31f7ebb7cb64ec04d3c9c8e94225cd66a7513535f7eca9b4be6d282e697c",
         "sketch/generator_protocol.h": "c241267801e21c326fbd854a324e6c82c01dc6e1ded51a7fbe2442c84299de75",
         "sketch/generator_timing.h": "a2774f18e899e328a988150e46e017b512fd724075e7f24cc6247923093aac9c",
-        "sketch/high_rate_profile.h": "c2c0e5db5d7228d9cbe17b8d5caac20cfb5a957b347522c18ca3dcef2ea11963",
-        "sketch/native_profiles.h": "33ff6c6ca46ad11c05fad92b391d4ee8a34cc4368ecd2652c9f9663bd805773b",
+        "sketch/high_rate_profile.h": "78faa85feb5c17625df5bed00844d7a14c3572aaefcaac836a02186626d315f0",
+        "sketch/native_profiles.h": "cb090dbe2bfa9349c7f69136cd766f0757e1294f97aeb1a62816bcb8844cc74c",
         "sketch/node_validation.h": "f0c38dae55f9fbfb2d4aece35643df6264fbc0c7b054c14ef301a2dd750cfa38",
         "sketch/node_validation_fast.h": "5e582042ee500b79946b0e4ca5e238abfee3bdc08752b5d16b639a0e193c046a",
         "sketch/radio_test.h": "fb56e0ccac1a0bd0c1e4dab23a9f236bb6fe5aae40e6a66890319d4e7e1c725e",
@@ -2474,14 +2399,14 @@
         "sketch/wav_queue.h": "002553b2c58ff1343a218959f58632a394656aeb0f28fc74bb17a97f2793dd83",
         "sketch/wav_storage.h": "a06e48b8192d2674dfa3ce1f57e601f523244c1016b5ecc899607d48fb1cce69"
       },
-      "manifest_sha256": "0f03af486ea165f8d3cec91bab14a1119978629a686726bc28b9869235003022"
+      "manifest_sha256": "b843d95848cf109e82199fe116c360923e614882f461eedfaf8a9e319853435e"
     }
   },
   "private_after_restart_identity": {
     "board_serial": "1060031107",
-    "app": "scope-v18-rate-probe-batcharena-main-1",
-    "firmware_sha256": "cad37ccd079ff7905863e9f826ba956abe47d13ddeb85634698e44f4930325c7",
-    "relay_sha256": "9b8baa1a435838a33bca651669f5b64f0ca17066e53d567b9d1eaa6972cba114"
+    "app": "scope-v18-rate-probe-catalog-main-1",
+    "firmware_sha256": "37f049fa029ad62a10767c56dc586b2c3697f8d250a0b8a7396570ce8e0c7060",
+    "relay_sha256": "27da0bc4860401df27eef50429f2ec881bfd3b51b1893d1fe3bacb9e922f56ae"
   },
   "private_restoration": {
     "ok": true,
@@ -2497,7 +2422,7 @@
       "hardware_restored": true,
       "errors": [],
       "recovery": {
-        "seconds": 10.02496259502368,
+        "seconds": 10.028253301046789,
         "samples": 401408,
         "dropped": 0,
         "fatal": 0,
@@ -2506,9 +2431,9 @@
     },
     "identity": {
       "board_serial": "1060031107",
-      "app": "scope-v18-rate-probe-batcharena-main-1",
-      "firmware_sha256": "cad37ccd079ff7905863e9f826ba956abe47d13ddeb85634698e44f4930325c7",
-      "relay_sha256": "9b8baa1a435838a33bca651669f5b64f0ca17066e53d567b9d1eaa6972cba114"
+      "app": "scope-v18-rate-probe-catalog-main-1",
+      "firmware_sha256": "37f049fa029ad62a10767c56dc586b2c3697f8d250a0b8a7396570ce8e0c7060",
+      "relay_sha256": "27da0bc4860401df27eef50429f2ec881bfd3b51b1893d1fe3bacb9e922f56ae"
     },
     "cpu": {
       "policy": 0,
@@ -2528,7 +2453,7 @@
     "normal_cpu_state_equal": true,
     "errors": [],
     "recovery": {
-      "seconds": 10.026520298037212,
+      "seconds": 10.016667059040628,
       "samples": 313344,
       "dropped": 0,
       "fatal": 0,
@@ -2536,8 +2461,8 @@
     },
     "identity_equal": true,
     "restored_relay_inspect": {
-      "Id": "222cf1a63b3330466c575008cf1eef780a0bd369238f653db2e08da92d8222e8",
-      "Created": "2026-10-23T03:06:41.284453031Z",
+      "Id": "c0179ec8e28423b28480bdd102060e669e9ab4f679b5c1808621bcbd3881de85",
+      "Created": "2026-10-25T21:58:18.219163156Z",
       "Path": "/work/unoq_stream",
       "Args": [],
       "State": {
@@ -2547,17 +2472,17 @@
         "Restarting": false,
         "OOMKilled": false,
         "Dead": false,
-        "Pid": 367561,
+        "Pid": 536035,
         "ExitCode": 0,
         "Error": "",
-        "StartedAt": "2026-10-24T22:06:08.023394783Z",
-        "FinishedAt": "2026-10-24T22:02:43.493026402Z"
+        "StartedAt": "2026-10-26T01:29:40.406887516Z",
+        "FinishedAt": "2026-10-26T01:27:12.98958552Z"
       },
       "Image": "sha256:22b878f2712b7b2fe0fddaa677393886045746819e127615cafca4c63b306015",
-      "ResolvConfPath": "/var/lib/docker/containers/222cf1a63b3330466c575008cf1eef780a0bd369238f653db2e08da92d8222e8/resolv.conf",
-      "HostnamePath": "/var/lib/docker/containers/222cf1a63b3330466c575008cf1eef780a0bd369238f653db2e08da92d8222e8/hostname",
-      "HostsPath": "/var/lib/docker/containers/222cf1a63b3330466c575008cf1eef780a0bd369238f653db2e08da92d8222e8/hosts",
-      "LogPath": "/var/lib/docker/containers/222cf1a63b3330466c575008cf1eef780a0bd369238f653db2e08da92d8222e8/222cf1a63b3330466c575008cf1eef780a0bd369238f653db2e08da92d8222e8-json.log",
+      "ResolvConfPath": "/var/lib/docker/containers/c0179ec8e28423b28480bdd102060e669e9ab4f679b5c1808621bcbd3881de85/resolv.conf",
+      "HostnamePath": "/var/lib/docker/containers/c0179ec8e28423b28480bdd102060e669e9ab4f679b5c1808621bcbd3881de85/hostname",
+      "HostsPath": "/var/lib/docker/containers/c0179ec8e28423b28480bdd102060e669e9ab4f679b5c1808621bcbd3881de85/hosts",
+      "LogPath": "/var/lib/docker/containers/c0179ec8e28423b28480bdd102060e669e9ab4f679b5c1808621bcbd3881de85/c0179ec8e28423b28480bdd102060e669e9ab4f679b5c1808621bcbd3881de85-json.log",
       "Name": "/serialmonitor-usb-stream-v18",
       "RestartCount": 0,
       "Driver": "overlay2",
@@ -2660,7 +2585,7 @@
         "Mounts": [
           {
             "Type": "bind",
-            "Source": "/home/arduino/.cache/serialmonitor/usb-stream-08430aaec88ca9c16496/unoq_stream",
+            "Source": "/home/arduino/.cache/serialmonitor/v18-relay-f3326948649f46bc9ab1937340eb42a0/unoq_stream",
             "Target": "/work/unoq_stream",
             "ReadOnly": true
           },
@@ -2693,17 +2618,17 @@
       },
       "GraphDriver": {
         "Data": {
-          "LowerDir": "/var/lib/docker/overlay2/27dce39cc9b7cf2c3e146f5115211b76892ad66784edc002aee8d6fb9090dc85-init/diff:/var/lib/docker/overlay2/d44c10d7f3ead90724c72f7b59db1512e64f2a7df254c38b0a86c7f767485af4/diff:/var/lib/docker/overlay2/fbc34bc221e04b5ec300aa2af7d1113138d9331a8c9e1d89e685345da8483f02/diff:/var/lib/docker/overlay2/22dae50a59d69cfcd7a9bf5471d26697b5e9eb5b5249260e017c0ebdbfa7022c/diff:/var/lib/docker/overlay2/3f556d3c5834855fe06f7d17e3771bc8b5733571ea3af4a763c9841c305517ce/diff:/var/lib/docker/overlay2/8b8ffc0ae644f215db80b120ae6a4dd2b451db561ad5ce3c1b3a63d78f1290a5/diff:/var/lib/docker/overlay2/d9250ffc65e0357bd8b627e189f80c1c86bda6054bd80ae5fac68dd67af5eda3/diff:/var/lib/docker/overlay2/0e975bc62dd242a25184e28a0c0c07c93eb61c837b0f2bed2349c9ba90459f98/diff:/var/lib/docker/overlay2/5840fe07acfc47093da5a207f61653bc8855698a5c64e3f43b55559d33a38e75/diff:/var/lib/docker/overlay2/d4eca522e87bb424e991078151b8d69b4c1ec82d8207f52723cdb0fa50b4499f/diff:/var/lib/docker/overlay2/9706038d1c56e15bfa24105999266de812a9e90d6fdb7fef6db36947e2f4ea8c/diff:/var/lib/docker/overlay2/8555706bd8a2795730097a13efd59e65d120d6f43fa6b1c3a84cb44857086794/diff:/var/lib/docker/overlay2/6f8d80193936dd5de18ad8ce45040037c8ee4a55f7161b1774571cb99d2a566b/diff:/var/lib/docker/overlay2/86881765be623495a3f84360b63ba1a9de5abf07d18e1645acacfb204baba2a7/diff:/var/lib/docker/overlay2/147ce11877e3feec47dc6a0eb9a33bba66f8a88234962b356f0417fa518aff26/diff:/var/lib/docker/overlay2/0f5fd448972f343b2ab00355bb731e47423e8b17bedb44f0957f135561a9d2d3/diff:/var/lib/docker/overlay2/21349ef42547f51c781667f043eb6c1f96e1ba5bf8d9f2229304945c6e85c0a4/diff:/var/lib/docker/overlay2/7f1de31fbf51e091b5491c782d1a15a21ee544e8a75e6bf05168799b14fe2fba/diff:/var/lib/docker/overlay2/e7083cf187ea0246e4ef20e4078298ba380f6ad9b359cd5de26cf77d3413c9d6/diff:/var/lib/docker/overlay2/1d76b401a8120586fc6361b49dbd20cd1502169bf00d4b97606ada324a4d918f/diff:/var/lib/docker/overlay2/31b156ca310f21dcd7c24962137e251580cb1cc2e25baa2da0b2db319c98eaf3/diff",
-          "MergedDir": "/var/lib/docker/overlay2/27dce39cc9b7cf2c3e146f5115211b76892ad66784edc002aee8d6fb9090dc85/merged",
-          "UpperDir": "/var/lib/docker/overlay2/27dce39cc9b7cf2c3e146f5115211b76892ad66784edc002aee8d6fb9090dc85/diff",
-          "WorkDir": "/var/lib/docker/overlay2/27dce39cc9b7cf2c3e146f5115211b76892ad66784edc002aee8d6fb9090dc85/work"
+          "LowerDir": "/var/lib/docker/overlay2/cbccf4b467b1befa92c2410cdd939b6e8ee70c081d26fba32742dab5d972d18a-init/diff:/var/lib/docker/overlay2/d44c10d7f3ead90724c72f7b59db1512e64f2a7df254c38b0a86c7f767485af4/diff:/var/lib/docker/overlay2/fbc34bc221e04b5ec300aa2af7d1113138d9331a8c9e1d89e685345da8483f02/diff:/var/lib/docker/overlay2/22dae50a59d69cfcd7a9bf5471d26697b5e9eb5b5249260e017c0ebdbfa7022c/diff:/var/lib/docker/overlay2/3f556d3c5834855fe06f7d17e3771bc8b5733571ea3af4a763c9841c305517ce/diff:/var/lib/docker/overlay2/8b8ffc0ae644f215db80b120ae6a4dd2b451db561ad5ce3c1b3a63d78f1290a5/diff:/var/lib/docker/overlay2/d9250ffc65e0357bd8b627e189f80c1c86bda6054bd80ae5fac68dd67af5eda3/diff:/var/lib/docker/overlay2/0e975bc62dd242a25184e28a0c0c07c93eb61c837b0f2bed2349c9ba90459f98/diff:/var/lib/docker/overlay2/5840fe07acfc47093da5a207f61653bc8855698a5c64e3f43b55559d33a38e75/diff:/var/lib/docker/overlay2/d4eca522e87bb424e991078151b8d69b4c1ec82d8207f52723cdb0fa50b4499f/diff:/var/lib/docker/overlay2/9706038d1c56e15bfa24105999266de812a9e90d6fdb7fef6db36947e2f4ea8c/diff:/var/lib/docker/overlay2/8555706bd8a2795730097a13efd59e65d120d6f43fa6b1c3a84cb44857086794/diff:/var/lib/docker/overlay2/6f8d80193936dd5de18ad8ce45040037c8ee4a55f7161b1774571cb99d2a566b/diff:/var/lib/docker/overlay2/86881765be623495a3f84360b63ba1a9de5abf07d18e1645acacfb204baba2a7/diff:/var/lib/docker/overlay2/147ce11877e3feec47dc6a0eb9a33bba66f8a88234962b356f0417fa518aff26/diff:/var/lib/docker/overlay2/0f5fd448972f343b2ab00355bb731e47423e8b17bedb44f0957f135561a9d2d3/diff:/var/lib/docker/overlay2/21349ef42547f51c781667f043eb6c1f96e1ba5bf8d9f2229304945c6e85c0a4/diff:/var/lib/docker/overlay2/7f1de31fbf51e091b5491c782d1a15a21ee544e8a75e6bf05168799b14fe2fba/diff:/var/lib/docker/overlay2/e7083cf187ea0246e4ef20e4078298ba380f6ad9b359cd5de26cf77d3413c9d6/diff:/var/lib/docker/overlay2/1d76b401a8120586fc6361b49dbd20cd1502169bf00d4b97606ada324a4d918f/diff:/var/lib/docker/overlay2/31b156ca310f21dcd7c24962137e251580cb1cc2e25baa2da0b2db319c98eaf3/diff",
+          "MergedDir": "/var/lib/docker/overlay2/cbccf4b467b1befa92c2410cdd939b6e8ee70c081d26fba32742dab5d972d18a/merged",
+          "UpperDir": "/var/lib/docker/overlay2/cbccf4b467b1befa92c2410cdd939b6e8ee70c081d26fba32742dab5d972d18a/diff",
+          "WorkDir": "/var/lib/docker/overlay2/cbccf4b467b1befa92c2410cdd939b6e8ee70c081d26fba32742dab5d972d18a/work"
         },
         "Name": "overlay2"
       },
       "Mounts": [
         {
           "Type": "bind",
-          "Source": "/home/arduino/.cache/serialmonitor/usb-stream-08430aaec88ca9c16496/unoq_stream",
+          "Source": "/home/arduino/.cache/serialmonitor/v18-relay-f3326948649f46bc9ab1937340eb42a0/unoq_stream",
           "Destination": "/work/unoq_stream",
           "Mode": "",
           "RW": false,
@@ -2760,7 +2685,7 @@
       },
       "NetworkSettings": {
         "Bridge": "",
-        "SandboxID": "f6902340b7358c7d43bf870a21002873c0226f8cf350b6a848e7a7249d53fcd0",
+        "SandboxID": "b8f11ffc4dff398332e6ade7b63752b8cc05efcdb5271050e705fa9a8e270db1",
         "SandboxKey": "/var/run/docker/netns/default",
         "Ports": {},
         "HairpinMode": false,
@@ -2783,7 +2708,7 @@
             "Aliases": null,
             "MacAddress": "",
             "NetworkID": "f9da40f64b25bdd9167bd84f1c507b1245c4bef5d9a11bcfa3b83fa32c85aa64",
-            "EndpointID": "8994789187cae1ac6cda6dbcebaf4a751826825d16d6b3ef700f8c9ee5e2b853",
+            "EndpointID": "a1276d8eb5c5fbd2a26b2e80b7006c9adb15fc6dd1b4275f9e28919a86a4e750",
             "Gateway": "",
             "IPAddress": "",
             "IPPrefixLen": 0,

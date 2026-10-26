@@ -7,14 +7,14 @@ from monitor.v18.radio_loop_guard import RadioLoopGuard
 
 
 def acquisition_error(config):
-    # The maximum ADC14 profile lost a node with RADIO+A0; the candidate
-    # CPU/send fix also underruns in repeated physical runs. Do not expose it
-    # as a stable combined mode while that qualification remains open.
-    if config.bits==14 and config.rate>851063:
-        return 'Radio A0: en 14 bits usar adquisición de hasta 851,063 kHz; tasas mayores pendientes de validación conjunta'
+    # Higher ADC14 rates require exact geometry and combined physical evidence;
+    # do not extend a successful profile's permission to neighboring candidates.
     qualified = (getattr(config, '_native', None) or {}).get('combined_qualified', False)
-    adc1818 = qualified and (config.bits,config.channels,config.period,config.node_pairs)==(8,1,88,3488)
-    if config.rate>1600000 and not adc1818:return 'Radio A0: tasa de adquisición pendiente de validación conjunta'
+    adc14 = qualified and (config.bits,config.channels,config.period,config.node_pairs) in ((14,1,176,5952),(14,1,170,5952),(14,1,160,5952))
+    if config.bits==14 and config.rate>851063 and not adc14:
+        return 'Radio A0: este perfil de 14 bits está pendiente de validación conjunta'
+    adc8_high = qualified and (config.bits,config.channels,config.period,config.node_pairs) in ((8,1,88,3488),(8,1,86,3488))
+    if config.rate>1600000 and not adc8_high:return 'Radio A0: tasa de adquisición pendiente de validación conjunta'
     return None
 
 class RadioDacSource:

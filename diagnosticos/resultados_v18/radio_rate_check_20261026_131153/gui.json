@@ -1,0 +1,2653 @@
+{
+  "started": 1793031116.5576608,
+  "stages": [
+    {
+      "stage": "connect_requested",
+      "elapsed": 0.6347732620779425,
+      "render_metrics": {
+        "frames": 1,
+        "wall_seconds": 0.0009437010157853365,
+        "cpu_seconds": 0.0009475350000003324,
+        "max_wall_ms": 0.9437010157853365,
+        "heartbeat_gap_max_ms": 591.520422953181
+      },
+      "process_cpu_seconds": 3.718968,
+      "samples": 0,
+      "paint_events": 5,
+      "exposed": true,
+      "radio_samples": 0,
+      "batch_processing_count": 0,
+      "pending_gui": 0,
+      "rf_ipc_kind": null,
+      "pending_dsp": 0,
+      "pending_gui_peak": 0,
+      "pending_dsp_peak": 0,
+      "gui_delay_max_ms": 0.0,
+      "retained_seconds": 0.0,
+      "radio_playing_seconds": null,
+      "wav_active": false,
+      "radio_a0": false,
+      "radio_a0_diagnostics": null,
+      "radio_status": "RADIO \u00b7 mono \u00b7 salida 40 kHz",
+      "rf_history_samples": 0,
+      "scan_not_before_sample": -1,
+      "status": "Aplicando adquisici\u00f3n\u2026"
+    },
+    {
+      "stage": "radio_play",
+      "elapsed": 2.8983679490629584,
+      "render_metrics": {
+        "frames": 130,
+        "wall_seconds": 0.01610309409443289,
+        "cpu_seconds": 0.01588385100000167,
+        "max_wall_ms": 0.9437010157853365,
+        "heartbeat_gap_max_ms": 591.520422953181
+      },
+      "process_cpu_seconds": 4.184828,
+      "samples": 8352,
+      "paint_events": 9,
+      "exposed": false,
+      "radio_samples": 0,
+      "batch_processing_count": 4,
+      "pending_gui": 0,
+      "rf_ipc_kind": "RawRfBatch",
+      "pending_dsp": 0,
+      "pending_gui_peak": 1,
+      "pending_dsp_peak": 0,
+      "gui_delay_max_ms": 8.564665913581848,
+      "retained_seconds": 0.0,
+      "radio_playing_seconds": null,
+      "wav_active": false,
+      "radio_a0": false,
+      "radio_a0_diagnostics": null,
+      "radio_status": "RADIO esperando muestras de CH1",
+      "rf_history_samples": 8352,
+      "scan_not_before_sample": 4872,
+      "status": "Activo \u00b7 SPI \u00b7 10 bits \u00b7 192,076 kHz"
+    },
+    {
+      "stage": "periodic",
+      "elapsed": 5.096291659050621,
+      "render_metrics": {
+        "frames": 267,
+        "wall_seconds": 0.022706022718921304,
+        "cpu_seconds": 0.022114620000000418,
+        "max_wall_ms": 0.9437010157853365,
+        "heartbeat_gap_max_ms": 591.520422953181
+      },
+      "process_cpu_seconds": 4.43236,
+      "samples": 429780,
+      "paint_events": 9,
+      "exposed": false,
+      "radio_samples": 33864,
+      "batch_processing_count": 103,
+      "pending_gui": 0,
+      "rf_ipc_kind": "RawRfBatch",
+      "pending_dsp": 0,
+      "pending_gui_peak": 2,
+      "pending_dsp_peak": 1,
+      "gui_delay_max_ms": 15.919527038931847,
+      "retained_seconds": 0.0,
+      "radio_playing_seconds": null,
+      "wav_active": false,
+      "radio_a0": false,
+      "radio_a0_diagnostics": null,
+      "radio_status": "RADIO 40 kHz \u00b7 32124 muestras",
+      "rf_history_samples": 429780,
+      "scan_not_before_sample": 4872,
+      "status": "Activo \u00b7 SPI \u00b7 10 bits \u00b7 192,076 kHz",
+      "paint_fps_interval": 1.765993516701114
+    },
+    {
+      "stage": "radio_a0_play",
+      "elapsed": 7.0964300649939105,
+      "render_metrics": {
+        "frames": 392,
+        "wall_seconds": 0.028707753401249647,
+        "cpu_seconds": 0.027582283999999735,
+        "max_wall_ms": 0.9437010157853365,
+        "heartbeat_gap_max_ms": 591.520422953181
+      },
+      "process_cpu_seconds": 4.681028,
+      "samples": 813972,
+      "paint_events": 9,
+      "exposed": false,
+      "radio_samples": 113872,
+      "batch_processing_count": 197,
+      "pending_gui": 0,
+      "rf_ipc_kind": "RawRfBatch",
+      "pending_dsp": 0,
+      "pending_gui_peak": 2,
+      "pending_dsp_peak": 2,
+      "gui_delay_max_ms": 15.919527038931847,
+      "retained_seconds": 0.0,
+      "radio_playing_seconds": null,
+      "wav_active": true,
+      "radio_a0": true,
+      "radio_a0_diagnostics": {
+        "input_source": "RADIO",
+        "rate": 40000,
+        "played": 0,
+        "accepted": 0,
+        "pcm_transport": null,
+        "transport_underrun": null,
+        "delivery": {
+          "feed_gap_max_ms": 0.0,
+          "chunk_gap_max_ms": 0.0,
+          "audio_waits": 0,
+          "transport_max_ms": {},
+          "feed_age_ms": null,
+          "chunk_age_ms": null,
+          "events": []
+        },
+        "buffered_samples": 0,
+        "buffer_minimum": null,
+        "retunes": 0,
+        "error": null,
+        "closed": false,
+        "transition_silence_samples": 0,
+        "loop_score": 0.0,
+        "loop_hits": 0
+      },
+      "radio_status": "RADIO 40 kHz \u00b7 110393 muestras",
+      "rf_history_samples": 813972,
+      "scan_not_before_sample": 4872,
+      "status": "Activo \u00b7 SPI \u00b7 10 bits \u00b7 192,076 kHz"
+    },
+    {
+      "stage": "radio_a0_playing_confirmed",
+      "elapsed": 7.748052739072591,
+      "render_metrics": {
+        "frames": 433,
+        "wall_seconds": 0.030509959207847714,
+        "cpu_seconds": 0.02923359400000125,
+        "max_wall_ms": 0.9437010157853365,
+        "heartbeat_gap_max_ms": 591.520422953181
+      },
+      "process_cpu_seconds": 4.841393,
+      "samples": 938904,
+      "paint_events": 9,
+      "exposed": false,
+      "radio_samples": 139889,
+      "batch_processing_count": 230,
+      "pending_gui": 0,
+      "rf_ipc_kind": "RawRfBatch",
+      "pending_dsp": 0,
+      "pending_gui_peak": 2,
+      "pending_dsp_peak": 2,
+      "gui_delay_max_ms": 15.919527038931847,
+      "retained_seconds": 0.0,
+      "radio_playing_seconds": 4.119402728974819e-05,
+      "wav_active": true,
+      "radio_a0": true,
+      "radio_a0_diagnostics": {
+        "input_source": "RADIO",
+        "rate": 40000,
+        "played": 0,
+        "accepted": 14400,
+        "pcm_transport": {
+          "pending": null,
+          "pending_age_ms": null,
+          "cached_samples": 0,
+          "roundtrip_max_ms": 1.6967059345915914,
+          "stage_max_ms": {
+            "request_to_parent": 0.42308494448661804,
+            "executor_wait": 0.21016807295382023,
+            "render": 0.39626704528927803,
+            "reply_to_child": 1.3840189203619957
+          },
+          "last_reply_timing": {
+            "offset": 13920,
+            "accepted_at": 601941.836125962,
+            "request_to_parent": 0.08312205318361521,
+            "executor_wait": 0.031946925446391106,
+            "render": 0.06830599159002304,
+            "reply_to_child": 0.16179902013391256
+          },
+          "delivery_max_ms": {
+            "socket_send": 0.14650390949100256,
+            "send_to_ack": 18.93056300468743,
+            "chunk_generation": 0.010184943675994873
+          },
+          "slow_delivery": [],
+          "dac": {
+            "inflight": 0,
+            "oldest_inflight_ms": null,
+            "inflight_kinds": [],
+            "next_offset": 14400,
+            "accepted": 14400,
+            "played": 0,
+            "free_blocks": 0
+          }
+        },
+        "transport_underrun": null,
+        "delivery": {
+          "feed_gap_max_ms": 23.38293206412345,
+          "chunk_gap_max_ms": 7.530048955231905,
+          "audio_waits": 0,
+          "transport_max_ms": {
+            "loop_observe": 0.10480696801096201,
+            "pcm_request_to_render": 0.5513950018212199,
+            "source_lock_wait": 0.0011620577424764633
+          },
+          "feed_age_ms": 7.519677979871631,
+          "chunk_age_ms": 17.11999496910721,
+          "events": []
+        },
+        "buffered_samples": 11617,
+        "buffer_minimum": 10747,
+        "retunes": 0,
+        "error": null,
+        "closed": false,
+        "transition_silence_samples": 0,
+        "loop_score": 0.0,
+        "loop_hits": 0
+      },
+      "radio_status": "RADIO 40 kHz \u00b7 139889 muestras",
+      "rf_history_samples": 938904,
+      "scan_not_before_sample": 4872,
+      "status": "Activo \u00b7 SPI \u00b7 10 bits \u00b7 192,076 kHz"
+    },
+    {
+      "stage": "periodic",
+      "elapsed": 10.19615135807544,
+      "render_metrics": {
+        "frames": 586,
+        "wall_seconds": 0.037347790552303195,
+        "cpu_seconds": 0.03522113099999702,
+        "max_wall_ms": 0.9437010157853365,
+        "heartbeat_gap_max_ms": 591.520422953181
+      },
+      "process_cpu_seconds": 5.236766,
+      "samples": 1406616,
+      "paint_events": 9,
+      "exposed": false,
+      "radio_samples": 237290,
+      "batch_processing_count": 347,
+      "pending_gui": 0,
+      "rf_ipc_kind": "RawRfBatch",
+      "pending_dsp": 0,
+      "pending_gui_peak": 2,
+      "pending_dsp_peak": 2,
+      "gui_delay_max_ms": 15.919527038931847,
+      "retained_seconds": 0.0,
+      "radio_playing_seconds": 2.4481736270245165,
+      "wav_active": true,
+      "radio_a0": true,
+      "radio_a0_diagnostics": {
+        "input_source": "RADIO",
+        "rate": 40000,
+        "played": 96000,
+        "accepted": 108960,
+        "pcm_transport": {
+          "pending": null,
+          "pending_age_ms": null,
+          "cached_samples": 0,
+          "roundtrip_max_ms": 1.6967059345915914,
+          "stage_max_ms": {
+            "request_to_parent": 0.48333092126995325,
+            "executor_wait": 0.21016807295382023,
+            "render": 0.39626704528927803,
+            "reply_to_child": 1.3840189203619957
+          },
+          "last_reply_timing": {
+            "offset": 107040,
+            "accepted_at": 601944.21784541,
+            "request_to_parent": 0.11646607890725136,
+            "executor_wait": 0.04190800245851278,
+            "render": 0.1823239726945758,
+            "reply_to_child": 0.2595389960333705
+          },
+          "delivery_max_ms": {
+            "socket_send": 0.14650390949100256,
+            "send_to_ack": 20.899044000543654,
+            "chunk_generation": 0.02052506897598505
+          },
+          "slow_delivery": [
+            {
+              "stage": "send_to_ack",
+              "ms": 20.645481999963522,
+              "observed_at": 601942.15052829
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.239779958501458,
+              "observed_at": 601942.217038391
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.899044000543654,
+              "observed_at": 601942.281500431
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.097684930078685,
+              "observed_at": 601942.367918997
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.098039996810257,
+              "observed_at": 601942.413094036
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.276752999052405,
+              "observed_at": 601942.716137448
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.72697796393186,
+              "observed_at": 601943.521445831
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.21210198290646,
+              "observed_at": 601943.566394369
+            }
+          ],
+          "dac": {
+            "inflight": 0,
+            "oldest_inflight_ms": null,
+            "inflight_kinds": [],
+            "next_offset": 108960,
+            "accepted": 108960,
+            "played": 96000,
+            "free_blocks": 3
+          }
+        },
+        "transport_underrun": null,
+        "delivery": {
+          "feed_gap_max_ms": 33.7009719805792,
+          "chunk_gap_max_ms": 47.21217299811542,
+          "audio_waits": 0,
+          "transport_max_ms": {
+            "loop_observe": 3.298613941296935,
+            "pcm_request_to_render": 0.5585079779848456,
+            "source_lock_wait": 0.006503076292574406
+          },
+          "feed_age_ms": 15.621275990270078,
+          "chunk_age_ms": 18.68771796580404,
+          "events": []
+        },
+        "buffered_samples": 12058,
+        "buffer_minimum": 10747,
+        "retunes": 0,
+        "error": null,
+        "closed": false,
+        "transition_silence_samples": 0,
+        "loop_score": 0.13046750512328345,
+        "loop_hits": 0
+      },
+      "radio_status": "RADIO 40 kHz \u00b7 237290 muestras",
+      "rf_history_samples": 1028308,
+      "scan_not_before_sample": 4872,
+      "status": "Activo \u00b7 SPI \u00b7 10 bits \u00b7 192,076 kHz",
+      "paint_fps_interval": 0.0
+    },
+    {
+      "stage": "radio_retune",
+      "elapsed": 13.097067927010357,
+      "render_metrics": {
+        "frames": 767,
+        "wall_seconds": 0.045905404491350055,
+        "cpu_seconds": 0.04258796299999679,
+        "max_wall_ms": 0.9437010157853365,
+        "heartbeat_gap_max_ms": 591.520422953181
+      },
+      "process_cpu_seconds": 5.712563,
+      "samples": 1966200,
+      "paint_events": 9,
+      "exposed": false,
+      "radio_samples": 0,
+      "batch_processing_count": 487,
+      "pending_gui": 0,
+      "rf_ipc_kind": "RawRfBatch",
+      "pending_dsp": 0,
+      "pending_gui_peak": 2,
+      "pending_dsp_peak": 2,
+      "gui_delay_max_ms": 15.919527038931847,
+      "retained_seconds": 0.0,
+      "radio_playing_seconds": 5.349092824966647,
+      "wav_active": true,
+      "radio_a0": true,
+      "radio_a0_diagnostics": {
+        "input_source": "RADIO",
+        "rate": 40000,
+        "played": 211680,
+        "accepted": 225600,
+        "pcm_transport": {
+          "pending": null,
+          "pending_age_ms": null,
+          "cached_samples": 0,
+          "roundtrip_max_ms": 1.738240011036396,
+          "stage_max_ms": {
+            "request_to_parent": 0.5253501003608108,
+            "executor_wait": 0.21016807295382023,
+            "render": 0.39626704528927803,
+            "reply_to_child": 1.4041670365259051
+          },
+          "last_reply_timing": {
+            "offset": 225120,
+            "accepted_at": 601947.137544043,
+            "request_to_parent": 0.120529904961586,
+            "executor_wait": 0.03430200740695,
+            "render": 0.06543099880218506,
+            "reply_to_child": 0.17992104403674603
+          },
+          "delivery_max_ms": {
+            "socket_send": 0.14650390949100256,
+            "send_to_ack": 20.899044000543654,
+            "chunk_generation": 0.02052506897598505
+          },
+          "slow_delivery": [
+            {
+              "stage": "send_to_ack",
+              "ms": 20.645481999963522,
+              "observed_at": 601942.15052829
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.239779958501458,
+              "observed_at": 601942.217038391
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.899044000543654,
+              "observed_at": 601942.281500431
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.097684930078685,
+              "observed_at": 601942.367918997
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.098039996810257,
+              "observed_at": 601942.413094036
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.276752999052405,
+              "observed_at": 601942.716137448
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.72697796393186,
+              "observed_at": 601943.521445831
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.21210198290646,
+              "observed_at": 601943.566394369
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.179170998744667,
+              "observed_at": 601944.827470378
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.87556605692953,
+              "observed_at": 601944.913722297
+            }
+          ],
+          "dac": {
+            "inflight": 0,
+            "oldest_inflight_ms": null,
+            "inflight_kinds": [],
+            "next_offset": 225600,
+            "accepted": 225600,
+            "played": 211680,
+            "free_blocks": 1
+          }
+        },
+        "transport_underrun": null,
+        "delivery": {
+          "feed_gap_max_ms": 33.7009719805792,
+          "chunk_gap_max_ms": 47.21217299811542,
+          "audio_waits": 0,
+          "transport_max_ms": {
+            "loop_observe": 3.6638970486819744,
+            "pcm_request_to_render": 0.6120260804891586,
+            "source_lock_wait": 0.006503076292574406
+          },
+          "feed_age_ms": 4.653393989428878,
+          "chunk_age_ms": 25.375886936672032,
+          "events": []
+        },
+        "buffered_samples": 12911,
+        "buffer_minimum": 10747,
+        "retunes": 0,
+        "error": null,
+        "closed": false,
+        "transition_silence_samples": 0,
+        "loop_score": 0.15213193134123823,
+        "loop_hits": 0
+      },
+      "radio_status": "RADIO esperando muestras de CH1",
+      "rf_history_samples": 1028308,
+      "scan_not_before_sample": 4872,
+      "status": "Activo \u00b7 SPI \u00b7 10 bits \u00b7 192,076 kHz"
+    },
+    {
+      "stage": "periodic",
+      "elapsed": 15.296090044081211,
+      "render_metrics": {
+        "frames": 905,
+        "wall_seconds": 0.05190287600271404,
+        "cpu_seconds": 0.04789801399999716,
+        "max_wall_ms": 0.9437010157853365,
+        "heartbeat_gap_max_ms": 591.520422953181
+      },
+      "process_cpu_seconds": 6.070652,
+      "samples": 2387976,
+      "paint_events": 9,
+      "exposed": false,
+      "radio_samples": 87782,
+      "batch_processing_count": 592,
+      "pending_gui": 0,
+      "rf_ipc_kind": "RawRfBatch",
+      "pending_dsp": 0,
+      "pending_gui_peak": 2,
+      "pending_dsp_peak": 2,
+      "gui_delay_max_ms": 22.003935999237,
+      "retained_seconds": 0.0,
+      "radio_playing_seconds": 7.548115108977072,
+      "wav_active": true,
+      "radio_a0": true,
+      "radio_a0_diagnostics": {
+        "input_source": "RADIO",
+        "rate": 40000,
+        "played": 300480,
+        "accepted": 314400,
+        "pcm_transport": {
+          "pending": null,
+          "pending_age_ms": null,
+          "cached_samples": 0,
+          "roundtrip_max_ms": 1.738240011036396,
+          "stage_max_ms": {
+            "request_to_parent": 0.5253501003608108,
+            "executor_wait": 0.24119997397065163,
+            "render": 0.39626704528927803,
+            "reply_to_child": 1.4041670365259051
+          },
+          "last_reply_timing": {
+            "offset": 313920,
+            "accepted_at": 601949.357103257,
+            "request_to_parent": 0.15591992996633053,
+            "executor_wait": 0.04775403067469597,
+            "render": 0.09852705989032984,
+            "reply_to_child": 0.19361893646419048
+          },
+          "delivery_max_ms": {
+            "socket_send": 0.14650390949100256,
+            "send_to_ack": 21.342666004784405,
+            "chunk_generation": 0.02052506897598505
+          },
+          "slow_delivery": [
+            {
+              "stage": "send_to_ack",
+              "ms": 20.645481999963522,
+              "observed_at": 601942.15052829
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.239779958501458,
+              "observed_at": 601942.217038391
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.899044000543654,
+              "observed_at": 601942.281500431
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.097684930078685,
+              "observed_at": 601942.367918997
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.098039996810257,
+              "observed_at": 601942.413094036
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.276752999052405,
+              "observed_at": 601942.716137448
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.72697796393186,
+              "observed_at": 601943.521445831
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.21210198290646,
+              "observed_at": 601943.566394369
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.179170998744667,
+              "observed_at": 601944.827470378
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.87556605692953,
+              "observed_at": 601944.913722297
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.527423010207713,
+              "observed_at": 601947.372427451
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 21.342666004784405,
+              "observed_at": 601947.373288836
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.216065924614668,
+              "observed_at": 601948.045565015
+            }
+          ],
+          "dac": {
+            "inflight": 0,
+            "oldest_inflight_ms": null,
+            "inflight_kinds": [],
+            "next_offset": 314400,
+            "accepted": 314400,
+            "played": 300480,
+            "free_blocks": 1
+          }
+        },
+        "transport_underrun": null,
+        "delivery": {
+          "feed_gap_max_ms": 39.26963300909847,
+          "chunk_gap_max_ms": 47.21217299811542,
+          "audio_waits": 0,
+          "transport_max_ms": {
+            "loop_observe": 4.058902966789901,
+            "pcm_request_to_render": 0.6120260804891586,
+            "source_lock_wait": 0.006503076292574406
+          },
+          "feed_age_ms": 15.002612955868244,
+          "chunk_age_ms": 5.91230602003634,
+          "events": []
+        },
+        "buffered_samples": 11893,
+        "buffer_minimum": 10747,
+        "retunes": 1,
+        "error": null,
+        "closed": false,
+        "transition_silence_samples": 0,
+        "loop_score": 0.1431616310717374,
+        "loop_hits": 0
+      },
+      "radio_status": "RADIO 40 kHz \u00b7 84303 muestras",
+      "rf_history_samples": 1028308,
+      "scan_not_before_sample": 4872,
+      "status": "Activo \u00b7 SPI \u00b7 10 bits \u00b7 192,076 kHz",
+      "paint_fps_interval": 0.0
+    },
+    {
+      "stage": "periodic",
+      "elapsed": 20.307956397067755,
+      "render_metrics": {
+        "frames": 1205,
+        "wall_seconds": 0.42143312108237296,
+        "cpu_seconds": 0.3755239879999892,
+        "max_wall_ms": 8.398598991334438,
+        "heartbeat_gap_max_ms": 591.520422953181
+      },
+      "process_cpu_seconds": 8.562426,
+      "samples": 3344280,
+      "paint_events": 75,
+      "exposed": true,
+      "radio_samples": 286932,
+      "batch_processing_count": 829,
+      "pending_gui": 1,
+      "rf_ipc_kind": "RawRfBatch",
+      "pending_dsp": 0,
+      "pending_gui_peak": 3,
+      "pending_dsp_peak": 2,
+      "gui_delay_max_ms": 46.21799592860043,
+      "retained_seconds": 0.0217413,
+      "radio_playing_seconds": 12.55994158796966,
+      "wav_active": true,
+      "radio_a0": true,
+      "radio_a0_diagnostics": {
+        "input_source": "RADIO",
+        "rate": 40000,
+        "played": 499680,
+        "accepted": 512640,
+        "pcm_transport": {
+          "pending": null,
+          "pending_age_ms": null,
+          "cached_samples": 0,
+          "roundtrip_max_ms": 9.39650903455913,
+          "stage_max_ms": {
+            "request_to_parent": 7.316238014027476,
+            "executor_wait": 2.0476659992709756,
+            "render": 0.39626704528927803,
+            "reply_to_child": 7.0930360816419125
+          },
+          "last_reply_timing": {
+            "offset": 512160,
+            "accepted_at": 601954.340552888,
+            "request_to_parent": 4.194392007775605,
+            "executor_wait": 0.07218192331492901,
+            "render": 0.14241097960621119,
+            "reply_to_child": 0.8644460467621684
+          },
+          "delivery_max_ms": {
+            "socket_send": 0.14885608106851578,
+            "send_to_ack": 36.94246395025402,
+            "chunk_generation": 0.02116197720170021,
+            "read": 23.39817408937961
+          },
+          "slow_delivery": [
+            {
+              "stage": "send_to_ack",
+              "ms": 20.030220039188862,
+              "observed_at": 601952.311412553
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 34.82704795897007,
+              "observed_at": 601952.825355759
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 35.14550509862602,
+              "observed_at": 601952.825745646
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 35.322605981491506,
+              "observed_at": 601952.825984896
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.77614702284336,
+              "observed_at": 601953.137467306
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.48643899615854,
+              "observed_at": 601953.312352846
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.593179971911013,
+              "observed_at": 601953.335008294
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.665985997766256,
+              "observed_at": 601953.355486289
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.315840956754982,
+              "observed_at": 601953.420089332
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.48159297555685,
+              "observed_at": 601953.464917877
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.295199006795883,
+              "observed_at": 601953.487197337
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 21.243328927084804,
+              "observed_at": 601953.921482408
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 21.494139917194843,
+              "observed_at": 601954.008507125
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.93214902561158,
+              "observed_at": 601954.05160936
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.88013698812574,
+              "observed_at": 601954.183528612
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.9970329888165,
+              "observed_at": 601954.249584647
+            }
+          ],
+          "dac": {
+            "inflight": 1,
+            "oldest_inflight_ms": 14.06342105474323,
+            "inflight_kinds": [
+              13
+            ],
+            "next_offset": 513120,
+            "accepted": 512640,
+            "played": 499680,
+            "free_blocks": 3
+          }
+        },
+        "transport_underrun": null,
+        "delivery": {
+          "feed_gap_max_ms": 48.34959702566266,
+          "chunk_gap_max_ms": 51.89534404780716,
+          "audio_waits": 0,
+          "transport_max_ms": {
+            "loop_observe": 14.261779957450926,
+            "pcm_request_to_render": 7.483075023628771,
+            "source_lock_wait": 0.007400987669825554
+          },
+          "feed_age_ms": 2.4288890417665243,
+          "chunk_age_ms": 5.529463989660144,
+          "events": [
+            {
+              "kind": "chunk_gap",
+              "seconds": 10.117156530963257,
+              "buffered_samples": 12673,
+              "rendered": 390720,
+              "played": 376320,
+              "accepted": 388800,
+              "duration_ms": 51.89534404780716
+            }
+          ]
+        },
+        "buffered_samples": 11753,
+        "buffer_minimum": 10176,
+        "retunes": 1,
+        "error": null,
+        "closed": false,
+        "transition_silence_samples": 0,
+        "loop_score": 0.16331248475084226,
+        "loop_hits": 0
+      },
+      "radio_status": "RADIO 40 kHz \u00b7 283454 muestras",
+      "rf_history_samples": 1028308,
+      "scan_not_before_sample": 4872,
+      "status": "Activo \u00b7 SPI \u00b7 10 bits \u00b7 192,076 kHz",
+      "paint_fps_interval": 13.16872914069029
+    },
+    {
+      "stage": "periodic",
+      "elapsed": 25.39605498604942,
+      "render_metrics": {
+        "frames": 1509,
+        "wall_seconds": 0.9807339147664607,
+        "cpu_seconds": 0.8790962359999814,
+        "max_wall_ms": 9.71579400356859,
+        "heartbeat_gap_max_ms": 591.520422953181
+      },
+      "process_cpu_seconds": 11.895931,
+      "samples": 4329120,
+      "paint_events": 187,
+      "exposed": false,
+      "radio_samples": 492025,
+      "batch_processing_count": 1075,
+      "pending_gui": 0,
+      "rf_ipc_kind": "RawRfBatch",
+      "pending_dsp": 0,
+      "pending_gui_peak": 6,
+      "pending_dsp_peak": 2,
+      "gui_delay_max_ms": 110.70071998983622,
+      "retained_seconds": 6.938893903907228e-18,
+      "radio_playing_seconds": 17.648059497005306,
+      "wav_active": true,
+      "radio_a0": true,
+      "radio_a0_diagnostics": {
+        "input_source": "RADIO",
+        "rate": 40000,
+        "played": 704160,
+        "accepted": 716640,
+        "pcm_transport": {
+          "pending": null,
+          "pending_age_ms": null,
+          "cached_samples": 0,
+          "roundtrip_max_ms": 9.39650903455913,
+          "stage_max_ms": {
+            "request_to_parent": 7.316238014027476,
+            "executor_wait": 4.768025944940746,
+            "render": 0.39626704528927803,
+            "reply_to_child": 7.0930360816419125
+          },
+          "last_reply_timing": {
+            "offset": 715680,
+            "accepted_at": 601959.423884797,
+            "request_to_parent": 0.11323101352900267,
+            "executor_wait": 0.040381914004683495,
+            "render": 0.12442003935575485,
+            "reply_to_child": 0.13586704153567553
+          },
+          "delivery_max_ms": {
+            "socket_send": 0.20489899907261133,
+            "send_to_ack": 36.94246395025402,
+            "chunk_generation": 0.02116197720170021,
+            "read": 23.39817408937961
+          },
+          "slow_delivery": [
+            {
+              "stage": "send_to_ack",
+              "ms": 20.462300977669656,
+              "observed_at": 601955.161139311
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.025899983011186,
+              "observed_at": 601955.182692256
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.013113971799612,
+              "observed_at": 601955.247148051
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.6837709993124,
+              "observed_at": 601955.681651896
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 21.320859086699784,
+              "observed_at": 601955.90041874
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.396942039951682,
+              "observed_at": 601956.116347407
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.308951963670552,
+              "observed_at": 601956.183412958
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.636703935451806,
+              "observed_at": 601956.272292298
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.015407935716212,
+              "observed_at": 601956.403066422
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.442900015041232,
+              "observed_at": 601956.703620492
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.4427590360865,
+              "observed_at": 601957.053064325
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.17815294675529,
+              "observed_at": 601957.856790983
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.5224989913404,
+              "observed_at": 601958.227479602
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.83077491261065,
+              "observed_at": 601959.16403763
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.847410894930363,
+              "observed_at": 601959.24908969
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.306082908064127,
+              "observed_at": 601959.466228273
+            }
+          ],
+          "dac": {
+            "inflight": 0,
+            "oldest_inflight_ms": null,
+            "inflight_kinds": [],
+            "next_offset": 716640,
+            "accepted": 716640,
+            "played": 704160,
+            "free_blocks": 4
+          }
+        },
+        "transport_underrun": null,
+        "delivery": {
+          "feed_gap_max_ms": 48.34959702566266,
+          "chunk_gap_max_ms": 51.89534404780716,
+          "audio_waits": 0,
+          "transport_max_ms": {
+            "loop_observe": 16.86461200006306,
+            "pcm_request_to_render": 7.483075023628771,
+            "source_lock_wait": 0.007400987669825554
+          },
+          "feed_age_ms": 5.612403969280422,
+          "chunk_age_ms": 7.54401704762131,
+          "events": [
+            {
+              "kind": "chunk_gap",
+              "seconds": 10.117156530963257,
+              "buffered_samples": 12673,
+              "rendered": 390720,
+              "played": 376320,
+              "accepted": 388800,
+              "duration_ms": 51.89534404780716
+            }
+          ]
+        },
+        "buffered_samples": 12456,
+        "buffer_minimum": 10176,
+        "retunes": 1,
+        "error": null,
+        "closed": false,
+        "transition_silence_samples": 0,
+        "loop_score": 0.15630822107852474,
+        "loop_hits": 0
+      },
+      "radio_status": "RADIO 40 kHz \u00b7 488692 muestras",
+      "rf_history_samples": 1028308,
+      "scan_not_before_sample": 4872,
+      "status": "Activo \u00b7 SPI \u00b7 10 bits \u00b7 192,076 kHz",
+      "paint_fps_interval": 22.012157374188213
+    },
+    {
+      "stage": "periodic",
+      "elapsed": 30.39641887799371,
+      "render_metrics": {
+        "frames": 1821,
+        "wall_seconds": 0.9956159556750208,
+        "cpu_seconds": 0.8915439329999768,
+        "max_wall_ms": 9.71579400356859,
+        "heartbeat_gap_max_ms": 591.520422953181
+      },
+      "process_cpu_seconds": 12.723906,
+      "samples": 5286120,
+      "paint_events": 187,
+      "exposed": false,
+      "radio_samples": 691321,
+      "batch_processing_count": 1316,
+      "pending_gui": 0,
+      "rf_ipc_kind": "RawRfBatch",
+      "pending_dsp": 0,
+      "pending_gui_peak": 6,
+      "pending_dsp_peak": 2,
+      "gui_delay_max_ms": 110.70071998983622,
+      "retained_seconds": 6.938893903907228e-18,
+      "radio_playing_seconds": 22.648451937013306,
+      "wav_active": true,
+      "radio_a0": true,
+      "radio_a0_diagnostics": {
+        "input_source": "RADIO",
+        "rate": 40000,
+        "played": 902880,
+        "accepted": 915840,
+        "pcm_transport": {
+          "pending": null,
+          "pending_age_ms": null,
+          "cached_samples": 0,
+          "roundtrip_max_ms": 9.39650903455913,
+          "stage_max_ms": {
+            "request_to_parent": 7.316238014027476,
+            "executor_wait": 4.768025944940746,
+            "render": 0.39626704528927803,
+            "reply_to_child": 7.0930360816419125
+          },
+          "last_reply_timing": {
+            "offset": 914880,
+            "accepted_at": 601964.406107063,
+            "request_to_parent": 0.10208599269390106,
+            "executor_wait": 0.03637897316366434,
+            "render": 0.11176010593771935,
+            "reply_to_child": 0.12874300591647625
+          },
+          "delivery_max_ms": {
+            "socket_send": 0.20489899907261133,
+            "send_to_ack": 36.94246395025402,
+            "chunk_generation": 0.026879017241299152,
+            "read": 23.39817408937961
+          },
+          "slow_delivery": [
+            {
+              "stage": "send_to_ack",
+              "ms": 20.83077491261065,
+              "observed_at": 601959.16403763
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.847410894930363,
+              "observed_at": 601959.24908969
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.306082908064127,
+              "observed_at": 601959.466228273
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.615146029740572,
+              "observed_at": 601959.59738155
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.300599047914147,
+              "observed_at": 601959.685392639
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 21.789727034047246,
+              "observed_at": 601959.686953486
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.255833980627358,
+              "observed_at": 601959.75111985
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.196765079163015,
+              "observed_at": 601959.772492415
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.06231900304556,
+              "observed_at": 601960.338012701
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.498748985119164,
+              "observed_at": 601961.358880909
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.401941961608827,
+              "observed_at": 601961.794798727
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.730172051116824,
+              "observed_at": 601962.143767835
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.869167055934668,
+              "observed_at": 601963.166173271
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.607937942259014,
+              "observed_at": 601963.535631596
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.682308007963,
+              "observed_at": 601963.752173804
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.169341936707497,
+              "observed_at": 601963.90529398
+            }
+          ],
+          "dac": {
+            "inflight": 0,
+            "oldest_inflight_ms": null,
+            "inflight_kinds": [],
+            "next_offset": 915840,
+            "accepted": 915840,
+            "played": 902880,
+            "free_blocks": 3
+          }
+        },
+        "transport_underrun": null,
+        "delivery": {
+          "feed_gap_max_ms": 48.34959702566266,
+          "chunk_gap_max_ms": 51.89534404780716,
+          "audio_waits": 0,
+          "transport_max_ms": {
+            "loop_observe": 16.86461200006306,
+            "pcm_request_to_render": 7.483075023628771,
+            "source_lock_wait": 0.007400987669825554
+          },
+          "feed_age_ms": 14.835563022643328,
+          "chunk_age_ms": 8.959918981418014,
+          "events": [
+            {
+              "kind": "chunk_gap",
+              "seconds": 10.117156530963257,
+              "buffered_samples": 12673,
+              "rendered": 390720,
+              "played": 376320,
+              "accepted": 388800,
+              "duration_ms": 51.89534404780716
+            }
+          ]
+        },
+        "buffered_samples": 12072,
+        "buffer_minimum": 10176,
+        "retunes": 1,
+        "error": null,
+        "closed": false,
+        "transition_silence_samples": 0,
+        "loop_score": 0.13604996911491954,
+        "loop_hits": 0
+      },
+      "radio_status": "RADIO 40 kHz \u00b7 689581 muestras",
+      "rf_history_samples": 1028308,
+      "scan_not_before_sample": 4872,
+      "status": "Activo \u00b7 SPI \u00b7 10 bits \u00b7 192,076 kHz",
+      "paint_fps_interval": 0.0
+    },
+    {
+      "stage": "periodic",
+      "elapsed": 35.49549072398804,
+      "render_metrics": {
+        "frames": 2140,
+        "wall_seconds": 1.0098629214335233,
+        "cpu_seconds": 0.9041470069999806,
+        "max_wall_ms": 9.71579400356859,
+        "heartbeat_gap_max_ms": 591.520422953181
+      },
+      "process_cpu_seconds": 13.573068,
+      "samples": 6263304,
+      "paint_events": 187,
+      "exposed": false,
+      "radio_samples": 894819,
+      "batch_processing_count": 1561,
+      "pending_gui": 0,
+      "rf_ipc_kind": "RawRfBatch",
+      "pending_dsp": 0,
+      "pending_gui_peak": 6,
+      "pending_dsp_peak": 2,
+      "gui_delay_max_ms": 110.70071998983622,
+      "retained_seconds": 6.938893903907228e-18,
+      "radio_playing_seconds": 27.747489186003804,
+      "wav_active": true,
+      "radio_a0": true,
+      "radio_a0_diagnostics": {
+        "input_source": "RADIO",
+        "rate": 40000,
+        "played": 1106400,
+        "accepted": 1119360,
+        "pcm_transport": {
+          "pending": null,
+          "pending_age_ms": null,
+          "cached_samples": 0,
+          "roundtrip_max_ms": 9.39650903455913,
+          "stage_max_ms": {
+            "request_to_parent": 7.316238014027476,
+            "executor_wait": 4.768025944940746,
+            "render": 0.5233580013737082,
+            "reply_to_child": 7.0930360816419125
+          },
+          "last_reply_timing": {
+            "offset": 1118400,
+            "accepted_at": 601969.497009191,
+            "request_to_parent": 0.2577579580247402,
+            "executor_wait": 0.07557193748652935,
+            "render": 0.20571600180119276,
+            "reply_to_child": 0.43725501745939255
+          },
+          "delivery_max_ms": {
+            "socket_send": 0.20489899907261133,
+            "send_to_ack": 36.94246395025402,
+            "chunk_generation": 0.026879017241299152,
+            "read": 23.39817408937961
+          },
+          "slow_delivery": [
+            {
+              "stage": "send_to_ack",
+              "ms": 20.869167055934668,
+              "observed_at": 601963.166173271
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.607937942259014,
+              "observed_at": 601963.535631596
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.682308007963,
+              "observed_at": 601963.752173804
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.169341936707497,
+              "observed_at": 601963.90529398
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.3755620168522,
+              "observed_at": 601964.556706699
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.197693025693297,
+              "observed_at": 601965.862681792
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.54136001970619,
+              "observed_at": 601965.928538329
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.425630966201425,
+              "observed_at": 601966.472867214
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.32889297697693,
+              "observed_at": 601966.885660961
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.17518994398415,
+              "observed_at": 601967.689218238
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.544966915622354,
+              "observed_at": 601967.820428818
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.136674982495606,
+              "observed_at": 601967.90699315
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.430109929293394,
+              "observed_at": 601968.190981101
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.035019959323108,
+              "observed_at": 601969.323359327
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.931830047629774,
+              "observed_at": 601969.324354978
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.419980050064623,
+              "observed_at": 601969.43195853
+            }
+          ],
+          "dac": {
+            "inflight": 0,
+            "oldest_inflight_ms": null,
+            "inflight_kinds": [],
+            "next_offset": 1119360,
+            "accepted": 1119360,
+            "played": 1106400,
+            "free_blocks": 3
+          }
+        },
+        "transport_underrun": null,
+        "delivery": {
+          "feed_gap_max_ms": 48.34959702566266,
+          "chunk_gap_max_ms": 51.89534404780716,
+          "audio_waits": 0,
+          "transport_max_ms": {
+            "loop_observe": 16.86461200006306,
+            "pcm_request_to_render": 7.483075023628771,
+            "source_lock_wait": 0.007400987669825554
+          },
+          "feed_age_ms": 17.443082993850112,
+          "chunk_age_ms": 17.21826393622905,
+          "events": [
+            {
+              "kind": "chunk_gap",
+              "seconds": 10.117156530963257,
+              "buffered_samples": 12673,
+              "rendered": 390720,
+              "played": 376320,
+              "accepted": 388800,
+              "duration_ms": 51.89534404780716
+            }
+          ]
+        },
+        "buffered_samples": 12050,
+        "buffer_minimum": 10176,
+        "retunes": 1,
+        "error": null,
+        "closed": false,
+        "transition_silence_samples": 0,
+        "loop_score": 0.13403466009912585,
+        "loop_hits": 0
+      },
+      "radio_status": "RADIO 40 kHz \u00b7 893152 muestras",
+      "rf_history_samples": 1028308,
+      "scan_not_before_sample": 4872,
+      "status": "Activo \u00b7 SPI \u00b7 10 bits \u00b7 192,076 kHz",
+      "paint_fps_interval": 0.0
+    },
+    {
+      "stage": "before_stop",
+      "elapsed": 37.795899005024694,
+      "render_metrics": {
+        "frames": 2284,
+        "wall_seconds": 1.0164883655961603,
+        "cpu_seconds": 0.9096499389999777,
+        "max_wall_ms": 9.71579400356859,
+        "heartbeat_gap_max_ms": 591.520422953181
+      },
+      "process_cpu_seconds": 13.938186,
+      "samples": 6705960,
+      "paint_events": 187,
+      "exposed": false,
+      "radio_samples": 987002,
+      "batch_processing_count": 1672,
+      "pending_gui": 0,
+      "rf_ipc_kind": "RawRfBatch",
+      "pending_dsp": 0,
+      "pending_gui_peak": 6,
+      "pending_dsp_peak": 2,
+      "gui_delay_max_ms": 110.70071998983622,
+      "retained_seconds": 6.938893903907228e-18,
+      "radio_playing_seconds": null,
+      "wav_active": true,
+      "radio_a0": true,
+      "radio_a0_diagnostics": {
+        "input_source": "RADIO",
+        "rate": 40000,
+        "played": 1200480,
+        "accepted": 1214400,
+        "pcm_transport": {
+          "pending": null,
+          "pending_age_ms": null,
+          "cached_samples": 0,
+          "roundtrip_max_ms": 9.39650903455913,
+          "stage_max_ms": {
+            "request_to_parent": 7.316238014027476,
+            "executor_wait": 4.768025944940746,
+            "render": 0.5233580013737082,
+            "reply_to_child": 7.0930360816419125
+          },
+          "last_reply_timing": {
+            "offset": 1213920,
+            "accepted_at": 601971.870687455,
+            "request_to_parent": 0.09450200013816357,
+            "executor_wait": 0.03400305286049843,
+            "render": 0.0671829329803586,
+            "reply_to_child": 0.16814807895570993
+          },
+          "delivery_max_ms": {
+            "socket_send": 0.20489899907261133,
+            "send_to_ack": 36.94246395025402,
+            "chunk_generation": 0.026879017241299152,
+            "read": 23.39817408937961
+          },
+          "slow_delivery": [
+            {
+              "stage": "send_to_ack",
+              "ms": 20.169341936707497,
+              "observed_at": 601963.90529398
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.3755620168522,
+              "observed_at": 601964.556706699
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.197693025693297,
+              "observed_at": 601965.862681792
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.54136001970619,
+              "observed_at": 601965.928538329
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.425630966201425,
+              "observed_at": 601966.472867214
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.32889297697693,
+              "observed_at": 601966.885660961
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.17518994398415,
+              "observed_at": 601967.689218238
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.544966915622354,
+              "observed_at": 601967.820428818
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.136674982495606,
+              "observed_at": 601967.90699315
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.430109929293394,
+              "observed_at": 601968.190981101
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.035019959323108,
+              "observed_at": 601969.323359327
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.931830047629774,
+              "observed_at": 601969.324354978
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.419980050064623,
+              "observed_at": 601969.43195853
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.49241296481341,
+              "observed_at": 601969.647597899
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.29367198701948,
+              "observed_at": 601970.451942804
+            },
+            {
+              "stage": "send_to_ack",
+              "ms": 20.09703707881272,
+              "observed_at": 601971.7159236
+            }
+          ],
+          "dac": {
+            "inflight": 0,
+            "oldest_inflight_ms": null,
+            "inflight_kinds": [],
+            "next_offset": 1214400,
+            "accepted": 1214400,
+            "played": 1200480,
+            "free_blocks": 1
+          }
+        },
+        "transport_underrun": null,
+        "delivery": {
+          "feed_gap_max_ms": 48.34959702566266,
+          "chunk_gap_max_ms": 51.89534404780716,
+          "audio_waits": 0,
+          "transport_max_ms": {
+            "loop_observe": 16.86461200006306,
+            "pcm_request_to_render": 7.483075023628771,
+            "source_lock_wait": 0.007400987669825554
+          },
+          "feed_age_ms": 16.275834990665317,
+          "chunk_age_ms": 7.07378494553268,
+          "events": [
+            {
+              "kind": "chunk_gap",
+              "seconds": 10.117156530963257,
+              "buffered_samples": 12673,
+              "rendered": 390720,
+              "played": 376320,
+              "accepted": 388800,
+              "duration_ms": 51.89534404780716
+            }
+          ]
+        },
+        "buffered_samples": 11593,
+        "buffer_minimum": 10176,
+        "retunes": 1,
+        "error": null,
+        "closed": false,
+        "transition_silence_samples": 0,
+        "loop_score": 0.151034492764368,
+        "loop_hits": 0
+      },
+      "radio_status": "RADIO 40 kHz \u00b7 986133 muestras",
+      "rf_history_samples": 1028308,
+      "scan_not_before_sample": 4872,
+      "status": "Activo \u00b7 SPI \u00b7 10 bits \u00b7 192,076 kHz"
+    },
+    {
+      "stage": "periodic",
+      "elapsed": 40.49665185902268,
+      "render_metrics": {
+        "frames": 2452,
+        "wall_seconds": 1.0236942353658378,
+        "cpu_seconds": 0.9162097749999796,
+        "max_wall_ms": 9.71579400356859,
+        "heartbeat_gap_max_ms": 591.520422953181
+      },
+      "process_cpu_seconds": 14.215519,
+      "samples": 7224132,
+      "paint_events": 187,
+      "exposed": false,
+      "radio_samples": 0,
+      "batch_processing_count": 1799,
+      "pending_gui": 0,
+      "rf_ipc_kind": "RawRfBatch",
+      "pending_dsp": 0,
+      "pending_gui_peak": 6,
+      "pending_dsp_peak": 2,
+      "gui_delay_max_ms": 110.70071998983622,
+      "retained_seconds": 6.938893903907228e-18,
+      "radio_playing_seconds": null,
+      "wav_active": false,
+      "radio_a0": false,
+      "radio_a0_diagnostics": null,
+      "radio_status": "RADIO apagada",
+      "rf_history_samples": 1028308,
+      "scan_not_before_sample": 4872,
+      "status": "Activo \u00b7 SPI \u00b7 10 bits \u00b7 192,076 kHz",
+      "paint_fps_interval": 0.0
+    },
+    {
+      "stage": "before_close",
+      "elapsed": 42.79578681709245,
+      "render_metrics": {
+        "frames": 2596,
+        "wall_seconds": 1.0294345205184072,
+        "cpu_seconds": 0.9217076799999888,
+        "max_wall_ms": 9.71579400356859,
+        "heartbeat_gap_max_ms": 591.520422953181
+      },
+      "process_cpu_seconds": 14.438205,
+      "samples": 7666788,
+      "paint_events": 187,
+      "exposed": false,
+      "radio_samples": 0,
+      "batch_processing_count": 1907,
+      "pending_gui": 0,
+      "rf_ipc_kind": "RawRfBatch",
+      "pending_dsp": 0,
+      "pending_gui_peak": 6,
+      "pending_dsp_peak": 2,
+      "gui_delay_max_ms": 110.70071998983622,
+      "retained_seconds": 6.938893903907228e-18,
+      "radio_playing_seconds": null,
+      "wav_active": false,
+      "radio_a0": false,
+      "radio_a0_diagnostics": null,
+      "radio_status": "RADIO apagada",
+      "rf_history_samples": 1028308,
+      "scan_not_before_sample": 4872,
+      "status": "Activo \u00b7 SPI \u00b7 10 bits \u00b7 192,076 kHz"
+    }
+  ],
+  "errors": [],
+  "paint_events": 187,
+  "scan": {
+    "requested": false,
+    "completed": false,
+    "candidate_count": null
+  },
+  "assertions": {
+    "radio_playing_40k": true,
+    "radio_stop_confirmed": true,
+    "radio_progress": true,
+    "radio_hold_completed": true,
+    "scan_completed": true,
+    "wav_playing": true,
+    "wav_progress": true,
+    "wav_stop_confirmed": true,
+    "fm_playing": true,
+    "fm_progress": true,
+    "fm_stop_confirmed": true,
+    "shutdown_confirmed": true,
+    "worker_released": true
+  },
+  "render_interval_ms": 16,
+  "radio_hold_seconds": 30.04784471692983,
+  "radio_played_samples": 1201440,
+  "radio_accepted_samples": 1215360,
+  "render_metrics": {
+    "frames": 2596,
+    "wall_seconds": 1.0294345205184072,
+    "cpu_seconds": 0.9217076799999888,
+    "max_wall_ms": 9.71579400356859,
+    "heartbeat_gap_max_ms": 591.520422953181
+  },
+  "wav_statuses": [
+    {
+      "elapsed": 2.855863008997403,
+      "phase": "initial",
+      "request_id": 3096666312,
+      "session": 3273729549,
+      "state": 0,
+      "reason": 0,
+      "free_blocks": 3,
+      "accepted": 1218720,
+      "played": 1205760,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 7.132714703097008,
+      "phase": "initial",
+      "request_id": 3096666325,
+      "session": 3096666324,
+      "state": 1,
+      "reason": 0,
+      "free_blocks": 30,
+      "accepted": 0,
+      "played": 0,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 7.678715344052762,
+      "phase": "initial",
+      "request_id": 3096666343,
+      "session": 3096666324,
+      "state": 1,
+      "reason": 0,
+      "free_blocks": 12,
+      "accepted": 8640,
+      "played": 0,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 7.748045350075699,
+      "phase": "radio",
+      "request_id": 3096666356,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 0,
+      "accepted": 14400,
+      "played": 0,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 8.264189058099873,
+      "phase": "radio",
+      "request_id": 3096666407,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 4,
+      "accepted": 33120,
+      "played": 20640,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 8.787077172077261,
+      "phase": "radio",
+      "request_id": 3096666465,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 1,
+      "accepted": 55200,
+      "played": 41280,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 9.331107417005114,
+      "phase": "radio",
+      "request_id": 3096666522,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 2,
+      "accepted": 76320,
+      "played": 62880,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 9.87496640800964,
+      "phase": "radio",
+      "request_id": 3096666578,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 4,
+      "accepted": 97440,
+      "played": 84960,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 10.3757126260316,
+      "phase": "radio",
+      "request_id": 3096666634,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 1,
+      "accepted": 118560,
+      "played": 104640,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 10.875819773995318,
+      "phase": "radio",
+      "request_id": 3096666685,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 2,
+      "accepted": 138240,
+      "played": 124800,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 11.39809277805034,
+      "phase": "radio",
+      "request_id": 3096666739,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 3,
+      "accepted": 158400,
+      "played": 145440,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 11.96351934503764,
+      "phase": "radio",
+      "request_id": 3096666799,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 4,
+      "accepted": 180960,
+      "played": 168480,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 12.485251168021932,
+      "phase": "radio",
+      "request_id": 3096666856,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 1,
+      "accepted": 203040,
+      "played": 189120,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 12.992013386101462,
+      "phase": "radio",
+      "request_id": 3096666910,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 2,
+      "accepted": 222720,
+      "played": 209280,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 13.532308923080564,
+      "phase": "radio",
+      "request_id": 3096666967,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 1,
+      "accepted": 244800,
+      "played": 230880,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 14.075020933989435,
+      "phase": "radio",
+      "request_id": 3096667025,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 1,
+      "accepted": 266400,
+      "played": 252480,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 14.59854322602041,
+      "phase": "radio",
+      "request_id": 3096667080,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 2,
+      "accepted": 287040,
+      "played": 273600,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 15.119792425073683,
+      "phase": "radio",
+      "request_id": 3096667136,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 1,
+      "accepted": 308160,
+      "played": 294240,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 15.66089370904956,
+      "phase": "radio",
+      "request_id": 3096667191,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 4,
+      "accepted": 328800,
+      "played": 316320,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 16.184312644065358,
+      "phase": "radio",
+      "request_id": 3096667248,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 2,
+      "accepted": 350400,
+      "played": 336960,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 16.706146004027687,
+      "phase": "radio",
+      "request_id": 3096667301,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 4,
+      "accepted": 370560,
+      "played": 358080,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 17.213994293008,
+      "phase": "radio",
+      "request_id": 3096667355,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 3,
+      "accepted": 390720,
+      "played": 377760,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 17.74956278409809,
+      "phase": "radio",
+      "request_id": 3096667412,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 3,
+      "accepted": 412320,
+      "played": 399360,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 18.27187616599258,
+      "phase": "radio",
+      "request_id": 3096667470,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 2,
+      "accepted": 433920,
+      "played": 420480,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 18.81549543410074,
+      "phase": "radio",
+      "request_id": 3096667526,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 3,
+      "accepted": 455040,
+      "played": 442080,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 19.327731552068144,
+      "phase": "radio",
+      "request_id": 3096667575,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 3,
+      "accepted": 475200,
+      "played": 462240,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 19.834261227049865,
+      "phase": "radio",
+      "request_id": 3096667623,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 3,
+      "accepted": 495360,
+      "played": 482400,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 20.387729028007016,
+      "phase": "radio",
+      "request_id": 3096667676,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 2,
+      "accepted": 518400,
+      "played": 504960,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 20.913271220051683,
+      "phase": "radio",
+      "request_id": 3096667724,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 2,
+      "accepted": 539040,
+      "played": 525600,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 21.45748059405014,
+      "phase": "radio",
+      "request_id": 3096667776,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 3,
+      "accepted": 560160,
+      "played": 547200,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 22.018576896050945,
+      "phase": "radio",
+      "request_id": 3096667834,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 4,
+      "accepted": 582720,
+      "played": 570240,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 22.55729282309767,
+      "phase": "radio",
+      "request_id": 3096667890,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 2,
+      "accepted": 605280,
+      "played": 591840,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 23.080086153000593,
+      "phase": "radio",
+      "request_id": 3096667944,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 2,
+      "accepted": 625920,
+      "played": 612480,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 23.644553899997845,
+      "phase": "radio",
+      "request_id": 3096668003,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 3,
+      "accepted": 648000,
+      "played": 635040,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 24.19163301307708,
+      "phase": "radio",
+      "request_id": 3096668063,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 2,
+      "accepted": 670560,
+      "played": 657120,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 24.71040353400167,
+      "phase": "radio",
+      "request_id": 3096668118,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 2,
+      "accepted": 691200,
+      "played": 677760,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 25.211704057990573,
+      "phase": "radio",
+      "request_id": 3096668170,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 2,
+      "accepted": 711360,
+      "played": 697920,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 25.71436841308605,
+      "phase": "radio",
+      "request_id": 3096668223,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 2,
+      "accepted": 731520,
+      "played": 718080,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 26.256044381065294,
+      "phase": "radio",
+      "request_id": 3096668281,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 1,
+      "accepted": 753600,
+      "played": 739680,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 26.79877885908354,
+      "phase": "radio",
+      "request_id": 3096668338,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 1,
+      "accepted": 775200,
+      "played": 761280,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 27.342992840101942,
+      "phase": "radio",
+      "request_id": 3096668395,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 2,
+      "accepted": 796320,
+      "played": 782880,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 27.908683172077872,
+      "phase": "radio",
+      "request_id": 3096668454,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 4,
+      "accepted": 818400,
+      "played": 805920,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 28.40963150304742,
+      "phase": "radio",
+      "request_id": 3096668510,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 1,
+      "accepted": 839520,
+      "played": 825600,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 28.97512907499913,
+      "phase": "radio",
+      "request_id": 3096668569,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 3,
+      "accepted": 861120,
+      "played": 848160,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 29.49923568102531,
+      "phase": "radio",
+      "request_id": 3096668627,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 2,
+      "accepted": 882720,
+      "played": 869280,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 30.06188248109538,
+      "phase": "radio",
+      "request_id": 3096668686,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 2,
+      "accepted": 905280,
+      "played": 891840,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 30.562526530004106,
+      "phase": "radio",
+      "request_id": 3096668738,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 4,
+      "accepted": 924480,
+      "played": 912000,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 31.06313000502996,
+      "phase": "radio",
+      "request_id": 3096668794,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 1,
+      "accepted": 945600,
+      "played": 931680,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 31.628981905058026,
+      "phase": "radio",
+      "request_id": 3096668852,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 3,
+      "accepted": 967200,
+      "played": 954240,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 32.15073254308663,
+      "phase": "radio",
+      "request_id": 3096668907,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 2,
+      "accepted": 988800,
+      "played": 975360,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 32.696333894040436,
+      "phase": "radio",
+      "request_id": 3096668966,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 1,
+      "accepted": 1010880,
+      "played": 996960,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 33.24060173507314,
+      "phase": "radio",
+      "request_id": 3096669022,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 3,
+      "accepted": 1031520,
+      "played": 1018560,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 33.8032912920462,
+      "phase": "radio",
+      "request_id": 3096669080,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 4,
+      "accepted": 1054080,
+      "played": 1041600,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 34.347674080054276,
+      "phase": "radio",
+      "request_id": 3096669139,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 2,
+      "accepted": 1076640,
+      "played": 1063200,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 34.8691480490379,
+      "phase": "radio",
+      "request_id": 3096669194,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 3,
+      "accepted": 1096800,
+      "played": 1083840,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 35.43607131903991,
+      "phase": "radio",
+      "request_id": 3096669255,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 3,
+      "accepted": 1119360,
+      "played": 1106400,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 36.001868150080554,
+      "phase": "radio",
+      "request_id": 3096669314,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 4,
+      "accepted": 1141920,
+      "played": 1129440,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 36.52227435307577,
+      "phase": "radio",
+      "request_id": 3096669372,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 1,
+      "accepted": 1164000,
+      "played": 1150080,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 37.06812205899041,
+      "phase": "radio",
+      "request_id": 3096669430,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 1,
+      "accepted": 1185600,
+      "played": 1171680,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 37.591644511092454,
+      "phase": "radio",
+      "request_id": 3096669486,
+      "session": 3096666324,
+      "state": 2,
+      "reason": 0,
+      "free_blocks": 2,
+      "accepted": 1206240,
+      "played": 1192800,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    },
+    {
+      "elapsed": 37.80930382106453,
+      "phase": "radio",
+      "request_id": 3096669510,
+      "session": 3096666324,
+      "state": 0,
+      "reason": 0,
+      "free_blocks": 1,
+      "accepted": 1215360,
+      "played": 1201440,
+      "total": 3456000000,
+      "rate": 40000,
+      "rates_mask": 7,
+      "queue_slots": 30
+    }
+  ],
+  "finished": 1793031161.976515,
+  "exposed": false,
+  "shutdown_status": [
+    true,
+    "Salida apagada confirmada"
+  ],
+  "closed": true,
+  "worker_released": true
+}

@@ -11,19 +11,49 @@ def folded(frequency,rate):return abs((frequency+rate/2)%rate-rate/2)
 
 
 def scan_profiles(original):
+    if (original._native or {}).get('catalog_profile'):
+        existing=[]
+        for rate in RATES:
+            try:config=Configuration(original.bits,rate)
+            except ValueError:continue
+            profile=config._native or {}
+            if (config.channels==original.channels and config.actual_rate>=20000
+                    and not profile.get('catalog_profile') and not profile.get('internal_only')
+                    and not profile.get('integration_pending')):existing.append(config)
+        if not existing:return []
+        anchor=(max(existing,key=lambda c:c.actual_rate) if original.channels==1
+                else min(existing,key=lambda c:abs(c.actual_rate-original.actual_rate)))
+        prior=scan_profiles(anchor)
+        return [original,*prior[1:]] if len(prior)==3 else []
+    # New targets retain the exact auxiliaries used during qualification.
+    # They never become auxiliaries for existing profiles.
+    additions={(8,1,86,3488):1818181,(10,1,120,5568):1311475,
+               (14,1,170,5952):909090,
+               (8,1,85,3488):1860465,(10,1,118,5568):1333333,
+               (12,1,145,7488):1095890,(14,1,160,5952):941176}
+    anchor=additions.get((original.bits,original.channels,original.period,original.node_pairs))
+    if anchor is not None:
+        previous=scan_profiles(Configuration(original.bits,anchor))
+        return [original,*previous[1:]] if len(previous)==3 else []
     candidates=[]
     for rate in RATES:
         try:config=Configuration(original.bits,rate)
         except ValueError:continue
+        if (config.bits,config.channels,config.period,config.node_pairs) in additions:continue
         if config.channels!=original.channels or config==original or config.actual_rate<20000:continue
-        if config._native and (config._native.get('internal_only') or config._native.get('integration_pending')):continue
+        if config._native and (config._native.get('internal_only') or config._native.get('integration_pending') or config._native.get('catalog_profile')):continue
         candidates.append(config)
-    # The ADC8 high-rate scan must stay on its SPI38/40 FIFO profiles.
-    # Switching to the legacy 143-tick normal-scheduler profile lost a node
-    # and closed the relay during an actual US scan from 1.818 MS/s.
-    fast8={(88,3488),(100,3456),(114,3456)}
-    if original.bits==8 and original.channels==1 and (original.period,original.node_pairs) in fast8:
-        candidates=[c for c in candidates if (c.period,c.node_pairs) in fast8]
+    # Keep high-rate scans on the SPI38/40 FIFO family. Legacy auxiliary
+    # profiles (ADC8/143 and ADC10/176) lost nodes during physical US scans.
+    fast={
+        8:{(88,3488),(100,3456),(114,3456)},
+        10:{(122,5568),(124,5568),(126,5568),(128,5568),(137,5568),(140,2784)},
+        12:{(146,7488),(148,7488),(150,7488),(163,4608),(172,4608)},
+        14:{(176,5952),(180,5952),(184,5952),(188,5952),(188,1984),(192,1984)},
+    }
+    family=fast.get(original.bits,set())
+    if original.channels==1 and (original.period,original.node_pairs) in family:
+        candidates=[c for c in candidates if (c.period,c.node_pairs) in family]
     candidates.sort(key=lambda c:abs(c.actual_rate-original.actual_rate))
     return [original,candidates[0],candidates[-1]] if len(candidates)>=2 else []
 
@@ -72,7 +102,7 @@ class MultirateScan(QtCore.QObject):
         if not profiles:
             o.radio_status.setText('Scan US · faltan dos perfiles auxiliares con los mismos bits/canales.');return
         self.configs=profiles;self.scans=[];self.index=0;self.error=None;self.restoring=False
-        self.future=None;self.active=True;o._auto_apply_timer.stop();o._set_radio_scan_playback(False)
+        self.future=None;self.restore_confirmed=False;self.active=True;o._auto_apply_timer.stop();o._set_radio_scan_playback(False)
         self.widgets=[o.radio_us,o.radio_bandwidth,o.radio_frequency,o.radio_frequency_dial,o.config_bits_combo,o.config_rate_combo,o.destination_combo,o.radio_enabled,o.generator_mode,o.radio_output_panel,o.radio_output_rate]
         self.enabled=[w.isEnabled() for w in self.widgets]
         o.radio_scan_button.setEnabled(True)
@@ -99,7 +129,7 @@ class MultirateScan(QtCore.QObject):
                 return
             if self.restoring:
                 if o.sample_counter-self.start_sample<max(10000,int(self.original.actual_rate*.1)):return
-                self.finish();return
+                self.restore_confirmed=True;self.finish();return
             count=SCAN_SIZE*SCAN_BLOCKS
             o.radio_status.setText(f'Scan US · perfil {self.index+1}/3 · {self.target.actual_rate/1000:.3f} kHz')
             if o.sample_counter-self.start_sample<count+max(10000,int(self.target.actual_rate*.1)):return
@@ -121,14 +151,19 @@ class MultirateScan(QtCore.QObject):
     future=None
 
     def restore(self):
-        self.restoring=True
+        self.restoring=True;self.restore_confirmed=False
         if self.owner.serial_worker is None:self.finish();return
         self.request(self.original)
 
     def finish(self):
         o=self.owner;self.timer.stop();self.active=False;self.future=None
+        if getattr(o,'_close_pending',False):
+            # closeEvent waits for acquisition restoration; resume teardown once
+            # this transaction has finished, including its failure path.
+            QtCore.QTimer.singleShot(0,o.close)
         for widget,enabled in zip(self.widgets,self.enabled):widget.setEnabled(enabled)
-        restored=o.applied_configuration==self.original and o.serial_worker is not None
+        restored=(self.restore_confirmed and o.applied_configuration==self.original
+                  and o.serial_worker is not None)
         if restored:
             with QtCore.QSignalBlocker(o.radio_frequency):o.radio_frequency.setValue(self.frequency)
             o._sync_radio_dials()

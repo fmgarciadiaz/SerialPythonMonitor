@@ -146,7 +146,9 @@ class ScopeCursors(QtWidgets.QWidget):
     def analysis_changed(self,*_):
         if not hasattr(self,'delta'):return
         mode=self.owner.spectral.mode
-        key=(mode,self.owner.spectral._fft_kind() if mode==1 else None)
+        kind=self.owner.spectral._fft_kind() if mode==1 else None
+        if mode==1 and any(self.owner.spectral.radio_crop_active(j) for j in range(2)):kind='Radio recortada'
+        key=(mode,kind)
         changed=key!=self._analysis_key
         saved=None
         if changed:
@@ -206,6 +208,12 @@ class ScopeCursors(QtWidgets.QWidget):
     def read(self,i):
         state=self.states[i];mode=self.owner.spectral.mode;plot=self.plots[i]
         x=state.x*self.us_per_x if mode==0 else (self.linear(state.x) if mode in (1,3) and plot.getAxis('bottom').logMode else state.x)
+        if mode==1 and plot in self.owner.spectral.plots:
+            index=self.owner.spectral.plots.index(plot)
+            if self.owner.spectral.radio_crop_active(index):
+                from monitor.v18.radio_fft_crop import frequency_at
+                x=frequency_at(self.owner.spectral.radio_crop_columns(),state.x)
+                if x is None:x=float('nan')
         y=self.linear(state.y) if mode==2 and plot.getAxis('left').logMode and math.isfinite(state.y) else state.y
         return x,y
 

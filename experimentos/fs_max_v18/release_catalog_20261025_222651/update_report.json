@@ -1,0 +1,458 @@
+{
+  "version": 18,
+  "action": "verify_or_update",
+  "ok": true,
+  "production_changed": true,
+  "rollback": null,
+  "journal": [
+    {
+      "phase": "preflight",
+      "state": "completed"
+    },
+    {
+      "phase": "capture",
+      "state": "completed"
+    },
+    {
+      "phase": "backup",
+      "state": "completed"
+    },
+    {
+      "phase": "prepare",
+      "state": "completed"
+    },
+    {
+      "phase": "recheck",
+      "state": "completed"
+    },
+    {
+      "phase": "quiesce",
+      "state": "completed"
+    },
+    {
+      "phase": "stop_old_relay",
+      "state": "completed"
+    },
+    {
+      "phase": "rename_old_relay",
+      "state": "completed"
+    },
+    {
+      "phase": "stop_app",
+      "state": "completed"
+    },
+    {
+      "phase": "install_sources",
+      "state": "completed"
+    },
+    {
+      "phase": "install_cache",
+      "state": "completed"
+    },
+    {
+      "phase": "start_new_app",
+      "state": "completed"
+    },
+    {
+      "phase": "start_new_relay",
+      "state": "completed"
+    },
+    {
+      "phase": "verify_new",
+      "state": "completed"
+    }
+  ],
+  "baseline": {
+    "generator_off": true,
+    "wav_idle": true,
+    "receiver_closed": true,
+    "identity_verified": true,
+    "source_manifest_verified": true,
+    "identity": {
+      "board_serial": "1060031107",
+      "app": "scope-v18-main-1",
+      "firmware_sha256": "540c16745312b53e6aa70e8b288dc9be2e8b98bb1dc88a78bea1aa37551bb071",
+      "relay_sha256": "ecccdbcd340fb018ea341290cb1a7d9197530171f8eef90b4009ca58c94be5b7"
+    },
+    "snapshot": {
+      "schema": 1,
+      "identity": {
+        "board_serial": "1060031107",
+        "app": "scope-v18-main-1",
+        "firmware_sha256": "540c16745312b53e6aa70e8b288dc9be2e8b98bb1dc88a78bea1aa37551bb071",
+        "relay_sha256": "ecccdbcd340fb018ea341290cb1a7d9197530171f8eef90b4009ca58c94be5b7"
+      },
+      "adc_bits": 14,
+      "adc_period": 32,
+      "generator": {
+        "wave": 0,
+        "enabled": 0,
+        "mode": 0,
+        "frequency": 2500,
+        "final_frequency": 2500,
+        "low": 0,
+        "high": 4095,
+        "duration": 1000,
+        "duration_us": 0,
+        "duty": 50
+      }
+    },
+    "relay_inspect": {
+      "Id": "c0179ec8e28423b28480bdd102060e669e9ab4f679b5c1808621bcbd3881de85",
+      "Created": "2026-10-25T21:58:18.219163156Z",
+      "Path": "/work/unoq_stream",
+      "Args": [],
+      "State": {
+        "Status": "running",
+        "Running": true,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 536035,
+        "ExitCode": 0,
+        "Error": "",
+        "StartedAt": "2026-10-26T01:29:40.406887516Z",
+        "FinishedAt": "2026-10-26T01:27:12.98958552Z"
+      },
+      "Image": "sha256:22b878f2712b7b2fe0fddaa677393886045746819e127615cafca4c63b306015",
+      "ResolvConfPath": "/var/lib/docker/containers/c0179ec8e28423b28480bdd102060e669e9ab4f679b5c1808621bcbd3881de85/resolv.conf",
+      "HostnamePath": "/var/lib/docker/containers/c0179ec8e28423b28480bdd102060e669e9ab4f679b5c1808621bcbd3881de85/hostname",
+      "HostsPath": "/var/lib/docker/containers/c0179ec8e28423b28480bdd102060e669e9ab4f679b5c1808621bcbd3881de85/hosts",
+      "LogPath": "/var/lib/docker/containers/c0179ec8e28423b28480bdd102060e669e9ab4f679b5c1808621bcbd3881de85/c0179ec8e28423b28480bdd102060e669e9ab4f679b5c1808621bcbd3881de85-json.log",
+      "Name": "/serialmonitor-usb-stream-v18",
+      "RestartCount": 0,
+      "Driver": "overlay2",
+      "Platform": "linux",
+      "MountLabel": "",
+      "ProcessLabel": "",
+      "AppArmorProfile": "",
+      "ExecIDs": null,
+      "HostConfig": {
+        "Binds": null,
+        "ContainerIDFile": "",
+        "LogConfig": {
+          "Type": "json-file",
+          "Config": {
+            "max-file": "2",
+            "max-size": "10m"
+          }
+        },
+        "NetworkMode": "host",
+        "PortBindings": {},
+        "RestartPolicy": {
+          "Name": "no",
+          "MaximumRetryCount": 0
+        },
+        "AutoRemove": false,
+        "VolumeDriver": "",
+        "VolumesFrom": null,
+        "ConsoleSize": [
+          0,
+          0
+        ],
+        "CapAdd": [
+          "SYS_NICE"
+        ],
+        "CapDrop": [
+          "ALL"
+        ],
+        "CgroupnsMode": "private",
+        "Dns": [],
+        "DnsOptions": [],
+        "DnsSearch": [],
+        "ExtraHosts": null,
+        "GroupAdd": null,
+        "IpcMode": "private",
+        "Cgroup": "",
+        "Links": null,
+        "OomScoreAdj": 0,
+        "PidMode": "",
+        "Privileged": false,
+        "PublishAllPorts": false,
+        "ReadonlyRootfs": true,
+        "SecurityOpt": [
+          "no-new-privileges"
+        ],
+        "UTSMode": "",
+        "UsernsMode": "",
+        "ShmSize": 67108864,
+        "Runtime": "runc",
+        "Isolation": "",
+        "CpuShares": 0,
+        "Memory": 0,
+        "NanoCpus": 0,
+        "CgroupParent": "",
+        "BlkioWeight": 0,
+        "BlkioWeightDevice": [],
+        "BlkioDeviceReadBps": [],
+        "BlkioDeviceWriteBps": [],
+        "BlkioDeviceReadIOps": [],
+        "BlkioDeviceWriteIOps": [],
+        "CpuPeriod": 0,
+        "CpuQuota": 0,
+        "CpuRealtimePeriod": 0,
+        "CpuRealtimeRuntime": 0,
+        "CpusetCpus": "",
+        "CpusetMems": "",
+        "Devices": [
+          {
+            "PathOnHost": "/dev/spidev0.0",
+            "PathInContainer": "/dev/spidev0.0",
+            "CgroupPermissions": "rw"
+          },
+          {
+            "PathOnHost": "/dev/gpiochip1",
+            "PathInContainer": "/dev/gpiochip1",
+            "CgroupPermissions": "rw"
+          }
+        ],
+        "DeviceCgroupRules": null,
+        "DeviceRequests": null,
+        "MemoryReservation": 0,
+        "MemorySwap": 0,
+        "MemorySwappiness": null,
+        "OomKillDisable": null,
+        "PidsLimit": null,
+        "Ulimits": [],
+        "CpuCount": 0,
+        "CpuPercent": 0,
+        "IOMaximumIOps": 0,
+        "IOMaximumBandwidth": 0,
+        "Mounts": [
+          {
+            "Type": "bind",
+            "Source": "/home/arduino/.cache/serialmonitor/v18-relay-f3326948649f46bc9ab1937340eb42a0/unoq_stream",
+            "Target": "/work/unoq_stream",
+            "ReadOnly": true
+          },
+          {
+            "Type": "bind",
+            "Source": "/sys/devices/system/cpu/cpufreq/policy0/scaling_governor",
+            "Target": "/scope_cpu_governor"
+          }
+        ],
+        "MaskedPaths": [
+          "/proc/asound",
+          "/proc/acpi",
+          "/proc/kcore",
+          "/proc/keys",
+          "/proc/latency_stats",
+          "/proc/timer_list",
+          "/proc/timer_stats",
+          "/proc/sched_debug",
+          "/proc/scsi",
+          "/sys/firmware",
+          "/sys/devices/virtual/powercap"
+        ],
+        "ReadonlyPaths": [
+          "/proc/bus",
+          "/proc/fs",
+          "/proc/irq",
+          "/proc/sys",
+          "/proc/sysrq-trigger"
+        ]
+      },
+      "GraphDriver": {
+        "Data": {
+          "LowerDir": "/var/lib/docker/overlay2/cbccf4b467b1befa92c2410cdd939b6e8ee70c081d26fba32742dab5d972d18a-init/diff:/var/lib/docker/overlay2/d44c10d7f3ead90724c72f7b59db1512e64f2a7df254c38b0a86c7f767485af4/diff:/var/lib/docker/overlay2/fbc34bc221e04b5ec300aa2af7d1113138d9331a8c9e1d89e685345da8483f02/diff:/var/lib/docker/overlay2/22dae50a59d69cfcd7a9bf5471d26697b5e9eb5b5249260e017c0ebdbfa7022c/diff:/var/lib/docker/overlay2/3f556d3c5834855fe06f7d17e3771bc8b5733571ea3af4a763c9841c305517ce/diff:/var/lib/docker/overlay2/8b8ffc0ae644f215db80b120ae6a4dd2b451db561ad5ce3c1b3a63d78f1290a5/diff:/var/lib/docker/overlay2/d9250ffc65e0357bd8b627e189f80c1c86bda6054bd80ae5fac68dd67af5eda3/diff:/var/lib/docker/overlay2/0e975bc62dd242a25184e28a0c0c07c93eb61c837b0f2bed2349c9ba90459f98/diff:/var/lib/docker/overlay2/5840fe07acfc47093da5a207f61653bc8855698a5c64e3f43b55559d33a38e75/diff:/var/lib/docker/overlay2/d4eca522e87bb424e991078151b8d69b4c1ec82d8207f52723cdb0fa50b4499f/diff:/var/lib/docker/overlay2/9706038d1c56e15bfa24105999266de812a9e90d6fdb7fef6db36947e2f4ea8c/diff:/var/lib/docker/overlay2/8555706bd8a2795730097a13efd59e65d120d6f43fa6b1c3a84cb44857086794/diff:/var/lib/docker/overlay2/6f8d80193936dd5de18ad8ce45040037c8ee4a55f7161b1774571cb99d2a566b/diff:/var/lib/docker/overlay2/86881765be623495a3f84360b63ba1a9de5abf07d18e1645acacfb204baba2a7/diff:/var/lib/docker/overlay2/147ce11877e3feec47dc6a0eb9a33bba66f8a88234962b356f0417fa518aff26/diff:/var/lib/docker/overlay2/0f5fd448972f343b2ab00355bb731e47423e8b17bedb44f0957f135561a9d2d3/diff:/var/lib/docker/overlay2/21349ef42547f51c781667f043eb6c1f96e1ba5bf8d9f2229304945c6e85c0a4/diff:/var/lib/docker/overlay2/7f1de31fbf51e091b5491c782d1a15a21ee544e8a75e6bf05168799b14fe2fba/diff:/var/lib/docker/overlay2/e7083cf187ea0246e4ef20e4078298ba380f6ad9b359cd5de26cf77d3413c9d6/diff:/var/lib/docker/overlay2/1d76b401a8120586fc6361b49dbd20cd1502169bf00d4b97606ada324a4d918f/diff:/var/lib/docker/overlay2/31b156ca310f21dcd7c24962137e251580cb1cc2e25baa2da0b2db319c98eaf3/diff",
+          "MergedDir": "/var/lib/docker/overlay2/cbccf4b467b1befa92c2410cdd939b6e8ee70c081d26fba32742dab5d972d18a/merged",
+          "UpperDir": "/var/lib/docker/overlay2/cbccf4b467b1befa92c2410cdd939b6e8ee70c081d26fba32742dab5d972d18a/diff",
+          "WorkDir": "/var/lib/docker/overlay2/cbccf4b467b1befa92c2410cdd939b6e8ee70c081d26fba32742dab5d972d18a/work"
+        },
+        "Name": "overlay2"
+      },
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "/home/arduino/.cache/serialmonitor/v18-relay-f3326948649f46bc9ab1937340eb42a0/unoq_stream",
+          "Destination": "/work/unoq_stream",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/sys/devices/system/cpu/cpufreq/policy0/scaling_governor",
+          "Destination": "/scope_cpu_governor",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        }
+      ],
+      "Config": {
+        "Hostname": "arturino",
+        "Domainname": "",
+        "User": "0:0",
+        "AttachStdin": false,
+        "AttachStdout": false,
+        "AttachStderr": false,
+        "Tty": false,
+        "OpenStdin": false,
+        "StdinOnce": false,
+        "Env": [
+          "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+          "GPG_KEY=7169605F62C751356D054A26A821E680E5FA6305",
+          "PYTHON_VERSION=3.13.14",
+          "PYTHON_SHA256=639e43243c620a308f968213df9e00f2f8f62332f7adbaa7a7eeb9783057c690",
+          "UV_CONSTRAINT=/etc/uv-constraints.txt",
+          "PIP_CONSTRAINT=/etc/uv-constraints.txt",
+          "HOME=/home/app",
+          "USER=arduino",
+          "PIPEWIRE_REMOTE=/run/user/1000/pipewire-0"
+        ],
+        "Cmd": null,
+        "Image": "ghcr.io/arduino/app-bricks/python-apps-base:0.12.0",
+        "Volumes": null,
+        "WorkingDir": "/app",
+        "Entrypoint": [
+          "/work/unoq_stream"
+        ],
+        "OnBuild": null,
+        "Labels": {
+          "org.opencontainers.image.created": "2026-08-05T14:13:47.899Z",
+          "org.opencontainers.image.description": "The code of the Arduino App Lab Bricks",
+          "org.opencontainers.image.licenses": "MPL-2.0",
+          "org.opencontainers.image.revision": "7b1504fa79d6d05169aa286d53fe97c318499b2a",
+          "org.opencontainers.image.source": "https://github.com/arduino/app-bricks-py",
+          "org.opencontainers.image.title": "app-bricks-py",
+          "org.opencontainers.image.url": "https://github.com/arduino/app-bricks-py",
+          "org.opencontainers.image.version": "0.12.0"
+        }
+      },
+      "NetworkSettings": {
+        "Bridge": "",
+        "SandboxID": "b8f11ffc4dff398332e6ade7b63752b8cc05efcdb5271050e705fa9a8e270db1",
+        "SandboxKey": "/var/run/docker/netns/default",
+        "Ports": {},
+        "HairpinMode": false,
+        "LinkLocalIPv6Address": "",
+        "LinkLocalIPv6PrefixLen": 0,
+        "SecondaryIPAddresses": null,
+        "SecondaryIPv6Addresses": null,
+        "EndpointID": "",
+        "Gateway": "",
+        "GlobalIPv6Address": "",
+        "GlobalIPv6PrefixLen": 0,
+        "IPAddress": "",
+        "IPPrefixLen": 0,
+        "IPv6Gateway": "",
+        "MacAddress": "",
+        "Networks": {
+          "host": {
+            "IPAMConfig": null,
+            "Links": null,
+            "Aliases": null,
+            "MacAddress": "",
+            "NetworkID": "f9da40f64b25bdd9167bd84f1c507b1245c4bef5d9a11bcfa3b83fa32c85aa64",
+            "EndpointID": "a1276d8eb5c5fbd2a26b2e80b7006c9adb15fc6dd1b4275f9e28919a86a4e750",
+            "Gateway": "",
+            "IPAddress": "",
+            "IPPrefixLen": 0,
+            "IPv6Gateway": "",
+            "GlobalIPv6Address": "",
+            "GlobalIPv6PrefixLen": 0,
+            "DriverOpts": null,
+            "DNSNames": null
+          }
+        }
+      }
+    },
+    "cpu_state": {
+      "policy": 0,
+      "priority": 0,
+      "cpus": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    "governor": "performance",
+    "app_sources": {
+      "app.yaml": "7f3e8eee244984676f2156c85807d99b180127ccaa675960f84ea1e973804f25",
+      "python/main.py": "3f0ebe8813d7ca5ca01f850492981e5f8c52232c497e3fc2ada07c5ecee6c5b0",
+      "sketch/acquisition.h": "0c5c9f660665964edaca383dd1bab813c664125d460afda9ab02b46d04a2e90b",
+      "sketch/acquisition_protocol.h": "83838fb7388aa6b837757b83b963f5951b174dd58b49d6b3be93c8c3aa51c376",
+      "sketch/acquisition_storage.h": "1953242fddb28b6b2315572bf65f1cec207988a1a8be5183f0641379c92176f2",
+      "sketch/additional_profiles.h": "b8d94095548a562807ba48fd08b6f9cb6c4148e9926ee80cf0e46bc6142e5591",
+      "sketch/batch2_ownership.h": "c7857c0738dc3114ae248045429a64e569d8dc1e5fdf81f56f09fbdc976363a7",
+      "sketch/batch_command.h": "e4755d4b1c21645937c1f46030ce432893d9b95ad9709feb8a050e3765daf9f6",
+      "sketch/benchmark_protocol.h": "85461155f16b7ee1ca8f46df84377d2c57ced212d40f788bbfccc14822e5367f",
+      "sketch/control_protocol.h": "1c9ea38fa73b7e6fcfb88bde462077b319b7ebada3eab787c33fdcbbaa84ee3a",
+      "sketch/crc32_fast.h": "5d80da2df5d483bb028cf98abdaa2aed0a12da1be7f2ceb8591269debee81959",
+      "sketch/frame_buffer.h": "ac0d1d25cbfd5db0ea629d6990a919bb72de07c116fa23f9689f7db1e32c37f5",
+      "sketch/generator.h": "e853fca473f9c13df50912a54fc621cee9f2fcb125ffe6f810670e93a17ebc77",
+      "sketch/generator_dma.h": "faec31f7ebb7cb64ec04d3c9c8e94225cd66a7513535f7eca9b4be6d282e697c",
+      "sketch/generator_protocol.h": "c241267801e21c326fbd854a324e6c82c01dc6e1ded51a7fbe2442c84299de75",
+      "sketch/generator_timing.h": "a2774f18e899e328a988150e46e017b512fd724075e7f24cc6247923093aac9c",
+      "sketch/high_rate_profile.h": "1f6042f89f328210b5d8de0e9fc8ac714360ff8cf49a693a771ea6e105e41900",
+      "sketch/native_profiles.h": "5bdf328288b70e45dcc66206f0aab0a762dd6247e139298c76fb82f3678978eb",
+      "sketch/node_validation.h": "f0c38dae55f9fbfb2d4aece35643df6264fbc0c7b054c14ef301a2dd750cfa38",
+      "sketch/node_validation_fast.h": "5e582042ee500b79946b0e4ca5e238abfee3bdc08752b5d16b639a0e193c046a",
+      "sketch/radio_test.h": "fb56e0ccac1a0bd0c1e4dab23a9f236bb6fe5aae40e6a66890319d4e7e1c725e",
+      "sketch/sample_packing.h": "84823758ded381d3168e452893d86eeed6a05c73f96196514f5ec0d9115c3e76",
+      "sketch/scope_config.h": "827bb698332fb2405306c57b4ab4e5389c95969185096d780f97c750abcc04b1",
+      "sketch/scope_protocol.h": "c2bf92aed1aac5efc4f6283cd302297d3c8be3ce40e7b838fa8d5bcacef9d612",
+      "sketch/sketch.ino": "b73dffd401ba6c73b1dd06f00ebf3a0a5cf28b3ddaeff4f02ba1c72988b31df2",
+      "sketch/sketch.yaml": "2ee56ed8561b6ea420885ed62ca804f498a54825ce6df906168e78a014c424ea",
+      "sketch/spi16_geometry.h": "278b0d594820539a5a3a3863c5623eb433607401512d770242c0bf49bac35093",
+      "sketch/wav.h": "0dc2b88b7d25de037fc0598c85b70b3903caaa3c2d6a92ea84b23ab680ddb1f2",
+      "sketch/wav_dma.h": "82bf749b289b5dfc4907e751ac1c1dd146d2ab1b0fe92c046d7492b3cc15cc10",
+      "sketch/wav_protocol.h": "78e788ab24dac52eff1d79cc15d08ac730451316e28050f461d5f4febf2cd223",
+      "sketch/wav_queue.h": "002553b2c58ff1343a218959f58632a394656aeb0f28fc74bb17a97f2793dd83",
+      "sketch/wav_storage.h": "a06e48b8192d2674dfa3ce1f57e601f523244c1016b5ecc899607d48fb1cce69"
+    }
+  },
+  "backup": {
+    "export_verified": true,
+    "source_archive_verified": true,
+    "full_cache_verified": true,
+    "firmware_elf_bin_verified": true,
+    "relay_verified": true,
+    "paired_manifest_persisted": true,
+    "folder": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/respaldos/parejas/v18_production_f1e607634c4b49fca96fd30bc79f4fe6",
+    "archive_manifest_sha256": "9ebe91b08aafce5398dbbde5731a3f5972cf9c3308427e213bbf11a56170d9f4"
+  },
+  "prepared": {
+    "source_hashes_equal": true,
+    "compiled_firmware_hash_equal": true,
+    "precompiled_relay_hash_equal": true,
+    "fresh_cache_planned": true,
+    "candidate_cache_policy": "rebuild_in_production_app",
+    "candidate_identity": {
+      "firmware_sha256": "37f049fa029ad62a10767c56dc586b2c3697f8d250a0b8a7396570ce8e0c7060",
+      "relay_sha256": "27da0bc4860401df27eef50429f2ec881bfd3b51b1893d1fe3bacb9e922f56ae"
+    },
+    "staging_build": "/tmp/v18-production-build-f1e607634c4b49fca96fd30bc79f4fe6/build/sketch.ino.bin"
+  },
+  "source_changes": {
+    "remove": [],
+    "added": [],
+    "replace": [
+      "sketch/high_rate_profile.h",
+      "sketch/native_profiles.h"
+    ]
+  },
+  "verification": {
+    "accepted_identity_equal": true,
+    "sources_exact": true,
+    "cpu_equal": true,
+    "relay_configuration_verified": true,
+    "snapshot_equal": true,
+    "continuous": true,
+    "integrity_ok": true,
+    "seconds": 10.022834614966996,
+    "detail": {
+      "hardware_restored": true,
+      "errors": [],
+      "recovery": {
+        "seconds": 10.022834614966996,
+        "samples": 313344,
+        "dropped": 0,
+        "fatal": 0,
+        "continuous": true
+      }
+    }
+  }
+}

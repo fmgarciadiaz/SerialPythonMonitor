@@ -1,3 +1,821 @@
+## 26/10 · Orden local y presentación Radio
+
+Animación real 710 kHz con FFT16384, paneles Radio y zoom persistente en
+`assets/monitor_radio_710.gif`, PNG alternativo. Captura/restauración PASS:
+`diagnosticos/resultados_v18/radio_rate_check_20261026_201110/report.json`.
+Se borraron ocho imágenes temporales de pruebas, cachés regenerables y seis
+carpetas de capturas vacías; inventarios en `capturas/limpieza_20261026.json`
+y `docs/orden_archivos_20261026.json`. Índices actualizados sin mover fuentes
+ni evidencia. V17 y firmware V18 sin tocar. Sin campaña activa. Los cortes
+intermitentes RADIO/A0 siguen pendientes, no afirmar resolución.
+
+## 26/10 · Repetición RADIO/A0 19:08
+
+120 s ADC8 máximo + FFT65536 recortada + RADIO/A0: funcional/visible PASS,
+exposición 100%, restauración exacta PASS y salida apagada confirmada.
+Sin cambios de código ni firmware. Evidencia: `diagnosticos/resultados_v18/
+radio_rate_check_20261026_190845/report.json`. No reprodujo el corte; sigue
+pendiente localizar la demora extrema en una captura fallida. No afirmar
+resolución. No hay campaña activa.
+
+## 26/10 · CIERRE FPS físicos y política conservadora de audio
+
+Q aceptado preparado/restaurado, sin ensayos activos. ObjetivoFPS validado sólo
+para FFTrecortada sola (sin reproducciónRADIO/A0): ADC8/86,65536,avg4,Scanreal,
+60scada:9.995FFT/s fijo10 ->12.674adaptativo,visiblePASS. Evidencia
+`diagnosticos/resultados_v18/fft_no_a0_20261026_184142/report.json`.
+
+POLÍTICAFINAL: FFTlarga>=16384conreceiver activo empieza10,max15 tras8costes
+<=25ms,sólo sin reproducciónDAC. Conowner._wav_activeTrue conserva10.
+Se arreglóphasebypass trasbacklog con_resume_pending/_last_fft_started;
+guardpendingGUI>1 intacto,resetcostesyrespetaintervalorealalreanudar.
+CostessóloresultadosnuevosnoNone, incluido validacióntimestamps. Cacheeje
+crop porlayout,invalidaciónconfigurepara no rehacerlabelsestáticas.
+
+FALLOSNORESUELTOS: primerfijo10_180641UNDERRUNparentPCM19709ACKmax498ms;
+matrizpostphasefix182105:fixed9.717PASS,adaptive10.144PASS,crop_182606FAIL
+MCUdropped1queue8/8CRCcorrecto. RestauraciónPASS; noatribuircausalidadcrop.
+Diagnóstico relayV4 privado fft_crop_diagnosis_20261026_183300 pasó120visible;
+148601SPIcompletos,backlog1,sinerrores,no reprodujo. Retirado/restaurado original.
+Finalacceptedpolicyaudio10,cropcache_183757PASS120visible/restauración.
+No darporresueltoADCnounderrun original, ni subirFPSconA0 por estos datos.
+
+251regresión+36focalesPASS;175V17y47ArduinoV18intactos. Informeactual
+`diagnosticos/resultados_v18/fft_adaptive_20261026/report.json`.
+Doc FFT_CADENCIA_V18_20261026.md,finalPrepareQPASS enmatrizsinA0.
+Herramientasguismoke/probe_radio aceptanfft_size,fixed10,crop yfft_only;
+fft_onlydiferenciaasserts, no finge reproducción. Próximo: diagnóstico pérdidas
+concarga combinada, no anunciar15sostenidos conaudio.
+
+## 26/10 · ACTIVO: FPS físicos con adquisición/A0, no tocar Q
+
+Usuario autorizó continuarvalidaciónreal. FFT65536/avg4 Radio CH1,ADC8/86,
+RADIOA0salida40kHz,120s. Primercontrolfijo10 (radio_rate_check_20261026_180641)
+fallóUNDERRUN~44saudio: parentPCM19709samples,ACKprocesadohasta498ms,
+sourceaudio_waits0,RFcontinuó/restauraciónPASS. No atribuiralobjetivo15FPS.
+RepeticiónconMONITOR_V18_CHILD_STAGE_TIMING1 181116funcionalPASS peroexposure73%,
+fixedreal~8.7FFT/s global; 181441adaptivePASS120visible100%;181744cropPASS120visible100%.
+
+Se detectódefectoreiniciofase0trasbacklog: permitíabypasspresupuestofijo10.
+Corregido flag_resume_pending y_last_fft_started; respeta intervaloantesde
+reanudar yreiniciafase ennow. Costessólocuentanlast_endnoNone.7testsfocalesPASS.
+NOcompararFPSanteriorescomobaseline válido; informesconservados.
+
+Trescasoscomparablesconhasheshostfijos en exec33229:
+`/private/tmp/v18_fft_final_physical_matrix.log`,primeralínea directorioinforme.
+Script `/private/tmp/v18_fft_final_physical_matrix.py`: fixed10/adaptive/crop,
+120scada,diagnósticotemporalactivo,restauraciónpropietarioúnico,stopporfallofuncional.
+No editar spectrum/cadence/harness mientrasactivo; notcompilar/leerQparalelo.
+Despuésauditar,fullregresión250+GUI31,PrepareQfinal,documentarestosresultados.
+V17/ArduinoV18intactos; no tasa/reloj/firmware cambiados. Audiointermitentesiguependiente.
+
+## 26/10 · FFT adaptativa calibrada y validada offline
+
+Pedido seguir revisiónFPS y menor espaciofrecuencias/título. LongFFT>=16384:
+10Hzinicial ->15Hzmax tras8resultadosnuevos<=25ms completos (incluyevalidación
+reloj+análisis/preparación,nopinturaQtposterior). Guardpending_batches>1 conserva
+aplazamiento; ahora borracostesyfase FFTpara recalentamiento alrecuperar.
+Heavyframe>25ms vuelve10; noops/SINGLEnocuentan. Heatmap sin cambio de cadencia.
+
+Comparación sintéticaQt65536/4promedios: fixed10~10FPS,adaptativo~12normal,
+~13recortado. Muestrascortasoffscreen, noFPSfísicoQ.20msinicialdemasiadorestrictivo,
+ambosinformespreservados. 250regresión y30focalesGUI/cadenciaPASS.
+Evidencia `diagnosticos/resultados_v18/fft_adaptive_20261026/report.json`.
+Ejeverticalcropaltura70antes100,separación6pxlíneaejeintacta.
+
+V18abiertaPID52315durantecambio,nointerferida; noQoperado.NuevaUIrequiere
+reiniciarusuario cuandoquiera.175V17y47ArduinoV18intactos.Noafirmar15FPSsostenidos
+conaudio/adquisición,siguependientefísico. DocFFT_CADENCIA_V18_20261026.md.
+
+## 26/10 · FFT larga adaptativa y eje recortado compacto
+
+Usuario pidió revisarFPS/subirmoderado yluego reducir espaciofrecuencias/título.
+Spectrum usa fft_cadence.py: longFFT>=16384conreceiver arranca10Hz, permite15Hz
+tras8resultadosnuevos consecutivos<=20ms de análisis/preparación; uncostepesado
+vuelve10hasta salirventana. Noops/SINGLEnocuentan,resetlimpiacostes. Guard
+pending_batches>1 intacto, heatmapmismo límiteprevio. NoQni audio/firmware/tasas.
+AxisTickRotation altura70antes100, espaciadofrecuenciarespectoeje6px intacto.
+
+Benchmarklocaloffscreen65536promedio4mediana11–12msp95~15ms; noFPSfísico.
+250regresiónPASS y27focalesPASS. Evidencia
+`diagnosticos/resultados_v18/fft_adaptive_20261026/report.json`.
+Doc FFT_CADENCIA_V18_20261026.md. V18abiertaPID51356durantecambio,nointerferida.
+No afirmar15FPSsostenidos: pendientevisualconadquisición/audio; cambiolocal
+aplica alreiniciarapp. Mantenercriteriosfallosniocultarpérdidas.
+
+## 26/10 · FFT Radio recortada incorporada en V18
+
+Nuevo tick «Recortar radios» en FFT→Radio. Sólo visual/CH1, sin Qni firmware.
+Candidatos válidosScan obligatorios; sinScan/CH1deshabilitadoyautodesmarca.
+Módulo radio_fft_crop.py: columnasigualesordenadasRF, bandasugeridaScan o
+bandaseleccionada, NanYenbordesnosaltenhuecos. USmapea aliasyorientación.
+Tickoffrestauravista/axis/logpreferido,inclusopausadoconcachecompatible.
+ClicencolumnasintonizaRF,hueconosintoniza. Dragdetunehabitualdesactivado
+sólocrop. CursoresbankseparadoRadio recortada yreadRFcorrecto.
+
+Docs FFT_RADIO_RECORTADA_V18.md. testsGUItest_radio_fft_crop.py yscope_cursors:
+24casos focales (logúltimo /private/tmp/v18_crop_validation.log).
+RegresiónV18 previa247PASS en /private/tmp/v18_crop_full_tests.log.
+Sintéticoinspeccionadovisualmenteconportadoraylaterales. NingúnQoperado.
+Fuentes modificadas spectrum.py,scope_cursors.py; nuevopurecropmodule.
+
+## 26/10 · CIERRE pruebas relay telemetría A/B
+
+Q aceptado restaurado y preparado, libre de ensayos. No promover candidatoV4.
+`experimentos/relay_telemetry_v18/closure_20261026.json` yRESULTADOS_20261026.md.
+BuildLinuxPASS conbombeoADC/restauración. RF A/B12/12PASS:
+comparison_20261026_151628/report.json. ADC8máximo120scadarelay,otros5x30s.
+Colas2salvo16cola1; márgenes similares sin degrado observable, no equivalenciaestadística.
+
+Audio A/B ADC8/86120scadarelay2/2funcional/restauraciónPASS:
+audio_comparison_20261026_152755/report.json. AcceptedGUIvisiblePASS100%2417paint,
+instrumented100%2393paint<2400:visualFALSEpreservado, no erroresfuncionales.
+Historialaudio sin overwrite:SPI148811intentostodoscompletos,max808.6us,
+servicegap3550.4us,READY2948us,backlog1,sinEAGAINparcialesnierrorTCP.
+No inferirholguraconjuntanicausadelincidente delos máximos. ACKde salida
+perteneceperfilprevio. PrimeraA/B151023falseporstartupdesincronizado,
+recovery.jsonPASS ycontrolladorcomparecorregidoreiniciaappidéntica+hash.
+FinalPreparePASS10s;175V17 y47fuentesArduinoV18intactas.12testsfocalesPASS.
+
+rate_evidence.json/buildtool enlazan acceptedGUI120visible152756 paraADC8max;
+noinheritcandidate. Testsevidencia/selectoractualizados. Fallooriginalsigue
+sinreproducir/explicar; no subir tasas ni borrar criteriospor estetanda.
+
+## 26/10 · ACTIVO A/B relay telemetría, Q único propietario
+
+Usuario autorizó avanzar todos testeos sinpreguntar. Build privado exitoso
+`experimentos/relay_telemetry_v18/build_20261026_150815/report.json`:
+compilaciónLinux -O2-Wall-Wextra-Werror, adquisiciónbaja bombeada yrestauración10sPASS.
+CandidatoV4 sin cambiosfuentesArduino/MCU. Primera A/B comparison_20261026_151023:
+6controlesacceptedPASS, candidatoarranqueFAIL porqueMCUseguíavivoepochantiguo.
+Originalcontainerrepuesto, restauracióninicialFAIL por sincronización. Recovery.json
+viaPrepararQ PASS exactapareja y10s. Informeoriginalpermanecefalse.
+
+Controller compare.py corregido: b.start appaceptadaidéntica paraepochstartup
+antescandidatoyrestauración; hashfirmwareverificado. Finallybest-effort,
+originalcontainerpreservado, rereadidentity+snapshot. NO segundo lector.
+Reintento exec26719 log `/private/tmp/v18_telemetry_compare_retry.log`.
+Leerprimeralínealog paradirectorioreport. Casosporrelay8/86=120s,8/104,
+10/118,12/145,14/160,16/1060=30sc/u, sinRADIO para costeRF. Luego falta
+medicióncombinadaaudio instrumentada si RF/restauraciónpasan. No publicar.
+Fuenteshostcambiadas diagnóstico anterior, Qrecibosaceptadosintactos, V17congelada.
+
+## 26/10 · Relay telemetría V4 vigente, sin despliegue
+
+V4 `experimentos/relay_telemetry_v18/candidate_v4/` y manifiestopropio.
+AstraV3sinbloqueantes,observóprintclientfailure quecontinuabaADC;V4loquita.
+Sólo nuevoprintalintegfalloquesale yexit. Restov3identidadporperfil/epoch,
+ring8,attempts/completed/failedSPI. 2pruebasampliadasPASS. NoQ ni fuentes
+producciónmodificadas. Pendiente controlador seguro relayonly,compilarLinux,
+medircoste yrestaurarantesdepromover. No cambiar tasas/relojes/políticas.
+
+## 26/10 · Relay telemetría V3 preparado, pruebas offline PASS
+
+Candidato vigente `experimentos/relay_telemetry_v18/candidate_v3/`, manifiesto
+candidate_v3.manifest.json. Separación porbits/modo/períodocodificado/epochprevios
+aSPI;ACKdecambioquedaenperfilprevio, siguienteiteraciónnuevoperfil. Historial
+8intervalosenmemoria+overwritten,sinprintsdecambio. IntentosSPI/completadas/
+fallidas y duraciónfallidamedidas,preservandoerrno. Resumenfault/exitúnicamente.
+2pruebasC PASS con escenarios ampliados, noQ ni producción modificados.
+RevisiónAstra V3 solicitada, pendiente respuesta. No declarar coste/compilación
+Linux ni aceptaciónfísica. Falta controlador relayonlyconbackup,buildprivado,
+comparaciónoverhead yrestauraciónexacta. No instalar directoenPrepararQ.
+V17 congelada;tasas/reloj/buffers/políticasintactos.
+
+## 26/10 · Telemetría relay preparada sólo offline, NO desplegar aún
+
+Candidato aislado `experimentos/relay_telemetry_v18/candidate_v2/`.
+Preparador prepare.py, header telemetry.h, manifest candidate_v2.manifest.json,
+2 pruebas C aprobadas (send parcial/reintentos/cola/errno/orden y alcancefuentes).
+No Q ni producción modificados;47fuentesArduinoV18 intactas.
+
+Astra review detectó logperiódico potencialmentebloqueante y duraciónSPIfallida
+omitida. V2 elimina diagnóstico periódico (progresooriginaligual), midetambién
+intentoSPIfallido preservandoerrno. candidate/ conserva primera revisión.
+NO aceptar ni instalar todavía: faltasepararmétricasporperfil/epoch y distinguir
+intentosSPI/completadas. Lifetime mezcla startup y transiciones, documentado.
+Añadir pruebas para esoscaminos antesfísico. Luego prepararcampañarelaysolo,
+backup/propietarioúnico/medircoste/restaurarparejaexacta. No cambiar tasas.
+README experimento documenta alcance ylimitaciones. FalloADC8noresuelto.
+
+## 26/10 · Diagnóstico host y evidencia por pareja implementados
+
+Bloque autorizado tras revisión con Astra: sin operar Q, firmware, relay,
+tasas, límites ni permisosA0. Regresión247/247PASS y selector5/5PASS.
+Informe `diagnosticos/resultados_v18/host_diagnostics_20261026/report.json`.
+Se conserva un timeout aislado de arranque previo; familia10PASS y suite
+completaPASS al repetir. V17:175 y fuentes ArduinoV18:47 intactas.
+
+Nuevos flow_limits.py, rate_evidence.py/json, builder tools/build_rate_evidence_v18.py.
+DeliveryBudget registra recurso/previo/proyectado/límites/picos y no muta al
+rechazar; receiver_process captura detalles antes decleanup. App snapshotincluye
+los límites y motivos. Tooltip tasas distingue hash+geometría parejaaceptada,
+ADCsinAudio15/60s, RADIOA0funcional30/120s, visible y holguraconjuntapendiente.
+Flags históricos y políticaA0 intactos. No se declara resuelto dropped1ADC8.
+
+Próximo bloque: preparar relayaislado con telemetría SPI/READY/backlog y coste
+medido; no instalar directamente. Guía docs/DIAGNOSTICO_HOST_V18_20261026.md.
+Trabajo pendiente de GUIvisibleADC8 y comparaciónparejas si reproduce.
+
+## 26/10 · Revisión general con Astra completada, sin implementación
+
+Usuario pidió revisar procesos y tasas. Revisión read-only de cadena completa,
+fuentes, ELF y evidencia; sin operar Q ni modificar fuentes de producción.
+Informe `docs/REVISION_PROCESOS_TASAS_V18_20261026.md`.
+
+Prioridades: separar aceptación histórica/pareja actual; identificar presupuesto
+host agotado; instrumentar latencias/backlog relay en candidato aislado;
+repetir ADC8 máximo visible; optimizar correlación pasiva sólo si se mide que
+domina. El detector hoy ocupa callback serial antes de liberar crédito IPC.
+No culpar TCP del dropped MCU: cola de envío es no bloqueante y cierra cliente,
+fallo distinto del dropped1 que termina el relay. No cambiar tasas ni aumentar
+buffers sin evidencia. Arquitectura mantiene propietarios, límites y generaciones.
+
+Resultados anteriores conservados:32nuevas×30s y5máximos×120s funcionales;
+sólo6/37GUIvisibles, noADC8máximo. No declarar resuelto cierre original.
+V17 intocable. Próxima fase propuesta: trazabilidad y diagnóstico host primero;
+la implementación no se inició en esta revisión.
+
+## 26/10 · CIERRE: revisión de todas las tasas nuevas con RADIO/A0
+
+Q preparado y libre. Campaña cerrada sin fallos funcionales:32/32 perfiles
+nuevos con RADIO/A0≥30s y5/5 máximos anteriores con RADIO/A0≥120s. Control
+inicial ADC8 máximo adicional120s aprobado. Misma pareja37f049fa…/27da0bc4…;
+no se cambiaron firmware, tasas ni métodos durante estas pruebas.
+
+Informe: `diagnosticos/resultados_v18/radio_rates_review_20261026_130257/report.json`.
+Auditoría: `audit.json`; verificación final Preparar Q: `final_prepare.json`,
+ambos del mismo directorio. Restauración e identidad correctas por caso.
+175 archivos V17 intactos y47 arduino/v18 idénticos al respaldo catálogo.
+
+Usuario dejó ventana en segundo plano: sólo6/37 califican GUI visible.
+NO declarar resuelto el fallo original (dropped1, cola8/8, relay salió1).
+ADC8 máximo aún pendiente de repetir con dibujo visible; si reproduce,
+A/B de parejas completas antes de cambios. Nueva campaña no midió holgura.
+No modificar V17. Diagnóstico: `docs/DIAGNOSTICO_ADC8_MAX_20261026.md`.
+Las secciones ACTIVO siguientes corresponden a historial previo a este cierre.
+
+## 26/10 · ACTIVO: verificar todas las tasas nuevas con RADIO/A0
+
+Usuario reportó cierre ADC8 máximo con RADIO/A0 y pidió verificar todas las
+nuevas tasas y si cambió algo. Fallo real decodificado: dropped1, cola pico8/8,
+CRC correcto, fatal0; relay terminó1. Diagnóstico en docs/DIAGNOSTICO_ADC8_MAX_20261026.md.
+
+Control inicial ADC8/86/N3488 120s en exec63908:
+`/private/tmp/adc8_control_before_matrix.log`, evidencia
+`diagnosticos/resultados_v18/adc8_max_radio_20261026_130130/`.
+
+Supervisor exec6974, log `/private/tmp/verify_radio_rates_v18.log`.
+Campaña `diagnosticos/resultados_v18/radio_rates_review_20261026_130257/report.json`.
+Espera restauración del control inicial; luego32catálogo×30s RADIO/A0 y5máximos
+previos×120s (8/86,10/118,12/145,14/160,16/1060). GUI pública sin inyección.
+Usa `tools/probe_radio_rate_v18.py`; scriptsupervisor /private/tmp/verify_radio_rates_v18.py.
+No tocar Q mientras siga activo. Un solo propietario, sincompilar ni instalar.
+Stop ante fallo funcional/restauración; ocultación se registra aparte y no
+calificaGUI visible. Usuario confirmó que ahora debe quedar en segundo plano;
+seguir audio/transporte y dejar dibujo visible pendiente.
+La primera corrida anterior120s pasóaudio/restauración,peroGUIoculta13%.
+
+Astra revisófuentes+ELF: tablas extendidas y3comparaciones extra por nodo en
+predicadoshighrate/spi40, receta86idéntica; evidenciainsuficientepara culparlas.
+No cambios de firmware ni tasas durantecampaña. V17 congelada.
+
+## 25/10 · CIERRE: catálogo V18 incorporado y validado
+
+Q libre; no quedan campañas activas. Scope V18 instalada y preparada.
+Catálogo: 17 opciones en 8/10/12/14 bits, 15 en 16 bits. Audio aproximado
+44,1/48/96/192 kHz; 16 bits sin 192 y con 96 sólo CH1. Históricas accesibles
+por clic derecho; máximos y métodos existentes conservados.
+
+32/32 perfiles instalados con holgura, cola máxima 2 y sin pérdidas/fatales;
+10/10 recorridos GUI pública visibles, aprobados y restaurados; 237 pruebas
+V18 + 30 adicionales aprobadas. 148 rutas Scan históricas idénticas.
+Preparar Q final e identidad verificados. V17: 175 archivos protegidos intactos.
+
+Pareja: firmware `37f049fa029ad62a10767c56dc586b2c3697f8d250a0b8a7396570ce8e0c7060`,
+relay `27da0bc4860401df27eef50429f2ec881bfd3b51b1893d1fe3bacb9e922f56ae`.
+Respaldo final: `respaldos/parejas/v18_catalogo_20261025_230123/manifest.json`.
+Evidencia y límites: `docs/CATALOGO_TASAS_V18_PLAN_20261025.md`.
+Stage: `experimentos/fs_max_v18/release_catalog_20261025_222651/`.
+La landing conserva sus 16 imágenes y la presentación del proyecto.
+Las secciones ACTIVO siguientes son historial anterior a este cierre.
+
+## 25/10 · ACTIVO: catálogo instalado, regresión física en curso
+
+Único propietario del Q: matriz instalada, exec **84246**.
+Log: `/private/tmp/catalog_installed_screen_fixed.log`.
+Buscar el directorio de informe en la primera línea del log. No iniciar otro
+lector, GUI ni compilación mientras siga activo.
+
+- GUI privada: 10/10 aprobadas y restauradas, informe
+  `diagnosticos/resultados_v18/catalog_private_gui_20261025_205321/report.json`.
+- Stage: `experimentos/fs_max_v18/release_catalog_20261025_222651/`.
+- Rollback exacto aprobado:
+  `experimentos/fs_max_v18/resultados/same_app_restore_20261025_222710_f9903e/report.json`.
+- Prebuild, respaldo pareado y actualización transaccional aprobados.
+  Respaldo previo: `respaldos/parejas/v18_antes_catalog_20261025_223234/`.
+- Nueva identidad: firmware `37f049fa029ad62a10767c56dc586b2c3697f8d250a0b8a7396570ce8e0c7060`,
+  relay `27da0bc4860401df27eef50429f2ec881bfd3b51b1893d1fe3bacb9e922f56ae`.
+- Ya incorporados los 32 perfiles y `rate_catalog.json`; 148 rutas Scan
+  históricas verificadas sin cambios. Máximos y métodos anteriores conservados.
+- Regresión posterior: 237 pruebas aprobadas. Adicionales de catálogo/updater:
+  30 aprobadas. V17: 175 archivos protegidos verificados intactos.
+- Primer intento de matriz instalada (223700) no midió casos: arnés omitía
+  marca dual al formar wire. Restauró correctamente. Corregido usando
+  Configuration(bits,rate) y comprobación de geometría; informe fallido conservado.
+
+Pendiente: terminar los 32 casos instalados de 15 s; si pasan y restauran,
+GUI pública con `/private/tmp/catalog_installed_gui.py` (10 casos, hold30,
+usa `tools/probe_catalog_gui_v18.py`, sin inyección de perfiles), verificación
+final Preparar Q, respaldo pareado final y documentación. Si algún ensayo
+falla, detener y diagnosticar antes de seguir. Ver plan del catálogo en docs.
+
+## 25/10 · ACTIVO: GUI privada del catálogo
+
+Root únicoQexec23013,log `/private/tmp/v18_catalog_private_gui.log`.
+Campaña `diagnosticos/resultados_v18/catalog_private_gui_20261025_204734/report.json`.
+10recorridos:8/3628y104,10/3628y141,12/3628y171,14/3628y190,16/1667y1166.
+Hold30RADIO/A0,Scan normal enaudio bajo/16yUSen8–14bridgealto,WAVySynth
+recorren40kcomoharnesshabitual,ventanavisibleexposición90%ycierre/restauración.
+Duración65sparaescaneosbajos. Si fallaPARAR/analizar,nopromoverciegamente.
+Evidencia física:audio17×60s194759PASS(restaurado);bridges15×60s201421PASS(restaurado);
+audio17×15integrados203801PASS(restaurado). Colas1salvo8bridgealto2,todosconholgura.
+Reciborelaycachecatalogcreado;mismaidentidadbridges/integración. Producción540c/eccc
+arduinosincambios;V17intacta. UIlocalapp+y rate_catalog.pypreparadossinJSONpúblico:
+RATESallreceiver;_destination_changedfiltrarecomendadaspero dejaseleccionada;context
+Mostrar todas las tasas,~nominalaudioactualtooltip;WAVcabeceraactualconfig.rate.
+4GUItestsPASScatálogo/recordWAV,12offlineintegraciónPASS. Scannerexcluye32nuevos
+catalog_profilecomoauxviejos;newusaanchorprevio porbits/canales. Máximosintactos.
+Próximos:stage_catalog_release.py --gui-reportcampaigncuando10/10PASS;
+rollbackrecipecatalog(preparado),prebuildexacto,backupantes,recibo/backendpermitir
+catalog,updateQ;hostappend32metadata purposeaudio/intermediatevalidation60y
+integration_evidence;rate_catalog.json17/15opciones. Verificar145Scansprevios,
+fulltests,matrizinstalada32perfiles15syGUIrepresentativa,finalprepareybackuppareado.
+MantenerREADMElandingimágenes,maximosactuales;docCATALOGO_TASASplanconlímites
+16no192y96CH1.Userconfirmó44,1. Sinsegundolector/compileencampaña.
+
+## 25/10 · ACTIVO: catálogo; física integrada7/15 cerradasPASS
+
+Root únicoQ exec8521,log `/private/tmp/v18_catalog_bridges_screen.log`;
+reporte201421. Audio17/17sesentaPASS/restaurado194759. Catalogintegrado32privados:
+7bridges60cerradosPASS(8todos,10todos,12/265),restoen curso. NOlector/compilar.
+UIlocalappmodificadaparacatálogo(defaultsinJSONtodavíasiguelistascompletas),
+rate_catalog.pyrecomendados+menúcontextualmostrarhistóricas;etiquetas~nominal+realtooltip,
+WAVallowedpurposeaudio60paratodosbits,headerconfig.rateentero,no nominalfake.
+4GUItestsPASScatalogo+WAVcapcanales+frames+rate.12offlinepropuestaPASS.
+NoJSONpúbliconuevoni q_supportnuevoaún;arduinoV18base540c/ecccsincambios.
+QactualejecutaScopeV18RateProbeCataloghastaouterrestore. V17intacta.
+Siguientes:restaurar201421,recibo relaycache,17audiointegrados15sconrecipecatalog
+--target-ticks3628/3333/1667/833. Luego GUIprivada porbitsaudio bajo+bridgealto
+(8:3628/104,10:3628/141,12:3628/171,14:3628/190,16:1667/1166),frecuencia10/50kHz,
+ScanUSsolo8–14 (16CH1nofaltan2aux,sinesUS). Propósito60s/GUIrecorridono420smaxima.
+Despuésstagecatálogo32,rollbackrecipecatalog,prebuild,backuppareado,update,
+hostappend32profilespurposeaudio/intermediatevalidation60+catalog_profileTrue,
+rate_catalog.jsondesdeaudio_catalog/catalog.proposed.json. Scanneractualyareconoce
+catalog_profile:nuevosheredanauxiliaresdeanchorprevio;métodosviejosno usannewaux.
+VerificarScantodasantes/después;fulltests;físicoinstalado15s32+GUIrepresentativa;
+finalprepare ybackupfinal docs/landingcifrasmaximasintactas.
+Planes ytests enexperimentos/fs_max_v18/{prepare_audio_catalog,prepare_catalog_bridges,
+prepare_catalog,catalog_selection,test_*catalog*}.py.Continuarautónomamente.
+
+## 25/10 · ACTIVO: puntos intermedios del catálogo integrado
+
+Audio17/17perfiles60sPASS conholgura,cola1todos,yrestauraciónexacta:
+`experimentos/fs_max_v18/resultados/20261025_194759/report.json`true.
+RootúnicoQ exec8521,log `/private/tmp/v18_catalog_bridges_screen.log`,reporte
+`experimentos/fs_max_v18/resultados/20261025_201421/report.json`.
+RecipecatalogScopeV18RateProbeCatalogintegra32privados:17audio+15bridges.
+Se miden15bridges60s:8/170,128,104;10/220,171,141;12/265,208,171;
+14/306,235,190;16/1458,1296,1166. Soloheaderslistas/políticasextendidos;
+misma geometríaymétodos,CPU8SPI40cola8compact;10/12/14fastcola4;16OSx16normal.
+Nolector/compilar simultáneo. Alcerrarrestauración,regresiónde17audiointegrados
+15s(usarlos--target-ticks3628/3333/1667/833),GUItransicionesaudioybridges;calidadanalógica
+noaceptadaportransporte. Catálogo17opciones8–14/15opciones16propuesto en
+`audio_catalog/catalog.proposed.json`,construidoporcatalog_selection.py.
+UIpendiente:separarrecomendadasdehistóricas;no borraridentidades;mostrar~nominal
+conrealentooltip;no192en16,96soloCH1. Userconfirmó44,1yrespetarlímites.
+Astrarevisó;planesdocs/CATALOGO_TASAS_V18_PLAN_20261025.md.12testsPASS.
+Producción540c/eccc máximosactualesintactos;V17intacta. No nuevospúblicosaún.
+Luegoaceptación:rollback/prebuild/respaldo/updaterecibos/host32profiles+
+rate_catalog.json/UI+tests,regresióninstalada,finalprepareybackuppareado.
+
+## 25/10 · ACTIVO: reorganización de catálogo y audio con Astra
+
+Usuario confirmó44,1kHz(no44literal),respetar límites. Catálogo dual paraaudio
+común;CH1extiendesobremáximodual. Configurationactualidentificabits+tasa:
+NOduplicarmismosbits/ticksconCH1/dual. Nombreaudionominal+realexplícitos.
+RootúnicoQ,campañaaudioexec26159,log `/private/tmp/v18_audio_catalog_screen.log`.
+Reporte `experimentos/fs_max_v18/resultados/20261025_194759/report.json`.
+17perfilesaudio privados60scadauno:8/10/12/14dual44.1/48/96/192,16CH196.
+16dual44.1/48yaexisten;192en16NOposible,maxsimple150943/dual76226.
+Recipeaudio_catalogScopeV18RateProbeAudioCatalog modificaSOLOnativeheaders.
+14testsPASSsincolisiónyroundtrip;prod540c/ecccyV17intactos. Nootrolector/compile.
+Planner `plan_rate_catalog.py` borradorselecciónexistentes;faltanhuecosCH1:
+preparado(noejecutado)prepare_catalog_bridges.py15candidatosquartiles sobre
+maxdual->maxsingle. Revisaryprobar;no habilitar sin evidencia. Asignarmétodos
+rápidosidénticosalosmáximos(8SPI40cola8compact,10/12/14fastcola4,16normal).
+Astrarecomienda catálogovisible separado deperfileshistóricos;conservarACK,
+restauraciónyaccesoanteriores;nomodificarUARTni simularaudionominalexacto.
+Luegocampañaaudio:restauraciónexacta,bridgeprep/tests/screen60,GUItransiciones,
+publicaciónpareada/prebuild/rollback/backup/update. FaltaimplementarcatálogoUI.
+No pedirok,rutinaautorizada;usuarioesperatrabajoytesteosconAstra.
+
+## 25/10 · Segunda tanda incorporada y verificada
+
+Máximos CH1: 8 bits 1.860.465,116 S/s; 10 bits 1.355.932,203 S/s;
+12 bits 1.103.448,276 S/s; 14 bits 1.000.000 S/s; 16 bits 150.943,396 S/s.
+Dual y tasas anteriores conservados. Métodos de ADC/SPI/DMA/DSP sin cambios.
+8 bits/85 ticks (1.882.352,941 S/s) fue retirado tras UNDERRUN instalado:
+el informe privado PASS no anula ese fallo. Control 8/86 instalado120PASS.
+
+60 + 3×120 s y GUI privada completados. Rollback/prebuild/respaldo antes de
+update transaccional. Regresión instalada aceptada9/9 (3nuevos,control8,
+5anteriores incluyendo16simple/dual);342tests offlinePASS. PrepararQfinal
+verificó fuentes, identidad y10s de adquisición. Qlibre,sincampañasactivas.
+Pareja MCU540c1674… / relayecccdbcd… . V17:175hashes intactos. Archivos
+centrales app.py/processing.py/numeric_batch.py/radio_am.py/radio_stream.py/
+digital_filter.py sin cambios respecto del respaldo anterior.
+
+Respaldo final: `respaldos/parejas/v18_tasas_rateonly2_20261025_193958/manifest.json`.
+Detalle: `docs/SONDEO_TASAS_V18_20261025.md`.
+Regresión: `diagnosticos/resultados_v18/rateonly2_installed_remainder_20261025_191207/report.json`.
+Verificación: `diagnosticos/resultados_v18/rateonly2_final_prepare_20261025.json`.
+El informe fallido190204 se conserva; no reintroducir8/85ni otrosperfilesprivados
+sin resolver/validar el fallo.145Scanseleccionesanterioresintactas.
+
+---
+
+Historial de continuidad (estados activos siguientes ya cerrados):
+
+## 25/10 · CIERRE EN CURSO: segunda tanda instalada
+
+Regresiónrestante9/9PASS:new10/1355932,new12/1103448,new14/1000000,control8/1860465
+120s cadauno y5viejos20incluyendo16simple/dual. Informe191207true.
+8/1882352RECHAZADOporUNDERRUNinstalado190204,retiradodeJSONypermisoA0.
+Parejaactual540c/eccc.PrepararQfinalverificado enrateonly2_final_prepare_20261025.json.
+Testsfullsession81929log `/private/tmp/v18_rateonly2_final_tests.log` en curso.
+Faltaesperartests,corregirfallossilos hay,backupfinalscript`/private/tmp/backup_rateonly2_final.py`
+(Qlibretrasprepare,usarboardowner),docs/continuidadconresultadosybackupruta.
+HostJSONsolo3nuevos10/118,12/145,14/160;métodosactualesyV17conservados.
+README/guíaactualizados;docSONDEOencabezaresultadosegundatanda,guardarhistórico.
+
+## 25/10 · ACTIVO: restante rateonly2 tras fallo INSTALADO de8/85
+
+IMPORTANTE:8/85(1882352)pasóprivado+largasperoFALLÓinstaladoUNDERRUNa~21s.
+No reintentarhastaque pase ni incorporarlo. Retirado8/85delJSONpúblicoypermisoA0;
+se conserva8/86(1860465). Informe fallido190204permanecefalse. Losotros3todavíapendientes.
+Qpareja540c/ecccactualizada correctamente;Cviejaspolíticasiguales;noasumircausa.
+ÚltimodiagnósticoPCteníaaudioenbuffer;nocausalidadconfirmadametadata/SPI/host.
+Controller ACTIVO exec90108,log `/private/tmp/v18_rateonly2_remainder.log`:
+controlnormal8/1860465con120s, luego10/1355932,12/1103448,14/1000000con120s,
+luego5viejos20s(10/12/14/16simple/dual). Si controlviejo falla parar/restaurarpareja
+anterior545c/3c66porupdaterconbundle/headersdelbackup185347,noforzarmétodos.
+NativosJSONactual:prefijoprevio+solo3nuevos10/118,12/145,14/160;8/85NOpublicado.
+Testsrateonly2releaseadaptadosarechazo8/85. RootúnicoQ,nosegundolector/compilación.
+Trasrestante:demotarfaltantes si falla cualquiera;finalprepareQ,offlinefull,docs+
+backupfinalsi aceptación. Stage184722.Propuestas4originales sonhistóricas.
+V17y6archivoscentralesintactos,métodosactualesconservados;145Scanseleccionesiguales.
+
+## 25/10 · ACTIVO: actualización transaccional rateonly2
+
+RootúnicoQ.Log `/private/tmp/v18_rateonly2_production_update.log`,reporte
+`diagnosticos/resultados_v18/rateonly2_production_update_20261025.json`.
+16/16aisladas y4/4GUI120PASS,rollback184745_0b4426PASS,prebuildexactoPASS.
+Stage `experimentos/fs_max_v18/release_rateonly2_20261025_184722`.
+Backupantes `respaldos/parejas/v18_antes_rateonly2_20261025_185347/manifest.json`.
+LocalarduinoV18y acceptedbundle nuevos540c1674/ecccdbcd;QupdateEN CURSO.
+Hostnative_profiles.jsontodavíaconservapúblicos86/120/146/170. Trasupdateok:
+append4propuestos85/118/145/160,installedevidence,compararScanantes/después,
+testpreflight,GUIinstalada4nuevos120y6anteriores20,offlinefullfinal,PrepararQ10s,
+backupfinalyREADMEcifrasconimágenes. MétodoScanmapyacontienelos4anchorsnuevos
+conexclusióncomoauxiliaresviejos;guardasA0exactas85y160. Appscentrales/DSPintactos.
+Powerguard88938liberado,ningúnlector/compilaciónsimultáneos.V17intacta.
+
+## 25/10 · ACTIVO: incorporación rateonly2 tras calificación completa
+
+16/16largas60+3×120 y4/4GUI120 conUS/RADIO/A0/WAV/Synth20PASS;restauraciones
+verificadas. Objetivos8/85=1882352,10/118=1355932,12/145=1103448,14/160=1000000.
+Mínimosmárgenes17,46/13,63/12,08/15,97%,colas3/2/2/2. Consolidadorateonly2/
+qualified_candidates.json.33testsdeexperimentosPASScuandofinalizóQ.
+Stage:experimentos/fs_max_v18/release_rateonly2_20261025_184722.
+Rollbackprivado--recipe rateonly2 ACTIVO,log `/private/tmp/v18_rateonly2_rollback.log`.
+Nolector/compilaciónsimultánea.RootúnicoQ.Powerguard88938liberado.
+Siguientes:rollbackPASS,prebuildexactoStageScopeV18,backuppareadoantes,recibos,
+updateScopeV18transaccional,hostappend4profiles(escannerexcluye4nuevoscomoaux
+viejosyheredacadenaactual),tests,GUIinstalada4nuevos120+6viejos20,finalprepare10s,
+backupfinal/docs/landingconimágenes. V17intacta,métodosactualesconservados.
+Prodactual545c/3c66conmax86/120/146/170aúnsincambiar. No tasas nuevaspúblicas.
+
+## 25/10 · ACTIVO: calificación sostenida rateonly2
+
+Root únicoQ;exec83182,log `/private/tmp/v18_rateonly2_qualify.log`.
+Reporte `experimentos/fs_max_v18/resultados/20261025_181349/report.json`.
+--qualify --recipe rateonly2 --bits8/10/12/14 --target-ticks85/118/145/160.
+16corridas60+3×120conreiniciosindependientes;restauraciónexactafinal.
+4/4GUI120USScan/RADIO/A0/WAV/Synth20/visible/cierre/restauraciónPASS:
+`diagnosticos/resultados_v18/rateonly2_gui_20261025_175917/report.json`true.
+Fuentesprivadas ScopeV18RateProbeRateOnly2;actualproducción545c/3c66intacta.
+Nuevosobjetivos1.882.352,941(8),1.355.932,203(10),1.103.448,276(12),1.000.000(14).
+Si60+3×120yrestauraciónpasan,continuarincorporaciónpareada (usuarioquiere
+avanzarsinOK):rollback/prebuild/respaldo/recibos/update/host4profiles/GUIinstalada.
+Mantenermétodosactuales;capturarScanantes,heredarmismosauxiliares yexcluir
+nuevoscomoauxiliaresparalosviejos. V17intacta. Nolector/compilaciónsimultánea.
+Powerguardexec88938 caffeinate-i2400,liberaralterminarqual;sinpreferenciascambiadas.
+
+## 25/10 · ACTIVO: GUI del segundo sondeo rateonly2
+
+Root únicoQ, controller exec38861, log `/private/tmp/v18_rateonly2_gui.log`.
+9/9sondeos15sPASS yrestauraciónexacta en174849;colapico2todos,márgenes:
+8/85=17,48%;10/119=14,51%,118=13,78%;12/145=12,03%;14/160=16,19%.
+GUIprivada120RADIO/A0+USScan+WAV+Synth20,exposiciónydibujo:8/85,10/118,
+12/145,14/160. Fallback10/119y14/164->168sierrorfuncional,siemprerestaurando.
+No lectorni compilar mientrascorre. No nuevosperfilespúblicos;producción545c/3c66
+conmáximos86/120/146/170yV17intactos. Métodosanterioresconservados.
+TrasGUIrevisarcandidatosviables;sondeos15syGUI120noequivalena60+3×120.
+NuevaappScopeV18RateProbeRateOnly2;fuentesexperimentalesbajofs_max_v18/rateonly2.
+15testsharnessPASSincluyendoequivalenciaCdepolíticasexistentesynodosnuevos.
+
+## 25/10 · ACTIVO: segundo sondeo rateonly2
+
+Root únicoQ. exec19275,log `/private/tmp/v18_rateonly2_screen.log`.
+Reporte `experimentos/fs_max_v18/resultados/20261025_174849/report.json`.
+App nueva Scope V18 Rate Probe RateOnly2;copiadeproducción545c/3c66.
+Nuevos candidatos8/85;10/119y118;12/145;14/168,166,164,162,160(hasta1MS/s).
+9casos15s,restauración exacta final;no lectorni compilaciónsimultáneos.
+15testsPASS:políticasCviejasigualesynuevageometría,fuentesalteradas solo5headers.
+DespuésGUIprivada120con--recipe rateonly2 --us --keep-display-awake,hereda
+auxiliaresdelos máximos actuales86/120/146/170. No cambiarmétodosactuales.
+8/84,10/116,12/144fallaronconaudioenlatandaanterior:mantenerrechazos.
+No tasas públicas nuevaseneste sondeo. V17yproducciónintactas.
+
+## 25/10 · CERRADO: tasas incorporadas en Monitor V18 + Scope V18
+
+Máximos CH1: 8 bits 1.860.465,116 S/s; 10 bits 1.333.333,333 S/s;
+12 bits 1.095.890,411 S/s (sin cambio); 14 bits 941.176,471 S/s;
+16 bits 150.943,396 S/s (sin cambio). Dual y tasas previas conservados.
+Pareja aceptada: MCU 545c2404… / relay 3c663944…; Preparar Q actualizado.
+
+Calificación física y GUI/audio aceptadas. Rollback y prebuild exactos antes
+de actualización transaccional. Regresión instalada 9/9, incluidos perfiles
+anteriores y 16 bits simple/dual; 334 tests offline PASS. Las 142 configuraciones
+previas conservan auxiliares de Scan US. Métodos centrales sin modificar.
+Preparar Q final verificó fuentes, identidad y 10 s de adquisición.
+Respaldo final: `respaldos/parejas/v18_tasas_rateonly_20261025_173359/manifest.json`.
+V17: 175 hashes intactos. Landing: 16 imágenes/badges preservados.
+Q libre, sin campañas activas. Usuario puede probar la app normal de V18.
+
+Informe: `docs/SONDEO_TASAS_V18_20261025.md`.
+Regresión: `diagnosticos/resultados_v18/rateonly_installed_20261025_171653/report.json`.
+Verificación: `diagnosticos/resultados_v18/rateonly_final_prepare_20261025.json`.
+La tanda mayor 8/84, 10/116 y 12/144 se descartó para audio; no habilitar.
+
+---
+
+Historial (los estados activos siguientes ya concluyeron):
+
+## 25/10 · ACTIVO: regresión instalada rateonly
+
+Pareja Scope V18 actualizada y verificada: MCU545c2404 / relay3c663944.
+Update`diagnosticos/resultados_v18/rateonly_production_update_20261025.json`ok.
+Host nuevos perfiles8/86(1860465),10/120(1333333),14/170(941176)ya incorporados.
+142configuracionesprevias conservan auxiliaresScanexactos;28testsPASS.
+Regresión física controller exec53230, log `/private/tmp/v18_rateonly_installed_campaign.log`:
+3nuevosGUI120US/RADIO/A0/WAV/Synth20, luego6viejosGUI20 (8/10/12/14+16simple/dual).
+No lectorni compilaciónsimultánea;controllerse detieneal primerfallo;guarddisplay scoped.
+Tras finalizar: revisartodosasertos/exposición; metadatosinstalled_gui_evidence,
+docs/READMEcifrasmanteniendoimágenes;offlinechecks;PrepararQverify10s ybackupfinal.
+Respaldoantes171017;rollback170343_9be146y prebuild170513PASS. V17intacta.
+Métodos anterioresconservados; nuevosScanheredan100/114,128/140,188/192respectivamente.
+
+## 25/10 · ACTIVO: incorporación transaccional rateonly
+
+Root únicoQ. exec deupdate en curso, log `/private/tmp/v18_rateonly_production_update.log`.
+Reporte `diagnosticos/resultados_v18/rateonly_production_update_20261025.json`.
+Stage:experimentos/fs_max_v18/release_rateonly_20261025_170513.
+Rollback same-app170343_9be146PASS,prebuildexacto/restauraciónPASS.
+Respaldoantes:respaldos/parejas/v18_antes_rateonly_20261025_171017/manifest.json.
+FuentesarduinoV18solo5headerslistas/condicionesextendidos;bundleq_support545c/3c66.
+GuardasradioA0admitennuevasgeometríasexactasconcombined_qualified;ScanUShereda
+mismosauxiliares,sinusanuevosobjetivoscomoauxiliaresdelosperfilesviejos.
+PERFILESPÚBLICOSaúnSINMODIFICAR. Trasupdateok+restauración:mergepropuestade
+3perfiles(8/86,10/120,14/170),verificartodaslasScanseleccionesantes/después,
+tests,GUIinstalada120porcadauno+regresióntasasviejas,PrepararQyrespaldo final.
+V17congelada. No abrirsegundolector ni compilar mientras updatecorre.
+
+## 25/10 · CERRADO: candidatos con métodos constantes
+
+Q restaurado y libre. Candidatos privados con 60 + 3×120 s y GUI de 120 s:
+- 8 bits / 86 ticks: 1.860.465,116 S/s; margen mínimo 18,38 %, cola pico 3.
+- 10 bits / 120 ticks: 1.333.333,333 S/s; margen mínimo 15,39 %, cola pico 2.
+- 14 bits / 170 ticks: 941.176,471 S/s; margen mínimo 20,92 %, cola pico 2.
+
+Prueba combinada: RADIO/A0 a 40 kHz, Scan US, WAV, Synth de 20 voces,
+GUI visible, cierre y restauración. 42 pruebas offline del arnés aprobadas.
+8/84, 10/116 y 12/144 pasaron aislado pero fallaron con audio: no incorporar.
+12 bits mantiene 1.095.890,411 S/s; 16 bits sin cambios. V17 y producción intactas.
+Informe: `docs/SONDEO_TASAS_V18_20261025.md`.
+Consolidado: `experimentos/fs_max_v18/rateonly/qualified_candidates.json`.
+
+Próxima etapa para habilitar los tres candidatos: prebuild, rollback same-app,
+respaldo pareado, recibos, despliegue transaccional y regresión instalada.
+No basta exponer tasas: el Q de producción aún no habilita esos períodos.
+
+---
+
+Historial (los estados activos siguientes ya concluyeron):
+
+## 25/10 · ACTIVO: calificación aislada de escalones menores yaGUIaceptados
+
+Root únicoQ; exec96352, log `/private/tmp/v18_rateonly_fallback_qualify.log`.
+Reporte `experimentos/fs_max_v18/resultados/20261025_153648/report.json`.
+--qualify --recipe rateonly --bits8/10 --target-ticks86/120:60+3×120cadauno,
+reinicios independientes yrestauraciónexactafinal. Nolector/compilaciónsimultáneos.
+GUI8/86(1,860MS/s)y10/120(1,333MS/s)PASS120RADIO/A0+USScan+WAV+Synth20,
+ventana visible+cierre+restauración:campaña
+`diagnosticos/resultados_v18/rateonly_gui_fallback_20261025_152933/report.json`true.
+14/170(941,176kS/s)yaaislado60+3×120yGUI120PASS,completocandidato privado.
+8/84,10/116,12/144aisladosPASSperofallaronconaudio;noaceptadoscombinados.
+12conservarmáximoactual1095890.411S/s. Producción/V17y métodos intactos.
+Alcerrar153648:validartodasheadroom_ok+restauración;documentar3candidatos
+8/86,10/120,14/170si pasa;Qlibre. No tasas públicasincorporadas aún.
+
+## 25/10 · ACTIVO: GUI escalones menores rateonly
+
+Controller exec35224, log `/private/tmp/v18_rateonly_gui_fallback.log`, campaña
+`diagnosticos/resultados_v18/rateonly_gui_fallback_20261025_152933/report.json`.
+Root únicoQ. GUI8/86iniciada en`gui_private_20261025_152933`, luego10/120.
+No abrir otrolector; cadaGUI restaura producción. Estosperíodos aúnno tienen
+60+3×120: verificarGUIprimero trasfalloscombinados deperíodosmayores.
+122824:16/16aisladasPASS yrestauraciónexacta. GUIprimera ronda completada:
+8/84y12/144UNDERRUN;10/116Qcerróflujo. Las3noaceptadascombinadas,restauradas.
+14/170pasó120sRADIO/A0,USScan,WAV,Synth20,visibleGUI,cierre yrestauración;
+`gui_private_20261025_130902/report.json`true. Candidato14listo, aúnprivado.
+Producción yV17sin cambios. Métodos actuales conservados. Si8/86y10/120
+pasanGUI, calificaraislado60+3×120yrestaurar; noforzar cambiandoalgoritmos.
+
+## 25/10 · ACTIVO: GUI privada rateonly tras16/16 sostenidasPASS
+
+Root únicoQ. Controller exec63944, log `/private/tmp/v18_rateonly_gui_campaign.log`.
+Campaña `diagnosticos/resultados_v18/rateonly_gui_campaign_20261025_130208/report.json`.
+PrimeraGUI8/84 `gui_private_20261025_130208`. Secuencia8/84,10/116,12/144,14/170;
+120sRADIO/A0+USScan+WAV+Synth20+cierre, restauración exacta tras cadaformato.
+Ventana visible y scopedcaffeinate; no abrir lector ni compilar simultáneamente.
+Calificaciónaislada16/16PASS conholgura en122824 yrestauraciónexacta verificada.
+8margen15,13–15,21%colas3/2/3/3;10margen11,94–12,05%cola2;
+12margen11,32–11,41%cola2;14margen20,92–21,02%cola2. Cero dropped/fatal.
+Toolsbootstrap GUI rateonly extiende objetivo privado yheredaauxiliaresrápidos
+existentes. Se exigeexposición>=90%ypaint_events>=hold*20,además de asserts.
+6testsharnessPASS. Producción/V17intactas. No tasaspúblicas todavía.
+
+## 25/10 · ACTIVO: calificación sostenida rateonly
+
+Root único Q. exec57973, log `/private/tmp/v18_rateonly_qualify.log`.
+Reporte `experimentos/fs_max_v18/resultados/20261025_122824/report.json`.
+--qualify --recipe rateonly --bits8/10/12/14 --target-ticks84/116/144/170.
+60+3×120s por candidato, reinicios independientes, restauración exacta alfinal.
+Noabrir otrolector ni compilar mientras corre. Producción yV17 sin cambios.
+Después GUI privada120 con --us --keep-display-awake por candidato aceptado.
+Tools/probe_gui_live_v18 ygui_experimental admitenrateonly;bootstrap extiende
+solo el objetivo privado para heredar los mismosauxiliaresrápidos deproducción.
+Ninguna tasa pública por sondeos. Usuarioautorizó avanzar.
+
+## 25/10 · CERRADO: sondeo rateonly
+
+Q restaurado y libre. Doce perfiles15s, integridad PASS, cola2 todos.
+Candidatos:8/84ticks=1.904.761,90S/s margen15,25%;10/116=1.379.310,34
+margen11,96%;12/144=1.111.111,11 margen11,37%;14/170=941.176,47 margen20,96%.
+12/142y140 sin holgura(<10%) aunque integridad pasó. No promover.
+Tres restauraciones exactas PASS121157,121731,122126. Producción/fuentes yV17
+sin cambios. Informe docs/SONDEO_TASAS_V18_20261025.md;resultado consolidado
+experimentos/fs_max_v18/rateonly/screen_summary.json. No quedan procesos activos.
+Siguiente:calificar60+3×120 yGUI candidatos; nohabilitar públicos por sondeos.
+Usuario pidió preservar métodos actuales: nueva receta soloamplía listas y
+condiciones explícitas privadas; no cambios de relojes, packing, colas niDMA.
+
+## 25/10 · ACTIVO: rateonly ronda2
+
+Root único Q, exec36048, log `/private/tmp/v18_rateonly_round2.log`.
+Runner --recipe rateonly --bits8/10/12/14 --target-ticks86/84/118/116/142/140/172/170,
+15s cadauno, detención al primer fallo y restauración exacta. No abrir otrolector.
+Primeratanda completa y restaurada:121157(8/87),121731(10/120,12/144,14/174).
+Todos integridad/holgura15s PASS; aún privados. Relay buildreceipt verifica
+manifest+SHA para no recompilar; app fuente exacta adoptada, no sobrescritura.
+Producción y V17 intactas; no métodos nuevos ni tasas públicas.
+
+## 25/10 · ACTIVO: tanda privada rateonly, sin cambiar métodos actuales
+
+Root único Q. exec61235; log `/private/tmp/v18_rateonly_other.log`.
+No abrir monitor ni segundo lector hasta restauración. Runner privado:
+`run_probe --recipe rateonly --bits 10 12 14 --target-ticks 120 144 174 --seconds 15`.
+Copia Scope V18 Rate Probe RateOnly. Producción monitor/arduino sin cambios.
+Se extienden listas privadas de perfiles y política CPU; métodos/colas/SPI/ADC
+actuales intactos. Ver `experimentos/fs_max_v18/rateonly/PLAN.md`.
+8/87ticks=1.839.080,46 S/s pasó15s: dropped=fatal0, cola2, margen19,255%,
+slack88798. Informe121157 completo ok=true y restauración exacta verificada.
+Aún no es tasa pública ni aceptación sostenida/GUI. Siguiente8:86/84ticks;
+primero completar sondeo10/12/14 y restauración. CPU heredada explícita para
+10/12/14;8 hereda scope_spi40 y metadato compact_adc8_ipc=true para futura GUI.
+Pruebas rateonly/runner13pass. V17 congelada. No incorporar sin60+3×120,
+GUI combinada y restauración. Usuario autoriza continuar autónomamente.
+
+## 25/10 · Revisión global y correcciones V18
+
+Scan US exige muestras nuevas para confirmar restauración antes de reanudar
+RADIO. Timeout/desconexión mantiene pausa. Pruebas GUI base e integrada
+actualizadas al canal PCM y cierre actual. Regresión: 282 + 1 casos aprobados.
+Cierre durante carga WAV y rechazo tardío comprobados offline. Sin operar Q.
+V17: 175 hashes congelados sin cambios. Firmware y tasas sin cambios.
+Informe: `docs/REVISION_GLOBAL_V18_20261025.md`.
+Pendiente identificado: optimizar grabación CSV a FS altas, con etapa propia.
+Medición sintética actual consume más que el intervalo de llegada en 8–14 bits;
+no basta con pasarla a un hilo ni usar una cola sin límite. CSV sin modificar.
+
+## 25/10 · Tasas incorporadas y regresión final aprobada
+
+| Formato CH1 | Máximo público |
+|---|---:|
+| 8 bits | 1.818.181,818 S/s |
+| 10 bits | 1.311.475,410 S/s |
+| 12 bits | 1.095.890,411 S/s |
+| 14 bits | 909.090,909 S/s |
+| 16 bits (sobremuestreo x16) | 150.943,396 S/s |
+
+16 bits dual conserva 76.226,775 S/s por canal: el siguiente candidato falló.
+10/12/14/16 pasaron calificación física 60 + 3×120 s y GUI combinada de
+120 s; integridad y margen se documentan por separado en la campaña.
+La pareja Scope V18 instalada es MCU `7f8de38c…` / relay `f43923b0…`.
+Regresión instalada final 8/10/12/14: RADIO/A0, Scan US, WAV, Synth 20 voces
+y cierre aprobados, sin errores. 16 pasó su GUI pública de 120 s.
+Evidencia: `diagnosticos/resultados_v18/installed_rates_regression_20261025_104120/report.json`
+y `diagnosticos/resultados_v18/adc16_installed_public_gui120_20261025.json`.
+No se certifica ENOB analógico con estas pruebas. V17 permanece congelada.
+Detalle: [campaña de tasas](docs/TASAS_ALTAS_V18_20261025.md).
+No quedan procesos de campaña activos; continuar desde esta pareja aceptada.
+
+---
+
+Historial de continuidad (los estados activos siguientes son históricos):
+
+## 25/10 · ACTIVO: GUI instalada10 bits/1,311MS/s conUS
+
+Root único Q. Sesión exec53526, log `/private/tmp/adc10_installed_gui_fixed.log`;
+reporte `diagnosticos/resultados_v18/gui_installed_private_20261025_100543`.
+Scan US ya pasó; RADIO/A0 en hold120. No abrir otro lector ni compilar enQ.
+Calificación aislada10/12/14 completa12/12 y restaurada (093116).
+Fallo GUI previo095355 fue en auxiliar legado10/176/N8192 con dropped1,
+no en1311. Se restringieron auxiliares rápidos10/12/14, conservando cambio8.
+Se corrigió cierre pendiente trasScan, más cancelaciónenel arnés diagnóstico.
+Recuperación aceptada + snapshot exacto14/31,25kHz verificados en manual_recovery.
+Siguientes: GUI privada instalada12/146 y14/176 con --us --keep-display-awake,
+siempre120s y restauración; luego incorporación de candidatos aceptados.
+16/1060 ya pasó60+3×120 yGUI120. Su propuesta está staged, sin aplicar; falta
+rollback same-app exacto --recipe adc16 y prebuild/recibo/despliegue transaccional.
+V17 intacta; usuario autoriza continuar sin pedir OK.
+
+## 25/10 · ACTIVO: calificación instalada 10/12/14
+
+Root único dueño del Q. Proceso exec5943, log
+`/private/tmp/installed_other_bits_qualification.log`, reporte
+`experimentos/fs_max_v18/installed_campaign/20261025_093116/report.json`.
+Comando `screen.py --qualify --bits 10 12 14`: por formato, 60+3×120 s con
+reconfiguración entre corridas; sin reinicio del MCU. No abrir otro lector ni
+compilar en el Q hasta cierre/restauración. Por ahora 10 bits:60+120 pasaron,
+segunda120 en curso. V17 congelada. Usuario autoriza continuar sin pedir OK.
+
+16 bits simple150943,4 S/s: aislado60+3×120 PASS (015536) y GUI combinada120
+PASS con Scan/WAV/Synth20/cierre/restauración (gui_private_20261025_020837).
+16 simple152672 y dual76555 fallaron antes de medir; ambas restauradas.
+Dual conserva76226,8 S/s/canal. Etapa local propuesta, NO aplicada:
+`experimentos/fs_max_v18/release_adc16_20261025_093436/proposal.json`.
+Pendiente para incorporar16: ensayo same-app rollback exacto (herramienta ahora
+acepta --recipe adc16), prebuild exacto de fuentes Scope V18, respaldo pareado,
+actualización transaccional por q_support, GUI instalada y luego perfil público.
+No falsificar recibos ni reutilizar los de cad37 para firmware7f8de38.
+
+## 25/10 · ADC16 calificación activa; luego 10/12/14
+
+Root único Q. Sesión exec18695, log `/private/tmp/adc16_qualify.log`:
+`run_probe.py --run --qualify --recipe adc16 --bits 16 --target-ticks 1060`.
+Reporte `experimentos/fs_max_v18/resultados/20261025_015536/report.json`.
+60s y dos120s pasaron; falta última120s y restauración. No abrir otra conexión.
+Dual2090ticks falló con fatal1, originalrestaurado; conserva2099ticks.
+Siguiente: GUI privada16/1060 con50kHz de sintonía, hold120 y restauración;
+luego calificación10/12/14 mediante `installed_campaign/screen.py --qualify
+--bits 10 12 14` (reiniciaadquisición/cambiaepochentreensayos, sin reflashear).
+No incorporar perfiles públicos hasta pruebas combinadas y restauración.
+V17 congelada; UI actual sóloV18. Usuario autoriza continuar sin pedir OK.
+
+## 25/10 · Campaña de tasas reanudada (Q exclusivo)
+
+Root opera Q. Sesión exec 53582, log `/private/tmp/adc16_staircase.log`:
+`run_probe.py --run --recipe adc16 --bits 16 --seconds 15`.
+App privada Scope V18 Rate Probe ADC16; preserva x16/54MHz, sólo agrega
+perfiles en copia experimental. Esperar y verificar restauración antes de
+otra conexión. Sondeo instalado previo: 16 bits CH1 145454,5 y dual76226,8
+pasaron60s con márgenes72,2%/84,4%, cola1 y sin pérdidas; restaurado e identidad
+iguales. 10/12/14 superiores pasaron15s (requieren sostenidos/combinados).
+Plan y datos: `docs/TASAS_ALTAS_V18_20261025.md`.
+
 ## 25/10 · Cierre visual inmediato
 
 Al cerrar V18 se oculta la ventana y se detiene el dibujo inmediatamente;

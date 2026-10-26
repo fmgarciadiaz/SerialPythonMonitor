@@ -40,7 +40,7 @@ La imagen muestra una cuadrada y la respuesta de un filtro RC simulado.
 |---|---|
 | Entradas | Dos canales: A2/V_IN y A3/V_OUT, rango nominal 0–3,3 V |
 | Resolución ADC | 8/10/12/14 bits; 16 bits por oversampling ×16, sin implicar 16 bits de precisión efectiva |
-| Muestreo SPI V18 | Dual hasta 632,41 kHz por canal (ADC8) y 76,23 kHz (ADC16 OS); CH1 hasta 1,818 MHz (ADC8) |
+| Muestreo SPI V18 | Dual hasta 632,41 kHz por canal (ADC8) y 76,23 kHz (ADC16 OS); CH1 hasta 1,860 MHz (ADC8) |
 | Salida DAC | A0, 12 bits, rango nominal 0–3,3 V; amplitud y offset ajustables dentro de esos límites |
 | Generador | Seno, cuadrada, triángulo, rampa; modos Sweep, Chirp y Pulso; seno hasta 150 kHz, cuadrada hasta 200 kHz; triángulo/rampa hasta 50 kHz, con frecuencias intermedias |
 | Audio de salida | WAV mono por A0, L/R/Mix, tasas negociadas de 20/40/50 ksps; 40 ksps por defecto |
@@ -66,11 +66,11 @@ El selector ofrece tasas bajas, intermedias y máximos según resolución y modo
 
 | Bits | Máximo CH1 (kHz) | Máximo dual (kHz por canal) |
 |---|---:|---:|
-| 8 | 1818,182 | 632,411 |
-| 10 | 1250 | 519,481 |
-| 12 | 1066,667 | 437,158 |
-| 14 | 851,064 | 363,636 |
-| 16, oversampling | — | 76,227 |
+| 8 | 1860,465 | 632,411 |
+| 10 | 1355,932 | 519,481 |
+| 12 | 1103,448 | 437,158 |
+| 14 | 1000,000 | 363,636 |
+| 16, oversampling | 150,943 | 76,227 |
 
 Son máximos disponibles, no una calificación universal de holgura ni de carga
 simultánea RADIO/WAV. UART conserva hasta 31,25 kHz por canal; Synth tiene
@@ -129,16 +129,36 @@ La imagen ilustra el panel integrado con el osciloscopio.
 
 ## RADIO · recepción AM y sintonía
 
-![RADIO V17: portadora AM y señal demodulada en una demostración](assets/monitor_radio.png)
+![Radio V18 sintonizada a 710 kHz, con FFT de emisoras recortada y barras LED de audio](assets/monitor_radio_710.gif)
+
+[Ver captura estática de la recepción a 710 kHz](assets/monitor_radio_710.png).
 
 Toma CH1 como entrada de radio, sintoniza una portadora y demodula AM.
 El panel permite escanear emisoras, ajustar la banda RF y trabajar con gain
 manual o automático hasta ×80. US extiende la sintonía aprovechando alias y
 compara detecciones entre tasas para estimar la frecuencia real.
-La imagen muestra una señal AM de demostración y su audio demodulado.
+La animación muestra una captura real de CH1, con 710 kHz seleccionada,
+FFT de 16.384 puntos y zoom en «Recortar radios». Se ven el Generador Radio
+con sus barras LED y la solapa Radio. Los candidatos de Scan son detecciones espectrales;
+la captura no certifica la identidad de una emisora.
 
 Play de RADIO activa la recepción y el análisis. Generador Radio permite
 llevar el resultado a A0, con entrada RADIO o FILTER, volumen y offset.
+Su panel incorpora diez barras de LED de audio, de verde a naranja y rojo,
+con movimiento suavizado. Funcionan también fuera del modo FFT; visualizan
+el espectro sin modificar el sonido.
+
+![Generador Radio V18 con volumen, offset y diez bandas LED; audio de demostración](assets/monitor_radio_equ.png)
+
+<details>
+<summary>Ver el indicador de audio en movimiento (demostración)</summary>
+
+![Animación del Generador Radio V18 con audio sintético de demostración](assets/monitor_radio_equ.gif)
+
+[Abrir la imagen estática](assets/monitor_radio_equ.png).
+
+</details>
+
 La escucha se realiza por esa salida; no hay reproducción por parlantes PC
 implementada. [Recepción, antena y US](docs/GUIA_V18.md) ·
 [Salida a A0](docs/GUIA_V18.md).
@@ -223,7 +243,7 @@ distorsión y respuesta entre entradas. [Definiciones y límites](docs/FFT_ANALI
 - Synth con MIDI, hasta veinte voces, FM, ondas clásicas y guitarra/piano físicos.
 - Adquisición configurable: 8/10/12/14 bits o 16 bits por oversampling.
   SPI dual hasta632,41kHz por canal (ADC8), ADC16 hasta76,23kHz y
-  CH1 hasta 1,818 MHz (ADC8); ver tabla de frecuencias.
+  CH1 hasta 1,860 MHz (ADC8); ver tabla de frecuencias.
 
 ## Empezar
 
@@ -338,7 +358,7 @@ identifican por separado en los informes.
 
 | Conjunto | Estado y documentación |
 |---|---|
-| [Monitor V18 + Scope V18](monitor/v18/README.md) | Actual: ADC8 CH1 hasta 1,818 MS/s, RADIO/FILTER, WAV y Synth20; [validación](docs/VALIDACION_V18.md) |
+| [Monitor V18 + Scope V18](monitor/v18/README.md) | Actual: ADC8 CH1 hasta 1,860 MS/s, RADIO/FILTER, WAV y Synth20; [catálogo de tasas](docs/CATALOGO_TASAS_V18_PLAN_20261025.md); [validación](docs/VALIDACION_V18.md) |
 | [Pareja V17 congelada](monitor/v17/README.md) | Conservada con sus fuentes y respaldos, sin desarrollo activo |
 | [Monitor V16](monitor/historico/v16/README.md) | Respaldo local anterior, app exportada y retirada del Q |
 | [Monitor V15 · Synth](monitor/historico/v15/README.md) | Synth: tres osciladores, feedback, FM/ondas/Virtual, guitarra y piano físicos, nueve voces y MIDI; estabilidad de cada perfil pendiente de validación física |

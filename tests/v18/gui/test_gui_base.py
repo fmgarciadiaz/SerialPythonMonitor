@@ -2,12 +2,12 @@
 import os
 os.environ.setdefault('QT_QPA_PLATFORM', 'offscreen')
 from pathlib import Path
+import json
 import unittest
 from unittest.mock import patch
 
 from PyQt6 import QtWidgets
 from monitor.v18.app import SerialMonitorWindow
-from monitor.v18.receiver.unoq_autoload import CURRENT_FIRMWARE, APPS
 
 
 class GuiBaseTests(unittest.TestCase):
@@ -19,8 +19,8 @@ class GuiBaseTests(unittest.TestCase):
         with patch('monitor.v18.app.usb_devices', return_value=[]), \
              patch('monitor.v18.app.list_ports.comports', return_value=[]), \
              patch('monitor.v18.app.Connection') as connection, \
-             patch('monitor.v18.app.connect_scope') as connect_scope, \
-             patch('monitor.v18.app.ensure_scope') as ensure_scope:
+             patch('monitor.v18.io.receiver_process.ReceiverProcess') as receiver, \
+             patch('monitor.v18.app.QPreparationThread') as preparation:
             window = SerialMonitorWindow()
             try:
                 window.show()
@@ -29,10 +29,8 @@ class GuiBaseTests(unittest.TestCase):
                 self.assertFalse(window.windowIcon().isNull())
                 self.assertEqual(window.filter_config.source, 'OFF')
                 self.assertIsNone(window.serial_worker)
-                self.assertFalse(window.prepare_q_button.isEnabled())
                 window.prepare_q()
-                window._begin_q_preparation('offline')
-                ensure_scope.assert_not_called()
+                preparation.assert_not_called()
                 self.assertIsNone(window._q_preparation)
                 for mode in range(4):
                     window.spectral.set_mode(mode)
@@ -43,8 +41,8 @@ class GuiBaseTests(unittest.TestCase):
                     self.app.processEvents()
                 self.assertIsNone(window.serial_worker)
                 connection.assert_not_called()
-                connect_scope.assert_not_called()
-                ensure_scope.assert_not_called()
+                receiver.assert_not_called()
+                preparation.assert_not_called()
             finally:
                 window.close()
                 self.app.processEvents()
@@ -55,8 +53,9 @@ class GuiBaseTests(unittest.TestCase):
         package = Path(__file__).resolve().parents[3] / 'monitor' / 'v18'
         # The host's visual identity is independent of the installed Q stack.
         self.assertTrue((package / 'assets' / 'scope_app.svg').is_file())
-        self.assertEqual(CURRENT_FIRMWARE, 'v18')
-        self.assertEqual(APPS, {'Scope V18': 'v18'})
+        config=json.loads((package.parents[1]/'arduino/v18/unoq.json').read_text())
+        self.assertEqual(config['name'],'Scope V18')
+        self.assertEqual(config['remote_app'],'/home/arduino/ArduinoApps/scope-v18')
 
 
 if __name__ == '__main__':

@@ -242,7 +242,17 @@ class OverflowDuringReadReceiver(CleanupMarkerReceiver):
         if not Path(self.marker).exists():raise AssertionError('Overflow interrupted decoder events')
     def close(self):pass
 
+class SplitOverflowDuringReadReceiver(OverflowDuringReadReceiver):
+    def pump(self):
+        if getattr(self,'completed',False):return
+        self.samples(np.zeros((20000,4),dtype=np.uint32))
+        self.samples(np.zeros((20000,4),dtype=np.uint32))
+        self.completed=True
+        with open(self.marker,'w') as stream:stream.write('read-complete\n')
+
 class ReceiverOverloadBoundaryTests(unittest.TestCase):
+    receiver_factory=OverflowDuringReadReceiver
+    samples_before=0
     def test_overload_is_reported_after_read_and_cleanup_still_runs(self):
         import tempfile
         from pathlib import Path
@@ -251,7 +261,7 @@ class ReceiverOverloadBoundaryTests(unittest.TestCase):
             started_monotonic=time.monotonic()
             started_wall=time.time()
             owner=ReceiverProcess(str(marker),0,Configuration(),connection_factory=MarkerConnection,
-                                  receiver_factory=OverflowDuringReadReceiver).start()
+                                  receiver_factory=self.receiver_factory).start()
             try:
                 terminal=None;deadline=time.monotonic()+8
                 while time.monotonic()<deadline:
@@ -260,11 +270,18 @@ class ReceiverOverloadBoundaryTests(unittest.TestCase):
                     owner.poll();time.sleep(.005)
                 self.assertIsNotNone(terminal)
                 self.assertFalse(terminal['ok'])
-                self.assertIn('pendiente supera un segundo',terminal['error'])
+                self.assertIn('RF pendiente atrasado',terminal['error'])
                 snapshot=terminal['failure_snapshot']
-                self.assertEqual(snapshot['buffered_samples'],40000)
-                self.assertEqual(snapshot['buffered_chunks'],1)
-                self.assertEqual(snapshot['retained_batches'],[])
+                details=snapshot['limit_details']
+                self.assertEqual(details['exceeded'],['seconds'])
+                self.assertEqual(details['limits']['seconds'],1.)
+                self.assertAlmostEqual(details['current']['seconds'],self.samples_before/Configuration().actual_rate)
+                self.assertAlmostEqual(details['projected']['seconds'],40000/Configuration().actual_rate)
+                self.assertEqual(details['context']['buffered_samples'],snapshot['buffered_samples'])
+                if not self.samples_before:
+                    self.assertEqual(snapshot['buffered_samples'],40000)
+                    self.assertEqual(snapshot['buffered_chunks'],1)
+                    self.assertEqual(snapshot['retained_batches'],[])
                 self.assertEqual(snapshot['actual_rate'],Configuration().actual_rate)
                 self.assertEqual(snapshot['bits'],Configuration().bits)
                 self.assertGreater(snapshot['pending_duration_s'],1.)
@@ -277,6 +294,10 @@ class ReceiverOverloadBoundaryTests(unittest.TestCase):
                 self.assertTrue(terminal['shutdown_confirmed'],terminal)
                 self.assertEqual(marker.read_text(),'read-complete\n')
             finally:owner.close()
+
+class ReceiverSplitOverloadBoundaryTests(ReceiverOverloadBoundaryTests):
+    receiver_factory=SplitOverflowDuringReadReceiver
+    samples_before=20000
 
 class WavProgressBurstReceiver(FakeReceiver):
     def pump(self):

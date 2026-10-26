@@ -1,0 +1,100 @@
+{
+  "ok": false,
+  "deployment": false,
+  "profile": {
+    "bits": 14,
+    "channels": 2,
+    "ticks": 3628,
+    "node_pairs": 3968,
+    "queue_slots": 4,
+    "nominal_rate": 44100,
+    "headroom": true,
+    "validation": "60s",
+    "catalog_profile": true,
+    "isolated_headroom": true,
+    "purpose": "audio",
+    "evidence": "experimentos/fs_max_v18/resultados/20261025_194759/report.json",
+    "analog_enob_qualified": false,
+    "headroom_scope": "ADC only; representative GUI/audio tested separately",
+    "catalog_gui_evidence": "diagnosticos/resultados_v18/catalog_private_gui_20261025_205321/report.json",
+    "integration_evidence": "experimentos/fs_max_v18/resultados/20261025_203801/report.json",
+    "installed_evidence": "experimentos/fs_max_v18/release_catalog_20261025_222651/update_report.json",
+    "installed_identity": {
+      "firmware_sha256": "37f049fa029ad62a10767c56dc586b2c3697f8d250a0b8a7396570ce8e0c7060",
+      "relay_sha256": "27da0bc4860401df27eef50429f2ec881bfd3b51b1893d1fe3bacb9e922f56ae"
+    },
+    "installed_screen_evidence": "experimentos/fs_max_v18/installed_campaign/20261025_223730/report.json",
+    "installed_gui_evidence": "diagnosticos/resultados_v18/catalog_installed_gui_20261025_224618/report.json"
+  },
+  "baseline": {
+    "schema": 1,
+    "identity": {
+      "board_serial": "1060031107",
+      "app": "scope-v18-main-1",
+      "firmware_sha256": "37f049fa029ad62a10767c56dc586b2c3697f8d250a0b8a7396570ce8e0c7060",
+      "relay_sha256": "27da0bc4860401df27eef50429f2ec881bfd3b51b1893d1fe3bacb9e922f56ae"
+    },
+    "adc_bits": 14,
+    "adc_period": 32,
+    "generator": {
+      "wave": 0,
+      "enabled": 0,
+      "mode": 0,
+      "frequency": 2500,
+      "final_frequency": 2500,
+      "low": 0,
+      "high": 4095,
+      "duration": 1000,
+      "duration_us": 0,
+      "duty": 50
+    }
+  },
+  "identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v18-main-1",
+    "firmware_sha256": "37f049fa029ad62a10767c56dc586b2c3697f8d250a0b8a7396570ce8e0c7060",
+    "relay_sha256": "27da0bc4860401df27eef50429f2ec881bfd3b51b1893d1fe3bacb9e922f56ae"
+  },
+  "display_guard": {
+    "pid": 41018,
+    "timeout_seconds": 600,
+    "released": true
+  },
+  "command": [
+    "/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/bin/python",
+    "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/tools/gui_live_smoke_v18.py",
+    "--serial",
+    "1060031107",
+    "--output",
+    "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v18/radio_rate_check_20261026_131655/gui.json",
+    "--bits",
+    "14",
+    "--rate",
+    "44101",
+    "--frequency-khz",
+    "10.0",
+    "--duration",
+    "35.0",
+    "--hold-radio-seconds",
+    "30.0",
+    "--voices",
+    "20"
+  ],
+  "exit_code": 0,
+  "exposed_fraction": 0.125,
+  "paint_events": 131,
+  "visible_gui_ok": false,
+  "gui_ok": false,
+  "restoration": {
+    "hardware_restored": true,
+    "errors": [],
+    "recovery": {
+      "seconds": 10.02709478000179,
+      "samples": 313344,
+      "dropped": 0,
+      "fatal": 0,
+      "continuous": true
+    }
+  },
+  "identity_unchanged": true
+}

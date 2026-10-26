@@ -15,10 +15,14 @@ def main():
     import argparse
     parser=argparse.ArgumentParser()
     parser.add_argument("--artifacts",type=Path)
+    parser.add_argument("--local-app",type=Path)
+    parser.add_argument("--report",type=Path)
     args=parser.parse_args()
     folder=Path(__file__).resolve().parent
     config=json.loads((ROOT/'arduino/v18/unoq.json').read_text())
-    config['local_app']='experimentos/fs_max_v18/oscilloscope'
+    local=args.local_app.resolve() if args.local_app else folder/'oscilloscope'
+    if not local.is_relative_to(ROOT) or not (local/'app.yaml').is_file():raise ValueError('App source must be inside the repository')
+    config['local_app']=str(local)
     board=Board(config)
     report=dict(compiled=False,installed=False,restored=False)
     try:
@@ -27,6 +31,7 @@ def main():
             receiver.decoder.numeric=True
             lifecycle=ReceiverLifecycle(receiver,connection.identity)
             lifecycle.capture()
+            report['original_identity']=connection.identity
             try:
                 receiver.select(0)
                 receiver.configure(Configuration(14,40000))
@@ -41,7 +46,8 @@ def main():
                 report['restored']=result['hardware_restored']
     except Exception as exc:
         report['error']=repr(exc)
-    path=folder/'compile_report.json';path.write_text(json.dumps(report,indent=2)+'\n')
+    path=args.report if args.report else folder/'compile_report.json'
+    path.write_text(json.dumps(report,indent=2)+'\n')
     print(json.dumps(report,indent=2))
     return 0 if report['compiled'] and report['restored'] else 1
 if __name__=='__main__':raise SystemExit(main())

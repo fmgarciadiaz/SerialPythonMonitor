@@ -195,7 +195,7 @@ class ProductionBackend:
         rehearsal = _verified_file(acceptance, 'rollback_rehearsal')
         trial = json.loads(rehearsal.read_text())
         if not (trial.get('ok') is True and trial.get('private') is True and
-                trial.get('recipe') == 'batcharena' and
+                trial.get('recipe') in ('batcharena','adc16','rateonly','rateonly2','catalog') and
                 trial.get('private_mutation_ok') is True and
                 trial.get('private_restoration', {}).get('ok') is True and
                 trial['private_restoration'].get('recovery', {}).get('hardware_restored') is True and
@@ -400,8 +400,8 @@ class ProductionBackend:
         self._board().stop()
 
     def install_sources(self, acceptance, changes):
-        if set(changes['added']) != set(ADDED) or changes['remove']:
-            raise RuntimeError('Only three reviewed V18 source additions are allowed')
+        if set(changes['added']) not in (set(),set(ADDED)) or changes['remove']:
+            raise RuntimeError('Only no additions or the three reviewed V18 additions are allowed')
         b = self._board()
         for name in changes['replace'] + changes['added']:
             source = contract.APP_SOURCES / name

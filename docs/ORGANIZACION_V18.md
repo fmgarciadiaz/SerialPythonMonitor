@@ -11,6 +11,18 @@
 - `audios/`: archivos de entrada de ejemplo, conservados; no son grabaciones del monitor.
 - `diagnosticos/` y `experimentos/`: scripts e informes de medición, con la evidencia histórica conservada.
 
+## Revisión local del 26/10/2026
+
+Se conservaron las rutas de fuentes y campañas para no romper imports ni
+informes históricos. Se corrigió el índice de experimentos a V18 y se añadieron
+índices de [herramientas](../tools/README.md),
+[resultados recientes](../diagnosticos/resultados_v18/README.md) y procedencia
+de [imágenes de Radio](../assets/README.md).
+Se limpiaron cachés Python regenerables y carpetas de capturas vacías;
+[inventario](orden_archivos_20261026.json). La limpieza de imágenes temporales
+está registrada por separado en [capturas](../capturas/limpieza_20261026.json).
+No se operó el Q ni se modificaron fuentes de firmware o la pareja V17.
+
 En el Q quedan Scope V18 activa y Scope V17 detenida. Se eliminaron trece apps
 Rate Probe y sus cachés de relay, y un container saved obsoleto. El catálogo de
 ejemplos de fábrica sin inicializar se conserva. Los manifiestos de limpieza

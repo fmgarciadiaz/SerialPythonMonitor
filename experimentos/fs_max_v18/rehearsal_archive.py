@@ -14,6 +14,10 @@ import stat
 import tarfile
 
 APP = '/home/arduino/ArduinoApps/scope-v18-rate-probe-batcharena'
+ADC16_APP = '/home/arduino/ArduinoApps/scope-v18-rate-probe-adc16'
+RATEONLY_APP = '/home/arduino/ArduinoApps/scope-v18-rate-probe-rateonly'
+RATEONLY2_APP = '/home/arduino/ArduinoApps/scope-v18-rate-probe-rateonly2'
+CATALOG_APP = '/home/arduino/ArduinoApps/scope-v18-rate-probe-catalog'
 WORK_PREFIX = '/home/arduino/.cache/serialmonitor/v18-rehearsal-'
 PRODUCTION_APP = '/home/arduino/ArduinoApps/scope-v18'
 PRODUCTION_WORK_PREFIX = '/home/arduino/.cache/serialmonitor/v18-production-'
@@ -234,13 +238,13 @@ def main(argv=None):
     parser.add_argument('--folder')
     parser.add_argument('--manifest-sha256')
     args = parser.parse_args(argv)
-    if args.root not in (APP, PRODUCTION_APP) or Path(args.root).resolve() != Path(args.root):
+    if args.root not in (APP, ADC16_APP, RATEONLY_APP, RATEONLY2_APP, CATALOG_APP, PRODUCTION_APP) or Path(args.root).resolve() != Path(args.root):
         raise ValueError('Only explicit private or production V18 app roots are accepted')
     if args.action == 'snapshot':
         result = dict(source_files=source_files(snapshot(args.root, 'sources')),
                       cache=snapshot(args.root, 'cache'))
     else:
-        prefix = WORK_PREFIX if args.root == APP else PRODUCTION_WORK_PREFIX
+        prefix = PRODUCTION_WORK_PREFIX if args.root == PRODUCTION_APP else WORK_PREFIX
         if (not args.folder or not args.folder.startswith(prefix)
                 or not re.fullmatch('[0-9a-f]{32}', args.folder[len(prefix):])):
             raise ValueError('Unique V18 backup folder required')

@@ -1,0 +1,74 @@
+{
+  "ok": false,
+  "complete": true,
+  "cases": [
+    {
+      "variant": "fixed10",
+      "functional_ok": true,
+      "restored": true,
+      "visible_gui_ok": true,
+      "exposed_fraction": 1.0,
+      "visible_analysis_hz": 9.717100697324302,
+      "visible_measurement_seconds": 105.99869571009185,
+      "crop_active": false,
+      "evidence": "diagnosticos/resultados_v18/radio_rate_check_20261026_182105/report.json",
+      "errors": [],
+      "identity": {
+        "board_serial": "1060031107",
+        "app": "scope-v18-main-1",
+        "firmware_sha256": "37f049fa029ad62a10767c56dc586b2c3697f8d250a0b8a7396570ce8e0c7060",
+        "relay_sha256": "27da0bc4860401df27eef50429f2ec881bfd3b51b1893d1fe3bacb9e922f56ae"
+      }
+    },
+    {
+      "variant": "adaptive",
+      "functional_ok": true,
+      "restored": true,
+      "visible_gui_ok": true,
+      "exposed_fraction": 1.0,
+      "visible_analysis_hz": 10.144463685706794,
+      "visible_measurement_seconds": 106.06770681391936,
+      "crop_active": false,
+      "evidence": "diagnosticos/resultados_v18/radio_rate_check_20261026_182335/report.json",
+      "errors": [],
+      "identity": {
+        "board_serial": "1060031107",
+        "app": "scope-v18-main-1",
+        "firmware_sha256": "37f049fa029ad62a10767c56dc586b2c3697f8d250a0b8a7396570ce8e0c7060",
+        "relay_sha256": "27da0bc4860401df27eef50429f2ec881bfd3b51b1893d1fe3bacb9e922f56ae"
+      }
+    },
+    {
+      "variant": "adaptive_crop",
+      "functional_ok": false,
+      "restored": true,
+      "visible_gui_ok": true,
+      "exposed_fraction": 1.0,
+      "visible_analysis_hz": 9.255996137299691,
+      "visible_measurement_seconds": 80.92051778000314,
+      "crop_active": true,
+      "evidence": "diagnosticos/resultados_v18/radio_rate_check_20261026_182606/report.json",
+      "errors": [
+        "RuntimeError: El Q cerr\u00f3 el flujo.",
+        "RuntimeError: El Q cerr\u00f3 el flujo.",
+        "Assertion failed: radio_stop_confirmed",
+        "Assertion failed: radio_hold_completed",
+        "Assertion failed: shutdown_confirmed"
+      ],
+      "identity": {
+        "board_serial": "1060031107",
+        "app": "scope-v18-main-1",
+        "firmware_sha256": "37f049fa029ad62a10767c56dc586b2c3697f8d250a0b8a7396570ce8e0c7060",
+        "relay_sha256": "27da0bc4860401df27eef50429f2ec881bfd3b51b1893d1fe3bacb9e922f56ae"
+      }
+    }
+  ],
+  "source_hashes": {
+    "monitor/v18/spectrum.py": "f0a3cfbeb6a2cfbdda51f5273627341d4cd6a424815b660e6ac480af0dc2e20a",
+    "monitor/v18/fft_cadence.py": "ae9af10b4adb0a14d08573acb578b9e876a05fe155b1aabfececae5766cb279d",
+    "tools/gui_live_smoke_v18.py": "2a47f7fcc521e216cc4ba2b1202e1b1750cf23167adc547e2362729e815d2230",
+    "tools/probe_radio_rate_v18.py": "6a1af86db7bb807044216223233ba0b1f74674c648572fb8f02b413b5f52d15f"
+  },
+  "hardware_changed": false,
+  "functional_ok": false
+}

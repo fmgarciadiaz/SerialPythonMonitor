@@ -1,0 +1,106 @@
+{
+  "ok": true,
+  "deployment": false,
+  "profile": {
+    "bits": 8,
+    "channels": 1,
+    "ticks": 86,
+    "node_pairs": 3488,
+    "queue_slots": 8,
+    "headroom": true,
+    "isolated_headroom": true,
+    "combined_qualified": true,
+    "headroom_scope": "ADC only; joint GUI/RADIO/A0 functionality tested separately",
+    "validation": "physical_60s_3x120s_and_gui_us120",
+    "acceptance_seconds": [
+      60,
+      120,
+      120,
+      120
+    ],
+    "evidence": "experimentos/fs_max_v18/resultados/20261025_153648/report.json",
+    "gui_evidence": "diagnosticos/resultados_v18/gui_private_20261025_152933/report.json",
+    "analog_enob_qualified": false,
+    "compact_adc8_ipc": true,
+    "installed_evidence": "diagnosticos/resultados_v18/rateonly_production_update_20261025.json",
+    "firmware_sha256": "545c240499a65b67a526ea8aae6fc0c7a9a671419955175f5f32a387e5388f23",
+    "relay_sha256": "3c663944e85229549935d3064f6ffbf2c7d709aace4484e6de8b7a0d6255ae7f",
+    "installed_gui_evidence": "diagnosticos/resultados_v18/rateonly_installed_20261025_171653/new8.json"
+  },
+  "baseline": {
+    "schema": 1,
+    "identity": {
+      "board_serial": "1060031107",
+      "app": "scope-v18-main-1",
+      "firmware_sha256": "37f049fa029ad62a10767c56dc586b2c3697f8d250a0b8a7396570ce8e0c7060",
+      "relay_sha256": "27da0bc4860401df27eef50429f2ec881bfd3b51b1893d1fe3bacb9e922f56ae"
+    },
+    "adc_bits": 14,
+    "adc_period": 32,
+    "generator": {
+      "wave": 0,
+      "enabled": 0,
+      "mode": 0,
+      "frequency": 2500,
+      "final_frequency": 2500,
+      "low": 0,
+      "high": 4095,
+      "duration": 1000,
+      "duration_us": 0,
+      "duty": 50
+    }
+  },
+  "identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v18-main-1",
+    "firmware_sha256": "37f049fa029ad62a10767c56dc586b2c3697f8d250a0b8a7396570ce8e0c7060",
+    "relay_sha256": "27da0bc4860401df27eef50429f2ec881bfd3b51b1893d1fe3bacb9e922f56ae"
+  },
+  "display_guard": {
+    "pid": 55650,
+    "timeout_seconds": 600,
+    "released": true
+  },
+  "command": [
+    "/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/bin/python",
+    "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/tools/gui_live_smoke_v18.py",
+    "--serial",
+    "1060031107",
+    "--output",
+    "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v18/radio_rate_check_20261026_183757/gui.json",
+    "--bits",
+    "8",
+    "--rate",
+    "1860465",
+    "--frequency-khz",
+    "550.0",
+    "--duration",
+    "125.0",
+    "--hold-radio-seconds",
+    "120.0",
+    "--voices",
+    "20",
+    "--fft-size",
+    "65536",
+    "--scan",
+    "--crop-radios"
+  ],
+  "exit_code": 0,
+  "exposed_fraction": 1.0,
+  "paint_events": 2014,
+  "minimum_paint_hz": 8,
+  "visible_gui_ok": true,
+  "gui_ok": true,
+  "restoration": {
+    "hardware_restored": true,
+    "errors": [],
+    "recovery": {
+      "seconds": 10.024963517091237,
+      "samples": 313344,
+      "dropped": 0,
+      "fatal": 0,
+      "continuous": true
+    }
+  },
+  "identity_unchanged": true
+}

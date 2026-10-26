@@ -44,7 +44,7 @@ class RadioOutputPanel(QtWidgets.QWidget):
         label=QtWidgets.QLabel('Volumen · A0');label.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter);volume_box.addWidget(label)
         self.volume=dial_type();self.volume.setRange(0,100);self.volume.setValue(60)
         self.volume.setFixedSize(64,64);self.volume.setNotchesVisible(True)
-        self.volume.setProperty('redColor',True)
+        self.volume.setProperty('amplitudeColor',True)
         self.volume.audio_meter_level=0.
         self._meter_peak=0.;self._meter_at=0.;self._meter_level=0.
         self._meter_audio_at=0.
@@ -56,7 +56,10 @@ class RadioOutputPanel(QtWidgets.QWidget):
         offset_box.addStretch()
         levels.addLayout(volume_box,1);levels.addLayout(offset_box,1);box.addLayout(levels)
         self.volume.valueChanged.connect(self.volume_changed)
+        from monitor.v18.radio_led_spectrum import RadioLedSpectrum
+        self.audio_spectrum=RadioLedSpectrum(self);box.addWidget(self.audio_spectrum)
         self.state=QtWidgets.QLabel('Audio de RADIO → A0 · 20/40 kHz');self.state.setWordWrap(True);box.addWidget(self.state)
+        self.state.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.timer=QtCore.QTimer(self);self.timer.setInterval(200);self.timer.timeout.connect(self.sync)
 
     def volume_changed(self,value):
@@ -71,6 +74,8 @@ class RadioOutputPanel(QtWidgets.QWidget):
         if audio is None or not len(audio):return
         settings=result['settings']
         offset=result.get('audio_filter_offset',0.) if filtered else settings.radio_offset
+        if self.isVisible() and offset is not None:
+            self.audio_spectrum.feed(audio,(result.get('radio_key'),filtered,getattr(settings,'filter',None)),settings.audio_rate,offset)
         # At most 256 audio samples per batch; this is a visual meter, not clip detection.
         values=np.asarray(audio)[::max(1,math.ceil(len(audio)/256))]
         peak=float(np.max(np.abs(values-offset)))
@@ -79,13 +84,19 @@ class RadioOutputPanel(QtWidgets.QWidget):
             self._meter_audio_at=time.monotonic()
 
     def refresh_meter(self,now):
-        if now-self._meter_at<.1:return
-        elapsed=min(1.,now-self._meter_at);self._meter_at=now
         live=self.owner.radio_enabled.isChecked() and now-self._meter_audio_at<.3
-        target=min(1.,self._meter_peak*(self.volume.value()/100)/1.15) if live else 0.
-        self._meter_peak=0.
-        # Fast attack and a short release, quantized to avoid redundant repaints.
-        self._meter_level=max(target,self._meter_level-elapsed*2.) if live and self.volume.value() else 0.
+        if self.isVisible():self.audio_spectrum.refresh(now,live,self.volume.value()/100)
+        if now-self._meter_at>=.075:
+            self._meter_at=now
+            self._meter_target=min(1.,self._meter_peak*(self.volume.value()/100)/1.15) if live else 0.
+            self._meter_peak=0.
+        previous=getattr(self,'_meter_visual_at',None)
+        if previous is not None and now-previous<1/30:return
+        elapsed=1/30 if previous is None else min(1.,now-previous)
+        self._meter_visual_at=now
+        target=getattr(self,'_meter_target',0.) if live and self.volume.value() else 0.
+        tau=.045 if target>self._meter_level else .18
+        self._meter_level+=(target-self._meter_level)*(1-math.exp(-elapsed/tau))
         level=round(self._meter_level*100)/100
         if self.volume.audio_meter_level!=level:
             self.volume.audio_meter_level=level

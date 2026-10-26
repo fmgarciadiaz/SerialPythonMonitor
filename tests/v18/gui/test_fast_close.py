@@ -22,3 +22,24 @@ class FastCloseTests(unittest.TestCase):
         self.assertFalse(owner.running)
         owner._receiver_process.submit.assert_called_once_with('shutdown')
 
+    def test_close_during_wav_preparation_waits_and_ignores_late_audio(self):
+        with patch('monitor.v18.app.usb_devices',return_value=[]):w=SerialMonitorWindow()
+        w._wav_thread=MagicMock();w._wav_thread.isRunning.return_value=True
+        w.show();self.app.processEvents()
+        try:
+            with patch('monitor.v18.app.QtCore.QTimer.singleShot') as retry:
+                w.close()
+                self.assertTrue(w._wav_cancelled)
+                self.assertTrue(w._close_pending)
+                self.assertFalse(w.isVisible())
+                w._wav_thread.quit.assert_called_once()
+                retry.assert_called_once_with(100,w.close)
+            source=MagicMock()
+            with patch.object(w,'serial_worker') as worker:
+                w._wav_ready(source)
+                worker.request_wav.assert_not_called()
+            w._wav_thread.isRunning.return_value=False
+            w.close()
+            self.assertFalse(w._close_pending)
+        finally:
+            w._wav_thread.isRunning.return_value=False;w.serial_worker=None;w.close()

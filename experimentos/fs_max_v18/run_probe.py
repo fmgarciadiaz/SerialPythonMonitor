@@ -99,7 +99,7 @@ class Hardware:
         self.original=BoundedBoard(cfg);self.folder=folder;self.report=report
         self.recipe=report.get('recipe','baseline')
         self.source=EXP if self.recipe=='baseline' else EXP/self.recipe
-        suffix={'baseline':'','spin100':'','spi40_10_12':'-spi40','wide8':'-wide8','txclean':'-txclean','word14':'-word14','full8':'-full8','crc8':'-full8','wordping':'-wordping','spi16':'-spi16','batch2':'-batch2','batchfast':'-batchfast','batchnative':'-batchnative','batchstack':'-batchstack','batcharena':'-batcharena','batchquickack':'-batcharena','trace8':'-wordping','trace8time':'-wordping','alignedping':'-alignedping','adc16':'-adc16'}[self.recipe]
+        suffix={'baseline':'','spin100':'','spi40_10_12':'-spi40','wide8':'-wide8','txclean':'-txclean','word14':'-word14','full8':'-full8','crc8':'-full8','wordping':'-wordping','spi16':'-spi16','batch2':'-batch2','batchfast':'-batchfast','batchnative':'-batchnative','batchstack':'-batchstack','batcharena':'-batcharena','batchquickack':'-batcharena','trace8':'-wordping','trace8time':'-wordping','alignedping':'-alignedping','adc16':'-adc16','rateonly':'-rateonly','rateonly2':'-rateonly2','audio_catalog':'-audio-catalog','catalog_bridges':'-catalog-bridges','catalog':'-catalog'}[self.recipe]
         self.app=APP+suffix
         from experimentos.fs_max_v18.probe_journal import RECIPES
         self.app_name=RECIPES[self.app]
@@ -195,9 +195,18 @@ class Hardware:
         self.relay='/home/arduino/.cache/serialmonitor/v18-rate-probe-'+relay_digest(self.source/'relay')
         self.action('mkdir_private_relay',lambda:b.shell('mkdir','-p',self.relay))
         for p in relay_sources(self.source/'relay'):self.action('push_private_relay_'+p.name,lambda p=p:b.run('push',str(p),self.relay+'/'+p.name))
-        self.action('build_private_relay',lambda:b.shell('docker','run','--rm','--user','0:0','--security-opt','no-new-privileges',
-            '--mount',f'type=bind,src={self.relay},dst=/build','--entrypoint','sh',self.BUILD_IMAGE,'-c',
-            'apt-get update && apt-get install -y --no-install-recommends gcc libc6-dev && cc -O2 -std=c11 -Wall -Wextra -Werror /build/unoq_config_stream.c -lm -o /build/unoq_stream'))
+        receipt_path=self.source/'relay_build_receipt.json'
+        receipt=json.loads(receipt_path.read_text()) if receipt_path.exists() else None
+        reused=False
+        if receipt and receipt.get('sources')==source_manifest(self.source/'relay'):
+            try:remote_hash=b.shell('sha256sum',self.relay+'/unoq_stream',capture=True).stdout.split()[0]
+            except subprocess.CalledProcessError:remote_hash=None
+            reused=remote_hash==receipt.get('sha256')
+        self.report['relay_binary_reused']=reused
+        if not reused:
+            self.action('build_private_relay',lambda:b.shell('docker','run','--rm','--user','0:0','--security-opt','no-new-privileges',
+                '--mount',f'type=bind,src={self.relay},dst=/build','--entrypoint','sh',self.BUILD_IMAGE,'-c',
+                'apt-get update && apt-get install -y --no-install-recommends gcc libc6-dev && cc -O2 -std=c11 -Wall -Wextra -Werror /build/unoq_config_stream.c -lm -o /build/unoq_stream'))
         self.report['candidate_relay']=self.relay
 
     def restart(self):
@@ -349,14 +358,17 @@ class Hardware:
 
 def main(argv=None):
     parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--qualify',action='store_true',help='60 s + three independent 120 s runs per profile')
     parser.add_argument('--run',action='store_true');parser.add_argument('--bits',nargs='+',type=int,default=[8,10,12,14,16])
     parser.add_argument('--seconds',type=float,default=15)
     parser.add_argument('--target-ticks',nargs='+',type=int)
     parser.add_argument('--repeats',type=int,choices=range(1,4),default=1)
-    parser.add_argument('--recipe',choices=('baseline','spi40_10_12','wide8','spin100','txclean','word14','full8','crc8','wordping','spi16','batch2','batchfast','batchnative','batchstack','batcharena','batchquickack','trace8','trace8time','alignedping','adc16'),default='baseline')
+    parser.add_argument('--recipe',choices=('baseline','spi40_10_12','wide8','spin100','txclean','word14','full8','crc8','wordping','spi16','batch2','batchfast','batchnative','batchstack','batcharena','batchquickack','trace8','trace8time','alignedping','adc16','rateonly','rateonly2','audio_catalog','catalog_bridges','catalog'),default='baseline')
     args=parser.parse_args(argv);rows=[dict(row,repetition=repetition)
         for repetition in range(1,args.repeats+1)
         for row in plan(args.bits,args.seconds,args.target_ticks,args.recipe)]
+    if args.qualify:
+        rows=[dict(row,seconds=duration,repetition=i,qualification=True) for row in plan(args.bits,15,args.target_ticks,args.recipe) for i,duration in enumerate((60,120,120,120),1)]
     if not args.run:print(json.dumps(dict(private=True,transport='SPI',cases=rows),indent=2));return 0
     from monitor.v18.board_owner import board_owner
     folder=EXP/'resultados'/time.strftime('%Y%m%d_%H%M%S');folder.mkdir(parents=True)

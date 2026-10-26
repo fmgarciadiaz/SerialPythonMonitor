@@ -93,4 +93,4 @@ def estimate_bandwidth(power, rate, carrier, carriers=()):
     # Energy reaching a neighbor/Nyquist boundary is ambiguous.
     if edge+max(250,3*spacing)>=limit:return None
     needed=2*(edge+max(250,3*spacing))
-    return next((width for width in (6000,8000,10000,12000,20000) if width>=needed),None)
+    return next((width for width in (6000,8000,10000,12000,15000,20000) if width>=needed),None)
