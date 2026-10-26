@@ -1,3 +1,14 @@
+## 26/10 · Landing renovada con V18
+
+Ocho pares GIF/PNG nuevos generados offline por `tools/capture_landing_v18.py`;
+manifiesto `assets/landing_v18_manifest.json`. Diez bloques de landing con
+PNG para reducir movimiento y enlace estático explícito. Radio710 sigue
+siendo captura real; el resto son demos V18. Bode RC simulado, pendiente
+captura física cuando el usuario reconecte A0 a CH1/A2 como referencia y
+salida del circuito a CH2/A3, masa común. No iniciar ese ensayo sin aviso
+del usuario. Imágenes antiguas en `assets/historico/antes_v18_20261026/`.
+V17 y Q sin cambios en esta renovación; sin campañas activas.
+
 ## 26/10 · Orden local y presentación Radio
 
 Animación real 710 kHz con FFT16384, paneles Radio y zoom persistente en

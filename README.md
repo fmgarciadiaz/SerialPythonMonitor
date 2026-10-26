@@ -22,11 +22,16 @@ bloques; USB/ADB conecta el instrumento con la computadora.
 ordenado por el monitor, relay Linux, aplicación App Lab y sketch MCU;
 flujos de muestras y órdenes, temporizadores, DMA, IRQ, mutex, colas y carga del Q.
 
-**V18 es la versión de trabajo; V17 queda congelada con su pareja del Q.** [Parejas y respaldo](docs/PAREJAS_V17_V18.md). [Validación y límites V18](docs/VALIDACION_V18.md) · [Plan de trabajo](Plan%20de%20trabajo.md). Las imágenes ilustran cada función; algunas son demostraciones de versiones anteriores y no acreditan una nueva validación física.
+**V18 es la versión de trabajo; V17 queda congelada con su pareja del Q.** [Parejas y respaldo](docs/PAREJAS_V17_V18.md). [Validación y límites V18](docs/VALIDACION_V18.md) · [Plan de trabajo](Plan%20de%20trabajo.md). Las imágenes y animaciones principales muestran V18: Radio usa recepción real; las demás son demostraciones sintéticas y no acreditan validación física.
 
 ## V(t) · osciloscopio
 
-![Monitor en modo V(t): dos canales y respuesta RC](assets/monitor_vt.png)
+<picture>
+  <source media="(prefers-reduced-motion: reduce)" srcset="assets/monitor_vt.png">
+  <img src="assets/monitor_vt.gif" alt="V18 · V(t), señal cuadrada y respuesta RC simulada">
+</picture>
+
+[Ver imagen estática](assets/monitor_vt.png).
 
 Muestra tensión frente al tiempo para comparar entrada y salida de un circuito.
 Permite ajustar escalas y posición, estabilizar la señal con trigger, detener
@@ -78,7 +83,12 @@ sus restricciones de adquisición. [Perfiles y evidencia V18](docs/VALIDACION_V1
 
 ## FFT · espectro de frecuencia
 
-![Monitor en modo FFT Spectrum: entradas sintéticas](assets/monitor_fft_spectrum.png)
+<picture>
+  <source media="(prefers-reduced-motion: reduce)" srcset="assets/monitor_fft_spectrum.png">
+  <img src="assets/monitor_fft_spectrum.gif" alt="V18 · FFT con dos entradas sintéticas">
+</picture>
+
+[Ver imagen estática](assets/monitor_fft_spectrum.png).
 
 Descompone cada canal en sus componentes de frecuencia para observar tonos,
 armónicos y atenuación. Permite elegir tamaño de FFT, ventana, solapamiento,
@@ -90,7 +100,12 @@ al trigger de mayor energía; RUN vuelve al espectro en vivo.
 
 ## Heatmap · evolución espectral
 
-![Monitor en modo Heatmap: frecuencia, tiempo y amplitud por color](assets/monitor_heatmap.png)
+<picture>
+  <source media="(prefers-reduced-motion: reduce)" srcset="assets/monitor_heatmap.png">
+  <img src="assets/monitor_heatmap.gif" alt="V18 · heatmap de dos canales sintéticos">
+</picture>
+
+[Ver imagen estática](assets/monitor_heatmap.png).
 
 Acumula espectros para mostrar cómo cambian con el tiempo. Un eje representa
 frecuencia, el otro tiempo y el color amplitud. Sirve para seguir un sweep o
@@ -99,7 +114,12 @@ visible y comparar los dos canales.
 
 ## Bode · respuesta del circuito
 
-![Monitor en modo Bode: ganancia y fase de tres filtros RC simulados](assets/monitor_bode.png)
+<picture>
+  <source media="(prefers-reduced-motion: reduce)" srcset="assets/monitor_bode.png">
+  <img src="assets/monitor_bode.gif" alt="V18 · Bode de un filtro RC simulado; pendiente de captura física">
+</picture>
+
+[Ver imagen estática](assets/monitor_bode.png).
 
 Mide la relación V_OUT/V_IN por frecuencia: ganancia en dB y fase en grados.
 Ofrece tres paneles: **Tonos**, con asentamiento y ciclos por frecuencia;
@@ -111,14 +131,21 @@ frecuencias sin señal suficiente. Permite comparar hasta cinco curvas por
 método. Elegir el modo prepara el panel; la medición empieza con Repetir
 o Agregar. Los pulsos de 100 µs requieren el firmware experimental.
 
-Estas capturas usan señales sintéticas; FFT muestra la nueva variante
-y las otras vistas muestran la versión conservada;
-Bode ilustra tres filtros RC, sin representar una medición física.
+Las demostraciones muestran la interfaz V18 actual y señales sintéticas.
+Bode ilustra un filtro RC; su captura física está pendiente de reconectar
+el circuito. No representan mediciones de hardware. Los GIF tienen PNG
+alternativo y respetan la preferencia de reducir movimiento cuando el lector
+la admite.
 [Controles del monitor](monitor/v18/README.md) · [Análisis y Bode](docs/MONITOR_TECNICO.md).
 
 ## Generador · señales por A0
 
-![Panel del generador y señales del monitor](assets/monitor_vt.png)
+<picture>
+  <source media="(prefers-reduced-motion: reduce)" srcset="assets/monitor_generator.png">
+  <img src="assets/monitor_generator.gif" alt="V18 · controles del generador y trazas de demostración">
+</picture>
+
+[Ver imagen estática](assets/monitor_generator.png).
 
 Genera seno, cuadrada, triángulo y rampa con amplitud y offset ajustables.
 Permite trabajar con una frecuencia fija, recorrer un rango con Sweep/Chirp
@@ -129,7 +156,12 @@ La imagen ilustra el panel integrado con el osciloscopio.
 
 ## RADIO · recepción AM y sintonía
 
-![Radio V18 sintonizada a 710 kHz, con FFT de emisoras recortada y barras LED de audio](assets/monitor_radio_710.gif)
+<picture>
+  <source media="(prefers-reduced-motion: reduce)" srcset="assets/monitor_radio_710.png">
+  <img src="assets/monitor_radio_710.gif" alt="V18 · recepción real a 710 kHz y FFT recortada">
+</picture>
+
+[Ver imagen estática](assets/monitor_radio_710.png).
 
 [Ver captura estática de la recepción a 710 kHz](assets/monitor_radio_710.png).
 
@@ -148,16 +180,14 @@ Su panel incorpora diez barras de LED de audio, de verde a naranja y rojo,
 con movimiento suavizado. Funcionan también fuera del modo FFT; visualizan
 el espectro sin modificar el sonido.
 
-![Generador Radio V18 con volumen, offset y diez bandas LED; audio de demostración](assets/monitor_radio_equ.png)
+<picture>
+  <source media="(prefers-reduced-motion: reduce)" srcset="assets/monitor_radio_equ.png">
+  <img src="assets/monitor_radio_equ.gif" alt="V18 · indicadores de audio del Generador Radio, demostración">
+</picture>
 
-<details>
-<summary>Ver el indicador de audio en movimiento (demostración)</summary>
+[Ver imagen estática](assets/monitor_radio_equ.png).
 
-![Animación del Generador Radio V18 con audio sintético de demostración](assets/monitor_radio_equ.gif)
 
-[Abrir la imagen estática](assets/monitor_radio_equ.png).
-
-</details>
 
 La escucha se realiza por esa salida; no hay reproducción por parlantes PC
 implementada. [Recepción, antena y US](docs/GUIA_V18.md) ·
@@ -165,7 +195,12 @@ implementada. [Recepción, antena y US](docs/GUIA_V18.md) ·
 
 ## FILTER · procesamiento y comparación
 
-![FILTER V17 con entrada RADIO en una demostración](assets/monitor_filter.png)
+<picture>
+  <source media="(prefers-reduced-motion: reduce)" srcset="assets/monitor_filter.png">
+  <img src="assets/monitor_filter.gif" alt="V18 · FILTER con CH1 de demostración">
+</picture>
+
+[Ver imagen estática](assets/monitor_filter.png).
 
 Elige su propia entrada y procesa CH1, CH2 o el audio de RADIO. Permite
 comparar la señal original y la filtrada en temporal o análisis espectral;
@@ -177,7 +212,12 @@ La captura muestra el selector de entrada y los controles del filtro.
 
 ## Wav · grabación y reproducción
 
-![Monitor con controles Wav y señales de demostración](assets/monitor_wav.png)
+<picture>
+  <source media="(prefers-reduced-motion: reduce)" srcset="assets/monitor_wav.png">
+  <img src="assets/monitor_wav.gif" alt="V18 · panel Wav con trazas de demostración; sin reproducción física">
+</picture>
+
+[Ver imagen estática](assets/monitor_wav.png).
 
 Graba las entradas **A2 como L** y **A3 como R** en WAV estéreo PCM16,
 con el mismo botón de registro que CSV. El selector permite elegir el formato;
@@ -199,9 +239,14 @@ Es reproducción de archivos; no crea una salida de audio del sistema operativo.
 
 ## Synth · FM, ondas y modelos físicos
 
-![Monitor con controles Synth y señales de demostración](assets/monitor_synth.png)
+<picture>
+  <source media="(prefers-reduced-motion: reduce)" srcset="assets/monitor_synth.png">
+  <img src="assets/monitor_synth.gif" alt="V18 · panel Synth con trazas de demostración; sin reproducción física">
+</picture>
 
-Mini sintetizador **mono de salida y polifónico de nueve voces**, controlado
+[Ver imagen estática](assets/monitor_synth.png).
+
+Mini sintetizador **mono de salida y polifónico de veinte voces**, controlado
 por MIDI o Play. Ofrece **Osc 1, Osc 2 y Osc 3**, FM con feedback, seno,
 cuadrada, triángulo y rampa; ADSR por oscilador, mezcla, detune y filtros
 pasa bajos, pasa altos, pasa banda y notch.

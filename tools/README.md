@@ -12,6 +12,7 @@ se importan desde pruebas y campañas.
 | Comprobación RADIO/A0 con restauración | `probe_radio_rate_v18.py` |
 | Catálogo y evidencia de tasas V18 | `probe_catalog_gui_v18.py`, `build_rate_evidence_v18.py` |
 | Calibración Bode | `calibrate_bode.py`, `calibrate_bode_matrix.py` |
+| GIF/PNG de presentación V18, sin Q | `capture_landing_v18.py` |
 
 Los nombres con V17 y los sincronizadores antiguos son soporte histórico;
 no usarlos para actualizar la pareja V18. Las pruebas físicas requieren
