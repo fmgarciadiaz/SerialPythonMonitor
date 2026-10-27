@@ -51,9 +51,8 @@ class RadioOutputPanel(QtWidgets.QWidget):
         volume_box.addWidget(self.volume,0,QtCore.Qt.AlignmentFlag.AlignCenter)
         self.value=QtWidgets.QLabel('60 %');self.value.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter);volume_box.addWidget(self.value)
         offset_label=QtWidgets.QLabel('Offset');offset_label.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-        offset_box.addWidget(offset_label);offset_box.addStretch()
+        offset_box.addWidget(offset_label)
         self.offset_box=offset_box
-        offset_box.addStretch()
         levels.addLayout(volume_box,1);levels.addLayout(offset_box,1);box.addLayout(levels)
         self.volume.valueChanged.connect(self.volume_changed)
         from monitor.v18.radio_led_spectrum import RadioLedSpectrum

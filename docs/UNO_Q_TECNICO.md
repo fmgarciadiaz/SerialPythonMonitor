@@ -1,8 +1,8 @@
 # Arduino UNO Q · MCU, DMA y circuito
 
-[Arquitectura completa del sistema](ARQUITECTURA.md)
+[Arquitectura completa del sistema](ARQUITECTURA_V18.md)
 
-[Proyecto](../README.md) · [Firmware V16](../arduino/v16/README.md)
+[Proyecto](../README.md) · [Firmware V18](../arduino/v18/README.md)
 
 ## MCU y MPU en la pareja actual
 
@@ -12,9 +12,9 @@ genera la salida DAC de A0. El MPU ejecuta Linux y App Lab; aloja el
 relay nativo que intercambia tramas SPI con el MCU y las entrega al PC
 por TCP reenviado mediante USB/ADB. El monitor Python se ejecuta en el PC.
 
-La pareja actual monitor/MCU/relay V16 usa SCP1 V4 de 992 bytes. El ADC usa
-54 MHz mediante PLL2: admite dual hasta 632,41 kHz por canal en ADC8,
-76,23 kHz en ADC16 con oversampling ×16, y CH1 hasta 1,221 MHz en ADC8.
+La pareja actual monitor/MCU/relay es V18. Los límites por resolución y
+canales se mantienen en la [Guía V18](GUIA_V18.md); los ensayos V16 de esta
+página describen perfiles históricos y no sustituyen ese catálogo.
 [Todas las frecuencias por resolución y salida](CONFIGURACION_ADQUISICION.md#perfiles-de-adquisición).
 Monitor V15/Q V13 Pulse y Monitor V12/Q V11 P992 son parejas históricas SCP1 V3.
 El kernel de reloj es compartido con DAC: el
@@ -29,10 +29,10 @@ Los ensayos anteriores a este cambio describen el reloj anterior.
 ```mermaid
 flowchart LR
  A0[A0 / DAC0: estímulo] --> IN[Entrada del circuito]
- IN --> A2[A2: V_IN / ADC1_IN11]
+ IN --> A2[A2: CH1 / ADC1_IN11]
  IN --> DUT[Circuito bajo prueba]
  DUT --> OUT[Salida del circuito]
- OUT --> A3[A3: V_OUT / ADC1_IN12]
+ OUT --> A3[A3: CH2 / ADC1_IN12]
  G[GND común] --- DUT
 ```
 
@@ -88,7 +88,7 @@ aplicación por conversión ni una ISR propia de adquisición. Un flag TC aislad
 no demuestra que el bloque siga disponible: se verifica también la posición
 del DMA y se detiene ante sobreescritura, overrun ADC o captura temporal perdida.
 Los nodos publicados se encolan para el transporte sin insertar texto de debug
-en el flujo binario. [Implementación](../arduino/v16/oscilloscope/sketch/acquisition.h).
+en el flujo binario. [Implementación](../arduino/v18/oscilloscope/sketch/acquisition.h).
 
 ### SPI: IRQ de fin/error y semáforo
 
@@ -97,7 +97,7 @@ El callback registra fin/error de cada dirección y libera `transfer_done` cuand
 ambas terminaron o hubo un fallo. El hilo espera ese semáforo y controla plazos;
 DMA mueve los bytes. El sketch evita reemplazar las ISR compartidas del core.
 READY indica al MPU que la siguiente transferencia está preparada; se retira
-al completar la operación. [Servicio SPI](../arduino/v16/oscilloscope/sketch/sketch.ino).
+al completar la operación. [Servicio SPI](../arduino/v18/oscilloscope/sketch/sketch.ino).
 
 ### DAC: tabla periódica y bloques WAV
 

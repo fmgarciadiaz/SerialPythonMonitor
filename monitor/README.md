@@ -1,4 +1,4 @@
-# Monitor Python
+# Arduscopio Q
 
 Aplicación actual: **[V18](v18/README.md)**.
 

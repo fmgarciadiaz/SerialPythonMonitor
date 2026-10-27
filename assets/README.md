@@ -1,4 +1,4 @@
-# Imágenes de presentación
+# Arduscopio Q · imágenes de presentación
 
 El README raíz es la landing del proyecto: conservar sus badges, capturas y explicaciones de módulos, conforme a `AGENTS.md`.
 

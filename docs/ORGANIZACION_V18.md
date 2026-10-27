@@ -1,4 +1,4 @@
-# Organización del proyecto
+# Arduscopio Q · organización del proyecto
 
 - `monitor/v18/`: aplicación actual autocontenida y soporte de Preparar Q.
 - `arduino/v18/`: firmware y relay pareados con el monitor actual.

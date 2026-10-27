@@ -128,7 +128,7 @@ def main():
                 palette=Image.new('P',(1,1));palette.putpalette(colors+grayscale)
                 compact=[image.quantize(palette=palette,dither=Image.Dither.NONE) for image in frames]
                 compact[0].save(gif,save_all=True,append_images=compact[1:],duration=80,loop=0,optimize=True)
-                manifest.append(dict(name=name,source='V18 GUI, offline synthetic demo; no Q',frames=len(frames),gif_size=list(frames[0].size),png_scale=2,palette_colors=256,gif_bytes=gif.stat().st_size))
+                manifest.append(dict(name=name,application='Arduscopio Q',source='V18 GUI, offline synthetic demo; no Q',frames=len(frames),gif_size=list(frames[0].size),png_scale=2,palette_colors=256,gif_bytes=gif.stat().st_size))
                 print(name,gif.stat().st_size,flush=True)
             finally:
                 w.close();app.processEvents()

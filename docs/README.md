@@ -1,4 +1,4 @@
-# Documentación V18
+# Arduscopio Q · documentación V18
 
 [Presentación del proyecto con imágenes](../README.md).
 
@@ -7,7 +7,7 @@
 | Uso, conexión, Preparar Q y límites | [Guía V18](GUIA_V18.md) |
 | Componentes, adquisición, DSP y salida A0 | [Arquitectura V18](ARQUITECTURA_V18.md) |
 | Ensayos y alcance de aceptación | [Validación V18](VALIDACION_V18.md) |
-| Fuentes del monitor | [Monitor V18](../monitor/v18/README.md) |
+| Fuentes del monitor | [Arduscopio Q V18](../monitor/v18/README.md) |
 | Pareja MCU y relay | [Arduino V18](../arduino/v18/README.md) |
 | Organización y limpieza | [Organización](ORGANIZACION_V18.md) |
 | Trabajo pendiente | [Plan](../Plan%20de%20trabajo.md) |

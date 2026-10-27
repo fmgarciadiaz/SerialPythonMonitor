@@ -1,7 +1,11 @@
-# Monitor V18: uso y límites
+# Arduscopio Q V18: uso y límites
 
-V18 reúne osciloscopio, FFT, heatmap, Bode, FILTER, RADIO, generador, WAV y
+Arduscopio Q V18 reúne osciloscopio, FFT, heatmap, Bode, FILTER, RADIO, generador, WAV y
 Synth de veinte voces. [Presentación e imágenes](../README.md).
+
+El nombre visible de la aplicación es **Arduscopio Q**. La app del Q conserva
+el identificador técnico **Scope V18**, sus rutas y hashes aceptados; el nombre
+del repositorio y los comandos `monitor.v18` también se conservan.
 
 ## Inicio y Preparar Q
 
@@ -10,8 +14,25 @@ Ejecutar `python -m monitor.v18 --gui`. Seleccionar el Q por USB.
 coincide, no vuelve a instalarla. Puede recuperar una pareja aceptada detenida
 y actualizar una instalación existente mediante respaldo completo y rollback.
 No actúa mientras el monitor adquiere ni reemplaza otras apps activas.
-Una placa sin Scope V18 requiere instalación inicial; el botón lo indica y no
-sobrescribe aplicaciones desconocidas. «Conectar» sólo abre la pareja instalada.
+En una placa sin Scope V18, «Preparar Q» también realiza la primera instalación:
+comprueba el destino vacío, compila y verifica el firmware aceptado, importa
+Scope V18 y arranca su relay. Sólo confirma éxito después de comprobar identidad,
+fuentes y diez segundos de adquisición continua. «Conectar» sólo abre la pareja instalada.
+
+La placa debe tener el sistema UNO Q operativo, ADB autorizado, App CLI y el
+entorno Arduino del firmware aceptado. La versión y el hash de App CLI se
+verifican contra el entorno validado; si difieren se informa el problema antes
+de instalar. No reinstala el sistema operativo ni instala controladores del PC.
+La compilación o App CLI pueden requerir conexión a Internet para sus dependencias.
+
+No sobrescribe una V18 parcial, otra carpeta con el mismo destino ni apps
+desconocidas. Una app o relay ajeno activo debe detenerse antes. Una V17 detenida
+puede permanecer instalada. Si falla después de importar, intenta detener sólo
+los recursos nuevos propios y conservar sus fuentes en una carpeta de diagnóstico;
+si la detención falla no mueve la carpeta. No puede restaurar un firmware inicial
+desconocido de una placa sin pareja previa. El informe indica cualquier fallo de
+limpieza antes de reintentar. La ruta nueva tiene pruebas automatizadas; la
+primera instalación sobre un Q realmente vacío aún requiere validación física.
 
 El soporte del botón vive en `monitor/v18/q_support`, con recibo, binarios y
 verificadores propios. No usa herramientas ni módulos de versiones anteriores.

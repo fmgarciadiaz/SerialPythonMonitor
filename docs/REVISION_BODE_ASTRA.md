@@ -1,3 +1,5 @@
+> Documento histórico: los nombres V_IN y V_OUT corresponden a los actuales CH1 (A2) y CH2 (A3). Para controles y conexiones vigentes, consultar la [Guía V18](GUIA_V18.md).
+
 # Revisión de Bode por Astra · 2026-10-06
 
 Revisión del estado de trabajo de V13, solicitada por el usuario. Alcance:

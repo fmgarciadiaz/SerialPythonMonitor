@@ -1,4 +1,4 @@
-# Arquitectura V18
+# Arduscopio Q · arquitectura V18
 
 El STM32 del UNO Q adquiere A2/A3 y genera A0 con temporizadores y DMA.
 Linux ejecuta Scope V18 y un relay nativo independiente; USB/ADB lleva muestras

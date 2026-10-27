@@ -1,3 +1,31 @@
+## 26/10 · Primera instalación desde Preparar Q
+
+El botón agrega una ruta para un Q sin Scope V18. Implementación autocontenida
+en `monitor/v18/q_support/bootstrap.py`, seleccionada por `service.py` sólo
+cuando falta la pareja y un inventario explícito confirma el destino vacío.
+No considera un fallo genérico de conexión como permiso para sobrescribir.
+
+Antes de importar: propietario único, ausencia de lectores, apps/relays ajenos
+activos y colisiones de nombre/carpeta; App CLI con versión y SHA256 del entorno
+validado; verificador remoto íntegro; compilación aislada de fuentes aceptadas y
+SHA256 exacto del firmware y relay. Luego importa Scope V18, inicia la app,
+comprueba caché/BIN, arranca el relay, verifica identidad/fuentes y exige diez
+segundos de adquisición continua con salida del generador apagada y WAV inactivo.
+
+Cada fase se registra con intención y resultado. Un fallo conserva `ok=false`:
+se detienen únicamente recursos nuevos atribuibles a este intento y se conserva
+la instalación fallida para diagnóstico. No se mueve la carpeta si una parada
+falla ni se modifica un relay con otra identidad. Una instalación parcial ajena
+se rechaza. No se promete restaurar el firmware anterior desconocido de un Q
+sin pareja previa. V17 detenida puede permanecer instalada y no se modifica.
+
+Requisitos: sistema UNO Q operativo, ADB autorizado, App CLI compatible y el
+entorno Arduino instalado. La operación no instala el sistema operativo del Q
+ni controladores del PC. La primera instalación en un Q realmente vacío sigue
+pendiente de validación física; las pruebas automatizadas cubren la selección,
+orden de operaciones, verificación y fallos. La validación física histórica de
+actualizar/restaurar una app existente no certifica este nuevo camino.
+
 ## 24/10 · adapter instalado y validado
 
 El backend de producción ya se ejecutó con recibo explícito. El primer intento

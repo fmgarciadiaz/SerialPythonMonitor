@@ -3,7 +3,7 @@ from collections import deque
 from threading import Event, Lock
 from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
 import multiprocessing
-"""Monitor V18: adquisición configurable y generador DAC controlado desde el Q."""
+"""Arduscopio Q V18: adquisición configurable y generador DAC controlado desde el Q."""
 import os
 os.environ["PYQTGRAPH_QT_LIB"] = "PyQt6"
 import csv
@@ -404,6 +404,41 @@ class InstrumentLogo(QtWidgets.QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setFixedSize(180, 42)
+        self.info_button=QtWidgets.QToolButton(self)
+        logo_font=QtGui.QFont(self.font())
+        logo_font.setPointSize(12);logo_font.setBold(True);logo_font.setItalic(True)
+        text_end=72+QtGui.QFontMetricsF(logo_font).horizontalAdvance('fer.gd')
+        self.info_button.setGeometry(round(text_end)+5,11,20,20)
+        self.info_button.setIcon(QtGui.QIcon(str(ROOT/'monitor/v18/assets/info.svg')))
+        self.info_button.setIconSize(QtCore.QSize(18,18))
+        self.info_button.setCursor(QtCore.Qt.CursorShape.PointingHandCursor)
+        self.info_button.setToolTip('Acerca de Arduscopio Q')
+        self.info_button.setAccessibleName('Información de Arduscopio Q')
+        self.info_button.setStyleSheet('QToolButton {border:none;background:transparent;padding:0;} QToolButton:hover {background:#303743;border-radius:10px;}')
+        self.info_button.clicked.connect(self.show_information)
+        self.information=None
+
+    def show_information(self):
+        if self.information is None:
+            dialog=QtWidgets.QDialog(self.window(),QtCore.Qt.WindowType.Tool)
+            dialog.setWindowTitle('Acerca de Arduscopio Q')
+            dialog.setModal(False);dialog.setFixedWidth(410)
+            layout=QtWidgets.QVBoxLayout(dialog);layout.setContentsMargins(18,16,18,16);layout.setSpacing(12)
+            title=QtWidgets.QLabel('Arduscopio Q · V18')
+            title.setStyleSheet('font-size:16px;font-weight:600;color:#55dfc4;')
+            layout.addWidget(title)
+            author=QtWidgets.QLabel('Desarrollado por F. Garcia Diaz para Arduino Q')
+            author.setWordWrap(True);layout.addWidget(author)
+            details=QtWidgets.QLabel(
+                f'Python: {sys.version.split()[0]}\nPyQt: {QtCore.PYQT_VERSION_STR}\n'
+                f'Qt: {QtCore.qVersion()}\npyqtgraph: {pg.__version__}\n'
+                'Protocolo: SCP1 · versión 4\nFirmware esperado: Scope V18 · MCU y relay')
+            details.setWordWrap(True)
+            details.setTextInteractionFlags(QtCore.Qt.TextInteractionFlag.TextSelectableByMouse)
+            details.setStyleSheet('background:#171c24;border:1px solid #454d59;border-radius:6px;padding:10px;color:#b9c3d0;')
+            layout.addWidget(details)
+            self.information=dialog
+        self.information.show();self.information.raise_()
 
     def paintEvent(self, event):
         painter = QtGui.QPainter(self)
@@ -426,7 +461,7 @@ class InstrumentLogo(QtWidgets.QWidget):
         painter.setPen(QtGui.QColor('#aeb8c8'))
         metrics = QtGui.QFontMetricsF(font)
         baseline = 9 + (27 - metrics.height()) / 2 + metrics.ascent()
-        prefix = 'fer·'
+        prefix = 'fer.'
         painter.drawText(QtCore.QPointF(72, baseline), prefix)
         painter.setPen(QtGui.QColor('#55dfc4'))
         painter.drawText(QtCore.QPointF(72 + metrics.horizontalAdvance(prefix), baseline), 'gd')
@@ -1324,7 +1359,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self.render_timer.timeout.connect(self._render_with_diagnostics)
         self.render_timer.start(RENDER_INTERVAL_MS)
 
-        self.setWindowTitle('Scope V18 · PyQt6 · protocolo 4 · firmware Q V18')
+        self.setWindowTitle('Arduscopio Q · V18')
         self.setWindowIcon(QtGui.QIcon(str(ROOT / 'monitor/v18/assets/scope_app.svg')))
         self.baud_input.setText('—')
         self.baud_input.setReadOnly(True)
@@ -1865,7 +1900,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         destination_layout.addWidget(QtWidgets.QLabel('DETALLE / FPS'), 0, 0)
         destination_layout.addLayout(detail_row, 0, 1, 1, 3)
         self.prepare_q_button = QtWidgets.QPushButton('Preparar Q')
-        self.prepare_q_button.setToolTip('Verificar la pareja Scope V18 aceptada o actualizarla con respaldo y recuperación.')
+        self.prepare_q_button.setToolTip('Preparar Arduscopio Q: instalar Scope V18 en un Q vacío, verificar la pareja aceptada o actualizarla con respaldo y recuperación.')
         self.prepare_q_button.setEnabled(True)
         self.prepare_q_button.clicked.connect(self.prepare_q)
         destination_layout.addWidget(self.prepare_q_button, 1, 3)
@@ -2069,7 +2104,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self.plot_widget.setMenuEnabled(False)
         self.plot_widget.setMouseEnabled(x=True, y=True)
         self.plot_widget.showGrid(x=True, y=True, alpha=0.35)
-        self.plot_widget.setTitle("SCOPE V18 - CH1 [A2] / CH2 [A3]")
+        self.plot_widget.setTitle("Arduscopio Q V18 - CH1 [A2] / CH2 [A3]")
         self.plot_widget.getAxis("bottom").setTextPen("#ffffff")
         self.plot_widget.getAxis("left").setTextPen("#ffffff")
         self.plot_widget.setLabel("bottom", "Muestras en ventana", color="#ffffff")
@@ -2948,7 +2983,24 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             control.setKeyboardTracking(False);control.setFixedHeight(CONTROL_HEIGHT)
             control.setMinimumWidth(0)
             control.setSizePolicy(QtWidgets.QSizePolicy.Policy.Ignored,QtWidgets.QSizePolicy.Policy.Fixed)
-        self.radio_output_panel.offset_box.insertWidget(2,self.radio_offset)
+        self.radio_offset.setParent(self.radio_output_panel);self.radio_offset.hide()
+        self.radio_offset_dial=OffsetDial()
+        self.radio_offset_dial.setFixedSize(64,64)
+        self.radio_offset_dial.setProperty('virtualColor',True)
+        self.radio_offset_dial.setRange(-330,330)
+        self.radio_offset_dial.setSingleStep(1);self.radio_offset_dial.setPageStep(10)
+        self.radio_offset_dial.setToolTip('Offset digital: 0,01 V por paso. Shift + arrastrar: ajuste fino; doble clic: 1,65 V.')
+        self.radio_offset_dial.centered.connect(lambda:self.radio_offset.setValue(1.65))
+        self.radio_offset_dial.valueChanged.connect(lambda value:self.radio_offset.setValue(value/100))
+        self.radio_offset_value=QtWidgets.QLabel()
+        self.radio_offset_value.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        def sync_radio_offset(value):
+            with QtCore.QSignalBlocker(self.radio_offset_dial):self.radio_offset_dial.setValue(round(value*100))
+            self.radio_offset_value.setText(number(value,'.2f')+' V')
+        self.radio_offset.valueChanged.connect(sync_radio_offset)
+        sync_radio_offset(self.radio_offset.value())
+        self.radio_output_panel.offset_box.addWidget(self.radio_offset_dial,0,QtCore.Qt.AlignmentFlag.AlignHCenter)
+        self.radio_output_panel.offset_box.addWidget(self.radio_offset_value)
         gain_box=QtWidgets.QVBoxLayout();gain_box.setSpacing(4)
         gain_label=QtWidgets.QLabel('Gain');gain_label.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         gain_label.setStyleSheet('color:#8f98a8;background:transparent;border:none;padding:0;')
@@ -5597,7 +5649,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
         self._q_preparation.progress.connect(self._set_connection_status)
         self._q_preparation.result.connect(self._q_prepared)
         self._q_preparation.finished.connect(self._q_preparation_finished)
-        self._set_connection_status('Verificando Scope V18…')
+        self._set_connection_status('Verificando la pareja de Arduscopio Q…')
         self._q_preparation.start()
 
     def _q_prepared(self, success, text):
@@ -6527,7 +6579,7 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
             self.last_fps_calc = now_calc
             mode_str = "RUN" if self.is_running else "STOP"
             self.plot_widget.setTitle(
-                f"SCOPE V18 [{mode_str}] | Muestras: {number(self.sample_counter, formats.n_)} | "
+                f"Arduscopio Q V18 [{mode_str}] | Muestras: {number(self.sample_counter, formats.n_)} | "
                 f"Ventana: {number(self.h_scale, formats.n_)} | Fs: {fs_text} | FPS: {number(self.current_fps, formats.n_1f)}"
             )
 
@@ -6675,6 +6727,8 @@ class SerialMonitorWindow(QtWidgets.QMainWindow):
 def main():
     prepare_platform_plugins()
     app = QtWidgets.QApplication([])
+    app.setApplicationName('Arduscopio Q')
+    app.setApplicationDisplayName('Arduscopio Q')
     app.setWindowIcon(QtGui.QIcon(str(ROOT / 'monitor/v18/assets/scope_app.svg')))
     app.setStyle("Fusion")
     app.setFont(QtGui.QFontDatabase.systemFont(QtGui.QFontDatabase.SystemFont.GeneralFont))

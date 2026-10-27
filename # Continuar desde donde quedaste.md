@@ -1,3 +1,26 @@
+## 26/10 · Nombre del producto: Arduscopio Q
+
+Aplicado en título Qt, marca vectorial, encabezado temporal, ayuda CLI,
+actividad macOS, documentación actual, badge, acceso IDE y diez GIF/PNG
+regenerados. El identificador técnico de App Lab sigue Scope V18 y conserva
+fuentes, hashes, nombres de contenedores y rutas aceptados. Repositorio y
+comandos monitor.v18 mantienen sus rutas. V17 intacta. Regla en AGENTS.md.
+19 pruebas de GUI/preparación/bootstrap PASS, enlaces y medios verificados.
+Sin Q operado ni campañas activas.
+
+## 26/10 · Preparar Q también instala desde cero
+
+Nueva ruta `monitor/v18/q_support/bootstrap.py`, integrada en `service.py`: sólo
+si falta la pareja y el inventario confirma destino vacío. Stage/compilación y
+hashes aceptados antes de importar/arrancar; nueva app y relay, identidad/fuentes
+y 10 s de adquisición requeridos. CLI compatible y entorno Arduino previos.
+Protege V17/otras apps/relays; rechaza instalaciones parciales desconocidas.
+Fallo: detiene sólo nuevos recursos propios y conserva diagnóstico; no mueve
+fuentes si parar falla; no promete recuperar firmware previo desconocido.
+265 generales y 35 focalizadas PASS. Evidencia: `diagnosticos/resultados_v18/
+bootstrap_20261026/report.json`. Q actual sin operar, pareja aceptada intacta.
+PENDIENTE: primer ensayo físico con Q realmente vacío; no vaciar el actual.
+
 ## 26/10 · Calidad HD y presentación totalmente simulada
 
 Por pedido del usuario TODAS las imágenes principales de landing son ahora

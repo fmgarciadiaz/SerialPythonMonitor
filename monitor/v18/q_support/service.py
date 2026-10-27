@@ -12,6 +12,10 @@ from monitor.v18.io.live_connection import installed_identity
 RECEIPT = Path(__file__).with_name('accepted') / 'acceptance.json'
 
 
+class MissingScopePair(RuntimeError):
+    """Missing containers are not proof that the target is safe to overwrite."""
+
+
 def wake_accepted_pair(backend, acceptance):
     """Recover a stopped accepted installation; never select another app."""
     backend._no_reader()
@@ -26,7 +30,7 @@ def wake_accepted_pair(backend, acceptance):
         app=backend._inspect(APP_CONTAINER)
         relay=backend._inspect(CONTAINER)
     except Exception as exc:
-        raise RuntimeError('Falta la pareja Scope V18; requiere instalación inicial documentada') from exc
+        raise MissingScopePair('Falta la pareja Scope V18; comprobar instalación inicial') from exc
     expected=acceptance['candidate_identity']
     if (backend._hash(APP+'/.cache/sketch/sketch.ino.bin') != expected['firmware_sha256'] or
             backend._hash(backend._relay_bin(relay)) != expected['relay_sha256']):
@@ -54,7 +58,14 @@ def prepare(serial, report_path):
             try:
                 identity = installed_identity(serial)
             except RuntimeError:
-                wake_accepted_pair(backend,acceptance)
+                try:
+                    wake_accepted_pair(backend,acceptance)
+                except MissingScopePair:
+                    from monitor.v18.q_support.bootstrap import install_empty
+                    install_empty(backend,acceptance,report,
+                                  lambda:atomic_report(report_path,report))
+                    atomic_report(report_path,report)
+                    return report
                 identity=installed_identity(serial)
             backend.preflight(acceptance)
             expected = acceptance['candidate_identity']

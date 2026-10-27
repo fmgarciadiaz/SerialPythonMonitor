@@ -1,4 +1,4 @@
-# Monitor V18
+# Arduscopio Q V18
 
 Osciloscopio, generador, RADIO/FILTER, FFT, heatmap, Bode, WAV y Synth20.
 
@@ -9,7 +9,11 @@ python -m monitor.v18 --self-test
 
 No conecta al Q automáticamente. Seleccionar el dispositivo y usar Conectar;
 «Preparar Q» verifica la pareja aceptada sin reinstalarla si ya coincide, o
-actualiza una pareja existente con respaldo y recuperación. No sobrescribe
+actualiza una pareja existente con respaldo y recuperación. En un destino vacío
+también importa Scope V18, instala su pareja aceptada y exige diez segundos de
+adquisición verificada. Esta ruta nueva tiene pruebas automatizadas; la primera
+instalación en una placa realmente vacía está pendiente de validación física.
+Requiere el sistema UNO Q y el entorno Arduino/App CLI compatible. No sobrescribe
 aplicaciones desconocidas ni ejecuta preparadores de otras versiones.
 
 Código, receptor, DSP, utilidades y preparador están dentro de esta versión.

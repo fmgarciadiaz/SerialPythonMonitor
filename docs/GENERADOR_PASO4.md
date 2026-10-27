@@ -1,3 +1,5 @@
+> Documento histórico: los nombres V_IN y V_OUT corresponden a los actuales CH1 (A2) y CH2 (A3). Para controles y conexiones vigentes, consultar la [Guía V18](GUIA_V18.md).
+
 > Guía de implementación histórica. Para los límites productivos V17 usar [Generador ampliado](GENERADOR_200K_V17.md) y [Estado vigente](ESTADO_ACTUAL_V17.md). La descripción heredada de tablas y frecuencias de esta página corresponde a sus ensayos originales.
 
 # Paso cuatro: generador de ondas

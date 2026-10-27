@@ -1,4 +1,4 @@
-# Pareja del Q para Monitor V18
+# Pareja del Q para Arduscopio Q V18
 
 - App: `Scope V18`, ruta `/home/arduino/ArduinoApps/scope-v18`.
 - Fuentes: `arduino/v18/oscilloscope` y `arduino/v18/relay`.

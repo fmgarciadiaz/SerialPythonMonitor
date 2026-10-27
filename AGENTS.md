@@ -1,4 +1,8 @@
-# SerialPythonMonitor: instrucciones de documentación
+# Arduscopio Q: instrucciones de documentación
+
+El nombre visible del programa es **Arduscopio Q**. Conservar los identificadores
+técnicos de despliegue y las rutas de Scope V18; no renombrar la pareja aceptada
+como parte de cambios de marca.
 
 El README raíz es la landing de presentación del proyecto. Conservar badges, imágenes de cada función del monitor, explicación de los módulos, capacidades, arquitectura y puesta en marcha. Actualizar versiones y cifras sin reemplazar esa presentación por un índice técnico ni eliminar sus imágenes.
 

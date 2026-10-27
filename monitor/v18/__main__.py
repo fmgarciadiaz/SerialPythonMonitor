@@ -1,13 +1,13 @@
-"""V18 development entrypoint; never opens Q automatically."""
+"""Arduscopio Q V18 entrypoint; never opens Q automatically."""
 import argparse
 import json
 import unittest
 
 
 def main():
-    parser=argparse.ArgumentParser(description='V18 monitor with acquisition in a separate process')
+    parser=argparse.ArgumentParser(description='Arduscopio Q V18: adquisición en un proceso separado')
     parser.add_argument('--self-test',action='store_true',help='Run offline tests, including localhost TCP')
-    parser.add_argument('--gui',action='store_true',help='Open the V18 monitor; connects only on user action')
+    parser.add_argument('--gui',action='store_true',help='Abrir Arduscopio Q V18; conecta sólo por acción del usuario')
     args=parser.parse_args()
     if args.gui:
         from monitor.v18.app import main as gui_main

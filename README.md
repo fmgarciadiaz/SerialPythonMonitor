@@ -1,6 +1,10 @@
-# fergd · Osciloscopio, generador y radio AM · UNO Q
+# Arduscopio Q · Osciloscopio, generador y radio AM · UNO Q
 
-[![GitHub](https://img.shields.io/badge/GitHub-SerialPythonMonitor-181717?logo=github)](https://github.com/fmgarciadiaz/SerialPythonMonitor)
+Uso gratuito **no comercial**, con cita **«Arduscopio Q, Fernando Garcia Diaz»**.
+Para uso comercial, contactar al autor. [Licencia](LICENSE.md) ·
+[Dependencias y distribución](licencias/TERCEROS.md).
+
+[![GitHub](https://img.shields.io/badge/GitHub-Arduscopio_Q-181717?logo=github)](https://github.com/fmgarciadiaz/SerialPythonMonitor)
 [![Último commit](https://img.shields.io/github/last-commit/fmgarciadiaz/SerialPythonMonitor?logo=github)](https://github.com/fmgarciadiaz/SerialPythonMonitor/commits)
 [![Stars](https://img.shields.io/github/stars/fmgarciadiaz/SerialPythonMonitor?style=flat&logo=github)](https://github.com/fmgarciadiaz/SerialPythonMonitor/stargazers)
 ![Python](https://img.shields.io/badge/Python-3.13-3776AB?logo=python&logoColor=white)
@@ -28,7 +32,7 @@ flujos de muestras y órdenes, temporizadores, DMA, IRQ, mutex, colas y carga de
 
 <picture>
   <source media="(prefers-reduced-motion: reduce)" srcset="assets/monitor_vt.png">
-  <img src="assets/monitor_vt.gif" alt="V18 · V(t), señal cuadrada y respuesta RC simulada">
+  <img src="assets/monitor_vt.gif" alt="Arduscopio Q V18 · V(t), señal cuadrada y respuesta RC simulada">
 </picture>
 
 [Ver imagen estática](assets/monitor_vt.png).
@@ -43,7 +47,7 @@ La imagen muestra una cuadrada y la respuesta de un filtro RC simulado.
 
 | Área | Implementación y alcance |
 |---|---|
-| Entradas | Dos canales: A2/V_IN y A3/V_OUT, rango nominal 0–3,3 V |
+| Entradas | Dos canales: A2/CH1 y A3/CH2, rango nominal 0–3,3 V |
 | Resolución ADC | 8/10/12/14 bits; 16 bits por oversampling ×16, sin implicar 16 bits de precisión efectiva |
 | Muestreo SPI V18 | Dual hasta 632,41 kHz por canal (ADC8) y 76,23 kHz (ADC16 OS); CH1 hasta 1,860 MHz (ADC8) |
 | Salida DAC | A0, 12 bits, rango nominal 0–3,3 V; amplitud y offset ajustables dentro de esos límites |
@@ -85,7 +89,7 @@ sus restricciones de adquisición. [Perfiles y evidencia V18](docs/VALIDACION_V1
 
 <picture>
   <source media="(prefers-reduced-motion: reduce)" srcset="assets/monitor_fft_spectrum.png">
-  <img src="assets/monitor_fft_spectrum.gif" alt="V18 · FFT con dos entradas sintéticas">
+  <img src="assets/monitor_fft_spectrum.gif" alt="Arduscopio Q V18 · FFT con dos entradas sintéticas">
 </picture>
 
 [Ver imagen estática](assets/monitor_fft_spectrum.png).
@@ -102,7 +106,7 @@ al trigger de mayor energía; RUN vuelve al espectro en vivo.
 
 <picture>
   <source media="(prefers-reduced-motion: reduce)" srcset="assets/monitor_heatmap.png">
-  <img src="assets/monitor_heatmap.gif" alt="V18 · heatmap de dos canales sintéticos">
+  <img src="assets/monitor_heatmap.gif" alt="Arduscopio Q V18 · heatmap de dos canales sintéticos">
 </picture>
 
 [Ver imagen estática](assets/monitor_heatmap.png).
@@ -116,16 +120,18 @@ visible y comparar los dos canales.
 
 <picture>
   <source media="(prefers-reduced-motion: reduce)" srcset="assets/monitor_bode.png">
-  <img src="assets/monitor_bode.gif" alt="V18 · Bode de un filtro RC simulado">
+  <img src="assets/monitor_bode.gif" alt="Arduscopio Q V18 · Bode de un filtro RC simulado">
 </picture>
 
 [Ver imagen estática](assets/monitor_bode.png).
 
-Mide la relación V_OUT/V_IN por frecuencia: ganancia en dB y fase en grados.
+Mide la relación entre respuesta Y y referencia X: ganancia en dB y fase
+en grados. Normalmente CH1 (A2) es la referencia y CH2 (A3) la respuesta;
+las fuentes se eligen en el panel.
 Ofrece tres paneles: **Tonos**, con asentamiento y ciclos por frecuencia;
 **Pulso**, con captura de la respuesta transitoria; y **Sweep/Chirp**, con
 barrido lineal o exponencial. Pulso promedia espectros cruzados de varios
-disparos (8 por defecto); Sweep/Chirp calcula FFT(V_OUT)/FFT(V_IN).
+disparos (8 por defecto); Sweep/Chirp calcula FFT(Y)/FFT(X), o FFT(CH2)/FFT(CH1) con esa selección.
 Ambos incluyen la cola de respuesta y descartan
 frecuencias sin señal suficiente. Permite comparar hasta cinco curvas por
 método. Elegir el modo prepara el panel; la medición empieza con Repetir
@@ -141,7 +147,7 @@ la admite.
 
 <picture>
   <source media="(prefers-reduced-motion: reduce)" srcset="assets/monitor_generator.png">
-  <img src="assets/monitor_generator.gif" alt="V18 · controles del generador y trazas de demostración">
+  <img src="assets/monitor_generator.gif" alt="Arduscopio Q V18 · controles del generador y trazas de demostración">
 </picture>
 
 [Ver imagen estática](assets/monitor_generator.png).
@@ -157,7 +163,7 @@ La imagen ilustra el panel integrado con el osciloscopio.
 
 <picture>
   <source media="(prefers-reduced-motion: reduce)" srcset="assets/monitor_radio_710.png">
-  <img src="assets/monitor_radio_710.gif" alt="V18 · simulación AM a 710 kHz y FFT recortada">
+  <img src="assets/monitor_radio_710.gif" alt="Arduscopio Q V18 · simulación AM a 710 kHz y FFT recortada">
 </picture>
 
 [Ver imagen estática](assets/monitor_radio_710.png).
@@ -179,7 +185,7 @@ el espectro sin modificar el sonido.
 
 <picture>
   <source media="(prefers-reduced-motion: reduce)" srcset="assets/monitor_radio_equ.png">
-  <img src="assets/monitor_radio_equ.gif" alt="V18 · indicadores de audio del Generador Radio, demostración">
+  <img src="assets/monitor_radio_equ.gif" alt="Arduscopio Q V18 · indicadores de audio del Generador Radio, demostración">
 </picture>
 
 [Ver imagen estática](assets/monitor_radio_equ.png).
@@ -194,7 +200,7 @@ implementada. [Recepción, antena y US](docs/GUIA_V18.md) ·
 
 <picture>
   <source media="(prefers-reduced-motion: reduce)" srcset="assets/monitor_filter.png">
-  <img src="assets/monitor_filter.gif" alt="V18 · FILTER con CH1 de demostración">
+  <img src="assets/monitor_filter.gif" alt="Arduscopio Q V18 · FILTER con CH1 de demostración">
 </picture>
 
 [Ver imagen estática](assets/monitor_filter.png).
@@ -211,7 +217,7 @@ La captura muestra el selector de entrada y los controles del filtro.
 
 <picture>
   <source media="(prefers-reduced-motion: reduce)" srcset="assets/monitor_wav.png">
-  <img src="assets/monitor_wav.gif" alt="V18 · panel Wav con trazas de demostración; sin reproducción física">
+  <img src="assets/monitor_wav.gif" alt="Arduscopio Q V18 · panel Wav con trazas de demostración; sin reproducción física">
 </picture>
 
 [Ver imagen estática](assets/monitor_wav.png).
@@ -238,7 +244,7 @@ Es reproducción de archivos; no crea una salida de audio del sistema operativo.
 
 <picture>
   <source media="(prefers-reduced-motion: reduce)" srcset="assets/monitor_synth.png">
-  <img src="assets/monitor_synth.gif" alt="V18 · panel Synth con trazas de demostración; sin reproducción física">
+  <img src="assets/monitor_synth.gif" alt="Arduscopio Q V18 · panel Synth con trazas de demostración; sin reproducción física">
 </picture>
 
 [Ver imagen estática](assets/monitor_synth.png).
@@ -300,7 +306,11 @@ python -m monitor.v18 --gui
 Si el entorno ya existe, omitir su creación. Demo permite probar la interfaz
 sin placa. V18 requiere su pareja `Scope V18` y el relay V18 ya activos. La conexión verifica esa app y no instala ni reinicia programas automáticamente.
 Preparar Q está habilitado: verifica la pareja aceptada sin reinstalarla si ya
-coincide, o actualiza una instalación existente con respaldo y recuperación.
+coincide, actualiza una instalación existente con respaldo y recuperación, o
+instala Scope V18 por primera vez si su destino está vacío. Requiere el sistema
+UNO Q y el entorno Arduino/App CLI compatible; no reinstala el sistema operativo.
+La nueva ruta de primera instalación está probada automáticamente y pendiente
+de validación física en un Q vacío. [Preparación y requisitos](docs/GUIA_V18.md).
 No actúa mientras hay adquisición ni sobrescribe otras aplicaciones activas.
 
 Valores iniciales: ADC 14 bits/40 kHz, amplitud 2 Vpp, offset 1,65 V y salida
@@ -328,8 +338,8 @@ El pequeño Python de App Lab mantiene la app; el relay es un proceso separado.
 | Pin | Uso |
 |---|---|
 | A0 / DAC0 | Salida de 12 bits, 0–3,3 V |
-| A2 / V_IN | Primera entrada / canal izquierdo de grabación |
-| A3 / V_OUT | Segunda entrada / canal derecho de grabación |
+| A2 / CH1 | Primera entrada / canal izquierdo de grabación |
+| A3 / CH2 | Segunda entrada / canal derecho de grabación |
 | GND | Masa común |
 
 [MCU y cableado](docs/UNO_Q_TECNICO.md) · [Relay y protocolos](docs/TRANSPORTE_TECNICO.md)
@@ -400,7 +410,7 @@ identifican por separado en los informes.
 
 | Conjunto | Estado y documentación |
 |---|---|
-| [Monitor V18 + Scope V18](monitor/v18/README.md) | Actual: ADC8 CH1 hasta 1,860 MS/s, RADIO/FILTER, WAV y Synth20; [catálogo de tasas](docs/CATALOGO_TASAS_V18_PLAN_20261025.md); [validación](docs/VALIDACION_V18.md) |
+| [Arduscopio Q V18 + Scope V18](monitor/v18/README.md) | Actual: ADC8 CH1 hasta 1,860 MS/s, RADIO/FILTER, WAV y Synth20; [catálogo de tasas](docs/CATALOGO_TASAS_V18_PLAN_20261025.md); [validación](docs/VALIDACION_V18.md) |
 | [Pareja V17 congelada](monitor/v17/README.md) | Conservada con sus fuentes y respaldos, sin desarrollo activo |
 | [Monitor V16](monitor/historico/v16/README.md) | Respaldo local anterior, app exportada y retirada del Q |
 | [Monitor V15 · Synth](monitor/historico/v15/README.md) | Synth: tres osciladores, feedback, FM/ondas/Virtual, guitarra y piano físicos, nueve voces y MIDI; estabilidad de cada perfil pendiente de validación física |

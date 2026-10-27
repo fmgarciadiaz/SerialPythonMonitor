@@ -1,14 +1,15 @@
 # Análisis espectral de dos entradas
 
-[Proyecto](../README.md) · [Monitor](../monitor/historico/v14/README.md)
+[Proyecto](../README.md) · [Monitor](../monitor/v18/README.md)
 
-Los cuatro análisis utilizan muestras de A2/V_IN y A3/V_OUT. No generan señales
+Los cuatro análisis utilizan muestras de A2/CH1 y A3/CH2. No generan señales
 por sí solos: para Transfer se necesita excitar el circuito con una señal que
 cubra la banda que se desea medir. Bode por tonos, pulso o sweep conserva sus
 controles y referencias independientes.
 
 Las estadísticas se presentan en el panel inferior «Medición», seleccionando
-V_IN o V_OUT. Transfer muestra la relación fija OUT / IN. Los tooltips incluyen
+CH1 o CH2 (y las fuentes derivadas disponibles). Transfer muestra la relación
+respuesta Y / referencia X, con sus fuentes seleccionables. Los tooltips incluyen
 picos y armónicos completos. Power muestra RMS de banda, potencia de banda,
 piso en dB re 1 V²/Hz, SNR y las tres potencias de bandas fijas.
 
@@ -96,7 +97,8 @@ cercana a cero no constituye una medida del límite físico del instrumento.
 
 ## Transfer
 
-X es V_IN y Y es V_OUT. Se promedian espectros sincronizados:
+X es la referencia e Y la respuesta seleccionada; en una medición típica,
+X = CH1 (A2) e Y = CH2 (A3). Se promedian espectros sincronizados:
 
 ```text
 H1        = mean(Pxy)/mean(Pxx)

@@ -25,7 +25,8 @@ class GuiBaseTests(unittest.TestCase):
             try:
                 window.show()
                 self.app.processEvents()
-                self.assertIn('Scope V18', window.windowTitle())
+                self.assertIn('Arduscopio Q', window.windowTitle())
+                self.assertIn('V18', window.windowTitle())
                 self.assertFalse(window.windowIcon().isNull())
                 self.assertEqual(window.filter_config.source, 'OFF')
                 self.assertIsNone(window.serial_worker)

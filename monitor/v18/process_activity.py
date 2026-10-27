@@ -26,7 +26,7 @@ class MacActivity:
         try:
             self.process=self.send(self.objc.objc_getClass(b'NSProcessInfo'),self.sel(b'processInfo'))
             reason=string(self.objc.objc_getClass(b'NSString'),self.sel(b'stringWithUTF8String:'),
-                          b'Monitor V18 acquisition and audio')
+                          b'Arduscopio Q V18 acquisition and audio')
             options=0x00FFFFFF & ~(1<<20)  # UserInitiatedAllowingIdleSystemSleep
             if mode=='critical':options|=0xFF00000000
             token=begin(self.process,self.sel(b'beginActivityWithOptions:reason:'),options,reason)

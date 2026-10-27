@@ -1,4 +1,4 @@
-# Herramientas del proyecto
+# Arduscopio Q · herramientas del proyecto
 
 La aplicación actual se inicia con `python -m monitor.v18 --gui`.
 Las herramientas de esta carpeta conservan rutas estables porque también

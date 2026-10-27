@@ -1,4 +1,4 @@
-# Pareja Arduino UNO Q
+# Arduscopio Q · pareja Arduino UNO Q
 
 La pareja actual es **[Scope V18](v18/README.md)**: MCU STM32 y relay Linux.
 Preparar Q se ejecuta desde el monitor V18; Conectar usa lo instalado.

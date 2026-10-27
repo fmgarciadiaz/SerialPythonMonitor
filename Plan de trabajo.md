@@ -1,3 +1,10 @@
+## 26/10 · Primera instalación desde Preparar Q
+
+- [x] Ruta de instalación inicial con inventario, pareja aceptada y verificación de adquisición.
+- [x] Pruebas de errores/propiedad y regresión: 265 generales, 35 focalizadas.
+- [x] Guía y requisitos actualizados; sin tocar V17 ni firmware aceptado.
+- [ ] Validar físicamente en un Q vacío sin vaciar el Q de trabajo.
+
 ## 26/10 · Revisión general de procesos y tasas
 
 - [x] Revisión con Astra de adquisición, relay, IPC, DSP, GUI y A0.
