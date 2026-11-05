@@ -1,3 +1,786 @@
+# 5/11 · Recuperación explícita y presentación del proyecto
+
+Relay terminó tras dropped=1 a ADC8/2M con RADIO/A0, CRC correcto; Linux/Scope seguían activos. Nueva acción Restablecer, separada de Preparar/Conectar, valida pareja/fuentes/BIN y conserva evidencia antes de recargar la misma app/relay. Job remoto durable, exclusión local/remota y pending impiden segunda carga incierta. 23 tests focalizados PASS. Recuperación física PASS: identidad exacta antes/después, ADC14/40k dual SPI, genOFF/WAV IDLE, 10,028s/401408 muestras sin CRC/drop/fatal. Q libre para Conectar. 2M+audio sigue experimental; no ocultar pérdida ni restaurar perfil fallido. [Informe](docs/V20_RESTABLECER_Q_20261105.md).
+
+Landing reorganizada como recorrido visual de funciones, con GIF/PNG, badges, tecnologías y enlaces a guía y capacidades; detalles de validación separados.
+
+V(t): caché acotada de ejes/grilla (no señal), equivalencia visual nativa cero píxeles distintos, invalidación por escala/tamaño/DPR. Cadencia de vistas reducidas usa coste medido; detalle completo conserva pisos. Benchmark sintético nativo: 40k/9k 25,6→46 FPS; 2M/4M 10→15,5 FPS. 40k/80k no mejora acreditada; prueba de piso16ms rechazada, queda34ms. 21 tests PASS. Smoke físico10s por perfil sin pérdidas/restauraciones PASS, pero alta tasa parcialmente oculta: no aceptación visual sostenida. EQ/aro Radio y WAV animan a34ms con reloj propio, objetivo75ms sostenido entre lotes; EQ conserva píxeles y reduce coste aislado ~13x. [Evidencia](diagnosticos/resultados_v20/vt_fluency_20261104/).
+
+# 4/11 · Trigger CH2: capa superior y límite del historial
+
+Trigger horizontalZ400/T399 sobrecurvas/cursores. CorregidoIndexError reproducido en CH2 2kHz/40k, N10000/w9000/HPos1000 (pretrigger0 pedía índice-1). Acotar búsqueda a historial real conserva histéresis/NaNs. 10tests locales PASS, CH2ambosflancosconCH1plano. SinQ; no afirmar resuelta toda sesiónusuario. [Informe](docs/V20_TRIGGER_CH2_20261104.md).
+
+# 4/11 · FPS por cuadros Qt y WAV con indicadores de Radio
+
+Contador FPS ya no queda con valor de una ruta RF: mide pinturas Qt precedidas por actualización de curvas/imágenes/raster en vista activa, refresco independiente1s, sin contar sólo títulos. WAV reutiliza EQ10bandas y aro nivel, leyendo2048códigos memmap de transferencia existente según played; Stop/cambio modo libera. DialRadio82x78, marcas0/medio/máximo y trazos de estaciones agrupados sólo visualmente, candidatos íntegros. 16tests PASS. Smoke físico ADC14/40kdual+WAV20k:120960played, aro0.61, EQ0.875, maxFPS16.01, restore10s PASS/identidadigual/Qlibre. No aceleración FPS ni Synth afirmada: journalprevio2.935spreparación y2.990sPLAY. [Informe](docs/V20_FPS_WAV_DIAL_20261104.md).
+
+# 4/11 · Limpieza completada; lanzador V20 y reconexión verificados
+
+Entorno `.venv-v19Pyside` eliminado, conda habitual intacto. Q: 45 contenedores de relay de evidencia detenidos y 88 cachés sólo-binario eliminados; relay activo SHA intacto, App Lab/apps y respaldos pareados preservados. VS Code principal ahora abre `monitor/v20/app.py`. API macOS materializó nuevamente 151 archivos; control V20 cero dataless, preferencia permanente no cambiada. Ventana real visible 4,52 s. Dos conexiones ADC14/40k dual con 10s adquisición y restauraciones10s PASS, identidad exacta, Q libre. [Informe](docs/V20_LIMPIEZA_Y_ARRANQUE_20261104.md). No atribuir todos los problemas a nube ni afirmar cerradas las incidencias Synth/2M/FPS.
+
+# 4/11 · Margen 1,86M frente a2M explicado por presupuestos y servicio medidos
+
+- ADCsolo20s pareado: 1,86M/86ticks margen19,296%, presupuesto1874,8µs/nodo, servicio derivado1513,0µs; 2M/80ticks margen7,511%, presupuesto1744,0µs/nodo, servicio1613,0µs. N3488 y SPI40/WORD/FIFO10/cola16 iguales. La caída ya aparece sin A0; no adjudicar los+100µs medidos a una causa concreta. RADIO/A0 40k: 1,86M playing12,224% (60s, ventana21% expuesta) y2M playing0,8245% (60s,100% expuesta): corridas no pareadas. Último2M80traza playing0,5264% frente a all1,2724%; no mezclar denominadores. [Detalle](docs/V20_MARGEN_ADC8_2M_20261104.md).
+- Experimento local único `Os`→`O2` del proxy de preparación: bytes/CRC idénticos en256secuencias; medianaMac0,414→0,416µs y símboloARM68→444B. Descartado; ninguna compilación/despliegue en Q ni cambio de fuentes producto. [Resultado](experiments/v20/adc8_2m_prepare_o2/result.json). SIGSEGV120s y margen2Mexperimental pendientes; cola8 no corresponde a esa holgura.
+
+# 4/11 · ADC8/2M visible sólo como experimental V20; SIGSEGV abierto
+
+- Selector V20: sólo ADC8/CH1, SPI, ticks80/N3488/cola16, etiqueta/resumen/estado `EXPERIMENTAL`; tasa inicial40k y 1,86M intactas. A0 permite sólo esa tupla; US conserva auxiliares1,6M/1,403508M. Sin cambios en firmware/relay/priming/recibo/CRC. Respaldo SHA `respaldos/host/v20_before_experimental_2m_20261104/`;13tests focalizados Python3.13 PASS, con Qt offscreen. [Detalle](docs/V20_SIGSEGV_Y_COLA8_20261104.md).
+- Incorpora exploración, NO estabilidad: 60s visible PASS,120s GUI SIGSEGV sin causa,80s funcional con exposición76,19%; margenA0 playing0,53%. No promocionar ni desplegar cola8 por este cambio. Q sigue con firmware V20 instalado, sin nuevo build.
+- Smoke físico NORMAL sin override privado de tasa/A0:20,033s PLAY,802080 muestras, STOP/cierrePASS, exposición periódica6/6 y estado `EXPERIMENTAL`. Restauración independiente10,025s/313344muestras/0drop-fatal; SHA MCU/relayV20 idénticos y Q lock libre/sin proceso de prueba. [Reporte](diagnosticos/resultados_v20/experimental_2m_normal_smoke20_r2_20261104/report.json). Intento previo falló antes de conectar por lock duplicado del wrapper; evidencia preservada. No extrapolar20s a estabilidad sostenida.
+
+# 4/11 · Estado anterior: Q recuperado, SIGSEGV GUI abierto y cola8 sólo local
+
+- Sol es único ejecutor del siguiente bloque y dueño exclusivo del Q; root coordina. Python obligatorio: `/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/bin/python` con `PYTHONPYCACHEPREFIX=/tmp/arduscopio-v20-check-cache`. V17/V18/V19 congeladas; Q siempre V20.
+- GUI 2M visible `installed_2000_visible_native_us120_20261104` cayó con SIGSEGV a los65,86s de escenario/43,9s postUS. No hay gui.json ni pase120s. La sesión hija cerró/restauró después del informe padre; recuperación independiente `recover_gui_sigsegv_20261104/report.json` confirma app/MCU/relay exactos, ADC14/32 dual, generadorOFF, WAVIDLE, SPI,10,011s/313344 muestras0drop/fatal. El informe padre fallido permanece sin reescribir.
+- `.ips` nuevo: `EXC_BAD_ACCESS` dentro de NumPy `logical_or.reduce` desde callback `QTimer` del hilo GUI; es pila distinta del anterior PySide `retrieveMetaObject/QTimer_Init`. Causa Python exacta y relación con ADC desconocidas. Diagnóstico privado opt-in `--trace-numpy-any` y espera de restauración tras caída añadidos;15tests focalizadosPASS.
+- Reproducción acotada `installed_2000_native_any_trace80_20261104` SINpriming: 80,09s A0, US3perfiles y Scan2candidatos, transicionesPASS, restore10,022s/0drop-fatal, identidad/recibo/sello iguales. Ventana expuesta16/21=76,19%: NO aceptaciónvisible. Margenradio_playing0,53% (all1,27%),cola10/16: NO reserva10%. Las2476llamadas `np.any` del hilo principal terminaron normalmente; crash no reproducido ni reparado.
+- Control previo60s visible completo sinpriming pasó, pero cola12/16,margen0,66%; la120s fallida impide afirmar estabilidad visual sostenida. No más campañas largas sin hipótesis nueva. Cola8 experimental sólo en `experiments/v20/queue8_candidates/`; cinco tests incluyendo C++harnessPASS, sin Q/deploy. Faltan tamaño/mapaARM y binding privado MCU/relay/host antes de probar físicamente. Tasas públicas y fuentes de pareja intactas. [Informe](docs/V20_SIGSEGV_Y_COLA8_20261104.md).
+
+# 3/11 · Estado actual: confirmar controles nativos y candidatos ADC10/12
+
+- Root único dueñoQ; EN CURSO runnersecuencial `installed_adc10_1379_fullui_native_us60_20261103`, luegoADC12/1.143M (`...adc12_1143_fullui_native_us60...`). SonrestartA0→US3tasas→restaurar→60s tras reanudar, fullUI/G7/EQ+tabRADIO seleccionados, diagnósticoligero, priminghabitual sinmodificación. Noabrirotroclientehasta leerreportes/restauración.
+- 2M candidata depriming12ms+diagnósticoligero pasó3x60s, márgenes0.54/0.74/0.64%,colas8/8/6de16; exposición100/100/76%. Sólo2 cumplen carga visual completa. Control SINprimingprivadotambiénpasó2x60sconexposición88/6%; sonpasesfuncionales, noaceptacióncompletadibujo. Se consultó usuario opcionalmente para dejarventanavisible, sinfrenaraudio/integridad.
+- Instrumentación detallada ON tuvoUNDERRUN yEOFfullUI; quitarla noes cambiarproductoniCRC: decoderestricto+WireMetricsmétricasnativas siguenactivos. Evitaratribuircausalidadcerrada con estas corridas. Noactivar frame-service ni incorporarprimingprivado(por ahora noha demostrado sernecesario). Tasaspúblicasiguales.
+- Fix cierrescaneo+EOF enapp/harness aplicado porSol, restauraciónno confirmada sepreserva, nomodalal cerrar; eraunbugposible, NOcausademostradadelclose_timeoutfísico(Scaninactivoenesesnapshot). Suite179PASS. FW/relay52f933bd/bf6893f5intactos. Todosloscasosreciéntestauraron10sPASS; recuperaciónmanualtrasfullUIcontrolfallidotambiénPASSsinreset.
+- PythonSIEMPREcondaPython_3_13_DataScience/bin/python. NoQdeagentes. Astra planificóexperimentos/Solimplementóprivatepriming5testsypatchcierre; rootrevisó, repitiótests y ejecutatodoQ. Pendienteal finalizarcopiarlogs179einformeconsolidado yliberarQ. QsiempreV20, noV19.
+
+
+# 3/11 · Estado actual: repetir candidata con paneles RADIO/EQ realmente visibles
+
+- Corrida `installed_2000_fullui_control_us20_20261103` FALLÓ: underrunA0 al pausar paraUS(t18.7s), EOF, restauración deesa sesión falló. GUIquedó close_pending hastaSIGINTdelwrapper; no avanzarotrascorridas. Verreporteysesiónoriginales sinreescribir.
+- **RECUPERACIÓN CONFIRMADA posterior** `recover_fullui_control_20261103/report.json`: conexiónnueva, sinreset/deploy, snapshotADC14/31250dual+generadorOFF,10.04s/313344muestras0drops/fatal eidentidadmismaV20. Qnoestáindeterminado.
+- AHORA EN CURSO `installed_2000_fullui_priming_us20_20261103` (root únicoQowner): restartA0+ScanUS+20s después, primingprivado12ms antesPLAY/6mssteady. Esperar reporte/restauración antesotrousodelQ.
+- Astra diseñó/Sol implementó sólo `tools/private_radio_priming_v20.py`+5tests. Root revisó y repitió5PASS conPython3.13usuario. CLI --prime-real-time enlaza flagdelbinding al contextodelreceptorhijo; perfil8/2M/DAC40kexacto, burst/tokens/30bloques/límites/prioridades iguales. No producto priming todavía.
+- Comparación previa candidata20(Trigger visible)PASS: US3perfiles restaurados,20.08sA0,803040samples,cola8/16,ACKrawmax26msvs186msdelprimerfallo. Controlrepetido20 tambiénPASS, asíquenocausalidadcerrada. ArnéssostenidoanteriornoexigíaG7/EQ; ahorafuerzaG7+tabRADIOyregistra/assertvisibilidad. RepetirconfirmacionesconGUIcompleta; noafirmaraceptaciónGUIporcasosviejos.
+- ADC10/1.379M yADC12/1.143M RADIO/A0 20+60sPASS, pero previos a exigirpanelesvisibles. Márgenes60s5.42/5.12%,colas4/4 y2/4. No promoción pública.
+- Suite177PASS trasnuevoscontextos/testsyassertvisibilidad. FuenteADC/relayfirmwareintactos. HandlerSIGUSR1dedumpopcionalen--stall-traceañadidodespués(diagnósticosólo). SiGUIcierresecuelga,sepuedeseñalarÚNICAMENTEPIDdelGUIpropio paraobtenerstacks, nomanipularQmientrassiguavivoreceptor.
+
+# 3/11 · EN CURSO: US/A0 a2M y preparación GUI de ADC10/12
+
+- Q dueño único root. US2Mtransitions completó3perfiles/restauró/reanudó peroA0 UNDERRUN3.3s después; RF íntegro,pico11/16,snapshot10sPASS. ADC10/1.379GUI/A020sPASS (margen5.32%,pico4/4). EN CURSO: `installed_adc12_1143_radio20_20261103`. No iniciar otra conexión hasta leer reporte/restauración. Astra revisó, Sol implementa sólo `tools/private_radio_priming_v20.py` y tests:priming12ms privado2M, sin cambiosbuffers/steady/rate. Root integró --prime-real-time/binding, todavía no ejecutado.
+- Encontrado en estático: US2M elegíaauxiliar viejoADC8/143/8192(1.119M). Producto `radio_multiscan.py` ahora heredaauxiliares exactos de1.86:1.6M/1.4035M. NuevosprivadosADC10/12 tambiénheredanauxiliares de susmáximos públicos. Comparación180configuracionespúblicasigual; catálogo sin cambios. Backuphost reconstruido invirtiendo sóloesasentradas `respaldos/host/v20_before_candidate_us_20261103`.
+- Herramienta GUI ampliada con --scan/--us/--scan-during-a0/--restart-a0 y --radio-bits10|12 --private-rate. Perfilesprivados encontexto padre+receptorhijo, desde `tools/private_rate_profiles_v20.py`; firmware/relay intactos.
+- Suite171PASS (r3) antesQ; primerintentoexit139 nativoPySide::SignalManager/QTimerInit observado1vez, no reproducido; r2dosfixturesincompletos, corregidos; r3completaPASS. No afirmararreglocausal delnativeexit. Evidencia `diagnosticos/resultados_v20/candidate_transitions_20261103/`.
+- Después: RADIO/A060s ADC10/1.379M yADC12/1.143M, luego transicionesWAV/Synth. ConservarV20, nunca usarherramientasviejasquerestauranV19.
+
+# 3/11 · Tanda cerrada: estabilidad 2M y candidatos ADC10/12
+
+- **2M/RADIO/A0:60s +3x120s PASS**, exposición100%, fuente activa hastaSTOP,0 interrupciones/pérdidas registradas. Márgenes reproducción0,82/0,69/0,60/0,62%;picos7/9/10/10 sobre16. NO reserva10%, NO promoción pública. ADCsolo2M60+120s tambiénPASS,7,57/7,67% y5/3 sobre16.
+- ADC10/1.379.310:60s PASS82.708.464muestras,cola2/4,margen12,42%. ADC12sondeos1.111.111/1.126.760/1.142.857:3x20s PASS; máximo confirmado120s/137.056.896muestras/0drop-fatal/cola2/4/margen8,95%. Todavía ADCsolo, NO aceptaciónGUI/audio/analógica. ADC14>1M requiere candidato nuevo, no ensayado.
+- **Q libre**: todas las corridas restauraron snapshotV20 >=10s/0drop-fatal, identidadMCU52f933bd/relaybf6893f5 igual; ADC14/31250dual,generadorOFF,ningún lector de prueba. V20 sigue activa, V17/V18/V19 intactas. No cambiosFW/relay/catálogo ni límites.
+- SuiteV20 actual167PASS; log `diagnosticos/resultados_v20/stability_suite_20261103/unittest.log`. Implementación de cadencia equilibrada40k ya aceptada físicamente:~15→29imágenes nuevas/s; alta tasa/mixto largo conserva límites previos.
+- Resumen y hashes `diagnosticos/resultados_v20/stability_campaign_20261103/summary.json`; informe `docs/V20_ESTABILIDAD_TASAS_20261103.md`. Primera GUI2M bloqueada por guard no es aceptaciónA0; posteriores usan excepción privada exacta, guardproducto intacto.
+- Próximo bloque: otras cargas/ScanUS/transiciones a2M y GUI/audio de candidatosADC10/12 antes de ampliar catálogo; margen<10 NO bloquea explorar estabilidad, siempre informar reserva por separado. README landing sin cambios.
+
+# 3/11 · Ensayos actualizados: 2M con RADIO/A0 y candidatos ADC10/12
+
+- ADC8/2M solo:60s y120s PASS integridad; márgenes7,57/7,67%,picos5/16 y3/16. SnapshotV20 restaurado10s eidentidadesiguales.
+- RADIO/A0 a2M: primera corrida no arrancó A0 por guard de perfil privado; NO aceptaciónaudio. Segunda `installed_2000_radio60_r2_20261103` PASS60,04s/2.399.040 muestrasDAC,exposición100%,fuenteactiva sinerror antesSTOP,cola7/16,margen reproducción0,82%. Muy poca reserva; NO tasa pública. Excepción sólo en arnés, guardproducto intacto.
+- ADC10 privado ticks116/1.379.310:60s PASS,82.708.464muestras,0drop/fatal,cola2/4,margen12,42%. ADC12 ticks144/142/140:3x20s PASS, márgenes12,10/10,59/8,98%,cola2/4,0drop/fatal. Herramienta registra perfiles sólo en proceso y valida su presencia en fuentesMCU+relay vinculadas al binario instalado. No firmware/relay/catalog changes.
+- SuiteV20 **167 PASS** fuera sandbox; errores previos de POSIX/nice fueron sandbox. Log `diagnosticos/resultados_v20/stability_suite_20261103/unittest.log`.
+- Primera GUI2M/RADIO/A0120s PASS,cola9/16,margen0,69%,fuente activa4.797.120 muestrasDAC sinerror. ADC12max120s PASS137.056.896 muestras,0drop/fatal,cola2/4,margen8,95%. EN CURSO: `installed_2000_radio120_r2_20261103` y después r3 (runner secuencial, detener si falla). Leer reportes y verificar exclusión antes de tocarQ. Docs `docs/V20_ESTABILIDAD_TASAS_20261103.md`. Q permaneceV20; versionesviejasquietas.
+
+# 3/11 · Cadencia RF recuperada y exploración sostenida de tasas
+
+- Incorporada cadencia equilibrada sólo para V(t) RF <=40 kHz, ventana <=80.000 muestras, sin RADIO/FILTER/raster. Fórmula por coste con presupuesto visual del 60%, piso34ms, nunca más lenta que la política previa. Fuera de ese ámbito se conserva la cadencia anterior. Backup: `respaldos/host/v20_before_balanced_cadence_20261103/`.
+- Físico limpio a40k: control20s 15,09 imágenes nuevas/s; candidata20s 28,82 y confirmación60,60s 29,14. Exposición100%, sin pérdidas/fatales; snapshot V20 restaurado y verificado10s. Informes `rf40k_physical_legacy20_r2_20261103`, `rf40k_physical_balanced20_20261103`, `rf40k_physical_balanced60_20261103`. Primera corrida legacy20 invalidada por traceback del arnés; no usarla para aceptación. No garantiza estos FPS en ventanas largas/alta tasa.
+- Pedido actualizado: explorar estabilidad a2MS/s aun sin10% y luego candidatos de más bits, separando estabilidad de reserva. Cola16 sólo para ADC8 rápido; ADC10/12/14 actuales tienen4 nodos de tamaños distintos.
+- ADC8/2M instalado,60s:119.928.776 muestras,0 pérdidas/fatal,cola pico5/16,margen medio7,57%,slack mínimo63.708ticks. PASS integridad, NO10% de reserva. Informe `installed_2000_sustained60_20261103/report.json`. Iniciada corrida independiente120s `installed_2000_sustained120_r1_20261103`; consultar reporte antes de operarQ.
+- Herramienta `probe_working_v20_rates.py` conserva V20 y restaura snapshot; admite candidatos privados ya compilados ADC10 ticks116 y ADC12 ticks144/142/140, sólo en su proceso. No cambia manifiestos públicos/firmware/relay. ADC14 por encima de1M necesita candidato nuevo, no está probado.
+- Astra planificó; Sol agotó cuota, root continuó ejecución y revisión como se informó. V17/V18/V19 intactas. README de presentación sin cambios en este bloque.
+
+# 3/11 · FPS usuario: RF puro40k, referencia V17/V18 y causa de pacing
+
+- Usuarioaclaró14FPSenV(t), SINRADIO, bajatasa~40k; NO corresponde al caso mixto2s5FPS. Título stale de ramasmixed/audio existe pero NOexplica su caso. Noimplementarcambiocontadorporconfundir.
+- Astra planificó comparadorRFpuro/Sol ejecutó. Nativo/Python3.13/RetinaDPR2, RF40kCH1/window9000/detail50/RápidoEscalón/gridON/triggercursorOFF, sinQ. Trespares V19/V20 warmup3s+10s: 166/155,180/180,184/177 nuevos. Ambos17–18FPS, paintmed10.5ms/prep1.65, paint×4dominó1042renders, no caídaV20repetida>=15%vsV19. Informe rf40k_comparison_20261103/README.md.
+- Usuario pidió mirarpocoV17/V18: una corrida3+10 cadauna, procesosPyQt6 separados dePySide6, viejasintactas/PYCACHEtmp. V17 622nuevos/624paint, V18 592/594; timersfijos16ms vsV19/20adaptive. DPR/screen/plotwidthiguales;V17alto+9px. Aprox59–62FPS frente15–18; confirma pérdida histórica, no atribuible sóloV20. Nativeen sandbox falló noscreens, elevado válido, nofalloproducto.
+- Astra siguiente plan/Sol ejecutó causal MISMA V20PySide6 contra timer16privado(no-op refresh sólo instancia). Trespares control/fijo nuevos177/450,178/474,165/446 (~17–18vs45–47/s normalizado). CPU5s→15–16s en~10s, backlogpicos4/4/7→9/8/6, feedp95similar+0–3ms pero max26/33/69→83/73/47ms. NOaceptado talcualporreserva/latencia; sinproductpatch niQ. Deficitsfinalesfeedsoncallbacks pendientes, noacredita ceropérdida física. QTimerfincoarsecerróalgunascorridas9.56s envez10, límitesexplicitados. Informe rf40k_fixed_timer_20261103/README.md.
+- Conclusión: pacingadaptativo explica buena parte pérdida histórica y hay margen recuperarfluidezlowrate; diseñar equilibrioFPS/reserva (no simplemente fijo16global) con criterios y ensayo físico antesincorporar. Noampliar tasas aún. V17/V18/V19/productoV20 yQ intactos en este bloque; sólo harness/informes y docscontinuidad.
+
+# 3/11 · Astra planificó / Sol ejecutó: perfiles mixto y timer, sin incorporación
+
+- Usuario pidió retomar Astra y luego Sol. Ambos disponibles: Astra sólo lectura/planes y Sol ejecutó dos bloques locales; root revisó. NO Q, NO cambios en monitor, firmware, relay, límites, cadencia ni V19. Envelope sigue retirado y Synth conserva correcciones previas.
+- Perfil mixto real Qt offscreen (timer parado), RF3.720930M/RADIO80000/detail50/CH1medido, seis repeticiones alternadas baseline/candidato y ring contiguo/envuelto. Candidato índices NumPy equivale72/72 (incl NaN/Inf/ring), pero NO mejora >=15% total. Medianas base→candidata: contiguo no vencida14.84→15.76ms/vencida28.12→28.45; envuelto no13.80→13.64/vencida36.04→37.46. DESCARTADO. Evidencia diagnosticos/resultados_v20/mixed_profile_20261103/README.md y profile_ab.json; tools/profile_mixed_v20.py. Preliminares separados no son ABválido.
+- Segundo planAstra: quitar sólo actualizacióncadencia desdepaint manteniendo3/4/500/.85. Micro QTimer real probó que setInterval enpaint reinicia deadline, pero ABvistamixta contimeractivo mostró incidencia2/469pinturas vs453/468timeoutsactualizados desdeprepare. Seispares5s porring/warmupexcluido: contiguo base50/candidate49cuadrosnuevos, mediana99.82→100.13ms,p95 119.82→125.61,picorender33.98→41.79; envuelto28→31 y168.04→151.24ms, pero costeGUI1555→1599ms. Falla criterio global10%/p95/pico; DESCARTADO, sin parcheapp.
+- TimerAB simula ingreso~50kRF/s, NO cargaADC1.86M real; cuadro inicial3.72M, no afirmarFPS físicos. Distingue últimocapturado/pintado/repaint. Evidencia mixed_timer_20261103/README.md/timer_ab_raw.json/timer_ab_summary.json. Tools probe_mixed_timer_v20.py, benchmark_mixed_timer_v20.py, qt_timer_trace_v20.py; py_compile PASS.
+- Próximo foco razonado: coste de medición completa y copias de ventana envuelta; no bajar cadencia/precisión por comodidad. Requiere nuevo plan acotado antes de rediseñar RMS/frecuencia. No promover tasas todavía. Q conserva estado previo (no se verificó en vivo en este bloque porque no se operó).
+
+# 3/11 · Recuperación V20: envelope retirado, Synth un Play, FPS pendientes en mixto
+
+- Pedido usuario: Astra plan/Sol ejecución; ambos agotaron cuota tras lectura inicial. Root ejecutó fallback explicado. V19/V18/V17 quietas, firmware/relay V20 intactos. No tasas nuevas ni límites/prioridades/workers extra.
+- Regresión FPS identificada: _can_use_live_envelope False había deshabilitado detalle V19 y raster envelope se activaba incluso detalle<100. Retirados módulo/badge/envelope; raster vuelve exactamente a V19 salvo namespace y política de detalle previa restaurada. Archivo histórico en experiments/v20/retired_envelope_20261103 (tests .txt fuera de suite).
+- Comparación local Qt offscreen3.720930M/detalle50: V19 mediana10.47ms/V20 10.60ms, mismos puntos. No FPS físicos. Raster100% sigue completo/costoso.
+- Synth espera adquisición/capacidad/STOP previo con una intención de Play; segundo clic cancela, cambio de modo/desconexión cancela, IDLE/DONE viejos no borran fuente en preparación. No exigir otro clic. Testespera/cancelación/workerreemplazado/pollviejo/STOPprevio.
+- V(t)mixto copia menos: aplicar detalle RF en ring antes de copiar; mediciónraw a cadencia propia con vistas síncronas. Cursores/gaps/trigger conservan recorrido completo. Físico20s CH1+RADIO/A0 1.86M/2s/detalle50 PASS, pintura mediana2.86→5.18/s entre casos antes/después mixto. Sigue bajo, NO resuelto FPS global. Confirmación60.10s PASS/exposición100%, recovery10.022s/313344/0drops-fatal/identidadigual.
+- Synthsingleclick20notasDX DAC40/ADC40dual: clic durante configuración pendiente, PLAY1.69s, hold30.06s/STOP/recovery PASS exposición100%; notas percusivas voces0–20, NO20 sostenidas. Posterior audiohandoff5.09s PASS funcional/exposición37.5%, PLAY1.61s; clic ya sin configpendiente, STOPprevio cubierto unit. Recovery10.022s0drop/fatal/identidadigual.
+- Suite154 PASS antes ajuste mixto;38focalizados PASS después;16focalizados PASS después último ajuste Synth. CLI V20 --self-test y versión corregidos (apuntaban V19); rutas diagnósticas V20 corregidas. Diff Python normalizado en recovery_review_20261103/host_diff.json; FFT/heatmap/DSP sin cambio funcional versusV19. Spawn reimport GUI queda pendiente, no causa probada.
+- docs/V20_RECUPERACION_20261103.md. README landing sin tocar. Q libre con V20activa y mismo snapshot14/31250dual/generadorOFF. Pendiente subir FPS mixto largo, luego tasas superiores; no promocionar2M sólo por integridad/memoria.
+
+# 2/11 · Conectando: detectar muerte del receptor y EOF
+
+- Corregido en V20 io/receiver_process.py: cerrar extremo terminal_child en padre tras spawn; EOF siempre genera fallo (carrera is_alive ocultaba resultado); salida sin mensaje detectada por exitcode. 18 tests PASS con regresiones receptor/cursor. app muestra inicio de receptor y guarda todos los fallos en resultados_v20.
+- Ensayo connection_review_20261102 conectó y completó RADIO/A0 20s ADC8/1.86M, pero falló al STOP por GUI pendiente1.61058M/1.6M; no subir límites. Restauración10.023s/313344/0drops/fatal confirmada e identidad igual.
+- connection_review_lowrate_20261102 ADC8/40k dual PASS conexión/RADIO/A0/STOP/cierre/restauración. V20 activa, ninguna GUI de ensayo abierta. Causa original de salida del hijo NO determinada; muestra lo vio importando PySide y terminó sin traceback recuperado. Ver docs/V20_CONEXION_20261102.md. FPS y atasco alta tasa pendientes.
+
+# 2/11 · V(t) envolvente automática incorporada; datos completos para cursores
+
+- Usuario pidióenvolventecuandohaymuchasmuestras,volverapuntosalzoom ycartel env. Implementadoenmonitor/v20/temporal_envelope.py +temporal_raster.py;appmantienecapturacruda (reducciónanteriordeshabilitada). Sólo geometría delworker:min/max porcolumna/tramo, enlacesdeextremos, no puenteNaNs/gaps. Ningún cambioADC/DSP/firmware/relay/V19.
+- Auto:≥100000visibles y≥8muestras/píxelfísico; salir<50000o<4ppx (histéresis). Cursorusaframeoriginalcompletoindependientedelaenvolvente. envpequeñogristopright,nointerceptaclics;ocultoalvolverapuntosuotrosmodos.
+- 140testsV20PASSinclregresionesraster/cursor;trasNoButton/telemetría23focalizadosPASS. Integraciónworkerprueba raw200k+cursorrealpuntointerioryzoomvueltaapuntos. Benchlocal3.72M:mediana724→75ms pintor≈9.6x,excluyeIPC/visibleFPS.
+- QV20yaactiva:2shistoria3.720930Mmuestras,detalle100,ADC8 1.86M +RADIOA040khold60.075s PASS,exposición100%. envvisible,capturaCH1full3.720930M/RADIO80000;worker mediano129msvsbaseline3092ms;imágenesnuevasobservadas0.264→2.518Hz. Comparaciónseparadabaseline20s/nuevo60s,nogarantíauniversalFPS.
+- SnapshotV20≥10s0pérdidas/fatal,identidad/receipt/selloiguales;QquedaV20activa/generadorOFF/sinsesión. Nopromocióntasasniaceptaciónanalógica. Postevidencia sólo2docstringsactualizados, ejecutableigual(hashreconstruidoverificado).
+- docs/V20_ENVOLVENTE_20261102.md · diagnosticos/resultados_v20/temporal_envelope_validation_summary_20261102.json. SourceproofArduino/informeselladointactos.V17/V18/V19quietas. Rootimplementó/midió(Solsincuota,Astranoejecutó).
+
+# 2/11 · GUI: transición alta y V(t)2s/detalle100 PASS; raster~3s/imagen
+
+- Root ejecutó sinAstra niSol(sincuota). Producto/firmware/relay/prioridades/buffers/flowlimits intactos; cacheDXprevia conserva. HerramientaexigeV(t)real con --radio-time-view separado deanalysis-only;16focalizadosPASS. NoQdeploy,noV19.
+- Highrate1.86→WAV→DX40k20notas/30sPASS conexposición100%,recuperaciónV20≥10s/0drop-fatal eidentidad/receipt/seal iguales. No pausacapturada,no arreglocausalconfirmado.
+- Intentoslongwindowanteriores completaron audio/recuperación pero fallaroncriterios setup(FFTnoraster; analysis-onlyA0off). Evidenciapreservada,noerroresdeproductoatribuidos.
+- V(t)real2s(3.720.930muestras)/detalle100/RADIOA0/ADC8 1.86M:20.035sPASS,exposición100%,rasterpublicado/visible;recuperaciónidentidadesiguales. Worker3.294/3.069/3.115/3.006ms porimagen,limitadibujo. CallbackGUImax156ms,heartbeatgapmax737msinclinicio,stacks0bytes. No equivaler3sworkerablockGUI;pausa1.9s anterior sinreproducir.
+- docs/V20_GUI_PAUSAS_20261102.md · diagnosticos/resultados_v20/v20_gui_stall_followup_summary_20261102.json. Próximo:rasterprivado preservandopíxeles/huecos,mediciónantesincorporar; noparalelismoextraniotrosbuffersporahora.
+- V20sigueactiva,generadorOFFrestaurado,sinlectorprueba.V19respaldoquieto.
+
+# 2/11 · Optimización host DX Piano: caché por nota, audio exacto y pase funcional40k
+
+- Root ejecutó; Sol sin cuota y Astra no ejecutó. Perfil real del panel: DX40kmean4.636ms por480 frenteFMbásico1.209ms, sinIPC/Q. Costeprincipalvoice_render. CandidateLRU256sólo(brilloDX,profundidadgrave) estáticosporcarrier; fórmulasoriginales, sinfase/audio/envolvente mutable.
+- Benchmark6repeticionesalternadas baseline/candidato: mediana4.332→4.065ms,mejoraLOCAL6.17%; noFPSniSPI. Candidato incorporado a monitor/v20/fm_source.py trasfloat exactoa20/40k,cambiosdeacordes/rampas/gate/release,DACygananciaigual ycacheacotada.18focalizadosPASS;21conwrapperPASS,últimametadatadehash9PASS. Backuphostrespaldos/host/v20_before_dx_note_cache_20261102/hashfe029ad…;nuevoec2f46b….
+- FísicoDXPianoDAC40k/20notas/hold30s PASS,ADC40kdualdesdeinicio; presetpercusión,pico20no20sostenidas. Ventanaoculta0%,noaceptaciónvisible niarreglocausalconfirmado. PLAY/progreso/STOP/cierre yrecuperaciónV20≥10s0drop/fatal;firmware/relay/identidad/recibo/selloigual. V20continúaactiva,generadorOFF. NoV19ni tasaspúblicasnuevas.
+- Herramientasnuevas tools/profile_dx_piano_v20.py y experiments/v20/dx_note_cache/benchmark.py sólooffline,Qnooperadoenbenchmark. Reports diagnósticos dx_render_profile_20261102/dx_note_cache_candidate_20261102/v20_dx_note_cache_physical_20261102_dac40k. docs/V20_DX_PIANO_CACHE_20261102.md.
+- Pendiente: reproducciónconexposición/cargainicialequivalente ypausasGUI/RFconpilas; no atribuirunderrunanteriorresuelto porunpaseoculto. No QoS/buffers/gate86/firmware/relaymodificados.
+
+# 2/11 · Controles FM básico sostenido 20 voces a DAC20/40k: 60 s PASS
+
+- Sol agotó cuota; root continuó pruebas locales y fue único dueñoQ en este bloque. Astra no ejecutó. Cambios sólo tools/tests: --synth-profile sustained-fm (FMManual1oscilador,ADSRsustain0.7,20notas), paneldefaultintacto; criterio exige20en todasobservacionesPLAY.23tests perfil/escenario/wrapperPASS, más pruebasobserver/regresión y2scopegenéricoPASS.
+- Nuevo --radio-rate40000 de diagnóstico para aislarSynth, frecuencia10k dentrodebanda; defaulthelper1.86M intacto. Observador permite explícitamente perfilno-nativo en ruta privadaV20; native_counters_expected/performance_acceptance_eligiblefalse. No fakecounters/aceptación pública.
+- PrimerperfilaltoADC fallóantesSynth porentregaGUI1.604M/1.6M; aislado tuvoRFpending1s durantepreparación+GUIpausa1.923s. Ambos recuperaronV20; rastreodepilasposteriorno reprodujolapausa. Nodarporarreglado.
+- Controles conADC40kdual: DAC20k/40k,hold60s desdePLAY, vocesobservadasmin=max20, exposición100%, recuperaciónV20≥10s/0pérdidas-fatal,identidad/recibo/selloiguales. V20quedaactiva/generadorOFF, sinV19. Perfilbásico NOequivaleDXPiano3osciladores.
+- DXPiano previo20k sóloPCMsostenido(conmin0voces),40k underrun~2santesSIGINT; sigueabierto, sincausaexclusiva. No tocarproducto/firmware/relay/gate88/buffers/prioridades ni subir tasas por estoscontroles.
+- docs/V20_SYNTH_SOSTENIDO_20261102.md · diagnosticos/resultados_v20/v20_sustained_fm_control_summary_20261102.json. Próximo: acotarDXPiano/render+IPC ypausasGUIconpilas,evidencianuevaantesoptimizar.
+
+# 2/11 · Synth40k: fallo previo a cancelación; perfil sostenido en preparación
+
+- Último bloque de Sol: salida20k completó60,0086s PCM pero voces observadas min0/max20 (599observaciones): NO20voces sostenidas.40k llegó aPLAY34,2572s ystate4/reason2 a36,2545s; cierre36,305s, señalSIGINTposterior~41,91s. No presentar como simplecancelación. RecuperacionesV20PASS≥10s,313344muestras,0drop/fatal; identidad/recibo/selloiguales. Última verificaciónSol:V20activa,generadorOFF,locklibreysinprocesosprueba.
+- Sol alcanzó cuota. Root continúa análisis/pruebas locales; Astra no ejecuta. Producto/firmware/relay intactos. Preparado perfilprivado tools --synth-profile sustained-fm con ADSRsustainnozero y20notas, paneldefaultintacto; verificar motorrealoffline antesQ. No confundir pico20 con20durantehold.
+- Evidenciaanterior: diagnosticos/resultados_v20/v20_synth60_rates_campaign_20261102_085748_dac20k y_dac40k.40kcaptura generaciónPCMmax32,25ms para bloques480(12msdeaudio), ACKmáx10,69ms: hipótesisrender/IPC, no causalidadexclusivademostrada.
+
+# 2/11 · V20: RADIO→WAV sintético→Synth20, dos PASS funcionales y restauración
+
+- Primer intento falló Synth sin nuevo BEGIN/PLAY; STOP del smoke llegaba 10,3932 s después de solicitarlo. Se detuvo r2 y se preservó evidencia/restauración V20. Medición offline de otro spawn/preparación: 14,7356 s; no es el tiempo medido del intento fallido ni prueba su causa exacta.
+- Sol ajustó sólo tools: esperar PLAY nuevo hasta 120 s, hold Synth 5 s desde ACK, STOP único/confirmado y no cerrar mientras pendiente; ACK tardío rechazado. 14 focalizados PASS. Producto/timeouts/audio/QoS/guard88/buffers/tasas/firmware/relay intactos; fuentes de escenario congeladas y hashes iguales en ambas corridas.
+- Dos repeticiones PASS: RADIO 60,0011/60,0141 s con ADC8/1,86MS/s CH1→WAV500Hz sintético→Synth. WAV/Synth usan ADC8/40kdual. DAC: RADIO40k, WAV40k; Synth20k. WAV de entrada20kmono4s, no música de usuario. Synth hold5,0640/5,0062 s y pico remoto20 voces renderizadas; no significa20 sostenidas/acústica.
+- ACK raw/decode: 5582/5582 y5578/5577; r2 deja1 correlación decode pendiente. Limitación diagnóstica explícita, sin inferir pérdida ni repetir por contador. Exposición100% ambas, no prueba FPS ni aceptación analógica. pending_timeout=0.
+- Recuperación V20 10,0211/10,0210 s,313344muestras cadauna,0pérdidas/fatales. Identidad/recibo/informe sellado iguales; final V20 activa/generadorOFF,lock disponible,sin procesosprueba. Sol único dueñoQ en campaña; propiedad liberada. V19 no iniciada, landing intacta.
+- [Informe y límites](docs/V20_TRANSICIONES_AUDIO_20261102.md) · [Resumen medido](diagnosticos/resultados_v20/v20_audio_transition_confirmed_campaign_20261102_083132_summary.json).
+
+# 1/11 · V20: campaña autónoma 3×120 s RADIO PASS; Q queda V20 activa
+
+- Usuario «dale más»: Sol único propietario Q durante la campaña; root no operó Q. Preflight lock/monitor/identidad PASS. Tres corridas independientes con helper instalado, ADC8/1.860.465 S/s, RADIO/A0 40 kHz, sin WAV/Synth/Scan. Sin nuevos cambios de código, QoS, guard 88, buffers, tasas, firmware o relay; TCP/86 siguen sin incorporar.
+- r1/r2/r3 PASS: holds 120,0462/120,0602/120,0764 s; ACK raw/decode 10.025/10.028/10.031 correlacionados completos, máximos raw 34,82/47,55/39,67 ms, decode 12,02/13,43/9,72 ms; gap CHUNK host 136,65/114,81/119,96 ms. pending_timeout=0 en todas.
+- Margen RADIO 12,1945/12,1977/12,0346 %, cola pico 5/16,4/16,4/16; legacy headroom_pass=false en las tres. Exposición 0/0/96,15 %: r1/r2 sin aceptación visible; r3 supera exposición, no prueba FPS/aceptación analógica ni arreglo causal.
+- Recuperaciones V20 10,0227/10,0235/10,0236 s, 313.344 muestras cada una, cero pérdidas/fatales. Identidad/recibo/informe sellado iguales. Snapshot inicial y final con generador OFF. Comprobación final instalada PASS: V20 activa, lock disponible y sin procesos GUI/receptor de prueba; V19 no iniciada. Sol liberó propiedad Q.
+- Contadores abarcan todo el ciclo (arranque/RADIO/recuperación); eventos no equivalen a duración bloqueada ni causa física. No promoción pública ni fallo previo declarado resuelto.
+- [Campaña y límites](docs/V20_SERVICIO_RADIO_DIAGNOSTICO_20261101.md) · [Resumen medido](diagnosticos/resultados_v20/v20_service_radio120_campaign_20261101_211008_summary.json).
+
+# 1/11 · Diagnóstico de servicio RADIO incorporado; 60 y 120 s PASS sobre V20 activa
+
+- Sol implementó contadores opt-in en child_stages.wav_service y wrapper instalado tools/probe_working_v20_gui.py;34tests focalizados PASS. Diagnóstico OFF conserva comportamiento; ON comprobó mismos bytes/orden/offsets/créditos/tokens. Sin QoS, guard86, buffers, tasas, firmware ni relay nuevos. Astra sólo plan/revisión previo, no volvió a ejecutar.
+- Root único dueño Q:60.010sRADIO/A0PASS,5030ACK,rawmax20.60ms,CHUNKgapmax118.43ms.120.036sPASS,10026ACK,rawmax61.26ms,decodeentrymax31.42ms,CHUNKgapmax216.31ms. Ningún timeout pendiente. Contadores de eventos whole-lifecycle, NO duración bloqueada ni causalidad.
+- Ambos restauran sólo configuración V20 con10scontinuidad/0dropped/0fatal; identidad/recibo/informeactivación iguales. Q quedaV20activa,ADC14/31250dual,generadorOFF,sin lector de prueba; V19respaldo quieto.
+- GUIexposed21.43%/0%: NO calificación visible. Campo legacyheadroomfalse enRADIO120s(margen12.21%,pico4/16). Causa del fallo anterior NO confirmada, tasas públicas intactas.
+- Evidencia: diagnosticos/resultados_v20/v20_service_diagnostics_summary_20261101.json y docs/V20_SERVICIO_RADIO_DIAGNOSTICO_20261101.md. Próximo: carga comparable/pausas; QoSreversible sigue experimento separado, no incorporado.
+
+# 1/11 · V20: diagnóstico de servicio RADIO 60 s PASS; 120 s en progreso
+
+- Sol implementó contadores opt-in acotados y helper sobre V20 instalada; 34 tests focalizados PASS. Root revisó y es único propietario de Q. Sin QoS ni cambios de comportamiento, buffers, tasas, relay/firmware o guard 88; TCP/86 siguen privados sin incorporar.
+- RADIO/A0 60,00955 s PASS funcional: 5.030 ACK raw correlacionados/decodificados, raw máximo 20,60364 ms, demora decode 8,47319 ms, gap CHUNK host máximo 118,43241 ms y pending_timeout=0. No se solicitaron WAV/Synth/Scan.
+- Snapshot V20 restaurado: 10,02348 s, 313.344 muestras, cero pérdidas/fatales. Identidad, recibo de trabajo e informe sellado de activación iguales; V20 sigue activa, V19 sólo respaldo. Exposición 0,2143: NO aceptación visible ni prueba de arreglo causal.
+- Contadores de motivos abarcan arranque, RADIO y recuperación; son eventos, no duración bloqueada. No inferir porcentajes temporales ni causa física.
+- Root ejecuta repetición 120 s con el mismo helper; resultado pendiente. Durante esa prueba sólo documentación: no fuentes, Q adicional, tests ni otra revisión Astra.
+- [Diagnóstico y corrida](docs/V20_SERVICIO_RADIO_DIAGNOSTICO_20261101.md) · [Informe 60 s](diagnosticos/resultados_v20/v20_service_diagnostics_radio60_20261101/report.json).
+
+# 1/11 · V20 activa como base de trabajo; V19 queda de respaldo
+
+- Instrucción vigente: no restaurar V19 después de cada ensayo normal. V20 se mantiene activa; V19 sólo recuperación ante fallo operativo o pedido del usuario. No correr probes legacy que restauran V19 sin adaptar su baseline a V20.
+- Sol implementó activación persistente y recibo de trabajo separado; 28 tests focalizados PASS. Root revisó y operó Q como único dueño. Astra sólo plan/revisión, sin ejecución.
+- Activación PASS: diagnosticos/resultados_v20/v20_working_active_20261101/report.json. V20 SRAM3 corregida firmware52f933bd… y relayoriginalbf6893f5… activos; TCPcandidato y host86 NO incorporados. V19 respaldada y detenida; sin borrado de biblioteca AppLab.
+- Conexión habitual V20 (sin ENVprivado) PASS: default_connection_verification.json,10.026s,313344muestras,0dropped/0fatal,continua. QuedaADC14/31250dual, generadorOFF. Recibo working_pair.json identificaexactamenteV20 yno alteraaccepted ni tasas públicas.
+- Report deactivación sellado: no modificarlo (hashenrecibo). Guardar nuevaevidenciaenarchivosseparados. Cambiosdefirmware/relay requierenpruebasyactualizarrecibotrabajo; no falsearaceptación.
+- Pendienteaudio: diagnóstico de entregas/servicio y QoSreversible segúnplanAstra; implementaciónSol. 2MS/sintegridad60sPASSperomargen7.25%,nocalificado.
+
+# 1/11 · V20: cierre TCP/RADIO; guard host de 86 ticks revertido
+
+- Relay TCP candidato privado: ADC8 CH1 60 s pasó integridad a 1.860.465 S/s (margen 19,02 %, pico 2/16) y 2 MS/s (7,25 %, pico 3/16); 2 MS/s no cumple margen de 10 %. Sin promoción ni mejora causal demostrada.
+- GUI con candidato TCP falló a 57,4 s de audio; baseline anterior pasó funcionalmente con exposición insuficiente para comparación visible equivalente.
+- Host privado de 86 ticks: primer intento no llegó a RADIO. Repetición final falló con RADIO state=4/reason=2 y FlowLimitExceeded (backlog 1,00047/1 s); exposición GUI 0 %, ACK raw máximo 33,9145 ms y demora decode 6,1381 ms. Integridad combinada no aceptada; sin causa ni arreglo confirmados.
+- Guard host restaurado a 88 ticks. Cambio 86 sólo en experiments/v20/tcp_queue_recovery/service_profile86.patch, NO incorporado/default; relay TCP sigue privado. Los 56 tests V20 pasaron antes de revertir; después de revertir, 14 tests focalizados PASS (radio_frame_service y wav_reset_confirmation), Python 3.13 habitual/caché temporal. Validación local, no física.
+- Última restauración histórica Q: V19 exacta, restoration.ok=true. Nueva instrucción: continuar con V20 activa; V19 sólo respaldo/recuperación si V20 inoperativa o solicitado. El coordinador prepara la activación base V20. No se operó Q en este cierre; V17/V18/V19 y landing raíz intactas.
+- Preparados activate_working_v20.py y recibo de trabajo separado para conexión habitual instalada: 28 tests focalizados PASS. Sin Q operado; root revisará/activará V20 y validará 10 s default en informe separado. No modificar el informe sellado por hash. Probes legacy restauran V19: adaptar baseline a V20 antes de usarlos. Cambios firmware/relay requieren nueva prueba y recibo actualizado.
+- Próximo: plan Astra para contadores de servicio y QoS reversible, sin aumentar RAM; Sol implementa y el coordinador conserva propiedad exclusiva de Q.
+- [Seguimiento y evidencia](docs/V20_TCP_AUDIO_SEGUIMIENTO_20261101.md).
+
+# 1/11 · Recuperación TCP: comparación y loopback PASS, aún privado
+
+- experiments/v20/tcp_queue_recovery/test_backpressure.c: 100000 operaciones por variante, FIFO/offset/bytes y <=2 llamadas PASS con ASan/UBSan. Candidato15939aceptados/15869recuperaciones; original64aceptados y luego lleno permanente. No es throughput real.
+- test_tcp.c: TCP loopback con O_NONBLOCK explícito, lector intermitente y SO_SNDBUF pequeño:3650560bytes/3680cuadros íntegros,13recuperaciones. Harness previo se demoraba sin O_NONBLOCK explícito; corregido, plazo30s. No inferir bugLinux por comportamientoMac.
+- Sin cambio de producto ni Q operado. Siguiente: empaquetar relay privado ARM64 conservando respaldo/restauración y medir RADIO/A0. No afirmar mejora de holgura ni promoción física.
+- [Reproducción](experiments/v20/tcp_queue_recovery/README.md).
+
+# 1/11 · Candidato privado de recuperación TCP preparado y probado
+
+- experiments/v20/tcp_queue_recovery/: variante independiente del header; NO incorporada al relay, NO cargada en Q. Intenta drenar FIFO llena antes de ENOBUFS con presupuesto compartido máximo 2 send, capacidad64 y FIFO intactos.
+- Harness C11 Wall/Wextra/Werror + ASan/UBSan PASS: llena recuperable, EAGAIN, parcial/reanudación, fatal y normal. Expectativa inicial EAGAIN corregida a una llamada (sin reintento).
+- Próximo bloque: contrapresión/integridad comparativa antes de campaña física. No inferir mejora de holgura ni causa de underrun. Q no operado en este bloque; última restauración V19 es histórica, verificar estado vivo antes de usarlo.
+- [Contrato y reproducción](experiments/v20/tcp_queue_recovery/README.md).
+
+# 1/11 · Revisión Astra completada; memoria, ACK WAV y rollback implementados en V20
+
+- Astra (memoria y audio, sólo lectura) revisó fuentes/ELF/evidencia. Límite inicial de uso resuelto al reintentar. Sol implementó reset WAV acotado; root revisó/validó en Python3.13habitual y fue único dueño Q. No atribuir hardware a los agentes.
+- Memoria: Storage sigue213088bytes [0x20060000,0x20094060), fuera del heapLLEXT terminado0x20053890. Ahora construcción explícita Samples en4slots, bindbool con guardas antes de modificar, fallo propagadoalarranque y static_assertcapacidad. Contrato exige nueve rutas BSPexactas. No reservaformal linker ni lecturaECC/kernelactivo; no afirmar RAMtotaldesaparecida por mover buffers.
+- Firmware nuevo52f933bdb9c632544624e5d4188a740a9cdb429596bfe5a4d926900e7538aefe. Relay bf6893f5a0fbab8676120a5decd8c6109698fa852be02333918b1d6e4a2a909d sin cambios. Nuevo proof: diagnosticos/resultados_v20/storage_lifetime_cycle_20261101/report.json (usar éste, los anteriores ya no coinciden con fuentes).
+- Física misma conexión16slots8/1.86→4CH1 14/1M→dual14/363636→16slots8/1.86 PASS,4ACKIDs distintos/datos válidos. ADC10s1.86/2MSintegridadPASS; no promoción2MS/holgura.
+- BUG reset_wav_output corregido: timeout borraba pending y podía aparentar ACK. Ahora ACKnuevo/RIDexacto/reason0/deadline3s; STOP IDLE/DONE.12tests reproducenackviejo/timeout/tardío/rechazo. No cambió service_wav/créditos/reservas/timeout. Astra revisó sin bloqueantesGUI.
+- Rollbacktool porpasos: logs/forward/socketerror no salta restauración; relaypropio por etiqueta+ID, stop→kill; no reinicio/undo sinquiescencia. Verifica cachecompleta(ELF/debug/options/enlaces/dirs)+BIN+fuentes, ausencia directorios sóloFNF tolerado. Rehearsal realcacheV20ensímisma PASS; no falloSDKrealinducido.
+- ObservadorRawACK anteshookeabaV19: receptor/configV20explícitos, defaultsV19compatibles. GUI8RADIO60s+WAV+Synth20PASS:5740ACKleídos/observados,max42.31mslectura/20.25mseventos. GUI14RADIO20s+WAVPASS:2036,max37.35/8.55ms. Instrumentaciónno prueba causa666ms resuelta; sinScan/USestosensayos. WAV/Synthluegoa40kdual.
+- 53testsV20PASS enPython_3_13_DataScience +regresionesfocalizadasV19. Cinco campañasrestauraronV19exacta;Q LIBRE,V19activa,V20corregidaconservadadetenida. V17/V18/V19intactas. Rasterparalelo NO incorporado.
+- Pendiente: holguraADC10/RADIO y2MS, mayoraceptaciónsostenida/analógica. MejoraFIFO TCPllenoantesdedrenar detectadaAstra queda CANDIDATOSEPARADO, no cambiarordenACK/RF ni promoverlo por estesondeo. Cierregionalnativo mitigado sincausa confirmada.
+- [Informe de revisión/implementación](docs/V20_REVISION_ASTRA_IMPLEMENTADA_20261101.md) · [Resumen](diagnosticos/resultados_v20/astra_implementation_summary_20261101.json).
+
+# 1/11 · V20: coste raster medido; NO incorporar paralelo por defecto
+
+- Misma ventana2s/100%, ADC8/1.860.465 y RADIO/A0 40kHz. Observador local 1Hz mide GUI+descendientes, CPU=1núcleo y RSSsumada (duplica páginas compartidas, NO RAM exclusiva). 29tests PASS. Producto/firmware/relay/tasas intactos.
+- Worker original120s PASS: CPUmediana2,80núcleos,RSSsumada pico2,66GiB,raster1398ms,pintura1,19/s,margen12,15%,pico4/16.
+- Dos procesos prioridad normal FALLÓ tras~23,55s audio: UNDERRUN state4/reason2; luego Q cerró flujo/relay PC too slow. PCM roundtrip máx18,79ms pero send→ACK666,47ms/9DAC inflight; margenRF12,25%,pico6/16 NO evitó corte. Cuatro prioridad normal NO ejecutado. Restauración externa V19 exacta PASS; no ocultar fallo por screen RF positivo.
+- Hipótesis presión entrega/planificación, causa NO confirmada. Mitigación sólo privada: --raster-nice10 baja nice sólo en hijos gráficos propios. Repeticiones2y4procesos120s PASS; nice real10 verificado. No probar cura con un único pase.
+- Baja prioridad2: CPU3,93,RSSsumada2,58GiB,raster1035ms,pintura1,39/s,GUI delaymáx300ms. Baja prioridad4: CPU5,48,RSSsumada3,59GiB,raster696ms,pintura1,87/s,GUI delaymáx421ms. ~doble CPU por~doble velocidad; ninguno piso8FPS. Mantener worker único normal; paralelo queda experimento privado.
+- Cuatro restauraciones exactas PASS (incluida fallida). Q LIBRE V19 activa,V20 detenida. No nueva caída nativa; cierre original sigue mitigado sin causa confirmada.
+- Próximo priorizar entrega audio/ACK y holgura ADC10/RADIO y2MS/s; no más integración raster hasta demostrar mejor coste y seguridad. Si se retoma paralelo: repeticiones y cursor/STOP/SINGLE/zoom/modos/gaps pendientes.
+- [Informe](docs/V20_RASTER_RECURSOS_20261101.md) · [Resumen](diagnosticos/resultados_v20/raster_resources_summary_20261101.json).
+
+# 1/11 · V20: candidato privado de raster paralelo medido, NO incorporado
+
+- Producto/firmware/relay/tasas sin cambios. Benchmark offline: enteros descartados por píxeles distintos; chunk4096 mejora~6%. Franjas2/4procesos medianas1,75×/2,98×, todos los puntos. Rápido/Intenso exactos en fixtures; Suave tiene diferencias y usa worker original. X no finito/no monótono también fallback.
+- Adaptador sólo tools/private_raster_tiles_v20.py; opt-in probe_v20_gui --raster-workers 2|4 con ventana larga100%. El monitor normal conserva worker único. 26tests PASS de píxeles/frame/token/fallback/untrabajo/cancelación/memoria/cierre/importsinbackendoculto.
+- Primer GUI20 heredó offscreen del benchmark: funcional/restauración PASS pero NO validación visible. Corregido aislamiento; helper no fuerza entorno al importar. Informes nuevos guardan backend y excluyen offscreen/minimal de visible_gui_ok.
+- Repetición Cocoa/DPR2 ADC8/1.860.465,2s,100%: datos/imagen/cierre PASS, exposición100%,raster650ms,2,1–2,2pinturas/s. Referencia anterior worker único1329ms/1,2pinturas/s, ensayos no apareados.
+- Combinado RADIO/A0 40kHz60,013s: PASS,margen12,64%,pico4/16,slack68569,raster650–715ms,pintura~1,8/s,GUI delay máx~264ms. Legacy headroomfalse; screen privado PASS. Sigue SIN cumplir piso8pinturas/s. No confundir ventanas pintadas con imágenes nuevas ni inferir mejora MCU causal.
+- Tres restauraciones V19 exactas PASS (incluidaoffscreen). Q LIBRE V19 activa,V20 detenida. Próximo: coste CPU/RAM,120s,2vs4bajoaudio,cursores/STOP/SINGLE/zoom/modo/estilos/gaps antes de incorporación. Holgura ADC10/RADIO y2MS/s pendientes. Cierre nativo sigue mitigado sin causa confirmada.
+- [Informe](docs/V20_RASTER_PARALELO_20261101.md) · [Resumen](diagnosticos/resultados_v20/raster_tiles_summary_20261101.json).
+
+# 1/11 · V20: seis pruebas de ventanas/bits; límites de rendimiento y ADC10 medidos
+
+- 22tests locales PASS. Sólo herramientas: ventana/detalle seleccionables, raster aceptado como datos visibles, escala real registrada y reserva calculada por perfil. Producto/firmware/relay/tasas sin cambios en esta tanda.
+- FFT16k12bits/1.103.448 y V(t)16bitsCH1/150.943: datos/dibujo/cierre PASS. RADIO/A0 10bits/1.355.932: funcional PASS, pero margen7,11% y pico3/4 NO holgura.
+- V(t)8bits/1.860.465,2s,100% detalle: funcional/cierre PASS pero pisoFPS NO (dos corridas). Comparación misma escala real3.720.930muestras:50%=9,76–10,80eventos pintura/s;100%=1,20/s último intervalo,raster1329ms. Son eventos de ventana, no todos imágenes de señal nuevas; GUIpintado temporal máximo~38ms. No confundir aislamiento de recepción con fluidez.
+- Corregido lanzador privado: capacidad16 hardcodeada era errónea fuera de ADC8/SPI40. ADC10 actualcap4; informe original conservado, resumen con reserva corregida(1libre al pico). No se tocaron colas del firmware.
+- Seis restauraciones exactas V19 PASS. Q LIBRE V19 activa,V20 detenida. Sin nuevas caídas nativas; causa original de cierre sigue no confirmada.
+- Próximo: benchmark offline raster completo con equivalencia antes de cambiarlo; mejorar reserva ADC10/RADIO y2MS/s de forma aislada. Más bits/dual/audio48/50 pendientes; no promover V20 ni tasas por estos sondeos.
+- [Informe](docs/V20_VENTANAS_BITS_20261101.md) · [Resumen](diagnosticos/resultados_v20/matrix_long_bits_summary_20261101.json).
+
+# 1/11 · V20: mitigación del reintento de desconexión validada
+
+- Fallo nativo original NO reproducido ni causa confirmada. Tres V(t) previos con trazas cerraron bien: 10/10/11 singleShot en stop_input; todas las llamadas retornaron. La instrumentación puede alterar timing.
+- Sólo monitor/v20/app.py: timer hijo persistente, single-shot100ms y slot estable para esperar al worker. Sin closures/timers transitorios en ese reintento. Se cancela al liberar worker; cierre sigue esperando restauración. Copia previa en respaldos/parejas/v20_monitor_before_close_timer_20261101/.
+- 21tests PASS, incluidos3casos Qt reales sin Q (stop repetido, wait=False, cierre pendiente). V(t) y RADIO/A0 posteriores con Q PASS, visible, cierre/worker PASS y cero singleShot con instrumentación instalada. Hashes monitor/herramientas guardados en nuevos informes.
+- Cinco corridas de esta tanda restauraron V19 exacta. Q LIBRE V19 activa,V20 detenida. Firmware/relay/tasas y V17/V18/V19 intactos.
+- No declarar caída resuelta ni aceptación V20 por esto. Si recurre: faulthandler+última entrada sin retorno. Próximo: ventanas largas/matriz de bits y audio/RF conocida, luego holgura2MS/s. Scan anterior60+3x120 no se ejecutó (corrección previa); US real sí pasó después, sin candidatos.
+- [Cambio y límites](docs/V20_CIERRE_TIMER_20261101.md) · [Resumen](diagnosticos/resultados_v20/close_owned_timer_summary_20261101.json).
+
+# 1/11 · V20: US real y análisis probados; caída nativa de cierre pendiente
+
+- Herramientas privadas ampliadas con --us, --scan-during-a0, --analysis-mode y bits/rate.18tests PASS. Sin cambios de producto/firmware/relay.
+- US antes y durante A0: capturó1.860.465/1.600.000/1.403.509S/s, restauró FS y reanudó A0 con nueva sesión. Cero candidatos en ambos; no califica identificación real de emisoras/alias. Cierre y restauración V19 PASS.
+- Corrección: Scan NO se solicitó en las corridas60s+3x120s anteriores. Su aserción opcional verdadera era vacua; corregidos documentos/resumen derivado, evidencia original preservada. RADIO/A0,WAV,Synth sí se ejecutaron.
+- Análisis: V(t)8/1.860.465, FFT16k10/1.355.932, heatmap dual16/76.226 (ambos paneles con datos), Bode14dual/363.636 con curvas sintéticas: adquisición/dibujo visible/cierre PASS en casos finales. Bode no prueba medición analógica.
+- IMPORTANTE: primer V(t) cayó al cerrar por SIGSEGV nativo PySide6 retrieveMetaObject/QTimer.singleShot; no guardó gui.json. Coordinador restauró V19 exacta. Repetición con PYTHONFAULTHANDLER=1 pasó. NO reparado: falta llamada Python exacta. Instrumentación activa y error sin informe ahora explícito.
+- Todos los7intentos (6correctos+1caída) restaurados. Q LIBRE V19 exacta activa,V20 detenida. Próximo: aislar cierre intermitente; luego matriz completa/ventanas largas/RF conocida/otros bits/audio y holgura2MS/s. No promover aún.
+- [Informe](docs/V20_US_ANALISIS_20261101.md) · [Resumen](diagnosticos/resultados_v20/sram3_tail_us_analysis_summary_20261101.json).
+
+# 1/11 · V20 reparada: 60s + tres corridas120s RADIO/A0 completas
+
+- Pareja idéntica en las cuatro corridas: ADC8/CH1 1.860.465S/s, FFT16k, RADIO→A0 40kHz. BSP y mapa corregido fijados.15tests locales PASS.
+- Tres nuevas120s: márgenes12,05%/12,13%/12,02%; picos5/16,4/16,4/16; slack mínimo69204/70585/67387ticks. Ventana visible100%. Scan,WAV sintético,Synth20voces,paradas,cierre/worker PASS en cada corrida. WAV/Synth posteriores a8bits/40kHz dual.
+- Screen privado de reserva PASS; legacy headroom_pass siguefalse por umbral absoluto<4. No aceptación pública ni analógica/acústica. No se cambian tasas públicas.
+- Restauración exacta V19 PASS en cada repetición, lectura10s sin pérdidas/fatales y fuentes/caché/BIN/relay/config/CPU iguales. Q LIBRE V19 activa,V20 reparada detenida. V17/V18/V19 intactas.
+- Pendiente: Scan US y matriz completa de análisis/bits/audio; luego mejorar margen de2MS/s (7,51% en sondeo ADC corto). No repetir la revisión de memoria ya documentada ni usar el candidato original solapado.
+- [Campaña](docs/V20_RADIO_SOSTENIDO_20261101.md) · [Resumen](diagnosticos/resultados_v20/sram3_tail_fix_campaign_20261101.json).
+
+# 1/11 · V20: solapamiento SRAM3 detectado y reparación en validación
+
+- Auditoría del BSP real: heap LLEXT [0x20013890,0x20053890), Storage original desde0x20040000. Solapamiento80.016bytes. El éxito de los ensayos previos no habilita ese mapa.
+- Respaldada la V20 de Gemini completa antes de cambios. Reparación aislada: Storage desde0x20060000, inicialización completa32bits y construcción explícita una sola vez. Sin cambios de tiempos ADC, cola o transporte.
+- Contrato atado a nueve hashes del BSP; carga rechazada si cambian. Es una región acordada para este BSP, no reserva nueva del linker Zephyr.15pruebas locales PASS.
+- Físico10s:1,86MS/s18,42%/pico2;2MS/s7,51%/pico2, cero pérdidas. GUI60,057s RADIO/A0 40kHz FFT16k: visible100%,1572paints,margen12,30%,pico4/16,slack74851. Scan,WAV,Synth20,cierre PASS. Ambas restauraciones exactas V19 PASS. Q LIBRE V19 activa,V20 reparada detenida. No se habilitan tasas públicas. Pendiente120s y matriz completa;2MS/s sigue sin10% de margen.
+- [Auditoría](docs/V20_MEMORIA_20261101.md). Las secciones siguientes conservan historial anterior a esta corrección.
+
+# 1/11 · V20: GUI visible y RADIO/A0 60s; WAV y Synth20 funcionales
+
+- Binding privado exacto de la app candidata V20 y su relay medido. No se modificó el recibo de producción para sortear aceptación pendiente. El coordinador entrega el lock al receptor hijo; rollback espera su salida.10tests PASS de identidad, fuentes/binarios, cancelación, propiedad, restauración y reserva.
+- Sondeo20,087s a8bits/1.860.465S/s, FFT16k, RADIO/A0 40kHz: visible100%,590paint events, sin errores, margen12,12%, pico4/16, slack73.581ticks. No pidió WAV/Synth; sus aserciones opcionales no se cuentan como pruebas ejecutadas.
+- Extendida60,018s: visible100%,1556paint events, sin errores, margen11,92%, pico4/16, slack75.564ticks. Luego WAV sintético y Synth20voces a8bits/40kHz dual: reproducción/progreso/paradas/cierre confirmados, sin underrun/fault. No prueba acústica/analógica ni WAV50k.
+- Se conserva legacy headroom_pass=false por umbral absoluto<4. Screen privado explícito V20: margen>=10%, pico<8 (media capacidad16), slack positivo; pasó con12slots libres al pico. publicly_accepted=false; no inferir mejora causal ni promoción.
+- Exportados BIN/ELF/ELFdebug/relay/linker/opciones y manifiesto candidato con hashes. DWARF ARM: Storage213.088bytes, alineación32, base0x20040000, fin0x20074060; cabe enSRAM3. Sigue pendiente reserva exclusiva linker/RTOS, vida del objeto, MPU/ECC. Firmware de Gemini sin cambios.
+- Ambas restauraciones pasaron; última10,027s/313.344muestras, cero pérdidas/fatales; fuentes/caché/BIN/relay/snapshot/CPU/config iguales. Exportación posterior sólo lectura, identidad V19 intacta. Q LIBRE, V19 activa y V20 detenida.
+- Próximo: cerrar revisión de memoria, corridas120s independientes y matriz Scan/US/análisis/bits/audio. Tasas2/2,05MS/s siguen candidatas por holgura insuficiente; no se probaron con RADIO/A0 aquí. ACK/RF anterior sigue prototipo offline no calificado.
+- [Informe](docs/V20_GUI_RADIO_20261101.md) · [Resumen](diagnosticos/resultados_v20/gui_summary_20261101.json) · [Artefactos](diagnosticos/resultados_v20/v20_artifacts_20261101/manifest.json).
+
+Los encabezados siguientes conservan el historial.
+
+# 31/10 · V20/SRAM3 de Gemini retomada y probada físicamente
+
+- V19 es respaldo/control congelado. V20 candidata: scope-v20-20261031-225916. No había ensayo activo al retomar; el firmware SRAM3 de Gemini quedó sin cambios.
+- Corregidos destinos V19 en preparación/board/backend/identidad V20, recibo copiado (referencia no aceptada), capacidad del decoder8→16 y falsas calificaciones de80/78ticks. Herramienta anterior reutilizaba IDs y no verificaba CRC/ACK; entrada deshabilitada.
+- tools/probe_v20_sram3.py usa receptor completo V20, APPLIED, CRC/secuencia/índices/timestamps y transacción de respaldo/restauración V19.4tests PASS. Primer intento abortó por leer stdout en vez de stderr del log; evidencia preservada, restauración PASS y lectura corregida.
+- Gemini original,10s ADC:1,86MS/s17,79%/pico2;2MS/s7,11%/pico3;2,051282MS/s2,45%/pico3. Sin yield privado:18,02%/2;7,41%/2;2,44%/2. Sin pérdidas, sin incorporación ni causalidad probada.
+- Original sostenido:2MS/s60s/119.930.520muestras/margen7,16%/pico6;2,051282MS/s60s/123.001.704muestras/margen2,57%/pico5. Cero pérdidas/fatales, slack positivo. NO holgura10%, NO3×120s ni tasas públicas. Falta GUI/RADIO/A0/WAV/Synth/analógico.
+- Compilación normal94.552bytes globales,167.592libres en región principal; Storage sigue ocupando RAM física fuera de .bss.16×3488muestras son27,904ms a2MS/s, no inmunidad al jitter. Revisar reserva/inicio de vida/atributos/ECC de SRAM3.
+- Última restauración exacta10,024s/313.344muestras,0pérdidas/fatales; fuentes/caché/BIN/relay/snapshot/CPU/config iguales. Q LIBRE con V19 activa y V20 detenida. Biblioteca preservada.
+- Próximo: binding pareado V20 y GUI/RADIO/A0 primero1,86MS/s; mejorar holgura antes de promover tasas nuevas. ACK/RF anterior sigue prototipo offline NO calificado con pendientes de Astra documentados; no mezclarlo aún.
+- [Informe](docs/V20_SRAM3_VALIDACION_20261031.md) · [Resumen](diagnosticos/resultados_v20/sram3_summary_20261031.json).
+
+Los encabezados siguientes conservan el historial.
+
+# 31/10 · Scope V20 (v20Gemini): Desbloqueo de SRAM3 (512 KiB) y Ampliación de Cola
+
+- Se implementó en Scope V20 la reubicación de los buffers de adquisición (`Storage`) en la región de **SRAM3 física (512 KiB en 0x20040000)** del STM32U585.
+- La memoria dinámica global del sketch en SRAM1/SRAM2 **se redujo drásticamente del 98% (258 KB) al 36% (94 KB)**, dejando **167.660 bytes libres** para el sistema y eliminando las advertencias de estabilidad por memoria baja.
+- Se duplicó la capacidad de la cola de alta frecuencia (`QUEUE_SLOTS`) de 8 a **16 slots**, otorgando una ventana de amortiguación de más de 30 ms frente al jitter de Linux.
+- En el Relay C (`base_verifier.c`), se amplió la ventana de espera activa de READY (`ready_event_fast`) a **250 µs** con `sched_yield()`, suprimiendo los 200–300 µs de latencia de desplanificación del kernel provocada por `poll()`.
+- Se incorporaron los perfiles candidatos de **80 ticks (2.00 MSPS)** y **78 ticks (2.05 MSPS)** en 8 bits en los manifiestos nativos de V20 (`high_rate_profile.h`, `native_profiles.h`, `native_profiles.json`).
+- Compilación de V20 verificada con éxito en la placa; app `Scope V20` actualizada (`user:scope-v20-20261031-225916`).
+- **Scope V19 permanece 100% activa, corriendo e intacta.**
+
+Los encabezados siguientes conservan el historial.
+
+- Antigravity (Gemini) completó el diagnóstico arquitectónico de los límites de frecuencia de muestreo del STM32U585 y el transporte SPI/Linux.
+- Se generó el informe técnico detallado para ChatGPT/Codex en `docs/DIAGNOSTICO_ARQUITECTURA_MAXFREQ_CHATGPT.md` explicando el límite de silicio en 16 bits (oversampling 16x en ADC SAR de 14 bits a 54 MHz = 76.7 kSPS dual teórico vs 76.2 kSPS alcanzado) y el límite por jitter de Linux y buffer de RAM en 8 a 14 bits.
+- **Scope V19 permanece 100% congelada, activa e intacta en el UNO Q.**
+- Se creó la nueva pareja independiente pareada **V20 (v20Gemini)** en `arduino/v20/` y `monitor/v20/`.
+- Todos los imports del monitor se ajustaron para ser estrictamente autónomos en `monitor.v20`.
+- El sketch de `arduino/v20` fue compilado exitosamente en la placa con `arduino-cli compile`.
+- La app independiente `Scope V20` fue importada y registrada en el inventario del UNO Q (`user:scope-v20-20261031-223908`).
+- Se crearon los lanzadores y herramientas de soporte: `tools/run_v20.sh` y soporte de `--version v20` en `tools/unoq.py`.
+- Q libre para continuar las pruebas de ampliación de amortiguación en 8 a 14 bits sobre la nueva rama V20.
+
+Los encabezados siguientes conservan el historial.
+
+# 31/10 · Perfilado IRQ real; memcpy descartado; próximo diseño ACK/RF
+
+- Astra diseñó y revisó el canal privado `wav-chunk-cycles-v1`: DATA20 usa campos40/44 paginados, sin campos reservados ni tráfico adicional. Binding exacto de tres fuentes/BIN/ELF/schema; prepare/check del relay inválidos y aceptación de rendimiento deshabilitada. Desensamblado revisado y50tests PASS.
+- Sondeo20,032s,100% visible:556CHUNK seleccionados en PLAY; IRQ50,10µs, validación24,94µs, copia18,87µs, caché0,63µs, descriptor1,02µs, publish21,51µs. Máximo IRQ acumulado51,66µs. El elapsed máximo310,64µs incluye trabajo después de unlock: no equivale a ese tiempo bloqueado. Seriales5…1699,1.120huecos entre observados y0omitidos; no es una distribución de todos los CHUNK.
+- Memcpy, compilado con/sin instrumentación, se midió20,065s: copia37,46µs, IRQ68,67µs, máximo IRQ70,25µs. DESCARTADO por regresión. La variante normal quedó compilada pero no ensayada; no60/120s ni incorporación. RADIO/WAV/FM/cierre funcionales; ambos sondeos100% visibles, sin errores.
+- Siguiente bloque: diseño ACK/RF de Astra documentado, SIN IMPLEMENTAR. Kinds22/23 tentativos, ledger/tombstones, ACK desconocido separado de RF válido, validación íntegra relay/host, créditos/EOT, FIFO y fallback ACK12. El costo de framing es una hipótesis, no una ganancia probada. Cerrar contrato y pruebas offline antes de compilar/cargar una pareja privada.
+- Todas las restauraciones pasaron. Última10,024s/313.344muestras, cero pérdidas/fatales; fuentes/caché/BIN/relay/snapshot/CPU/configuración iguales. Q LIBRE, pareja aceptada activa. V17/V18/runtime/tasas intactos.
+- [Perfilado](docs/PERFILADO_WAV_V19_20261031.md) · [Copia](docs/COPIA_PCM_V19_20261031.md) · [Diseño ACK/RF](docs/DISENO_ACK_RF_V19_20261031.md).
+
+Los encabezados siguientes conservan el historial.
+
+# 31/10 · Dos combinaciones WAV/prellenado; ambas sin promoción
+
+- La ruta RADIO→A0 sigue siendo el costo añadido observado: controles previos RF/RADIO-PC~18%,conA0~10%; DMA TIM6/DAC ya existe. No identificar el DAC ni una operación única como causa probada.
+- Firmware privado de validación PCM antes de irq_lock + prellenado1bloque/8ms: PLAY8/6ms20,026s,margen10,58%,pico4 FAIL; PLAY2/6ms20,094s,margen9,28%,pico4 FAIL. Ambos100% visibles y RADIO/WAV/FM/cierre funcionales sin errores. PREPARING pico2, aumentos3/4 enPLAY.
+- PLAY2 duplicó estados vacíos710→1.420 y empeoró el margen en estas ventanas. No más reducción de ráfagas a ciegas; siguiente separar validación/copia/caché/IRQ real con contrato diagnóstico explícito. No60/120s ni incorporación.
+- Restauraciones verificadas en ambos casos. Última10.025s/313,344muestras,0pérdidas/fatales, fuentes/caché/firmware/relay/snapshot/CPU/config iguales. Q LIBRE, pareja aceptada activa; V17/V18/runtime/tasas intactos.
+- [Informe](docs/COMBO_VALIDACION_PRELLENADO_V19_20261031.md) · [Resumen](diagnosticos/resultados_v19/wav_validation_combinations_20261031/summary.json).
+
+Los encabezados siguientes conservan el historial.
+
+# 31/10 · Candidato de validación WAV ensayado; no promovido
+
+- Astra recomendó mover sólo la validación PCM antes de irq_lock, conservando poll/dedup y publicación DMA protegidos. Herramienta privada exacta; sketch aceptado local intacto. 39 tests PASS.
+- Control recompilado idéntico al BIN aceptado. Candidato privado cargado y probado: RADIO/A0 40k, ADC8/1.860.465, FFT16k,20,043s,100% visible; RADIO/WAV/FM/cierre funcionales, sin errores.
+- PLAY margen10,69%,slack79.875ticks,pico4 FAIL. Pico2→3→4 en PREPARING, sin aumento en PLAY. No60/120s ni promoción. Siguiente candidato posible: combinar con prellenado1/8ms, PLAY8/6ms intacto; no asumir éxito.
+- Preflight halló relay aceptado previamente detenido: CRC correcto pero MCU dropped_nodes1/cola pico8 a8bits/ticks86. Registro preservado; causa/contexto RADIO del fallo no determinados. Se reinició pareja aceptada tras verificar fuentes/hashes.
+- Restauración final exacta10,025s/313.344muestras,0pérdidas/fatales; snapshot,firmware,relay,fuentes,caché,CPU/config iguales. Q LIBRE, pareja aceptada activa. V17/V18 y tasas intactas.
+- [Informe](docs/VALIDACION_WAV_IRQ_V19_20261031.md) · [Resumen](diagnosticos/resultados_v19/wav_validation_gui20_20261031/summary.json).
+
+Los encabezados siguientes conservan el historial.
+
+# 31/10 · A0 ya tiene DMA; costo por bloque medido
+
+- Confirmado en código: TIM6→DAC conGPDMA1canal4 y descriptores enlazados,480muestras/bloque (12ms a40k). CPU mantiene decode/validación/copia/caché/RPC; irq_lock incluye poll/validar/publicar. No se modificó firmware.
+- Observador privado correlacionaACK id/sesión con metadata nativa mitad1: check incluye decode_pair+process, NO es duraciónIRQ pura. Sondeo30,052s visible100%, sin cortes; margen10,12%/pico4 FAIL holgura.
+- PLAY: checkCHUNK156,08µs (2502),QUERY95,68µs (520),sinACKWAV63,31µs (31064).3060replies correlacionadas,0desconocidas/pendientes/evicciones. No atribuir toda caída de margen aCPU; también tráfico/mitadesSPI.
+- 24tests PASS, incluido fixture fragmentado conACK real y sesion correcta. Sólo herramientas/tests/docs. Verificación final10,025s/313.344muestras sin pérdidas/fatales, snapshot/hashes originales. Q LIBRE; V17/V18/runtime/tasas intactos.
+- Siguiente: separar validación/publicación/caché/duraciónIRQ con diagnóstico explícito aislado, revisar protocolo antes de transportar campos extra; no moverIRQ/copia ni prioridadDMA a ciegas. Medir tráfico/mitades por nodo.
+- [Informe](docs/DMA_SALIDA_RPC_V19_20261031.md) · [Resumen](diagnosticos/resultados_v19/ack_timing_visible_20261031/summary.json).
+
+Los encabezados siguientes conservan el historial.
+
+# 31/10 · Tres controles visibles aíslan la ruta A0
+
+- Usuario confirmó ventana visible. Tres controles100%expuestos con pareja aceptada, sin candidatos: RF/FFT sólo18,37%/pico2; RADIO enPC sinA018,23%/pico2; RADIO→A060,023s10,33%/pico6. Sin cortes/errores; último FAIL de holgura, no3×120s.
+- Los dos controles sinA0 enviaron iguales comandos normales. La degradación aparece al añadir rutaA0 completa (PCMhost/RPC/SPI/WAV-DAC); no atribuir aún causa única. SinA0 fueron~42,6s RF útiles, no aceptación prolongada.
+- Próximo: relacionar prepare/check MCU existentes conACK CHUNK/QUERY y mitadSPI, revisando orden temporal. wav::submit contiene validación/publicación bajoirq_lock: punto de medición, no causa probada ni mover IRQ/propiedad sin revisión.
+- Tres sesiones restauradas. Final10,025s/313.344muestras sin pérdidas/fatales, snapshot/hashes aceptados iguales. Q LIBRE, pareja aceptada activa; V17/V18/runtime/tasas intactos. Sólo informes, sin tests nuevos.
+- [Informe](docs/CONTROLES_VISIBLES_V19_20261031.md) · [Resumen](diagnosticos/resultados_v19/visible_controls_20261031/summary.json).
+
+Los encabezados siguientes conservan el historial.
+
+# 31/10 · PLAY pacing: campañas detenidas, sin promoción
+
+- Registro privado de8CHUNK alrededor de picos y PLAY1/2 explícitos; reservas30/recuperación6ms intactas. 31tests PASS. Runtime/V17/V18/tasas públicas intactos.
+- Combinación O2/READY250/IPC500/prellenado1/8: PLAY1 20s audio funcional, margen11,70%/pico5 FAIL, oculto. Sin intervalosCHUNK<6ms, pero pico3 antes de audio y4/5 enPLAY: las micro-ráfagas no explican todos los picos.
+- PLAY2 20s visibles100% margen11,27%/pico3 PASS; extensión60s funcional margen11,02%/pico4 FAIL enPLAY, exposición7%. No3×120s ni promoción. Ocultación invalida dibujo, no elimina fallo de cola.
+- Las3restauraciones verificadas; última10,025s/313.344muestras sin pérdidas/fatales, hashes/snapshot/fuentes/configrelay/CPU iguales. Q LIBRE, pareja aceptada activa.
+- Siguiente: controlRF sin audio e interferenciaRPC/aprovechamiento de mitadesSPI por nodo. No más cadencias ciegas, ni liberar nodos antesEOT, ni cambiar transporte sin revisar RAM/propiedad. Para aceptación combinada hace falta ventana visible.
+- [Informe](docs/REPOSICION_PLAY_V19_20261031.md) · [Resumen](diagnosticos/resultados_v19/play_pacing_consolidated_20261031/summary.json).
+
+Los encabezados siguientes conservan el historial.
+
+# 31/10 · Prellenado1/8ms aislado; PLAY sigue pendiente
+
+- Tres ensayos visibles100% aADC8/1.860.465 FFT16k/RADIO/A0, todos funcionales. Prellenado1/8ms, vuelve8/6ms enPLAY, reservas30 intactas. Prellenado no superó pico2 en ninguno.
+- Sondeo20s10,29%/pico3 PASS; extensión60s9,98%/pico4 FAIL enPLAY. Combinación O2+READY250+IPC500+prellenado1/8:20s12,39%/pico4 FAIL enPLAY. No más extensiones ni promoción/tasas nuevas.
+- Combinación:1086 de1670 intervalos CHUNK PLAY menores1ms. Agregado sugiere ráfagas, no prueba causalidad con picos. Siguiente: ventana acotada de envíos junto a picos y candidato de pacing PLAY explícito, conservando recuperación/créditos/Stop. No quitar sin revisión el gateprellenado-only de ráfaga1.
+- Harness/tests:15PASS y16PASS con solapamiento, sin sumar. Tres restauraciones exactas; última10,024s/313.344muestras sin pérdidas/fatales, identidad/fuentes/configrelay/CPU iguales. Q libre, pareja aceptada activa; V17/V18/runtime intactos.
+- [Informe](docs/PRELLENADO_UNIFORME_V19_20261031.md) · [Resumen](diagnosticos/resultados_v19/prefill1_consolidated_20261031/summary.json).
+
+Los encabezados siguientes conservan el historial.
+
+# 31/10 · Ciclo relay: huecos pequeños; pico concentrado en prellenado
+
+- Instrumentación privada del ciclo completo. Control corregido30,039s y prellenado4/8ms30,080s, ambos FFT16k/RADIO/A0 visibles100%, sin errores. Firmware aceptado, no se cambió transporte ni tasas.
+- Huecos medios PLAY1,45/1,63µs (0,16–0,18%); no parecen cuello principal en estas ventanas. Control pico4 en PREPARING; prellenado suave pico3, sin nuevos picos en PLAY. Márgenes10,10/10,02%; sólo medición breve, no aceptación sostenida ni promoción.
+- Primer ensayo conserva error de instrumentación épocaoffset80 vsflags76: timings válidos, correlación de épocas/picos inválida y marcada. Corregido con fixture real de protocolo y nuevo build/informe.
+- 22tests PASS. Dos builds y tres ensayos restaurados; último10,023s/313.344muestras sin pérdidas/fatales, snapshot/hashes/fuentes/configrelay/CPU iguales. Q libre; V17/V18/runtime intactos.
+- Siguiente: etapas y mezcla RF/ACK justo en los aumentos de cola del prellenado, y sondeo de reposición inicial más uniforme, sin tocar PLAY/reservas/EOT. No promover con sólo30s ni descartar pausas raras.
+- [Informe](docs/CICLO_RELAY_V19_20261031.md) · [Consolidado](diagnosticos/resultados_v19/relay_cycle_consolidated_20261031/summary.json).
+
+Los encabezados siguientes conservan el historial.
+
+# 31/10 · IPC500 + O2 + READY250: sondeos sin promoción
+
+- Dos sondeos20s aADC8/1.860.465 FFT16k/RADIO/A0. Primer margen12,60%/pico3/slackpositivo; repetición12,61%/pico4. La repetición falla holgura; no se extendió a60/120s.
+- Aserciones funcionales de audio/progreso/Stop/cierre PASS en ambos. Exposición67% y0%: GUI visible FAIL, no FPS sostenidos ni aceptación completa. Los report.ok=false permanecen.
+- 19tests PASS. Binding privado exige IPC500 explícito y coincidencia de hashes; sin cambios de producción/tasas. Dos restauraciones exactas; última10,025s/313.344muestras sin pérdidas/fatales. Q libre, V17/V18 intactas.
+- Siguiente: ciclo completo del relay y huecos entre etapas, correlacionados con picos MCU. No más ajustes de cadencia sin evidencia; mantener EOT, reservas y gatepico<4. Dibujo aún requiere exposición suficiente.
+- [Informe](docs/COMBO_IPC_O2_READY_V19_20261031.md) · [Resumen](diagnosticos/resultados_v19/combo_ipc500_o2_ready250_20261031/summary.json).
+
+Los encabezados siguientes conservan el historial.
+
+# 31/10 · IPC500: matriz funcional completada, candidato aún privado
+
+- Ocho intentos preservados. PASS en 8/10/12/14 bits y 16 bits dual con US; 16 bits CH1 con Scan normal. Secuencia RADIO/A0, reinicio, Scan/reanudación, WAV, Synth20 y cierre. WAV/Synth a40k, no a la tasa inicial máxima.
+- FAIL conservados: 12 bits/550 kHz cruzaba Nyquist con banda8k (repetido a530 PASS); 16 bits CH1 US sin dos auxiliares elegibles (Scan normal PASS). No se habilitaron auxiliares ni tasas.
+- Ventana mayormente oculta en casos8 y16CH1 normal: evidencia funcional, no FPS visibles sostenidos. 40tests PASS, incluidos FIFO real, PCM/créditos/cancelación en spawn y suite ReceiverProcess.
+- Ocho restauraciones verificadas. Final independiente10,026s/313.344 muestras sin pérdidas/fatales; snapshot/hashes originales. Q libre, V17/V18 y runtime intactos.
+- Siguiente: combinar privadamente IPC500 + O2 + READY250 en sondeo20s aADC8/1.860.465 FFT/RADIO/A0. Exigir margen≥10%, pico<4, slack positivo y exposición real. Si falla, no extender aceptación. Antes de producción, sondeo explícito por entrada, sin parche global de Queue.
+- [Informe](docs/IPC_TRANSICIONES_V19_20261031.md) · [Resumen](diagnosticos/resultados_v19/ipc500_functional_20261031/summary.json).
+
+Los encabezados siguientes conservan el historial.
+
+# 31/10 · Sondeo IPC: candidato privado de 500 µs
+
+- Tres corridas de 60 s a ADC8/1.860.465 FFT16k/RADIO/A0, pareja aceptada: control user, receptor critical y backoff privado de colas vacías. Sin errores, snapshots restaurados; ninguna pasa holgura MCU.
+- Backoff500: llamadas reales 865.123→292.742; CPU dentro de Queue.get 16,66→6,44 s (no es CPU total). ACK máximo 13,20 ms. Cola MCU pico4/margen10,16 %: no promovido ni tasas nuevas.
+- User/critical del receptor pasaron ambos; el contraste no justifica cambiar el default. Aclarado que el flag critical del ensayo anterior afectaba al gráfico y el receptor seguía user.
+- 22 tests PASS. Instrumentación privada acotada y parche restaurable, sin mensajes/arrays retenidos. Próximo: pruebas funcionales Scan/US, Stop/Play, WAV y cierre en otros perfiles antes de incorporar el ajuste. No extender aceptación de holgura a120 s con pico4.
+- Restauración final: 10,026 s/313.344 muestras, cero pérdidas/fatales, snapshot e identidad originales. Q libre; runtime y V17/V18 intactos.
+- [Informe](docs/IPC_RADIO_V19_20261031.md) · [Resumen](diagnosticos/resultados_v19/ipc_backoff500_20261031/summary.json).
+
+Los encabezados siguientes conservan el historial.
+
+# 30/10 · Corte RADIO reproducido: pausas del receptor e IPC pendiente
+
+- Observador privado conserva ocho mayores envíos de nodo y copia/sondeo acumulados; sin cambiar runtime, firmware, relay ni tasas. 16 tests PASS.
+- Pareja aceptada, ADC8/1.860.465 FFT16k/RADIO/A0: repetición user reprodujo UNDERRUN y ACK hasta 414 ms. pump_global 249 ms/32 ms CPU; tick 105 ms/0,35 ms CPU. Espera/desplanificación demostrada en esas etapas; origen IPC/bloqueo/scheduler aún abierto.
+- Contraste critical: 60,078 s sin errores, ACK máximo 38 ms y ninguna etapa ≥100 ms. Una sola corrida no acredita solución. MCU margen 10,26 %, pico5: holgura sigue pendiente.
+- Primera corrida con opciones mezcladas conserva su fallo de aserción; no se cuenta como PASS. Próximo: instrumentar lecturas IPC de tick y repetir user/critical con carga comparable; medir huecos entre etapas del relay.
+- Restauración final independiente: 10,025 s/313.344 muestras, cero pérdidas/fatales, snapshot e identidad originales. Q libre; V17/V18 intactas.
+- [Informe](docs/PAUSAS_RECEPTOR_V19_20261030.md) · [Evidencia](diagnosticos/resultados_v19/node_tails_critical_20261030/summary.json).
+
+Los encabezados siguientes conservan el historial.
+
+# 30/10 · Combinaciones RADIO/A0: ocho ensayos, sin promoción
+
+- Combinados O2 privado, READY250 y prellenado suave, con consultas 40/30/12/24 ms. ADC8/1.860.465, FFT16k y RADIO/A0 40 kHz; sin cambiar reservas ni tamaños.
+- Todos completaron funcionalidad y GUI visible. Los sondeos de 40/30/24 ms pasaron 20 s, pero las extensiones a 60 s alcanzaron pico 5/4/5. 12 ms falló el sondeo con pico 4. Sin corridas 120 s ni tasas nuevas.
+- Último caso: 60,098 s, margen 11,52 %, pico 5. Próximo diagnóstico: correlacionar pausas de servicio SPI/MCU; dejar de ajustar sólo la cadencia de consultas.
+- 24 tests PASS. Ocho restauraciones verificadas; última recuperación 10 s, estado/identidad originales e integridad confirmados. Q libre, pareja aceptada activa; V17/V18 intactas.
+- [Informe](docs/COMBINACIONES_RADIO_V19_20261030.md) · [Resumen](diagnosticos/resultados_v19/combos_20261030/summary.json).
+
+Los encabezados siguientes conservan el historial.
+
+# 30/10 · Latencias SPI/ACK: diagnóstico y candidatos descartados
+
+- Instrumentación privada de siete etapas del relay, sin cambiar bytes ni validaciones: READY medio 267 µs, SPI 484 µs, envío TCP 74 µs, validación 8 µs. Tiempos de pared; no confundir con utilización de CPU o margen por nodo.
+- READY 250 µs: 30 s funcionales, margen 11,70 %, pico 4; sin promoción. TCP agrupado: envío 58 µs, pero UNDERRUN y pico 5; descartado. Builds/ensayos restauraron la pareja completa.
+- Pareja aceptada: cierre reproducido con ACK leído a 478 ms y sólo 8–10 ms hasta el handler. El relay siguió con cero pérdidas; el log de envío no conserva errno. La recuperación externa verificó 10 s con snapshot original; el fallo se conserva.
+- Otra corrida con temporizadores del lector completó 62,31 s: ACK hasta 16 ms, ninguna etapa ≥100 ms, pero pico MCU 5. Pausa larga y picos MCU pendientes de aislar; no habilitar tasas superiores.
+- 29 pruebas PASS. Verificación final: 10,024 s, 313.344 muestras, cero pérdidas/fatales; identidad y estado aceptados, afinidad IRQ original. Sólo Scope V19 y su relay activos. Q libre; runtime y V17/V18 intactos.
+- [Informe](docs/LATENCIAS_RELAY_V19_20261030.md) · [consolidado](diagnosticos/resultados_v19/relay_latency_final_20261030/summary.json).
+
+Los encabezados siguientes conservan el historial.
+
+# 30/10 · Holgura RADIO/A0: ocho ensayos, sin promoción
+
+- Control y siete ensayos privados a ADC8/1.860.465 con FFT16k/RADIO/A0: ráfaga, cadencia, prellenado por fase, O2 y afinidad IRQ SPI. Ventanas expuestas en todas las observaciones periódicas.
+- Ráfaga4 pasó 20 s, pero falló la extensión a 60 s con UNDERRUN a unos55 s y pico4. No se avanzó a3×120 s.
+- O2 + suavizado sólo de prellenado: 11,49 % de margen, pero pico4 en PLAY. Resto de variantes sin holgura; no incorporadas. No se subieron tasas ni se alteró el runtime del monitor.
+- Se conservaron los errores y la evidencia de ACK demorados284 ms con audio disponible en host. El observador cuesta unos11 µs/frame en benchmark offline; no demuestra causalidad física.
+- 19tests PASS. Pareja aceptada, máscaraIRQ0-3/CPUefectiva0 y estado restaurados. Última recuperación10,027 s/313.344muestras, cero pérdidas/fatales. Sólo ScopeV19 y relayV19 activos; Q libre.
+- [Informe y siguiente diagnóstico](docs/HOLGURA_RADIO_V19_20261030.md) · [consolidado](diagnosticos/resultados_v19/headroom_burst4_20261030/summary.json). V17/V18 intactas.
+
+Los encabezados siguientes conservan el historial.
+
+# 30/10 · Regresión de apertura/conexión: corrección del host
+
+- Suspendidas las pruebas de tasas y firmware privado; prioridad a apertura/conexión.
+- Reproducido RF pendiente atrasado incluso a 14 bits/31,25 kHz. Tres SVG estaban dataless en macOS; al materializarlos la repetición dejó de fallar. Sin pila que identifique el archivo exacto.
+- 61 iconos embebidos en recursos Qt: sin lecturas tardías de SVG desde la GUI, con bytes/píxeles originales verificados.
+- Compilación Numba de instrumentos trasladada del constructor GUI a preparación en el proceso Synth, antes de BEGIN. Apertura local Cocoa final 3,02 s; no es garantía de arranque frío.
+- 47 tests PASS. Código final: conexión, FFT16k, RADIO/A0 a 8 bits/1.860.465 S/s sin errores y restauración confirmada. MCU sigue sin holgura aceptada; no se incorporaron tasas ni firmware nuevos.
+- Q liberado con pareja aceptada; V17/V18 intactas. [Diagnóstico](docs/ARRANQUE_V19_20261030.md), [evidencia](diagnosticos/resultados_v19/startup_regression_20261030/summary.json).
+
+Los encabezados siguientes son históricos.
+
+# 29/10 · Correcciones del host validadas; O2 permanece privado
+
+- [x] Dibujo V(t) denso/completo en proceso aislado: sin reducir muestras, con cursores coherentes y snapshots STOP/SINGLE. Escalas ns/µs/ms/s y mediciones del color del canal.
+- [x] ACK-refresh inline para CHUNK RADIO40k válido: reduce QUERY redundantes sin cambiar créditos, buffers, timeout, burst ni tasas. Wrapper privado evita doble renovación.
+- [x] 98 pruebas dirigidas PASS (37,530 s), incluidas geometría/estilos/DPR, carreras, trigger, GUI conectada sintética, US, ACK y transiciones.
+- [x] Pareja aceptada, host inline sin wrapper: ADC10/1.355.932, V(t)100, STOP/reinicio + ScanUS con A0 activo + 120,014 s tras reanudar, 276 imágenes, sin errores. ADC8/1.860.465 FFT/RADIO/A0: 60,093 s sin errores, con resintonía.
+- [x] Restauración final verificada 10,025 s, 313.344 muestras, cero pérdidas/fatales, snapshot y hashes aceptados iguales. Q disponible; V17/V18 intactas.
+- [x] O2 privado: 20 s y 60 s funcionales; a 60 s pico4 → holgura FAIL, campaña detenida antes de 3×120 s. ADC10 O2+ACK también pico4/margen7,16 %; sin promoción.
+- [ ] Reserva MCU en tasas máximas: host normal ADC10 margen6,73 %/pico4, ADC8 margen10,33 %/pico4. Funcionalidad probada NO acredita holgura. No se habilitaron tasas nuevas ni se cambió firmware/relay público.
+
+[Implementación y evidencia](docs/RASTER_TEMPORAL_V19_20261029.md) · [Resumen verificable](diagnosticos/resultados_v19/host_radio_validation_20261029/summary.json).
+Los bloques siguientes conservan el historial; este encabezado es el estado actual.
+
+# 29/10 · Dibujo completo corregido; campaña O2 en curso
+
+- [x] V(t) denso con detalle 100 usa un proceso de raster: todos los puntos, memoria compartida y una captura en vuelo. Ejes/cursores siguen vectoriales; no se alteran límites de flujo ni muestras.
+- [x] Regresiones de SINGLE/STOP/zoom/contextos y comparación visual de estilos/DPR: 14 tests PASS. La suite dirigida anterior de 61 casos pasó antes del último ajuste de primitivo; repetirla al terminar hardware.
+- [x] Físico US, ADC10/1.355.932 S/s, 0,534 s, detalle 100, RADIO sin A0: 30 s PASS, 26 candidatos y 22 imágenes; pintado Qt máximo 75,52 ms. Restauración exacta confirmada.
+- [x] Físico con A0: FAIL por un nodo perdido del MCU, CRC correcto, cola pico 4. Preservados frame/logs. App/relay aceptados recuperados con mismos hashes e ID, snapshot exacto y 10,022 s sin pérdidas/fatales.
+- [x] O2 privado + ACK-refresh privado, ADC8/1.860.465 S/s, FFT/RADIO/A0: 20 s PASS, margen 11,48 %, cola pico 3, restauración exacta. No promovido.
+- [x] Campaña `prepare_o2_gui_campaign_20261029`: corrida 60 s funcional/visible/restauración PASS; margen 11,32 % pero cola pico 4 → holgura FAIL. Detenida antes de 3×120 s; sin promoción.
+- [ ] Después, aislar ADC10/1,36 MHz con el mismo candidato privado; no rebajar criterios ni aumentar buffers para ocultar errores.
+
+[Raster y evidencia](docs/RASTER_TEMPORAL_V19_20261029.md) · [O2 privado](docs/PREPARE_FIRMWARE_PRIVADO_V19_20261028.md).
+V17/V18 congeladas. Los bloques siguientes conservan el historial de trabajo.
+
+# 29/10 · US con detalle alto y presentación temporal
+
+- [x] Revisados los registros: importación de US durante Scan y pintado Qt de cientos de miles de puntos provocaron pausas del host. No se atribuye todavía el fallo al Q.
+- [x] Precargar MultirateScan; medir pintado real y preparación; espaciar redibujos costosos conservando muestras, detalle solicitado y límites de flujo.
+- [x] Escalas temporales automáticas ns/µs/ms/s en V(t) y Heatmap; valores de medición con el color del canal elegido.
+- [x] 32 pruebas dirigidas PASS, incluidas GUI conectada sintética, RADIO, US y medición espectral. No equivalen a aceptación física.
+- [x] Reproducido físicamente: 10 bits/1.355.932 S/s, detalle 100, ventana 0,534 s. FAIL: paint Qt 1.049,94 ms, presupuesto RF 1,00042 s. US no completó. Restauración registrada sin errores.
+- [ ] Resolver el costo de un solo pintado; la cadencia adaptativa no basta. Segmentación de líneas descartada en benchmark preliminar por mejora insuficiente. Astra revisa alternativa sin alterar muestras/límites.
+- [ ] Continuar GUI/audio del candidato O2 después de aislar este problema del host.
+
+O2 ya pasó carga e integridad breve de 10 s a 1.860.465 S/s, seguida de restauración exacta. No está promovido. Los bloques inferiores conservan la secuencia histórica; este encabezado refleja el estado actual.
+
+## 28/10 · A/B GCC14.3 completado; candidato sólo estático
+
+MacIntel usaGCC12.2 peseal mismoIDpaquete. DWARFaceptadoGCC14.3: localA/B
+`prepare_opt_ab_20261028`NOtransferibleaproducción. UserpreguntóactualizarGCC:
+se recomendómantenerArduino y usarQ14.3, o LinuxaisladoSDKfijado; Homebrew
+arm-none-eabi actualnoesreemplazoautomático, SDK1.0.1MacsóloAArch64. Noinstalaciones.
+
+A/B relevanteQdetenido conrespaldo/restauraciónPASS en
+`prepare_opt_ab_q_20261028`. ControlOsBIN EXACTO37f049fa…aceptado. CandidatoO2
+BIN4e56c37b…NOinstalado. text42968→43248(+280), RAMestimada258228→258508
+libre3916→3636; stackprepare184→152, loop4280/output88iguales.
+Astra revisó: demásseccionesobjetoiguales; delta280explicado splitbuild_samples
+(+276)+prepare(+64)−data_frameexterno(60). LLEXTcarga/heap/pilasyvelocidad
+runtimeNOcalificados. [Reporte](docs/PREPARE_COMPILADOR_V19_20261028.md).
+
+Siguiente antesfísico: revisar carga/pilas +diseñar binding de firmwareprivado
+conrelayaceptado, identidadexacta yrollback. El harnessprivadoderelayactual
+exigefirmwareaceptado: NOreutilizarlorelajandoelrecibo. Qquedóparejaaceptada;
+V17/V18 yruntimeintactos. No tocarADC/propiedadDMA ni promoverporestática.
+
+## 28/10 · Costos SPI medidos; pareja aceptada, sin promoción
+
+Observadorhost offsets40/44 dedup porbatch +fronteras perfil/época marcadas;
+saludcount0 incluida sin reponderarsend.46testsPASS. Primer60s ocultodiagnóstico;
+segundo `radio_spi_costs_verified_20261028`60,043s/2400480audio, visible12/12,
+STOP2,730ms/cierre/restauraciónPASS. Coberturaestricta68077/68079timings.
+Preparación145,256us/check70,510us porbatch; wire396,8us nominal. Parcial612,566us
+NOesCPUutilización/ciclototal. Servicio1684,144us/nodo frente1874,8uspresupuesto;
+margen10,169%pico4FAIL. No mezclar denominadores niatribuirresto aTCP.
+Runtime/V17/V18 intactos;Qaceptadoverificado10s alfinal.
+[Reporte](docs/RADIO_SPI_COSTES_V19_20261028.md), `cost_summary.json` reproducible.
+
+Astra considera válido A/B de compilación aislado Os→O2 deprepare_batch_half,
+NOimplementado ni aprobado para desplegar.145us incluye lock/esperas/preempción:
+no es todo optimizable. Comparar ensamblado,seccionesELF,relocacionesLLEXT,
+RAM,pilas.su/callchain anteshardware; descartar si hotpathigual o crecimiento
+inexplicable. CRCcompute/data_frame/build_samples yaO2; CRCtiene ruta hardware
+condicional/autochequeo y slicing8; native_profile cacheado. No adelantarEOT/release.
+
+## 28/10 · Relay CHUNK alternado probado: NO incorporar
+
+Candidato aislado desde fuentes aceptadas, sin mezclar FIFOanterior:
+relay4548a5b3…, fuente `relay_chunk_pacing_sources_20261028/relay`.
+BuildARM64 con parejadetenida/restauraciónPASS; transporte10s18614584muestras
+sin errores. Audiofinal20,025s801120muestras, GUIvisible100%,STOP2,716ms y
+restauración exactaPASS. RachaWAV/RF bajó1, pero RFfinal/idle1117en20s,
+margen8,792%,pico5: holguraFAIL. No60s ni promoción. Qaceptado/restaurado;
+runtime y V17/V18 intactos;40testsdirigidos+GUI sintéticoPASS y harnessC.
+
+Conservar dos fallosprevios: timeoutconstrucciónQt por SVGdataless (61SVG
+materializados sin alterarbytes), luegoRFpendiente>1s antesde enviarCHUNK.
+No cuentan como pruebasdeaudio; restauraciónPASS en ambos.
+[Diseño, pruebas y decisión](docs/RELAY_CHUNK_PACING_V19_20261028.md).
+
+Siguiente acordado conAstra: medir prepare_us/check_us existentes offsets40/44,
+deduplicados por batchsecuencia//2; describen batchanterior. Comparar con
+send_previous por nodo y mix; no adelantarrelease/EOT ni cambiarADC/tasas.
+
+## 28/10 · SPI: huecos confirmados al final de nodo
+
+Astra descartó fairness “1 WAV reply/batch”: ya se cumple con relay aceptado
+(PING+máximo1comandoPC). Dos ensayosACK privados60s pasaron audio/restauración,
+sin validaciónGUIvisible (0/12 y1/12). Segundo:1598RF/idle TODOSfinalnode,
+maxrachaWAV/RF7PLAYING y8preparación. Margen10,395%/pico4: aúnFAIL.
+38testsPASS, runtime/firmware/relay sin cambios. No adelantar release antesEOT.
+Siguiente: revisar diseño relay-only para admitir CHUNK cada2batches en perfil
+privado, preservando pending/FIFO/STOP/reconnect; NO implementado ni calificado.
+[Evidencia](docs/RADIO_SPI_V19_20261028.md).
+
+## 28/10 · Pico localizado durante preparación; burst2 sin mejora demostrada
+
+Observador por fases: pico2→3→4→5 se vio durante preparación de audio, antes
+de PLAY. En PLAYING se muestreó hasta4, sin nuevo récord; no aprueba pico global.
+El ensayo60s completó audio/restauración pero5/14filasexpuestas.
+Control ACK con timingCHUNK:60s visible12/12, margen10,218%,pico4;3158/4998
+intervalos<1ms. Burst2 (única variable adicional) repartió envíos740/4999<1ms,
+audio60s y restauraciónPASS, pero margen8,410%,pico5 y visibilidad6/12.
+No incorporar burst2 ni atribuir causalmente la diferencia con carga distinta.
+37testsPASS, runtime/V17/V18 intactos. Siguiente: intercalado STATUS WAV/muestras
+en SPI, preservando métodosADC/tasas y criterio. [Reporte](docs/RADIO_QUERY_V19_20261028.md).
+
+## 28/10 · Cierre reproducido; candidato host ACK/QUERY en evaluación
+
+Control con pareja aceptada y RADIO/A0 máximo cerró flujo: frame CRC válido,
+dropped1, cola8/8, envío322868ticks > presupuesto299968. Recuperación explícita
+aceptada10s/313344muestras sin errores; no convertir corrida fallida en PASS.
+Astra revisó ruta MCU/host y candidato mínimo de renovar QUERY tras ACK CHUNK.
+Primer candidato privado60s pasó audio/cierre/restauración; margen10,404%,
+pico5: no cumple holgura. Control sham60s:8,633%,pico5; repetición candidato
+60s:10,244%,pico5, audio íntegro/cierre/restauración. QUERY bajó25–26% con
+audio equivalente.32testsPASS. Identidad final aceptada verificada. Próximo:
+medir pico por fase sin relajar aceptación. Runtime y firmware/relay aceptados
+no se modifican.
+[Evidencia y límites](docs/RADIO_QUERY_V19_20261028.md).
+
+## 28/10 · Relay candidato: GUI/audio PASS; holgura aún insuficiente
+
+GUI/FFT16K y RADIO/A0 al ADC8 máximo pasaron60s+3×120s visibles, sin errores,
+con restauración. Un caso se excluyó por exposición80,77% y se repitió; se
+preservó el fallo visual. Control adicional WAV/Synth20 también pasó.
+
+Métricas existentes del MCU, recogidas con observador host opt-in: candidato
+9,007% margen medio/pico4/slack70765; aceptado8,495%/pico5/slack74619.
+No cumplen ≥10% y pico<4. Es un único par instrumentado, no prueba de mejora
+causal. La FIFO TCP no está medida. No promover aún; Q queda con firmware/relay
+aceptados. Astra volvió a fallar por cuota: no dio revisión nueva.
+
+Herramientas nuevas privadas sólo en tools; runtime V19 y V17/V18 intactos.
+[Reporte, método y siguiente pendiente](docs/RELAY_GUI_V19_20261028.md).
+
+## 28/10 · Relay candidato compilado y transporte privado calificado
+
+Binario nuevo ARM64 `6aaa6afe…`, compilado con app/relay detenidos y respaldo
+pareado completo. Pasó ADC8/1.860.465 S/s: 60 s + tres arranques independientes
+de 120 s, 781.433.208 muestras, cero dropped/fatal. Restauración exacta tras
+cada corrida; identidad final aceptada firmware `37f049fa…` / relay `27da0bc4…`.
+El candidato no está activo ni promovido. V17/V18 y runtime V19 intactos.
+
+Pendiente: carga conjunta GUI/RADIO/A0 y holgura antes de promover el relay;
+la causa del `sent=-1` no quedó demostrada. No compilar con adquisición activa.
+[Resultados y reproducción](docs/RELAY_CANDIDATO_V19_20261028.md).
+
+## 28/10 · Correcciones globales V19 verificadas
+
+Corregidos preparación/rollback antes del build, cierre acotado de cálculo,
+limpieza WAV, identidad aceptada y arranque Qt. Herramientas que restauraban
+V17 retiradas de ejecución; matrices sólo V19 y cancelación sin matar al dueño.
+Suite 372 + 3 tests suplementarios PASS. V(t) máximo/4 s pasó 75,6 s efectivos;
+RADIO/A0 60 s pasó audio, y el control final RADIO/A0→WAV→Synth20 pasó dibujo,
+audio, cierre y restauración. Las corridas fallidas intermedias se preservan.
+Q conserva firmware/relay aceptados; V17/V18 intactas.
+
+Leer [correcciones y límites](docs/CORRECCIONES_REVISION_V19_20261028.md) y
+`diagnosticos/resultados_v19/revision_20261028/summary.json`.
+Seguimiento: el build y la integridad física del candidato se completaron en
+la tanda superior; sigue pendiente carga conjunta/holgura. El binario ARM64
+viejo dentro de `candidate/relay/` no es instalable. La causa intermitente
+`sent=-1` sigue abierta. La pausa/build y la restauración completa ya se
+ejercitaron físicamente; no se forzó una actualización de firmware MCU distinto.
+
+## 27/10 · Repetición V(t) posterior a recuperación V19
+
+Se ejecutó el servicio soportado de recuperación: firmware/relay aceptados,
+10,023 s y 313.344 muestras sin pérdidas ni fatales. Luego V(t), ADC8/1.860.465
+S/s, corrió 32,09 s con RADIO/A0 apagadas: 54.005.576 muestras, 1.816 Paint,
+retardo GUI máximo 37,54 ms, cero errores y cierre/restauración confirmados.
+El corte intermitente de la primera corrida no reapareció; no declararlo
+resuelto con una repetición. Inventario confirma V19 como única pareja activa.
+Evidencia: `diagnosticos/resultados_v19/prepare_q_20261027/` y
+`docs/DIAGNOSTICO_CIERRE_FLUJO_VT_V19.md`.
+
+Próximo paso: continuar con captura diagnóstica aislada del relay (errno y
+ocupación de FIFO) sólo si se reproduce `sent=-1`; el candidato sigue sin
+instalarse. No compilar con adquisición activa. Luego prueba manual de paneles,
+respuesta analógica y calificación de tasas/modos según evidencia física.
+
+## 27/10 · Estado actual V19 instalada; siguiente: aceptación manual y otros modos
+
+Scope V19 está instalada y activa en el Q con su relay `serialmonitor-usb-stream-v19`.
+La suite V19 pasó 354/354. «Preparar Q» comprobó recibo/hashes y sostuvo
+10,03 s: 313.344 muestras, sin pérdidas/fatales y con salida apagada. Luego el
+smoke visible de GUI dibujó FFT 16K en ADC8/1,860 MS/s durante 28 s: 744 Paint
+events, sin errores, A0 apagada; el cierre confirmó restauración/liberación.
+Evidencia: `diagnosticos/resultados_v19/prepare_q_20261027/`.
+
+También pasaron smokes físicos acotados: Scan normal (64 candidatas), Radio/A0
+40 kHz (25,36 s, 1.014.240 muestras), WAV (160.000 muestras) y Synth FM de 20
+voces (242.400 muestras), con parada/cierre confirmados y cero errores de
+transporte. Scan US al ADC8 máximo completó con 29 candidatas; FFT Radio 16K hizo
+782 actualizaciones/75 s sin cerrar el flujo. En esa corrida la ventana dejó de
+reportarse expuesta hacia el final, por lo que no acredita exposición continua.
+
+V(t), FFT, Heatmap dual y Bode también dibujaron con el Q conectado: ~59, 30,
+10 y 12,6 Paint fps estables, respectivamente. Una corrida de V(t) mono ADC8
+máximo cortó el flujo a los 18,9 s (retardo GUI 604 ms; relay registró `sent=-1`
+a los 20,017 s desde el comienzo). El log confirma que la adquisición continuó
+con `dropped=0`; el código no guardó errno ni nivel de FIFO, así que la causa
+sigue abierta. El Q recuperó en 10 s sin pérdidas/fatales y la repetición V(t)
+de 24 s pasó. Diagnóstico y siguiente captura:
+`docs/DIAGNOSTICO_CIERRE_FLUJO_VT_V19.md`.
+
+Próximo trabajo: aislar en relay candidato errno/nivel de FIFO del cierre, sin
+cambiar su política de transporte; después prueba manual de paneles y respuesta
+analógica, calificación de otros bits/tasas/modos y campañas largas de RADIO/WAV.
+No promover tasas por los smokes actuales. Inventario 27/10: V19 es la única
+pareja activa, V17 está detenida y V18 sin inicializar; ambas versiones
+anteriores permanecen intactas en sus rutas y respaldos.
+
+La importación incompleta del primer intento se verificó por ID y manifiesto y
+se movió a cuarentena remota; el reintento instaló V19 correctamente.
+
+## 27/10 · V19 diagnóstico de margen de pilas (nota previa a instalación)
+
+Se preparó SCP1 tipo 21 y el lector restaura la configuración ADC al finalizar.
+Build estándar compatible con la recompilación de App Lab: 258.516 B RAM, 3.628
+libres (alerta baja memoria). Build alternativo USART3-off: 256.324 B, 5.820
+libres. Ambos son sólo artefactos; ninguno fue instalado. El lector ahora guarda
+informe y sale con error si falla el flujo/restauración. `tools/unoq.py` y la
+documentación distinguen las dos variantes.
+
+En ese inventario previo a la primera instalación, V17/V18 figuraban sin
+inicializar, V19 ausente y ningún componente activo. Ese estado quedó superado:
+consultar el inventario actual de la sección superior, no usar esta instantánea
+para operar el Q. Los builds de pila siguen siendo artefactos candidatos no
+instalados. Evidencia compilada bajo
+`diagnosticos/resultados_v19/probes/stack_diagnostic_20261027/` y
+`diagnosticos/resultados_v19/probes/stack_diagnostic_stock_variant_20261027/`.
+
 ## 26/10 · Nombre del producto: Arduscopio Q
 
 Aplicado en título Qt, marca vectorial, encabezado temporal, ayuda CLI,

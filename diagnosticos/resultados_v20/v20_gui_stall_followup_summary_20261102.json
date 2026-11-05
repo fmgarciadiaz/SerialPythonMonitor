@@ -1,0 +1,108 @@
+{
+  "private": true,
+  "promoted": false,
+  "product_changes": false,
+  "cases": [
+    {
+      "case": "v20_gui_stall_highrate_20261102_r1",
+      "ok": true,
+      "errors": [],
+      "hold_seconds": 20.032401007949375,
+      "exposure": 1.0,
+      "paint_events": 1245,
+      "render_metrics": {
+        "frames": 2987,
+        "wall_seconds": 5.35348784562666,
+        "cpu_seconds": 5.055207907999989,
+        "max_wall_ms": 28.809109004214406,
+        "heartbeat_gap_max_ms": 718.8888790551573
+      },
+      "stack_trace_bytes": 0,
+      "identity_unchanged": true,
+      "receipt_unchanged": true,
+      "activation_report_unchanged": true,
+      "recovery_ok": true,
+      "raster_published_max": 0,
+      "raster_visible_observed": false
+    },
+    {
+      "case": "v20_gui_stall_longwindow_20261102_r1",
+      "ok": false,
+      "errors": [
+        "Assertion failed: temporal_raster_published"
+      ],
+      "hold_seconds": 20.010084802052006,
+      "exposure": 1.0,
+      "paint_events": 603,
+      "render_metrics": {
+        "frames": 1406,
+        "wall_seconds": 2.6919204716105014,
+        "cpu_seconds": 2.532024313000023,
+        "max_wall_ms": 22.280919016338885,
+        "heartbeat_gap_max_ms": 581.4536199904978
+      },
+      "stack_trace_bytes": 0,
+      "identity_unchanged": true,
+      "receipt_unchanged": true,
+      "activation_report_unchanged": true,
+      "recovery_ok": true,
+      "raster_published_max": 0,
+      "raster_visible_observed": false
+    },
+    {
+      "case": "v20_gui_stall_longwindow_vt_20261102_r1",
+      "ok": false,
+      "errors": [
+        "Assertion failed: analysis_has_data",
+        "Assertion failed: a0_remained_off"
+      ],
+      "hold_seconds": 20.025358418002725,
+      "exposure": 0.0,
+      "paint_events": 13,
+      "render_metrics": {
+        "frames": 132,
+        "wall_seconds": 0.235163533128798,
+        "cpu_seconds": 0.2306437970000017,
+        "max_wall_ms": 116.87529203481972,
+        "heartbeat_gap_max_ms": 627.1695260656998
+      },
+      "stack_trace_bytes": 0,
+      "identity_unchanged": true,
+      "receipt_unchanged": true,
+      "activation_report_unchanged": true,
+      "recovery_ok": true,
+      "raster_published_max": 2,
+      "raster_visible_observed": true
+    },
+    {
+      "case": "v20_gui_stall_longwindow_radio_vt_20261102_r1",
+      "ok": true,
+      "errors": [],
+      "hold_seconds": 20.035346478922293,
+      "exposure": 1.0,
+      "paint_events": 29,
+      "render_metrics": {
+        "frames": 267,
+        "wall_seconds": 1.0916391969658434,
+        "cpu_seconds": 1.0787227939999924,
+        "max_wall_ms": 156.04896494187415,
+        "heartbeat_gap_max_ms": 737.239046022296
+      },
+      "stack_trace_bytes": 0,
+      "identity_unchanged": true,
+      "receipt_unchanged": true,
+      "activation_report_unchanged": true,
+      "recovery_ok": true,
+      "raster_published_max": 7,
+      "raster_visible_observed": true
+    }
+  ],
+  "conclusion": "Pause not reproduced. Earlier test assertion/setup errors retained separately. Passing cases do not prove intermittent fault resolved.",
+  "long_window_worker_ms_observed": [
+    3294.2964340327308,
+    3069.0302710281685,
+    3114.794082008302,
+    3006.3373100711033
+  ],
+  "unresolved": "Earlier intermittent GUI/RF interruption not reproduced; full-detail raster production is slow in a separate worker."
+}

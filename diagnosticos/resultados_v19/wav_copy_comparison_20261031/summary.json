@@ -1,0 +1,225 @@
+{
+  "private": true,
+  "promoted": false,
+  "decision": "Reject memcpy: slower measured copy and IRQ interval. Plain candidate compiled but not physically screened.",
+  "cases": [
+    {
+      "source": "diagnosticos/resultados_v19/wav_timing_profile20_20261031",
+      "play": {
+        "phase": "playing",
+        "session": 3638695824,
+        "selected_chunks": 556,
+        "timing_us": {
+          "irq": {
+            "selected_mean": 50.104372751798564,
+            "selected_max": 51.59375
+          },
+          "poll_main": {
+            "selected_mean": 1.9545413669064746,
+            "selected_max": 3.44375
+          },
+          "validate": {
+            "selected_mean": 24.944008543165467,
+            "selected_max": 25.025
+          },
+          "copy": {
+            "selected_mean": 18.86837904676259,
+            "selected_max": 18.9125
+          },
+          "cache": {
+            "selected_mean": 0.6282486510791366,
+            "selected_max": 0.675
+          },
+          "descriptor": {
+            "selected_mean": 1.0155575539568344,
+            "selected_max": 1.05
+          },
+          "publish": {
+            "selected_mean": 21.509790917266187,
+            "selected_max": 21.56875
+          },
+          "elapsed": {
+            "selected_mean": 57.00269784172662,
+            "selected_max": 310.6375
+          }
+        }
+      },
+      "max_irq_since_boot": {
+        "cycles": 8266,
+        "request": 3638696771,
+        "clock_hz": 160000000
+      },
+      "restoration": {
+        "ok": true,
+        "attempted": true,
+        "errors": [],
+        "material": {
+          "sources_exact": true,
+          "cache_exact": true,
+          "firmware_exact": true,
+          "relay_exact": true
+        },
+        "recovery": {
+          "snapshot_equal": true,
+          "continuous": true,
+          "integrity_ok": true,
+          "seconds": 10.023177050985396,
+          "detail": {
+            "hardware_restored": true,
+            "errors": [],
+            "recovery": {
+              "seconds": 10.023177050985396,
+              "samples": 313344,
+              "dropped": 0,
+              "fatal": 0,
+              "continuous": true
+            }
+          }
+        },
+        "final": {
+          "identity_equal": true,
+          "sources_exact": true,
+          "relay_configuration_equal": true,
+          "cpu_equal": true
+        }
+      },
+      "gui": {
+        "ok": true,
+        "errors": [],
+        "assertions": {
+          "radio_playing_40k": true,
+          "radio_stop_confirmed": true,
+          "radio_progress": true,
+          "radio_hold_completed": true,
+          "scan_completed": true,
+          "wav_playing": true,
+          "wav_progress": true,
+          "wav_stop_confirmed": true,
+          "fm_playing": true,
+          "fm_progress": true,
+          "fm_stop_confirmed": true,
+          "shutdown_confirmed": true,
+          "worker_released": true
+        },
+        "visible_gui_ok": true,
+        "profile_ok": true,
+        "fft_ok": true,
+        "exposed_fraction": 1.0,
+        "paint_events": 614,
+        "radio_hold_seconds": 20.03249717701692,
+        "radio_played_samples": 801600,
+        "headroom_pass": false,
+        "performance_acceptance_eligible": false
+      }
+    },
+    {
+      "source": "diagnosticos/resultados_v19/wav_copy_profile20_20261031",
+      "play": {
+        "phase": "playing",
+        "session": 3062684520,
+        "selected_chunks": 556,
+        "timing_us": {
+          "irq": {
+            "selected_mean": 68.6712792266187,
+            "selected_max": 70.24375
+          },
+          "poll_main": {
+            "selected_mean": 1.957621402877698,
+            "selected_max": 3.45625
+          },
+          "validate": {
+            "selected_mean": 24.944458183453236,
+            "selected_max": 25.025
+          },
+          "copy": {
+            "selected_mean": 37.4556654676259,
+            "selected_max": 37.48125
+          },
+          "cache": {
+            "selected_mean": 0.6244829136690648,
+            "selected_max": 0.675
+          },
+          "descriptor": {
+            "selected_mean": 1.0142760791366907,
+            "selected_max": 1.0375
+          },
+          "publish": {
+            "selected_mean": 40.08642086330935,
+            "selected_max": 40.14375
+          },
+          "elapsed": {
+            "selected_mean": 76.13109262589927,
+            "selected_max": 328.90625
+          }
+        }
+      },
+      "max_irq_since_boot": {
+        "cycles": 11240,
+        "request": 3062686531,
+        "clock_hz": 160000000
+      },
+      "restoration": {
+        "ok": true,
+        "attempted": true,
+        "errors": [],
+        "material": {
+          "sources_exact": true,
+          "cache_exact": true,
+          "firmware_exact": true,
+          "relay_exact": true
+        },
+        "recovery": {
+          "snapshot_equal": true,
+          "continuous": true,
+          "integrity_ok": true,
+          "seconds": 10.023585241055116,
+          "detail": {
+            "hardware_restored": true,
+            "errors": [],
+            "recovery": {
+              "seconds": 10.023585241055116,
+              "samples": 313344,
+              "dropped": 0,
+              "fatal": 0,
+              "continuous": true
+            }
+          }
+        },
+        "final": {
+          "identity_equal": true,
+          "sources_exact": true,
+          "relay_configuration_equal": true,
+          "cpu_equal": true
+        }
+      },
+      "gui": {
+        "ok": true,
+        "errors": [],
+        "assertions": {
+          "radio_playing_40k": true,
+          "radio_stop_confirmed": true,
+          "radio_progress": true,
+          "radio_hold_completed": true,
+          "scan_completed": true,
+          "wav_playing": true,
+          "wav_progress": true,
+          "wav_stop_confirmed": true,
+          "fm_playing": true,
+          "fm_progress": true,
+          "fm_stop_confirmed": true,
+          "shutdown_confirmed": true,
+          "worker_released": true
+        },
+        "visible_gui_ok": true,
+        "profile_ok": true,
+        "fft_ok": true,
+        "exposed_fraction": 1.0,
+        "paint_events": 598,
+        "radio_hold_seconds": 20.064757654094137,
+        "radio_played_samples": 802560,
+        "headroom_pass": false,
+        "performance_acceptance_eligible": false
+      }
+    }
+  ]
+}

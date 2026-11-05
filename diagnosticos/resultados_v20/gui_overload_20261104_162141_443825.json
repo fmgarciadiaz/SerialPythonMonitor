@@ -1,0 +1,244 @@
+{
+  "error": "Entrega GUI atrasado: presupuesto excedido (muestras 1.6071e+06/1.6e+06); adquisici\u00f3n detenida sin descartar datos.",
+  "monotonic": 1070673.712871632,
+  "bits": 8,
+  "rate": 2000000,
+  "pending_gui": 38,
+  "pending_gui_peak": 38,
+  "pending_dsp": 0,
+  "pending_dsp_peak": 3,
+  "retained_samples": 1569600,
+  "retained_seconds": 0.7847999999999998,
+  "retained_bytes": 44953888,
+  "retained_batches": 38,
+  "delivery_limits": {
+    "samples": 1600000,
+    "seconds": 1.0,
+    "bytes": 67108864,
+    "batches": 256
+  },
+  "delivery_peaks": {
+    "samples": 1569600,
+    "seconds": 0.7847999999999998,
+    "bytes": 44953888,
+    "batches": 38
+  },
+  "rf_pending_samples": 0,
+  "radio_enabled": true,
+  "limit_details": {
+    "scope": "Entrega GUI",
+    "current": {
+      "samples": 1569600,
+      "seconds": 0.7847999999999998,
+      "bytes": 44953888,
+      "batches": 38
+    },
+    "projected": {
+      "samples": 1607096,
+      "seconds": 0.8035479999999998,
+      "bytes": 46027776,
+      "batches": 39
+    },
+    "limits": {
+      "samples": 1600000,
+      "seconds": 1.0,
+      "bytes": 67108864,
+      "batches": 256
+    },
+    "exceeded": [
+      "samples"
+    ],
+    "peaks": {
+      "samples": 1569600,
+      "seconds": 0.7847999999999998,
+      "bytes": 44953888,
+      "batches": 38
+    },
+    "context": {
+      "bits": 8,
+      "channels": 1,
+      "actual_rate": 2000000.0
+    }
+  },
+  "gui_thread_stack_at_notification": [
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v20/app.py\", line 7115, in <module>\n    main()\n",
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v20/app.py\", line 7111, in main\n    sys.exit(app.exec())\n",
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v20/app.py\", line 3223, in _wait_a0_for_radio_scan\n    self.radio_output_panel.stop(reason='Pausa suave A0 para Scan')\n",
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v20/radio_output_panel.py\", line 178, in stop\n    record_stop(self.owner,self.source,reason,status)\n",
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v20/radio_output_panel.py\", line 25, in record_stop\n    with path.open('a',encoding='utf-8') as stream:stream.write(json.dumps(entry,ensure_ascii=False)+'\\n')\n"
+  ],
+  "gui_thread_stack_at_failure": [
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v20/app.py\", line 7115, in <module>\n    main()\n",
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v20/app.py\", line 7111, in main\n    sys.exit(app.exec())\n",
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v20/app.py\", line 3223, in _wait_a0_for_radio_scan\n    self.radio_output_panel.stop(reason='Pausa suave A0 para Scan')\n",
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v20/radio_output_panel.py\", line 178, in stop\n    record_stop(self.owner,self.source,reason,status)\n",
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v20/radio_output_panel.py\", line 25, in record_stop\n    with path.open('a',encoding='utf-8') as stream:stream.write(json.dumps(entry,ensure_ascii=False)+'\\n')\n"
+  ],
+  "time": "2026-11-04T16:21:41.443733",
+  "radio_playing": true,
+  "us": true,
+  "scan_pending": false,
+  "multiscan_active": false,
+  "scan_status": "US \u00b7 RF 710.441 \u00b7 alias 710.441 kHz \u00b7 RADIO 40 kHz \u00b7 1549469 muestras",
+  "a0_active": true,
+  "analysis_mode": 0,
+  "fft_mode": "Spectre",
+  "fft_size": "2048",
+  "heatmap_size": "2048",
+  "filter_source": "OFF",
+  "gui_delay_max_ms": 2518.7902769539505,
+  "window_visible": true,
+  "window_minimized": false,
+  "wav_path": "",
+  "wav_rate": 40000,
+  "wav_preparing": false,
+  "wav_active": true,
+  "wav_dialog_open": false,
+  "slow_gui_callbacks": [
+    [
+      "render_frame",
+      1070587.002895246,
+      40.56410677731037
+    ],
+    [
+      "render_frame",
+      1070630.085140764,
+      24.08255892805755
+    ],
+    [
+      "render_frame",
+      1070631.893078077,
+      20.473424112424254
+    ],
+    [
+      "render_frame",
+      1070631.994331215,
+      22.118055960163474
+    ],
+    [
+      "render_frame",
+      1070634.247874275,
+      20.267944084480405
+    ],
+    [
+      "render_frame",
+      1070634.569719338,
+      23.846301017329097
+    ],
+    [
+      "render_frame",
+      1070634.737143727,
+      23.421810939908028
+    ],
+    [
+      "render_frame",
+      1070634.907909947,
+      23.79716606810689
+    ],
+    [
+      "render_frame",
+      1070635.067612566,
+      22.117255022749305
+    ],
+    [
+      "render_frame",
+      1070637.535512336,
+      22.678349865600467
+    ],
+    [
+      "render_frame",
+      1070637.744637085,
+      23.601504042744637
+    ],
+    [
+      "render_frame",
+      1070638.728165024,
+      20.00477584078908
+    ],
+    [
+      "render_frame",
+      1070638.879159184,
+      23.21215206757188
+    ],
+    [
+      "render_frame",
+      1070639.051457977,
+      25.5604381673038
+    ],
+    [
+      "render_frame",
+      1070639.223730507,
+      26.2176760006696
+    ],
+    [
+      "render_frame",
+      1070639.391081045,
+      20.0299269054085
+    ],
+    [
+      "render_frame",
+      1070640.946219124,
+      21.128296852111816
+    ],
+    [
+      "render_frame",
+      1070641.915769268,
+      20.35454288125038
+    ],
+    [
+      "render_frame",
+      1070642.863962485,
+      23.73243193142116
+    ],
+    [
+      "render_frame",
+      1070643.325100678,
+      22.46629702858627
+    ],
+    [
+      "render_frame",
+      1070644.598812607,
+      20.309999119490385
+    ],
+    [
+      "render_frame",
+      1070645.557958417,
+      22.132219979539514
+    ],
+    [
+      "render_frame",
+      1070669.772702144,
+      22.450773045420647
+    ],
+    [
+      "render_frame",
+      1070671.186588594,
+      23.103466955944896
+    ],
+    [
+      "render_frame",
+      1070671.870245418,
+      22.871946915984154
+    ],
+    [
+      "render_frame",
+      1070672.031739084,
+      22.768726805225015
+    ]
+  ],
+  "selected_columns": {
+    "CH1": true,
+    "CH2": false,
+    "FILTER": false,
+    "RADIO": true
+  },
+  "horizontal_samples": 1109405,
+  "trigger_enabled": false,
+  "trigger_source": "CH1",
+  "detail": 50,
+  "trace_style": "R\u00e1pido",
+  "temporal_paint_ms": 23.971738992258906,
+  "temporal_paint_max_ms": 72.06872594542801,
+  "temporal_prepare_ms": 17.718539806082845,
+  "render_interval_ms": 96
+}

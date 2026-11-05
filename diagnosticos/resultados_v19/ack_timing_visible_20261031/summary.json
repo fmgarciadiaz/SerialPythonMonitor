@@ -1,0 +1,612 @@
+{
+  "private": true,
+  "promoted": false,
+  "tests_passed": 24,
+  "exposure": 1.0,
+  "radio_seconds": 30.051579552004114,
+  "gui_assertions": {
+    "radio_playing_40k": true,
+    "radio_stop_confirmed": true,
+    "radio_progress": true,
+    "radio_hold_completed": true,
+    "scan_completed": true,
+    "wav_playing": true,
+    "wav_progress": true,
+    "wav_stop_confirmed": true,
+    "fm_playing": true,
+    "fm_progress": true,
+    "fm_stop_confirmed": true,
+    "shutdown_confirmed": true,
+    "worker_released": true
+  },
+  "mcu": {
+    "frames": 64166,
+    "samples": 55952752,
+    "empty_status_frames": 993,
+    "send_nodes": 16042,
+    "mean_send_margin": 0.10116696805386882,
+    "mcu_queue_peak": 4,
+    "min_slack_ticks": 73709,
+    "sampled_queue_max": 4,
+    "send_ticks_max": 610749,
+    "send_over_budget_nodes": 1586,
+    "headroom_pass": false
+  },
+  "ack_timing": {
+    "groups": [
+      {
+        "phase": "playing",
+        "ack_command": "chunk",
+        "reason": 0,
+        "prepare": {
+          "count": 2502,
+          "total_us": 388263,
+          "min_us": 107,
+          "max_us": 417,
+          "zero_count": 0,
+          "histogram": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            2246,
+            256,
+            0,
+            0,
+            0
+          ],
+          "mean_us": 155.1810551558753
+        },
+        "check": {
+          "count": 2502,
+          "total_us": 390520,
+          "min_us": 129,
+          "max_us": 392,
+          "zero_count": 0,
+          "histogram": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            2266,
+            236,
+            0,
+            0,
+            0
+          ],
+          "mean_us": 156.08313349320542
+        }
+      },
+      {
+        "phase": "playing",
+        "ack_command": "no_wav_ack",
+        "reason": 0,
+        "prepare": {
+          "count": 31064,
+          "total_us": 4508877,
+          "min_us": 107,
+          "max_us": 417,
+          "zero_count": 0,
+          "histogram": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            29805,
+            1259,
+            0,
+            0,
+            0
+          ],
+          "mean_us": 145.14798480556271
+        },
+        "check": {
+          "count": 31064,
+          "total_us": 1966579,
+          "min_us": 59,
+          "max_us": 320,
+          "zero_count": 0,
+          "histogram": [
+            0,
+            0,
+            0,
+            0,
+            30867,
+            0,
+            197,
+            0,
+            0,
+            0
+          ],
+          "mean_us": 63.307333247489055
+        }
+      },
+      {
+        "phase": "playing",
+        "ack_command": "play",
+        "reason": 0,
+        "prepare": {
+          "count": 1,
+          "total_us": 111,
+          "min_us": 111,
+          "max_us": 111,
+          "zero_count": 0,
+          "histogram": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "mean_us": 111.0
+        },
+        "check": {
+          "count": 1,
+          "total_us": 92,
+          "min_us": 92,
+          "max_us": 92,
+          "zero_count": 0,
+          "histogram": [
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "mean_us": 92.0
+        }
+      },
+      {
+        "phase": "playing",
+        "ack_command": "query",
+        "reason": 0,
+        "prepare": {
+          "count": 520,
+          "total_us": 66676,
+          "min_us": 110,
+          "max_us": 165,
+          "zero_count": 0,
+          "histogram": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            520,
+            0,
+            0,
+            0,
+            0
+          ],
+          "mean_us": 128.22307692307692
+        },
+        "check": {
+          "count": 520,
+          "total_us": 49754,
+          "min_us": 91,
+          "max_us": 350,
+          "zero_count": 0,
+          "histogram": [
+            0,
+            0,
+            0,
+            0,
+            411,
+            108,
+            1,
+            0,
+            0,
+            0
+          ],
+          "mean_us": 95.68076923076923
+        }
+      },
+      {
+        "phase": "preparing",
+        "ack_command": "begin",
+        "reason": 0,
+        "prepare": {
+          "count": 1,
+          "total_us": 155,
+          "min_us": 155,
+          "max_us": 155,
+          "zero_count": 0,
+          "histogram": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "mean_us": 155.0
+        },
+        "check": {
+          "count": 1,
+          "total_us": 112,
+          "min_us": 112,
+          "max_us": 112,
+          "zero_count": 0,
+          "histogram": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "mean_us": 112.0
+        }
+      },
+      {
+        "phase": "preparing",
+        "ack_command": "chunk",
+        "reason": 0,
+        "prepare": {
+          "count": 30,
+          "total_us": 4134,
+          "min_us": 110,
+          "max_us": 412,
+          "zero_count": 0,
+          "histogram": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            29,
+            1,
+            0,
+            0,
+            0
+          ],
+          "mean_us": 137.8
+        },
+        "check": {
+          "count": 30,
+          "total_us": 4642,
+          "min_us": 128,
+          "max_us": 389,
+          "zero_count": 0,
+          "histogram": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            27,
+            3,
+            0,
+            0,
+            0
+          ],
+          "mean_us": 154.73333333333332
+        }
+      },
+      {
+        "phase": "preparing",
+        "ack_command": "no_wav_ack",
+        "reason": 0,
+        "prepare": {
+          "count": 665,
+          "total_us": 92085,
+          "min_us": 107,
+          "max_us": 413,
+          "zero_count": 0,
+          "histogram": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            655,
+            10,
+            0,
+            0,
+            0
+          ],
+          "mean_us": 138.47368421052633
+        },
+        "check": {
+          "count": 665,
+          "total_us": 42214,
+          "min_us": 59,
+          "max_us": 318,
+          "zero_count": 0,
+          "histogram": [
+            0,
+            0,
+            0,
+            0,
+            662,
+            0,
+            3,
+            0,
+            0,
+            0
+          ],
+          "mean_us": 63.4796992481203
+        }
+      },
+      {
+        "phase": "starting",
+        "ack_command": "no_wav_ack",
+        "reason": 0,
+        "prepare": {
+          "count": 4,
+          "total_us": 1028,
+          "min_us": 107,
+          "max_us": 405,
+          "zero_count": 0,
+          "histogram": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            2,
+            2,
+            0,
+            0,
+            0
+          ],
+          "mean_us": 257.0
+        },
+        "check": {
+          "count": 4,
+          "total_us": 248,
+          "min_us": 59,
+          "max_us": 65,
+          "zero_count": 0,
+          "histogram": [
+            0,
+            0,
+            0,
+            0,
+            4,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "mean_us": 62.0
+        }
+      },
+      {
+        "phase": "stopped",
+        "ack_command": "no_wav_ack",
+        "reason": 0,
+        "prepare": {
+          "count": 10435,
+          "total_us": 1411683,
+          "min_us": 105,
+          "max_us": 368,
+          "zero_count": 0,
+          "histogram": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            10429,
+            6,
+            0,
+            0,
+            0
+          ],
+          "mean_us": 135.28346909439387
+        },
+        "check": {
+          "count": 10435,
+          "total_us": 657417,
+          "min_us": 58,
+          "max_us": 316,
+          "zero_count": 0,
+          "histogram": [
+            0,
+            0,
+            0,
+            0,
+            10432,
+            2,
+            1,
+            0,
+            0,
+            0
+          ],
+          "mean_us": 63.001149976042164
+        }
+      },
+      {
+        "phase": "stopped",
+        "ack_command": "query",
+        "reason": 0,
+        "prepare": {
+          "count": 2,
+          "total_us": 224,
+          "min_us": 111,
+          "max_us": 113,
+          "zero_count": 0,
+          "histogram": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0
+          ],
+          "mean_us": 112.0
+        },
+        "check": {
+          "count": 2,
+          "total_us": 186,
+          "min_us": 90,
+          "max_us": 96,
+          "zero_count": 0,
+          "histogram": [
+            0,
+            0,
+            0,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "mean_us": 93.0
+        }
+      },
+      {
+        "phase": "stopped",
+        "ack_command": "stop",
+        "reason": 0,
+        "prepare": {
+          "count": 1,
+          "total_us": 155,
+          "min_us": 155,
+          "max_us": 155,
+          "zero_count": 0,
+          "histogram": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "mean_us": 155.0
+        },
+        "check": {
+          "count": 1,
+          "total_us": 108,
+          "min_us": 108,
+          "max_us": 108,
+          "zero_count": 0,
+          "histogram": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "mean_us": 108.0
+        }
+      },
+      {
+        "phase": "stopping",
+        "ack_command": "no_wav_ack",
+        "reason": 0,
+        "prepare": {
+          "count": 4,
+          "total_us": 541,
+          "min_us": 110,
+          "max_us": 156,
+          "zero_count": 0,
+          "histogram": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            4,
+            0,
+            0,
+            0,
+            0
+          ],
+          "mean_us": 135.25
+        },
+        "check": {
+          "count": 4,
+          "total_us": 251,
+          "min_us": 59,
+          "max_us": 74,
+          "zero_count": 0,
+          "histogram": [
+            0,
+            0,
+            0,
+            0,
+            4,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "mean_us": 62.75
+        }
+      }
+    ],
+    "matched_replies": 3060,
+    "unmatched_replies": 0,
+    "pending": 0,
+    "evicted": 0,
+    "omitted_groups": 0,
+    "note": "Native half 1 metadata, categorized by same-batch WAV reply id/session. prepare/check describe prior iteration; check includes decode_pair and command processing, not IRQ-lock duration alone. No WAV ACK does not mean no command. Lifecycle reply counters include non-target profiles; timing groups only target RF. ACK-only and RF+ACK pairs lack coverage."
+  },
+  "final_verification": {
+    "ok": true,
+    "snapshot_equal": true,
+    "identity_before": {
+      "board_serial": "1060031107",
+      "app": "scope-v19-main-1",
+      "firmware_sha256": "37f049fa029ad62a10767c56dc586b2c3697f8d250a0b8a7396570ce8e0c7060",
+      "relay_sha256": "27da0bc4860401df27eef50429f2ec881bfd3b51b1893d1fe3bacb9e922f56ae"
+    },
+    "restoration": {
+      "hardware_restored": true,
+      "errors": [],
+      "recovery": {
+        "seconds": 10.024939930997789,
+        "samples": 313344,
+        "dropped": 0,
+        "fatal": 0,
+        "continuous": true
+      }
+    },
+    "identity_after": {
+      "board_serial": "1060031107",
+      "app": "scope-v19-main-1",
+      "firmware_sha256": "37f049fa029ad62a10767c56dc586b2c3697f8d250a0b8a7396570ce8e0c7060",
+      "relay_sha256": "27da0bc4860401df27eef50429f2ec881bfd3b51b1893d1fe3bacb9e922f56ae"
+    }
+  }
+}

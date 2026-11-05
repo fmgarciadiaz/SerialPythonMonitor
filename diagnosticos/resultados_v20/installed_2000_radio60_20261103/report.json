@@ -1,0 +1,1063 @@
+{
+  "schema": 1,
+  "version": 20,
+  "private": true,
+  "promoted": false,
+  "private_firmware_activated": true,
+  "private_identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v20-20261031-225916-main-1",
+    "firmware_sha256": "52f933bdb9c632544624e5d4188a740a9cdb429596bfe5a4d926900e7538aefe",
+    "relay_sha256": "bf6893f5a0fbab8676120a5decd8c6109698fa852be02333918b1d6e4a2a909d"
+  },
+  "source_report": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v20/storage_lifetime_cycle_20261101/report.json",
+  "source_report_sha256": "298e09f178d140cc003bf03e4ce610e38f56b593f2afaa3440003718c035e9e8",
+  "working_receipt": {
+    "path": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v20/q_support/working_pair.json",
+    "sha256": "0708e10da6755ba09d27dafefd5b742b463c2c88647378de05454b69c22d4835"
+  },
+  "identity_before": {
+    "board_serial": "1060031107",
+    "app": "scope-v20-20261031-225916-main-1",
+    "firmware_sha256": "52f933bdb9c632544624e5d4188a740a9cdb429596bfe5a4d926900e7538aefe",
+    "relay_sha256": "bf6893f5a0fbab8676120a5decd8c6109698fa852be02333918b1d6e4a2a909d"
+  },
+  "requested_tests": {
+    "radio": true,
+    "wav": false,
+    "fm": false,
+    "synth_early_play": false,
+    "voices": null,
+    "synth_profile": null,
+    "hold_seconds": 60,
+    "stall_trace": true,
+    "window_seconds": 0,
+    "detail_percent": null,
+    "analysis_mode": "fft_radio",
+    "radio_adc_bits": 8,
+    "radio_adc_rate": 2000000,
+    "radio_a0_rate": 40000,
+    "wav_source": null,
+    "synth_prepare_timeout": null,
+    "synth_confirmed_hold_seconds": null,
+    "synth_dac_rate": null
+  },
+  "scope": "Installed working V20 audio screen; private, no public/analog acceptance",
+  "ok": false,
+  "host_sources": {
+    "tools/probe_working_v20_gui.py": "00d178a68ecf14408dfff5b4362db19ee9f9784b4a459ab105fbd9e762f552cf",
+    "tools/gui_private_v20.py": "bde14b3639c6f84f2dfc4667692d55fe4bb3fba8ae0ccecf6ef2f630d0abe99a",
+    "tools/private_v20_pair.py": "4f6f89eaa18f976d5ca1fce383da9962a18ac5abc4d4591970eb02f20f97859f",
+    "tools/gui_live_smoke_v20.py": "aae1ef8717df814615634713fd22404fec29c0c7a8dcc16585cd47b9515112f8",
+    "tools/synth_transition_scenario_v20.py": "b362a61da1110fc9e87a9b0a62983715b27e71cf0bee4889559957ea3b1fd6ea",
+    "monitor/v20/receiver/unoq_config_receiver.py": "c18e649ca951749e597778e5322587347531b5072500f3f328d4149e559475e1",
+    "monitor/v20/io/receiver_process.py": "9aba33676723459084894f0b1d65c5acfe5fd01d590b9262f7dc98571ed85d7d",
+    "monitor/v20/fm_source.py": "ec2f46b3984c92bb0c6ae2ec637dce3339d59595e4f5730c9460efdcc2419730",
+    "monitor/v20/fm_panel.py": "efe23240acc05b6b4c3b249fc76a9fbf2ae87e7266d8f33aed59ccbc93ba5955",
+    "monitor/v20/synth_process.py": "26a9b85f8c8fd8dfd2575ea3df2500618786a769e84784000035a9d230bd6d14",
+    "monitor/v20/app.py": "bb5903a92a21ca227b02e4e8c837c1abe37ab14652eb160fe64c25937af5d6ff",
+    "monitor/v20/temporal_raster.py": "2e54c5ae40bb4537b86f06f6ab7ee5e142ad2099302efad18942d34f6b5bc932",
+    "monitor/v20/scope_cursors.py": "90afa613efab8eac682932ca1006de3c0bd9717f46a36971d773ebd358bb9cb1"
+  },
+  "gui_command": [
+    "/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/bin/python",
+    "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/tools/gui_private_v20.py",
+    "--firmware-binding",
+    "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v20/installed_2000_radio60_20261103/report.json",
+    "--serial",
+    "1060031107",
+    "--output",
+    "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v20/installed_2000_radio60_20261103/gui.json",
+    "--bits",
+    "8",
+    "--rate",
+    "2000000",
+    "--fft-size",
+    "16384",
+    "--no-retune",
+    "--frequency-khz",
+    "710",
+    "--hold-radio-seconds",
+    "60",
+    "--duration",
+    "65",
+    "--stall-trace",
+    "--allow-internal-2m"
+  ],
+  "child_pid": 67053,
+  "execution_budget_seconds": 240,
+  "child_returncode": 1,
+  "gui": {
+    "errors": [
+      "Assertion failed: radio_playing_40k",
+      "Assertion failed: radio_stop_confirmed",
+      "Assertion failed: radio_progress",
+      "Assertion failed: radio_hold_completed"
+    ],
+    "assertions": {
+      "radio_playing_40k": false,
+      "radio_stop_confirmed": false,
+      "radio_progress": false,
+      "radio_hold_completed": false,
+      "scan_completed": true,
+      "wav_playing": true,
+      "wav_progress": true,
+      "wav_stop_confirmed": true,
+      "fm_playing": true,
+      "fm_progress": true,
+      "fm_stop_confirmed": true,
+      "fm_hold_completed": true,
+      "fm_configured_voices_rendered": true,
+      "fm_sustained_voices_observed": true,
+      "fm_selected_dac_rate": true,
+      "shutdown_confirmed": true,
+      "worker_released": true
+    },
+    "display": {
+      "platform": "cocoa",
+      "dpr": 2.0,
+      "size": [
+        1320,
+        920
+      ],
+      "screen": "Built-in Retina Display",
+      "exposed": false
+    },
+    "paint_events": 1217,
+    "radio_hold_seconds": 0.0,
+    "synth_transition": {
+      "phase": "idle",
+      "requested_at": null,
+      "playing_at": null,
+      "stop_requested_at": null,
+      "stopped_at": null,
+      "session": null,
+      "played": 0,
+      "prepare_timeout": 120.0,
+      "hold_seconds": 5,
+      "stop_timeout": 10.0,
+      "hold_completed": false,
+      "complete": false,
+      "voice_observations": 0,
+      "voice_min": null,
+      "voice_max": null
+    },
+    "synth_remote_voice_peak": 0
+  },
+  "audio_phases": [
+    {
+      "stage": "before_stop",
+      "elapsed": 60.07259666209575,
+      "applied_configuration": {
+        "bits": 8,
+        "rate": 2000000,
+        "channels": 1
+      },
+      "requested_voices": null,
+      "wav_active": false,
+      "radio_a0": false,
+      "radio_status": "RADIO 40 kHz \u00b7 2241209 muestras",
+      "samples": 114417736,
+      "exposed": true,
+      "synth_transition": {
+        "phase": "idle",
+        "requested_at": null,
+        "playing_at": null,
+        "stop_requested_at": null,
+        "stopped_at": null,
+        "session": null,
+        "played": 0,
+        "prepare_timeout": 120.0,
+        "hold_seconds": 5,
+        "stop_timeout": 10.0,
+        "hold_completed": false,
+        "complete": false,
+        "voice_observations": 0,
+        "voice_min": null,
+        "voice_max": null
+      },
+      "synth_preparation": {
+        "request_pending": false,
+        "task_present": false,
+        "task_done": null,
+        "active": false,
+        "requested_rate": null,
+        "active_rate": null,
+        "synth_process_created": false
+      },
+      "synth_source": null
+    },
+    {
+      "stage": "before_close",
+      "elapsed": 65.07825750706252,
+      "applied_configuration": {
+        "bits": 8,
+        "rate": 2000000,
+        "channels": 1
+      },
+      "requested_voices": null,
+      "wav_active": false,
+      "radio_a0": false,
+      "radio_status": "RADIO apagada",
+      "samples": 124611416,
+      "exposed": true,
+      "synth_transition": {
+        "phase": "idle",
+        "requested_at": null,
+        "playing_at": null,
+        "stop_requested_at": null,
+        "stopped_at": null,
+        "session": null,
+        "played": 0,
+        "prepare_timeout": 120.0,
+        "hold_seconds": 5,
+        "stop_timeout": 10.0,
+        "hold_completed": false,
+        "complete": false,
+        "voice_observations": 0,
+        "voice_min": null,
+        "voice_max": null
+      },
+      "synth_preparation": {
+        "request_pending": false,
+        "task_present": false,
+        "task_done": null,
+        "active": false,
+        "requested_rate": null,
+        "active_rate": null,
+        "synth_process_created": false
+      },
+      "synth_source": null
+    }
+  ],
+  "exposure": {
+    "periodic_samples": 12,
+    "exposed_fraction": 1.0,
+    "exposure_sufficient": true,
+    "note": "Exposure only; no visible FPS or analog acceptance inferred."
+  },
+  "metrics": {
+    "profile": [
+      8,
+      2000000,
+      80,
+      3488,
+      1
+    ],
+    "node_budget_ticks": 279040,
+    "epoch_count": 1,
+    "all": {
+      "frames": 143088,
+      "samples": 124772736,
+      "empty_status_frames": 66,
+      "send_nodes": 35771,
+      "mean_send_margin": 0.07546235731900863,
+      "mcu_queue_peak": 3,
+      "min_slack_ticks": 64425,
+      "sampled_queue_max": 2,
+      "send_ticks_max": 398622,
+      "send_over_budget_nodes": 12622,
+      "headroom_pass": false
+    },
+    "radio_playing": {
+      "frames": 0,
+      "samples": 0,
+      "empty_status_frames": 0,
+      "send_nodes": 0,
+      "mean_send_margin": null,
+      "mcu_queue_peak": 0,
+      "min_slack_ticks": null,
+      "sampled_queue_max": 0,
+      "send_ticks_max": 0,
+      "send_over_budget_nodes": 0,
+      "headroom_pass": false
+    },
+    "phases": {
+      "stopped": {
+        "frames": 143088,
+        "samples": 124772736,
+        "empty_status_frames": 66,
+        "send_nodes": 35771,
+        "mean_send_margin": 0.07546235731900863,
+        "mcu_queue_peak": 3,
+        "min_slack_ticks": 64425,
+        "sampled_queue_max": 2,
+        "send_ticks_max": 398622,
+        "send_over_budget_nodes": 12622,
+        "headroom_pass": false
+      }
+    },
+    "phase_events": [
+      {
+        "kind": "phase",
+        "phase": "stopped",
+        "previous": "acquisition",
+        "last_observed_rf": null
+      },
+      {
+        "kind": "first_rf_in_phase",
+        "phase": "stopped",
+        "snapshot": {
+          "epoch": "104",
+          "node": 0,
+          "index": 0,
+          "queue": 0,
+          "queue_peak": 0,
+          "slack_min_ticks": 4294967295
+        }
+      },
+      {
+        "kind": "cumulative_peak",
+        "phase": "stopped",
+        "previous_peak": null,
+        "snapshot": {
+          "epoch": "104",
+          "node": 0,
+          "index": 0,
+          "queue": 0,
+          "queue_peak": 0,
+          "slack_min_ticks": 4294967295,
+          "copy_max_ticks": 0,
+          "poll_max_ticks": 58,
+          "previous_node_send_ticks": 0,
+          "previous_batch_prepare_us": 104,
+          "previous_batch_check_us": 58,
+          "previous_batch_origin": "unknown"
+        },
+        "host_observed_at": 999679.198571685,
+        "recent_chunks": []
+      },
+      {
+        "kind": "cumulative_peak",
+        "phase": "stopped",
+        "previous_peak": 0,
+        "snapshot": {
+          "epoch": "104",
+          "node": 0,
+          "index": 0,
+          "queue": 1,
+          "queue_peak": 1,
+          "slack_min_ticks": 176927,
+          "copy_max_ticks": 37430,
+          "poll_max_ticks": 174921,
+          "previous_node_send_ticks": 0,
+          "previous_batch_prepare_us": 111,
+          "previous_batch_check_us": 59,
+          "previous_batch_origin": "same_epoch_profile"
+        },
+        "host_observed_at": 999679.200981852,
+        "recent_chunks": []
+      },
+      {
+        "kind": "cumulative_peak",
+        "phase": "stopped",
+        "previous_peak": 1,
+        "snapshot": {
+          "epoch": "104",
+          "node": 2,
+          "index": 6976,
+          "queue": 1,
+          "queue_peak": 2,
+          "slack_min_ticks": 70773,
+          "copy_max_ticks": 38948,
+          "poll_max_ticks": 208022,
+          "previous_node_send_ticks": 243298,
+          "previous_batch_prepare_us": 111,
+          "previous_batch_check_us": 58,
+          "previous_batch_origin": "same_epoch_profile"
+        },
+        "host_observed_at": 999679.205939654,
+        "recent_chunks": []
+      },
+      {
+        "kind": "cumulative_peak",
+        "phase": "stopped",
+        "previous_peak": 2,
+        "snapshot": {
+          "epoch": "104",
+          "node": 22,
+          "index": 76736,
+          "queue": 2,
+          "queue_peak": 3,
+          "slack_min_ticks": 70773,
+          "copy_max_ticks": 39418,
+          "poll_max_ticks": 216319,
+          "previous_node_send_ticks": 302199,
+          "previous_batch_prepare_us": 117,
+          "previous_batch_check_us": 58,
+          "previous_batch_origin": "same_epoch_profile"
+        },
+        "host_observed_at": 999679.241786592,
+        "recent_chunks": []
+      }
+    ],
+    "phase_events_omitted": 0,
+    "slowest_node_observations": [
+      {
+        "epoch": "104",
+        "node": 33652,
+        "index": 117378176,
+        "queue": 1,
+        "queue_peak": 3,
+        "slack_min_ticks": 64425,
+        "copy_max_ticks": 39713,
+        "poll_max_ticks": 216319,
+        "previous_node_send_ticks": 398622,
+        "previous_batch_prepare_us": 106,
+        "previous_batch_check_us": 58,
+        "previous_batch_origin": "same_epoch_profile",
+        "phase": "stopped"
+      },
+      {
+        "epoch": "104",
+        "node": 29048,
+        "index": 101319424,
+        "queue": 1,
+        "queue_peak": 3,
+        "slack_min_ticks": 64425,
+        "copy_max_ticks": 39713,
+        "poll_max_ticks": 216319,
+        "previous_node_send_ticks": 397063,
+        "previous_batch_prepare_us": 107,
+        "previous_batch_check_us": 58,
+        "previous_batch_origin": "same_epoch_profile",
+        "phase": "stopped"
+      },
+      {
+        "epoch": "104",
+        "node": 10962,
+        "index": 38235456,
+        "queue": 1,
+        "queue_peak": 3,
+        "slack_min_ticks": 64425,
+        "copy_max_ticks": 39694,
+        "poll_max_ticks": 216319,
+        "previous_node_send_ticks": 395069,
+        "previous_batch_prepare_us": 107,
+        "previous_batch_check_us": 58,
+        "previous_batch_origin": "same_epoch_profile",
+        "phase": "stopped"
+      },
+      {
+        "epoch": "104",
+        "node": 6353,
+        "index": 22159264,
+        "queue": 1,
+        "queue_peak": 3,
+        "slack_min_ticks": 64844,
+        "copy_max_ticks": 39694,
+        "poll_max_ticks": 216319,
+        "previous_node_send_ticks": 394622,
+        "previous_batch_prepare_us": 107,
+        "previous_batch_check_us": 58,
+        "previous_batch_origin": "same_epoch_profile",
+        "phase": "stopped"
+      },
+      {
+        "epoch": "104",
+        "node": 26167,
+        "index": 91270496,
+        "queue": 1,
+        "queue_peak": 3,
+        "slack_min_ticks": 64425,
+        "copy_max_ticks": 39713,
+        "poll_max_ticks": 216319,
+        "previous_node_send_ticks": 394051,
+        "previous_batch_prepare_us": 106,
+        "previous_batch_check_us": 58,
+        "previous_batch_origin": "same_epoch_profile",
+        "phase": "stopped"
+      },
+      {
+        "epoch": "104",
+        "node": 20985,
+        "index": 73195680,
+        "queue": 1,
+        "queue_peak": 3,
+        "slack_min_ticks": 64425,
+        "copy_max_ticks": 39707,
+        "poll_max_ticks": 216319,
+        "previous_node_send_ticks": 393231,
+        "previous_batch_prepare_us": 107,
+        "previous_batch_check_us": 58,
+        "previous_batch_origin": "same_epoch_profile",
+        "phase": "stopped"
+      },
+      {
+        "epoch": "104",
+        "node": 19116,
+        "index": 66676608,
+        "queue": 1,
+        "queue_peak": 3,
+        "slack_min_ticks": 64425,
+        "copy_max_ticks": 39707,
+        "poll_max_ticks": 216319,
+        "previous_node_send_ticks": 393166,
+        "previous_batch_prepare_us": 107,
+        "previous_batch_check_us": 58,
+        "previous_batch_origin": "same_epoch_profile",
+        "phase": "stopped"
+      },
+      {
+        "epoch": "104",
+        "node": 31925,
+        "index": 111354400,
+        "queue": 1,
+        "queue_peak": 3,
+        "slack_min_ticks": 64425,
+        "copy_max_ticks": 39713,
+        "poll_max_ticks": 216319,
+        "previous_node_send_ticks": 392943,
+        "previous_batch_prepare_us": 107,
+        "previous_batch_check_us": 58,
+        "previous_batch_origin": "same_epoch_profile",
+        "phase": "stopped"
+      }
+    ],
+    "node_timing_note": "Eight largest previous-node sends, one observation per epoch/node start. Copy/poll are cumulative MCU maxima; prepare/check refer to previous physical batch. Same observation does not establish simultaneity or causality.",
+    "chunk_timing": {},
+    "physical_batch_mix": {
+      "acquisition:other+other": 11,
+      "acquisition:wav+other": 1,
+      "stopped:other+other": 6165,
+      "stopped:other+idle": 7,
+      "stopped:rf+rf": 71485,
+      "stopped:wav+rf": 2,
+      "stopped:rf+idle": 59,
+      "stopped:other+rf": 57,
+      "stopped:wav+other": 2
+    },
+    "physical_batch_mix_omitted": 0,
+    "final_rf_followed_by_idle": {
+      "stopped": 59
+    },
+    "wav_rf_max_consecutive_batches": {
+      "stopped": 1
+    },
+    "stop_roundtrips": [],
+    "stop_pending_count": 0,
+    "stop_observations_omitted": 0,
+    "wav_chunk_timing": null,
+    "ordinary_timing_valid": true,
+    "performance_acceptance_eligible": true,
+    "spi_batch_timing": {
+      "histogram_upper_bounds_exclusive_us": [
+        5,
+        10,
+        20,
+        50,
+        100,
+        200,
+        500,
+        1000,
+        5000
+      ],
+      "groups": [
+        {
+          "observed_phase": "stopped",
+          "previous_batch": "stopped:other+idle",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 7,
+            "total_us": 765,
+            "min_us": 107,
+            "max_us": 113,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              7,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 109.28571428571429
+          },
+          "check": {
+            "count": 7,
+            "total_us": 407,
+            "min_us": 58,
+            "max_us": 59,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              7,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 58.142857142857146
+          }
+        },
+        {
+          "observed_phase": "stopped",
+          "previous_batch": "stopped:other+other",
+          "previous_origin": "unknown",
+          "prepare": {
+            "count": 1,
+            "total_us": 104,
+            "min_us": 104,
+            "max_us": 104,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 104.0
+          },
+          "check": {
+            "count": 1,
+            "total_us": 58,
+            "min_us": 58,
+            "max_us": 58,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 58.0
+          }
+        },
+        {
+          "observed_phase": "stopped",
+          "previous_batch": "stopped:other+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 57,
+            "total_us": 8483,
+            "min_us": 111,
+            "max_us": 368,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              55,
+              2,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 148.82456140350877
+          },
+          "check": {
+            "count": 57,
+            "total_us": 4628,
+            "min_us": 58,
+            "max_us": 316,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              52,
+              0,
+              5,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 81.19298245614036
+          }
+        },
+        {
+          "observed_phase": "stopped",
+          "previous_batch": "stopped:rf+idle",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 59,
+            "total_us": 6619,
+            "min_us": 106,
+            "max_us": 362,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              58,
+              1,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 112.1864406779661
+          },
+          "check": {
+            "count": 59,
+            "total_us": 3498,
+            "min_us": 58,
+            "max_us": 66,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              59,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 59.28813559322034
+          }
+        },
+        {
+          "observed_phase": "stopped",
+          "previous_batch": "stopped:rf+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 71484,
+            "total_us": 10695837,
+            "min_us": 110,
+            "max_us": 414,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              67414,
+              4070,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 149.62560852778245
+          },
+          "check": {
+            "count": 71484,
+            "total_us": 6306344,
+            "min_us": 58,
+            "max_us": 345,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              63481,
+              3,
+              8000,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 88.2203570029657
+          }
+        },
+        {
+          "observed_phase": "stopped",
+          "previous_batch": "stopped:wav+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 2,
+            "total_us": 306,
+            "min_us": 153,
+            "max_us": 153,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 153.0
+          },
+          "check": {
+            "count": 2,
+            "total_us": 122,
+            "min_us": 58,
+            "max_us": 64,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 61.0
+          }
+        }
+      ],
+      "omitted_batches": 0,
+      "note": "Fields describe previous physical batch. Dedup by epoch/sequence//2; only batches containing target native RF/status are covered. Phase/mix are host observations, not causal attribution."
+    },
+    "ack_batch_timing": {
+      "groups": [
+        {
+          "phase": "stopped",
+          "ack_command": "no_wav_ack",
+          "reason": 0,
+          "prepare": {
+            "count": 71608,
+            "total_us": 10711885,
+            "min_us": 104,
+            "max_us": 414,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              67535,
+              4073,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 149.59061836666294
+          },
+          "check": {
+            "count": 71608,
+            "total_us": 6314624,
+            "min_us": 58,
+            "max_us": 343,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              63601,
+              3,
+              8004,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 88.18321975198302
+          }
+        },
+        {
+          "phase": "stopped",
+          "ack_command": "query",
+          "reason": 0,
+          "prepare": {
+            "count": 2,
+            "total_us": 229,
+            "min_us": 112,
+            "max_us": 117,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 114.5
+          },
+          "check": {
+            "count": 2,
+            "total_us": 433,
+            "min_us": 88,
+            "max_us": 345,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              1,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 216.5
+          }
+        }
+      ],
+      "matched_replies": 5,
+      "unmatched_replies": 0,
+      "pending": 0,
+      "evicted": 0,
+      "omitted_groups": 0,
+      "note": "Native half 1 metadata, categorized by same-batch WAV reply id/session. prepare/check describe prior iteration; check includes decode_pair and command processing, not IRQ-lock duration alone. No WAV ACK does not mean no command. Lifecycle reply counters include non-target profiles; timing groups only target RF. ACK-only and RF+ACK pairs lack coverage."
+    },
+    "raw_chunk_ack_latency": {
+      "enabled": true,
+      "matched": 0,
+      "raw_max_ms": 0.0,
+      "raw_mean_ms": null,
+      "decoded": 0,
+      "decode_max_ms": 0.0,
+      "pending_sends": 0,
+      "pending_decode": 0,
+      "omitted": 0,
+      "slow": [],
+      "note": "Complete-frame socket read time versus entry to decoder event handling; correlated CHUNK ids/session, normal receiver validation unchanged"
+    },
+    "phase_caveat": "Host observation boundaries, not MCU event timestamps. Sampled queue is a lower bound; cumulative peak remains acceptance gate. Send counters refer to previous node. Retune is not visible on this wire.",
+    "pending_bytes": 0,
+    "tcp_fifo_headroom_measured": false,
+    "frame_kinds": {
+      "15": 12346,
+      "12": 5,
+      "9": 67,
+      "5": 2,
+      "7": 4,
+      "20": 143154
+    },
+    "radio_playing_frame_kinds": {},
+    "sent_commands": {
+      "11:0": 5,
+      "10": 65,
+      "4": 1,
+      "6": 2,
+      "8": 2,
+      "2": 70
+    },
+    "radio_playing_sent_commands": {},
+    "note": "MCU queue/slack/send counters; send weighted once per complete node start. Cumulative MCU peak includes startup.",
+    "native_counters_expected": true
+  },
+  "service_diagnostics": [
+    {
+      "calls": 126845,
+      "priming_calls": 0,
+      "reasons": {
+        "no_source": 126800,
+        "no_status": 0,
+        "session_mismatch": 0,
+        "pending_timeout": 0,
+        "pending_control_ack": 45,
+        "pending_chunk_ack": 0,
+        "credits": 0,
+        "token": 0,
+        "target_full": 0,
+        "pcm_pending": 0,
+        "no_chunk": 0,
+        "priming_ack": 0,
+        "source_exhausted": 0,
+        "poll_wait": 0
+      },
+      "sends": {
+        "chunk": 0,
+        "play": 0,
+        "query": 5,
+        "begin": 0,
+        "stop": 0
+      },
+      "last_reason": "no_source",
+      "chunk_gaps": 0,
+      "chunk_gap_last_ms": null,
+      "chunk_gap_max_ms": 0.0,
+      "last_chunk_at": null,
+      "chunk_session": null
+    }
+  ],
+  "v20_snapshot_restore": {
+    "ok": true,
+    "sessions": [
+      {
+        "path": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v20/installed_2000_radio60_20261103/private_gui_sessions/session_20261103_122109_392890.json",
+        "ok": true,
+        "detail": {
+          "snapshot": {
+            "schema": 1,
+            "identity": {
+              "board_serial": "1060031107",
+              "app": "scope-v20-20261031-225916-main-1",
+              "firmware_sha256": "52f933bdb9c632544624e5d4188a740a9cdb429596bfe5a4d926900e7538aefe",
+              "relay_sha256": "bf6893f5a0fbab8676120a5decd8c6109698fa852be02333918b1d6e4a2a909d"
+            },
+            "adc_bits": 14,
+            "adc_period": 32,
+            "generator": {
+              "wave": 0,
+              "enabled": 0,
+              "mode": 0,
+              "frequency": 2500,
+              "final_frequency": 2500,
+              "low": 0,
+              "high": 4095,
+              "duration": 1000,
+              "duration_us": 0,
+              "duty": 50
+            }
+          },
+          "state": "closed",
+          "hardware_restored": true,
+          "errors": [],
+          "recovery": {
+            "seconds": 10.02287137589883,
+            "samples": 313344,
+            "dropped": 0,
+            "fatal": 0,
+            "continuous": true
+          },
+          "receiver_activity": {
+            "pid": 67068,
+            "mode": "user",
+            "active": true,
+            "released": true
+          }
+        }
+      }
+    ]
+  },
+  "diagnostics_complete": false,
+  "functional_ok": false,
+  "receipt_unchanged": true,
+  "activation_report_unchanged": true,
+  "identity_after": {
+    "board_serial": "1060031107",
+    "app": "scope-v20-20261031-225916-main-1",
+    "firmware_sha256": "52f933bdb9c632544624e5d4188a740a9cdb429596bfe5a4d926900e7538aefe",
+    "relay_sha256": "bf6893f5a0fbab8676120a5decd8c6109698fa852be02333918b1d6e4a2a909d"
+  },
+  "identity_unchanged": true
+}

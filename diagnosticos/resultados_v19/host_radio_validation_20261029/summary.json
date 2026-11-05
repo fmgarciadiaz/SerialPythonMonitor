@@ -1,0 +1,112 @@
+{
+  "host_functional_ok": true,
+  "directed_tests": {
+    "passed": 98,
+    "seconds": 37.53,
+    "ok": true
+  },
+  "cases": [
+    {
+      "path": "diagnosticos/resultados_v19/inline_us10_transitions_120s_20261029",
+      "functional_ok": true,
+      "radio_hold_seconds": 120.01428645092528,
+      "dac_played_samples": 4799520,
+      "painted_frames": 562,
+      "raster_frames": 276,
+      "wire_metrics": {
+        "frames": 254410,
+        "samples": 177069360,
+        "empty_status_frames": 4668,
+        "send_nodes": 31802,
+        "mean_send_margin": 0.06729566483897664,
+        "mcu_queue_peak": 4,
+        "min_slack_ticks": 408721,
+        "sampled_queue_max": 4,
+        "send_ticks_max": 1028974,
+        "send_over_budget_nodes": 6698,
+        "headroom_pass": false
+      },
+      "restored": true,
+      "post_run_change": "Trigger edits also invalidate pending rasters; covered by final GUI regression.",
+      "physical_source_manifest": "diagnosticos/resultados_v19/inline_us10_transitions_120s_20261029/host_sources.json",
+      "final_sources_match_physical_manifest": false,
+      "source_verification_before_post_run_change": true,
+      "verification_note": "Hashes were checked unchanged immediately after the physical run. Trigger-context guard was added afterward and included in the final 98 tests."
+    },
+    {
+      "path": "diagnosticos/resultados_v19/inline_adc8_fft_60s_20261029",
+      "functional_ok": true,
+      "radio_hold_seconds": 60.092972350888886,
+      "dac_played_samples": 2403840,
+      "painted_frames": 1435,
+      "raster_frames": 0,
+      "wire_metrics": {
+        "frames": 128228,
+        "samples": 111814816,
+        "empty_status_frames": 2044,
+        "send_nodes": 32057,
+        "mean_send_margin": 0.10329648293262084,
+        "mcu_queue_peak": 4,
+        "min_slack_ticks": 66160,
+        "sampled_queue_max": 4,
+        "send_ticks_max": 602957,
+        "send_over_budget_nodes": 3107,
+        "headroom_pass": false
+      },
+      "restored": true,
+      "sources_unchanged_during_run": null
+    }
+  ],
+  "hardware_headroom_qualified": false,
+  "private_o2_promoted": false,
+  "o2_campaign_stopped": "60s functional pass, cumulative MCU queue peak 4 fails required <4",
+  "final_restore": {
+    "identity_before": {
+      "board_serial": "1060031107",
+      "app": "scope-v19-main-1",
+      "firmware_sha256": "37f049fa029ad62a10767c56dc586b2c3697f8d250a0b8a7396570ce8e0c7060",
+      "relay_sha256": "27da0bc4860401df27eef50429f2ec881bfd3b51b1893d1fe3bacb9e922f56ae"
+    },
+    "recovery": {
+      "snapshot_equal": true,
+      "continuous": true,
+      "integrity_ok": true,
+      "seconds": 10.025479284930043,
+      "detail": {
+        "hardware_restored": true,
+        "errors": [],
+        "recovery": {
+          "seconds": 10.025479284930043,
+          "samples": 313344,
+          "dropped": 0,
+          "fatal": 0,
+          "continuous": true
+        }
+      }
+    },
+    "identity_after": {
+      "board_serial": "1060031107",
+      "app": "scope-v19-main-1",
+      "firmware_sha256": "37f049fa029ad62a10767c56dc586b2c3697f8d250a0b8a7396570ce8e0c7060",
+      "relay_sha256": "27da0bc4860401df27eef50429f2ec881bfd3b51b1893d1fe3bacb9e922f56ae"
+    },
+    "ok": true
+  },
+  "preserved_versions": [
+    "monitor/v17",
+    "arduino/v17",
+    "monitor/v18",
+    "arduino/v18"
+  ],
+  "final_host_source_sha256": {
+    "monitor/v19/app.py": "cdf56598650416907c5308a7b6d3eb0923c0fc989988be1498ce508a48bef7c4",
+    "monitor/v19/temporal_raster.py": "2e54c5ae40bb4537b86f06f6ab7ee5e142ad2099302efad18942d34f6b5bc932",
+    "monitor/v19/temporal_paint.py": "ed5a192c71659c7077fa895b9aa6ecb7e9713685b9a8da525986621f2cdd2785",
+    "monitor/v19/locale_axis.py": "4398a0ec4d9c7974be6f36229b49a6e3327c05bd35936d97c54db05dd945d7ca",
+    "monitor/v19/spectrum.py": "2c964189ef3c6a8f2c3fb286fdc0397c1f79899f2a0679761164c30097c49e23",
+    "monitor/v19/scope_cursors.py": "980894559668c31018971d53b3d7dc0c4b13ef75e1b480f5bcc3fee64bd96400",
+    "monitor/v19/receiver/unoq_config_receiver.py": "d71d97dc38141f67715be0707f8299e87c43e6c67e2157c77d961e0fe1bb8b1e",
+    "tools/gui_live_smoke_v19.py": "6edfe47071ef0b4de7c972f203338493d46814006def90be36f15542f72c2a9c",
+    "tools/radio_transition_scenario_v19.py": "6da90e6db3656f828028b7c5bb9c549924266ad5fe24fb01ab57289265f56ea0"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "version": 20,
+  "private": true,
+  "promoted": false,
+  "status": "local_candidate_unbuilt",
+  "purpose": "Exact queue-8 storage for three ADC CH1 candidates",
+  "base_sha256": {
+    "sketch/acquisition_storage.h": "e4b37e8d2e21fce13dca7081219d08233851f9cb170d237f54fd03535349a742",
+    "sketch/acquisition.h": "e8c2c8e11e3eb51d036407348d30b3a4cdc3a197d739a5b0d484888cdd6f46d9",
+    "sketch/high_rate_profile.h": "2a4b3a5dad0611385b97ad815a7d0ee85e4c954359cf262858a27be27405aeed",
+    "sketch/native_profiles.h": "27d2382483812e4fdc544f857de293d50a09c5837a9a1e25c17e20904ec0bcdc",
+    "relay/high_rate_profile.h": "2a4b3a5dad0611385b97ad815a7d0ee85e4c954359cf262858a27be27405aeed",
+    "relay/native_profiles.h": "27d2382483812e4fdc544f857de293d50a09c5837a9a1e25c17e20904ec0bcdc"
+  },
+  "queue8_profiles": [
+    [10, 1, 116, 5568],
+    [12, 1, 140, 7488],
+    [14, 1, 158, 5952]
+  ],
+  "unchanged_queue16": "scope_spi40 exact ADC8 profiles",
+  "unchanged_queue4": "all remaining profiles, including dual",
+  "memory": {
+    "begin": "0x20060000",
+    "end": "0x200c0000",
+    "available_bytes": 393216,
+    "single_sample_elements": 59904,
+    "single_sample_bytes": 119808,
+    "arm_size_and_map": "pending_board_build"
+  },
+  "validation": "source and offline contract tests only; no compiler, Q, or physical acceptance"
+}

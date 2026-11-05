@@ -1,0 +1,101 @@
+{
+  "ok": false,
+  "firmware_deployment": false,
+  "profile": {
+    "bits": 8,
+    "ticks": 86
+  },
+  "hold_seconds": 30,
+  "cases": [
+    {
+      "name": "v18_vt_spectre",
+      "version": "v18",
+      "mode": "vt",
+      "fft_view": "Spectre",
+      "command": [
+        "/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/bin/python",
+        "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/tools/probe_radio_rate_v18.py",
+        "--serial",
+        "1060031107",
+        "--bits",
+        "8",
+        "--ticks",
+        "86",
+        "--hold",
+        "30",
+        "--frequency-khz",
+        "400",
+        "--analysis-mode",
+        "vt",
+        "--fft-view",
+        "Spectre",
+        "--fft-size",
+        "16384",
+        "--keep-display-awake"
+      ],
+      "log": "diagnosticos/resultados_v19Pyside/long_vt_visible_20261027/v18_vt_spectre.log",
+      "evidence": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v18/radio_rate_check_20261027_103605",
+      "exit_code": 0,
+      "ok": true,
+      "fps_samples": [
+        7.531120970082977,
+        33.289542209378205,
+        23.96365905599389,
+        15.255775362988203,
+        16.538471899623346,
+        13.788418931645676
+      ],
+      "mean_paint_fps": 18.394498071618717,
+      "median_paint_fps": 15.897123631305774,
+      "p95_paint_fps": 33.289542209378205,
+      "synthetic_bode_updates": null,
+      "exposed_fraction": 1.0,
+      "restored": true
+    },
+    {
+      "name": "v19Pyside_vt_spectre",
+      "version": "v19Pyside",
+      "mode": "vt",
+      "fft_view": "Spectre",
+      "command": [
+        "/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/bin/python",
+        "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/tools/probe_radio_rate_v19Pyside.py",
+        "--serial",
+        "1060031107",
+        "--bits",
+        "8",
+        "--ticks",
+        "86",
+        "--hold",
+        "30",
+        "--frequency-khz",
+        "400",
+        "--analysis-mode",
+        "vt",
+        "--fft-view",
+        "Spectre",
+        "--fft-size",
+        "16384",
+        "--keep-display-awake"
+      ],
+      "log": "diagnosticos/resultados_v19Pyside/long_vt_visible_20261027/v19Pyside_vt_spectre.log",
+      "evidence": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v19Pyside/radio_rate_check_20261027_103659",
+      "exit_code": 0,
+      "ok": true,
+      "fps_samples": [
+        9.322583218029955,
+        58.391057642563034,
+        57.505450102994864,
+        58.66787009361421,
+        57.404222014542725,
+        56.9740867384535
+      ],
+      "mean_paint_fps": 49.710878301699715,
+      "median_paint_fps": 57.45483605876879,
+      "p95_paint_fps": 58.66787009361421,
+      "synthetic_bode_updates": null,
+      "exposed_fraction": 1.0,
+      "restored": true
+    }
+  ]
+}

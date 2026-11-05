@@ -1,0 +1,225 @@
+{
+  "private": true,
+  "promoted": false,
+  "performance_acceptance_eligible": false,
+  "gui": {
+    "ok": true,
+    "errors": [],
+    "assertions": {
+      "radio_playing_40k": true,
+      "radio_stop_confirmed": true,
+      "radio_progress": true,
+      "radio_hold_completed": true,
+      "scan_completed": true,
+      "wav_playing": true,
+      "wav_progress": true,
+      "wav_stop_confirmed": true,
+      "fm_playing": true,
+      "fm_progress": true,
+      "fm_stop_confirmed": true,
+      "shutdown_confirmed": true,
+      "worker_released": true
+    },
+    "visible_gui_ok": true,
+    "profile_ok": true,
+    "fft_ok": true,
+    "exposed_fraction": 1.0,
+    "paint_events": 598,
+    "radio_hold_seconds": 20.064757654094137,
+    "radio_played_samples": 802560,
+    "headroom_pass": false,
+    "performance_acceptance_eligible": false
+  },
+  "timing": {
+    "schema": "wav-chunk-cycles-v1",
+    "groups": [
+      {
+        "phase": "mixed",
+        "session": 3062684520,
+        "selected_chunks": 2,
+        "timing_us": {
+          "irq": {
+            "selected_mean": 67.04374999999999,
+            "selected_max": 67.05
+          },
+          "poll_main": {
+            "selected_mean": 0.38125,
+            "selected_max": 0.38125
+          },
+          "validate": {
+            "selected_mean": 24.940625,
+            "selected_max": 24.94375
+          },
+          "copy": {
+            "selected_mean": 37.45,
+            "selected_max": 37.45625
+          },
+          "cache": {
+            "selected_mean": 0.621875,
+            "selected_max": 0.625
+          },
+          "descriptor": {
+            "selected_mean": 1.009375,
+            "selected_max": 1.0125
+          },
+          "publish": {
+            "selected_mean": 40.06875,
+            "selected_max": 40.06875
+          },
+          "elapsed": {
+            "selected_mean": 67.80000000000001,
+            "selected_max": 67.80625
+          }
+        }
+      },
+      {
+        "phase": "playing",
+        "session": 3062684520,
+        "selected_chunks": 556,
+        "timing_us": {
+          "irq": {
+            "selected_mean": 68.6712792266187,
+            "selected_max": 70.24375
+          },
+          "poll_main": {
+            "selected_mean": 1.957621402877698,
+            "selected_max": 3.45625
+          },
+          "validate": {
+            "selected_mean": 24.944458183453236,
+            "selected_max": 25.025
+          },
+          "copy": {
+            "selected_mean": 37.4556654676259,
+            "selected_max": 37.48125
+          },
+          "cache": {
+            "selected_mean": 0.6244829136690648,
+            "selected_max": 0.675
+          },
+          "descriptor": {
+            "selected_mean": 1.0142760791366907,
+            "selected_max": 1.0375
+          },
+          "publish": {
+            "selected_mean": 40.08642086330935,
+            "selected_max": 40.14375
+          },
+          "elapsed": {
+            "selected_mean": 76.13109262589927,
+            "selected_max": 328.90625
+          }
+        }
+      },
+      {
+        "phase": "preparing",
+        "session": 3062684520,
+        "selected_chunks": 17,
+        "timing_us": {
+          "irq": {
+            "selected_mean": 67.0533088235294,
+            "selected_max": 67.0875
+          },
+          "poll_main": {
+            "selected_mean": 0.38455882352941173,
+            "selected_max": 0.3875
+          },
+          "validate": {
+            "selected_mean": 24.94264705882353,
+            "selected_max": 24.95
+          },
+          "copy": {
+            "selected_mean": 37.44963235294118,
+            "selected_max": 37.45625
+          },
+          "cache": {
+            "selected_mean": 0.6224264705882353,
+            "selected_max": 0.6625
+          },
+          "descriptor": {
+            "selected_mean": 1.013970588235294,
+            "selected_max": 1.01875
+          },
+          "publish": {
+            "selected_mean": 40.07610294117647,
+            "selected_max": 40.1125
+          },
+          "elapsed": {
+            "selected_mean": 68.17647058823529,
+            "selected_max": 74.1125
+          }
+        }
+      }
+    ],
+    "completed": 4352,
+    "incomplete": 1,
+    "invalid": 718,
+    "repeated": 3059,
+    "skipped_serials": 1124,
+    "resets": 0,
+    "omitted": 0,
+    "first_seen_serial": 1,
+    "last_seen_serial": 1699,
+    "last_completed_sample": {
+      "serial": 1699,
+      "request": 3062686594,
+      "session": 3062684520,
+      "count_state": 16908768,
+      "clock_hz": 160000000,
+      "irq": 11031,
+      "poll_main": 359,
+      "validate": 3990,
+      "copy": 5991,
+      "cache": 100,
+      "descriptor": 162,
+      "publish": 6412,
+      "elapsed": 11149,
+      "max_irq": 11240,
+      "max_irq_request": 3062686531,
+      "phase": "stopped",
+      "epoch": 1,
+      "frame_sequence": 89582
+    },
+    "max_irq_since_boot": {
+      "cycles": 11240,
+      "request": 3062686531,
+      "clock_hz": 160000000
+    },
+    "seen_snapshots": 4353,
+    "note": "Cadence-selected last accepted CHUNK snapshots, not an all-CHUNK distribution. IRQ is after-lock/before-unlock only; elapsed includes pending interrupts after unlock. Components are nested. Instrumentation perturbs execution. max_irq is cumulative over accepted CHUNKs since boot; per-phase sampled maxima are not global maxima. Relay prepare/check aggregates and ordinary SPI cost summaries are invalid for this private firmware."
+  },
+  "restoration": {
+    "ok": true,
+    "attempted": true,
+    "errors": [],
+    "material": {
+      "sources_exact": true,
+      "cache_exact": true,
+      "firmware_exact": true,
+      "relay_exact": true
+    },
+    "recovery": {
+      "snapshot_equal": true,
+      "continuous": true,
+      "integrity_ok": true,
+      "seconds": 10.023585241055116,
+      "detail": {
+        "hardware_restored": true,
+        "errors": [],
+        "recovery": {
+          "seconds": 10.023585241055116,
+          "samples": 313344,
+          "dropped": 0,
+          "fatal": 0,
+          "continuous": true
+        }
+      }
+    },
+    "final": {
+      "identity_equal": true,
+      "sources_exact": true,
+      "relay_configuration_equal": true,
+      "cpu_equal": true
+    }
+  }
+}

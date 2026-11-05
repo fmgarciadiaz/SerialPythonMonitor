@@ -2,32 +2,28 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "V18: pruebas del n\u00facleo (localhost, sin Q)",
+      "label": "Arduscopio Q: suite completa offline",
       "type": "process",
       "command": "/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/bin/python",
-      "args": [
-        "-m",
-        "monitor.v18",
-        "--self-test"
-      ],
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
+      "args": ["-m", "monitor.v19", "--self-test"],
+      "options": {"cwd": "${workspaceFolder}"},
       "problemMatcher": [],
       "group": "test"
     },
     {
-      "label": "V18: abrir monitor",
+      "label": "Arduscopio Q: abrir monitor",
       "type": "process",
       "command": "/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/bin/python",
-      "args": [
-        "-m",
-        "monitor.v18",
-        "--gui"
-      ],
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
+      "args": ["-m", "monitor.v19", "--gui"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": []
+    },
+    {
+      "label": "Archivo: pruebas del monitor anterior",
+      "type": "process",
+      "command": "/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/bin/python",
+      "args": ["-m", "monitor.v18", "--self-test"],
+      "options": {"cwd": "${workspaceFolder}"},
       "problemMatcher": []
     }
   ]

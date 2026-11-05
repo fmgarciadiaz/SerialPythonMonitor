@@ -1,0 +1,203 @@
+{
+  "schema": 1,
+  "version": 19,
+  "purpose": "normal V19 firmware pair private rate probe; not production acceptance",
+  "started_utc": "2026-10-27T20:57:02.533986+00:00",
+  "serial": "1060031107",
+  "candidate_only": true,
+  "production_scope_v19_used": false,
+  "temporary_apps": [
+    {
+      "role": "normal_v19_probe",
+      "id": "dXNlcjpzY29wZS12MTktbm9ybWFsLXByb2JlLTkzYWYzMDk0",
+      "path": "/home/arduino/ArduinoApps/scope-v19-normal-probe-93af3094"
+    }
+  ],
+  "temporary_relay": {
+    "name": "serialmonitor-usb-stream-v19-normal-probe-93af3094",
+    "id": "874348c2186a9e1fbf0aca571753ca94c6224ba0d2ad9962432b113772ffbc09",
+    "sha256": "27da0bc4860401df27eef50429f2ec881bfd3b51b1893d1fe3bacb9e922f56ae"
+  },
+  "restored": true,
+  "errors": [],
+  "baseline": {
+    "apps": [
+      {
+        "id": "dXNlcjpjb3B5LW9mLWJsaW5raW5nLWFuLWxlZA",
+        "name": "Copy of Blinking an LED",
+        "status": "uninitialized",
+        "default": false
+      },
+      {
+        "id": "dXNlcjpkZWJ1Z2dlci1yeC1ydA",
+        "name": "Debugger Rx Rt",
+        "status": "uninitialized",
+        "default": false
+      },
+      {
+        "id": "dXNlcjpnZW5lcmFkb3I",
+        "name": "Generador",
+        "status": "uninitialized",
+        "default": false
+      },
+      {
+        "id": "dXNlcjpwb3RlbnRpb21ldGVy",
+        "name": "Potentiometer",
+        "status": "uninitialized",
+        "default": false
+      },
+      {
+        "id": "dXNlcjpzY29wZS12MTc",
+        "name": "Scope V17",
+        "status": "stopped",
+        "default": false
+      },
+      {
+        "id": "dXNlcjpzY29wZS12MTg",
+        "name": "Scope V18",
+        "status": "uninitialized",
+        "default": false
+      }
+    ],
+    "containers": {
+      "scope-v17-main-1": "b9c0a3e7543c1027d6952c72c262d2e34c1e102ca7fe600ae5d18895e69941da",
+      "serialmonitor-usb-stream": "dae7927bf95694dabc19486c9d1379d6bbdcfc9b9591b9fb22d2ee37d0f7c0c0",
+      "serialmonitor-usb-stream-v18": "ed2711164be2bfb75a90303f5ee0b05998fbcce7301052219d4ad3b4402d8d97",
+      "serialmonitor-usb-stream-v18-saved-6209307a50": "9710636791f8d2364170538df82c5c7ff17adb10e5454ee12840b7c634cf421d",
+      "serialmonitor-usb-stream-v18-saved-c616ddb651": "583990219be6c769fa4076875b13d9a39f0a9623d1aa203f21a28422d1b65f67",
+      "serialmonitor-usb-stream-v18-saved-f1e607634c": "c0179ec8e28423b28480bdd102060e669e9ab4f679b5c1808621bcbd3881de85",
+      "serialmonitor-usb-stream-v18-saved-f332694864": "0c025ff50633b07ec53986baf38fb4e81452980f9edd7c047e25030c5fe21e7d"
+    },
+    "v17_sources": {
+      "app.yaml": "f5c6c3b2263d221cd7e0753cd21aa2fd97de2f16bd1f0090b942f423552dfb03",
+      "python/main.py": "b3bfd0d2c5282d4a3e84cb47d9b2c565721c7dda41f1c253a42908e0ae18587b",
+      "sketch/acquisition.h": "0c5c9f660665964edaca383dd1bab813c664125d460afda9ab02b46d04a2e90b",
+      "sketch/acquisition_protocol.h": "83838fb7388aa6b837757b83b963f5951b174dd58b49d6b3be93c8c3aa51c376",
+      "sketch/acquisition_storage.h": "1163149e643ef92592d63b0f79f86f58988086aa345f0d2d17095813452d2c66",
+      "sketch/additional_profiles.h": "b8d94095548a562807ba48fd08b6f9cb6c4148e9926ee80cf0e46bc6142e5591",
+      "sketch/benchmark_protocol.h": "8ab078d333b64c9c55e20c8476ce9fbe6a7a17f9dd24582717f263c5c2ea4763",
+      "sketch/control_protocol.h": "1c9ea38fa73b7e6fcfb88bde462077b319b7ebada3eab787c33fdcbbaa84ee3a",
+      "sketch/crc32_fast.h": "5d80da2df5d483bb028cf98abdaa2aed0a12da1be7f2ceb8591269debee81959",
+      "sketch/frame_buffer.h": "ac0d1d25cbfd5db0ea629d6990a919bb72de07c116fa23f9689f7db1e32c37f5",
+      "sketch/generator.h": "e853fca473f9c13df50912a54fc621cee9f2fcb125ffe6f810670e93a17ebc77",
+      "sketch/generator_dma.h": "faec31f7ebb7cb64ec04d3c9c8e94225cd66a7513535f7eca9b4be6d282e697c",
+      "sketch/generator_protocol.h": "c241267801e21c326fbd854a324e6c82c01dc6e1ded51a7fbe2442c84299de75",
+      "sketch/generator_timing.h": "a2774f18e899e328a988150e46e017b512fd724075e7f24cc6247923093aac9c",
+      "sketch/high_rate_profile.h": "f63bf48fbacd71a068a39fd8d692b5e7fe09cd7b810b393fa0a0194dc4320872",
+      "sketch/native_profiles.h": "f6bd00bb325beb1f1ed9243fc7b506103f008541a1780b5b59873d55711cf1ba",
+      "sketch/node_validation.h": "f0c38dae55f9fbfb2d4aece35643df6264fbc0c7b054c14ef301a2dd750cfa38",
+      "sketch/node_validation_fast.h": "5e582042ee500b79946b0e4ca5e238abfee3bdc08752b5d16b639a0e193c046a",
+      "sketch/radio_test.h": "fb56e0ccac1a0bd0c1e4dab23a9f236bb6fe5aae40e6a66890319d4e7e1c725e",
+      "sketch/radio_test_stream.h": "74ae576822c604b3a716674ae1bc296444ac23bc2fbe1e2d63cc7818bca17487",
+      "sketch/sample_packing.h": "969227ee4db1ed2be4edafacf616d327fad996b117098d4413d3fed76ec05c43",
+      "sketch/scope_config.h": "827bb698332fb2405306c57b4ab4e5389c95969185096d780f97c750abcc04b1",
+      "sketch/scope_protocol.h": "c2bf92aed1aac5efc4f6283cd302297d3c8be3ce40e7b838fa8d5bcacef9d612",
+      "sketch/sketch.ino": "619fea280dd7fdea7aeaebeffc928acdfc2e2eaeb584bbff869c16f70d8bfe21",
+      "sketch/sketch.yaml": "2ee56ed8561b6ea420885ed62ca804f498a54825ce6df906168e78a014c424ea",
+      "sketch/wav.h": "0dc2b88b7d25de037fc0598c85b70b3903caaa3c2d6a92ea84b23ab680ddb1f2",
+      "sketch/wav_dma.h": "82bf749b289b5dfc4907e751ac1c1dd146d2ab1b0fe92c046d7492b3cc15cc10",
+      "sketch/wav_protocol.h": "78e788ab24dac52eff1d79cc15d08ac730451316e28050f461d5f4febf2cd223",
+      "sketch/wav_queue.h": "002553b2c58ff1343a218959f58632a394656aeb0f28fc74bb17a97f2793dd83",
+      "sketch/wav_storage.h": "a06e48b8192d2674dfa3ce1f57e601f523244c1016b5ecc899607d48fb1cce69"
+    },
+    "v18_sources": {
+      "app.yaml": "7f3e8eee244984676f2156c85807d99b180127ccaa675960f84ea1e973804f25",
+      "python/main.py": "3f0ebe8813d7ca5ca01f850492981e5f8c52232c497e3fc2ada07c5ecee6c5b0",
+      "sketch/acquisition.h": "0c5c9f660665964edaca383dd1bab813c664125d460afda9ab02b46d04a2e90b",
+      "sketch/acquisition_protocol.h": "83838fb7388aa6b837757b83b963f5951b174dd58b49d6b3be93c8c3aa51c376",
+      "sketch/acquisition_storage.h": "1953242fddb28b6b2315572bf65f1cec207988a1a8be5183f0641379c92176f2",
+      "sketch/additional_profiles.h": "b8d94095548a562807ba48fd08b6f9cb6c4148e9926ee80cf0e46bc6142e5591",
+      "sketch/batch2_ownership.h": "c7857c0738dc3114ae248045429a64e569d8dc1e5fdf81f56f09fbdc976363a7",
+      "sketch/batch_command.h": "e4755d4b1c21645937c1f46030ce432893d9b95ad9709feb8a050e3765daf9f6",
+      "sketch/benchmark_protocol.h": "85461155f16b7ee1ca8f46df84377d2c57ced212d40f788bbfccc14822e5367f",
+      "sketch/control_protocol.h": "1c9ea38fa73b7e6fcfb88bde462077b319b7ebada3eab787c33fdcbbaa84ee3a",
+      "sketch/crc32_fast.h": "5d80da2df5d483bb028cf98abdaa2aed0a12da1be7f2ceb8591269debee81959",
+      "sketch/frame_buffer.h": "ac0d1d25cbfd5db0ea629d6990a919bb72de07c116fa23f9689f7db1e32c37f5",
+      "sketch/generator.h": "e853fca473f9c13df50912a54fc621cee9f2fcb125ffe6f810670e93a17ebc77",
+      "sketch/generator_dma.h": "faec31f7ebb7cb64ec04d3c9c8e94225cd66a7513535f7eca9b4be6d282e697c",
+      "sketch/generator_protocol.h": "c241267801e21c326fbd854a324e6c82c01dc6e1ded51a7fbe2442c84299de75",
+      "sketch/generator_timing.h": "a2774f18e899e328a988150e46e017b512fd724075e7f24cc6247923093aac9c",
+      "sketch/high_rate_profile.h": "78faa85feb5c17625df5bed00844d7a14c3572aaefcaac836a02186626d315f0",
+      "sketch/native_profiles.h": "cb090dbe2bfa9349c7f69136cd766f0757e1294f97aeb1a62816bcb8844cc74c",
+      "sketch/node_validation.h": "f0c38dae55f9fbfb2d4aece35643df6264fbc0c7b054c14ef301a2dd750cfa38",
+      "sketch/node_validation_fast.h": "5e582042ee500b79946b0e4ca5e238abfee3bdc08752b5d16b639a0e193c046a",
+      "sketch/radio_test.h": "fb56e0ccac1a0bd0c1e4dab23a9f236bb6fe5aae40e6a66890319d4e7e1c725e",
+      "sketch/sample_packing.h": "84823758ded381d3168e452893d86eeed6a05c73f96196514f5ec0d9115c3e76",
+      "sketch/scope_config.h": "827bb698332fb2405306c57b4ab4e5389c95969185096d780f97c750abcc04b1",
+      "sketch/scope_protocol.h": "c2bf92aed1aac5efc4f6283cd302297d3c8be3ce40e7b838fa8d5bcacef9d612",
+      "sketch/sketch.ino": "b73dffd401ba6c73b1dd06f00ebf3a0a5cf28b3ddaeff4f02ba1c72988b31df2",
+      "sketch/sketch.yaml": "2ee56ed8561b6ea420885ed62ca804f498a54825ce6df906168e78a014c424ea",
+      "sketch/spi16_geometry.h": "278b0d594820539a5a3a3863c5623eb433607401512d770242c0bf49bac35093",
+      "sketch/wav.h": "0dc2b88b7d25de037fc0598c85b70b3903caaa3c2d6a92ea84b23ab680ddb1f2",
+      "sketch/wav_dma.h": "82bf749b289b5dfc4907e751ac1c1dd146d2ab1b0fe92c046d7492b3cc15cc10",
+      "sketch/wav_protocol.h": "78e788ab24dac52eff1d79cc15d08ac730451316e28050f461d5f4febf2cd223",
+      "sketch/wav_queue.h": "002553b2c58ff1343a218959f58632a394656aeb0f28fc74bb17a97f2793dd83",
+      "sketch/wav_storage.h": "a06e48b8192d2674dfa3ce1f57e601f523244c1016b5ecc899607d48fb1cce69"
+    },
+    "v17_cached_firmware_sha256": "96685eb64cc722adebc7f345f40c3500e22642814bbfc6f182c66c0f992a7ec9",
+    "v19_firmware_sha256": "37f049fa029ad62a10767c56dc586b2c3697f8d250a0b8a7396570ce8e0c7060",
+    "v19_relay_sha256": "27da0bc4860401df27eef50429f2ec881bfd3b51b1893d1fe3bacb9e922f56ae",
+    "source_drift_requiring_binary_hash_check": [
+      "sketch/acquisition.h",
+      "sketch/scope_config.h",
+      "sketch/sketch.ino",
+      "sketch/sketch.yaml"
+    ],
+    "v19_pair_matches_accepted_v18": true
+  },
+  "normal_v19_firmware_sha256": "37f049fa029ad62a10767c56dc586b2c3697f8d250a0b8a7396570ce8e0c7060",
+  "normal_v19_app_status_after_start": "running",
+  "relay_logs_before_capture": "",
+  "capture": {
+    "tested_configuration": {
+      "bits": 8,
+      "rate_sps": 1860465,
+      "channels": 1,
+      "ticks": 86,
+      "node_pairs": 3488
+    },
+    "initial_configuration": {
+      "bits": 14,
+      "rate_sps": 31250,
+      "channels": 2,
+      "ticks": 32
+    },
+    "first_frame_kind": 15,
+    "acquisition_applied": true,
+    "duration_seconds": 5.000132792000002,
+    "native_frames": 10657,
+    "empty_native_frames": 1,
+    "queue_peak": 2,
+    "dropped_nodes_max": 0,
+    "fatal_errors_max": 0,
+    "spi_error_total": 0,
+    "unexpected_frame_kinds": {},
+    "adc_configuration_restored": true,
+    "capture_error": null,
+    "restore_error": null
+  },
+  "cleanup_relay_errors": [],
+  "cleanup_relay_cache_error": null,
+  "cleanup_probe_app_errors": [],
+  "restore_firmware_sha256": "96685eb64cc722adebc7f345f40c3500e22642814bbfc6f182c66c0f992a7ec9",
+  "restore_spi_proof": {
+    "relay_id": "dae7927bf95694dabc19486c9d1379d6bbdcfc9b9591b9fb22d2ee37d0f7c0c0",
+    "firmware_sha256": "96685eb64cc722adebc7f345f40c3500e22642814bbfc6f182c66c0f992a7ec9",
+    "first_verified_frame": true,
+    "first_frame_kind": 15,
+    "first_frame_sequence": 27
+  },
+  "final_state": {
+    "running_apps": [],
+    "running_containers": [],
+    "original_app_inventory_equal": true,
+    "original_container_ids_equal": true,
+    "v17_source_manifest_equal": true,
+    "v18_source_manifest_equal": true,
+    "v17_cached_firmware_unchanged": true,
+    "v18_cached_firmware_absent": true,
+    "v19_production_absent": true,
+    "v17_firmware_restored": true
+  },
+  "finished_utc": "2026-10-27T20:59:31.669665+00:00"
+}

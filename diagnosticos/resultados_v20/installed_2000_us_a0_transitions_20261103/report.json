@@ -1,0 +1,4790 @@
+{
+  "schema": 1,
+  "version": 20,
+  "private": true,
+  "promoted": false,
+  "private_firmware_activated": true,
+  "private_identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v20-20261031-225916-main-1",
+    "firmware_sha256": "52f933bdb9c632544624e5d4188a740a9cdb429596bfe5a4d926900e7538aefe",
+    "relay_sha256": "bf6893f5a0fbab8676120a5decd8c6109698fa852be02333918b1d6e4a2a909d"
+  },
+  "source_report": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v20/storage_lifetime_cycle_20261101/report.json",
+  "source_report_sha256": "298e09f178d140cc003bf03e4ce610e38f56b593f2afaa3440003718c035e9e8",
+  "working_receipt": {
+    "path": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v20/q_support/working_pair.json",
+    "sha256": "0708e10da6755ba09d27dafefd5b742b463c2c88647378de05454b69c22d4835"
+  },
+  "identity_before": {
+    "board_serial": "1060031107",
+    "app": "scope-v20-20261031-225916-main-1",
+    "firmware_sha256": "52f933bdb9c632544624e5d4188a740a9cdb429596bfe5a4d926900e7538aefe",
+    "relay_sha256": "bf6893f5a0fbab8676120a5decd8c6109698fa852be02333918b1d6e4a2a909d"
+  },
+  "requested_tests": {
+    "radio": true,
+    "wav": false,
+    "fm": false,
+    "synth_early_play": false,
+    "voices": null,
+    "synth_profile": null,
+    "hold_seconds": 60,
+    "scan": false,
+    "us": true,
+    "scan_during_a0": true,
+    "restart_a0": true,
+    "stall_trace": true,
+    "window_seconds": 0,
+    "detail_percent": null,
+    "analysis_mode": "fft_radio",
+    "radio_adc_bits": 8,
+    "radio_adc_rate": 2000000,
+    "radio_a0_rate": 40000,
+    "wav_source": null,
+    "synth_prepare_timeout": null,
+    "synth_confirmed_hold_seconds": null,
+    "synth_dac_rate": null
+  },
+  "scope": "Installed working V20 audio screen; private, no public/analog acceptance",
+  "ok": false,
+  "host_sources": {
+    "tools/probe_working_v20_gui.py": "9c525bdc613b1102e758f0f87f736a7f319f3ea7019de0847eb7a180532cd368",
+    "tools/gui_private_v20.py": "f6390391b606c250419815d4abd4ed58215c8de95f003d8545a99e8bc7cbccb8",
+    "tools/private_v20_pair.py": "f5ad537cc448310ea4fea0e0fedd4af5499bc0dc38594eaf64ec8c6bcae83526",
+    "tools/private_rate_profiles_v20.py": "89b7afea219c962c8e2e222afc860fb09fe3343950d6d47fbb4fd6d79245f6cd",
+    "tools/gui_live_smoke_v20.py": "aae1ef8717df814615634713fd22404fec29c0c7a8dcc16585cd47b9515112f8",
+    "tools/synth_transition_scenario_v20.py": "b362a61da1110fc9e87a9b0a62983715b27e71cf0bee4889559957ea3b1fd6ea",
+    "monitor/v20/receiver/unoq_config_receiver.py": "c18e649ca951749e597778e5322587347531b5072500f3f328d4149e559475e1",
+    "monitor/v20/io/receiver_process.py": "9aba33676723459084894f0b1d65c5acfe5fd01d590b9262f7dc98571ed85d7d",
+    "monitor/v20/fm_source.py": "ec2f46b3984c92bb0c6ae2ec637dce3339d59595e4f5730c9460efdcc2419730",
+    "monitor/v20/fm_panel.py": "efe23240acc05b6b4c3b249fc76a9fbf2ae87e7266d8f33aed59ccbc93ba5955",
+    "monitor/v20/synth_process.py": "26a9b85f8c8fd8dfd2575ea3df2500618786a769e84784000035a9d230bd6d14",
+    "monitor/v20/app.py": "bb5903a92a21ca227b02e4e8c837c1abe37ab14652eb160fe64c25937af5d6ff",
+    "monitor/v20/radio_multiscan.py": "39cc5a06524e5d750bfeb1f74fdeb9415493ab8e23529dc20c614975d1b2dddd",
+    "monitor/v20/temporal_raster.py": "2e54c5ae40bb4537b86f06f6ab7ee5e142ad2099302efad18942d34f6b5bc932",
+    "monitor/v20/scope_cursors.py": "90afa613efab8eac682932ca1006de3c0bd9717f46a36971d773ebd358bb9cb1"
+  },
+  "gui_command": [
+    "/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/bin/python",
+    "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/tools/gui_private_v20.py",
+    "--firmware-binding",
+    "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v20/installed_2000_us_a0_transitions_20261103/report.json",
+    "--serial",
+    "1060031107",
+    "--output",
+    "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v20/installed_2000_us_a0_transitions_20261103/gui.json",
+    "--bits",
+    "8",
+    "--rate",
+    "2000000",
+    "--fft-size",
+    "16384",
+    "--no-retune",
+    "--frequency-khz",
+    "710",
+    "--hold-radio-seconds",
+    "60",
+    "--duration",
+    "65",
+    "--stall-trace",
+    "--allow-internal-2m",
+    "--us",
+    "--scan-during-a0",
+    "--restart-a0"
+  ],
+  "child_pid": 75458,
+  "execution_budget_seconds": 240,
+  "child_returncode": 1,
+  "gui": {
+    "errors": [
+      "radio status state=4 reason=2",
+      "Assertion failed: radio_stop_confirmed",
+      "Assertion failed: radio_hold_completed"
+    ],
+    "assertions": {
+      "radio_playing_40k": true,
+      "radio_stop_confirmed": false,
+      "radio_progress": true,
+      "radio_hold_completed": false,
+      "scan_completed": true,
+      "wav_playing": true,
+      "wav_progress": true,
+      "wav_stop_confirmed": true,
+      "fm_playing": true,
+      "fm_progress": true,
+      "fm_stop_confirmed": true,
+      "fm_hold_completed": true,
+      "fm_configured_voices_rendered": true,
+      "fm_sustained_voices_observed": true,
+      "fm_selected_dac_rate": true,
+      "shutdown_confirmed": true,
+      "worker_released": true,
+      "us_three_profiles_captured": true,
+      "us_original_restored": true,
+      "a0_transitions_completed": true
+    },
+    "display": {
+      "platform": "cocoa",
+      "dpr": 2.0,
+      "size": [
+        1320,
+        920
+      ],
+      "screen": "Built-in Retina Display",
+      "exposed": false
+    },
+    "paint_events": 407,
+    "radio_hold_seconds": 0.0,
+    "scan": {
+      "requested": true,
+      "completed": true,
+      "candidate_count": 0,
+      "multirate": {
+        "rates": [
+          2000000,
+          1600000,
+          1403508
+        ],
+        "captures": [
+          2000000.0,
+          1600000.0,
+          1403508.7719298245
+        ],
+        "restored": true,
+        "error": null
+      }
+    },
+    "synth_transition": {
+      "phase": "idle",
+      "requested_at": null,
+      "playing_at": null,
+      "stop_requested_at": null,
+      "stopped_at": null,
+      "session": null,
+      "played": 0,
+      "prepare_timeout": 120.0,
+      "hold_seconds": 5,
+      "stop_timeout": 10.0,
+      "hold_completed": false,
+      "complete": false,
+      "voice_observations": 0,
+      "voice_min": null,
+      "voice_max": null
+    },
+    "synth_remote_voice_peak": 0
+  },
+  "audio_phases": [
+    {
+      "stage": "radio_a0_playing_confirmed",
+      "elapsed": 7.773710570065305,
+      "applied_configuration": {
+        "bits": 8,
+        "rate": 2000000,
+        "channels": 1
+      },
+      "requested_voices": null,
+      "wav_active": true,
+      "radio_a0": true,
+      "radio_status": "US \u00b7 RF 710 \u00b7 alias 710 kHz \u00b7 RADIO 40 kHz \u00b7 125092 muestras",
+      "samples": 9299880,
+      "exposed": true,
+      "synth_transition": {
+        "phase": "idle",
+        "requested_at": null,
+        "playing_at": null,
+        "stop_requested_at": null,
+        "stopped_at": null,
+        "session": null,
+        "played": 0,
+        "prepare_timeout": 120.0,
+        "hold_seconds": 5,
+        "stop_timeout": 10.0,
+        "hold_completed": false,
+        "complete": false,
+        "voice_observations": 0,
+        "voice_min": null,
+        "voice_max": null
+      },
+      "synth_preparation": {
+        "request_pending": false,
+        "task_present": false,
+        "task_done": null,
+        "active": false,
+        "requested_rate": null,
+        "active_rate": null,
+        "synth_process_created": false
+      },
+      "synth_source": null
+    },
+    {
+      "stage": "before_close",
+      "elapsed": 25.551366538973525,
+      "applied_configuration": {
+        "bits": 8,
+        "rate": 2000000,
+        "channels": 1
+      },
+      "requested_voices": null,
+      "wav_active": true,
+      "radio_a0": false,
+      "radio_status": "US \u00b7 RF 710 \u00b7 alias 710 kHz \u00b7 RADIO 40 kHz \u00b7 166006 muestras",
+      "samples": 8662448,
+      "exposed": true,
+      "synth_transition": {
+        "phase": "idle",
+        "requested_at": null,
+        "playing_at": null,
+        "stop_requested_at": null,
+        "stopped_at": null,
+        "session": null,
+        "played": 0,
+        "prepare_timeout": 120.0,
+        "hold_seconds": 5,
+        "stop_timeout": 10.0,
+        "hold_completed": false,
+        "complete": false,
+        "voice_observations": 0,
+        "voice_min": null,
+        "voice_max": null
+      },
+      "synth_preparation": {
+        "request_pending": false,
+        "task_present": false,
+        "task_done": null,
+        "active": false,
+        "requested_rate": null,
+        "active_rate": null,
+        "synth_process_created": false
+      },
+      "synth_source": null
+    }
+  ],
+  "exposure": {
+    "periodic_samples": 5,
+    "exposed_fraction": 1.0,
+    "exposure_sufficient": true,
+    "note": "Exposure only; no visible FPS or analog acceptance inferred."
+  },
+  "metrics": {
+    "profile": [
+      8,
+      2000000,
+      80,
+      3488,
+      1
+    ],
+    "node_budget_ticks": 279040,
+    "epoch_count": 2,
+    "all": {
+      "frames": 47952,
+      "samples": 41814144,
+      "empty_status_frames": 592,
+      "send_nodes": 11986,
+      "mean_send_margin": 0.027944348861420165,
+      "mcu_queue_peak": 11,
+      "min_slack_ticks": 45644,
+      "sampled_queue_max": 10,
+      "send_ticks_max": 633511,
+      "send_over_budget_nodes": 5126,
+      "headroom_pass": false
+    },
+    "radio_playing": {
+      "frames": 32046,
+      "samples": 27944112,
+      "empty_status_frames": 507,
+      "send_nodes": 8011,
+      "mean_send_margin": 0.010894398338036404,
+      "mcu_queue_peak": 11,
+      "min_slack_ticks": 45644,
+      "sampled_queue_max": 10,
+      "send_ticks_max": 633511,
+      "send_over_budget_nodes": 3667,
+      "headroom_pass": false
+    },
+    "phases": {
+      "playing": {
+        "frames": 32031,
+        "samples": 27931032,
+        "empty_status_frames": 507,
+        "send_nodes": 8008,
+        "mean_send_margin": 0.01088470821752785,
+        "mcu_queue_peak": 11,
+        "min_slack_ticks": 45644,
+        "sampled_queue_max": 10,
+        "send_ticks_max": 633511,
+        "send_over_budget_nodes": 3665,
+        "headroom_pass": false
+      },
+      "preparing": {
+        "frames": 4324,
+        "samples": 3770528,
+        "empty_status_frames": 59,
+        "send_nodes": 1081,
+        "mean_send_margin": 0.039596844924636554,
+        "mcu_queue_peak": 10,
+        "min_slack_ticks": 51932,
+        "sampled_queue_max": 9,
+        "send_ticks_max": 581583,
+        "send_over_budget_nodes": 432,
+        "headroom_pass": false
+      },
+      "starting": {
+        "frames": 27,
+        "samples": 23544,
+        "empty_status_frames": 2,
+        "send_nodes": 7,
+        "mean_send_margin": -0.12043178653342079,
+        "mcu_queue_peak": 10,
+        "min_slack_ticks": 51932,
+        "sampled_queue_max": 9,
+        "send_ticks_max": 416376,
+        "send_over_budget_nodes": 4,
+        "headroom_pass": false
+      },
+      "stopped": {
+        "frames": 11388,
+        "samples": 9930336,
+        "empty_status_frames": 24,
+        "send_nodes": 2846,
+        "mean_send_margin": 0.0712888068800892,
+        "mcu_queue_peak": 11,
+        "min_slack_ticks": 45644,
+        "sampled_queue_max": 3,
+        "send_ticks_max": 459070,
+        "send_over_budget_nodes": 1007,
+        "headroom_pass": false
+      },
+      "stopping": {
+        "frames": 182,
+        "samples": 158704,
+        "empty_status_frames": 0,
+        "send_nodes": 44,
+        "mean_send_margin": 0.06652524564741458,
+        "mcu_queue_peak": 11,
+        "min_slack_ticks": 45644,
+        "sampled_queue_max": 2,
+        "send_ticks_max": 286341,
+        "send_over_budget_nodes": 18,
+        "headroom_pass": false
+      }
+    },
+    "phase_events": [
+      {
+        "kind": "phase",
+        "phase": "stopped",
+        "previous": "acquisition",
+        "last_observed_rf": null
+      },
+      {
+        "kind": "first_rf_in_phase",
+        "phase": "stopped",
+        "snapshot": {
+          "epoch": "122",
+          "node": 0,
+          "index": 0,
+          "queue": 0,
+          "queue_peak": 0,
+          "slack_min_ticks": 4294967295
+        }
+      },
+      {
+        "kind": "cumulative_peak",
+        "phase": "stopped",
+        "previous_peak": null,
+        "snapshot": {
+          "epoch": "122",
+          "node": 0,
+          "index": 0,
+          "queue": 0,
+          "queue_peak": 0,
+          "slack_min_ticks": 4294967295,
+          "copy_max_ticks": 0,
+          "poll_max_ticks": 58,
+          "previous_node_send_ticks": 0,
+          "previous_batch_prepare_us": 104,
+          "previous_batch_check_us": 58,
+          "previous_batch_origin": "unknown"
+        },
+        "host_observed_at": 1038690.768815662,
+        "recent_chunks": []
+      },
+      {
+        "kind": "cumulative_peak",
+        "phase": "stopped",
+        "previous_peak": 0,
+        "snapshot": {
+          "epoch": "122",
+          "node": 0,
+          "index": 0,
+          "queue": 1,
+          "queue_peak": 1,
+          "slack_min_ticks": 170387,
+          "copy_max_ticks": 38343,
+          "poll_max_ticks": 175940,
+          "previous_node_send_ticks": 0,
+          "previous_batch_prepare_us": 105,
+          "previous_batch_check_us": 59,
+          "previous_batch_origin": "same_epoch_profile"
+        },
+        "host_observed_at": 1038690.771183441,
+        "recent_chunks": []
+      },
+      {
+        "kind": "cumulative_peak",
+        "phase": "stopped",
+        "previous_peak": 1,
+        "snapshot": {
+          "epoch": "122",
+          "node": 2,
+          "index": 6976,
+          "queue": 1,
+          "queue_peak": 2,
+          "slack_min_ticks": 65183,
+          "copy_max_ticks": 38352,
+          "poll_max_ticks": 207979,
+          "previous_node_send_ticks": 242260,
+          "previous_batch_prepare_us": 118,
+          "previous_batch_check_us": 58,
+          "previous_batch_origin": "same_epoch_profile"
+        },
+        "host_observed_at": 1038690.776304064,
+        "recent_chunks": []
+      },
+      {
+        "kind": "phase",
+        "phase": "preparing",
+        "previous": "stopped",
+        "last_observed_rf": {
+          "epoch": "122",
+          "node": 2318,
+          "index": 8087800,
+          "queue": 1,
+          "queue_peak": 2,
+          "slack_min_ticks": 65177
+        }
+      },
+      {
+        "kind": "first_rf_in_phase",
+        "phase": "preparing",
+        "snapshot": {
+          "epoch": "122",
+          "node": 0,
+          "index": 0,
+          "queue": 2,
+          "queue_peak": 2,
+          "slack_min_ticks": 65177
+        }
+      },
+      {
+        "kind": "cumulative_peak",
+        "phase": "preparing",
+        "previous_peak": 2,
+        "snapshot": {
+          "epoch": "122",
+          "node": 2319,
+          "index": 8088672,
+          "queue": 2,
+          "queue_peak": 3,
+          "slack_min_ticks": 65177,
+          "copy_max_ticks": 39671,
+          "poll_max_ticks": 213222,
+          "previous_node_send_ticks": 415507,
+          "previous_batch_prepare_us": 106,
+          "previous_batch_check_us": 58,
+          "previous_batch_origin": "same_epoch_profile"
+        },
+        "host_observed_at": 1038694.821974589,
+        "recent_chunks": []
+      },
+      {
+        "kind": "cumulative_peak",
+        "phase": "preparing",
+        "previous_peak": 3,
+        "snapshot": {
+          "epoch": "122",
+          "node": 2620,
+          "index": 9138560,
+          "queue": 3,
+          "queue_peak": 4,
+          "slack_min_ticks": 64783,
+          "copy_max_ticks": 39671,
+          "poll_max_ticks": 218161,
+          "previous_node_send_ticks": 549749,
+          "previous_batch_prepare_us": 109,
+          "previous_batch_check_us": 64,
+          "previous_batch_origin": "same_epoch_profile"
+        },
+        "host_observed_at": 1038695.349733282,
+        "recent_chunks": [
+          {
+            "sent_at": 1038695.337207717,
+            "phase": "preparing",
+            "request_id": 2973476812
+          },
+          {
+            "sent_at": 1038695.337359871,
+            "phase": "preparing",
+            "request_id": 2973476813
+          },
+          {
+            "sent_at": 1038695.33747745,
+            "phase": "preparing",
+            "request_id": 2973476814
+          },
+          {
+            "sent_at": 1038695.337598498,
+            "phase": "preparing",
+            "request_id": 2973476815
+          },
+          {
+            "sent_at": 1038695.337710834,
+            "phase": "preparing",
+            "request_id": 2973476816
+          },
+          {
+            "sent_at": 1038695.337793184,
+            "phase": "preparing",
+            "request_id": 2973476817
+          },
+          {
+            "sent_at": 1038695.337867519,
+            "phase": "preparing",
+            "request_id": 2973476818
+          },
+          {
+            "sent_at": 1038695.344911769,
+            "phase": "preparing",
+            "request_id": 2973476819
+          }
+        ]
+      },
+      {
+        "kind": "cumulative_peak",
+        "phase": "preparing",
+        "previous_peak": 4,
+        "snapshot": {
+          "epoch": "122",
+          "node": 2625,
+          "index": 9156000,
+          "queue": 4,
+          "queue_peak": 5,
+          "slack_min_ticks": 64783,
+          "copy_max_ticks": 39685,
+          "poll_max_ticks": 218161,
+          "previous_node_send_ticks": 285994,
+          "previous_batch_prepare_us": 117,
+          "previous_batch_check_us": 58,
+          "previous_batch_origin": "same_epoch_profile"
+        },
+        "host_observed_at": 1038695.35836941,
+        "recent_chunks": [
+          {
+            "sent_at": 1038695.33747745,
+            "phase": "preparing",
+            "request_id": 2973476814
+          },
+          {
+            "sent_at": 1038695.337598498,
+            "phase": "preparing",
+            "request_id": 2973476815
+          },
+          {
+            "sent_at": 1038695.337710834,
+            "phase": "preparing",
+            "request_id": 2973476816
+          },
+          {
+            "sent_at": 1038695.337793184,
+            "phase": "preparing",
+            "request_id": 2973476817
+          },
+          {
+            "sent_at": 1038695.337867519,
+            "phase": "preparing",
+            "request_id": 2973476818
+          },
+          {
+            "sent_at": 1038695.344911769,
+            "phase": "preparing",
+            "request_id": 2973476819
+          },
+          {
+            "sent_at": 1038695.350888014,
+            "phase": "preparing",
+            "request_id": 2973476820
+          },
+          {
+            "sent_at": 1038695.357192329,
+            "phase": "preparing",
+            "request_id": 2973476821
+          }
+        ]
+      },
+      {
+        "kind": "cumulative_peak",
+        "phase": "preparing",
+        "previous_peak": 5,
+        "snapshot": {
+          "epoch": "122",
+          "node": 2637,
+          "index": 9197856,
+          "queue": 5,
+          "queue_peak": 6,
+          "slack_min_ticks": 64783,
+          "copy_max_ticks": 39685,
+          "poll_max_ticks": 218161,
+          "previous_node_send_ticks": 405685,
+          "previous_batch_prepare_us": 106,
+          "previous_batch_check_us": 64,
+          "previous_batch_origin": "same_epoch_profile"
+        },
+        "host_observed_at": 1038695.382489204,
+        "recent_chunks": [
+          {
+            "sent_at": 1038695.337867519,
+            "phase": "preparing",
+            "request_id": 2973476818
+          },
+          {
+            "sent_at": 1038695.344911769,
+            "phase": "preparing",
+            "request_id": 2973476819
+          },
+          {
+            "sent_at": 1038695.350888014,
+            "phase": "preparing",
+            "request_id": 2973476820
+          },
+          {
+            "sent_at": 1038695.357192329,
+            "phase": "preparing",
+            "request_id": 2973476821
+          },
+          {
+            "sent_at": 1038695.363195692,
+            "phase": "preparing",
+            "request_id": 2973476822
+          },
+          {
+            "sent_at": 1038695.368951432,
+            "phase": "preparing",
+            "request_id": 2973476823
+          },
+          {
+            "sent_at": 1038695.374306156,
+            "phase": "preparing",
+            "request_id": 2973476824
+          },
+          {
+            "sent_at": 1038695.381751458,
+            "phase": "preparing",
+            "request_id": 2973476825
+          }
+        ]
+      },
+      {
+        "kind": "cumulative_peak",
+        "phase": "preparing",
+        "previous_peak": 6,
+        "snapshot": {
+          "epoch": "122",
+          "node": 2651,
+          "index": 9246688,
+          "queue": 6,
+          "queue_peak": 7,
+          "slack_min_ticks": 64783,
+          "copy_max_ticks": 39685,
+          "poll_max_ticks": 218161,
+          "previous_node_send_ticks": 404986,
+          "previous_batch_prepare_us": 107,
+          "previous_batch_check_us": 58,
+          "previous_batch_origin": "same_epoch_profile"
+        },
+        "host_observed_at": 1038695.411376883,
+        "recent_chunks": [
+          {
+            "sent_at": 1038695.357192329,
+            "phase": "preparing",
+            "request_id": 2973476821
+          },
+          {
+            "sent_at": 1038695.363195692,
+            "phase": "preparing",
+            "request_id": 2973476822
+          },
+          {
+            "sent_at": 1038695.368951432,
+            "phase": "preparing",
+            "request_id": 2973476823
+          },
+          {
+            "sent_at": 1038695.374306156,
+            "phase": "preparing",
+            "request_id": 2973476824
+          },
+          {
+            "sent_at": 1038695.381751458,
+            "phase": "preparing",
+            "request_id": 2973476825
+          },
+          {
+            "sent_at": 1038695.38820445,
+            "phase": "preparing",
+            "request_id": 2973476826
+          },
+          {
+            "sent_at": 1038695.393527199,
+            "phase": "preparing",
+            "request_id": 2973476827
+          },
+          {
+            "sent_at": 1038695.399654657,
+            "phase": "preparing",
+            "request_id": 2973476828
+          }
+        ]
+      },
+      {
+        "kind": "cumulative_peak",
+        "phase": "preparing",
+        "previous_peak": 7,
+        "snapshot": {
+          "epoch": "122",
+          "node": 0,
+          "index": 0,
+          "queue": 8,
+          "queue_peak": 8,
+          "slack_min_ticks": 64783,
+          "copy_max_ticks": 39685,
+          "poll_max_ticks": 220795,
+          "previous_node_send_ticks": 402166,
+          "previous_batch_prepare_us": 109,
+          "previous_batch_check_us": 58,
+          "previous_batch_origin": "same_epoch_profile"
+        },
+        "host_observed_at": 1038695.465524352,
+        "recent_chunks": [
+          {
+            "sent_at": 1038695.442263816,
+            "phase": "preparing",
+            "request_id": 2973476832
+          },
+          {
+            "sent_at": 1038695.446842502,
+            "phase": "preparing",
+            "request_id": 2973476833
+          },
+          {
+            "sent_at": 1038695.450343422,
+            "phase": "preparing",
+            "request_id": 2973476834
+          },
+          {
+            "sent_at": 1038695.454504609,
+            "phase": "preparing",
+            "request_id": 2973476835
+          },
+          {
+            "sent_at": 1038695.456546713,
+            "phase": "preparing",
+            "request_id": 2973476836
+          },
+          {
+            "sent_at": 1038695.458018343,
+            "phase": "preparing",
+            "request_id": 2973476837
+          },
+          {
+            "sent_at": 1038695.4605668,
+            "phase": "preparing",
+            "request_id": 2973476838
+          },
+          {
+            "sent_at": 1038695.464677464,
+            "phase": "preparing",
+            "request_id": 2973476839
+          }
+        ]
+      },
+      {
+        "kind": "cumulative_peak",
+        "phase": "preparing",
+        "previous_peak": 8,
+        "snapshot": {
+          "epoch": "122",
+          "node": 2684,
+          "index": 9361792,
+          "queue": 8,
+          "queue_peak": 9,
+          "slack_min_ticks": 64783,
+          "copy_max_ticks": 39685,
+          "poll_max_ticks": 220795,
+          "previous_node_send_ticks": 281883,
+          "previous_batch_prepare_us": 112,
+          "previous_batch_check_us": 58,
+          "previous_batch_origin": "same_epoch_profile"
+        },
+        "host_observed_at": 1038695.470624732,
+        "recent_chunks": [
+          {
+            "sent_at": 1038695.442263816,
+            "phase": "preparing",
+            "request_id": 2973476832
+          },
+          {
+            "sent_at": 1038695.446842502,
+            "phase": "preparing",
+            "request_id": 2973476833
+          },
+          {
+            "sent_at": 1038695.450343422,
+            "phase": "preparing",
+            "request_id": 2973476834
+          },
+          {
+            "sent_at": 1038695.454504609,
+            "phase": "preparing",
+            "request_id": 2973476835
+          },
+          {
+            "sent_at": 1038695.456546713,
+            "phase": "preparing",
+            "request_id": 2973476836
+          },
+          {
+            "sent_at": 1038695.458018343,
+            "phase": "preparing",
+            "request_id": 2973476837
+          },
+          {
+            "sent_at": 1038695.4605668,
+            "phase": "preparing",
+            "request_id": 2973476838
+          },
+          {
+            "sent_at": 1038695.464677464,
+            "phase": "preparing",
+            "request_id": 2973476839
+          }
+        ]
+      },
+      {
+        "kind": "phase",
+        "phase": "starting",
+        "previous": "preparing",
+        "last_observed_rf": {
+          "epoch": "122",
+          "node": 2688,
+          "index": 9377488,
+          "queue": 8,
+          "queue_peak": 9,
+          "slack_min_ticks": 64783
+        }
+      },
+      {
+        "kind": "first_rf_in_phase",
+        "phase": "starting",
+        "snapshot": {
+          "epoch": "122",
+          "node": 2688,
+          "index": 9378360,
+          "queue": 8,
+          "queue_peak": 9,
+          "slack_min_ticks": 64783
+        }
+      },
+      {
+        "kind": "phase",
+        "phase": "playing",
+        "previous": "starting",
+        "last_observed_rf": {
+          "epoch": "122",
+          "node": 2690,
+          "index": 9385336,
+          "queue": 8,
+          "queue_peak": 9,
+          "slack_min_ticks": 64783
+        }
+      },
+      {
+        "kind": "first_rf_in_phase",
+        "phase": "playing",
+        "snapshot": {
+          "epoch": "122",
+          "node": 2691,
+          "index": 9386208,
+          "queue": 8,
+          "queue_peak": 9,
+          "slack_min_ticks": 64783
+        }
+      },
+      {
+        "kind": "cumulative_peak",
+        "phase": "playing",
+        "previous_peak": 9,
+        "snapshot": {
+          "epoch": "122",
+          "node": 2693,
+          "index": 9393184,
+          "queue": 9,
+          "queue_peak": 10,
+          "slack_min_ticks": 64783,
+          "copy_max_ticks": 39685,
+          "poll_max_ticks": 220795,
+          "previous_node_send_ticks": 282430,
+          "previous_batch_prepare_us": 112,
+          "previous_batch_check_us": 58,
+          "previous_batch_origin": "same_epoch_profile"
+        },
+        "host_observed_at": 1038695.487619984,
+        "recent_chunks": [
+          {
+            "sent_at": 1038695.446842502,
+            "phase": "preparing",
+            "request_id": 2973476833
+          },
+          {
+            "sent_at": 1038695.450343422,
+            "phase": "preparing",
+            "request_id": 2973476834
+          },
+          {
+            "sent_at": 1038695.454504609,
+            "phase": "preparing",
+            "request_id": 2973476835
+          },
+          {
+            "sent_at": 1038695.456546713,
+            "phase": "preparing",
+            "request_id": 2973476836
+          },
+          {
+            "sent_at": 1038695.458018343,
+            "phase": "preparing",
+            "request_id": 2973476837
+          },
+          {
+            "sent_at": 1038695.4605668,
+            "phase": "preparing",
+            "request_id": 2973476838
+          },
+          {
+            "sent_at": 1038695.464677464,
+            "phase": "preparing",
+            "request_id": 2973476839
+          },
+          {
+            "sent_at": 1038695.471465517,
+            "phase": "preparing",
+            "request_id": 2973476840
+          }
+        ]
+      },
+      {
+        "kind": "phase",
+        "phase": "stopping",
+        "previous": "playing",
+        "last_observed_rf": {
+          "epoch": "122",
+          "node": 5590,
+          "index": 19498792,
+          "queue": 2,
+          "queue_peak": 10,
+          "slack_min_ticks": 54648
+        }
+      },
+      {
+        "kind": "first_rf_in_phase",
+        "phase": "stopping",
+        "snapshot": {
+          "epoch": "122",
+          "node": 5590,
+          "index": 19499664,
+          "queue": 2,
+          "queue_peak": 10,
+          "slack_min_ticks": 54648
+        }
+      },
+      {
+        "kind": "phase",
+        "phase": "stopped",
+        "previous": "stopping",
+        "last_observed_rf": {
+          "epoch": "122",
+          "node": 5592,
+          "index": 19507512,
+          "queue": 2,
+          "queue_peak": 10,
+          "slack_min_ticks": 54648
+        }
+      },
+      {
+        "kind": "phase",
+        "phase": "preparing",
+        "previous": "stopped",
+        "last_observed_rf": {
+          "epoch": "122",
+          "node": 5672,
+          "index": 19786552,
+          "queue": 1,
+          "queue_peak": 10,
+          "slack_min_ticks": 54648
+        }
+      },
+      {
+        "kind": "phase",
+        "phase": "starting",
+        "previous": "preparing",
+        "last_observed_rf": {
+          "epoch": "122",
+          "node": 6023,
+          "index": 21010840,
+          "queue": 7,
+          "queue_peak": 10,
+          "slack_min_ticks": 54648
+        }
+      },
+      {
+        "kind": "phase",
+        "phase": "playing",
+        "previous": "starting",
+        "last_observed_rf": {
+          "epoch": "122",
+          "node": 6025,
+          "index": 21017816,
+          "queue": 7,
+          "queue_peak": 10,
+          "slack_min_ticks": 54648
+        }
+      },
+      {
+        "kind": "phase",
+        "phase": "stopping",
+        "previous": "playing",
+        "last_observed_rf": {
+          "epoch": "122",
+          "node": 9188,
+          "index": 32049488,
+          "queue": 2,
+          "queue_peak": 10,
+          "slack_min_ticks": 52307
+        }
+      },
+      {
+        "kind": "phase",
+        "phase": "playing",
+        "previous": "stopping",
+        "last_observed_rf": {
+          "epoch": "122",
+          "node": 9189,
+          "index": 32053848,
+          "queue": 2,
+          "queue_peak": 10,
+          "slack_min_ticks": 52307
+        }
+      },
+      {
+        "kind": "phase",
+        "phase": "stopped",
+        "previous": "playing",
+        "last_observed_rf": {
+          "epoch": "122",
+          "node": 9192,
+          "index": 32064312,
+          "queue": 2,
+          "queue_peak": 10,
+          "slack_min_ticks": 52307
+        }
+      },
+      {
+        "kind": "first_rf_in_phase",
+        "phase": "stopped",
+        "snapshot": {
+          "epoch": "128",
+          "node": 0,
+          "index": 0,
+          "queue": 1,
+          "queue_peak": 1,
+          "slack_min_ticks": 169140
+        }
+      },
+      {
+        "kind": "cumulative_peak",
+        "phase": "stopped",
+        "previous_peak": null,
+        "snapshot": {
+          "epoch": "128",
+          "node": 0,
+          "index": 0,
+          "queue": 1,
+          "queue_peak": 1,
+          "slack_min_ticks": 169140,
+          "copy_max_ticks": 38345,
+          "poll_max_ticks": 175910,
+          "previous_node_send_ticks": 0,
+          "previous_batch_prepare_us": 108,
+          "previous_batch_check_us": 59,
+          "previous_batch_origin": "unknown"
+        },
+        "host_observed_at": 1038708.799544034,
+        "recent_chunks": [
+          {
+            "sent_at": 1038706.728349465,
+            "phase": "playing",
+            "request_id": 2973477882
+          },
+          {
+            "sent_at": 1038706.737425838,
+            "phase": "playing",
+            "request_id": 2973477883
+          },
+          {
+            "sent_at": 1038706.743920517,
+            "phase": "playing",
+            "request_id": 2973477884
+          },
+          {
+            "sent_at": 1038706.797535847,
+            "phase": "playing",
+            "request_id": 2973477886
+          },
+          {
+            "sent_at": 1038706.797629961,
+            "phase": "playing",
+            "request_id": 2973477887
+          },
+          {
+            "sent_at": 1038706.797704785,
+            "phase": "playing",
+            "request_id": 2973477888
+          },
+          {
+            "sent_at": 1038706.797770746,
+            "phase": "playing",
+            "request_id": 2973477889
+          },
+          {
+            "sent_at": 1038706.806780285,
+            "phase": "playing",
+            "request_id": 2973477890
+          }
+        ]
+      },
+      {
+        "kind": "cumulative_peak",
+        "phase": "stopped",
+        "previous_peak": 1,
+        "snapshot": {
+          "epoch": "128",
+          "node": 1,
+          "index": 3488,
+          "queue": 1,
+          "queue_peak": 2,
+          "slack_min_ticks": 169140,
+          "copy_max_ticks": 38345,
+          "poll_max_ticks": 208002,
+          "previous_node_send_ticks": 241418,
+          "previous_batch_prepare_us": 118,
+          "previous_batch_check_us": 64,
+          "previous_batch_origin": "same_epoch_profile"
+        },
+        "host_observed_at": 1038708.801460942,
+        "recent_chunks": [
+          {
+            "sent_at": 1038706.728349465,
+            "phase": "playing",
+            "request_id": 2973477882
+          },
+          {
+            "sent_at": 1038706.737425838,
+            "phase": "playing",
+            "request_id": 2973477883
+          },
+          {
+            "sent_at": 1038706.743920517,
+            "phase": "playing",
+            "request_id": 2973477884
+          },
+          {
+            "sent_at": 1038706.797535847,
+            "phase": "playing",
+            "request_id": 2973477886
+          },
+          {
+            "sent_at": 1038706.797629961,
+            "phase": "playing",
+            "request_id": 2973477887
+          },
+          {
+            "sent_at": 1038706.797704785,
+            "phase": "playing",
+            "request_id": 2973477888
+          },
+          {
+            "sent_at": 1038706.797770746,
+            "phase": "playing",
+            "request_id": 2973477889
+          },
+          {
+            "sent_at": 1038706.806780285,
+            "phase": "playing",
+            "request_id": 2973477890
+          }
+        ]
+      },
+      {
+        "kind": "phase",
+        "phase": "preparing",
+        "previous": "stopped",
+        "last_observed_rf": {
+          "epoch": "128",
+          "node": 116,
+          "index": 406352,
+          "queue": 1,
+          "queue_peak": 2,
+          "slack_min_ticks": 65081
+        }
+      },
+      {
+        "kind": "first_rf_in_phase",
+        "phase": "preparing",
+        "snapshot": {
+          "epoch": "128",
+          "node": 116,
+          "index": 407224,
+          "queue": 1,
+          "queue_peak": 2,
+          "slack_min_ticks": 65081
+        }
+      },
+      {
+        "kind": "cumulative_peak",
+        "phase": "preparing",
+        "previous_peak": 2,
+        "snapshot": {
+          "epoch": "128",
+          "node": 118,
+          "index": 411584,
+          "queue": 2,
+          "queue_peak": 3,
+          "slack_min_ticks": 65081,
+          "copy_max_ticks": 39501,
+          "poll_max_ticks": 210077,
+          "previous_node_send_ticks": 307247,
+          "previous_batch_prepare_us": 112,
+          "previous_batch_check_us": 110,
+          "previous_batch_origin": "same_epoch_profile"
+        },
+        "host_observed_at": 1038709.009573762,
+        "recent_chunks": [
+          {
+            "sent_at": 1038706.728349465,
+            "phase": "playing",
+            "request_id": 2973477882
+          },
+          {
+            "sent_at": 1038706.737425838,
+            "phase": "playing",
+            "request_id": 2973477883
+          },
+          {
+            "sent_at": 1038706.743920517,
+            "phase": "playing",
+            "request_id": 2973477884
+          },
+          {
+            "sent_at": 1038706.797535847,
+            "phase": "playing",
+            "request_id": 2973477886
+          },
+          {
+            "sent_at": 1038706.797629961,
+            "phase": "playing",
+            "request_id": 2973477887
+          },
+          {
+            "sent_at": 1038706.797704785,
+            "phase": "playing",
+            "request_id": 2973477888
+          },
+          {
+            "sent_at": 1038706.797770746,
+            "phase": "playing",
+            "request_id": 2973477889
+          },
+          {
+            "sent_at": 1038706.806780285,
+            "phase": "playing",
+            "request_id": 2973477890
+          }
+        ]
+      },
+      {
+        "kind": "cumulative_peak",
+        "phase": "preparing",
+        "previous_peak": 3,
+        "snapshot": {
+          "epoch": "128",
+          "node": 402,
+          "index": 1402176,
+          "queue": 3,
+          "queue_peak": 4,
+          "slack_min_ticks": 64998,
+          "copy_max_ticks": 39723,
+          "poll_max_ticks": 219236,
+          "previous_node_send_ticks": 581583,
+          "previous_batch_prepare_us": 109,
+          "previous_batch_check_us": 382,
+          "previous_batch_origin": "same_epoch_profile"
+        },
+        "host_observed_at": 1038709.506028126,
+        "recent_chunks": [
+          {
+            "sent_at": 1038709.494470295,
+            "phase": "preparing",
+            "request_id": 2973477906
+          },
+          {
+            "sent_at": 1038709.494540982,
+            "phase": "preparing",
+            "request_id": 2973477907
+          },
+          {
+            "sent_at": 1038709.494606122,
+            "phase": "preparing",
+            "request_id": 2973477908
+          },
+          {
+            "sent_at": 1038709.494670286,
+            "phase": "preparing",
+            "request_id": 2973477909
+          },
+          {
+            "sent_at": 1038709.494735426,
+            "phase": "preparing",
+            "request_id": 2973477910
+          },
+          {
+            "sent_at": 1038709.494798253,
+            "phase": "preparing",
+            "request_id": 2973477911
+          },
+          {
+            "sent_at": 1038709.494861322,
+            "phase": "preparing",
+            "request_id": 2973477912
+          },
+          {
+            "sent_at": 1038709.501746807,
+            "phase": "preparing",
+            "request_id": 2973477913
+          }
+        ]
+      },
+      {
+        "kind": "cumulative_peak",
+        "phase": "preparing",
+        "previous_peak": 4,
+        "snapshot": {
+          "epoch": "128",
+          "node": 407,
+          "index": 1419616,
+          "queue": 4,
+          "queue_peak": 5,
+          "slack_min_ticks": 64998,
+          "copy_max_ticks": 39723,
+          "poll_max_ticks": 219236,
+          "previous_node_send_ticks": 297339,
+          "previous_batch_prepare_us": 111,
+          "previous_batch_check_us": 58,
+          "previous_batch_origin": "same_epoch_profile"
+        },
+        "host_observed_at": 1038709.516834674,
+        "recent_chunks": [
+          {
+            "sent_at": 1038709.494606122,
+            "phase": "preparing",
+            "request_id": 2973477908
+          },
+          {
+            "sent_at": 1038709.494670286,
+            "phase": "preparing",
+            "request_id": 2973477909
+          },
+          {
+            "sent_at": 1038709.494735426,
+            "phase": "preparing",
+            "request_id": 2973477910
+          },
+          {
+            "sent_at": 1038709.494798253,
+            "phase": "preparing",
+            "request_id": 2973477911
+          },
+          {
+            "sent_at": 1038709.494861322,
+            "phase": "preparing",
+            "request_id": 2973477912
+          },
+          {
+            "sent_at": 1038709.501746807,
+            "phase": "preparing",
+            "request_id": 2973477913
+          },
+          {
+            "sent_at": 1038709.507815816,
+            "phase": "preparing",
+            "request_id": 2973477914
+          },
+          {
+            "sent_at": 1038709.514759584,
+            "phase": "preparing",
+            "request_id": 2973477915
+          }
+        ]
+      },
+      {
+        "kind": "cumulative_peak",
+        "phase": "preparing",
+        "previous_peak": 5,
+        "snapshot": {
+          "epoch": "128",
+          "node": 428,
+          "index": 1492864,
+          "queue": 5,
+          "queue_peak": 6,
+          "slack_min_ticks": 51932,
+          "copy_max_ticks": 39723,
+          "poll_max_ticks": 219236,
+          "previous_node_send_ticks": 405779,
+          "previous_batch_prepare_us": 109,
+          "previous_batch_check_us": 58,
+          "previous_batch_origin": "same_epoch_profile"
+        },
+        "host_observed_at": 1038709.554523275,
+        "recent_chunks": [
+          {
+            "sent_at": 1038709.507815816,
+            "phase": "preparing",
+            "request_id": 2973477914
+          },
+          {
+            "sent_at": 1038709.514759584,
+            "phase": "preparing",
+            "request_id": 2973477915
+          },
+          {
+            "sent_at": 1038709.533926014,
+            "phase": "preparing",
+            "request_id": 2973477916
+          },
+          {
+            "sent_at": 1038709.545202012,
+            "phase": "preparing",
+            "request_id": 2973477917
+          },
+          {
+            "sent_at": 1038709.547714788,
+            "phase": "preparing",
+            "request_id": 2973477918
+          },
+          {
+            "sent_at": 1038709.549946808,
+            "phase": "preparing",
+            "request_id": 2973477919
+          },
+          {
+            "sent_at": 1038709.551185519,
+            "phase": "preparing",
+            "request_id": 2973477920
+          },
+          {
+            "sent_at": 1038709.553140193,
+            "phase": "preparing",
+            "request_id": 2973477921
+          }
+        ]
+      },
+      {
+        "kind": "cumulative_peak",
+        "phase": "preparing",
+        "previous_peak": 6,
+        "snapshot": {
+          "epoch": "128",
+          "node": 431,
+          "index": 1503328,
+          "queue": 6,
+          "queue_peak": 7,
+          "slack_min_ticks": 51932,
+          "copy_max_ticks": 39723,
+          "poll_max_ticks": 219236,
+          "previous_node_send_ticks": 388775,
+          "previous_batch_prepare_us": 112,
+          "previous_batch_check_us": 58,
+          "previous_batch_origin": "same_epoch_profile"
+        },
+        "host_observed_at": 1038709.562457309,
+        "recent_chunks": [
+          {
+            "sent_at": 1038709.533926014,
+            "phase": "preparing",
+            "request_id": 2973477916
+          },
+          {
+            "sent_at": 1038709.545202012,
+            "phase": "preparing",
+            "request_id": 2973477917
+          },
+          {
+            "sent_at": 1038709.547714788,
+            "phase": "preparing",
+            "request_id": 2973477918
+          },
+          {
+            "sent_at": 1038709.549946808,
+            "phase": "preparing",
+            "request_id": 2973477919
+          },
+          {
+            "sent_at": 1038709.551185519,
+            "phase": "preparing",
+            "request_id": 2973477920
+          },
+          {
+            "sent_at": 1038709.553140193,
+            "phase": "preparing",
+            "request_id": 2973477921
+          },
+          {
+            "sent_at": 1038709.555612723,
+            "phase": "preparing",
+            "request_id": 2973477922
+          },
+          {
+            "sent_at": 1038709.561688868,
+            "phase": "preparing",
+            "request_id": 2973477923
+          }
+        ]
+      },
+      {
+        "kind": "cumulative_peak",
+        "phase": "preparing",
+        "previous_peak": 7,
+        "snapshot": {
+          "epoch": "128",
+          "node": 441,
+          "index": 1538208,
+          "queue": 7,
+          "queue_peak": 8,
+          "slack_min_ticks": 51932,
+          "copy_max_ticks": 39723,
+          "poll_max_ticks": 219236,
+          "previous_node_send_ticks": 404018,
+          "previous_batch_prepare_us": 107,
+          "previous_batch_check_us": 58,
+          "previous_batch_origin": "same_epoch_profile"
+        },
+        "host_observed_at": 1038709.579579049,
+        "recent_chunks": [
+          {
+            "sent_at": 1038709.549946808,
+            "phase": "preparing",
+            "request_id": 2973477919
+          },
+          {
+            "sent_at": 1038709.551185519,
+            "phase": "preparing",
+            "request_id": 2973477920
+          },
+          {
+            "sent_at": 1038709.553140193,
+            "phase": "preparing",
+            "request_id": 2973477921
+          },
+          {
+            "sent_at": 1038709.555612723,
+            "phase": "preparing",
+            "request_id": 2973477922
+          },
+          {
+            "sent_at": 1038709.561688868,
+            "phase": "preparing",
+            "request_id": 2973477923
+          },
+          {
+            "sent_at": 1038709.567735054,
+            "phase": "preparing",
+            "request_id": 2973477924
+          },
+          {
+            "sent_at": 1038709.57389736,
+            "phase": "preparing",
+            "request_id": 2973477925
+          },
+          {
+            "sent_at": 1038709.579317069,
+            "phase": "preparing",
+            "request_id": 2973477926
+          }
+        ]
+      },
+      {
+        "kind": "cumulative_peak",
+        "phase": "preparing",
+        "previous_peak": 8,
+        "snapshot": {
+          "epoch": "128",
+          "node": 457,
+          "index": 1594016,
+          "queue": 8,
+          "queue_peak": 9,
+          "slack_min_ticks": 51932,
+          "copy_max_ticks": 39723,
+          "poll_max_ticks": 219236,
+          "previous_node_send_ticks": 284271,
+          "previous_batch_prepare_us": 112,
+          "previous_batch_check_us": 58,
+          "previous_batch_origin": "same_epoch_profile"
+        },
+        "host_observed_at": 1038709.610408435,
+        "recent_chunks": [
+          {
+            "sent_at": 1038709.567735054,
+            "phase": "preparing",
+            "request_id": 2973477924
+          },
+          {
+            "sent_at": 1038709.57389736,
+            "phase": "preparing",
+            "request_id": 2973477925
+          },
+          {
+            "sent_at": 1038709.579317069,
+            "phase": "preparing",
+            "request_id": 2973477926
+          },
+          {
+            "sent_at": 1038709.585419834,
+            "phase": "preparing",
+            "request_id": 2973477927
+          },
+          {
+            "sent_at": 1038709.592102421,
+            "phase": "preparing",
+            "request_id": 2973477928
+          },
+          {
+            "sent_at": 1038709.598196504,
+            "phase": "preparing",
+            "request_id": 2973477929
+          },
+          {
+            "sent_at": 1038709.603386644,
+            "phase": "preparing",
+            "request_id": 2973477930
+          },
+          {
+            "sent_at": 1038709.609671103,
+            "phase": "preparing",
+            "request_id": 2973477931
+          }
+        ]
+      },
+      {
+        "kind": "cumulative_peak",
+        "phase": "preparing",
+        "previous_peak": 9,
+        "snapshot": {
+          "epoch": "128",
+          "node": 472,
+          "index": 1646336,
+          "queue": 9,
+          "queue_peak": 10,
+          "slack_min_ticks": 51932,
+          "copy_max_ticks": 39723,
+          "poll_max_ticks": 219236,
+          "previous_node_send_ticks": 415813,
+          "previous_batch_prepare_us": 107,
+          "previous_batch_check_us": 58,
+          "previous_batch_origin": "same_epoch_profile"
+        },
+        "host_observed_at": 1038709.638923695,
+        "recent_chunks": [
+          {
+            "sent_at": 1038709.579317069,
+            "phase": "preparing",
+            "request_id": 2973477926
+          },
+          {
+            "sent_at": 1038709.585419834,
+            "phase": "preparing",
+            "request_id": 2973477927
+          },
+          {
+            "sent_at": 1038709.592102421,
+            "phase": "preparing",
+            "request_id": 2973477928
+          },
+          {
+            "sent_at": 1038709.598196504,
+            "phase": "preparing",
+            "request_id": 2973477929
+          },
+          {
+            "sent_at": 1038709.603386644,
+            "phase": "preparing",
+            "request_id": 2973477930
+          },
+          {
+            "sent_at": 1038709.609671103,
+            "phase": "preparing",
+            "request_id": 2973477931
+          },
+          {
+            "sent_at": 1038709.619299178,
+            "phase": "preparing",
+            "request_id": 2973477932
+          },
+          {
+            "sent_at": 1038709.632180006,
+            "phase": "preparing",
+            "request_id": 2973477933
+          }
+        ]
+      },
+      {
+        "kind": "phase",
+        "phase": "starting",
+        "previous": "preparing",
+        "last_observed_rf": {
+          "epoch": "128",
+          "node": 476,
+          "index": 1662904,
+          "queue": 8,
+          "queue_peak": 10,
+          "slack_min_ticks": 51932
+        }
+      },
+      {
+        "kind": "first_rf_in_phase",
+        "phase": "starting",
+        "snapshot": {
+          "epoch": "128",
+          "node": 0,
+          "index": 0,
+          "queue": 9,
+          "queue_peak": 10,
+          "slack_min_ticks": 51932
+        }
+      },
+      {
+        "kind": "phase",
+        "phase": "playing",
+        "previous": "starting",
+        "last_observed_rf": {
+          "epoch": "128",
+          "node": 479,
+          "index": 1671624,
+          "queue": 8,
+          "queue_peak": 10,
+          "slack_min_ticks": 51932
+        }
+      },
+      {
+        "kind": "first_rf_in_phase",
+        "phase": "playing",
+        "snapshot": {
+          "epoch": "128",
+          "node": 479,
+          "index": 1672496,
+          "queue": 8,
+          "queue_peak": 10,
+          "slack_min_ticks": 51932
+        }
+      },
+      {
+        "kind": "cumulative_peak",
+        "phase": "playing",
+        "previous_peak": 10,
+        "snapshot": {
+          "epoch": "128",
+          "node": 681,
+          "index": 2375328,
+          "queue": 10,
+          "queue_peak": 11,
+          "slack_min_ticks": 51932,
+          "copy_max_ticks": 40017,
+          "poll_max_ticks": 223291,
+          "previous_node_send_ticks": 346968,
+          "previous_batch_prepare_us": 115,
+          "previous_batch_check_us": 58,
+          "previous_batch_origin": "same_epoch_profile"
+        },
+        "host_observed_at": 1038710.006104143,
+        "recent_chunks": [
+          {
+            "sent_at": 1038709.94159642,
+            "phase": "playing",
+            "request_id": 2973477961
+          },
+          {
+            "sent_at": 1038709.941683733,
+            "phase": "playing",
+            "request_id": 2973477962
+          },
+          {
+            "sent_at": 1038709.957306336,
+            "phase": "playing",
+            "request_id": 2973477963
+          },
+          {
+            "sent_at": 1038709.977056886,
+            "phase": "playing",
+            "request_id": 2973477964
+          },
+          {
+            "sent_at": 1038709.986546099,
+            "phase": "playing",
+            "request_id": 2973477965
+          },
+          {
+            "sent_at": 1038709.986701025,
+            "phase": "playing",
+            "request_id": 2973477966
+          },
+          {
+            "sent_at": 1038709.998482239,
+            "phase": "playing",
+            "request_id": 2973477967
+          },
+          {
+            "sent_at": 1038710.005746972,
+            "phase": "playing",
+            "request_id": 2973477968
+          }
+        ]
+      },
+      {
+        "kind": "phase",
+        "phase": "stopped",
+        "previous": "playing",
+        "last_observed_rf": {
+          "epoch": "128",
+          "node": 2421,
+          "index": 8447064,
+          "queue": 1,
+          "queue_peak": 11,
+          "slack_min_ticks": 45644
+        }
+      },
+      {
+        "kind": "phase",
+        "phase": "stopping",
+        "previous": "stopped",
+        "last_observed_rf": {
+          "epoch": "128",
+          "node": 2510,
+          "index": 8754880,
+          "queue": 1,
+          "queue_peak": 11,
+          "slack_min_ticks": 45644
+        }
+      },
+      {
+        "kind": "first_rf_in_phase",
+        "phase": "stopping",
+        "snapshot": {
+          "epoch": "128",
+          "node": 2510,
+          "index": 8755752,
+          "queue": 1,
+          "queue_peak": 11,
+          "slack_min_ticks": 45644
+        }
+      },
+      {
+        "kind": "phase",
+        "phase": "stopped",
+        "previous": "stopping",
+        "last_observed_rf": {
+          "epoch": "128",
+          "node": 2551,
+          "index": 8900504,
+          "queue": 1,
+          "queue_peak": 11,
+          "slack_min_ticks": 45644
+        }
+      }
+    ],
+    "phase_events_omitted": 0,
+    "slowest_node_observations": [
+      {
+        "epoch": "122",
+        "node": 4016,
+        "index": 14007808,
+        "queue": 2,
+        "queue_peak": 10,
+        "slack_min_ticks": 58138,
+        "copy_max_ticks": 40135,
+        "poll_max_ticks": 223340,
+        "previous_node_send_ticks": 633511,
+        "previous_batch_prepare_us": 114,
+        "previous_batch_check_us": 58,
+        "previous_batch_origin": "same_epoch_profile",
+        "phase": "playing"
+      },
+      {
+        "epoch": "122",
+        "node": 8439,
+        "index": 29435232,
+        "queue": 2,
+        "queue_peak": 10,
+        "slack_min_ticks": 52307,
+        "copy_max_ticks": 40174,
+        "poll_max_ticks": 227159,
+        "previous_node_send_ticks": 590290,
+        "previous_batch_prepare_us": 367,
+        "previous_batch_check_us": 127,
+        "previous_batch_origin": "same_epoch_profile",
+        "phase": "playing"
+      },
+      {
+        "epoch": "128",
+        "node": 402,
+        "index": 1402176,
+        "queue": 3,
+        "queue_peak": 4,
+        "slack_min_ticks": 64998,
+        "copy_max_ticks": 39723,
+        "poll_max_ticks": 219236,
+        "previous_node_send_ticks": 581583,
+        "previous_batch_prepare_us": 109,
+        "previous_batch_check_us": 382,
+        "previous_batch_origin": "same_epoch_profile",
+        "phase": "preparing"
+      },
+      {
+        "epoch": "128",
+        "node": 1760,
+        "index": 6138880,
+        "queue": 2,
+        "queue_peak": 11,
+        "slack_min_ticks": 45644,
+        "copy_max_ticks": 40087,
+        "poll_max_ticks": 223291,
+        "previous_node_send_ticks": 580619,
+        "previous_batch_prepare_us": 116,
+        "previous_batch_check_us": 377,
+        "previous_batch_origin": "same_epoch_profile",
+        "phase": "playing"
+      },
+      {
+        "epoch": "122",
+        "node": 4673,
+        "index": 16299424,
+        "queue": 3,
+        "queue_peak": 10,
+        "slack_min_ticks": 54648,
+        "copy_max_ticks": 40135,
+        "poll_max_ticks": 225196,
+        "previous_node_send_ticks": 576276,
+        "previous_batch_prepare_us": 368,
+        "previous_batch_check_us": 58,
+        "previous_batch_origin": "same_epoch_profile",
+        "phase": "playing"
+      },
+      {
+        "epoch": "122",
+        "node": 6763,
+        "index": 23589344,
+        "queue": 3,
+        "queue_peak": 10,
+        "slack_min_ticks": 54648,
+        "copy_max_ticks": 40135,
+        "poll_max_ticks": 225918,
+        "previous_node_send_ticks": 575687,
+        "previous_batch_prepare_us": 109,
+        "previous_batch_check_us": 58,
+        "previous_batch_origin": "same_epoch_profile",
+        "phase": "playing"
+      },
+      {
+        "epoch": "122",
+        "node": 6808,
+        "index": 23746304,
+        "queue": 3,
+        "queue_peak": 10,
+        "slack_min_ticks": 54648,
+        "copy_max_ticks": 40135,
+        "poll_max_ticks": 225918,
+        "previous_node_send_ticks": 575279,
+        "previous_batch_prepare_us": 109,
+        "previous_batch_check_us": 58,
+        "previous_batch_origin": "same_epoch_profile",
+        "phase": "playing"
+      },
+      {
+        "epoch": "122",
+        "node": 4495,
+        "index": 15678560,
+        "queue": 2,
+        "queue_peak": 10,
+        "slack_min_ticks": 54648,
+        "copy_max_ticks": 40135,
+        "poll_max_ticks": 225196,
+        "previous_node_send_ticks": 574838,
+        "previous_batch_prepare_us": 109,
+        "previous_batch_check_us": 58,
+        "previous_batch_origin": "same_epoch_profile",
+        "phase": "playing"
+      }
+    ],
+    "node_timing_note": "Eight largest previous-node sends, one observation per epoch/node start. Copy/poll are cumulative MCU maxima; prepare/check refer to previous physical batch. Same observation does not establish simultaneity or causality.",
+    "chunk_timing": {
+      "preparing": {
+        "count": 90,
+        "max_gap_ms": 8202.938001020811,
+        "gaps": {
+          "lt1ms": 21,
+          "1to3ms": 13,
+          "3to6ms": 20,
+          "6to12ms": 26,
+          "ge12ms": 9
+        }
+      },
+      "playing": {
+        "count": 1137,
+        "max_gap_ms": 2894.7870350675657,
+        "gaps": {
+          "lt1ms": 576,
+          "1to3ms": 8,
+          "3to6ms": 47,
+          "6to12ms": 190,
+          "ge12ms": 315
+        }
+      }
+    },
+    "physical_batch_mix": {
+      "acquisition:other+other": 12,
+      "acquisition:wav+other": 1,
+      "stopped:other+other": 6320,
+      "stopped:other+idle": 4,
+      "stopped:rf+rf": 6849,
+      "stopped:wav+rf": 14,
+      "stopped:rf+idle": 22,
+      "stopped:other+rf": 15,
+      "preparing:rf+rf": 2086,
+      "preparing:wav+rf": 93,
+      "preparing:rf+idle": 59,
+      "starting:rf+idle": 1,
+      "starting:rf+rf": 13,
+      "starting:wav+rf": 3,
+      "playing:rf+rf": 15129,
+      "playing:rf+idle": 498,
+      "playing:wav+rf": 1274,
+      "playing:wav+idle": 9,
+      "stopping:rf+rf": 90,
+      "stopping:wav+rf": 3,
+      "stopped:wav+idle": 2,
+      "stopped:wav+other": 2
+    },
+    "physical_batch_mix_omitted": 0,
+    "final_rf_followed_by_idle": {
+      "stopped": 22,
+      "preparing": 59,
+      "starting": 1,
+      "playing": 498
+    },
+    "wav_rf_max_consecutive_batches": {
+      "stopped": 7,
+      "preparing": 9,
+      "starting": 1,
+      "playing": 7,
+      "stopping": 1
+    },
+    "stop_roundtrips": [
+      {
+        "request_id": 2973477313,
+        "roundtrip_ms": 4.004125017672777,
+        "state": 0,
+        "reason": 0
+      },
+      {
+        "request_id": 2973477891,
+        "roundtrip_ms": 5.6824039202183485,
+        "state": 0,
+        "reason": 0
+      },
+      {
+        "request_id": 2973478222,
+        "roundtrip_ms": 33.39544706977904,
+        "state": 0,
+        "reason": 0
+      }
+    ],
+    "stop_pending_count": 0,
+    "stop_observations_omitted": 0,
+    "wav_chunk_timing": null,
+    "ordinary_timing_valid": true,
+    "performance_acceptance_eligible": true,
+    "spi_batch_timing": {
+      "histogram_upper_bounds_exclusive_us": [
+        5,
+        10,
+        20,
+        50,
+        100,
+        200,
+        500,
+        1000,
+        5000
+      ],
+      "groups": [
+        {
+          "observed_phase": "playing",
+          "previous_batch": "playing:rf+idle",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 498,
+            "total_us": 63295,
+            "min_us": 106,
+            "max_us": 366,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              462,
+              36,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 127.09839357429719
+          },
+          "check": {
+            "count": 498,
+            "total_us": 29707,
+            "min_us": 58,
+            "max_us": 316,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              495,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 59.65261044176707
+          }
+        },
+        {
+          "observed_phase": "playing",
+          "previous_batch": "playing:rf+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 15125,
+            "total_us": 2327909,
+            "min_us": 110,
+            "max_us": 416,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              14041,
+              1084,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 153.9113388429752
+          },
+          "check": {
+            "count": 15125,
+            "total_us": 1017633,
+            "min_us": 58,
+            "max_us": 389,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              14279,
+              534,
+              312,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 67.28152066115703
+          }
+        },
+        {
+          "observed_phase": "playing",
+          "previous_batch": "playing:wav+idle",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 9,
+            "total_us": 2115,
+            "min_us": 105,
+            "max_us": 492,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              6,
+              3,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 235.0
+          },
+          "check": {
+            "count": 9,
+            "total_us": 668,
+            "min_us": 58,
+            "max_us": 134,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              7,
+              2,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 74.22222222222223
+          }
+        },
+        {
+          "observed_phase": "playing",
+          "previous_batch": "playing:wav+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 1272,
+            "total_us": 193187,
+            "min_us": 108,
+            "max_us": 413,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1152,
+              120,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 151.87657232704402
+          },
+          "check": {
+            "count": 1272,
+            "total_us": 139434,
+            "min_us": 58,
+            "max_us": 389,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              680,
+              496,
+              96,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 109.61792452830188
+          }
+        },
+        {
+          "observed_phase": "playing",
+          "previous_batch": "starting:rf+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 3,
+            "total_us": 379,
+            "min_us": 111,
+            "max_us": 156,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              3,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 126.33333333333333
+          },
+          "check": {
+            "count": 3,
+            "total_us": 276,
+            "min_us": 90,
+            "max_us": 96,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              3,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 92.0
+          }
+        },
+        {
+          "observed_phase": "playing",
+          "previous_batch": "starting:wav+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 3,
+            "total_us": 679,
+            "min_us": 115,
+            "max_us": 411,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 226.33333333333334
+          },
+          "check": {
+            "count": 3,
+            "total_us": 174,
+            "min_us": 58,
+            "max_us": 58,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              3,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 58.0
+          }
+        },
+        {
+          "observed_phase": "playing",
+          "previous_batch": "stopping:rf+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 1,
+            "total_us": 111,
+            "min_us": 111,
+            "max_us": 111,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 111.0
+          },
+          "check": {
+            "count": 1,
+            "total_us": 377,
+            "min_us": 377,
+            "max_us": 377,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 377.0
+          }
+        },
+        {
+          "observed_phase": "playing",
+          "previous_batch": "stopping:wav+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 1,
+            "total_us": 154,
+            "min_us": 154,
+            "max_us": 154,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 154.0
+          },
+          "check": {
+            "count": 1,
+            "total_us": 58,
+            "min_us": 58,
+            "max_us": 58,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 58.0
+          }
+        },
+        {
+          "observed_phase": "preparing",
+          "previous_batch": "preparing:rf+idle",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 58,
+            "total_us": 6823,
+            "min_us": 106,
+            "max_us": 363,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              56,
+              2,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 117.63793103448276
+          },
+          "check": {
+            "count": 58,
+            "total_us": 3609,
+            "min_us": 58,
+            "max_us": 125,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              55,
+              3,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 62.224137931034484
+          }
+        },
+        {
+          "observed_phase": "preparing",
+          "previous_batch": "preparing:rf+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 2085,
+            "total_us": 317427,
+            "min_us": 110,
+            "max_us": 412,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1944,
+              141,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 152.2431654676259
+          },
+          "check": {
+            "count": 2085,
+            "total_us": 176629,
+            "min_us": 58,
+            "max_us": 382,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              1834,
+              63,
+              188,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 84.71414868105515
+          }
+        },
+        {
+          "observed_phase": "preparing",
+          "previous_batch": "preparing:wav+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 92,
+            "total_us": 15157,
+            "min_us": 108,
+            "max_us": 410,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              80,
+              12,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 164.75
+          },
+          "check": {
+            "count": 92,
+            "total_us": 8243,
+            "min_us": 58,
+            "max_us": 382,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              66,
+              21,
+              5,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 89.59782608695652
+          }
+        },
+        {
+          "observed_phase": "preparing",
+          "previous_batch": "stopped:other+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 1,
+            "total_us": 117,
+            "min_us": 117,
+            "max_us": 117,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 117.0
+          },
+          "check": {
+            "count": 1,
+            "total_us": 58,
+            "min_us": 58,
+            "max_us": 58,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 58.0
+          }
+        },
+        {
+          "observed_phase": "preparing",
+          "previous_batch": "stopped:rf+idle",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 1,
+            "total_us": 106,
+            "min_us": 106,
+            "max_us": 106,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 106.0
+          },
+          "check": {
+            "count": 1,
+            "total_us": 58,
+            "min_us": 58,
+            "max_us": 58,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 58.0
+          }
+        },
+        {
+          "observed_phase": "preparing",
+          "previous_batch": "stopped:rf+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 1,
+            "total_us": 111,
+            "min_us": 111,
+            "max_us": 111,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 111.0
+          },
+          "check": {
+            "count": 1,
+            "total_us": 58,
+            "min_us": 58,
+            "max_us": 58,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 58.0
+          }
+        },
+        {
+          "observed_phase": "starting",
+          "previous_batch": "preparing:rf+idle",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 1,
+            "total_us": 107,
+            "min_us": 107,
+            "max_us": 107,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 107.0
+          },
+          "check": {
+            "count": 1,
+            "total_us": 64,
+            "min_us": 64,
+            "max_us": 64,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 64.0
+          }
+        },
+        {
+          "observed_phase": "starting",
+          "previous_batch": "preparing:rf+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 1,
+            "total_us": 367,
+            "min_us": 367,
+            "max_us": 367,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 367.0
+          },
+          "check": {
+            "count": 1,
+            "total_us": 58,
+            "min_us": 58,
+            "max_us": 58,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 58.0
+          }
+        },
+        {
+          "observed_phase": "starting",
+          "previous_batch": "preparing:wav+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 1,
+            "total_us": 109,
+            "min_us": 109,
+            "max_us": 109,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 109.0
+          },
+          "check": {
+            "count": 1,
+            "total_us": 58,
+            "min_us": 58,
+            "max_us": 58,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 58.0
+          }
+        },
+        {
+          "observed_phase": "starting",
+          "previous_batch": "starting:rf+idle",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 1,
+            "total_us": 107,
+            "min_us": 107,
+            "max_us": 107,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 107.0
+          },
+          "check": {
+            "count": 1,
+            "total_us": 58,
+            "min_us": 58,
+            "max_us": 58,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 58.0
+          }
+        },
+        {
+          "observed_phase": "starting",
+          "previous_batch": "starting:rf+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 10,
+            "total_us": 1647,
+            "min_us": 111,
+            "max_us": 362,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              9,
+              1,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 164.7
+          },
+          "check": {
+            "count": 10,
+            "total_us": 586,
+            "min_us": 58,
+            "max_us": 64,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              10,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 58.6
+          }
+        },
+        {
+          "observed_phase": "stopped",
+          "previous_batch": "playing:rf+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 2,
+            "total_us": 230,
+            "min_us": 112,
+            "max_us": 118,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 115.0
+          },
+          "check": {
+            "count": 2,
+            "total_us": 137,
+            "min_us": 46,
+            "max_us": 91,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 68.5
+          }
+        },
+        {
+          "observed_phase": "stopped",
+          "previous_batch": "playing:wav+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 2,
+            "total_us": 307,
+            "min_us": 153,
+            "max_us": 154,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 153.5
+          },
+          "check": {
+            "count": 2,
+            "total_us": 104,
+            "min_us": 46,
+            "max_us": 58,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 52.0
+          }
+        },
+        {
+          "observed_phase": "stopped",
+          "previous_batch": "stopped:other+idle",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 2,
+            "total_us": 595,
+            "min_us": 105,
+            "max_us": 490,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 297.5
+          },
+          "check": {
+            "count": 2,
+            "total_us": 123,
+            "min_us": 59,
+            "max_us": 64,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 61.5
+          }
+        },
+        {
+          "observed_phase": "stopped",
+          "previous_batch": "stopped:other+other",
+          "previous_origin": "unknown",
+          "prepare": {
+            "count": 2,
+            "total_us": 212,
+            "min_us": 104,
+            "max_us": 108,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 106.0
+          },
+          "check": {
+            "count": 2,
+            "total_us": 117,
+            "min_us": 58,
+            "max_us": 59,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 58.5
+          }
+        },
+        {
+          "observed_phase": "stopped",
+          "previous_batch": "stopped:other+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 13,
+            "total_us": 2105,
+            "min_us": 111,
+            "max_us": 368,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              12,
+              1,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 161.92307692307693
+          },
+          "check": {
+            "count": 13,
+            "total_us": 1534,
+            "min_us": 58,
+            "max_us": 316,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              10,
+              0,
+              3,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 118.0
+          }
+        },
+        {
+          "observed_phase": "stopped",
+          "previous_batch": "stopped:rf+idle",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 20,
+            "total_us": 2671,
+            "min_us": 106,
+            "max_us": 363,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              18,
+              2,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 133.55
+          },
+          "check": {
+            "count": 20,
+            "total_us": 1186,
+            "min_us": 58,
+            "max_us": 66,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              20,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 59.3
+          }
+        },
+        {
+          "observed_phase": "stopped",
+          "previous_batch": "stopped:rf+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 5664,
+            "total_us": 850119,
+            "min_us": 110,
+            "max_us": 413,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              5333,
+              331,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 150.0916313559322
+          },
+          "check": {
+            "count": 5664,
+            "total_us": 486886,
+            "min_us": 46,
+            "max_us": 317,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              5,
+              5071,
+              2,
+              586,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 85.96151129943503
+          }
+        },
+        {
+          "observed_phase": "stopped",
+          "previous_batch": "stopped:wav+idle",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 2,
+            "total_us": 586,
+            "min_us": 105,
+            "max_us": 481,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 293.0
+          },
+          "check": {
+            "count": 2,
+            "total_us": 116,
+            "min_us": 58,
+            "max_us": 58,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 58.0
+          }
+        },
+        {
+          "observed_phase": "stopped",
+          "previous_batch": "stopped:wav+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 14,
+            "total_us": 1772,
+            "min_us": 109,
+            "max_us": 154,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              14,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 126.57142857142857
+          },
+          "check": {
+            "count": 14,
+            "total_us": 749,
+            "min_us": 46,
+            "max_us": 73,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              6,
+              8,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 53.5
+          }
+        },
+        {
+          "observed_phase": "stopped",
+          "previous_batch": "stopping:rf+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 2,
+            "total_us": 222,
+            "min_us": 111,
+            "max_us": 111,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 111.0
+          },
+          "check": {
+            "count": 2,
+            "total_us": 179,
+            "min_us": 89,
+            "max_us": 90,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 89.5
+          }
+        },
+        {
+          "observed_phase": "stopped",
+          "previous_batch": "stopping:wav+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 2,
+            "total_us": 314,
+            "min_us": 154,
+            "max_us": 160,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 157.0
+          },
+          "check": {
+            "count": 2,
+            "total_us": 131,
+            "min_us": 58,
+            "max_us": 73,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 65.5
+          }
+        },
+        {
+          "observed_phase": "stopping",
+          "previous_batch": "playing:rf+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 2,
+            "total_us": 516,
+            "min_us": 155,
+            "max_us": 361,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 258.0
+          },
+          "check": {
+            "count": 2,
+            "total_us": 125,
+            "min_us": 58,
+            "max_us": 67,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 62.5
+          }
+        },
+        {
+          "observed_phase": "stopping",
+          "previous_batch": "stopped:rf+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 1,
+            "total_us": 171,
+            "min_us": 171,
+            "max_us": 171,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 171.0
+          },
+          "check": {
+            "count": 1,
+            "total_us": 58,
+            "min_us": 58,
+            "max_us": 58,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 58.0
+          }
+        },
+        {
+          "observed_phase": "stopping",
+          "previous_batch": "stopping:rf+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 87,
+            "total_us": 13077,
+            "min_us": 111,
+            "max_us": 368,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              82,
+              5,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 150.31034482758622
+          },
+          "check": {
+            "count": 87,
+            "total_us": 6469,
+            "min_us": 58,
+            "max_us": 315,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              82,
+              0,
+              5,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 74.35632183908046
+          }
+        }
+      ],
+      "omitted_batches": 0,
+      "note": "Fields describe previous physical batch. Dedup by epoch/sequence//2; only batches containing target native RF/status are covered. Phase/mix are host observations, not causal attribution."
+    },
+    "ack_batch_timing": {
+      "groups": [
+        {
+          "phase": "playing",
+          "ack_command": "chunk",
+          "reason": 0,
+          "prepare": {
+            "count": 1122,
+            "total_us": 172354,
+            "min_us": 105,
+            "max_us": 489,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1020,
+              102,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 153.6131907308378
+          },
+          "check": {
+            "count": 1122,
+            "total_us": 167865,
+            "min_us": 126,
+            "max_us": 389,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1032,
+              90,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 149.61229946524065
+          }
+        },
+        {
+          "phase": "playing",
+          "ack_command": "no_wav_ack",
+          "reason": 0,
+          "prepare": {
+            "count": 15626,
+            "total_us": 2391433,
+            "min_us": 105,
+            "max_us": 492,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              14493,
+              1133,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 153.0419173172917
+          },
+          "check": {
+            "count": 15626,
+            "total_us": 1004037,
+            "min_us": 58,
+            "max_us": 319,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              15312,
+              0,
+              314,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 64.25425572763343
+          }
+        },
+        {
+          "phase": "playing",
+          "ack_command": "play",
+          "reason": 0,
+          "prepare": {
+            "count": 3,
+            "total_us": 379,
+            "min_us": 111,
+            "max_us": 156,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              3,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 126.33333333333333
+          },
+          "check": {
+            "count": 3,
+            "total_us": 276,
+            "min_us": 90,
+            "max_us": 96,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              3,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 92.0
+          }
+        },
+        {
+          "phase": "playing",
+          "ack_command": "query",
+          "reason": 0,
+          "prepare": {
+            "count": 160,
+            "total_us": 23501,
+            "min_us": 110,
+            "max_us": 412,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              151,
+              9,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 146.88125
+          },
+          "check": {
+            "count": 160,
+            "total_us": 16091,
+            "min_us": 89,
+            "max_us": 349,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              152,
+              2,
+              6,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 100.56875
+          }
+        },
+        {
+          "phase": "preparing",
+          "ack_command": "begin",
+          "reason": 0,
+          "prepare": {
+            "count": 3,
+            "total_us": 335,
+            "min_us": 111,
+            "max_us": 112,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              3,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 111.66666666666667
+          },
+          "check": {
+            "count": 3,
+            "total_us": 330,
+            "min_us": 110,
+            "max_us": 110,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              3,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 110.0
+          }
+        },
+        {
+          "phase": "preparing",
+          "ack_command": "chunk",
+          "reason": 0,
+          "prepare": {
+            "count": 90,
+            "total_us": 13845,
+            "min_us": 107,
+            "max_us": 412,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              81,
+              9,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 153.83333333333334
+          },
+          "check": {
+            "count": 90,
+            "total_us": 12954,
+            "min_us": 125,
+            "max_us": 382,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              84,
+              6,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 143.93333333333334
+          }
+        },
+        {
+          "phase": "preparing",
+          "ack_command": "no_wav_ack",
+          "reason": 0,
+          "prepare": {
+            "count": 2145,
+            "total_us": 325308,
+            "min_us": 106,
+            "max_us": 412,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              2000,
+              145,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 151.65874125874126
+          },
+          "check": {
+            "count": 2145,
+            "total_us": 175371,
+            "min_us": 58,
+            "max_us": 317,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              1958,
+              0,
+              187,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 81.75804195804196
+          }
+        },
+        {
+          "phase": "starting",
+          "ack_command": "no_wav_ack",
+          "reason": 0,
+          "prepare": {
+            "count": 15,
+            "total_us": 2702,
+            "min_us": 107,
+            "max_us": 367,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              12,
+              3,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 180.13333333333333
+          },
+          "check": {
+            "count": 15,
+            "total_us": 882,
+            "min_us": 58,
+            "max_us": 64,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              15,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 58.8
+          }
+        },
+        {
+          "phase": "stopped",
+          "ack_command": "chunk",
+          "reason": 2,
+          "prepare": {
+            "count": 15,
+            "total_us": 2096,
+            "min_us": 109,
+            "max_us": 363,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              14,
+              1,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 139.73333333333332
+          },
+          "check": {
+            "count": 15,
+            "total_us": 702,
+            "min_us": 46,
+            "max_us": 52,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              13,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 46.8
+          }
+        },
+        {
+          "phase": "stopped",
+          "ack_command": "no_wav_ack",
+          "reason": 0,
+          "prepare": {
+            "count": 5703,
+            "total_us": 856202,
+            "min_us": 104,
+            "max_us": 490,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              5368,
+              335,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 150.13186042433807
+          },
+          "check": {
+            "count": 5703,
+            "total_us": 489969,
+            "min_us": 58,
+            "max_us": 317,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              5113,
+              1,
+              589,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 85.91425565491846
+          }
+        },
+        {
+          "phase": "stopped",
+          "ack_command": "query",
+          "reason": 0,
+          "prepare": {
+            "count": 2,
+            "total_us": 266,
+            "min_us": 111,
+            "max_us": 155,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 133.0
+          },
+          "check": {
+            "count": 2,
+            "total_us": 197,
+            "min_us": 88,
+            "max_us": 109,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 98.5
+          }
+        },
+        {
+          "phase": "stopped",
+          "ack_command": "stop",
+          "reason": 0,
+          "prepare": {
+            "count": 3,
+            "total_us": 340,
+            "min_us": 111,
+            "max_us": 118,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              3,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 113.33333333333333
+          },
+          "check": {
+            "count": 3,
+            "total_us": 270,
+            "min_us": 89,
+            "max_us": 91,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              3,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 90.0
+          }
+        },
+        {
+          "phase": "stopping",
+          "ack_command": "no_wav_ack",
+          "reason": 0,
+          "prepare": {
+            "count": 92,
+            "total_us": 14043,
+            "min_us": 111,
+            "max_us": 368,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              86,
+              6,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 152.6413043478261
+          },
+          "check": {
+            "count": 92,
+            "total_us": 6776,
+            "min_us": 58,
+            "max_us": 315,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              87,
+              0,
+              5,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 73.65217391304348
+          }
+        }
+      ],
+      "matched_replies": 1401,
+      "unmatched_replies": 0,
+      "pending": 0,
+      "evicted": 0,
+      "omitted_groups": 0,
+      "note": "Native half 1 metadata, categorized by same-batch WAV reply id/session. prepare/check describe prior iteration; check includes decode_pair and command processing, not IRQ-lock duration alone. No WAV ACK does not mean no command. Lifecycle reply counters include non-target profiles; timing groups only target RF. ACK-only and RF+ACK pairs lack coverage."
+    },
+    "raw_chunk_ack_latency": {
+      "enabled": true,
+      "matched": 1227,
+      "raw_max_ms": 186.3481500186026,
+      "raw_mean_ms": 9.755399300809419,
+      "decoded": 1212,
+      "decode_max_ms": 18.29827600158751,
+      "pending_sends": 0,
+      "pending_decode": 15,
+      "omitted": 0,
+      "slow": [
+        {
+          "request_id": 2973476984,
+          "sent_at": 1038697.070440645,
+          "received_at": 1038697.090887097,
+          "raw_roundtrip_ms": 20.446451962925494,
+          "state": 2,
+          "reason": 0,
+          "accepted": 75840,
+          "played": 63360,
+          "decoded_at": 1038697.09437939,
+          "decode_delay_ms": 3.49229306448251,
+          "decoded_roundtrip_ms": 23.938745027408004
+        },
+        {
+          "request_id": 2973476985,
+          "sent_at": 1038697.07056587,
+          "received_at": 1038697.090887097,
+          "raw_roundtrip_ms": 20.321226911619306,
+          "state": 2,
+          "reason": 0,
+          "accepted": 76320,
+          "played": 63360,
+          "decoded_at": 1038697.094874465,
+          "decode_delay_ms": 3.9873680798336864,
+          "decoded_roundtrip_ms": 24.308594991452992
+        },
+        {
+          "request_id": 2973477107,
+          "sent_at": 1038698.385503462,
+          "received_at": 1038698.411336839,
+          "raw_roundtrip_ms": 25.833376916125417,
+          "state": 2,
+          "reason": 0,
+          "accepted": 127680,
+          "played": 116160,
+          "decoded_at": 1038698.41373509,
+          "decode_delay_ms": 2.3982510901987553,
+          "decoded_roundtrip_ms": 28.231628006324172
+        },
+        {
+          "request_id": 2973477108,
+          "sent_at": 1038698.386015343,
+          "received_at": 1038698.411336839,
+          "raw_roundtrip_ms": 25.32149595208466,
+          "state": 2,
+          "reason": 0,
+          "accepted": 128160,
+          "played": 116160,
+          "decoded_at": 1038698.414502047,
+          "decode_delay_ms": 3.165208036080003,
+          "decoded_roundtrip_ms": 28.486703988164663
+        },
+        {
+          "request_id": 2973477109,
+          "sent_at": 1038698.386322402,
+          "received_at": 1038698.411336839,
+          "raw_roundtrip_ms": 25.014436920173466,
+          "state": 2,
+          "reason": 0,
+          "accepted": 128640,
+          "played": 116160,
+          "decoded_at": 1038698.414947183,
+          "decode_delay_ms": 3.6103440215811133,
+          "decoded_roundtrip_ms": 28.62478094175458
+        },
+        {
+          "request_id": 2973477110,
+          "sent_at": 1038698.410627544,
+          "received_at": 1038698.434203252,
+          "raw_roundtrip_ms": 23.57570792082697,
+          "state": 2,
+          "reason": 0,
+          "accepted": 129120,
+          "played": 117120,
+          "decoded_at": 1038698.436651683,
+          "decode_delay_ms": 2.448430983349681,
+          "decoded_roundtrip_ms": 26.024138904176652
+        },
+        {
+          "request_id": 2973477114,
+          "sent_at": 1038698.450692489,
+          "received_at": 1038698.475256897,
+          "raw_roundtrip_ms": 24.56440799869597,
+          "state": 2,
+          "reason": 0,
+          "accepted": 131040,
+          "played": 118560,
+          "decoded_at": 1038698.480482712,
+          "decode_delay_ms": 5.225814995355904,
+          "decoded_roundtrip_ms": 29.790222994051874
+        },
+        {
+          "request_id": 2973477115,
+          "sent_at": 1038698.450812196,
+          "received_at": 1038698.475256897,
+          "raw_roundtrip_ms": 24.444701033644378,
+          "state": 2,
+          "reason": 0,
+          "accepted": 131520,
+          "played": 118560,
+          "decoded_at": 1038698.481446747,
+          "decode_delay_ms": 6.189849926158786,
+          "decoded_roundtrip_ms": 30.634550959803164
+        },
+        {
+          "request_id": 2973477116,
+          "sent_at": 1038698.473478397,
+          "received_at": 1038698.499107974,
+          "raw_roundtrip_ms": 25.629576994106174,
+          "state": 2,
+          "reason": 0,
+          "accepted": 132000,
+          "played": 119520,
+          "decoded_at": 1038698.503526456,
+          "decode_delay_ms": 4.418481956236064,
+          "decoded_roundtrip_ms": 30.048058950342238
+        },
+        {
+          "request_id": 2973477117,
+          "sent_at": 1038698.473651324,
+          "received_at": 1038698.499107974,
+          "raw_roundtrip_ms": 25.456649949774146,
+          "state": 2,
+          "reason": 0,
+          "accepted": 132480,
+          "played": 119520,
+          "decoded_at": 1038698.504009497,
+          "decode_delay_ms": 4.901523003354669,
+          "decoded_roundtrip_ms": 30.358172953128815
+        },
+        {
+          "request_id": 2973477752,
+          "sent_at": 1038705.493034943,
+          "received_at": 1038705.513483346,
+          "raw_roundtrip_ms": 20.44840296730399,
+          "state": 2,
+          "reason": 0,
+          "accepted": 177600,
+          "played": 167520,
+          "decoded_at": 1038705.514269567,
+          "decode_delay_ms": 0.7862210040912032,
+          "decoded_roundtrip_ms": 21.234623971395195
+        },
+        {
+          "request_id": 2973477753,
+          "sent_at": 1038705.493111737,
+          "received_at": 1038705.513483346,
+          "raw_roundtrip_ms": 20.371609018184245,
+          "state": 2,
+          "reason": 0,
+          "accepted": 178080,
+          "played": 167520,
+          "decoded_at": 1038705.514854016,
+          "decode_delay_ms": 1.3706700410693884,
+          "decoded_roundtrip_ms": 21.742279059253633
+        },
+        {
+          "request_id": 2973477754,
+          "sent_at": 1038705.493181604,
+          "received_at": 1038705.513483346,
+          "raw_roundtrip_ms": 20.301742013543844,
+          "state": 2,
+          "reason": 0,
+          "accepted": 178560,
+          "played": 167520,
+          "decoded_at": 1038705.515127032,
+          "decode_delay_ms": 1.6436859732493758,
+          "decoded_roundtrip_ms": 21.94542798679322
+        },
+        {
+          "request_id": 2973477755,
+          "sent_at": 1038705.493247197,
+          "received_at": 1038705.513483346,
+          "raw_roundtrip_ms": 20.236148964613676,
+          "state": 2,
+          "reason": 0,
+          "accepted": 179040,
+          "played": 167520,
+          "decoded_at": 1038705.515474869,
+          "decode_delay_ms": 1.9915230805054307,
+          "decoded_roundtrip_ms": 22.227672045119107
+        },
+        {
+          "request_id": 2973477756,
+          "sent_at": 1038705.493313503,
+          "received_at": 1038705.513483346,
+          "raw_roundtrip_ms": 20.16984298825264,
+          "state": 2,
+          "reason": 0,
+          "accepted": 179520,
+          "played": 167520,
+          "decoded_at": 1038705.51620009,
+          "decode_delay_ms": 2.716743969358504,
+          "decoded_roundtrip_ms": 22.886586957611144
+        },
+        {
+          "request_id": 2973477757,
+          "sent_at": 1038705.493377878,
+          "received_at": 1038705.513483346,
+          "raw_roundtrip_ms": 20.105467992834747,
+          "state": 2,
+          "reason": 0,
+          "accepted": 180000,
+          "played": 168000,
+          "decoded_at": 1038705.516658253,
+          "decode_delay_ms": 3.174907062202692,
+          "decoded_roundtrip_ms": 23.28037505503744
+        },
+        {
+          "request_id": 2973477977,
+          "sent_at": 1038710.136639195,
+          "received_at": 1038710.1567571,
+          "raw_roundtrip_ms": 20.117904990911484,
+          "state": 2,
+          "reason": 0,
+          "accepted": 32160,
+          "played": 19200,
+          "decoded_at": 1038710.159312435,
+          "decode_delay_ms": 2.5553349405527115,
+          "decoded_roundtrip_ms": 22.673239931464195
+        },
+        {
+          "request_id": 2973478192,
+          "sent_at": 1038712.505140346,
+          "received_at": 1038712.586116507,
+          "raw_roundtrip_ms": 80.9761609416455,
+          "state": 2,
+          "reason": 0,
+          "accepted": 126720,
+          "played": 114240,
+          "decoded_at": 1038712.590009476,
+          "decode_delay_ms": 3.8929691072553396,
+          "decoded_roundtrip_ms": 84.86913004890084
+        },
+        {
+          "request_id": 2973478193,
+          "sent_at": 1038712.505380499,
+          "received_at": 1038712.586116507,
+          "raw_roundtrip_ms": 80.73600800707936,
+          "state": 2,
+          "reason": 0,
+          "accepted": 127200,
+          "played": 114240,
+          "decoded_at": 1038712.590835842,
+          "decode_delay_ms": 4.719335003755987,
+          "decoded_roundtrip_ms": 85.45534301083535
+        },
+        {
+          "request_id": 2973478194,
+          "sent_at": 1038712.622126232,
+          "received_at": 1038712.808474382,
+          "raw_roundtrip_ms": 186.3481500186026,
+          "state": 2,
+          "reason": 0,
+          "accepted": 127680,
+          "played": 118560,
+          "decoded_at": 1038712.81669135,
+          "decode_delay_ms": 8.216967922635376,
+          "decoded_roundtrip_ms": 194.565117941238
+        },
+        {
+          "request_id": 2973478195,
+          "sent_at": 1038712.622388067,
+          "received_at": 1038712.808474382,
+          "raw_roundtrip_ms": 186.08631507959217,
+          "state": 2,
+          "reason": 0,
+          "accepted": 128160,
+          "played": 118560,
+          "decoded_at": 1038712.817846843,
+          "decode_delay_ms": 9.372461005114019,
+          "decoded_roundtrip_ms": 195.4587760847062
+        },
+        {
+          "request_id": 2973478196,
+          "sent_at": 1038712.622605569,
+          "received_at": 1038712.808474382,
+          "raw_roundtrip_ms": 185.8688130741939,
+          "state": 2,
+          "reason": 0,
+          "accepted": 128640,
+          "played": 118560,
+          "decoded_at": 1038712.818634067,
+          "decode_delay_ms": 10.159684927202761,
+          "decoded_roundtrip_ms": 196.02849800139666
+        },
+        {
+          "request_id": 2973478197,
+          "sent_at": 1038712.839718547,
+          "received_at": 1038712.984594004,
+          "raw_roundtrip_ms": 144.87545704469085,
+          "state": 2,
+          "reason": 0,
+          "accepted": 129120,
+          "played": 127200,
+          "decoded_at": 1038713.0003991,
+          "decode_delay_ms": 15.805096016265452,
+          "decoded_roundtrip_ms": 160.6805530609563
+        },
+        {
+          "request_id": 2973478198,
+          "sent_at": 1038712.839823975,
+          "received_at": 1038712.984594004,
+          "raw_roundtrip_ms": 144.77002900093794,
+          "state": 2,
+          "reason": 0,
+          "accepted": 129600,
+          "played": 127680,
+          "decoded_at": 1038713.000571609,
+          "decode_delay_ms": 15.977605013176799,
+          "decoded_roundtrip_ms": 160.74763401411474
+        },
+        {
+          "request_id": 2973478199,
+          "sent_at": 1038712.839951671,
+          "received_at": 1038712.984594004,
+          "raw_roundtrip_ms": 144.64233303442597,
+          "state": 2,
+          "reason": 0,
+          "accepted": 130080,
+          "played": 127680,
+          "decoded_at": 1038713.001157582,
+          "decode_delay_ms": 16.56357804313302,
+          "decoded_roundtrip_ms": 161.205911077559
+        },
+        {
+          "request_id": 2973478200,
+          "sent_at": 1038712.840056758,
+          "received_at": 1038712.984594004,
+          "raw_roundtrip_ms": 144.5372459711507,
+          "state": 2,
+          "reason": 0,
+          "accepted": 130560,
+          "played": 127680,
+          "decoded_at": 1038713.001682879,
+          "decode_delay_ms": 17.088875058107078,
+          "decoded_roundtrip_ms": 161.62612102925777
+        },
+        {
+          "request_id": 2973478201,
+          "sent_at": 1038712.840150488,
+          "received_at": 1038712.984594004,
+          "raw_roundtrip_ms": 144.4435160374269,
+          "state": 2,
+          "reason": 0,
+          "accepted": 131040,
+          "played": 127680,
+          "decoded_at": 1038713.002092711,
+          "decode_delay_ms": 17.498707049526274,
+          "decoded_roundtrip_ms": 161.94222308695316
+        },
+        {
+          "request_id": 2973478202,
+          "sent_at": 1038712.840240857,
+          "received_at": 1038712.984594004,
+          "raw_roundtrip_ms": 144.35314701404423,
+          "state": 2,
+          "reason": 0,
+          "accepted": 131520,
+          "played": 127680,
+          "decoded_at": 1038713.002499465,
+          "decode_delay_ms": 17.905461019836366,
+          "decoded_roundtrip_ms": 162.2586080338806
+        },
+        {
+          "request_id": 2973478203,
+          "sent_at": 1038712.840330844,
+          "received_at": 1038712.984594004,
+          "raw_roundtrip_ms": 144.26315994933248,
+          "state": 2,
+          "reason": 0,
+          "accepted": 132000,
+          "played": 127680,
+          "decoded_at": 1038713.00289228,
+          "decode_delay_ms": 18.29827600158751,
+          "decoded_roundtrip_ms": 162.56143595091999
+        },
+        {
+          "request_id": 2973478204,
+          "sent_at": 1038712.840421469,
+          "received_at": 1038713.003912278,
+          "raw_roundtrip_ms": 163.49080903455615,
+          "state": 2,
+          "reason": 0,
+          "accepted": 132480,
+          "played": 127680,
+          "decoded_at": 1038713.005101237,
+          "decode_delay_ms": 1.1889589950442314,
+          "decoded_roundtrip_ms": 164.67976802960038
+        },
+        {
+          "request_id": 2973478205,
+          "sent_at": 1038712.889509046,
+          "received_at": 1038713.025244804,
+          "raw_roundtrip_ms": 135.73575799819082,
+          "state": 2,
+          "reason": 0,
+          "accepted": 132960,
+          "played": 129600,
+          "decoded_at": 1038713.039344823,
+          "decode_delay_ms": 14.100019005127251,
+          "decoded_roundtrip_ms": 149.83577700331807
+        },
+        {
+          "request_id": 2973478206,
+          "sent_at": 1038713.023798196,
+          "received_at": 1038713.145340081,
+          "raw_roundtrip_ms": 121.5418849606067,
+          "state": 4,
+          "reason": 2,
+          "accepted": 132960,
+          "played": 132480,
+          "decoded_at": 1038713.1523534,
+          "decode_delay_ms": 7.013319060206413,
+          "decoded_roundtrip_ms": 128.5552040208131
+        }
+      ],
+      "note": "Complete-frame socket read time versus entry to decoder event handling; correlated CHUNK ids/session, normal receiver validation unchanged"
+    },
+    "phase_caveat": "Host observation boundaries, not MCU event timestamps. Sampled queue is a lower bound; cumulative peak remains acceptance gate. Send counters refer to previous node. Retune is not visible on this wire.",
+    "pending_bytes": 0,
+    "tcp_fifo_headroom_measured": false,
+    "frame_kinds": {
+      "15": 12648,
+      "12": 1401,
+      "9": 20,
+      "5": 2,
+      "7": 16,
+      "20": 50911
+    },
+    "radio_playing_frame_kinds": {
+      "12": 1285,
+      "20": 32553
+    },
+    "sent_commands": {
+      "11:0": 165,
+      "10": 16,
+      "4": 1,
+      "6": 8,
+      "2": 12,
+      "8": 4,
+      "11:1": 3,
+      "13": 1227,
+      "11:2": 3,
+      "11:3": 3
+    },
+    "radio_playing_sent_commands": {
+      "11:0": 160,
+      "13": 1137,
+      "11:3": 2
+    },
+    "note": "MCU queue/slack/send counters; send weighted once per complete node start. Cumulative MCU peak includes startup.",
+    "native_counters_expected": true
+  },
+  "service_diagnostics": [
+    {
+      "calls": 41656,
+      "priming_calls": 1748,
+      "reasons": {
+        "no_source": 23926,
+        "no_status": 0,
+        "session_mismatch": 0,
+        "pending_timeout": 0,
+        "pending_control_ack": 1044,
+        "pending_chunk_ack": 0,
+        "credits": 12299,
+        "token": 292,
+        "target_full": 0,
+        "pcm_pending": 3543,
+        "no_chunk": 0,
+        "priming_ack": 19,
+        "source_exhausted": 0,
+        "poll_wait": 0
+      },
+      "sends": {
+        "chunk": 1227,
+        "play": 3,
+        "query": 165,
+        "begin": 3,
+        "stop": 3
+      },
+      "last_reason": "no_source",
+      "chunk_gaps": 1224,
+      "chunk_gap_last_ms": 23.35724199656397,
+      "chunk_gap_max_ms": 217.10939600598067,
+      "last_chunk_at": 1038713.143677994,
+      "chunk_session": 2973477903
+    }
+  ],
+  "v20_snapshot_restore": {
+    "ok": true,
+    "sessions": [
+      {
+        "path": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v20/installed_2000_us_a0_transitions_20261103/private_gui_sessions/session_20261103_231122_275044.json",
+        "ok": true,
+        "detail": {
+          "snapshot": {
+            "schema": 1,
+            "identity": {
+              "board_serial": "1060031107",
+              "app": "scope-v20-20261031-225916-main-1",
+              "firmware_sha256": "52f933bdb9c632544624e5d4188a740a9cdb429596bfe5a4d926900e7538aefe",
+              "relay_sha256": "bf6893f5a0fbab8676120a5decd8c6109698fa852be02333918b1d6e4a2a909d"
+            },
+            "adc_bits": 14,
+            "adc_period": 32,
+            "generator": {
+              "wave": 0,
+              "enabled": 0,
+              "mode": 0,
+              "frequency": 2500,
+              "final_frequency": 2500,
+              "low": 0,
+              "high": 4095,
+              "duration": 1000,
+              "duration_us": 0,
+              "duty": 50
+            }
+          },
+          "state": "closed",
+          "hardware_restored": true,
+          "errors": [],
+          "recovery": {
+            "seconds": 10.023358686943538,
+            "samples": 313344,
+            "dropped": 0,
+            "fatal": 0,
+            "continuous": true
+          },
+          "receiver_activity": {
+            "pid": 75475,
+            "mode": "user",
+            "active": true,
+            "released": true
+          }
+        }
+      }
+    ]
+  },
+  "diagnostics_complete": true,
+  "functional_ok": false,
+  "receipt_unchanged": true,
+  "activation_report_unchanged": true,
+  "identity_after": {
+    "board_serial": "1060031107",
+    "app": "scope-v20-20261031-225916-main-1",
+    "firmware_sha256": "52f933bdb9c632544624e5d4188a740a9cdb429596bfe5a4d926900e7538aefe",
+    "relay_sha256": "bf6893f5a0fbab8676120a5decd8c6109698fa852be02333918b1d6e4a2a909d"
+  },
+  "identity_unchanged": true
+}

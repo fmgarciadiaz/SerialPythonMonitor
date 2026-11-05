@@ -1,0 +1,225 @@
+{
+  "private": true,
+  "promoted": false,
+  "performance_acceptance_eligible": false,
+  "gui": {
+    "ok": true,
+    "errors": [],
+    "assertions": {
+      "radio_playing_40k": true,
+      "radio_stop_confirmed": true,
+      "radio_progress": true,
+      "radio_hold_completed": true,
+      "scan_completed": true,
+      "wav_playing": true,
+      "wav_progress": true,
+      "wav_stop_confirmed": true,
+      "fm_playing": true,
+      "fm_progress": true,
+      "fm_stop_confirmed": true,
+      "shutdown_confirmed": true,
+      "worker_released": true
+    },
+    "visible_gui_ok": true,
+    "profile_ok": true,
+    "fft_ok": true,
+    "exposed_fraction": 1.0,
+    "paint_events": 614,
+    "radio_hold_seconds": 20.03249717701692,
+    "radio_played_samples": 801600,
+    "headroom_pass": false,
+    "performance_acceptance_eligible": false
+  },
+  "timing": {
+    "schema": "wav-chunk-cycles-v1",
+    "groups": [
+      {
+        "phase": "mixed",
+        "session": 3638695824,
+        "selected_chunks": 1,
+        "timing_us": {
+          "irq": {
+            "selected_mean": 48.475,
+            "selected_max": 48.475
+          },
+          "poll_main": {
+            "selected_mean": 0.38125,
+            "selected_max": 0.38125
+          },
+          "validate": {
+            "selected_mean": 24.9375,
+            "selected_max": 24.9375
+          },
+          "copy": {
+            "selected_mean": 18.85625,
+            "selected_max": 18.85625
+          },
+          "cache": {
+            "selected_mean": 0.61875,
+            "selected_max": 0.61875
+          },
+          "descriptor": {
+            "selected_mean": 1.01875,
+            "selected_max": 1.01875
+          },
+          "publish": {
+            "selected_mean": 21.49375,
+            "selected_max": 21.49375
+          },
+          "elapsed": {
+            "selected_mean": 49.2375,
+            "selected_max": 49.2375
+          }
+        }
+      },
+      {
+        "phase": "playing",
+        "session": 3638695824,
+        "selected_chunks": 556,
+        "timing_us": {
+          "irq": {
+            "selected_mean": 50.104372751798564,
+            "selected_max": 51.59375
+          },
+          "poll_main": {
+            "selected_mean": 1.9545413669064746,
+            "selected_max": 3.44375
+          },
+          "validate": {
+            "selected_mean": 24.944008543165467,
+            "selected_max": 25.025
+          },
+          "copy": {
+            "selected_mean": 18.86837904676259,
+            "selected_max": 18.9125
+          },
+          "cache": {
+            "selected_mean": 0.6282486510791366,
+            "selected_max": 0.675
+          },
+          "descriptor": {
+            "selected_mean": 1.0155575539568344,
+            "selected_max": 1.05
+          },
+          "publish": {
+            "selected_mean": 21.509790917266187,
+            "selected_max": 21.56875
+          },
+          "elapsed": {
+            "selected_mean": 57.00269784172662,
+            "selected_max": 310.6375
+          }
+        }
+      },
+      {
+        "phase": "preparing",
+        "session": 3638695824,
+        "selected_chunks": 18,
+        "timing_us": {
+          "irq": {
+            "selected_mean": 48.49027777777778,
+            "selected_max": 48.56875
+          },
+          "poll_main": {
+            "selected_mean": 0.384375,
+            "selected_max": 0.3875
+          },
+          "validate": {
+            "selected_mean": 24.945138888888888,
+            "selected_max": 25.01875
+          },
+          "copy": {
+            "selected_mean": 18.856944444444444,
+            "selected_max": 18.8625
+          },
+          "cache": {
+            "selected_mean": 0.6260416666666667,
+            "selected_max": 0.63125
+          },
+          "descriptor": {
+            "selected_mean": 1.0135416666666666,
+            "selected_max": 1.01875
+          },
+          "publish": {
+            "selected_mean": 21.49375,
+            "selected_max": 21.5
+          },
+          "elapsed": {
+            "selected_mean": 49.922222222222224,
+            "selected_max": 55.55
+          }
+        }
+      }
+    ],
+    "completed": 4364,
+    "incomplete": 1,
+    "invalid": 732,
+    "repeated": 3057,
+    "skipped_serials": 1120,
+    "resets": 0,
+    "omitted": 0,
+    "first_seen_serial": 5,
+    "last_seen_serial": 1699,
+    "last_completed_sample": {
+      "serial": 1699,
+      "request": 3638697899,
+      "session": 3638695824,
+      "count_state": 16908768,
+      "clock_hz": 160000000,
+      "irq": 8060,
+      "poll_main": 359,
+      "validate": 3991,
+      "copy": 3018,
+      "cache": 100,
+      "descriptor": 163,
+      "publish": 3441,
+      "elapsed": 8181,
+      "max_irq": 8266,
+      "max_irq_request": 3638696771,
+      "phase": "stopped",
+      "epoch": 1,
+      "frame_sequence": 89950
+    },
+    "max_irq_since_boot": {
+      "cycles": 8266,
+      "request": 3638696771,
+      "clock_hz": 160000000
+    },
+    "seen_snapshots": 4365,
+    "note": "Cadence-selected last accepted CHUNK snapshots, not an all-CHUNK distribution. IRQ is after-lock/before-unlock only; elapsed includes pending interrupts after unlock. Components are nested. Instrumentation perturbs execution. max_irq is cumulative over accepted CHUNKs since boot; per-phase sampled maxima are not global maxima. Relay prepare/check aggregates and ordinary SPI cost summaries are invalid for this private firmware."
+  },
+  "restoration": {
+    "ok": true,
+    "attempted": true,
+    "errors": [],
+    "material": {
+      "sources_exact": true,
+      "cache_exact": true,
+      "firmware_exact": true,
+      "relay_exact": true
+    },
+    "recovery": {
+      "snapshot_equal": true,
+      "continuous": true,
+      "integrity_ok": true,
+      "seconds": 10.023177050985396,
+      "detail": {
+        "hardware_restored": true,
+        "errors": [],
+        "recovery": {
+          "seconds": 10.023177050985396,
+          "samples": 313344,
+          "dropped": 0,
+          "fatal": 0,
+          "continuous": true
+        }
+      }
+    },
+    "final": {
+      "identity_equal": true,
+      "sources_exact": true,
+      "relay_configuration_equal": true,
+      "cpu_equal": true
+    }
+  }
+}

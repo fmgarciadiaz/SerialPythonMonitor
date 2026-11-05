@@ -1,0 +1,620 @@
+{
+  "private": true,
+  "incorporated": false,
+  "publicly_accepted": false,
+  "local_tests_passed": 26,
+  "benchmarks": {
+    "raster_candidates_20261101.json": {
+      "path": "diagnosticos/resultados_v20/raster_candidates_20261101.json",
+      "sha256": "f75715df65b676d3e5d0d6745fd42173fa4b85b54e9733b769929cc2c7b5836d"
+    },
+    "raster_tiles_20261101.json": {
+      "path": "diagnosticos/resultados_v20/raster_tiles_20261101.json",
+      "sha256": "ce2c5634cc782527d1ad794c0e0ceeec3873646c40b89240c39613cc561592b8"
+    }
+  },
+  "offline_speedup_medians": {
+    "2": 1.7508037474193687,
+    "4": 2.9768721498007444
+  },
+  "runs": [
+    {
+      "report": "diagnosticos/resultados_v20/raster_tiles4_gui20_20261101/report.json",
+      "report_sha256": "d264a9cb6e057b0f36b1cbbab790c71a27dc8ec6617403753657b680c1b93fb7",
+      "platform": "offscreen",
+      "valid_visible_trial": false,
+      "exposure_fraction": 1.0,
+      "paint_floor_pass": false,
+      "requested": {
+        "radio": false,
+        "wav": false,
+        "fm": false,
+        "voices": 1,
+        "us": false,
+        "scan_during_a0": false,
+        "analysis_mode": "vt",
+        "bits": 8,
+        "rate": 1860465,
+        "window_seconds": 2.0,
+        "detail_percent": 100,
+        "raster_workers": 4
+      },
+      "gui": {
+        "ok": true,
+        "errors": [],
+        "assertions": {
+          "acquisition_configuration_applied": true,
+          "samples_advanced_between_observations": true,
+          "useful_sample_volume": true,
+          "effective_acquisition_duration": true,
+          "analysis_has_data": true,
+          "a0_remained_off": true,
+          "shutdown_confirmed": true,
+          "worker_released": true,
+          "requested_time_window_applied": true,
+          "requested_detail_applied": true,
+          "temporal_raster_published": true,
+          "temporal_raster_no_error": true
+        },
+        "exposed_fraction": 1.0,
+        "visible_gui_ok": false,
+        "paint_events": 60,
+        "hold": 0.0,
+        "radio": {
+          "frames": 0,
+          "samples": 0,
+          "empty_status_frames": 0,
+          "send_nodes": 0,
+          "mean_send_margin": null,
+          "mcu_queue_peak": 0,
+          "min_slack_ticks": null,
+          "sampled_queue_max": 0,
+          "send_ticks_max": 0,
+          "send_over_budget_nodes": 0,
+          "headroom_pass": false
+        },
+        "scan": {
+          "requested": false,
+          "completed": false,
+          "candidate_count": null
+        },
+        "analysis_mode": "vt",
+        "analysis_synthetic": false,
+        "acquisition": {
+          "frames": 49068,
+          "samples": 42787296,
+          "empty_status_frames": 27,
+          "send_nodes": 12266,
+          "mean_send_margin": 0.19287770960800954,
+          "mcu_queue_peak": 2,
+          "min_slack_ticks": 85405,
+          "sampled_queue_max": 2,
+          "send_ticks_max": 364038,
+          "send_over_budget_nodes": 23,
+          "headroom_pass": true
+        },
+        "reserve_screen": {
+          "publicly_accepted": false,
+          "capacity": 16,
+          "legacy_headroom_pass": false,
+          "free_at_peak": 16,
+          "passes": false,
+          "criterion": "Mean margin >=10%, cumulative peak strictly below half capacity, positive slack; private screen only"
+        },
+        "scope": "Functional V20 private screen; public acceptance remains false"
+      },
+      "periodic_metrics": [
+        {
+          "elapsed": 5.080025248927996,
+          "paint_fps_interval": 2.1653574402025337,
+          "raster_published": 3,
+          "raster_worker_ms": 424.84891798812896,
+          "raster_error": null,
+          "gui_delay_max_ms": 171.5816989308223,
+          "radio_playing_seconds": null
+        },
+        {
+          "elapsed": 10.14848599000834,
+          "paint_fps_interval": 2.3734869808011263,
+          "raster_published": 9,
+          "raster_worker_ms": 512.9502839408815,
+          "raster_error": null,
+          "gui_delay_max_ms": 191.18919305037707,
+          "radio_playing_seconds": null
+        },
+        {
+          "elapsed": 15.21551460691262,
+          "paint_fps_interval": 2.5625894505470592,
+          "raster_published": 16,
+          "raster_worker_ms": 444.8803599225357,
+          "raster_error": null,
+          "gui_delay_max_ms": 209.77996999863535,
+          "radio_playing_seconds": null
+        },
+        {
+          "elapsed": 20.230179333942942,
+          "paint_fps_interval": 2.395244682403773,
+          "raster_published": 22,
+          "raster_worker_ms": 505.13944297563285,
+          "raster_error": null,
+          "gui_delay_max_ms": 209.77996999863535,
+          "radio_playing_seconds": null
+        }
+      ],
+      "restoration": {
+        "ok": true,
+        "attempted": true,
+        "errors": [],
+        "material": {
+          "sources_exact": true,
+          "cache_exact": true,
+          "firmware_exact": true,
+          "relay_exact": true
+        },
+        "recovery": {
+          "snapshot_equal": true,
+          "continuous": true,
+          "integrity_ok": true,
+          "seconds": 10.023559013032354,
+          "detail": {
+            "hardware_restored": true,
+            "errors": [],
+            "recovery": {
+              "seconds": 10.023559013032354,
+              "samples": 313344,
+              "dropped": 0,
+              "fatal": 0,
+              "continuous": true
+            }
+          }
+        },
+        "final": {
+          "identity_equal": true,
+          "sources_exact": true,
+          "relay_configuration_equal": true,
+          "cpu_equal": true
+        }
+      }
+    },
+    {
+      "report": "diagnosticos/resultados_v20/raster_tiles4_cocoa20_20261101/report.json",
+      "report_sha256": "ad7893d254eada53de85ba37d15e6e8a16ab23fe38d0957c12d884639461feb2",
+      "platform": "cocoa",
+      "valid_visible_trial": true,
+      "exposure_fraction": 1.0,
+      "paint_floor_pass": false,
+      "requested": {
+        "radio": false,
+        "wav": false,
+        "fm": false,
+        "voices": 1,
+        "us": false,
+        "scan_during_a0": false,
+        "analysis_mode": "vt",
+        "bits": 8,
+        "rate": 1860465,
+        "window_seconds": 2.0,
+        "detail_percent": 100,
+        "raster_workers": 4
+      },
+      "gui": {
+        "ok": true,
+        "errors": [],
+        "assertions": {
+          "acquisition_configuration_applied": true,
+          "samples_advanced_between_observations": true,
+          "useful_sample_volume": true,
+          "effective_acquisition_duration": true,
+          "analysis_has_data": true,
+          "a0_remained_off": true,
+          "shutdown_confirmed": true,
+          "worker_released": true,
+          "requested_time_window_applied": true,
+          "requested_detail_applied": true,
+          "temporal_raster_published": true,
+          "temporal_raster_no_error": true
+        },
+        "exposed_fraction": 1.0,
+        "visible_gui_ok": false,
+        "display": {
+          "platform": "cocoa",
+          "dpr": 2.0,
+          "size": [
+            1320,
+            920
+          ],
+          "screen": "Built-in Retina Display",
+          "exposed": false
+        },
+        "paint_events": 56,
+        "hold": 0.0,
+        "radio": {
+          "frames": 0,
+          "samples": 0,
+          "empty_status_frames": 0,
+          "send_nodes": 0,
+          "mean_send_margin": null,
+          "mcu_queue_peak": 0,
+          "min_slack_ticks": null,
+          "sampled_queue_max": 0,
+          "send_ticks_max": 0,
+          "send_over_budget_nodes": 0,
+          "headroom_pass": false
+        },
+        "scan": {
+          "requested": false,
+          "completed": false,
+          "candidate_count": null
+        },
+        "analysis_mode": "vt",
+        "analysis_synthetic": false,
+        "acquisition": {
+          "frames": 48220,
+          "samples": 42047840,
+          "empty_status_frames": 28,
+          "send_nodes": 12054,
+          "mean_send_margin": 0.19281313932487287,
+          "mcu_queue_peak": 2,
+          "min_slack_ticks": 85405,
+          "sampled_queue_max": 2,
+          "send_ticks_max": 389195,
+          "send_over_budget_nodes": 27,
+          "headroom_pass": true
+        },
+        "reserve_screen": {
+          "publicly_accepted": false,
+          "capacity": 16,
+          "legacy_headroom_pass": false,
+          "free_at_peak": 16,
+          "passes": false,
+          "criterion": "Mean margin >=10%, cumulative peak strictly below half capacity, positive slack; private screen only"
+        },
+        "scope": "Functional V20 private screen; public acceptance remains false"
+      },
+      "periodic_metrics": [
+        {
+          "elapsed": 5.077192798024043,
+          "paint_fps_interval": 2.5604996758985767,
+          "raster_published": 2,
+          "raster_worker_ms": 447.3662549862638,
+          "raster_error": null,
+          "gui_delay_max_ms": 175.535031943582,
+          "radio_playing_seconds": null
+        },
+        {
+          "elapsed": 10.102531343931332,
+          "paint_fps_interval": 2.192850264794136,
+          "raster_published": 7,
+          "raster_worker_ms": 738.2159029366449,
+          "raster_error": null,
+          "gui_delay_max_ms": 213.77664408646524,
+          "radio_playing_seconds": null
+        },
+        {
+          "elapsed": 15.111032205983065,
+          "paint_fps_interval": 2.199287243111086,
+          "raster_published": 13,
+          "raster_worker_ms": 671.7668389901519,
+          "raster_error": null,
+          "gui_delay_max_ms": 228.19766704924405,
+          "radio_playing_seconds": null
+        },
+        {
+          "elapsed": 20.36822482594289,
+          "paint_fps_interval": 2.106829790867554,
+          "raster_published": 18,
+          "raster_worker_ms": 650.2869760151953,
+          "raster_error": null,
+          "gui_delay_max_ms": 229.82299304567277,
+          "radio_playing_seconds": null
+        }
+      ],
+      "restoration": {
+        "ok": true,
+        "attempted": true,
+        "errors": [],
+        "material": {
+          "sources_exact": true,
+          "cache_exact": true,
+          "firmware_exact": true,
+          "relay_exact": true
+        },
+        "recovery": {
+          "snapshot_equal": true,
+          "continuous": true,
+          "integrity_ok": true,
+          "seconds": 10.0223057649564,
+          "detail": {
+            "hardware_restored": true,
+            "errors": [],
+            "recovery": {
+              "seconds": 10.0223057649564,
+              "samples": 313344,
+              "dropped": 0,
+              "fatal": 0,
+              "continuous": true
+            }
+          }
+        },
+        "final": {
+          "identity_equal": true,
+          "sources_exact": true,
+          "relay_configuration_equal": true,
+          "cpu_equal": true
+        }
+      }
+    },
+    {
+      "report": "diagnosticos/resultados_v20/raster_tiles4_radio60_20261101/report.json",
+      "report_sha256": "f7a40c4733b97b70a7e0c061552d4a7b3ed78a8b218c67a0abc8c42c9ffa9a10",
+      "platform": "cocoa",
+      "valid_visible_trial": true,
+      "exposure_fraction": 1.0,
+      "paint_floor_pass": false,
+      "requested": {
+        "radio": true,
+        "wav": false,
+        "fm": false,
+        "voices": 1,
+        "us": false,
+        "scan_during_a0": false,
+        "analysis_mode": null,
+        "bits": 8,
+        "rate": 1860465,
+        "window_seconds": 2.0,
+        "detail_percent": 100,
+        "raster_workers": 4
+      },
+      "gui": {
+        "ok": true,
+        "errors": [],
+        "assertions": {
+          "radio_playing_40k": true,
+          "radio_stop_confirmed": true,
+          "radio_progress": true,
+          "radio_hold_completed": true,
+          "scan_completed": true,
+          "wav_playing": true,
+          "wav_progress": true,
+          "wav_stop_confirmed": true,
+          "fm_playing": true,
+          "fm_progress": true,
+          "fm_stop_confirmed": true,
+          "shutdown_confirmed": true,
+          "worker_released": true,
+          "requested_time_window_applied": true,
+          "requested_detail_applied": true,
+          "temporal_raster_published": true,
+          "temporal_raster_no_error": true
+        },
+        "exposed_fraction": 1.0,
+        "visible_gui_ok": false,
+        "display": {
+          "platform": "cocoa",
+          "dpr": 2.0,
+          "size": [
+            1320,
+            920
+          ],
+          "screen": "Built-in Retina Display",
+          "exposed": false
+        },
+        "paint_events": 131,
+        "hold": 60.01349988800939,
+        "radio": {
+          "frames": 128120,
+          "samples": 111720640,
+          "empty_status_frames": 2101,
+          "send_nodes": 32030,
+          "mean_send_margin": 0.1263795355363454,
+          "mcu_queue_peak": 4,
+          "min_slack_ticks": 68569,
+          "sampled_queue_max": 3,
+          "send_ticks_max": 628370,
+          "send_over_budget_nodes": 2807,
+          "headroom_pass": false
+        },
+        "scan": {
+          "requested": false,
+          "completed": false,
+          "candidate_count": null
+        },
+        "analysis_mode": null,
+        "analysis_synthetic": false,
+        "acquisition": {
+          "frames": 150268,
+          "samples": 131033696,
+          "empty_status_frames": 2138,
+          "send_nodes": 37566,
+          "mean_send_margin": 0.1356151070602476,
+          "mcu_queue_peak": 4,
+          "min_slack_ticks": 68569,
+          "sampled_queue_max": 3,
+          "send_ticks_max": 628370,
+          "send_over_budget_nodes": 2841,
+          "headroom_pass": false
+        },
+        "reserve_screen": {
+          "publicly_accepted": false,
+          "capacity": 16,
+          "legacy_headroom_pass": false,
+          "free_at_peak": 12,
+          "passes": true,
+          "criterion": "Mean margin >=10%, cumulative peak strictly below half capacity, positive slack; private screen only"
+        },
+        "scope": "Functional V20 private screen; public acceptance remains false"
+      },
+      "periodic_metrics": [
+        {
+          "elapsed": 5.0871366820065305,
+          "paint_fps_interval": 2.162387175784179,
+          "raster_published": 1,
+          "raster_worker_ms": 1038.0296719959006,
+          "raster_error": null,
+          "gui_delay_max_ms": 168.25948609039187,
+          "radio_playing_seconds": null
+        },
+        {
+          "elapsed": 10.41862289805431,
+          "paint_fps_interval": 1.907986517577103,
+          "raster_published": 6,
+          "raster_worker_ms": 670.2157319523394,
+          "raster_error": null,
+          "gui_delay_max_ms": 257.2519240202382,
+          "radio_playing_seconds": 2.608539791079238
+        },
+        {
+          "elapsed": 15.381982323015109,
+          "paint_fps_interval": 1.7862159568723723,
+          "raster_published": 11,
+          "raster_worker_ms": 763.8350379420444,
+          "raster_error": null,
+          "gui_delay_max_ms": 257.2519240202382,
+          "radio_playing_seconds": 7.571659401059151
+        },
+        {
+          "elapsed": 20.46553360996768,
+          "paint_fps_interval": 1.7742408905051235,
+          "raster_published": 15,
+          "raster_worker_ms": 685.9230370027944,
+          "raster_error": null,
+          "gui_delay_max_ms": 257.2519240202382,
+          "radio_playing_seconds": 12.655306721106172
+        },
+        {
+          "elapsed": 25.589539670036174,
+          "paint_fps_interval": 1.97486242056651,
+          "raster_published": 20,
+          "raster_worker_ms": 680.5069929687306,
+          "raster_error": null,
+          "gui_delay_max_ms": 257.2519240202382,
+          "radio_playing_seconds": 17.77940506010782
+        },
+        {
+          "elapsed": 30.533841744996607,
+          "paint_fps_interval": 1.796891393712553,
+          "raster_published": 25,
+          "raster_worker_ms": 704.1386099299416,
+          "raster_error": null,
+          "gui_delay_max_ms": 263.7229081010446,
+          "radio_playing_seconds": 22.723572603077628
+        },
+        {
+          "elapsed": 35.615792753058486,
+          "paint_fps_interval": 1.7731594411996852,
+          "raster_published": 29,
+          "raster_worker_ms": 656.7004120443016,
+          "raster_error": null,
+          "gui_delay_max_ms": 263.7229081010446,
+          "radio_playing_seconds": 27.805447171092965
+        },
+        {
+          "elapsed": 40.93429461901542,
+          "paint_fps_interval": 1.8985811429090338,
+          "raster_published": 34,
+          "raster_worker_ms": 684.7656649770215,
+          "raster_error": null,
+          "gui_delay_max_ms": 263.7229081010446,
+          "radio_playing_seconds": 33.1245032120496
+        },
+        {
+          "elapsed": 45.94195378606673,
+          "paint_fps_interval": 1.7722145887993754,
+          "raster_published": 39,
+          "raster_worker_ms": 717.6057759206742,
+          "raster_error": null,
+          "gui_delay_max_ms": 263.7229081010446,
+          "radio_playing_seconds": 38.13160591002088
+        },
+        {
+          "elapsed": 51.09407557407394,
+          "paint_fps_interval": 1.765628741846153,
+          "raster_published": 43,
+          "raster_worker_ms": 661.2505749799311,
+          "raster_error": null,
+          "gui_delay_max_ms": 263.7229081010446,
+          "radio_playing_seconds": 43.283808423089795
+        },
+        {
+          "elapsed": 56.141024262062274,
+          "paint_fps_interval": 1.7653229402620028,
+          "raster_published": 48,
+          "raster_worker_ms": 677.4939459282905,
+          "raster_error": null,
+          "gui_delay_max_ms": 289.26087205763906,
+          "radio_playing_seconds": 48.33067613502499
+        },
+        {
+          "elapsed": 61.21573363500647,
+          "paint_fps_interval": 1.7729581906503225,
+          "raster_published": 52,
+          "raster_worker_ms": 649.9710089992732,
+          "raster_error": null,
+          "gui_delay_max_ms": 314.66622406151146,
+          "radio_playing_seconds": 53.40540917008184
+        },
+        {
+          "elapsed": 66.65755111502949,
+          "paint_fps_interval": 1.8450226477874343,
+          "raster_published": 57,
+          "raster_worker_ms": 715.0725909741595,
+          "raster_error": null,
+          "gui_delay_max_ms": 336.19613491464406,
+          "radio_playing_seconds": 58.84731972310692
+        },
+        {
+          "elapsed": 71.73484999698121,
+          "paint_fps_interval": 1.1795022183870065,
+          "raster_published": 61,
+          "raster_worker_ms": 617.8846920374781,
+          "raster_error": null,
+          "gui_delay_max_ms": 336.19613491464406,
+          "radio_playing_seconds": null
+        }
+      ],
+      "restoration": {
+        "ok": true,
+        "attempted": true,
+        "errors": [],
+        "material": {
+          "sources_exact": true,
+          "cache_exact": true,
+          "firmware_exact": true,
+          "relay_exact": true
+        },
+        "recovery": {
+          "snapshot_equal": true,
+          "continuous": true,
+          "integrity_ok": true,
+          "seconds": 10.02300342102535,
+          "detail": {
+            "hardware_restored": true,
+            "errors": [],
+            "recovery": {
+              "seconds": 10.02300342102535,
+              "samples": 313344,
+              "dropped": 0,
+              "fatal": 0,
+              "continuous": true
+            }
+          }
+        },
+        "final": {
+          "identity_equal": true,
+          "sources_exact": true,
+          "relay_configuration_equal": true,
+          "cpu_equal": true
+        }
+      }
+    }
+  ],
+  "offscreen_trial_excluded_from_visible_acceptance": true,
+  "product_changed": false,
+  "final_state": "Q free; exact V19 active; V20 stopped",
+  "limitations": [
+    "Pixel match limited to fixtures; smooth lines retain baseline renderer",
+    "Still below diagnostic 8 paints/s floor",
+    "Extra CPU/memory and broader UI/long-duration qualification required",
+    "No inference of improved hardware service margin from renderer benchmark"
+  ]
+}

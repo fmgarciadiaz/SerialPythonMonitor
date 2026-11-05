@@ -1,16 +1,23 @@
-# Arduscopio Q · pareja Arduino UNO Q
+# Arduscopio Q · parejas Arduino UNO Q
 
-La pareja actual es **[Scope V18](v18/README.md)**: MCU STM32 y relay Linux.
-Preparar Q se ejecuta desde el monitor V18; Conectar usa lo instalado.
+La pareja activa es **[Scope V19](v19/README.md)**, asociada a
+`monitor/v19`. Sus hashes de firmware y relay están verificados contra el
+recibo V19; la calificación física disponible cubre ADC8 CH1 a 1,860 MS/s y los
+smokes descritos en la documentación. V18 y V17 se conservan intactas como
+parejas anteriores.
+
+Para comprobar la pareja activa y sus componentes (V19):
 
 ```sh
-python tools/unoq.py status --version v18
-python -m monitor.v18.q_support.service --serial SERIAL --report diagnosticos/preparar_v18.json
+python tools/unoq.py inventory --version v19
+python tools/unoq.py status --version v19
 ```
 
-El preparador verifica la instalación aceptada o actualiza una pareja existente
-con backup y rollback. No selecciona firmware de otra versión. V17 permanece
-congelada y detenida; V16 y anteriores están en `historico/`.
+`inventory` es de solo lectura y muestra por separado las apps y relays activos.
+Para preparar o actualizar V19 usar el botón «Preparar Q», que verifica el
+recibo, respalda y conserva recuperación. No iniciar V18 junto con V19: ambos
+usan ADC/SPI/READY. V17 permanece congelada y detenida; las versiones anteriores
+están en `historico/`.
 
-[Guía actual](../docs/GUIA_V18.md) · [Arquitectura](../docs/ARQUITECTURA_V18.md) ·
+[Guía V19](../monitor/v19/README.md) · [Parejas y estado](../docs/VERSIONES.md) ·
 [Histórico](historico/README.md) · [Catálogo](apps_catalogo.json).

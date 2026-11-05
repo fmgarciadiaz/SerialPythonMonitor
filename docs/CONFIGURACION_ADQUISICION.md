@@ -2,6 +2,30 @@
 
 ## Perfiles de adquisición
 
+### V19 actualmente seleccionables
+
+Las tasas máximas del selector son por canal. En V19, la tabla resumen es:
+
+| Bits | CH1 máximo (kHz) | Dual máximo por canal (kHz) |
+|---|---:|---:|
+| 8 | 1860,465 | 632,411 |
+| 10 | 1355,932 | 519,481 |
+| 12 | 1103,448 | 437,158 |
+| 14 | 1000,000 | 363,636 |
+| 16, oversampling | 150,943 | 76,227 |
+
+Son tasas configurables, no aceptación física equivalente para toda la matriz.
+La evidencia de V19 califica la pareja y ADC8 CH1 a 1,860 MS/s; consultar
+[validación y alcance](PYSIDE_V19_COMPARACION.md) antes de atribuir estabilidad a
+otro perfil o a una carga concurrente.
+[Perfiles de V19](../monitor/v19/receiver/native_profiles.json) ·
+[Pareja activa](VERSIONES.md).
+
+### Perfiles heredados V16
+
+La tabla que sigue conserva el catálogo histórico V16 y no describe el selector
+actual V19.
+
 Todas las tasas son **por canal**, en **kHz**. En dual se capturan CH1 y CH2
 por disparo; en CH1 sólo A2. Se muestran tres decimales cuando hace falta para
 identificar la tasa en Hz enteros; la tasa efectiva depende del período aplicado.
@@ -50,9 +74,9 @@ shift derecho de dos bits. TIM2/TIM5 usan 1 MHz en dual heredado y 160 MHz en
 CH1 rápido y perfiles nativos. Los nativos se identifican mediante bits, ticks,
 tamaño de nodo y número de canales compartidos por las tres capas.
 
-[Perfiles disponibles en Python](../monitor/v16/receiver/unoq_acquisition.py) ·
-[Máximos nativos](../monitor/v16/receiver/native_profiles.json) ·
-[Tasas adicionales](../monitor/v16/receiver/additional_profiles.json) ·
+[Perfiles V16 archivados](../monitor/historico/v16/receiver/unoq_acquisition.py) ·
+[Máximos V16 archivados](../monitor/historico/v16/receiver/native_profiles.json) ·
+[Tasas adicionales V16](../monitor/historico/v16/receiver/additional_profiles.json) ·
 [Ensayo de las adicionales](../diagnosticos/resultados_v16/additional_rates_60s_20261012.json) ·
 [Evidencia de integración](../experimentos/maxfreq_dual_v16/RESULTADOS.md#incorporación-a-producción-completada).
 

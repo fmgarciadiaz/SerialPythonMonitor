@@ -1,0 +1,3326 @@
+{
+  "schema": 1,
+  "version": 20,
+  "private": true,
+  "promoted": false,
+  "private_firmware_activated": true,
+  "private_identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v20-20261031-225916-main-1",
+    "firmware_sha256": "52f933bdb9c632544624e5d4188a740a9cdb429596bfe5a4d926900e7538aefe",
+    "relay_sha256": "bf6893f5a0fbab8676120a5decd8c6109698fa852be02333918b1d6e4a2a909d"
+  },
+  "source_report": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v20/storage_lifetime_cycle_20261101/report.json",
+  "source_report_sha256": "298e09f178d140cc003bf03e4ce610e38f56b593f2afaa3440003718c035e9e8",
+  "working_receipt": {
+    "path": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v20/q_support/working_pair.json",
+    "sha256": "0708e10da6755ba09d27dafefd5b742b463c2c88647378de05454b69c22d4835"
+  },
+  "identity_before": {
+    "board_serial": "1060031107",
+    "app": "scope-v20-20261031-225916-main-1",
+    "firmware_sha256": "52f933bdb9c632544624e5d4188a740a9cdb429596bfe5a4d926900e7538aefe",
+    "relay_sha256": "bf6893f5a0fbab8676120a5decd8c6109698fa852be02333918b1d6e4a2a909d"
+  },
+  "requested_tests": {
+    "radio": true,
+    "wav": false,
+    "fm": false,
+    "synth_early_play": false,
+    "voices": null,
+    "synth_profile": null,
+    "hold_seconds": 120,
+    "stall_trace": true,
+    "window_seconds": 0,
+    "detail_percent": null,
+    "analysis_mode": "fft_radio",
+    "radio_adc_bits": 8,
+    "radio_adc_rate": 2000000,
+    "radio_a0_rate": 40000,
+    "wav_source": null,
+    "synth_prepare_timeout": null,
+    "synth_confirmed_hold_seconds": null,
+    "synth_dac_rate": null
+  },
+  "scope": "Installed working V20 audio screen; private, no public/analog acceptance",
+  "ok": true,
+  "host_sources": {
+    "tools/probe_working_v20_gui.py": "00d178a68ecf14408dfff5b4362db19ee9f9784b4a459ab105fbd9e762f552cf",
+    "tools/gui_private_v20.py": "2f91be0a470a84776f98ae68a6728c0d2c92574604ede815c36cb30f37bbf904",
+    "tools/private_v20_pair.py": "4f6f89eaa18f976d5ca1fce383da9962a18ac5abc4d4591970eb02f20f97859f",
+    "tools/gui_live_smoke_v20.py": "aae1ef8717df814615634713fd22404fec29c0c7a8dcc16585cd47b9515112f8",
+    "tools/synth_transition_scenario_v20.py": "b362a61da1110fc9e87a9b0a62983715b27e71cf0bee4889559957ea3b1fd6ea",
+    "monitor/v20/receiver/unoq_config_receiver.py": "c18e649ca951749e597778e5322587347531b5072500f3f328d4149e559475e1",
+    "monitor/v20/io/receiver_process.py": "9aba33676723459084894f0b1d65c5acfe5fd01d590b9262f7dc98571ed85d7d",
+    "monitor/v20/fm_source.py": "ec2f46b3984c92bb0c6ae2ec637dce3339d59595e4f5730c9460efdcc2419730",
+    "monitor/v20/fm_panel.py": "efe23240acc05b6b4c3b249fc76a9fbf2ae87e7266d8f33aed59ccbc93ba5955",
+    "monitor/v20/synth_process.py": "26a9b85f8c8fd8dfd2575ea3df2500618786a769e84784000035a9d230bd6d14",
+    "monitor/v20/app.py": "bb5903a92a21ca227b02e4e8c837c1abe37ab14652eb160fe64c25937af5d6ff",
+    "monitor/v20/temporal_raster.py": "2e54c5ae40bb4537b86f06f6ab7ee5e142ad2099302efad18942d34f6b5bc932",
+    "monitor/v20/scope_cursors.py": "90afa613efab8eac682932ca1006de3c0bd9717f46a36971d773ebd358bb9cb1"
+  },
+  "gui_command": [
+    "/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/bin/python",
+    "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/tools/gui_private_v20.py",
+    "--firmware-binding",
+    "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v20/installed_2000_radio120_r2_20261103/report.json",
+    "--serial",
+    "1060031107",
+    "--output",
+    "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v20/installed_2000_radio120_r2_20261103/gui.json",
+    "--bits",
+    "8",
+    "--rate",
+    "2000000",
+    "--fft-size",
+    "16384",
+    "--no-retune",
+    "--frequency-khz",
+    "710",
+    "--hold-radio-seconds",
+    "120",
+    "--duration",
+    "125",
+    "--stall-trace",
+    "--allow-internal-2m"
+  ],
+  "child_pid": 67982,
+  "execution_budget_seconds": 300,
+  "child_returncode": 0,
+  "gui": {
+    "errors": [],
+    "assertions": {
+      "radio_playing_40k": true,
+      "radio_stop_confirmed": true,
+      "radio_progress": true,
+      "radio_hold_completed": true,
+      "scan_completed": true,
+      "wav_playing": true,
+      "wav_progress": true,
+      "wav_stop_confirmed": true,
+      "fm_playing": true,
+      "fm_progress": true,
+      "fm_stop_confirmed": true,
+      "fm_hold_completed": true,
+      "fm_configured_voices_rendered": true,
+      "fm_sustained_voices_observed": true,
+      "fm_selected_dac_rate": true,
+      "shutdown_confirmed": true,
+      "worker_released": true
+    },
+    "display": {
+      "platform": "cocoa",
+      "dpr": 2.0,
+      "size": [
+        1320,
+        920
+      ],
+      "screen": "Built-in Retina Display",
+      "exposed": false
+    },
+    "paint_events": 2555,
+    "radio_hold_seconds": 120.00128026306629,
+    "synth_transition": {
+      "phase": "idle",
+      "requested_at": null,
+      "playing_at": null,
+      "stop_requested_at": null,
+      "stopped_at": null,
+      "session": null,
+      "played": 0,
+      "prepare_timeout": 120.0,
+      "hold_seconds": 5,
+      "stop_timeout": 10.0,
+      "hold_completed": false,
+      "complete": false,
+      "voice_observations": 0,
+      "voice_min": null,
+      "voice_max": null
+    },
+    "synth_remote_voice_peak": 0
+  },
+  "audio_phases": [
+    {
+      "stage": "radio_a0_playing_confirmed",
+      "elapsed": 7.675902653019875,
+      "applied_configuration": {
+        "bits": 8,
+        "rate": 2000000,
+        "channels": 1
+      },
+      "requested_voices": null,
+      "wav_active": true,
+      "radio_a0": true,
+      "radio_status": "RADIO 40 kHz \u00b7 152856 muestras",
+      "samples": 9740240,
+      "exposed": true,
+      "synth_transition": {
+        "phase": "idle",
+        "requested_at": null,
+        "playing_at": null,
+        "stop_requested_at": null,
+        "stopped_at": null,
+        "session": null,
+        "played": 0,
+        "prepare_timeout": 120.0,
+        "hold_seconds": 5,
+        "stop_timeout": 10.0,
+        "hold_completed": false,
+        "complete": false,
+        "voice_observations": 0,
+        "voice_min": null,
+        "voice_max": null
+      },
+      "synth_preparation": {
+        "request_pending": false,
+        "task_present": false,
+        "task_done": null,
+        "active": false,
+        "requested_rate": null,
+        "active_rate": null,
+        "synth_process_created": false
+      },
+      "synth_source": null
+    },
+    {
+      "stage": "before_stop",
+      "elapsed": 127.67727254307829,
+      "applied_configuration": {
+        "bits": 8,
+        "rate": 2000000,
+        "channels": 1
+      },
+      "requested_voices": null,
+      "wav_active": true,
+      "radio_a0": true,
+      "radio_status": "RADIO 40 kHz \u00b7 4949048 muestras",
+      "samples": 249593432,
+      "exposed": true,
+      "synth_transition": {
+        "phase": "idle",
+        "requested_at": null,
+        "playing_at": null,
+        "stop_requested_at": null,
+        "stopped_at": null,
+        "session": null,
+        "played": 0,
+        "prepare_timeout": 120.0,
+        "hold_seconds": 5,
+        "stop_timeout": 10.0,
+        "hold_completed": false,
+        "complete": false,
+        "voice_observations": 0,
+        "voice_min": null,
+        "voice_max": null
+      },
+      "synth_preparation": {
+        "request_pending": false,
+        "task_present": false,
+        "task_done": null,
+        "active": false,
+        "requested_rate": null,
+        "active_rate": null,
+        "synth_process_created": false
+      },
+      "synth_source": null
+    },
+    {
+      "stage": "before_close",
+      "elapsed": 132.70004270307254,
+      "applied_configuration": {
+        "bits": 8,
+        "rate": 2000000,
+        "channels": 1
+      },
+      "requested_voices": null,
+      "wav_active": false,
+      "radio_a0": false,
+      "radio_status": "RADIO apagada",
+      "samples": 259640616,
+      "exposed": true,
+      "synth_transition": {
+        "phase": "idle",
+        "requested_at": null,
+        "playing_at": null,
+        "stop_requested_at": null,
+        "stopped_at": null,
+        "session": null,
+        "played": 0,
+        "prepare_timeout": 120.0,
+        "hold_seconds": 5,
+        "stop_timeout": 10.0,
+        "hold_completed": false,
+        "complete": false,
+        "voice_observations": 0,
+        "voice_min": null,
+        "voice_max": null
+      },
+      "synth_preparation": {
+        "request_pending": false,
+        "task_present": false,
+        "task_done": null,
+        "active": false,
+        "requested_rate": null,
+        "active_rate": null,
+        "synth_process_created": false
+      },
+      "synth_source": null
+    }
+  ],
+  "exposure": {
+    "periodic_samples": 26,
+    "exposed_fraction": 1.0,
+    "exposure_sufficient": true,
+    "note": "Exposure only; no visible FPS or analog acceptance inferred."
+  },
+  "metrics": {
+    "profile": [
+      8,
+      2000000,
+      80,
+      3488,
+      1
+    ],
+    "node_budget_ticks": 279040,
+    "epoch_count": 1,
+    "all": {
+      "frames": 298028,
+      "samples": 259880416,
+      "empty_status_frames": 3825,
+      "send_nodes": 74506,
+      "mean_send_margin": 0.011028069025042386,
+      "mcu_queue_peak": 10,
+      "min_slack_ticks": 48194,
+      "sampled_queue_max": 10,
+      "send_ticks_max": 673771,
+      "send_over_budget_nodes": 34373,
+      "headroom_pass": false
+    },
+    "radio_playing": {
+      "frames": 275146,
+      "samples": 239927312,
+      "empty_status_frames": 3786,
+      "send_nodes": 68786,
+      "mean_send_margin": 0.006005293327053907,
+      "mcu_queue_peak": 10,
+      "min_slack_ticks": 48194,
+      "sampled_queue_max": 10,
+      "send_ticks_max": 673771,
+      "send_over_budget_nodes": 32314,
+      "headroom_pass": false
+    },
+    "phases": {
+      "playing": {
+        "frames": 275135,
+        "samples": 239917720,
+        "empty_status_frames": 3786,
+        "send_nodes": 68784,
+        "mean_send_margin": 0.006005173725761037,
+        "mcu_queue_peak": 10,
+        "min_slack_ticks": 48194,
+        "sampled_queue_max": 10,
+        "send_ticks_max": 673771,
+        "send_over_budget_nodes": 32313,
+        "headroom_pass": false
+      },
+      "preparing": {
+        "frames": 1463,
+        "samples": 1275736,
+        "empty_status_frames": 21,
+        "send_nodes": 366,
+        "mean_send_margin": 0.0400913299148995,
+        "mcu_queue_peak": 9,
+        "min_slack_ticks": 51528,
+        "sampled_queue_max": 9,
+        "send_ticks_max": 580544,
+        "send_over_budget_nodes": 148,
+        "headroom_pass": false
+      },
+      "starting": {
+        "frames": 8,
+        "samples": 6976,
+        "empty_status_frames": 1,
+        "send_nodes": 2,
+        "mean_send_margin": -0.06931264334862375,
+        "mcu_queue_peak": 9,
+        "min_slack_ticks": 51528,
+        "sampled_queue_max": 9,
+        "send_ticks_max": 355877,
+        "send_over_budget_nodes": 1,
+        "headroom_pass": false
+      },
+      "stopped": {
+        "frames": 21411,
+        "samples": 18670392,
+        "empty_status_frames": 17,
+        "send_nodes": 5352,
+        "mean_send_margin": 0.07362526205585496,
+        "mcu_queue_peak": 10,
+        "min_slack_ticks": 48194,
+        "sampled_queue_max": 3,
+        "send_ticks_max": 397056,
+        "send_over_budget_nodes": 1910,
+        "headroom_pass": false
+      },
+      "stopping": {
+        "frames": 11,
+        "samples": 9592,
+        "empty_status_frames": 0,
+        "send_nodes": 2,
+        "mean_send_margin": 0.010118620986238502,
+        "mcu_queue_peak": 10,
+        "min_slack_ticks": 48194,
+        "sampled_queue_max": 2,
+        "send_ticks_max": 305708,
+        "send_over_budget_nodes": 1,
+        "headroom_pass": false
+      }
+    },
+    "phase_events": [
+      {
+        "kind": "phase",
+        "phase": "stopped",
+        "previous": "acquisition",
+        "last_observed_rf": null
+      },
+      {
+        "kind": "first_rf_in_phase",
+        "phase": "stopped",
+        "snapshot": {
+          "epoch": "118",
+          "node": 0,
+          "index": 0,
+          "queue": 0,
+          "queue_peak": 0,
+          "slack_min_ticks": 4294967295
+        }
+      },
+      {
+        "kind": "cumulative_peak",
+        "phase": "stopped",
+        "previous_peak": null,
+        "snapshot": {
+          "epoch": "118",
+          "node": 0,
+          "index": 0,
+          "queue": 0,
+          "queue_peak": 0,
+          "slack_min_ticks": 4294967295,
+          "copy_max_ticks": 0,
+          "poll_max_ticks": 58,
+          "previous_node_send_ticks": 0,
+          "previous_batch_prepare_us": 104,
+          "previous_batch_check_us": 58,
+          "previous_batch_origin": "unknown"
+        },
+        "host_observed_at": 1000473.347232036,
+        "recent_chunks": []
+      },
+      {
+        "kind": "cumulative_peak",
+        "phase": "stopped",
+        "previous_peak": 0,
+        "snapshot": {
+          "epoch": "118",
+          "node": 0,
+          "index": 0,
+          "queue": 1,
+          "queue_peak": 1,
+          "slack_min_ticks": 167093,
+          "copy_max_ticks": 37428,
+          "poll_max_ticks": 176836,
+          "previous_node_send_ticks": 0,
+          "previous_batch_prepare_us": 105,
+          "previous_batch_check_us": 65,
+          "previous_batch_origin": "same_epoch_profile"
+        },
+        "host_observed_at": 1000473.349757606,
+        "recent_chunks": []
+      },
+      {
+        "kind": "cumulative_peak",
+        "phase": "stopped",
+        "previous_peak": 1,
+        "snapshot": {
+          "epoch": "118",
+          "node": 1,
+          "index": 3488,
+          "queue": 1,
+          "queue_peak": 2,
+          "slack_min_ticks": 167093,
+          "copy_max_ticks": 38945,
+          "poll_max_ticks": 207109,
+          "previous_node_send_ticks": 240242,
+          "previous_batch_prepare_us": 112,
+          "previous_batch_check_us": 58,
+          "previous_batch_origin": "same_epoch_profile"
+        },
+        "host_observed_at": 1000473.35229197,
+        "recent_chunks": []
+      },
+      {
+        "kind": "phase",
+        "phase": "preparing",
+        "previous": "stopped",
+        "last_observed_rf": {
+          "epoch": "118",
+          "node": 2447,
+          "index": 8536880,
+          "queue": 1,
+          "queue_peak": 2,
+          "slack_min_ticks": 64415
+        }
+      },
+      {
+        "kind": "first_rf_in_phase",
+        "phase": "preparing",
+        "snapshot": {
+          "epoch": "118",
+          "node": 2447,
+          "index": 8537752,
+          "queue": 1,
+          "queue_peak": 2,
+          "slack_min_ticks": 64415
+        }
+      },
+      {
+        "kind": "cumulative_peak",
+        "phase": "preparing",
+        "previous_peak": 2,
+        "snapshot": {
+          "epoch": "118",
+          "node": 2448,
+          "index": 8538624,
+          "queue": 2,
+          "queue_peak": 3,
+          "slack_min_ticks": 64415,
+          "copy_max_ticks": 39329,
+          "poll_max_ticks": 211922,
+          "previous_node_send_ticks": 392461,
+          "previous_batch_prepare_us": 107,
+          "previous_batch_check_us": 58,
+          "previous_batch_origin": "same_epoch_profile"
+        },
+        "host_observed_at": 1000477.623637176,
+        "recent_chunks": []
+      },
+      {
+        "kind": "cumulative_peak",
+        "phase": "preparing",
+        "previous_peak": 3,
+        "snapshot": {
+          "epoch": "118",
+          "node": 2746,
+          "index": 9578048,
+          "queue": 3,
+          "queue_peak": 4,
+          "slack_min_ticks": 64415,
+          "copy_max_ticks": 39329,
+          "poll_max_ticks": 211922,
+          "previous_node_send_ticks": 580544,
+          "previous_batch_prepare_us": 110,
+          "previous_batch_check_us": 382,
+          "previous_batch_origin": "same_epoch_profile"
+        },
+        "host_observed_at": 1000478.146447504,
+        "recent_chunks": [
+          {
+            "sent_at": 1000478.135769647,
+            "phase": "preparing",
+            "request_id": 4153447377
+          },
+          {
+            "sent_at": 1000478.135859662,
+            "phase": "preparing",
+            "request_id": 4153447378
+          },
+          {
+            "sent_at": 1000478.135932599,
+            "phase": "preparing",
+            "request_id": 4153447379
+          },
+          {
+            "sent_at": 1000478.135999232,
+            "phase": "preparing",
+            "request_id": 4153447380
+          },
+          {
+            "sent_at": 1000478.136062786,
+            "phase": "preparing",
+            "request_id": 4153447381
+          },
+          {
+            "sent_at": 1000478.136124864,
+            "phase": "preparing",
+            "request_id": 4153447382
+          },
+          {
+            "sent_at": 1000478.1361858,
+            "phase": "preparing",
+            "request_id": 4153447383
+          },
+          {
+            "sent_at": 1000478.142144851,
+            "phase": "preparing",
+            "request_id": 4153447384
+          }
+        ]
+      },
+      {
+        "kind": "cumulative_peak",
+        "phase": "preparing",
+        "previous_peak": 4,
+        "snapshot": {
+          "epoch": "118",
+          "node": 2750,
+          "index": 9592000,
+          "queue": 4,
+          "queue_peak": 5,
+          "slack_min_ticks": 64415,
+          "copy_max_ticks": 39329,
+          "poll_max_ticks": 213887,
+          "previous_node_send_ticks": 389849,
+          "previous_batch_prepare_us": 106,
+          "previous_batch_check_us": 58,
+          "previous_batch_origin": "same_epoch_profile"
+        },
+        "host_observed_at": 1000478.154656879,
+        "recent_chunks": [
+          {
+            "sent_at": 1000478.135932599,
+            "phase": "preparing",
+            "request_id": 4153447379
+          },
+          {
+            "sent_at": 1000478.135999232,
+            "phase": "preparing",
+            "request_id": 4153447380
+          },
+          {
+            "sent_at": 1000478.136062786,
+            "phase": "preparing",
+            "request_id": 4153447381
+          },
+          {
+            "sent_at": 1000478.136124864,
+            "phase": "preparing",
+            "request_id": 4153447382
+          },
+          {
+            "sent_at": 1000478.1361858,
+            "phase": "preparing",
+            "request_id": 4153447383
+          },
+          {
+            "sent_at": 1000478.142144851,
+            "phase": "preparing",
+            "request_id": 4153447384
+          },
+          {
+            "sent_at": 1000478.148549621,
+            "phase": "preparing",
+            "request_id": 4153447385
+          },
+          {
+            "sent_at": 1000478.154163819,
+            "phase": "preparing",
+            "request_id": 4153447386
+          }
+        ]
+      },
+      {
+        "kind": "cumulative_peak",
+        "phase": "preparing",
+        "previous_peak": 5,
+        "snapshot": {
+          "epoch": "118",
+          "node": 2759,
+          "index": 9623392,
+          "queue": 5,
+          "queue_peak": 6,
+          "slack_min_ticks": 51528,
+          "copy_max_ticks": 39668,
+          "poll_max_ticks": 213887,
+          "previous_node_send_ticks": 415435,
+          "previous_batch_prepare_us": 112,
+          "previous_batch_check_us": 58,
+          "previous_batch_origin": "same_epoch_profile"
+        },
+        "host_observed_at": 1000478.172176863,
+        "recent_chunks": [
+          {
+            "sent_at": 1000478.136062786,
+            "phase": "preparing",
+            "request_id": 4153447381
+          },
+          {
+            "sent_at": 1000478.136124864,
+            "phase": "preparing",
+            "request_id": 4153447382
+          },
+          {
+            "sent_at": 1000478.1361858,
+            "phase": "preparing",
+            "request_id": 4153447383
+          },
+          {
+            "sent_at": 1000478.142144851,
+            "phase": "preparing",
+            "request_id": 4153447384
+          },
+          {
+            "sent_at": 1000478.148549621,
+            "phase": "preparing",
+            "request_id": 4153447385
+          },
+          {
+            "sent_at": 1000478.154163819,
+            "phase": "preparing",
+            "request_id": 4153447386
+          },
+          {
+            "sent_at": 1000478.160471361,
+            "phase": "preparing",
+            "request_id": 4153447387
+          },
+          {
+            "sent_at": 1000478.166262143,
+            "phase": "preparing",
+            "request_id": 4153447388
+          }
+        ]
+      },
+      {
+        "kind": "cumulative_peak",
+        "phase": "preparing",
+        "previous_peak": 6,
+        "snapshot": {
+          "epoch": "118",
+          "node": 2775,
+          "index": 9679200,
+          "queue": 6,
+          "queue_peak": 7,
+          "slack_min_ticks": 51528,
+          "copy_max_ticks": 39668,
+          "poll_max_ticks": 220165,
+          "previous_node_send_ticks": 407729,
+          "previous_batch_prepare_us": 113,
+          "previous_batch_check_us": 58,
+          "previous_batch_origin": "same_epoch_profile"
+        },
+        "host_observed_at": 1000478.202706978,
+        "recent_chunks": [
+          {
+            "sent_at": 1000478.154163819,
+            "phase": "preparing",
+            "request_id": 4153447386
+          },
+          {
+            "sent_at": 1000478.160471361,
+            "phase": "preparing",
+            "request_id": 4153447387
+          },
+          {
+            "sent_at": 1000478.166262143,
+            "phase": "preparing",
+            "request_id": 4153447388
+          },
+          {
+            "sent_at": 1000478.172661631,
+            "phase": "preparing",
+            "request_id": 4153447389
+          },
+          {
+            "sent_at": 1000478.178438946,
+            "phase": "preparing",
+            "request_id": 4153447390
+          },
+          {
+            "sent_at": 1000478.184787254,
+            "phase": "preparing",
+            "request_id": 4153447391
+          },
+          {
+            "sent_at": 1000478.191230375,
+            "phase": "preparing",
+            "request_id": 4153447392
+          },
+          {
+            "sent_at": 1000478.196638967,
+            "phase": "preparing",
+            "request_id": 4153447393
+          }
+        ]
+      },
+      {
+        "kind": "cumulative_peak",
+        "phase": "preparing",
+        "previous_peak": 7,
+        "snapshot": {
+          "epoch": "118",
+          "node": 2796,
+          "index": 9752448,
+          "queue": 7,
+          "queue_peak": 8,
+          "slack_min_ticks": 51528,
+          "copy_max_ticks": 39668,
+          "poll_max_ticks": 220165,
+          "previous_node_send_ticks": 293590,
+          "previous_batch_prepare_us": 117,
+          "previous_batch_check_us": 58,
+          "previous_batch_origin": "same_epoch_profile"
+        },
+        "host_observed_at": 1000478.240646792,
+        "recent_chunks": [
+          {
+            "sent_at": 1000478.196638967,
+            "phase": "preparing",
+            "request_id": 4153447393
+          },
+          {
+            "sent_at": 1000478.203651606,
+            "phase": "preparing",
+            "request_id": 4153447394
+          },
+          {
+            "sent_at": 1000478.218238321,
+            "phase": "preparing",
+            "request_id": 4153447395
+          },
+          {
+            "sent_at": 1000478.227893676,
+            "phase": "preparing",
+            "request_id": 4153447396
+          },
+          {
+            "sent_at": 1000478.229486416,
+            "phase": "preparing",
+            "request_id": 4153447397
+          },
+          {
+            "sent_at": 1000478.231013613,
+            "phase": "preparing",
+            "request_id": 4153447398
+          },
+          {
+            "sent_at": 1000478.232267488,
+            "phase": "preparing",
+            "request_id": 4153447399
+          },
+          {
+            "sent_at": 1000478.238515697,
+            "phase": "preparing",
+            "request_id": 4153447400
+          }
+        ]
+      },
+      {
+        "kind": "cumulative_peak",
+        "phase": "preparing",
+        "previous_peak": 8,
+        "snapshot": {
+          "epoch": "118",
+          "node": 2801,
+          "index": 9769888,
+          "queue": 8,
+          "queue_peak": 9,
+          "slack_min_ticks": 51528,
+          "copy_max_ticks": 39668,
+          "poll_max_ticks": 220165,
+          "previous_node_send_ticks": 415656,
+          "previous_batch_prepare_us": 112,
+          "previous_batch_check_us": 58,
+          "previous_batch_origin": "same_epoch_profile"
+        },
+        "host_observed_at": 1000478.25088502,
+        "recent_chunks": [
+          {
+            "sent_at": 1000478.218238321,
+            "phase": "preparing",
+            "request_id": 4153447395
+          },
+          {
+            "sent_at": 1000478.227893676,
+            "phase": "preparing",
+            "request_id": 4153447396
+          },
+          {
+            "sent_at": 1000478.229486416,
+            "phase": "preparing",
+            "request_id": 4153447397
+          },
+          {
+            "sent_at": 1000478.231013613,
+            "phase": "preparing",
+            "request_id": 4153447398
+          },
+          {
+            "sent_at": 1000478.232267488,
+            "phase": "preparing",
+            "request_id": 4153447399
+          },
+          {
+            "sent_at": 1000478.238515697,
+            "phase": "preparing",
+            "request_id": 4153447400
+          },
+          {
+            "sent_at": 1000478.245099916,
+            "phase": "preparing",
+            "request_id": 4153447401
+          },
+          {
+            "sent_at": 1000478.250396041,
+            "phase": "preparing",
+            "request_id": 4153447402
+          }
+        ]
+      },
+      {
+        "kind": "phase",
+        "phase": "starting",
+        "previous": "preparing",
+        "last_observed_rf": {
+          "epoch": "118",
+          "node": 2813,
+          "index": 9812616,
+          "queue": 8,
+          "queue_peak": 9,
+          "slack_min_ticks": 51528
+        }
+      },
+      {
+        "kind": "first_rf_in_phase",
+        "phase": "starting",
+        "snapshot": {
+          "epoch": "118",
+          "node": 2813,
+          "index": 9813488,
+          "queue": 8,
+          "queue_peak": 9,
+          "slack_min_ticks": 51528
+        }
+      },
+      {
+        "kind": "phase",
+        "phase": "playing",
+        "previous": "starting",
+        "last_observed_rf": {
+          "epoch": "118",
+          "node": 2815,
+          "index": 9819592,
+          "queue": 8,
+          "queue_peak": 9,
+          "slack_min_ticks": 51528
+        }
+      },
+      {
+        "kind": "first_rf_in_phase",
+        "phase": "playing",
+        "snapshot": {
+          "epoch": "118",
+          "node": 2815,
+          "index": 9820464,
+          "queue": 8,
+          "queue_peak": 9,
+          "slack_min_ticks": 51528
+        }
+      },
+      {
+        "kind": "cumulative_peak",
+        "phase": "playing",
+        "previous_peak": 9,
+        "snapshot": {
+          "epoch": "118",
+          "node": 2817,
+          "index": 9825696,
+          "queue": 9,
+          "queue_peak": 10,
+          "slack_min_ticks": 51528,
+          "copy_max_ticks": 39832,
+          "poll_max_ticks": 220165,
+          "previous_node_send_ticks": 284965,
+          "previous_batch_prepare_us": 111,
+          "previous_batch_check_us": 58,
+          "previous_batch_origin": "same_epoch_profile"
+        },
+        "host_observed_at": 1000478.28050276,
+        "recent_chunks": [
+          {
+            "sent_at": 1000478.231013613,
+            "phase": "preparing",
+            "request_id": 4153447398
+          },
+          {
+            "sent_at": 1000478.232267488,
+            "phase": "preparing",
+            "request_id": 4153447399
+          },
+          {
+            "sent_at": 1000478.238515697,
+            "phase": "preparing",
+            "request_id": 4153447400
+          },
+          {
+            "sent_at": 1000478.245099916,
+            "phase": "preparing",
+            "request_id": 4153447401
+          },
+          {
+            "sent_at": 1000478.250396041,
+            "phase": "preparing",
+            "request_id": 4153447402
+          },
+          {
+            "sent_at": 1000478.256489495,
+            "phase": "preparing",
+            "request_id": 4153447403
+          },
+          {
+            "sent_at": 1000478.262237734,
+            "phase": "preparing",
+            "request_id": 4153447404
+          },
+          {
+            "sent_at": 1000478.268660859,
+            "phase": "preparing",
+            "request_id": 4153447405
+          }
+        ]
+      },
+      {
+        "kind": "phase",
+        "phase": "stopping",
+        "previous": "playing",
+        "last_observed_rf": {
+          "epoch": "118",
+          "node": 71599,
+          "index": 249737312,
+          "queue": 1,
+          "queue_peak": 10,
+          "slack_min_ticks": 48194
+        }
+      },
+      {
+        "kind": "first_rf_in_phase",
+        "phase": "stopping",
+        "snapshot": {
+          "epoch": "118",
+          "node": 71599,
+          "index": 249738184,
+          "queue": 1,
+          "queue_peak": 10,
+          "slack_min_ticks": 48194
+        }
+      },
+      {
+        "kind": "phase",
+        "phase": "stopped",
+        "previous": "stopping",
+        "last_observed_rf": {
+          "epoch": "118",
+          "node": 71601,
+          "index": 249746904,
+          "queue": 1,
+          "queue_peak": 10,
+          "slack_min_ticks": 48194
+        }
+      }
+    ],
+    "phase_events_omitted": 0,
+    "slowest_node_observations": [
+      {
+        "epoch": "118",
+        "node": 65193,
+        "index": 227393184,
+        "queue": 2,
+        "queue_peak": 10,
+        "slack_min_ticks": 48194,
+        "copy_max_ticks": 40218,
+        "poll_max_ticks": 228532,
+        "previous_node_send_ticks": 673771,
+        "previous_batch_prepare_us": 110,
+        "previous_batch_check_us": 126,
+        "previous_batch_origin": "same_epoch_profile",
+        "phase": "playing"
+      },
+      {
+        "epoch": "118",
+        "node": 64650,
+        "index": 225499200,
+        "queue": 6,
+        "queue_peak": 10,
+        "slack_min_ticks": 48194,
+        "copy_max_ticks": 40218,
+        "poll_max_ticks": 228532,
+        "previous_node_send_ticks": 630080,
+        "previous_batch_prepare_us": 117,
+        "previous_batch_check_us": 58,
+        "previous_batch_origin": "same_epoch_profile",
+        "phase": "playing"
+      },
+      {
+        "epoch": "118",
+        "node": 20838,
+        "index": 72682944,
+        "queue": 5,
+        "queue_peak": 10,
+        "slack_min_ticks": 49952,
+        "copy_max_ticks": 40203,
+        "poll_max_ticks": 228248,
+        "previous_node_send_ticks": 589500,
+        "previous_batch_prepare_us": 110,
+        "previous_batch_check_us": 309,
+        "previous_batch_origin": "same_epoch_profile",
+        "phase": "playing"
+      },
+      {
+        "epoch": "118",
+        "node": 53811,
+        "index": 187692768,
+        "queue": 2,
+        "queue_peak": 10,
+        "slack_min_ticks": 49952,
+        "copy_max_ticks": 40203,
+        "poll_max_ticks": 228532,
+        "previous_node_send_ticks": 585026,
+        "previous_batch_prepare_us": 116,
+        "previous_batch_check_us": 58,
+        "previous_batch_origin": "same_epoch_profile",
+        "phase": "playing"
+      },
+      {
+        "epoch": "118",
+        "node": 52593,
+        "index": 183444384,
+        "queue": 2,
+        "queue_peak": 10,
+        "slack_min_ticks": 49952,
+        "copy_max_ticks": 40203,
+        "poll_max_ticks": 228532,
+        "previous_node_send_ticks": 582884,
+        "previous_batch_prepare_us": 110,
+        "previous_batch_check_us": 383,
+        "previous_batch_origin": "same_epoch_profile",
+        "phase": "playing"
+      },
+      {
+        "epoch": "118",
+        "node": 47437,
+        "index": 165460256,
+        "queue": 3,
+        "queue_peak": 10,
+        "slack_min_ticks": 49952,
+        "copy_max_ticks": 40203,
+        "poll_max_ticks": 228532,
+        "previous_node_send_ticks": 581862,
+        "previous_batch_prepare_us": 110,
+        "previous_batch_check_us": 384,
+        "previous_batch_origin": "same_epoch_profile",
+        "phase": "playing"
+      },
+      {
+        "epoch": "118",
+        "node": 51505,
+        "index": 179649440,
+        "queue": 2,
+        "queue_peak": 10,
+        "slack_min_ticks": 49952,
+        "copy_max_ticks": 40203,
+        "poll_max_ticks": 228532,
+        "previous_node_send_ticks": 581815,
+        "previous_batch_prepare_us": 109,
+        "previous_batch_check_us": 58,
+        "previous_batch_origin": "same_epoch_profile",
+        "phase": "playing"
+      },
+      {
+        "epoch": "118",
+        "node": 10015,
+        "index": 34932320,
+        "queue": 2,
+        "queue_peak": 10,
+        "slack_min_ticks": 49952,
+        "copy_max_ticks": 40203,
+        "poll_max_ticks": 228248,
+        "previous_node_send_ticks": 580803,
+        "previous_batch_prepare_us": 110,
+        "previous_batch_check_us": 58,
+        "previous_batch_origin": "same_epoch_profile",
+        "phase": "playing"
+      }
+    ],
+    "node_timing_note": "Eight largest previous-node sends, one observation per epoch/node start. Copy/poll are cumulative MCU maxima; prepare/check refer to previous physical batch. Same observation does not establish simultaneity or causality.",
+    "chunk_timing": {
+      "preparing": {
+        "count": 30,
+        "max_gap_ms": 14.586715027689934,
+        "gaps": {
+          "lt1ms": 7,
+          "1to3ms": 3,
+          "3to6ms": 7,
+          "6to12ms": 11,
+          "ge12ms": 1
+        }
+      },
+      "playing": {
+        "count": 9991,
+        "max_gap_ms": 136.56597502995282,
+        "gaps": {
+          "lt1ms": 6192,
+          "1to3ms": 11,
+          "3to6ms": 714,
+          "6to12ms": 909,
+          "ge12ms": 2164
+        }
+      }
+    },
+    "physical_batch_mix": {
+      "acquisition:other+other": 20,
+      "acquisition:wav+other": 1,
+      "stopped:other+other": 6156,
+      "stopped:other+idle": 2,
+      "stopped:rf+rf": 10690,
+      "stopped:wav+rf": 2,
+      "stopped:rf+idle": 15,
+      "stopped:other+rf": 13,
+      "preparing:rf+idle": 21,
+      "preparing:rf+rf": 706,
+      "preparing:wav+rf": 31,
+      "starting:rf+idle": 1,
+      "starting:rf+rf": 3,
+      "starting:wav+rf": 1,
+      "playing:rf+idle": 3717,
+      "playing:rf+rf": 129727,
+      "playing:wav+rf": 11964,
+      "playing:wav+idle": 69,
+      "stopping:rf+rf": 5,
+      "stopping:wav+rf": 1,
+      "stopped:wav+other": 2
+    },
+    "physical_batch_mix_omitted": 0,
+    "final_rf_followed_by_idle": {
+      "stopped": 15,
+      "preparing": 21,
+      "starting": 1,
+      "playing": 3717
+    },
+    "wav_rf_max_consecutive_batches": {
+      "stopped": 1,
+      "preparing": 9,
+      "starting": 1,
+      "playing": 8,
+      "stopping": 1
+    },
+    "stop_roundtrips": [
+      {
+        "request_id": 4153459440,
+        "roundtrip_ms": 4.428169107995927,
+        "state": 0,
+        "reason": 0
+      }
+    ],
+    "stop_pending_count": 0,
+    "stop_observations_omitted": 0,
+    "wav_chunk_timing": null,
+    "ordinary_timing_valid": true,
+    "performance_acceptance_eligible": true,
+    "spi_batch_timing": {
+      "histogram_upper_bounds_exclusive_us": [
+        5,
+        10,
+        20,
+        50,
+        100,
+        200,
+        500,
+        1000,
+        5000
+      ],
+      "groups": [
+        {
+          "observed_phase": "playing",
+          "previous_batch": "playing:rf+idle",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 3717,
+            "total_us": 485919,
+            "min_us": 106,
+            "max_us": 366,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              3394,
+              323,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 130.72881355932202
+          },
+          "check": {
+            "count": 3717,
+            "total_us": 219805,
+            "min_us": 58,
+            "max_us": 309,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              3709,
+              5,
+              3,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 59.135055152004306
+          }
+        },
+        {
+          "observed_phase": "playing",
+          "previous_batch": "playing:rf+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 129726,
+            "total_us": 20124150,
+            "min_us": 110,
+            "max_us": 417,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              119830,
+              9896,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 155.12811618334027
+          },
+          "check": {
+            "count": 129726,
+            "total_us": 8613028,
+            "min_us": 58,
+            "max_us": 389,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              123673,
+              3623,
+              2430,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 66.39399966082358
+          }
+        },
+        {
+          "observed_phase": "playing",
+          "previous_batch": "playing:wav+idle",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 69,
+            "total_us": 20711,
+            "min_us": 105,
+            "max_us": 491,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              34,
+              35,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 300.15942028985506
+          },
+          "check": {
+            "count": 69,
+            "total_us": 4371,
+            "min_us": 58,
+            "max_us": 127,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              65,
+              4,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 63.34782608695652
+          }
+        },
+        {
+          "observed_phase": "playing",
+          "previous_batch": "playing:wav+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 11964,
+            "total_us": 1799853,
+            "min_us": 108,
+            "max_us": 413,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              10879,
+              1085,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 150.43906720160481
+          },
+          "check": {
+            "count": 11964,
+            "total_us": 1396675,
+            "min_us": 58,
+            "max_us": 391,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              5509,
+              5451,
+              1004,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 116.73980274155801
+          }
+        },
+        {
+          "observed_phase": "playing",
+          "previous_batch": "starting:rf+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 1,
+            "total_us": 161,
+            "min_us": 161,
+            "max_us": 161,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 161.0
+          },
+          "check": {
+            "count": 1,
+            "total_us": 90,
+            "min_us": 90,
+            "max_us": 90,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 90.0
+          }
+        },
+        {
+          "observed_phase": "playing",
+          "previous_batch": "starting:wav+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 1,
+            "total_us": 110,
+            "min_us": 110,
+            "max_us": 110,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 110.0
+          },
+          "check": {
+            "count": 1,
+            "total_us": 58,
+            "min_us": 58,
+            "max_us": 58,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 58.0
+          }
+        },
+        {
+          "observed_phase": "preparing",
+          "previous_batch": "preparing:rf+idle",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 21,
+            "total_us": 2516,
+            "min_us": 106,
+            "max_us": 357,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              20,
+              1,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 119.80952380952381
+          },
+          "check": {
+            "count": 21,
+            "total_us": 1297,
+            "min_us": 58,
+            "max_us": 125,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              20,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 61.76190476190476
+          }
+        },
+        {
+          "observed_phase": "preparing",
+          "previous_batch": "preparing:rf+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 705,
+            "total_us": 107012,
+            "min_us": 110,
+            "max_us": 413,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              659,
+              46,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 151.7900709219858
+          },
+          "check": {
+            "count": 705,
+            "total_us": 60493,
+            "min_us": 58,
+            "max_us": 317,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              617,
+              21,
+              67,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 85.80567375886525
+          }
+        },
+        {
+          "observed_phase": "preparing",
+          "previous_batch": "preparing:wav+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 31,
+            "total_us": 5348,
+            "min_us": 108,
+            "max_us": 408,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              26,
+              5,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 172.51612903225808
+          },
+          "check": {
+            "count": 31,
+            "total_us": 2927,
+            "min_us": 58,
+            "max_us": 382,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              22,
+              7,
+              2,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 94.41935483870968
+          }
+        },
+        {
+          "observed_phase": "preparing",
+          "previous_batch": "stopped:other+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 1,
+            "total_us": 111,
+            "min_us": 111,
+            "max_us": 111,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 111.0
+          },
+          "check": {
+            "count": 1,
+            "total_us": 64,
+            "min_us": 64,
+            "max_us": 64,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 64.0
+          }
+        },
+        {
+          "observed_phase": "starting",
+          "previous_batch": "preparing:rf+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 1,
+            "total_us": 111,
+            "min_us": 111,
+            "max_us": 111,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 111.0
+          },
+          "check": {
+            "count": 1,
+            "total_us": 58,
+            "min_us": 58,
+            "max_us": 58,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 58.0
+          }
+        },
+        {
+          "observed_phase": "starting",
+          "previous_batch": "starting:rf+idle",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 1,
+            "total_us": 107,
+            "min_us": 107,
+            "max_us": 107,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 107.0
+          },
+          "check": {
+            "count": 1,
+            "total_us": 58,
+            "min_us": 58,
+            "max_us": 58,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 58.0
+          }
+        },
+        {
+          "observed_phase": "starting",
+          "previous_batch": "starting:rf+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 2,
+            "total_us": 267,
+            "min_us": 112,
+            "max_us": 155,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 133.5
+          },
+          "check": {
+            "count": 2,
+            "total_us": 116,
+            "min_us": 58,
+            "max_us": 58,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 58.0
+          }
+        },
+        {
+          "observed_phase": "stopped",
+          "previous_batch": "stopped:other+idle",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 2,
+            "total_us": 212,
+            "min_us": 105,
+            "max_us": 107,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 106.0
+          },
+          "check": {
+            "count": 2,
+            "total_us": 123,
+            "min_us": 58,
+            "max_us": 65,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 61.5
+          }
+        },
+        {
+          "observed_phase": "stopped",
+          "previous_batch": "stopped:other+other",
+          "previous_origin": "unknown",
+          "prepare": {
+            "count": 1,
+            "total_us": 104,
+            "min_us": 104,
+            "max_us": 104,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 104.0
+          },
+          "check": {
+            "count": 1,
+            "total_us": 58,
+            "min_us": 58,
+            "max_us": 58,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 58.0
+          }
+        },
+        {
+          "observed_phase": "stopped",
+          "previous_batch": "stopped:other+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 12,
+            "total_us": 1939,
+            "min_us": 112,
+            "max_us": 368,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              11,
+              1,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 161.58333333333334
+          },
+          "check": {
+            "count": 12,
+            "total_us": 1211,
+            "min_us": 58,
+            "max_us": 314,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              10,
+              0,
+              2,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 100.91666666666667
+          }
+        },
+        {
+          "observed_phase": "stopped",
+          "previous_batch": "stopped:rf+idle",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 14,
+            "total_us": 1538,
+            "min_us": 106,
+            "max_us": 127,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              14,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 109.85714285714286
+          },
+          "check": {
+            "count": 14,
+            "total_us": 853,
+            "min_us": 58,
+            "max_us": 85,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              14,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 60.92857142857143
+          }
+        },
+        {
+          "observed_phase": "stopped",
+          "previous_batch": "stopped:rf+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 10690,
+            "total_us": 1595002,
+            "min_us": 110,
+            "max_us": 413,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              10098,
+              592,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 149.20505144995323
+          },
+          "check": {
+            "count": 10690,
+            "total_us": 942639,
+            "min_us": 58,
+            "max_us": 344,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              9495,
+              0,
+              1195,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 88.17951356407858
+          }
+        },
+        {
+          "observed_phase": "stopped",
+          "previous_batch": "stopped:wav+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 2,
+            "total_us": 314,
+            "min_us": 154,
+            "max_us": 160,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 157.0
+          },
+          "check": {
+            "count": 2,
+            "total_us": 116,
+            "min_us": 58,
+            "max_us": 58,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 58.0
+          }
+        },
+        {
+          "observed_phase": "stopped",
+          "previous_batch": "stopping:rf+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 1,
+            "total_us": 119,
+            "min_us": 119,
+            "max_us": 119,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 119.0
+          },
+          "check": {
+            "count": 1,
+            "total_us": 91,
+            "min_us": 91,
+            "max_us": 91,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 91.0
+          }
+        },
+        {
+          "observed_phase": "stopped",
+          "previous_batch": "stopping:wav+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 1,
+            "total_us": 409,
+            "min_us": 409,
+            "max_us": 409,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 409.0
+          },
+          "check": {
+            "count": 1,
+            "total_us": 58,
+            "min_us": 58,
+            "max_us": 58,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 58.0
+          }
+        },
+        {
+          "observed_phase": "stopping",
+          "previous_batch": "playing:rf+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 1,
+            "total_us": 155,
+            "min_us": 155,
+            "max_us": 155,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 155.0
+          },
+          "check": {
+            "count": 1,
+            "total_us": 58,
+            "min_us": 58,
+            "max_us": 58,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 58.0
+          }
+        },
+        {
+          "observed_phase": "stopping",
+          "previous_batch": "stopping:rf+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 4,
+            "total_us": 533,
+            "min_us": 111,
+            "max_us": 156,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              4,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 133.25
+          },
+          "check": {
+            "count": 4,
+            "total_us": 239,
+            "min_us": 58,
+            "max_us": 65,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              4,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 59.75
+          }
+        }
+      ],
+      "omitted_batches": 0,
+      "note": "Fields describe previous physical batch. Dedup by epoch/sequence//2; only batches containing target native RF/status are covered. Phase/mix are host observations, not causal attribution."
+    },
+    "ack_batch_timing": {
+      "groups": [
+        {
+          "phase": "playing",
+          "ack_command": "chunk",
+          "reason": 0,
+          "prepare": {
+            "count": 9991,
+            "total_us": 1523417,
+            "min_us": 105,
+            "max_us": 488,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              9077,
+              914,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 152.47893103793413
+          },
+          "check": {
+            "count": 9991,
+            "total_us": 1528985,
+            "min_us": 126,
+            "max_us": 391,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              9055,
+              936,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 153.03623260934842
+          }
+        },
+        {
+          "phase": "playing",
+          "ack_command": "no_wav_ack",
+          "reason": 0,
+          "prepare": {
+            "count": 133443,
+            "total_us": 20596493,
+            "min_us": 105,
+            "max_us": 491,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              123183,
+              10260,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 154.34674730034547
+          },
+          "check": {
+            "count": 133443,
+            "total_us": 8489859,
+            "min_us": 58,
+            "max_us": 320,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              131056,
+              0,
+              2387,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 63.62161372271307
+          }
+        },
+        {
+          "phase": "playing",
+          "ack_command": "play",
+          "reason": 0,
+          "prepare": {
+            "count": 1,
+            "total_us": 161,
+            "min_us": 161,
+            "max_us": 161,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 161.0
+          },
+          "check": {
+            "count": 1,
+            "total_us": 90,
+            "min_us": 90,
+            "max_us": 90,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 90.0
+          }
+        },
+        {
+          "phase": "playing",
+          "ack_command": "query",
+          "reason": 0,
+          "prepare": {
+            "count": 2042,
+            "total_us": 310714,
+            "min_us": 110,
+            "max_us": 415,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1877,
+              165,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 152.16160626836435
+          },
+          "check": {
+            "count": 2042,
+            "total_us": 215035,
+            "min_us": 89,
+            "max_us": 351,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              1900,
+              28,
+              114,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 105.30607247796279
+          }
+        },
+        {
+          "phase": "preparing",
+          "ack_command": "begin",
+          "reason": 0,
+          "prepare": {
+            "count": 1,
+            "total_us": 127,
+            "min_us": 127,
+            "max_us": 127,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 127.0
+          },
+          "check": {
+            "count": 1,
+            "total_us": 110,
+            "min_us": 110,
+            "max_us": 110,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 110.0
+          }
+        },
+        {
+          "phase": "preparing",
+          "ack_command": "chunk",
+          "reason": 0,
+          "prepare": {
+            "count": 30,
+            "total_us": 4663,
+            "min_us": 107,
+            "max_us": 413,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              27,
+              3,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 155.43333333333334
+          },
+          "check": {
+            "count": 30,
+            "total_us": 4317,
+            "min_us": 125,
+            "max_us": 382,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              28,
+              2,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 143.9
+          }
+        },
+        {
+          "phase": "preparing",
+          "ack_command": "no_wav_ack",
+          "reason": 0,
+          "prepare": {
+            "count": 726,
+            "total_us": 110022,
+            "min_us": 106,
+            "max_us": 412,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              677,
+              49,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 151.54545454545453
+          },
+          "check": {
+            "count": 726,
+            "total_us": 60296,
+            "min_us": 58,
+            "max_us": 317,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              659,
+              0,
+              67,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 83.05234159779614
+          }
+        },
+        {
+          "phase": "starting",
+          "ack_command": "no_wav_ack",
+          "reason": 0,
+          "prepare": {
+            "count": 5,
+            "total_us": 660,
+            "min_us": 107,
+            "max_us": 175,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              5,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 132.0
+          },
+          "check": {
+            "count": 5,
+            "total_us": 290,
+            "min_us": 58,
+            "max_us": 58,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              5,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 58.0
+          }
+        },
+        {
+          "phase": "stopped",
+          "ack_command": "no_wav_ack",
+          "reason": 0,
+          "prepare": {
+            "count": 10720,
+            "total_us": 1599291,
+            "min_us": 104,
+            "max_us": 413,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              10126,
+              594,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 149.1875932835821
+          },
+          "check": {
+            "count": 10720,
+            "total_us": 944626,
+            "min_us": 58,
+            "max_us": 317,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              9524,
+              0,
+              1196,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 88.11809701492537
+          }
+        },
+        {
+          "phase": "stopped",
+          "ack_command": "query",
+          "reason": 0,
+          "prepare": {
+            "count": 2,
+            "total_us": 227,
+            "min_us": 111,
+            "max_us": 116,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 113.5
+          },
+          "check": {
+            "count": 2,
+            "total_us": 432,
+            "min_us": 88,
+            "max_us": 344,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              1,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 216.0
+          }
+        },
+        {
+          "phase": "stopped",
+          "ack_command": "stop",
+          "reason": 0,
+          "prepare": {
+            "count": 1,
+            "total_us": 119,
+            "min_us": 119,
+            "max_us": 119,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 119.0
+          },
+          "check": {
+            "count": 1,
+            "total_us": 91,
+            "min_us": 91,
+            "max_us": 91,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 91.0
+          }
+        },
+        {
+          "phase": "stopping",
+          "ack_command": "no_wav_ack",
+          "reason": 0,
+          "prepare": {
+            "count": 6,
+            "total_us": 807,
+            "min_us": 111,
+            "max_us": 156,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              6,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 134.5
+          },
+          "check": {
+            "count": 6,
+            "total_us": 355,
+            "min_us": 58,
+            "max_us": 65,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              6,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 59.166666666666664
+          }
+        }
+      ],
+      "matched_replies": 12071,
+      "unmatched_replies": 0,
+      "pending": 0,
+      "evicted": 0,
+      "omitted_groups": 0,
+      "note": "Native half 1 metadata, categorized by same-batch WAV reply id/session. prepare/check describe prior iteration; check includes decode_pair and command processing, not IRQ-lock duration alone. No WAV ACK does not mean no command. Lifecycle reply counters include non-target profiles; timing groups only target RF. ACK-only and RF+ACK pairs lack coverage."
+    },
+    "raw_chunk_ack_latency": {
+      "enabled": true,
+      "matched": 10021,
+      "raw_max_ms": 60.21160795353353,
+      "raw_mean_ms": 5.257335359240582,
+      "decoded": 10021,
+      "decode_max_ms": 28.09592499397695,
+      "pending_sends": 0,
+      "pending_decode": 0,
+      "omitted": 0,
+      "slow": [
+        {
+          "request_id": 4153449672,
+          "sent_at": 1000500.967196679,
+          "received_at": 1000500.998347561,
+          "raw_roundtrip_ms": 31.150882015936077,
+          "state": 2,
+          "reason": 0,
+          "accepted": 919680,
+          "played": 907200,
+          "decoded_at": 1000501.001394434,
+          "decode_delay_ms": 3.046873025596142,
+          "decoded_roundtrip_ms": 34.19775504153222
+        },
+        {
+          "request_id": 4153449673,
+          "sent_at": 1000500.967279362,
+          "received_at": 1000500.998347561,
+          "raw_roundtrip_ms": 31.06819896493107,
+          "state": 2,
+          "reason": 0,
+          "accepted": 920160,
+          "played": 907200,
+          "decoded_at": 1000501.002028536,
+          "decode_delay_ms": 3.680975059978664,
+          "decoded_roundtrip_ms": 34.749174024909735
+        },
+        {
+          "request_id": 4153449674,
+          "sent_at": 1000500.967412193,
+          "received_at": 1000501.003386511,
+          "raw_roundtrip_ms": 35.97431804519147,
+          "state": 2,
+          "reason": 0,
+          "accepted": 920640,
+          "played": 907200,
+          "decoded_at": 1000501.004555431,
+          "decode_delay_ms": 1.1689199600368738,
+          "decoded_roundtrip_ms": 37.14323800522834
+        },
+        {
+          "request_id": 4153449675,
+          "sent_at": 1000500.967533726,
+          "received_at": 1000501.003386511,
+          "raw_roundtrip_ms": 35.8527849894017,
+          "state": 2,
+          "reason": 0,
+          "accepted": 921120,
+          "played": 907200,
+          "decoded_at": 1000501.004892388,
+          "decode_delay_ms": 1.5058770077303052,
+          "decoded_roundtrip_ms": 37.358661997132
+        },
+        {
+          "request_id": 4153449676,
+          "sent_at": 1000501.00315444,
+          "received_at": 1000501.026699162,
+          "raw_roundtrip_ms": 23.54472200386226,
+          "state": 2,
+          "reason": 0,
+          "accepted": 921600,
+          "played": 908640,
+          "decoded_at": 1000501.032101802,
+          "decode_delay_ms": 5.402639973908663,
+          "decoded_roundtrip_ms": 28.947361977770925
+        },
+        {
+          "request_id": 4153453146,
+          "sent_at": 1000535.502573856,
+          "received_at": 1000535.562785464,
+          "raw_roundtrip_ms": 60.21160795353353,
+          "state": 2,
+          "reason": 0,
+          "accepted": 2300640,
+          "played": 2287680,
+          "decoded_at": 1000535.565443959,
+          "decode_delay_ms": 2.658494981005788,
+          "decoded_roundtrip_ms": 62.87010293453932
+        },
+        {
+          "request_id": 4153453147,
+          "sent_at": 1000535.502699536,
+          "received_at": 1000535.562785464,
+          "raw_roundtrip_ms": 60.08592795114964,
+          "state": 2,
+          "reason": 0,
+          "accepted": 2301120,
+          "played": 2287680,
+          "decoded_at": 1000535.566183125,
+          "decode_delay_ms": 3.397661028429866,
+          "decoded_roundtrip_ms": 63.48358897957951
+        },
+        {
+          "request_id": 4153453148,
+          "sent_at": 1000535.600332655,
+          "received_at": 1000535.650036853,
+          "raw_roundtrip_ms": 49.70419802702963,
+          "state": 2,
+          "reason": 0,
+          "accepted": 2301600,
+          "played": 2291520,
+          "decoded_at": 1000535.664259908,
+          "decode_delay_ms": 14.223054982721806,
+          "decoded_roundtrip_ms": 63.92725300975144
+        },
+        {
+          "request_id": 4153453149,
+          "sent_at": 1000535.600473901,
+          "received_at": 1000535.650036853,
+          "raw_roundtrip_ms": 49.562952015548944,
+          "state": 2,
+          "reason": 0,
+          "accepted": 2302080,
+          "played": 2291520,
+          "decoded_at": 1000535.665352111,
+          "decode_delay_ms": 15.31525794416666,
+          "decoded_roundtrip_ms": 64.8782099597156
+        },
+        {
+          "request_id": 4153453150,
+          "sent_at": 1000535.672452369,
+          "received_at": 1000535.710721996,
+          "raw_roundtrip_ms": 38.269627024419606,
+          "state": 2,
+          "reason": 0,
+          "accepted": 2302560,
+          "played": 2294400,
+          "decoded_at": 1000535.713082705,
+          "decode_delay_ms": 2.360709011554718,
+          "decoded_roundtrip_ms": 40.630336035974324
+        },
+        {
+          "request_id": 4153453151,
+          "sent_at": 1000535.672642798,
+          "received_at": 1000535.710721996,
+          "raw_roundtrip_ms": 38.079197984188795,
+          "state": 2,
+          "reason": 0,
+          "accepted": 2303040,
+          "played": 2294400,
+          "decoded_at": 1000535.71322464,
+          "decode_delay_ms": 2.502643968909979,
+          "decoded_roundtrip_ms": 40.581841953098774
+        },
+        {
+          "request_id": 4153453152,
+          "sent_at": 1000535.672818518,
+          "received_at": 1000535.710721996,
+          "raw_roundtrip_ms": 37.90347801987082,
+          "state": 2,
+          "reason": 0,
+          "accepted": 2303520,
+          "played": 2294400,
+          "decoded_at": 1000535.713588344,
+          "decode_delay_ms": 2.8663480188697577,
+          "decoded_roundtrip_ms": 40.769826038740575
+        },
+        {
+          "request_id": 4153453153,
+          "sent_at": 1000535.6729831,
+          "received_at": 1000535.710721996,
+          "raw_roundtrip_ms": 37.73889597505331,
+          "state": 2,
+          "reason": 0,
+          "accepted": 2304000,
+          "played": 2294400,
+          "decoded_at": 1000535.713870695,
+          "decode_delay_ms": 3.1486989464610815,
+          "decoded_roundtrip_ms": 40.88759492151439
+        },
+        {
+          "request_id": 4153453154,
+          "sent_at": 1000535.673080793,
+          "received_at": 1000535.710721996,
+          "raw_roundtrip_ms": 37.64120303094387,
+          "state": 2,
+          "reason": 0,
+          "accepted": 2304480,
+          "played": 2294400,
+          "decoded_at": 1000535.714166334,
+          "decode_delay_ms": 3.444337984547019,
+          "decoded_roundtrip_ms": 41.08554101549089
+        },
+        {
+          "request_id": 4153453155,
+          "sent_at": 1000535.673179363,
+          "received_at": 1000535.710721996,
+          "raw_roundtrip_ms": 37.54263301379979,
+          "state": 2,
+          "reason": 0,
+          "accepted": 2304960,
+          "played": 2294400,
+          "decoded_at": 1000535.714526275,
+          "decode_delay_ms": 3.804279025644064,
+          "decoded_roundtrip_ms": 41.34691203944385
+        },
+        {
+          "request_id": 4153453156,
+          "sent_at": 1000535.67326985,
+          "received_at": 1000535.710721996,
+          "raw_roundtrip_ms": 37.45214606169611,
+          "state": 2,
+          "reason": 0,
+          "accepted": 2305440,
+          "played": 2294400,
+          "decoded_at": 1000535.71548463,
+          "decode_delay_ms": 4.762633936479688,
+          "decoded_roundtrip_ms": 42.2147799981758
+        },
+        {
+          "request_id": 4153453157,
+          "sent_at": 1000535.673440076,
+          "received_at": 1000535.710721996,
+          "raw_roundtrip_ms": 37.28192008566111,
+          "state": 2,
+          "reason": 0,
+          "accepted": 2305920,
+          "played": 2294400,
+          "decoded_at": 1000535.715780881,
+          "decode_delay_ms": 5.058884969912469,
+          "decoded_roundtrip_ms": 42.34080505557358
+        },
+        {
+          "request_id": 4153453367,
+          "sent_at": 1000537.827457156,
+          "received_at": 1000537.848376373,
+          "raw_roundtrip_ms": 20.919216913171113,
+          "state": 2,
+          "reason": 0,
+          "accepted": 2390880,
+          "played": 2380320,
+          "decoded_at": 1000537.854041097,
+          "decode_delay_ms": 5.664724041707814,
+          "decoded_roundtrip_ms": 26.583940954878926
+        },
+        {
+          "request_id": 4153453368,
+          "sent_at": 1000537.827574601,
+          "received_at": 1000537.848376373,
+          "raw_roundtrip_ms": 20.80177189782262,
+          "state": 2,
+          "reason": 0,
+          "accepted": 2391360,
+          "played": 2380320,
+          "decoded_at": 1000537.85430138,
+          "decode_delay_ms": 5.92500704806298,
+          "decoded_roundtrip_ms": 26.7267789458856
+        },
+        {
+          "request_id": 4153453369,
+          "sent_at": 1000537.827707915,
+          "received_at": 1000537.848376373,
+          "raw_roundtrip_ms": 20.66845796070993,
+          "state": 2,
+          "reason": 0,
+          "accepted": 2391840,
+          "played": 2380800,
+          "decoded_at": 1000537.854885715,
+          "decode_delay_ms": 6.509341998025775,
+          "decoded_roundtrip_ms": 27.177799958735704
+        },
+        {
+          "request_id": 4153453370,
+          "sent_at": 1000537.827789448,
+          "received_at": 1000537.848376373,
+          "raw_roundtrip_ms": 20.586924976669252,
+          "state": 2,
+          "reason": 0,
+          "accepted": 2392320,
+          "played": 2380800,
+          "decoded_at": 1000537.855160742,
+          "decode_delay_ms": 6.784369004890323,
+          "decoded_roundtrip_ms": 27.371293981559575
+        },
+        {
+          "request_id": 4153454429,
+          "sent_at": 1000548.365574812,
+          "received_at": 1000548.395382136,
+          "raw_roundtrip_ms": 29.807323939166963,
+          "state": 2,
+          "reason": 0,
+          "accepted": 2814720,
+          "played": 2801760,
+          "decoded_at": 1000548.396853724,
+          "decode_delay_ms": 1.4715880388393998,
+          "decoded_roundtrip_ms": 31.278911978006363
+        },
+        {
+          "request_id": 4153454430,
+          "sent_at": 1000548.365652777,
+          "received_at": 1000548.395382136,
+          "raw_roundtrip_ms": 29.72935896832496,
+          "state": 2,
+          "reason": 0,
+          "accepted": 2815200,
+          "played": 2801760,
+          "decoded_at": 1000548.397105271,
+          "decode_delay_ms": 1.7231350066140294,
+          "decoded_roundtrip_ms": 31.45249397493899
+        },
+        {
+          "request_id": 4153454431,
+          "sent_at": 1000548.365725982,
+          "received_at": 1000548.395382136,
+          "raw_roundtrip_ms": 29.656153987161815,
+          "state": 2,
+          "reason": 0,
+          "accepted": 2815680,
+          "played": 2801760,
+          "decoded_at": 1000548.397387083,
+          "decode_delay_ms": 2.0049470476806164,
+          "decoded_roundtrip_ms": 31.66110103484243
+        },
+        {
+          "request_id": 4153454432,
+          "sent_at": 1000548.365793991,
+          "received_at": 1000548.395382136,
+          "raw_roundtrip_ms": 29.588144971057773,
+          "state": 2,
+          "reason": 0,
+          "accepted": 2816160,
+          "played": 2801760,
+          "decoded_at": 1000548.397688773,
+          "decode_delay_ms": 2.3066370049491525,
+          "decoded_roundtrip_ms": 31.894781976006925
+        },
+        {
+          "request_id": 4153454496,
+          "sent_at": 1000549.001695727,
+          "received_at": 1000549.028672098,
+          "raw_roundtrip_ms": 26.97637095116079,
+          "state": 2,
+          "reason": 0,
+          "accepted": 2841600,
+          "played": 2827200,
+          "decoded_at": 1000549.030683075,
+          "decode_delay_ms": 2.010977012105286,
+          "decoded_roundtrip_ms": 28.987347963266075
+        },
+        {
+          "request_id": 4153458311,
+          "sent_at": 1000587.017959031,
+          "received_at": 1000587.022687376,
+          "raw_roundtrip_ms": 4.728344967588782,
+          "state": 2,
+          "reason": 0,
+          "accepted": 4361280,
+          "played": 4346880,
+          "decoded_at": 1000587.050783301,
+          "decode_delay_ms": 28.09592499397695,
+          "decoded_roundtrip_ms": 32.82426996156573
+        }
+      ],
+      "note": "Complete-frame socket read time versus entry to decoder event handling; correlated CHUNK ids/session, normal receiver validation unchanged"
+    },
+    "phase_caveat": "Host observation boundaries, not MCU event timestamps. Sampled queue is a lower bound; cumulative peak remains acceptance gate. Send counters refer to previous node. Retune is not visible on this wire.",
+    "pending_bytes": 0,
+    "tcp_fifo_headroom_measured": false,
+    "frame_kinds": {
+      "15": 12347,
+      "12": 12071,
+      "9": 18,
+      "5": 2,
+      "7": 4,
+      "20": 301853
+    },
+    "radio_playing_frame_kinds": {
+      "12": 12034,
+      "20": 278932
+    },
+    "sent_commands": {
+      "11:0": 2047,
+      "10": 15,
+      "4": 1,
+      "6": 2,
+      "8": 3,
+      "2": 17,
+      "11:1": 1,
+      "13": 10021,
+      "11:2": 1,
+      "11:3": 1
+    },
+    "radio_playing_sent_commands": {
+      "11:0": 2042,
+      "13": 9991,
+      "11:3": 1
+    },
+    "note": "MCU queue/slack/send counters; send weighted once per complete node start. Cumulative MCU peak includes startup.",
+    "native_counters_expected": true
+  },
+  "service_diagnostics": [
+    {
+      "calls": 252127,
+      "priming_calls": 1014,
+      "reasons": {
+        "no_source": 33716,
+        "no_status": 0,
+        "session_mismatch": 0,
+        "pending_timeout": 0,
+        "pending_control_ack": 14554,
+        "pending_chunk_ack": 0,
+        "credits": 185122,
+        "token": 211,
+        "target_full": 0,
+        "pcm_pending": 14732,
+        "no_chunk": 0,
+        "priming_ack": 9,
+        "source_exhausted": 0,
+        "poll_wait": 0
+      },
+      "sends": {
+        "chunk": 10021,
+        "play": 1,
+        "query": 2047,
+        "begin": 1,
+        "stop": 1
+      },
+      "last_reason": "no_source",
+      "chunk_gaps": 10020,
+      "chunk_gap_last_ms": 5.676931003108621,
+      "chunk_gap_max_ms": 136.49591396097094,
+      "last_chunk_at": 1000598.242199717,
+      "chunk_session": 4153447374
+    }
+  ],
+  "v20_snapshot_restore": {
+    "ok": true,
+    "sessions": [
+      {
+        "path": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v20/installed_2000_radio120_r2_20261103/private_gui_sessions/session_20261103_123423_603671.json",
+        "ok": true,
+        "detail": {
+          "snapshot": {
+            "schema": 1,
+            "identity": {
+              "board_serial": "1060031107",
+              "app": "scope-v20-20261031-225916-main-1",
+              "firmware_sha256": "52f933bdb9c632544624e5d4188a740a9cdb429596bfe5a4d926900e7538aefe",
+              "relay_sha256": "bf6893f5a0fbab8676120a5decd8c6109698fa852be02333918b1d6e4a2a909d"
+            },
+            "adc_bits": 14,
+            "adc_period": 32,
+            "generator": {
+              "wave": 0,
+              "enabled": 0,
+              "mode": 0,
+              "frequency": 2500,
+              "final_frequency": 2500,
+              "low": 0,
+              "high": 4095,
+              "duration": 1000,
+              "duration_us": 0,
+              "duty": 50
+            }
+          },
+          "state": "closed",
+          "hardware_restored": true,
+          "errors": [],
+          "recovery": {
+            "seconds": 10.020103318965994,
+            "samples": 313344,
+            "dropped": 0,
+            "fatal": 0,
+            "continuous": true
+          },
+          "receiver_activity": {
+            "pid": 67996,
+            "mode": "user",
+            "active": true,
+            "released": true
+          }
+        }
+      }
+    ]
+  },
+  "diagnostics_complete": true,
+  "functional_ok": true,
+  "receipt_unchanged": true,
+  "activation_report_unchanged": true,
+  "identity_after": {
+    "board_serial": "1060031107",
+    "app": "scope-v20-20261031-225916-main-1",
+    "firmware_sha256": "52f933bdb9c632544624e5d4188a740a9cdb429596bfe5a4d926900e7538aefe",
+    "relay_sha256": "bf6893f5a0fbab8676120a5decd8c6109698fa852be02333918b1d6e4a2a909d"
+  },
+  "identity_unchanged": true
+}

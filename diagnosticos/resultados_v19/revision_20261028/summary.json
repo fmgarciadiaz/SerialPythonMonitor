@@ -1,0 +1,172 @@
+{
+  "schema": 1,
+  "version": 19,
+  "corrections_verified": true,
+  "offline_tests": {
+    "full_suite": 372,
+    "supplemental_tools": 3,
+    "passed": true,
+    "log": "unittest_final.log"
+  },
+  "physical_cases": [
+    {
+      "path": "diagnosticos/resultados_v19/radio_rate_check_20261028_004720",
+      "ok": true,
+      "errors": [],
+      "paint_events": 815,
+      "assertions": {
+        "acquisition_configuration_applied": true,
+        "samples_advanced_between_observations": true,
+        "useful_sample_volume": true,
+        "effective_acquisition_duration": true,
+        "analysis_has_data": true,
+        "a0_remained_off": true,
+        "shutdown_confirmed": true,
+        "worker_released": true
+      },
+      "radio_hold_seconds": 0.0,
+      "restoration": {
+        "hardware_restored": true,
+        "errors": [],
+        "recovery": {
+          "seconds": 10.025314950034954,
+          "samples": 313344,
+          "dropped": 0,
+          "fatal": 0,
+          "continuous": true
+        }
+      },
+      "identity_unchanged": true
+    },
+    {
+      "path": "diagnosticos/resultados_v19/radio_rate_check_20261028_005059",
+      "ok": false,
+      "errors": [],
+      "paint_events": 0,
+      "assertions": {
+        "radio_playing_40k": true,
+        "radio_stop_confirmed": true,
+        "radio_progress": true,
+        "radio_hold_completed": true,
+        "scan_completed": true,
+        "wav_playing": true,
+        "wav_progress": true,
+        "wav_stop_confirmed": true,
+        "fm_playing": true,
+        "fm_progress": true,
+        "fm_stop_confirmed": true,
+        "shutdown_confirmed": true,
+        "worker_released": true
+      },
+      "radio_hold_seconds": 60.034052547067404,
+      "restoration": {
+        "hardware_restored": true,
+        "errors": [],
+        "recovery": {
+          "seconds": 10.025221814052202,
+          "samples": 313344,
+          "dropped": 0,
+          "fatal": 0,
+          "continuous": true
+        }
+      },
+      "identity_unchanged": true
+    },
+    {
+      "path": "diagnosticos/resultados_v19/radio_rate_check_20261028_005310",
+      "ok": false,
+      "errors": [
+        "Cierre de c\u00e1lculo: No se pudo cerrar un proceso de c\u00e1lculo"
+      ],
+      "paint_events": 805,
+      "assertions": {
+        "radio_playing_40k": true,
+        "radio_stop_confirmed": true,
+        "radio_progress": true,
+        "radio_hold_completed": true,
+        "scan_completed": true,
+        "wav_playing": true,
+        "wav_progress": true,
+        "wav_stop_confirmed": true,
+        "fm_playing": true,
+        "fm_progress": true,
+        "fm_stop_confirmed": true,
+        "shutdown_confirmed": true,
+        "worker_released": true
+      },
+      "radio_hold_seconds": 30.026812682976015,
+      "restoration": {
+        "hardware_restored": true,
+        "errors": [],
+        "recovery": {
+          "seconds": 10.02498075296171,
+          "samples": 313344,
+          "dropped": 0,
+          "fatal": 0,
+          "continuous": true
+        }
+      },
+      "identity_unchanged": true
+    },
+    {
+      "path": "diagnosticos/resultados_v19/radio_rate_check_20261028_005711",
+      "ok": true,
+      "errors": [],
+      "paint_events": 851,
+      "assertions": {
+        "radio_playing_40k": true,
+        "radio_stop_confirmed": true,
+        "radio_progress": true,
+        "radio_hold_completed": true,
+        "scan_completed": true,
+        "wav_playing": true,
+        "wav_progress": true,
+        "wav_stop_confirmed": true,
+        "fm_playing": true,
+        "fm_progress": true,
+        "fm_stop_confirmed": true,
+        "shutdown_confirmed": true,
+        "worker_released": true
+      },
+      "radio_hold_seconds": 20.03160517301876,
+      "restoration": {
+        "hardware_restored": true,
+        "errors": [],
+        "recovery": {
+          "seconds": 10.027552439947613,
+          "samples": 313344,
+          "dropped": 0,
+          "fatal": 0,
+          "continuous": true
+        }
+      },
+      "identity_unchanged": true
+    }
+  ],
+  "final_accepted_identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v19-main-1",
+    "firmware_sha256": "37f049fa029ad62a10767c56dc586b2c3697f8d250a0b8a7396570ce8e0c7060",
+    "relay_sha256": "27da0bc4860401df27eef50429f2ec881bfd3b51b1893d1fe3bacb9e922f56ae"
+  },
+  "hardware_identity_unchanged": true,
+  "relay_candidate_installed": false,
+  "remaining": [
+    "Candidate relay needs isolated ARM64 build and physical qualification before promotion",
+    "Intermittent sent=-1 root cause is not proven by these bounded controls",
+    "Reordered update/build path has fault-injection coverage, not a new physical flash/rollback rehearsal"
+  ],
+  "host_source_sha256": {
+    "monitor/v19/app.py": "88c952a5b6c200686f3ad16e95b24494b643b5e633d560d1af6a16b456a0c4d9",
+    "monitor/v19/spectrum.py": "9b8afe60284474ef1987a2b14969e6a5d07b20e2e4c8e271441e04aaf12dfa23",
+    "monitor/v19/worker_cleanup.py": "3d9a0bba276dc97803b9ed044ad76c08e9eeffd70306aba59272f22eb5e2064c",
+    "monitor/v19/qt_environment.py": "fbb811bb9aafd7973d49aaab4a2f88602e4c9d24ccb6cd332c45b4e7c2a2851b",
+    "monitor/v19/q_support/prepare.py": "3505f6b3517e03053d70ea39be9736d4060c6c65afe9ba8668ae0bcbdd910372",
+    "monitor/v19/q_support/backend.py": "301a04e82c2f1bd4036cbe1d146ace3f7bae6d2d73dfa34cbb5c8b67c024e774",
+    "monitor/v19/q_support/service.py": "82353d009cbe0d7434649fd436f2f5a36ca133ff8dbfc903bec2706591f051c2",
+    "monitor/v19/io/live_connection.py": "b8fca3d7c5c661158b15a4332cb29eef1fea1dbe5aa9c71addeb8b3d3704e9bb",
+    "monitor/v19/io/pcm_request_pump.py": "6c90668458b6e93dfc78514d33c654bc83cd109b9bb8a507902ae29f74bc76ee",
+    "tools/gui_live_smoke_v19.py": "090218a0cf5eefccf4eb4794b53ee2ae571626900cfa1e1ad4959c40493d46ba",
+    "tools/validate_v19.py": "d0161769c884af3dda42175068a0a29c0c328cafe2915ae8bda5de911d77fedd"
+  }
+}

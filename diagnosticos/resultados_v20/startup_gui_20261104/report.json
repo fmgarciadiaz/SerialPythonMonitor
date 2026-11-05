@@ -1,0 +1,17 @@
+{
+  "scope": "offline Qt offscreen; no Q connection or hardware operation",
+  "finding": "Synchronous ADB/serial discovery blocks GUI startup and refresh; also present V19, not a demonstrated V20 regression",
+  "change": "V20 asynchronous discovery, queued GUI result, generation/close/worker guard; connect disabled during discovery",
+  "tests": "4 PASS in 2.901s: async ports + receiver startup failure",
+  "limits": [
+    "Does not demonstrate resolution of intermittent failed connection",
+    "Import timeouts observed in V19 importlib.get_data; source/cache/storage cause not established",
+    "No visible FPS or physical connection acceptance inferred"
+  ],
+  "backup": "respaldos/host/v20_before_async_ports_20261104/manifest.json",
+  "sha256": {
+    "monitor/v20/app.py": "dd85c28eaec14aae7c0b9e634ce3702d8b959443e0f58db1522bb6b70a220d75",
+    "monitor/v20/port_discovery.py": "ad3cf7f31c4104e548b59fc7b582552d3e2b363752e8e7c7b9f5e9ff7a220260",
+    "tests/v20/test_async_ports.py": "e3fd029fef8d8a140c0b27cecea0d6fed02ecfb44cb9daa8961c990d1335c03e"
+  }
+}

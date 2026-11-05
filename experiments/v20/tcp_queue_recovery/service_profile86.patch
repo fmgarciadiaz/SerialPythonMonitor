@@ -1,0 +1,14 @@
+--- a/monitor/v20/receiver/unoq_config_receiver.py
++++ b/monitor/v20/receiver/unoq_config_receiver.py
+@@ -395,9 +395,9 @@
+                     raise ProtocolError('Muestras SPI mientras el destino es R4')
+ 
+         # Reuse confirmed credits between ADC frames, under unchanged tokens
+-        # and limits. ADC8/88 is an explicitly private qualification candidate.
++        # and limits. Cover both measured high-rate ADC8 geometries.
+         private8=(self.config.bits==8 and getattr(self.config,'channels',None)==1
+-                  and getattr(self.config,'period',None)==88
++                  and getattr(self.config,'period',None) in (86,88)
+                   and getattr(self.config,'node_pairs',None)==3488)
+         if ((self.config.bits==10 and self.config.rate==1250000 or private8)
+                 and getattr(self.wav_codes,'radio_audio',False)):

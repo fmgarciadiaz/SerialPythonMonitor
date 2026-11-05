@@ -1,0 +1,661 @@
+{
+  "promoted": false,
+  "public_changes": false,
+  "tests_passed": 16,
+  "cases": [
+    {
+      "case": "node_tails_20261030",
+      "errors": [
+        "Assertion failed: a0_remained_off"
+      ],
+      "audio_hold_seconds": 92.31173734902404,
+      "played_samples": 3692640,
+      "mcu": {
+        "frames": 196970,
+        "samples": 171757840,
+        "empty_status_frames": 3091,
+        "send_nodes": 49243,
+        "mean_send_margin": 0.10123766788425759,
+        "mcu_queue_peak": 5,
+        "min_slack_ticks": 72097,
+        "sampled_queue_max": 4,
+        "send_ticks_max": 1121338,
+        "send_over_budget_nodes": 5009,
+        "headroom_pass": false
+      },
+      "slowest_nodes": [
+        {
+          "epoch": "1",
+          "node": 15449,
+          "index": 53886112,
+          "queue": 4,
+          "queue_peak": 5,
+          "slack_min_ticks": 73291,
+          "copy_max_ticks": 40176,
+          "poll_max_ticks": 228277,
+          "previous_node_send_ticks": 1121338,
+          "previous_batch_prepare_us": 111,
+          "previous_batch_check_us": 59,
+          "previous_batch_origin": "same_epoch_profile",
+          "phase": "playing"
+        },
+        {
+          "epoch": "1",
+          "node": 10117,
+          "index": 35288096,
+          "queue": 3,
+          "queue_peak": 4,
+          "slack_min_ticks": 73291,
+          "copy_max_ticks": 40176,
+          "poll_max_ticks": 228277,
+          "previous_node_send_ticks": 885692,
+          "previous_batch_prepare_us": 111,
+          "previous_batch_check_us": 59,
+          "previous_batch_origin": "same_epoch_profile",
+          "phase": "playing"
+        },
+        {
+          "epoch": "1",
+          "node": 20162,
+          "index": 70325056,
+          "queue": 2,
+          "queue_peak": 5,
+          "slack_min_ticks": 72097,
+          "copy_max_ticks": 40187,
+          "poll_max_ticks": 228294,
+          "previous_node_send_ticks": 611404,
+          "previous_batch_prepare_us": 107,
+          "previous_batch_check_us": 387,
+          "previous_batch_origin": "same_epoch_profile",
+          "phase": "playing"
+        },
+        {
+          "epoch": "1",
+          "node": 21737,
+          "index": 75818656,
+          "queue": 2,
+          "queue_peak": 5,
+          "slack_min_ticks": 72097,
+          "copy_max_ticks": 40187,
+          "poll_max_ticks": 228294,
+          "previous_node_send_ticks": 610877,
+          "previous_batch_prepare_us": 118,
+          "previous_batch_check_us": 381,
+          "previous_batch_origin": "same_epoch_profile",
+          "phase": "playing"
+        },
+        {
+          "epoch": "1",
+          "node": 16782,
+          "index": 58535616,
+          "queue": 2,
+          "queue_peak": 5,
+          "slack_min_ticks": 73291,
+          "copy_max_ticks": 40176,
+          "poll_max_ticks": 228294,
+          "previous_node_send_ticks": 601877,
+          "previous_batch_prepare_us": 107,
+          "previous_batch_check_us": 388,
+          "previous_batch_origin": "same_epoch_profile",
+          "phase": "playing"
+        },
+        {
+          "epoch": "1",
+          "node": 26062,
+          "index": 90904256,
+          "queue": 2,
+          "queue_peak": 5,
+          "slack_min_ticks": 72097,
+          "copy_max_ticks": 40187,
+          "poll_max_ticks": 228294,
+          "previous_node_send_ticks": 601541,
+          "previous_batch_prepare_us": 111,
+          "previous_batch_check_us": 316,
+          "previous_batch_origin": "same_epoch_profile",
+          "phase": "playing"
+        },
+        {
+          "epoch": "1",
+          "node": 10859,
+          "index": 37876192,
+          "queue": 2,
+          "queue_peak": 4,
+          "slack_min_ticks": 73291,
+          "copy_max_ticks": 40176,
+          "poll_max_ticks": 228277,
+          "previous_node_send_ticks": 598317,
+          "previous_batch_prepare_us": 116,
+          "previous_batch_check_us": 310,
+          "previous_batch_origin": "same_epoch_profile",
+          "phase": "playing"
+        },
+        {
+          "epoch": "1",
+          "node": 46058,
+          "index": 160650304,
+          "queue": 2,
+          "queue_peak": 5,
+          "slack_min_ticks": 72097,
+          "copy_max_ticks": 40187,
+          "poll_max_ticks": 228294,
+          "previous_node_send_ticks": 596414,
+          "previous_batch_prepare_us": 107,
+          "previous_batch_check_us": 317,
+          "previous_batch_origin": "same_epoch_profile",
+          "phase": "playing"
+        }
+      ],
+      "ack_max_ms": 37.985899951308966,
+      "decode_max_ms": 4.756765090860426,
+      "reader_slow_stages": [],
+      "sessions": [
+        {
+          "snapshot": {
+            "schema": 1,
+            "identity": {
+              "board_serial": "1060031107",
+              "app": "scope-v19-main-1",
+              "firmware_sha256": "37f049fa029ad62a10767c56dc586b2c3697f8d250a0b8a7396570ce8e0c7060",
+              "relay_sha256": "27da0bc4860401df27eef50429f2ec881bfd3b51b1893d1fe3bacb9e922f56ae"
+            },
+            "adc_bits": 14,
+            "adc_period": 32,
+            "generator": {
+              "wave": 0,
+              "enabled": 0,
+              "mode": 0,
+              "frequency": 2500,
+              "final_frequency": 2500,
+              "low": 0,
+              "high": 4095,
+              "duration": 1000,
+              "duration_us": 0,
+              "duty": 50
+            }
+          },
+          "state": "closed",
+          "hardware_restored": true,
+          "errors": [],
+          "recovery": {
+            "seconds": 0.24231893999967724,
+            "samples": 8192,
+            "dropped": 0,
+            "fatal": 0,
+            "continuous": true
+          },
+          "receiver_activity": {
+            "pid": 82422,
+            "mode": "user",
+            "active": true,
+            "released": true
+          }
+        }
+      ]
+    },
+    {
+      "case": "node_tails_repeat_20261030",
+      "errors": [
+        "radio status state=4 reason=2",
+        "Assertion failed: radio_stop_confirmed",
+        "Assertion failed: radio_hold_completed"
+      ],
+      "audio_hold_seconds": 0.0,
+      "played_samples": 408960,
+      "mcu": {
+        "frames": 21846,
+        "samples": 19049712,
+        "empty_status_frames": 381,
+        "send_nodes": 5462,
+        "mean_send_margin": 0.1051937929890846,
+        "mcu_queue_peak": 4,
+        "min_slack_ticks": 78060,
+        "sampled_queue_max": 3,
+        "send_ticks_max": 710739,
+        "send_over_budget_nodes": 526,
+        "headroom_pass": false
+      },
+      "slowest_nodes": [
+        {
+          "epoch": "3",
+          "node": 3513,
+          "index": 12253344,
+          "queue": 2,
+          "queue_peak": 4,
+          "slack_min_ticks": 85379,
+          "copy_max_ticks": 40013,
+          "poll_max_ticks": 227324,
+          "previous_node_send_ticks": 710739,
+          "previous_batch_prepare_us": 107,
+          "previous_batch_check_us": 59,
+          "previous_batch_origin": "same_epoch_profile",
+          "phase": "playing"
+        },
+        {
+          "epoch": "3",
+          "node": 6799,
+          "index": 23714912,
+          "queue": 2,
+          "queue_peak": 4,
+          "slack_min_ticks": 78060,
+          "copy_max_ticks": 40150,
+          "poll_max_ticks": 227324,
+          "previous_node_send_ticks": 603042,
+          "previous_batch_prepare_us": 114,
+          "previous_batch_check_us": 59,
+          "previous_batch_origin": "same_epoch_profile",
+          "phase": "playing"
+        },
+        {
+          "epoch": "3",
+          "node": 3238,
+          "index": 11294144,
+          "queue": 2,
+          "queue_peak": 4,
+          "slack_min_ticks": 85379,
+          "copy_max_ticks": 40013,
+          "poll_max_ticks": 227324,
+          "previous_node_send_ticks": 597188,
+          "previous_batch_prepare_us": 107,
+          "previous_batch_check_us": 318,
+          "previous_batch_origin": "same_epoch_profile",
+          "phase": "playing"
+        },
+        {
+          "epoch": "3",
+          "node": 3388,
+          "index": 11817344,
+          "queue": 2,
+          "queue_peak": 4,
+          "slack_min_ticks": 85379,
+          "copy_max_ticks": 40013,
+          "poll_max_ticks": 227324,
+          "previous_node_send_ticks": 593417,
+          "previous_batch_prepare_us": 115,
+          "previous_batch_check_us": 310,
+          "previous_batch_origin": "same_epoch_profile",
+          "phase": "playing"
+        },
+        {
+          "epoch": "3",
+          "node": 3542,
+          "index": 12354496,
+          "queue": 2,
+          "queue_peak": 4,
+          "slack_min_ticks": 85089,
+          "copy_max_ticks": 40013,
+          "poll_max_ticks": 227324,
+          "previous_node_send_ticks": 577097,
+          "previous_batch_prepare_us": 111,
+          "previous_batch_check_us": 59,
+          "previous_batch_origin": "same_epoch_profile",
+          "phase": "playing"
+        },
+        {
+          "epoch": "3",
+          "node": 4653,
+          "index": 16229664,
+          "queue": 2,
+          "queue_peak": 4,
+          "slack_min_ticks": 78060,
+          "copy_max_ticks": 40098,
+          "poll_max_ticks": 227324,
+          "previous_node_send_ticks": 554786,
+          "previous_batch_prepare_us": 107,
+          "previous_batch_check_us": 59,
+          "previous_batch_origin": "same_epoch_profile",
+          "phase": "playing"
+        },
+        {
+          "epoch": "3",
+          "node": 6895,
+          "index": 24049760,
+          "queue": 1,
+          "queue_peak": 4,
+          "slack_min_ticks": 78060,
+          "copy_max_ticks": 40150,
+          "poll_max_ticks": 227324,
+          "previous_node_send_ticks": 552528,
+          "previous_batch_prepare_us": 107,
+          "previous_batch_check_us": 59,
+          "previous_batch_origin": "same_epoch_profile",
+          "phase": "playing"
+        },
+        {
+          "epoch": "3",
+          "node": 7406,
+          "index": 25832128,
+          "queue": 2,
+          "queue_peak": 4,
+          "slack_min_ticks": 78060,
+          "copy_max_ticks": 40150,
+          "poll_max_ticks": 227324,
+          "previous_node_send_ticks": 549188,
+          "previous_batch_prepare_us": 111,
+          "previous_batch_check_us": 59,
+          "previous_batch_origin": "same_epoch_profile",
+          "phase": "playing"
+        }
+      ],
+      "ack_max_ms": 414.04528298880905,
+      "decode_max_ms": 15.328914974816144,
+      "reader_slow_stages": [
+        {
+          "tracker": "0x10a74d2b0",
+          "stage": "pump",
+          "start": 855858.081498462,
+          "end": 855858.196752343,
+          "wall_ms": 115.25388096924871,
+          "cpu_ms": 28.459589000000562,
+          "active": [
+            "pump_global"
+          ],
+          "details": {}
+        },
+        {
+          "tracker": "0x10a74d2b0",
+          "stage": "pump_global",
+          "start": 855858.08121179,
+          "end": 855858.196771966,
+          "wall_ms": 115.56017596740276,
+          "cpu_ms": 28.652314000000345,
+          "active": [],
+          "details": {}
+        },
+        {
+          "tracker": "0x10a74d2b0",
+          "stage": "tick",
+          "start": 855858.486480832,
+          "end": 855858.591760347,
+          "wall_ms": 105.27951503172517,
+          "cpu_ms": 0.3457610000001665,
+          "active": [
+            "pump_global",
+            "pump",
+            "decoder_events",
+            "collect"
+          ],
+          "details": {}
+        },
+        {
+          "tracker": "0x10a74d2b0",
+          "stage": "collect",
+          "start": 855858.48647692,
+          "end": 855858.592888007,
+          "wall_ms": 106.41108709387481,
+          "cpu_ms": 0.740375999999543,
+          "active": [
+            "pump_global",
+            "pump",
+            "decoder_events"
+          ],
+          "details": {}
+        },
+        {
+          "tracker": "0x10a74d2b0",
+          "stage": "decoder_events",
+          "start": 855858.486451214,
+          "end": 855858.592905275,
+          "wall_ms": 106.4540611114353,
+          "cpu_ms": 0.7833859999983872,
+          "active": [
+            "pump_global",
+            "pump"
+          ],
+          "details": {}
+        },
+        {
+          "tracker": "0x10a74d2b0",
+          "stage": "pump",
+          "start": 855858.356171543,
+          "end": 855858.604560669,
+          "wall_ms": 248.3891260344535,
+          "cpu_ms": 31.916407000000646,
+          "active": [
+            "pump_global"
+          ],
+          "details": {}
+        },
+        {
+          "tracker": "0x10a74d2b0",
+          "stage": "pump_global",
+          "start": 855858.355630616,
+          "end": 855858.604571843,
+          "wall_ms": 248.9412270952016,
+          "cpu_ms": 32.13782099999918,
+          "active": [],
+          "details": {}
+        }
+      ],
+      "sessions": [
+        {
+          "snapshot": {
+            "schema": 1,
+            "identity": {
+              "board_serial": "1060031107",
+              "app": "scope-v19-main-1",
+              "firmware_sha256": "37f049fa029ad62a10767c56dc586b2c3697f8d250a0b8a7396570ce8e0c7060",
+              "relay_sha256": "27da0bc4860401df27eef50429f2ec881bfd3b51b1893d1fe3bacb9e922f56ae"
+            },
+            "adc_bits": 14,
+            "adc_period": 32,
+            "generator": {
+              "wave": 0,
+              "enabled": 0,
+              "mode": 0,
+              "frequency": 2500,
+              "final_frequency": 2500,
+              "low": 0,
+              "high": 4095,
+              "duration": 1000,
+              "duration_us": 0,
+              "duty": 50
+            }
+          },
+          "state": "closed",
+          "hardware_restored": true,
+          "errors": [],
+          "recovery": {
+            "seconds": 0.24601444299332798,
+            "samples": 8192,
+            "dropped": 0,
+            "fatal": 0,
+            "continuous": true
+          },
+          "receiver_activity": {
+            "pid": 82503,
+            "mode": "user",
+            "active": true,
+            "released": true
+          }
+        }
+      ]
+    },
+    {
+      "case": "node_tails_critical_20261030",
+      "errors": [],
+      "audio_hold_seconds": 60.07842903304845,
+      "played_samples": 2403360,
+      "mcu": {
+        "frames": 128224,
+        "samples": 111811328,
+        "empty_status_frames": 2055,
+        "send_nodes": 32056,
+        "mean_send_margin": 0.10260824502088806,
+        "mcu_queue_peak": 5,
+        "min_slack_ticks": 76719,
+        "sampled_queue_max": 4,
+        "send_ticks_max": 687597,
+        "send_over_budget_nodes": 3258,
+        "headroom_pass": false
+      },
+      "slowest_nodes": [
+        {
+          "epoch": "5",
+          "node": 33137,
+          "index": 115581856,
+          "queue": 2,
+          "queue_peak": 5,
+          "slack_min_ticks": 76719,
+          "copy_max_ticks": 40176,
+          "poll_max_ticks": 228240,
+          "previous_node_send_ticks": 687597,
+          "previous_batch_prepare_us": 359,
+          "previous_batch_check_us": 67,
+          "previous_batch_origin": "same_epoch_profile",
+          "phase": "playing"
+        },
+        {
+          "epoch": "5",
+          "node": 15747,
+          "index": 54925536,
+          "queue": 2,
+          "queue_peak": 5,
+          "slack_min_ticks": 79333,
+          "copy_max_ticks": 40163,
+          "poll_max_ticks": 228240,
+          "previous_node_send_ticks": 685706,
+          "previous_batch_prepare_us": 358,
+          "previous_batch_check_us": 66,
+          "previous_batch_origin": "same_epoch_profile",
+          "phase": "playing"
+        },
+        {
+          "epoch": "5",
+          "node": 32317,
+          "index": 112721696,
+          "queue": 2,
+          "queue_peak": 5,
+          "slack_min_ticks": 76719,
+          "copy_max_ticks": 40176,
+          "poll_max_ticks": 228240,
+          "previous_node_send_ticks": 613210,
+          "previous_batch_prepare_us": 368,
+          "previous_batch_check_us": 59,
+          "previous_batch_origin": "same_epoch_profile",
+          "phase": "playing"
+        },
+        {
+          "epoch": "5",
+          "node": 19753,
+          "index": 68898464,
+          "queue": 2,
+          "queue_peak": 5,
+          "slack_min_ticks": 76719,
+          "copy_max_ticks": 40163,
+          "poll_max_ticks": 228240,
+          "previous_node_send_ticks": 603421,
+          "previous_batch_prepare_us": 119,
+          "previous_batch_check_us": 59,
+          "previous_batch_origin": "same_epoch_profile",
+          "phase": "playing"
+        },
+        {
+          "epoch": "5",
+          "node": 29938,
+          "index": 104423744,
+          "queue": 2,
+          "queue_peak": 5,
+          "slack_min_ticks": 76719,
+          "copy_max_ticks": 40176,
+          "poll_max_ticks": 228240,
+          "previous_node_send_ticks": 603279,
+          "previous_batch_prepare_us": 119,
+          "previous_batch_check_us": 59,
+          "previous_batch_origin": "same_epoch_profile",
+          "phase": "playing"
+        },
+        {
+          "epoch": "5",
+          "node": 5756,
+          "index": 20076928,
+          "queue": 2,
+          "queue_peak": 5,
+          "slack_min_ticks": 83681,
+          "copy_max_ticks": 40119,
+          "poll_max_ticks": 226638,
+          "previous_node_send_ticks": 599790,
+          "previous_batch_prepare_us": 111,
+          "previous_batch_check_us": 59,
+          "previous_batch_origin": "same_epoch_profile",
+          "phase": "playing"
+        },
+        {
+          "epoch": "5",
+          "node": 18700,
+          "index": 65225600,
+          "queue": 2,
+          "queue_peak": 5,
+          "slack_min_ticks": 76719,
+          "copy_max_ticks": 40163,
+          "poll_max_ticks": 228240,
+          "previous_node_send_ticks": 598695,
+          "previous_batch_prepare_us": 107,
+          "previous_batch_check_us": 388,
+          "previous_batch_origin": "same_epoch_profile",
+          "phase": "playing"
+        },
+        {
+          "epoch": "5",
+          "node": 6758,
+          "index": 23571904,
+          "queue": 2,
+          "queue_peak": 5,
+          "slack_min_ticks": 83681,
+          "copy_max_ticks": 40159,
+          "poll_max_ticks": 226638,
+          "previous_node_send_ticks": 596705,
+          "previous_batch_prepare_us": 115,
+          "previous_batch_check_us": 310,
+          "previous_batch_origin": "same_epoch_profile",
+          "phase": "playing"
+        }
+      ],
+      "ack_max_ms": 38.2217779988423,
+      "decode_max_ms": 3.424188937060535,
+      "reader_slow_stages": [],
+      "sessions": [
+        {
+          "snapshot": {
+            "schema": 1,
+            "identity": {
+              "board_serial": "1060031107",
+              "app": "scope-v19-main-1",
+              "firmware_sha256": "37f049fa029ad62a10767c56dc586b2c3697f8d250a0b8a7396570ce8e0c7060",
+              "relay_sha256": "27da0bc4860401df27eef50429f2ec881bfd3b51b1893d1fe3bacb9e922f56ae"
+            },
+            "adc_bits": 14,
+            "adc_period": 32,
+            "generator": {
+              "wave": 0,
+              "enabled": 0,
+              "mode": 0,
+              "frequency": 2500,
+              "final_frequency": 2500,
+              "low": 0,
+              "high": 4095,
+              "duration": 1000,
+              "duration_us": 0,
+              "duty": 50
+            }
+          },
+          "state": "closed",
+          "hardware_restored": true,
+          "errors": [],
+          "recovery": {
+            "seconds": 0.24904009501915425,
+            "samples": 8192,
+            "dropped": 0,
+            "fatal": 0,
+            "continuous": true
+          },
+          "receiver_activity": {
+            "pid": 82582,
+            "mode": "user",
+            "active": true,
+            "released": true
+          }
+        }
+      ]
+    }
+  ]
+}

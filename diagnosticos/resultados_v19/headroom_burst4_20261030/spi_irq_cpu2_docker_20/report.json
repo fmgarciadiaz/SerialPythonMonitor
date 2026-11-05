@@ -1,0 +1,102 @@
+{
+  "private": true,
+  "promoted": false,
+  "ok": false,
+  "changed": true,
+  "writer": "docker",
+  "identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v19-main-1",
+    "firmware_sha256": "37f049fa029ad62a10767c56dc586b2c3697f8d250a0b8a7396570ce8e0c7060",
+    "relay_sha256": "27da0bc4860401df27eef50429f2ec881bfd3b51b1893d1fe3bacb9e922f56ae"
+  },
+  "snapshot": {
+    "schema": 1,
+    "identity": {
+      "board_serial": "1060031107",
+      "app": "scope-v19-main-1",
+      "firmware_sha256": "37f049fa029ad62a10767c56dc586b2c3697f8d250a0b8a7396570ce8e0c7060",
+      "relay_sha256": "27da0bc4860401df27eef50429f2ec881bfd3b51b1893d1fe3bacb9e922f56ae"
+    },
+    "adc_bits": 14,
+    "adc_period": 32,
+    "generator": {
+      "wave": 0,
+      "enabled": 0,
+      "mode": 0,
+      "frequency": 2500,
+      "final_frequency": 2500,
+      "low": 0,
+      "high": 4095,
+      "duration": 1000,
+      "duration_us": 0,
+      "duty": 50
+    }
+  },
+  "irq": 116,
+  "original_affinity": {
+    "requested": "0-3",
+    "effective": "0"
+  },
+  "candidate_affinity": {
+    "requested": "2",
+    "effective": "2"
+  },
+  "command": [
+    "/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/bin/python",
+    "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/tools/gui_accepted_metrics_v19.py",
+    "--metrics-output",
+    "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v19/headroom_burst4_20261030/spi_irq_cpu2_docker_20/metrics.json",
+    "--serial",
+    "1060031107",
+    "--output",
+    "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v19/headroom_burst4_20261030/spi_irq_cpu2_docker_20/gui.json",
+    "--bits",
+    "8",
+    "--rate",
+    "1860465",
+    "--fft-size",
+    "16384",
+    "--frequency-khz",
+    "550",
+    "--duration",
+    "25.0",
+    "--hold-radio-seconds",
+    "20.0",
+    "--no-retune"
+  ],
+  "functional_pass": true,
+  "headroom": {
+    "frames": 42849,
+    "samples": 37364328,
+    "empty_status_frames": 776,
+    "send_nodes": 10712,
+    "mean_send_margin": 0.10358323427787486,
+    "mcu_queue_peak": 4,
+    "min_slack_ticks": 72150,
+    "sampled_queue_max": 4,
+    "send_ticks_max": 605960,
+    "send_over_budget_nodes": 1093,
+    "headroom_pass": false
+  },
+  "errors": [],
+  "exposed_fraction": 1.0,
+  "visible_gui_pass": true,
+  "restoring": false,
+  "final_affinity": {
+    "requested": "0-3",
+    "effective": "0"
+  },
+  "irq_restored": true,
+  "restoration": {
+    "hardware_restored": true,
+    "errors": [],
+    "recovery": {
+      "seconds": 10.027211903012358,
+      "samples": 313344,
+      "dropped": 0,
+      "fatal": 0,
+      "continuous": true
+    }
+  }
+}

@@ -1,0 +1,364 @@
+{
+  "private": true,
+  "promoted": false,
+  "cases": [
+    {
+      "report": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v20/gui_radio20_20261031/report.json",
+      "requested_tests": {
+        "radio": true,
+        "wav": false,
+        "fm": false
+      },
+      "gui": {
+        "ok": true,
+        "errors": [],
+        "assertions": {
+          "radio_playing_40k": true,
+          "radio_stop_confirmed": true,
+          "radio_progress": true,
+          "radio_hold_completed": true,
+          "scan_completed": true,
+          "wav_playing": true,
+          "wav_progress": true,
+          "wav_stop_confirmed": true,
+          "fm_playing": true,
+          "fm_progress": true,
+          "fm_stop_confirmed": true,
+          "shutdown_confirmed": true,
+          "worker_released": true
+        },
+        "exposed_fraction": 1.0,
+        "visible_gui_ok": true,
+        "paint_events": 590,
+        "hold": 20.08728584891651,
+        "radio": {
+          "frames": 43002,
+          "samples": 37497744,
+          "empty_status_frames": 853,
+          "send_nodes": 10750,
+          "mean_send_margin": 0.12123558388863809,
+          "mcu_queue_peak": 4,
+          "min_slack_ticks": 73581,
+          "sampled_queue_max": 3,
+          "send_ticks_max": 591961,
+          "send_over_budget_nodes": 1065,
+          "headroom_pass": false
+        },
+        "scope": "Functional V20 private screen; public acceptance remains false"
+      },
+      "reserve_screen": {
+        "publicly_accepted": false,
+        "capacity": 16,
+        "legacy_headroom_pass": false,
+        "free_at_peak": 12,
+        "passes": true,
+        "criterion": "Mean margin >=10%, cumulative peak strictly below half capacity, positive slack; private screen only"
+      },
+      "restoration": {
+        "ok": true,
+        "attempted": true,
+        "errors": [],
+        "material": {
+          "sources_exact": true,
+          "cache_exact": true,
+          "firmware_exact": true,
+          "relay_exact": true
+        },
+        "recovery": {
+          "snapshot_equal": true,
+          "continuous": true,
+          "integrity_ok": true,
+          "seconds": 10.024379816954024,
+          "detail": {
+            "hardware_restored": true,
+            "errors": [],
+            "recovery": {
+              "seconds": 10.024379816954024,
+              "samples": 313344,
+              "dropped": 0,
+              "fatal": 0,
+              "continuous": true
+            }
+          }
+        },
+        "final": {
+          "identity_equal": true,
+          "sources_exact": true,
+          "relay_configuration_equal": true,
+          "cpu_equal": true
+        }
+      },
+      "audio_stages": []
+    },
+    {
+      "report": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v20/gui_radio60_audio_20261101/report.json",
+      "requested_tests": {
+        "radio": true,
+        "wav": true,
+        "fm": true,
+        "voices": 20
+      },
+      "gui": {
+        "ok": true,
+        "errors": [],
+        "assertions": {
+          "radio_playing_40k": true,
+          "radio_stop_confirmed": true,
+          "radio_progress": true,
+          "radio_hold_completed": true,
+          "scan_completed": true,
+          "wav_playing": true,
+          "wav_progress": true,
+          "wav_stop_confirmed": true,
+          "fm_playing": true,
+          "fm_progress": true,
+          "fm_stop_confirmed": true,
+          "shutdown_confirmed": true,
+          "worker_released": true
+        },
+        "exposed_fraction": 1.0,
+        "visible_gui_ok": true,
+        "paint_events": 1556,
+        "hold": 60.01844018092379,
+        "radio": {
+          "frames": 128012,
+          "samples": 111626464,
+          "empty_status_frames": 2516,
+          "send_nodes": 32003,
+          "mean_send_margin": 0.11916505061522087,
+          "mcu_queue_peak": 4,
+          "min_slack_ticks": 75564,
+          "sampled_queue_max": 3,
+          "send_ticks_max": 683875,
+          "send_over_budget_nodes": 3223,
+          "headroom_pass": false
+        },
+        "reserve_screen": {
+          "publicly_accepted": false,
+          "capacity": 16,
+          "legacy_headroom_pass": false,
+          "free_at_peak": 12,
+          "passes": true,
+          "criterion": "Mean margin >=10%, cumulative peak strictly below half capacity, positive slack; private screen only"
+        },
+        "scope": "Functional V20 private screen; public acceptance remains false"
+      },
+      "reserve_screen": {
+        "publicly_accepted": false,
+        "capacity": 16,
+        "legacy_headroom_pass": false,
+        "free_at_peak": 12,
+        "passes": true,
+        "criterion": "Mean margin >=10%, cumulative peak strictly below half capacity, positive slack; private screen only"
+      },
+      "restoration": {
+        "ok": true,
+        "attempted": true,
+        "errors": [],
+        "material": {
+          "sources_exact": true,
+          "cache_exact": true,
+          "firmware_exact": true,
+          "relay_exact": true
+        },
+        "recovery": {
+          "snapshot_equal": true,
+          "continuous": true,
+          "integrity_ok": true,
+          "seconds": 10.02736972994171,
+          "detail": {
+            "hardware_restored": true,
+            "errors": [],
+            "recovery": {
+              "seconds": 10.02736972994171,
+              "samples": 313344,
+              "dropped": 0,
+              "fatal": 0,
+              "continuous": true
+            }
+          }
+        },
+        "final": {
+          "identity_equal": true,
+          "sources_exact": true,
+          "relay_configuration_equal": true,
+          "cpu_equal": true
+        }
+      },
+      "audio_stages": [
+        {
+          "stage": "wav_play_requested",
+          "elapsed": 68.10507005406544,
+          "fft_metrics": {
+            "completed": 615,
+            "wall_max_ms": 30.92546295374632,
+            "first_completed_at": 2.676530902972445
+          },
+          "fft_live_seconds": 65.4285402459791,
+          "fft_costs_ms": [],
+          "fft_deferred": 321,
+          "fft_crop_active": false,
+          "render_metrics": {
+            "frames": 2452,
+            "wall_seconds": 7.594547019689344,
+            "cpu_seconds": 6.741204033999976,
+            "max_wall_ms": 32.093671965412796,
+            "heartbeat_gap_max_ms": 456.6268640337512
+          },
+          "process_cpu_seconds": 79.781115,
+          "samples": 5696,
+          "paint_events": 1237,
+          "applied_configuration": {
+            "bits": 8,
+            "rate": 40000,
+            "channels": 2
+          },
+          "exposed": true,
+          "radio_samples": 0,
+          "batch_processing_count": 3127,
+          "pending_gui": 0,
+          "rf_ipc_kind": "RawRfBatch",
+          "pending_dsp": 0,
+          "pending_gui_peak": 4,
+          "pending_dsp_peak": 4,
+          "gui_delay_max_ms": 97.65226300805807,
+          "retained_seconds": 2.220446049250313e-16,
+          "radio_playing_seconds": null,
+          "wav_active": false,
+          "radio_a0": false,
+          "radio_a0_diagnostics": null,
+          "radio_status": "RADIO apagada",
+          "rf_history_samples": 5696,
+          "display_curve_points": {
+            "CH1": 0,
+            "CH2": 0,
+            "FILTER": 0,
+            "RADIO": 0
+          },
+          "finite_curve_points": {
+            "CH1": 0,
+            "CH2": 0,
+            "FILTER": 0,
+            "RADIO": 0
+          },
+          "spectral_last_end": null,
+          "fft_finite_points": [],
+          "heatmap_finite_pixels": [
+            0,
+            0
+          ],
+          "heatmap_nonempty": [
+            false,
+            false
+          ],
+          "raster_published": 0,
+          "raster_visible": false,
+          "raster_worker_ms": 0,
+          "raster_error": null,
+          "raster_busy": false,
+          "raster_rejected": 0,
+          "raster_last_rejection": [],
+          "temporal_paint_ms": 0,
+          "temporal_paint_max_ms": 0,
+          "render_interval_ms": 16,
+          "detail": 50,
+          "trigger_enabled": false,
+          "scan_not_before_sample": -1,
+          "status": "Activo \u00b7 SPI \u00b7 8 bits \u00b7 40 kHz"
+        },
+        {
+          "stage": "fm_play_requested",
+          "elapsed": 72.45569511398207,
+          "fft_metrics": {
+            "completed": 656,
+            "wall_max_ms": 30.92546295374632,
+            "first_completed_at": 2.676530902972445
+          },
+          "fft_live_seconds": 69.77916519099381,
+          "fft_costs_ms": [
+            6.451922003179789,
+            8.92796297557652,
+            12.132767005823553,
+            7.009770954027772,
+            9.746904019266367,
+            7.390015991404653,
+            10.205807047896087,
+            8.121829014271498
+          ],
+          "fft_deferred": 321,
+          "fft_crop_active": false,
+          "render_metrics": {
+            "frames": 2642,
+            "wall_seconds": 8.038559592794627,
+            "cpu_seconds": 7.162939370000009,
+            "max_wall_ms": 32.093671965412796,
+            "heartbeat_gap_max_ms": 456.6268640337512
+          },
+          "process_cpu_seconds": 83.550565,
+          "samples": 178176,
+          "paint_events": 1297,
+          "applied_configuration": {
+            "bits": 8,
+            "rate": 40000,
+            "channels": 2
+          },
+          "exposed": true,
+          "radio_samples": 0,
+          "batch_processing_count": 3325,
+          "pending_gui": 1,
+          "rf_ipc_kind": "RawRfBatch",
+          "pending_dsp": 0,
+          "pending_gui_peak": 4,
+          "pending_dsp_peak": 4,
+          "gui_delay_max_ms": 97.69127995241433,
+          "retained_seconds": 0.04000000000000023,
+          "radio_playing_seconds": null,
+          "wav_active": true,
+          "radio_a0": false,
+          "radio_a0_diagnostics": null,
+          "radio_status": "RADIO apagada",
+          "rf_history_samples": 178176,
+          "display_curve_points": {
+            "CH1": 0,
+            "CH2": 0,
+            "FILTER": 0,
+            "RADIO": 0
+          },
+          "finite_curve_points": {
+            "CH1": 0,
+            "CH2": 0,
+            "FILTER": 0,
+            "RADIO": 0
+          },
+          "spectral_last_end": 178176,
+          "fft_finite_points": [
+            8193
+          ],
+          "heatmap_finite_pixels": [
+            0,
+            0
+          ],
+          "heatmap_nonempty": [
+            false,
+            false
+          ],
+          "raster_published": 0,
+          "raster_visible": false,
+          "raster_worker_ms": 0,
+          "raster_error": null,
+          "raster_busy": false,
+          "raster_rejected": 0,
+          "raster_last_rejection": [],
+          "temporal_paint_ms": 0,
+          "temporal_paint_max_ms": 0,
+          "render_interval_ms": 16,
+          "detail": 50,
+          "trigger_enabled": false,
+          "scan_not_before_sample": -1,
+          "status": "Activo \u00b7 SPI \u00b7 8 bits \u00b7 40 kHz",
+          "requested_voices": 20
+        }
+      ]
+    }
+  ]
+}

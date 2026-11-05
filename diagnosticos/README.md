@@ -3,6 +3,14 @@
 Informes, herramientas de ensayo y resultados del proyecto. Los informes
 fechados conservan el estado y las versiones probadas en ese momento.
 
+## Evidencia conservada
+
+Se eliminaron registros crudos, compilaciones y resultados intermedios antiguos.
+Quedan resúmenes finales, herramientas y evidencia necesaria para identidad,
+recuperación y fallos abiertos de V20. Las referencias históricas a registros
+retirados no implican que esos archivos sigan disponibles.
+[Alcance de la depuración](LIMPIEZA_20261105.md).
+
 | Área | Entrada |
 |---|---|
 | Conexión, recuperación y generador | [resultados_autoload](resultados_autoload) |

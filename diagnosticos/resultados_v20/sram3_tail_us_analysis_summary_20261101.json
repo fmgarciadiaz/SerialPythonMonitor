@@ -1,0 +1,722 @@
+{
+  "private": true,
+  "publicly_accepted": false,
+  "version": 20,
+  "local_tests_passed": 18,
+  "successful_runs": [
+    {
+      "report": "diagnosticos/resultados_v20/sram3_tail_us_before_a0_20261101/report.json",
+      "report_sha256": "62e109c167572865f020a7dc50f99b658cddc12cd0eb15d9e9df0e7c7b039bf6",
+      "requested_tests": {
+        "radio": true,
+        "wav": false,
+        "fm": false,
+        "voices": 1,
+        "us": true,
+        "scan_during_a0": false,
+        "analysis_mode": null,
+        "bits": 8,
+        "rate": 1860465
+      },
+      "gui": {
+        "ok": true,
+        "errors": [],
+        "assertions": {
+          "radio_playing_40k": true,
+          "radio_stop_confirmed": true,
+          "radio_progress": true,
+          "radio_hold_completed": true,
+          "scan_completed": true,
+          "wav_playing": true,
+          "wav_progress": true,
+          "wav_stop_confirmed": true,
+          "fm_playing": true,
+          "fm_progress": true,
+          "fm_stop_confirmed": true,
+          "shutdown_confirmed": true,
+          "worker_released": true,
+          "us_three_profiles_captured": true,
+          "us_original_restored": true
+        },
+        "exposed_fraction": 1.0,
+        "visible_gui_ok": true,
+        "paint_events": 629,
+        "hold": 20.04798392194789,
+        "radio": {
+          "frames": 42828,
+          "samples": 37346016,
+          "empty_status_frames": 713,
+          "send_nodes": 10707,
+          "mean_send_margin": 0.11883887676327387,
+          "mcu_queue_peak": 4,
+          "min_slack_ticks": 71771,
+          "sampled_queue_max": 4,
+          "send_ticks_max": 683026,
+          "send_over_budget_nodes": 1056,
+          "headroom_pass": false
+        },
+        "scan": {
+          "requested": true,
+          "completed": true,
+          "candidate_count": 0,
+          "multirate": {
+            "rates": [
+              1860465,
+              1600000,
+              1403508
+            ],
+            "captures": [
+              1860465.1162790698,
+              1600000.0,
+              1403508.7719298245
+            ],
+            "restored": true,
+            "error": null
+          }
+        },
+        "analysis_mode": null,
+        "analysis_synthetic": false,
+        "acquisition": {
+          "frames": 61700,
+          "samples": 53802400,
+          "empty_status_frames": 752,
+          "send_nodes": 15423,
+          "mean_send_margin": 0.13990809001255977,
+          "mcu_queue_peak": 4,
+          "min_slack_ticks": 71771,
+          "sampled_queue_max": 4,
+          "send_ticks_max": 683026,
+          "send_over_budget_nodes": 1095,
+          "headroom_pass": false
+        },
+        "reserve_screen": {
+          "publicly_accepted": false,
+          "capacity": 16,
+          "legacy_headroom_pass": false,
+          "free_at_peak": 12,
+          "passes": true,
+          "criterion": "Mean margin >=10%, cumulative peak strictly below half capacity, positive slack; private screen only"
+        },
+        "scope": "Functional V20 private screen; public acceptance remains false"
+      },
+      "restoration": {
+        "ok": true,
+        "attempted": true,
+        "errors": [],
+        "material": {
+          "sources_exact": true,
+          "cache_exact": true,
+          "firmware_exact": true,
+          "relay_exact": true
+        },
+        "recovery": {
+          "snapshot_equal": true,
+          "continuous": true,
+          "integrity_ok": true,
+          "seconds": 10.023886616923846,
+          "detail": {
+            "hardware_restored": true,
+            "errors": [],
+            "recovery": {
+              "seconds": 10.023886616923846,
+              "samples": 313344,
+              "dropped": 0,
+              "fatal": 0,
+              "continuous": true
+            }
+          }
+        },
+        "final": {
+          "identity_equal": true,
+          "sources_exact": true,
+          "relay_configuration_equal": true,
+          "cpu_equal": true
+        }
+      }
+    },
+    {
+      "report": "diagnosticos/resultados_v20/sram3_tail_us_during_a0_20261101/report.json",
+      "report_sha256": "8180ec01c933e6ce2724fc6619a652aa3cd72c3c454e1d8e51f08e1fd3fb3f16",
+      "requested_tests": {
+        "radio": true,
+        "wav": false,
+        "fm": false,
+        "voices": 1,
+        "us": true,
+        "scan_during_a0": true,
+        "analysis_mode": null,
+        "bits": 8,
+        "rate": 1860465
+      },
+      "gui": {
+        "ok": true,
+        "errors": [],
+        "assertions": {
+          "radio_playing_40k": true,
+          "radio_stop_confirmed": true,
+          "radio_progress": true,
+          "radio_hold_completed": true,
+          "scan_completed": true,
+          "wav_playing": true,
+          "wav_progress": true,
+          "wav_stop_confirmed": true,
+          "fm_playing": true,
+          "fm_progress": true,
+          "fm_stop_confirmed": true,
+          "shutdown_confirmed": true,
+          "worker_released": true,
+          "us_three_profiles_captured": true,
+          "us_original_restored": true,
+          "a0_transitions_completed": true
+        },
+        "exposed_fraction": 1.0,
+        "visible_gui_ok": true,
+        "paint_events": 782,
+        "hold": 20.029203274985775,
+        "radio": {
+          "frames": 54380,
+          "samples": 47419360,
+          "empty_status_frames": 912,
+          "send_nodes": 13595,
+          "mean_send_margin": 0.1211519622286743,
+          "mcu_queue_peak": 5,
+          "min_slack_ticks": 81596,
+          "sampled_queue_max": 4,
+          "send_ticks_max": 942484,
+          "send_over_budget_nodes": 1306,
+          "headroom_pass": false
+        },
+        "scan": {
+          "requested": true,
+          "completed": true,
+          "candidate_count": 0,
+          "multirate": {
+            "rates": [
+              1860465,
+              1600000,
+              1403508
+            ],
+            "captures": [
+              1860465.1162790698,
+              1600000.0,
+              1403508.7719298245
+            ],
+            "restored": true,
+            "error": null
+          }
+        },
+        "analysis_mode": null,
+        "analysis_synthetic": false,
+        "acquisition": {
+          "frames": 79028,
+          "samples": 68912416,
+          "empty_status_frames": 977,
+          "send_nodes": 19755,
+          "mean_send_margin": 0.1415321277229159,
+          "mcu_queue_peak": 5,
+          "min_slack_ticks": 81596,
+          "sampled_queue_max": 4,
+          "send_ticks_max": 942484,
+          "send_over_budget_nodes": 1372,
+          "headroom_pass": false
+        },
+        "reserve_screen": {
+          "publicly_accepted": false,
+          "capacity": 16,
+          "legacy_headroom_pass": false,
+          "free_at_peak": 11,
+          "passes": true,
+          "criterion": "Mean margin >=10%, cumulative peak strictly below half capacity, positive slack; private screen only"
+        },
+        "scope": "Functional V20 private screen; public acceptance remains false"
+      },
+      "restoration": {
+        "ok": true,
+        "attempted": true,
+        "errors": [],
+        "material": {
+          "sources_exact": true,
+          "cache_exact": true,
+          "firmware_exact": true,
+          "relay_exact": true
+        },
+        "recovery": {
+          "snapshot_equal": true,
+          "continuous": true,
+          "integrity_ok": true,
+          "seconds": 10.023896155995317,
+          "detail": {
+            "hardware_restored": true,
+            "errors": [],
+            "recovery": {
+              "seconds": 10.023896155995317,
+              "samples": 313344,
+              "dropped": 0,
+              "fatal": 0,
+              "continuous": true
+            }
+          }
+        },
+        "final": {
+          "identity_equal": true,
+          "sources_exact": true,
+          "relay_configuration_equal": true,
+          "cpu_equal": true
+        }
+      }
+    },
+    {
+      "report": "diagnosticos/resultados_v20/sram3_tail_analysis_vt_repro_20261101/report.json",
+      "report_sha256": "fea292439a78ddcc80fbe85b65145551222a27a9cbde359c28c7651028ed74b6",
+      "requested_tests": {
+        "radio": false,
+        "wav": false,
+        "fm": false,
+        "voices": 1,
+        "us": false,
+        "scan_during_a0": false,
+        "analysis_mode": "vt",
+        "bits": 8,
+        "rate": 1860465
+      },
+      "gui": {
+        "ok": true,
+        "errors": [],
+        "assertions": {
+          "acquisition_configuration_applied": true,
+          "samples_advanced_between_observations": true,
+          "useful_sample_volume": true,
+          "effective_acquisition_duration": true,
+          "analysis_has_data": true,
+          "a0_remained_off": true,
+          "shutdown_confirmed": true,
+          "worker_released": true
+        },
+        "exposed_fraction": 1.0,
+        "visible_gui_ok": true,
+        "paint_events": 296,
+        "hold": 0.0,
+        "radio": {
+          "frames": 0,
+          "samples": 0,
+          "empty_status_frames": 0,
+          "send_nodes": 0,
+          "mean_send_margin": null,
+          "mcu_queue_peak": 0,
+          "min_slack_ticks": null,
+          "sampled_queue_max": 0,
+          "send_ticks_max": 0,
+          "send_over_budget_nodes": 0,
+          "headroom_pass": false
+        },
+        "scan": {
+          "requested": false,
+          "completed": false,
+          "candidate_count": null
+        },
+        "analysis_mode": "vt",
+        "analysis_synthetic": false,
+        "acquisition": {
+          "frames": 47876,
+          "samples": 41747872,
+          "empty_status_frames": 28,
+          "send_nodes": 11968,
+          "mean_send_margin": 0.19239416648515595,
+          "mcu_queue_peak": 3,
+          "min_slack_ticks": 85389,
+          "sampled_queue_max": 2,
+          "send_ticks_max": 408612,
+          "send_over_budget_nodes": 31,
+          "headroom_pass": true
+        },
+        "reserve_screen": {
+          "publicly_accepted": false,
+          "capacity": 16,
+          "legacy_headroom_pass": false,
+          "free_at_peak": 16,
+          "passes": false,
+          "criterion": "Mean margin >=10%, cumulative peak strictly below half capacity, positive slack; private screen only"
+        },
+        "scope": "Functional V20 private screen; public acceptance remains false"
+      },
+      "restoration": {
+        "ok": true,
+        "attempted": true,
+        "errors": [],
+        "material": {
+          "sources_exact": true,
+          "cache_exact": true,
+          "firmware_exact": true,
+          "relay_exact": true
+        },
+        "recovery": {
+          "snapshot_equal": true,
+          "continuous": true,
+          "integrity_ok": true,
+          "seconds": 10.022514475975186,
+          "detail": {
+            "hardware_restored": true,
+            "errors": [],
+            "recovery": {
+              "seconds": 10.022514475975186,
+              "samples": 313344,
+              "dropped": 0,
+              "fatal": 0,
+              "continuous": true
+            }
+          }
+        },
+        "final": {
+          "identity_equal": true,
+          "sources_exact": true,
+          "relay_configuration_equal": true,
+          "cpu_equal": true
+        }
+      }
+    },
+    {
+      "report": "diagnosticos/resultados_v20/sram3_tail_analysis_fft_10_1355932_20261101/report.json",
+      "report_sha256": "e54414f94481da165f2c91c19383191210d3aba06d2b44e85a7a9d9c5d3c8c5d",
+      "requested_tests": {
+        "radio": false,
+        "wav": false,
+        "fm": false,
+        "voices": 1,
+        "us": false,
+        "scan_during_a0": false,
+        "analysis_mode": "fft",
+        "bits": 10,
+        "rate": 1355932
+      },
+      "gui": {
+        "ok": true,
+        "errors": [],
+        "assertions": {
+          "acquisition_configuration_applied": true,
+          "samples_advanced_between_observations": true,
+          "useful_sample_volume": true,
+          "effective_acquisition_duration": true,
+          "analysis_has_data": true,
+          "a0_remained_off": true,
+          "shutdown_confirmed": true,
+          "worker_released": true
+        },
+        "exposed_fraction": 1.0,
+        "visible_gui_ok": true,
+        "paint_events": 661,
+        "hold": 0.0,
+        "radio": {
+          "frames": 0,
+          "samples": 0,
+          "empty_status_frames": 0,
+          "send_nodes": 0,
+          "mean_send_margin": null,
+          "mcu_queue_peak": 0,
+          "min_slack_ticks": null,
+          "sampled_queue_max": 0,
+          "send_ticks_max": 0,
+          "send_over_budget_nodes": 0,
+          "headroom_pass": false
+        },
+        "scan": {
+          "requested": false,
+          "completed": false,
+          "candidate_count": null
+        },
+        "analysis_mode": "fft",
+        "analysis_synthetic": false,
+        "acquisition": {
+          "frames": 43504,
+          "samples": 30278784,
+          "empty_status_frames": 28,
+          "send_nodes": 5437,
+          "mean_send_margin": 0.14008971869917364,
+          "mcu_queue_peak": 2,
+          "min_slack_ticks": 420974,
+          "sampled_queue_max": 2,
+          "send_ticks_max": 745797,
+          "send_over_budget_nodes": 20,
+          "headroom_pass": true
+        },
+        "reserve_screen": {
+          "publicly_accepted": false,
+          "capacity": 16,
+          "legacy_headroom_pass": false,
+          "free_at_peak": 16,
+          "passes": false,
+          "criterion": "Mean margin >=10%, cumulative peak strictly below half capacity, positive slack; private screen only"
+        },
+        "scope": "Functional V20 private screen; public acceptance remains false"
+      },
+      "restoration": {
+        "ok": true,
+        "attempted": true,
+        "errors": [],
+        "material": {
+          "sources_exact": true,
+          "cache_exact": true,
+          "firmware_exact": true,
+          "relay_exact": true
+        },
+        "recovery": {
+          "snapshot_equal": true,
+          "continuous": true,
+          "integrity_ok": true,
+          "seconds": 10.023609244963154,
+          "detail": {
+            "hardware_restored": true,
+            "errors": [],
+            "recovery": {
+              "seconds": 10.023609244963154,
+              "samples": 313344,
+              "dropped": 0,
+              "fatal": 0,
+              "continuous": true
+            }
+          }
+        },
+        "final": {
+          "identity_equal": true,
+          "sources_exact": true,
+          "relay_configuration_equal": true,
+          "cpu_equal": true
+        }
+      }
+    },
+    {
+      "report": "diagnosticos/resultados_v20/sram3_tail_analysis_heatmap_16_76226_20261101/report.json",
+      "report_sha256": "3a6d4a4197491708c0c544840e605328a08ae15c00142d91e79597bff810be28",
+      "requested_tests": {
+        "radio": false,
+        "wav": false,
+        "fm": false,
+        "voices": 1,
+        "us": false,
+        "scan_during_a0": false,
+        "analysis_mode": "heatmap",
+        "bits": 16,
+        "rate": 76226
+      },
+      "gui": {
+        "ok": true,
+        "errors": [],
+        "assertions": {
+          "acquisition_configuration_applied": true,
+          "samples_advanced_between_observations": true,
+          "useful_sample_volume": true,
+          "effective_acquisition_duration": true,
+          "analysis_has_data": true,
+          "a0_remained_off": true,
+          "shutdown_confirmed": true,
+          "worker_released": true
+        },
+        "exposed_fraction": 1.0,
+        "visible_gui_ok": true,
+        "paint_events": 229,
+        "hold": 0.0,
+        "radio": {
+          "frames": 0,
+          "samples": 0,
+          "empty_status_frames": 0,
+          "send_nodes": 0,
+          "mean_send_margin": null,
+          "mcu_queue_peak": 0,
+          "min_slack_ticks": null,
+          "sampled_queue_max": 0,
+          "send_ticks_max": 0,
+          "send_over_budget_nodes": 0,
+          "headroom_pass": false
+        },
+        "scan": {
+          "requested": false,
+          "completed": false,
+          "candidate_count": null
+        },
+        "analysis_mode": "heatmap",
+        "analysis_synthetic": false,
+        "acquisition": {
+          "frames": 7856,
+          "samples": 1696896,
+          "empty_status_frames": 22,
+          "send_nodes": 490,
+          "mean_send_margin": 0.8435162566164573,
+          "mcu_queue_peak": 1,
+          "min_slack_ticks": 6991242,
+          "sampled_queue_max": 1,
+          "send_ticks_max": 1412642,
+          "send_over_budget_nodes": 0,
+          "headroom_pass": true
+        },
+        "reserve_screen": {
+          "publicly_accepted": false,
+          "capacity": 16,
+          "legacy_headroom_pass": false,
+          "free_at_peak": 16,
+          "passes": false,
+          "criterion": "Mean margin >=10%, cumulative peak strictly below half capacity, positive slack; private screen only"
+        },
+        "scope": "Functional V20 private screen; public acceptance remains false"
+      },
+      "restoration": {
+        "ok": true,
+        "attempted": true,
+        "errors": [],
+        "material": {
+          "sources_exact": true,
+          "cache_exact": true,
+          "firmware_exact": true,
+          "relay_exact": true
+        },
+        "recovery": {
+          "snapshot_equal": true,
+          "continuous": true,
+          "integrity_ok": true,
+          "seconds": 10.0187415239634,
+          "detail": {
+            "hardware_restored": true,
+            "errors": [],
+            "recovery": {
+              "seconds": 10.0187415239634,
+              "samples": 313344,
+              "dropped": 0,
+              "fatal": 0,
+              "continuous": true
+            }
+          }
+        },
+        "final": {
+          "identity_equal": true,
+          "sources_exact": true,
+          "relay_configuration_equal": true,
+          "cpu_equal": true
+        }
+      }
+    },
+    {
+      "report": "diagnosticos/resultados_v20/sram3_tail_analysis_bode_14_363636_20261101/report.json",
+      "report_sha256": "f72528b7b90f0a332808bbb3a05fcdce59fa4be2eb6ea71920c0421d9147f09e",
+      "requested_tests": {
+        "radio": false,
+        "wav": false,
+        "fm": false,
+        "voices": 1,
+        "us": false,
+        "scan_during_a0": false,
+        "analysis_mode": "bode",
+        "bits": 14,
+        "rate": 363636
+      },
+      "gui": {
+        "ok": true,
+        "errors": [],
+        "assertions": {
+          "acquisition_configuration_applied": true,
+          "samples_advanced_between_observations": true,
+          "useful_sample_volume": true,
+          "effective_acquisition_duration": true,
+          "analysis_has_data": true,
+          "a0_remained_off": true,
+          "shutdown_confirmed": true,
+          "worker_released": true
+        },
+        "exposed_fraction": 1.0,
+        "visible_gui_ok": true,
+        "paint_events": 325,
+        "hold": 0.0,
+        "radio": {
+          "frames": 0,
+          "samples": 0,
+          "empty_status_frames": 0,
+          "send_nodes": 0,
+          "mean_send_margin": null,
+          "mcu_queue_peak": 0,
+          "min_slack_ticks": null,
+          "sampled_queue_max": 0,
+          "send_ticks_max": 0,
+          "send_over_budget_nodes": 0,
+          "headroom_pass": false
+        },
+        "scan": {
+          "requested": false,
+          "completed": false,
+          "candidate_count": null
+        },
+        "analysis_mode": "bode",
+        "analysis_synthetic": true,
+        "acquisition": {
+          "frames": 32640,
+          "samples": 8094720,
+          "empty_status_frames": 24,
+          "send_nodes": 2039,
+          "mean_send_margin": 0.36234925493834313,
+          "mcu_queue_peak": 1,
+          "min_slack_ticks": 1471447,
+          "sampled_queue_max": 1,
+          "send_ticks_max": 1356293,
+          "send_over_budget_nodes": 0,
+          "headroom_pass": true
+        },
+        "reserve_screen": {
+          "publicly_accepted": false,
+          "capacity": 16,
+          "legacy_headroom_pass": false,
+          "free_at_peak": 16,
+          "passes": false,
+          "criterion": "Mean margin >=10%, cumulative peak strictly below half capacity, positive slack; private screen only"
+        },
+        "scope": "Functional V20 private screen; public acceptance remains false"
+      },
+      "restoration": {
+        "ok": true,
+        "attempted": true,
+        "errors": [],
+        "material": {
+          "sources_exact": true,
+          "cache_exact": true,
+          "firmware_exact": true,
+          "relay_exact": true
+        },
+        "recovery": {
+          "snapshot_equal": true,
+          "continuous": true,
+          "integrity_ok": true,
+          "seconds": 10.018045922042802,
+          "detail": {
+            "hardware_restored": true,
+            "errors": [],
+            "recovery": {
+              "seconds": 10.018045922042802,
+              "samples": 313344,
+              "dropped": 0,
+              "fatal": 0,
+              "continuous": true
+            }
+          }
+        },
+        "final": {
+          "identity_equal": true,
+          "sources_exact": true,
+          "relay_configuration_equal": true,
+          "cpu_equal": true
+        }
+      }
+    }
+  ],
+  "failed_runs": [
+    {
+      "report": "diagnosticos/resultados_v20/sram3_tail_analysis_vt_8_1860465_20261101/report.json",
+      "error": "FileNotFoundError(2, 'No such file or directory')",
+      "restored": true,
+      "native_crash": "native_crash_summary.json",
+      "root_cause_confirmed": false
+    }
+  ],
+  "scan_detection_validated": false,
+  "all_successful_runs_visible": true,
+  "final_state": "Q free; V19 exact restored; V20 stopped",
+  "open_issues": [
+    "Intermittent native PySide6 QTimer.singleShot crash on close; one failure then one pass, not fixed",
+    "US found zero candidates: station identification not qualified",
+    "Full bits/rates/analysis matrix, long windows, other audio rates, analog Bode and 2 MS/s headroom remain pending"
+  ]
+}

@@ -1,0 +1,247 @@
+{
+  "private": true,
+  "promoted": false,
+  "experiment": "PCM validation before irq_lock only",
+  "functional_pass": true,
+  "visible_fraction": 1.0,
+  "radio_hold_seconds": 20.042787623940967,
+  "radio_played_samples": 802080,
+  "playing": {
+    "frames": 42802,
+    "samples": 37323344,
+    "empty_status_frames": 702,
+    "send_nodes": 10700,
+    "mean_send_margin": 0.10694406094905584,
+    "mcu_queue_peak": 4,
+    "min_slack_ticks": 79875,
+    "sampled_queue_max": 3,
+    "send_ticks_max": 617001,
+    "send_over_budget_nodes": 1045,
+    "headroom_pass": false
+  },
+  "headroom_pass": false,
+  "peak_increases": [
+    {
+      "kind": "cumulative_peak",
+      "phase": "stopped",
+      "previous_peak": null,
+      "snapshot": {
+        "epoch": "1",
+        "node": 0,
+        "index": 0,
+        "queue": 0,
+        "queue_peak": 0,
+        "slack_min_ticks": 4294967295,
+        "copy_max_ticks": 0,
+        "poll_max_ticks": 60,
+        "previous_node_send_ticks": 0,
+        "previous_batch_prepare_us": 105,
+        "previous_batch_check_us": 58,
+        "previous_batch_origin": "unknown"
+      },
+      "host_observed_at": 873823.362766465,
+      "recent_chunks": []
+    },
+    {
+      "kind": "cumulative_peak",
+      "phase": "stopped",
+      "previous_peak": 0,
+      "snapshot": {
+        "epoch": "1",
+        "node": 0,
+        "index": 0,
+        "queue": 1,
+        "queue_peak": 1,
+        "slack_min_ticks": 215900,
+        "copy_max_ticks": 37411,
+        "poll_max_ticks": 174896,
+        "previous_node_send_ticks": 0,
+        "previous_batch_prepare_us": 114,
+        "previous_batch_check_us": 59,
+        "previous_batch_origin": "same_epoch_profile"
+      },
+      "host_observed_at": 873823.365301379,
+      "recent_chunks": []
+    },
+    {
+      "kind": "cumulative_peak",
+      "phase": "stopped",
+      "previous_peak": 1,
+      "snapshot": {
+        "epoch": "1",
+        "node": 2,
+        "index": 6976,
+        "queue": 1,
+        "queue_peak": 2,
+        "slack_min_ticks": 130656,
+        "copy_max_ticks": 38963,
+        "poll_max_ticks": 208007,
+        "previous_node_send_ticks": 241786,
+        "previous_batch_prepare_us": 111,
+        "previous_batch_check_us": 59,
+        "previous_batch_origin": "same_epoch_profile"
+      },
+      "host_observed_at": 873823.369372125,
+      "recent_chunks": []
+    },
+    {
+      "kind": "cumulative_peak",
+      "phase": "preparing",
+      "previous_peak": 2,
+      "snapshot": {
+        "epoch": "1",
+        "node": 2738,
+        "index": 9550144,
+        "queue": 2,
+        "queue_peak": 3,
+        "slack_min_ticks": 85345,
+        "copy_max_ticks": 39721,
+        "poll_max_ticks": 210472,
+        "previous_node_send_ticks": 561808,
+        "previous_batch_prepare_us": 110,
+        "previous_batch_check_us": 59,
+        "previous_batch_origin": "same_epoch_profile"
+      },
+      "host_observed_at": 873828.505235957,
+      "recent_chunks": [
+        {
+          "sent_at": 873828.495932352,
+          "phase": "preparing",
+          "request_id": 2224123131
+        },
+        {
+          "sent_at": 873828.495988823,
+          "phase": "preparing",
+          "request_id": 2224123132
+        },
+        {
+          "sent_at": 873828.496038278,
+          "phase": "preparing",
+          "request_id": 2224123133
+        },
+        {
+          "sent_at": 873828.496086606,
+          "phase": "preparing",
+          "request_id": 2224123134
+        },
+        {
+          "sent_at": 873828.496134592,
+          "phase": "preparing",
+          "request_id": 2224123135
+        },
+        {
+          "sent_at": 873828.496181245,
+          "phase": "preparing",
+          "request_id": 2224123136
+        },
+        {
+          "sent_at": 873828.496225889,
+          "phase": "preparing",
+          "request_id": 2224123137
+        },
+        {
+          "sent_at": 873828.502500638,
+          "phase": "preparing",
+          "request_id": 2224123138
+        }
+      ]
+    },
+    {
+      "kind": "cumulative_peak",
+      "phase": "preparing",
+      "previous_peak": 3,
+      "snapshot": {
+        "epoch": "1",
+        "node": 2765,
+        "index": 9644320,
+        "queue": 3,
+        "queue_peak": 4,
+        "slack_min_ticks": 85345,
+        "copy_max_ticks": 39732,
+        "poll_max_ticks": 219467,
+        "previous_node_send_ticks": 397985,
+        "previous_batch_prepare_us": 107,
+        "previous_batch_check_us": 59,
+        "previous_batch_origin": "same_epoch_profile"
+      },
+      "host_observed_at": 873828.555741029,
+      "recent_chunks": [
+        {
+          "sent_at": 873828.509355494,
+          "phase": "preparing",
+          "request_id": 2224123139
+        },
+        {
+          "sent_at": 873828.514831335,
+          "phase": "preparing",
+          "request_id": 2224123140
+        },
+        {
+          "sent_at": 873828.521093604,
+          "phase": "preparing",
+          "request_id": 2224123141
+        },
+        {
+          "sent_at": 873828.527590783,
+          "phase": "preparing",
+          "request_id": 2224123142
+        },
+        {
+          "sent_at": 873828.532887358,
+          "phase": "preparing",
+          "request_id": 2224123143
+        },
+        {
+          "sent_at": 873828.538731443,
+          "phase": "preparing",
+          "request_id": 2224123144
+        },
+        {
+          "sent_at": 873828.544732286,
+          "phase": "preparing",
+          "request_id": 2224123145
+        },
+        {
+          "sent_at": 873828.550802722,
+          "phase": "preparing",
+          "request_id": 2224123146
+        }
+      ]
+    }
+  ],
+  "restoration": {
+    "ok": true,
+    "attempted": true,
+    "errors": [],
+    "material": {
+      "sources_exact": true,
+      "cache_exact": true,
+      "firmware_exact": true,
+      "relay_exact": true
+    },
+    "recovery": {
+      "snapshot_equal": true,
+      "continuous": true,
+      "integrity_ok": true,
+      "seconds": 10.024532419978641,
+      "detail": {
+        "hardware_restored": true,
+        "errors": [],
+        "recovery": {
+          "seconds": 10.024532419978641,
+          "samples": 313344,
+          "dropped": 0,
+          "fatal": 0,
+          "continuous": true
+        }
+      }
+    },
+    "final": {
+      "identity_equal": true,
+      "sources_exact": true,
+      "relay_configuration_equal": true,
+      "cpu_equal": true
+    }
+  },
+  "decision": "Do not promote or extend this isolated candidate; peak reached 4 during prefill."
+}

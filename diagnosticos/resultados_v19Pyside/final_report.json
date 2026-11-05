@@ -1,0 +1,40 @@
+{
+  "candidate": "monitor/v19Pyside",
+  "status": "experimental_candidate_passed_tested_scope",
+  "production_version": "V18",
+  "firmware_deployment": false,
+  "automated_tests": {
+    "count": 344,
+    "passed": 344,
+    "failed": 0,
+    "command": "QT_QPA_PLATFORM=offscreen .venv-v19Pyside/bin/python -m unittest discover -s tests/v19Pyside -t ."
+  },
+  "visual_comparison": {
+    "views": 10,
+    "pixel_exact": true,
+    "physical": false
+  },
+  "physical_matrix": {
+    "cases": 8,
+    "passed": 8,
+    "all_visible_restored": true,
+    "report": "diagnosticos/resultados_v19Pyside/physical_matrix/report.json"
+  },
+  "radio_wav_synth_20voices": {
+    "profile": "ADC14 dual, 40 kHz audio",
+    "passed": true,
+    "evidence": "diagnosticos/resultados_v19Pyside/radio_rate_check_20261026_222532/report.json"
+  },
+  "protected_baseline": {
+    "files": 403,
+    "changed": 0,
+    "scope": "monitor and firmware V17/V18 source files"
+  },
+  "remaining": "User manual comparison; V18 remains production until explicitly promoted.",
+  "runtime": {
+    "python": "3.13.5",
+    "interpreter": "/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/bin/python",
+    "pyside6": "6.11.2",
+    "venv_runtime": false
+  }
+}

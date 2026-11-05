@@ -1,0 +1,45 @@
+{
+  "version": 19,
+  "action": "install_initial",
+  "ok": false,
+  "journal": [
+    {
+      "phase": "initial_preflight",
+      "state": "completed"
+    },
+    {
+      "phase": "initial_stage",
+      "state": "completed"
+    },
+    {
+      "phase": "initial_recheck",
+      "state": "completed"
+    },
+    {
+      "phase": "initial_import",
+      "state": "completed"
+    }
+  ],
+  "initial_cleanup": {
+    "errors": [
+      "comprobar fuentes nuevas: Command '['/Users/fmgarciadiaz/Library/Arduino15/packages/arduino/tools/adb/32.0.0/adb', '-s', '1060031107', 'shell', 'python3 /tmp/v19-production-archive-1ab3efbd58ba48529229435320c9217d.py snapshot --root /home/arduino/ArduinoApps/scope-v19']' returned non-zero exit status 1."
+    ],
+    "previous_scope_pair_existed": false,
+    "previous_firmware_restored": false,
+    "failed_material": "/home/arduino/.cache/serialmonitor/v19-production-1ab3efbd58ba48529229435320c9217d",
+    "note": "No se restaura firmware previo desconocido; revisar informe antes de reintentar"
+  },
+  "error": "Command '['/Users/fmgarciadiaz/Library/Arduino15/packages/arduino/tools/adb/32.0.0/adb', '-s', '1060031107', 'shell', 'python3 /tmp/v19-production-archive-1ab3efbd58ba48529229435320c9217d.py snapshot --root /home/arduino/ArduinoApps/scope-v19']' returned non-zero exit status 1.",
+  "v17_fallback": {
+    "attempted": true,
+    "ok": true,
+    "firmware_sha256": "96685eb64cc722adebc7f345f40c3500e22642814bbfc6f182c66c0f992a7ec9",
+    "proof": {
+      "relay_id": "dae7927bf95694dabc19486c9d1379d6bbdcfc9b9591b9fb22d2ee37d0f7c0c0",
+      "firmware_sha256": "96685eb64cc722adebc7f345f40c3500e22642814bbfc6f182c66c0f992a7ec9",
+      "first_verified_frame": true,
+      "first_frame_kind": 15,
+      "first_frame_sequence": 32
+    }
+  }
+}

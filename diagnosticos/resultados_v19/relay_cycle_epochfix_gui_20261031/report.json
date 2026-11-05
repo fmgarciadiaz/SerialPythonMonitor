@@ -1,0 +1,2145 @@
+{
+  "schema": 1,
+  "version": 19,
+  "source_build_report": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v19/relay_cycle_epochfix_build_20261031/report.json",
+  "private": true,
+  "promoted": false,
+  "host_cadence": {
+    "burst": null,
+    "interval_ms": null,
+    "startup_only": false
+  },
+  "ok": true,
+  "state_uncertain": false,
+  "journal": [
+    {
+      "phase": "preflight",
+      "state": "completed"
+    },
+    {
+      "phase": "capture",
+      "state": "completed"
+    },
+    {
+      "phase": "backup",
+      "state": "completed"
+    },
+    {
+      "phase": "quiesce",
+      "state": "completed"
+    },
+    {
+      "phase": "stop_old_relay",
+      "state": "completed"
+    },
+    {
+      "phase": "rename_old_relay",
+      "state": "completed"
+    },
+    {
+      "phase": "stop_app",
+      "state": "completed"
+    },
+    {
+      "phase": "start_accepted_firmware",
+      "state": "completed"
+    },
+    {
+      "phase": "start_private_relay",
+      "state": "completed"
+    },
+    {
+      "phase": "verify_private_pair",
+      "state": "completed"
+    },
+    {
+      "phase": "gui_radio_a0",
+      "state": "completed"
+    },
+    {
+      "phase": "rollback_stop_new_relay",
+      "state": "completed"
+    },
+    {
+      "phase": "rollback_stop_app",
+      "state": "completed"
+    },
+    {
+      "phase": "rollback_restore_sources",
+      "state": "completed"
+    },
+    {
+      "phase": "rollback_restore_cache",
+      "state": "completed"
+    },
+    {
+      "phase": "rollback_verify_original_material",
+      "state": "completed"
+    },
+    {
+      "phase": "rollback_start_original_app",
+      "state": "completed"
+    },
+    {
+      "phase": "rollback_restore_old_relay",
+      "state": "completed"
+    },
+    {
+      "phase": "rollback_restore_cpu",
+      "state": "completed"
+    },
+    {
+      "phase": "rollback_restore_snapshot",
+      "state": "completed"
+    },
+    {
+      "phase": "rollback_verify_original",
+      "state": "completed"
+    }
+  ],
+  "baseline": {
+    "generator_off": true,
+    "wav_idle": true,
+    "receiver_closed": true,
+    "identity_verified": true,
+    "source_manifest_verified": true,
+    "identity": {
+      "board_serial": "1060031107",
+      "app": "scope-v19-main-1",
+      "firmware_sha256": "37f049fa029ad62a10767c56dc586b2c3697f8d250a0b8a7396570ce8e0c7060",
+      "relay_sha256": "27da0bc4860401df27eef50429f2ec881bfd3b51b1893d1fe3bacb9e922f56ae"
+    },
+    "snapshot": {
+      "schema": 1,
+      "identity": {
+        "board_serial": "1060031107",
+        "app": "scope-v19-main-1",
+        "firmware_sha256": "37f049fa029ad62a10767c56dc586b2c3697f8d250a0b8a7396570ce8e0c7060",
+        "relay_sha256": "27da0bc4860401df27eef50429f2ec881bfd3b51b1893d1fe3bacb9e922f56ae"
+      },
+      "adc_bits": 14,
+      "adc_period": 32,
+      "generator": {
+        "wave": 0,
+        "enabled": 0,
+        "mode": 0,
+        "frequency": 2500,
+        "final_frequency": 2500,
+        "low": 0,
+        "high": 4095,
+        "duration": 1000,
+        "duration_us": 0,
+        "duty": 50
+      }
+    },
+    "relay_inspect": {
+      "Id": "c94b825bcfdf3ead09f892c5ec58ba8b1e6fde0a421259ca5c13d2b9811c486f",
+      "Created": "2026-10-27T22:40:18.098010369Z",
+      "Path": "/work/unoq_stream",
+      "Args": [],
+      "State": {
+        "Status": "running",
+        "Running": true,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 725088,
+        "ExitCode": 0,
+        "Error": "",
+        "StartedAt": "2026-10-31T15:54:49.858601845Z",
+        "FinishedAt": "2026-10-31T15:52:56.461362306Z"
+      },
+      "Image": "sha256:22b878f2712b7b2fe0fddaa677393886045746819e127615cafca4c63b306015",
+      "ResolvConfPath": "/var/lib/docker/containers/c94b825bcfdf3ead09f892c5ec58ba8b1e6fde0a421259ca5c13d2b9811c486f/resolv.conf",
+      "HostnamePath": "/var/lib/docker/containers/c94b825bcfdf3ead09f892c5ec58ba8b1e6fde0a421259ca5c13d2b9811c486f/hostname",
+      "HostsPath": "/var/lib/docker/containers/c94b825bcfdf3ead09f892c5ec58ba8b1e6fde0a421259ca5c13d2b9811c486f/hosts",
+      "LogPath": "/var/lib/docker/containers/c94b825bcfdf3ead09f892c5ec58ba8b1e6fde0a421259ca5c13d2b9811c486f/c94b825bcfdf3ead09f892c5ec58ba8b1e6fde0a421259ca5c13d2b9811c486f-json.log",
+      "Name": "/serialmonitor-usb-stream-v19",
+      "RestartCount": 0,
+      "Driver": "overlay2",
+      "Platform": "linux",
+      "MountLabel": "",
+      "ProcessLabel": "",
+      "AppArmorProfile": "",
+      "ExecIDs": null,
+      "HostConfig": {
+        "Binds": null,
+        "ContainerIDFile": "",
+        "LogConfig": {
+          "Type": "json-file",
+          "Config": {
+            "max-file": "2",
+            "max-size": "10m"
+          }
+        },
+        "NetworkMode": "host",
+        "PortBindings": {},
+        "RestartPolicy": {
+          "Name": "no",
+          "MaximumRetryCount": 0
+        },
+        "AutoRemove": false,
+        "VolumeDriver": "",
+        "VolumesFrom": null,
+        "ConsoleSize": [
+          0,
+          0
+        ],
+        "CapAdd": [
+          "SYS_NICE"
+        ],
+        "CapDrop": [
+          "ALL"
+        ],
+        "CgroupnsMode": "private",
+        "Dns": [],
+        "DnsOptions": [],
+        "DnsSearch": [],
+        "ExtraHosts": null,
+        "GroupAdd": null,
+        "IpcMode": "private",
+        "Cgroup": "",
+        "Links": null,
+        "OomScoreAdj": 0,
+        "PidMode": "",
+        "Privileged": false,
+        "PublishAllPorts": false,
+        "ReadonlyRootfs": true,
+        "SecurityOpt": [
+          "no-new-privileges"
+        ],
+        "UTSMode": "",
+        "UsernsMode": "",
+        "ShmSize": 67108864,
+        "Runtime": "runc",
+        "Isolation": "",
+        "CpuShares": 0,
+        "Memory": 0,
+        "NanoCpus": 0,
+        "CgroupParent": "",
+        "BlkioWeight": 0,
+        "BlkioWeightDevice": [],
+        "BlkioDeviceReadBps": [],
+        "BlkioDeviceWriteBps": [],
+        "BlkioDeviceReadIOps": [],
+        "BlkioDeviceWriteIOps": [],
+        "CpuPeriod": 0,
+        "CpuQuota": 0,
+        "CpuRealtimePeriod": 0,
+        "CpuRealtimeRuntime": 0,
+        "CpusetCpus": "",
+        "CpusetMems": "",
+        "Devices": [
+          {
+            "PathOnHost": "/dev/spidev0.0",
+            "PathInContainer": "/dev/spidev0.0",
+            "CgroupPermissions": "rw"
+          },
+          {
+            "PathOnHost": "/dev/gpiochip1",
+            "PathInContainer": "/dev/gpiochip1",
+            "CgroupPermissions": "rw"
+          }
+        ],
+        "DeviceCgroupRules": null,
+        "DeviceRequests": null,
+        "MemoryReservation": 0,
+        "MemorySwap": 0,
+        "MemorySwappiness": null,
+        "OomKillDisable": null,
+        "PidsLimit": null,
+        "Ulimits": [],
+        "CpuCount": 0,
+        "CpuPercent": 0,
+        "IOMaximumIOps": 0,
+        "IOMaximumBandwidth": 0,
+        "Mounts": [
+          {
+            "Type": "bind",
+            "Source": "/home/arduino/.cache/serialmonitor/v19-relay-1a298491ebcc475285c862fc946ac2a1/unoq_stream",
+            "Target": "/work/unoq_stream",
+            "ReadOnly": true
+          },
+          {
+            "Type": "bind",
+            "Source": "/sys/devices/system/cpu/cpufreq/policy0/scaling_governor",
+            "Target": "/scope_cpu_governor"
+          }
+        ],
+        "MaskedPaths": [
+          "/proc/asound",
+          "/proc/acpi",
+          "/proc/kcore",
+          "/proc/keys",
+          "/proc/latency_stats",
+          "/proc/timer_list",
+          "/proc/timer_stats",
+          "/proc/sched_debug",
+          "/proc/scsi",
+          "/sys/firmware",
+          "/sys/devices/virtual/powercap"
+        ],
+        "ReadonlyPaths": [
+          "/proc/bus",
+          "/proc/fs",
+          "/proc/irq",
+          "/proc/sys",
+          "/proc/sysrq-trigger"
+        ]
+      },
+      "GraphDriver": {
+        "Data": {
+          "LowerDir": "/var/lib/docker/overlay2/b24e88a5fe41aaa894d54e433cb803392c41d4e5dfeaa122a2ad801ef6130da3-init/diff:/var/lib/docker/overlay2/d44c10d7f3ead90724c72f7b59db1512e64f2a7df254c38b0a86c7f767485af4/diff:/var/lib/docker/overlay2/fbc34bc221e04b5ec300aa2af7d1113138d9331a8c9e1d89e685345da8483f02/diff:/var/lib/docker/overlay2/22dae50a59d69cfcd7a9bf5471d26697b5e9eb5b5249260e017c0ebdbfa7022c/diff:/var/lib/docker/overlay2/3f556d3c5834855fe06f7d17e3771bc8b5733571ea3af4a763c9841c305517ce/diff:/var/lib/docker/overlay2/8b8ffc0ae644f215db80b120ae6a4dd2b451db561ad5ce3c1b3a63d78f1290a5/diff:/var/lib/docker/overlay2/d9250ffc65e0357bd8b627e189f80c1c86bda6054bd80ae5fac68dd67af5eda3/diff:/var/lib/docker/overlay2/0e975bc62dd242a25184e28a0c0c07c93eb61c837b0f2bed2349c9ba90459f98/diff:/var/lib/docker/overlay2/5840fe07acfc47093da5a207f61653bc8855698a5c64e3f43b55559d33a38e75/diff:/var/lib/docker/overlay2/d4eca522e87bb424e991078151b8d69b4c1ec82d8207f52723cdb0fa50b4499f/diff:/var/lib/docker/overlay2/9706038d1c56e15bfa24105999266de812a9e90d6fdb7fef6db36947e2f4ea8c/diff:/var/lib/docker/overlay2/8555706bd8a2795730097a13efd59e65d120d6f43fa6b1c3a84cb44857086794/diff:/var/lib/docker/overlay2/6f8d80193936dd5de18ad8ce45040037c8ee4a55f7161b1774571cb99d2a566b/diff:/var/lib/docker/overlay2/86881765be623495a3f84360b63ba1a9de5abf07d18e1645acacfb204baba2a7/diff:/var/lib/docker/overlay2/147ce11877e3feec47dc6a0eb9a33bba66f8a88234962b356f0417fa518aff26/diff:/var/lib/docker/overlay2/0f5fd448972f343b2ab00355bb731e47423e8b17bedb44f0957f135561a9d2d3/diff:/var/lib/docker/overlay2/21349ef42547f51c781667f043eb6c1f96e1ba5bf8d9f2229304945c6e85c0a4/diff:/var/lib/docker/overlay2/7f1de31fbf51e091b5491c782d1a15a21ee544e8a75e6bf05168799b14fe2fba/diff:/var/lib/docker/overlay2/e7083cf187ea0246e4ef20e4078298ba380f6ad9b359cd5de26cf77d3413c9d6/diff:/var/lib/docker/overlay2/1d76b401a8120586fc6361b49dbd20cd1502169bf00d4b97606ada324a4d918f/diff:/var/lib/docker/overlay2/31b156ca310f21dcd7c24962137e251580cb1cc2e25baa2da0b2db319c98eaf3/diff",
+          "MergedDir": "/var/lib/docker/overlay2/b24e88a5fe41aaa894d54e433cb803392c41d4e5dfeaa122a2ad801ef6130da3/merged",
+          "UpperDir": "/var/lib/docker/overlay2/b24e88a5fe41aaa894d54e433cb803392c41d4e5dfeaa122a2ad801ef6130da3/diff",
+          "WorkDir": "/var/lib/docker/overlay2/b24e88a5fe41aaa894d54e433cb803392c41d4e5dfeaa122a2ad801ef6130da3/work"
+        },
+        "Name": "overlay2"
+      },
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "/home/arduino/.cache/serialmonitor/v19-relay-1a298491ebcc475285c862fc946ac2a1/unoq_stream",
+          "Destination": "/work/unoq_stream",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/sys/devices/system/cpu/cpufreq/policy0/scaling_governor",
+          "Destination": "/scope_cpu_governor",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        }
+      ],
+      "Config": {
+        "Hostname": "arturino",
+        "Domainname": "",
+        "User": "0:0",
+        "AttachStdin": false,
+        "AttachStdout": false,
+        "AttachStderr": false,
+        "Tty": false,
+        "OpenStdin": false,
+        "StdinOnce": false,
+        "Env": [
+          "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+          "GPG_KEY=7169605F62C751356D054A26A821E680E5FA6305",
+          "PYTHON_VERSION=3.13.14",
+          "PYTHON_SHA256=639e43243c620a308f968213df9e00f2f8f62332f7adbaa7a7eeb9783057c690",
+          "UV_CONSTRAINT=/etc/uv-constraints.txt",
+          "PIP_CONSTRAINT=/etc/uv-constraints.txt",
+          "HOME=/home/app",
+          "USER=arduino",
+          "PIPEWIRE_REMOTE=/run/user/1000/pipewire-0"
+        ],
+        "Cmd": null,
+        "Image": "ghcr.io/arduino/app-bricks/python-apps-base:0.12.0",
+        "Volumes": null,
+        "WorkingDir": "/app",
+        "Entrypoint": [
+          "/work/unoq_stream"
+        ],
+        "OnBuild": null,
+        "Labels": {
+          "org.opencontainers.image.created": "2026-08-05T14:13:47.899Z",
+          "org.opencontainers.image.description": "The code of the Arduino App Lab Bricks",
+          "org.opencontainers.image.licenses": "MPL-2.0",
+          "org.opencontainers.image.revision": "7b1504fa79d6d05169aa286d53fe97c318499b2a",
+          "org.opencontainers.image.source": "https://github.com/arduino/app-bricks-py",
+          "org.opencontainers.image.title": "app-bricks-py",
+          "org.opencontainers.image.url": "https://github.com/arduino/app-bricks-py",
+          "org.opencontainers.image.version": "0.12.0"
+        }
+      },
+      "NetworkSettings": {
+        "Bridge": "",
+        "SandboxID": "cdf141dc45d8d838d3561c915eeb3aa9a79a1779a0a9f0a20ad78572ffa0ea40",
+        "SandboxKey": "/var/run/docker/netns/default",
+        "Ports": {},
+        "HairpinMode": false,
+        "LinkLocalIPv6Address": "",
+        "LinkLocalIPv6PrefixLen": 0,
+        "SecondaryIPAddresses": null,
+        "SecondaryIPv6Addresses": null,
+        "EndpointID": "",
+        "Gateway": "",
+        "GlobalIPv6Address": "",
+        "GlobalIPv6PrefixLen": 0,
+        "IPAddress": "",
+        "IPPrefixLen": 0,
+        "IPv6Gateway": "",
+        "MacAddress": "",
+        "Networks": {
+          "host": {
+            "IPAMConfig": null,
+            "Links": null,
+            "Aliases": null,
+            "MacAddress": "",
+            "NetworkID": "f9da40f64b25bdd9167bd84f1c507b1245c4bef5d9a11bcfa3b83fa32c85aa64",
+            "EndpointID": "533b20dd7a407c347acf25ec956b85832d8dd5bef67c8f44545a9d02140dc8ed",
+            "Gateway": "",
+            "IPAddress": "",
+            "IPPrefixLen": 0,
+            "IPv6Gateway": "",
+            "GlobalIPv6Address": "",
+            "GlobalIPv6PrefixLen": 0,
+            "DriverOpts": null,
+            "DNSNames": null
+          }
+        }
+      }
+    },
+    "cpu_state": {
+      "policy": 0,
+      "priority": 0,
+      "cpus": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    "governor": "performance",
+    "app_sources": {
+      "app.yaml": "24481f17d220e1f8d85978dc18a1b713481df220c49179ae8cddc57ca5e2eefd",
+      "python/main.py": "46e0aafd839f40c6ce4dc8580d9c3422d6ed5339465259a2e567ea06346f7aa3",
+      "sketch/acquisition.h": "6d3413c11ffae37bdc56680a2216faf6c7624f761686f561e1023626b3b36f13",
+      "sketch/acquisition_protocol.h": "83838fb7388aa6b837757b83b963f5951b174dd58b49d6b3be93c8c3aa51c376",
+      "sketch/acquisition_storage.h": "1953242fddb28b6b2315572bf65f1cec207988a1a8be5183f0641379c92176f2",
+      "sketch/additional_profiles.h": "b8d94095548a562807ba48fd08b6f9cb6c4148e9926ee80cf0e46bc6142e5591",
+      "sketch/batch2_ownership.h": "c7857c0738dc3114ae248045429a64e569d8dc1e5fdf81f56f09fbdc976363a7",
+      "sketch/batch_command.h": "e4755d4b1c21645937c1f46030ce432893d9b95ad9709feb8a050e3765daf9f6",
+      "sketch/benchmark_protocol.h": "85461155f16b7ee1ca8f46df84377d2c57ced212d40f788bbfccc14822e5367f",
+      "sketch/control_protocol.h": "1c9ea38fa73b7e6fcfb88bde462077b319b7ebada3eab787c33fdcbbaa84ee3a",
+      "sketch/crc32_fast.h": "5d80da2df5d483bb028cf98abdaa2aed0a12da1be7f2ceb8591269debee81959",
+      "sketch/frame_buffer.h": "ac0d1d25cbfd5db0ea629d6990a919bb72de07c116fa23f9689f7db1e32c37f5",
+      "sketch/generator.h": "e853fca473f9c13df50912a54fc621cee9f2fcb125ffe6f810670e93a17ebc77",
+      "sketch/generator_dma.h": "faec31f7ebb7cb64ec04d3c9c8e94225cd66a7513535f7eca9b4be6d282e697c",
+      "sketch/generator_protocol.h": "c241267801e21c326fbd854a324e6c82c01dc6e1ded51a7fbe2442c84299de75",
+      "sketch/generator_timing.h": "a2774f18e899e328a988150e46e017b512fd724075e7f24cc6247923093aac9c",
+      "sketch/high_rate_profile.h": "78faa85feb5c17625df5bed00844d7a14c3572aaefcaac836a02186626d315f0",
+      "sketch/native_profiles.h": "cb090dbe2bfa9349c7f69136cd766f0757e1294f97aeb1a62816bcb8844cc74c",
+      "sketch/node_validation.h": "f0c38dae55f9fbfb2d4aece35643df6264fbc0c7b054c14ef301a2dd750cfa38",
+      "sketch/node_validation_fast.h": "5e582042ee500b79946b0e4ca5e238abfee3bdc08752b5d16b639a0e193c046a",
+      "sketch/radio_test.h": "fb56e0ccac1a0bd0c1e4dab23a9f236bb6fe5aae40e6a66890319d4e7e1c725e",
+      "sketch/sample_packing.h": "84823758ded381d3168e452893d86eeed6a05c73f96196514f5ec0d9115c3e76",
+      "sketch/scope_config.h": "736ba175f81c1da18858a20cee497cfb94e733cc3b96b9cd2303c1759d416d13",
+      "sketch/scope_protocol.h": "c2bf92aed1aac5efc4f6283cd302297d3c8be3ce40e7b838fa8d5bcacef9d612",
+      "sketch/sketch.ino": "9e6812548b773a8e3b09c84fdfbaf364d4e76f565229bc2e1a0ccc274ee65375",
+      "sketch/sketch.yaml": "6cf6e038e5082ad98b26d3cef370966c1d89a98afe5cee3dd0c36cf58031daaf",
+      "sketch/spi16_geometry.h": "278b0d594820539a5a3a3863c5623eb433607401512d770242c0bf49bac35093",
+      "sketch/wav.h": "0dc2b88b7d25de037fc0598c85b70b3903caaa3c2d6a92ea84b23ab680ddb1f2",
+      "sketch/wav_dma.h": "82bf749b289b5dfc4907e751ac1c1dd146d2ab1b0fe92c046d7492b3cc15cc10",
+      "sketch/wav_protocol.h": "78e788ab24dac52eff1d79cc15d08ac730451316e28050f461d5f4febf2cd223",
+      "sketch/wav_queue.h": "002553b2c58ff1343a218959f58632a394656aeb0f28fc74bb17a97f2793dd83",
+      "sketch/wav_storage.h": "a06e48b8192d2674dfa3ce1f57e601f523244c1016b5ecc899607d48fb1cce69"
+    }
+  },
+  "backup": {
+    "export_verified": true,
+    "source_archive_verified": true,
+    "full_cache_verified": true,
+    "firmware_elf_bin_verified": true,
+    "relay_verified": true,
+    "paired_manifest_persisted": true,
+    "folder": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/respaldos/parejas/v19_production_fb9594b755d94e9486a77ae4cda8d9ad",
+    "archive_manifest_sha256": "a73a28ee3c0b8e325688a55d10bba20c84faf270aadfc65ea3a8c03d48686191"
+  },
+  "private_candidate_activated": true,
+  "private_verification": {
+    "accepted_identity_equal": true,
+    "sources_exact": true,
+    "cpu_equal": true,
+    "relay_configuration_verified": true,
+    "snapshot_equal": true,
+    "continuous": true,
+    "integrity_ok": true,
+    "seconds": 10.025768127059564,
+    "detail": {
+      "hardware_restored": true,
+      "errors": [],
+      "recovery": {
+        "seconds": 10.025768127059564,
+        "samples": 313344,
+        "dropped": 0,
+        "fatal": 0,
+        "continuous": true
+      }
+    }
+  },
+  "private_identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v19-main-1",
+    "firmware_sha256": "37f049fa029ad62a10767c56dc586b2c3697f8d250a0b8a7396570ce8e0c7060",
+    "relay_sha256": "5d0fa9d2611875c6fea6eaa03bd537c94d8c6cc9cd0412d2484bb1b852f1cfa8"
+  },
+  "gui_command": [
+    "/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/bin/python",
+    "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/tools/gui_relay_candidate_v19.py",
+    "--binding",
+    "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v19/relay_cycle_epochfix_gui_20261031/report.json",
+    "--serial",
+    "1060031107",
+    "--output",
+    "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v19/relay_cycle_epochfix_gui_20261031/gui.json",
+    "--bits",
+    "8",
+    "--rate",
+    "1860465",
+    "--duration",
+    "35.0",
+    "--hold-radio-seconds",
+    "30.0",
+    "--fft-size",
+    "16384",
+    "--frequency-khz",
+    "710",
+    "--voices",
+    "20",
+    "--metrics"
+  ],
+  "display_guard": {
+    "pid": 86125,
+    "scoped": true,
+    "released": true
+  },
+  "gui_pid": 86126,
+  "wire_metrics": {
+    "profile": [
+      8,
+      1860465,
+      86,
+      3488,
+      1
+    ],
+    "node_budget_ticks": 299968,
+    "epoch_count": 1,
+    "all": {
+      "frames": 86068,
+      "samples": 75051296,
+      "empty_status_frames": 1054,
+      "send_nodes": 21516,
+      "mean_send_margin": 0.1209289355244555,
+      "mcu_queue_peak": 4,
+      "min_slack_ticks": 70440,
+      "sampled_queue_max": 4,
+      "send_ticks_max": 612337,
+      "send_over_budget_nodes": 1615,
+      "headroom_pass": false
+    },
+    "radio_playing": {
+      "frames": 64086,
+      "samples": 55882992,
+      "empty_status_frames": 1013,
+      "send_nodes": 16022,
+      "mean_send_margin": 0.10097900227570067,
+      "mcu_queue_peak": 4,
+      "min_slack_ticks": 70440,
+      "sampled_queue_max": 4,
+      "send_ticks_max": 605508,
+      "send_over_budget_nodes": 1576,
+      "headroom_pass": false
+    },
+    "phases": {
+      "playing": {
+        "frames": 64086,
+        "samples": 55882992,
+        "empty_status_frames": 1013,
+        "send_nodes": 16022,
+        "mean_send_margin": 0.10097900227570067,
+        "mcu_queue_peak": 4,
+        "min_slack_ticks": 70440,
+        "sampled_queue_max": 4,
+        "send_ticks_max": 605508,
+        "send_over_budget_nodes": 1576,
+        "headroom_pass": false
+      },
+      "preparing": {
+        "frames": 1366,
+        "samples": 1191152,
+        "empty_status_frames": 23,
+        "send_nodes": 342,
+        "mean_send_margin": 0.13866745201359498,
+        "mcu_queue_peak": 4,
+        "min_slack_ticks": 84561,
+        "sampled_queue_max": 4,
+        "send_ticks_max": 612337,
+        "send_over_budget_nodes": 24,
+        "headroom_pass": false
+      },
+      "starting": {
+        "frames": 3,
+        "samples": 2616,
+        "empty_status_frames": 1,
+        "send_nodes": 0,
+        "mean_send_margin": null,
+        "mcu_queue_peak": 4,
+        "min_slack_ticks": 84561,
+        "sampled_queue_max": 3,
+        "send_ticks_max": 0,
+        "send_over_budget_nodes": 0,
+        "headroom_pass": false
+      },
+      "stopped": {
+        "frames": 20613,
+        "samples": 17974536,
+        "empty_status_frames": 17,
+        "send_nodes": 5152,
+        "mean_send_margin": 0.1817929219127059,
+        "mcu_queue_peak": 4,
+        "min_slack_ticks": 70440,
+        "sampled_queue_max": 3,
+        "send_ticks_max": 401133,
+        "send_over_budget_nodes": 15,
+        "headroom_pass": false
+      }
+    },
+    "phase_events": [
+      {
+        "kind": "phase",
+        "phase": "stopped",
+        "previous": "acquisition",
+        "last_observed_rf": null
+      },
+      {
+        "kind": "first_rf_in_phase",
+        "phase": "stopped",
+        "snapshot": {
+          "epoch": "1",
+          "node": 0,
+          "index": 0,
+          "queue": 0,
+          "queue_peak": 0,
+          "slack_min_ticks": 4294967295
+        }
+      },
+      {
+        "kind": "cumulative_peak",
+        "phase": "stopped",
+        "previous_peak": null,
+        "snapshot": {
+          "epoch": "1",
+          "node": 0,
+          "index": 0,
+          "queue": 0,
+          "queue_peak": 0,
+          "slack_min_ticks": 4294967295,
+          "copy_max_ticks": 0,
+          "poll_max_ticks": 60,
+          "previous_node_send_ticks": 0,
+          "previous_batch_prepare_us": 111,
+          "previous_batch_check_us": 58,
+          "previous_batch_origin": "unknown"
+        }
+      },
+      {
+        "kind": "cumulative_peak",
+        "phase": "stopped",
+        "previous_peak": 0,
+        "snapshot": {
+          "epoch": "1",
+          "node": 0,
+          "index": 0,
+          "queue": 1,
+          "queue_peak": 1,
+          "slack_min_ticks": 209490,
+          "copy_max_ticks": 38343,
+          "poll_max_ticks": 175924,
+          "previous_node_send_ticks": 0,
+          "previous_batch_prepare_us": 108,
+          "previous_batch_check_us": 59,
+          "previous_batch_origin": "same_epoch_profile"
+        }
+      },
+      {
+        "kind": "cumulative_peak",
+        "phase": "stopped",
+        "previous_peak": 1,
+        "snapshot": {
+          "epoch": "1",
+          "node": 2,
+          "index": 6976,
+          "queue": 1,
+          "queue_peak": 2,
+          "slack_min_ticks": 126191,
+          "copy_max_ticks": 38343,
+          "poll_max_ticks": 208991,
+          "previous_node_send_ticks": 243894,
+          "previous_batch_prepare_us": 111,
+          "previous_batch_check_us": 59,
+          "previous_batch_origin": "same_epoch_profile"
+        }
+      },
+      {
+        "kind": "phase",
+        "phase": "preparing",
+        "previous": "stopped",
+        "last_observed_rf": {
+          "epoch": "1",
+          "node": 2455,
+          "index": 8564784,
+          "queue": 1,
+          "queue_peak": 2,
+          "slack_min_ticks": 85380
+        }
+      },
+      {
+        "kind": "first_rf_in_phase",
+        "phase": "preparing",
+        "snapshot": {
+          "epoch": "1",
+          "node": 2455,
+          "index": 8565656,
+          "queue": 1,
+          "queue_peak": 2,
+          "slack_min_ticks": 85380
+        }
+      },
+      {
+        "kind": "cumulative_peak",
+        "phase": "preparing",
+        "previous_peak": 2,
+        "snapshot": {
+          "epoch": "1",
+          "node": 2729,
+          "index": 9518752,
+          "queue": 2,
+          "queue_peak": 3,
+          "slack_min_ticks": 85380,
+          "copy_max_ticks": 39208,
+          "poll_max_ticks": 213290,
+          "previous_node_send_ticks": 612337,
+          "previous_batch_prepare_us": 110,
+          "previous_batch_check_us": 385,
+          "previous_batch_origin": "same_epoch_profile"
+        }
+      },
+      {
+        "kind": "cumulative_peak",
+        "phase": "preparing",
+        "previous_peak": 3,
+        "snapshot": {
+          "epoch": "1",
+          "node": 2730,
+          "index": 9522240,
+          "queue": 3,
+          "queue_peak": 4,
+          "slack_min_ticks": 85380,
+          "copy_max_ticks": 39208,
+          "poll_max_ticks": 213290,
+          "previous_node_send_ticks": 577877,
+          "previous_batch_prepare_us": 110,
+          "previous_batch_check_us": 315,
+          "previous_batch_origin": "same_epoch_profile"
+        }
+      },
+      {
+        "kind": "phase",
+        "phase": "starting",
+        "previous": "preparing",
+        "last_observed_rf": {
+          "epoch": "1",
+          "node": 2797,
+          "index": 9755936,
+          "queue": 2,
+          "queue_peak": 4,
+          "slack_min_ticks": 84561
+        }
+      },
+      {
+        "kind": "first_rf_in_phase",
+        "phase": "starting",
+        "snapshot": {
+          "epoch": "1",
+          "node": 2797,
+          "index": 9756808,
+          "queue": 2,
+          "queue_peak": 4,
+          "slack_min_ticks": 84561
+        }
+      },
+      {
+        "kind": "phase",
+        "phase": "playing",
+        "previous": "starting",
+        "last_observed_rf": {
+          "epoch": "1",
+          "node": 0,
+          "index": 0,
+          "queue": 3,
+          "queue_peak": 4,
+          "slack_min_ticks": 84561
+        }
+      },
+      {
+        "kind": "first_rf_in_phase",
+        "phase": "playing",
+        "snapshot": {
+          "epoch": "1",
+          "node": 2798,
+          "index": 9759424,
+          "queue": 3,
+          "queue_peak": 4,
+          "slack_min_ticks": 84561
+        }
+      },
+      {
+        "kind": "phase",
+        "phase": "stopping",
+        "previous": "playing",
+        "last_observed_rf": {
+          "epoch": "1",
+          "node": 18817,
+          "index": 65635440,
+          "queue": 1,
+          "queue_peak": 4,
+          "slack_min_ticks": 70440
+        }
+      },
+      {
+        "kind": "phase",
+        "phase": "playing",
+        "previous": "stopping",
+        "last_observed_rf": {
+          "epoch": "1",
+          "node": 18817,
+          "index": 65635440,
+          "queue": 1,
+          "queue_peak": 4,
+          "slack_min_ticks": 70440
+        }
+      },
+      {
+        "kind": "phase",
+        "phase": "stopped",
+        "previous": "playing",
+        "last_observed_rf": {
+          "epoch": "1",
+          "node": 18819,
+          "index": 65641544,
+          "queue": 1,
+          "queue_peak": 4,
+          "slack_min_ticks": 70440
+        }
+      }
+    ],
+    "phase_events_omitted": 0,
+    "slowest_node_observations": [
+      {
+        "epoch": "1",
+        "node": 2729,
+        "index": 9518752,
+        "queue": 2,
+        "queue_peak": 3,
+        "slack_min_ticks": 85380,
+        "copy_max_ticks": 39208,
+        "poll_max_ticks": 213290,
+        "previous_node_send_ticks": 612337,
+        "previous_batch_prepare_us": 110,
+        "previous_batch_check_us": 385,
+        "previous_batch_origin": "same_epoch_profile",
+        "phase": "preparing"
+      },
+      {
+        "epoch": "1",
+        "node": 8037,
+        "index": 28033056,
+        "queue": 2,
+        "queue_peak": 4,
+        "slack_min_ticks": 80827,
+        "copy_max_ticks": 40138,
+        "poll_max_ticks": 228538,
+        "previous_node_send_ticks": 605508,
+        "previous_batch_prepare_us": 107,
+        "previous_batch_check_us": 387,
+        "previous_batch_origin": "same_epoch_profile",
+        "phase": "playing"
+      },
+      {
+        "epoch": "1",
+        "node": 6952,
+        "index": 24248576,
+        "queue": 2,
+        "queue_peak": 4,
+        "slack_min_ticks": 80827,
+        "copy_max_ticks": 40138,
+        "poll_max_ticks": 228538,
+        "previous_node_send_ticks": 603260,
+        "previous_batch_prepare_us": 111,
+        "previous_batch_check_us": 59,
+        "previous_batch_origin": "same_epoch_profile",
+        "phase": "playing"
+      },
+      {
+        "epoch": "1",
+        "node": 4012,
+        "index": 13993856,
+        "queue": 2,
+        "queue_peak": 4,
+        "slack_min_ticks": 80827,
+        "copy_max_ticks": 40069,
+        "poll_max_ticks": 222544,
+        "previous_node_send_ticks": 602705,
+        "previous_batch_prepare_us": 108,
+        "previous_batch_check_us": 387,
+        "previous_batch_origin": "same_epoch_profile",
+        "phase": "playing"
+      },
+      {
+        "epoch": "1",
+        "node": 11954,
+        "index": 41695552,
+        "queue": 2,
+        "queue_peak": 4,
+        "slack_min_ticks": 73361,
+        "copy_max_ticks": 40141,
+        "poll_max_ticks": 228538,
+        "previous_node_send_ticks": 594864,
+        "previous_batch_prepare_us": 115,
+        "previous_batch_check_us": 310,
+        "previous_batch_origin": "same_epoch_profile",
+        "phase": "playing"
+      },
+      {
+        "epoch": "1",
+        "node": 16548,
+        "index": 57719424,
+        "queue": 2,
+        "queue_peak": 4,
+        "slack_min_ticks": 70440,
+        "copy_max_ticks": 40141,
+        "poll_max_ticks": 228538,
+        "previous_node_send_ticks": 593439,
+        "previous_batch_prepare_us": 107,
+        "previous_batch_check_us": 318,
+        "previous_batch_origin": "same_epoch_profile",
+        "phase": "playing"
+      },
+      {
+        "epoch": "1",
+        "node": 9840,
+        "index": 34321920,
+        "queue": 2,
+        "queue_peak": 4,
+        "slack_min_ticks": 80827,
+        "copy_max_ticks": 40138,
+        "poll_max_ticks": 228538,
+        "previous_node_send_ticks": 591340,
+        "previous_batch_prepare_us": 110,
+        "previous_batch_check_us": 318,
+        "previous_batch_origin": "same_epoch_profile",
+        "phase": "playing"
+      },
+      {
+        "epoch": "1",
+        "node": 13405,
+        "index": 46756640,
+        "queue": 2,
+        "queue_peak": 4,
+        "slack_min_ticks": 70440,
+        "copy_max_ticks": 40141,
+        "poll_max_ticks": 228538,
+        "previous_node_send_ticks": 583775,
+        "previous_batch_prepare_us": 118,
+        "previous_batch_check_us": 310,
+        "previous_batch_origin": "same_epoch_profile",
+        "phase": "playing"
+      }
+    ],
+    "node_timing_note": "Eight largest previous-node sends, one observation per epoch/node start. Copy/poll are cumulative MCU maxima; prepare/check refer to previous physical batch. Same observation does not establish simultaneity or causality.",
+    "chunk_timing": {
+      "preparing": {
+        "count": 30,
+        "max_gap_ms": 10.637152940034866,
+        "gaps": {
+          "lt1ms": 7,
+          "1to3ms": 1,
+          "3to6ms": 12,
+          "6to12ms": 9,
+          "ge12ms": 0
+        }
+      },
+      "playing": {
+        "count": 2502,
+        "max_gap_ms": 104.11449300590903,
+        "gaps": {
+          "lt1ms": 1615,
+          "1to3ms": 4,
+          "3to6ms": 202,
+          "6to12ms": 106,
+          "ge12ms": 574
+        }
+      }
+    },
+    "physical_batch_mix": {
+      "acquisition:other+other": 5,
+      "acquisition:wav+other": 1,
+      "stopped:other+other": 202,
+      "stopped:other+idle": 6,
+      "stopped:rf+rf": 10295,
+      "stopped:wav+rf": 2,
+      "stopped:rf+idle": 11,
+      "stopped:other+rf": 9,
+      "preparing:rf+idle": 22,
+      "preparing:rf+rf": 657,
+      "preparing:wav+rf": 30,
+      "preparing:wav+idle": 1,
+      "starting:rf+rf": 1,
+      "starting:rf+idle": 1,
+      "starting:wav+rf": 1,
+      "playing:rf+rf": 30216,
+      "playing:rf+idle": 801,
+      "playing:wav+rf": 2852,
+      "playing:wav+idle": 212,
+      "stopping:wav+rf": 1,
+      "stopped:wav+other": 2
+    },
+    "physical_batch_mix_omitted": 0,
+    "final_rf_followed_by_idle": {
+      "stopped": 11,
+      "preparing": 22,
+      "starting": 1,
+      "playing": 801
+    },
+    "wav_rf_max_consecutive_batches": {
+      "stopped": 1,
+      "preparing": 8,
+      "starting": 1,
+      "playing": 5,
+      "stopping": 1
+    },
+    "stop_roundtrips": [
+      {
+        "request_id": 3308246506,
+        "roundtrip_ms": 3.742065979167819,
+        "state": 0,
+        "reason": 0
+      }
+    ],
+    "stop_pending_count": 0,
+    "stop_observations_omitted": 0,
+    "spi_batch_timing": {
+      "histogram_upper_bounds_exclusive_us": [
+        5,
+        10,
+        20,
+        50,
+        100,
+        200,
+        500,
+        1000,
+        5000
+      ],
+      "groups": [
+        {
+          "observed_phase": "playing",
+          "previous_batch": "playing:rf+idle",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 801,
+            "total_us": 92341,
+            "min_us": 107,
+            "max_us": 367,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              783,
+              18,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 115.28214731585518
+          },
+          "check": {
+            "count": 801,
+            "total_us": 51882,
+            "min_us": 59,
+            "max_us": 387,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              768,
+              26,
+              7,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 64.77153558052434
+          }
+        },
+        {
+          "observed_phase": "playing",
+          "previous_batch": "playing:rf+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 30215,
+            "total_us": 4413302,
+            "min_us": 110,
+            "max_us": 417,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              28989,
+              1226,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 146.06327982790006
+          },
+          "check": {
+            "count": 30215,
+            "total_us": 2008390,
+            "min_us": 59,
+            "max_us": 393,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              29122,
+              844,
+              249,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 66.46996524904849
+          }
+        },
+        {
+          "observed_phase": "playing",
+          "previous_batch": "playing:wav+idle",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 212,
+            "total_us": 23017,
+            "min_us": 107,
+            "max_us": 116,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              212,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 108.57075471698113
+          },
+          "check": {
+            "count": 212,
+            "total_us": 16038,
+            "min_us": 59,
+            "max_us": 139,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              167,
+              45,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 75.65094339622641
+          }
+        },
+        {
+          "observed_phase": "playing",
+          "previous_batch": "playing:wav+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 2851,
+            "total_us": 434563,
+            "min_us": 110,
+            "max_us": 415,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              2580,
+              271,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 152.42476324096808
+          },
+          "check": {
+            "count": 2851,
+            "total_us": 325550,
+            "min_us": 59,
+            "max_us": 390,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              1255,
+              1437,
+              159,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 114.18800420904945
+          }
+        },
+        {
+          "observed_phase": "playing",
+          "previous_batch": "starting:rf+idle",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 1,
+            "total_us": 107,
+            "min_us": 107,
+            "max_us": 107,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 107.0
+          },
+          "check": {
+            "count": 1,
+            "total_us": 92,
+            "min_us": 92,
+            "max_us": 92,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 92.0
+          }
+        },
+        {
+          "observed_phase": "playing",
+          "previous_batch": "starting:wav+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 1,
+            "total_us": 155,
+            "min_us": 155,
+            "max_us": 155,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 155.0
+          },
+          "check": {
+            "count": 1,
+            "total_us": 74,
+            "min_us": 74,
+            "max_us": 74,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 74.0
+          }
+        },
+        {
+          "observed_phase": "playing",
+          "previous_batch": "stopping:wav+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 1,
+            "total_us": 110,
+            "min_us": 110,
+            "max_us": 110,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 110.0
+          },
+          "check": {
+            "count": 1,
+            "total_us": 59,
+            "min_us": 59,
+            "max_us": 59,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 59.0
+          }
+        },
+        {
+          "observed_phase": "preparing",
+          "previous_batch": "preparing:rf+idle",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 22,
+            "total_us": 2388,
+            "min_us": 107,
+            "max_us": 114,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              22,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 108.54545454545455
+          },
+          "check": {
+            "count": 22,
+            "total_us": 1881,
+            "min_us": 59,
+            "max_us": 316,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              19,
+              1,
+              2,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 85.5
+          }
+        },
+        {
+          "observed_phase": "preparing",
+          "previous_batch": "preparing:rf+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 657,
+            "total_us": 91939,
+            "min_us": 110,
+            "max_us": 413,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              645,
+              12,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 139.93759512937595
+          },
+          "check": {
+            "count": 657,
+            "total_us": 42593,
+            "min_us": 59,
+            "max_us": 134,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              635,
+              22,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 64.82952815829528
+          }
+        },
+        {
+          "observed_phase": "preparing",
+          "previous_batch": "preparing:wav+idle",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 1,
+            "total_us": 107,
+            "min_us": 107,
+            "max_us": 107,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 107.0
+          },
+          "check": {
+            "count": 1,
+            "total_us": 134,
+            "min_us": 134,
+            "max_us": 134,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 134.0
+          }
+        },
+        {
+          "observed_phase": "preparing",
+          "previous_batch": "preparing:wav+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 29,
+            "total_us": 4555,
+            "min_us": 110,
+            "max_us": 412,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              26,
+              3,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 157.06896551724137
+          },
+          "check": {
+            "count": 29,
+            "total_us": 3257,
+            "min_us": 59,
+            "max_us": 385,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              21,
+              4,
+              4,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 112.3103448275862
+          }
+        },
+        {
+          "observed_phase": "preparing",
+          "previous_batch": "stopped:other+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 1,
+            "total_us": 113,
+            "min_us": 113,
+            "max_us": 113,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 113.0
+          },
+          "check": {
+            "count": 1,
+            "total_us": 59,
+            "min_us": 59,
+            "max_us": 59,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 59.0
+          }
+        },
+        {
+          "observed_phase": "starting",
+          "previous_batch": "preparing:wav+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 1,
+            "total_us": 163,
+            "min_us": 163,
+            "max_us": 163,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 163.0
+          },
+          "check": {
+            "count": 1,
+            "total_us": 59,
+            "min_us": 59,
+            "max_us": 59,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 59.0
+          }
+        },
+        {
+          "observed_phase": "starting",
+          "previous_batch": "starting:rf+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 1,
+            "total_us": 111,
+            "min_us": 111,
+            "max_us": 111,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 111.0
+          },
+          "check": {
+            "count": 1,
+            "total_us": 59,
+            "min_us": 59,
+            "max_us": 59,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 59.0
+          }
+        },
+        {
+          "observed_phase": "stopped",
+          "previous_batch": "playing:rf+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 1,
+            "total_us": 163,
+            "min_us": 163,
+            "max_us": 163,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 163.0
+          },
+          "check": {
+            "count": 1,
+            "total_us": 93,
+            "min_us": 93,
+            "max_us": 93,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 93.0
+          }
+        },
+        {
+          "observed_phase": "stopped",
+          "previous_batch": "playing:wav+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 1,
+            "total_us": 110,
+            "min_us": 110,
+            "max_us": 110,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 110.0
+          },
+          "check": {
+            "count": 1,
+            "total_us": 59,
+            "min_us": 59,
+            "max_us": 59,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 59.0
+          }
+        },
+        {
+          "observed_phase": "stopped",
+          "previous_batch": "stopped:other+idle",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 6,
+            "total_us": 660,
+            "min_us": 108,
+            "max_us": 116,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              6,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 110.0
+          },
+          "check": {
+            "count": 6,
+            "total_us": 360,
+            "min_us": 59,
+            "max_us": 65,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              6,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 60.0
+          }
+        },
+        {
+          "observed_phase": "stopped",
+          "previous_batch": "stopped:other+other",
+          "previous_origin": "unknown",
+          "prepare": {
+            "count": 1,
+            "total_us": 111,
+            "min_us": 111,
+            "max_us": 111,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 111.0
+          },
+          "check": {
+            "count": 1,
+            "total_us": 58,
+            "min_us": 58,
+            "max_us": 58,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 58.0
+          }
+        },
+        {
+          "observed_phase": "stopped",
+          "previous_batch": "stopped:other+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 8,
+            "total_us": 1147,
+            "min_us": 112,
+            "max_us": 164,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              8,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 143.375
+          },
+          "check": {
+            "count": 8,
+            "total_us": 782,
+            "min_us": 59,
+            "max_us": 316,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              7,
+              0,
+              1,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 97.75
+          }
+        },
+        {
+          "observed_phase": "stopped",
+          "previous_batch": "stopped:rf+idle",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 11,
+            "total_us": 1443,
+            "min_us": 107,
+            "max_us": 365,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              10,
+              1,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 131.1818181818182
+          },
+          "check": {
+            "count": 11,
+            "total_us": 661,
+            "min_us": 59,
+            "max_us": 65,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              11,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 60.09090909090909
+          }
+        },
+        {
+          "observed_phase": "stopped",
+          "previous_batch": "stopped:rf+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 10294,
+            "total_us": 1392421,
+            "min_us": 110,
+            "max_us": 368,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              10288,
+              6,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 135.26530017485914
+          },
+          "check": {
+            "count": 10294,
+            "total_us": 648908,
+            "min_us": 59,
+            "max_us": 105,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              10293,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 63.03749757140081
+          }
+        },
+        {
+          "observed_phase": "stopped",
+          "previous_batch": "stopped:wav+rf",
+          "previous_origin": "same_epoch_profile",
+          "prepare": {
+            "count": 2,
+            "total_us": 265,
+            "min_us": 110,
+            "max_us": 155,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 132.5
+          },
+          "check": {
+            "count": 2,
+            "total_us": 133,
+            "min_us": 59,
+            "max_us": 74,
+            "zero_count": 0,
+            "histogram": [
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_us": 66.5
+          }
+        }
+      ],
+      "omitted_batches": 0,
+      "note": "Fields describe previous physical batch. Dedup by epoch/sequence//2; only batches containing target native RF/status are covered. Phase/mix are host observations, not causal attribution."
+    },
+    "raw_chunk_ack_latency": {
+      "enabled": false,
+      "matched": 0,
+      "raw_max_ms": 0.0,
+      "raw_mean_ms": null,
+      "decoded": 0,
+      "decode_max_ms": 0.0,
+      "pending_sends": 0,
+      "pending_decode": 0,
+      "omitted": 0,
+      "slow": [],
+      "note": "Complete-frame socket read time versus entry to decoder event handling; correlated CHUNK ids/session, normal receiver validation unchanged"
+    },
+    "phase_caveat": "Host observation boundaries, not MCU event timestamps. Sampled queue is a lower bound; cumulative peak remains acceptance gate. Send counters refer to previous node. Retune is not visible on this wire.",
+    "pending_bytes": 0,
+    "tcp_fifo_headroom_measured": false,
+    "frame_kinds": {
+      "15": 408,
+      "12": 3102,
+      "9": 18,
+      "5": 2,
+      "7": 4,
+      "20": 87122
+    },
+    "radio_playing_frame_kinds": {
+      "12": 3065,
+      "20": 65099
+    },
+    "sent_commands": {
+      "11:0": 567,
+      "10": 15,
+      "4": 1,
+      "6": 2,
+      "8": 3,
+      "2": 9,
+      "11:1": 1,
+      "13": 2532,
+      "11:2": 1,
+      "11:3": 1
+    },
+    "radio_playing_sent_commands": {
+      "11:0": 562,
+      "13": 2502,
+      "11:3": 1
+    },
+    "note": "MCU queue/slack/send counters; send weighted once per complete node start. Cumulative MCU peak includes startup."
+  },
+  "gui": {
+    "ok": true,
+    "errors": [],
+    "assertions": {
+      "radio_playing_40k": true,
+      "radio_stop_confirmed": true,
+      "radio_progress": true,
+      "radio_hold_completed": true,
+      "scan_completed": true,
+      "wav_playing": true,
+      "wav_progress": true,
+      "wav_stop_confirmed": true,
+      "fm_playing": true,
+      "fm_progress": true,
+      "fm_stop_confirmed": true,
+      "shutdown_confirmed": true,
+      "worker_released": true
+    },
+    "visible_gui_ok": true,
+    "fft_data_ok": true,
+    "radio_profile_ok": true,
+    "exposed_fraction": 1.0,
+    "paint_events": 780,
+    "radio_hold_seconds": 30.039402795024216,
+    "radio_played_samples": 1200960,
+    "audio_source_min_samples": 9151,
+    "pending_gui_peak": 3,
+    "pending_dsp_peak": 3
+  },
+  "cancelling": false,
+  "restoring": false,
+  "candidate_relay_log": "UNO Q stream: 127.0.0.1:8766, SPI16 32 MHz, SCP1 dual ADC/control\nSPI ready: first verified frame\nPC connected at seq=747\nvalid=1216 pairs=311296 dropped=0\nPC closed or rejected; acquisition continues\nPC connected at seq=21423\nV17 CPU runtime: CPU2 performance verified\nvalid=7144 pairs=4903936 dropped=0\nvalid=28468 pairs=23498464 dropped=0\nvalid=49790 pairs=42091248 dropped=0\nvalid=71114 pairs=60685776 dropped=0\nSCOPE_CYCLE {\"phase\":0,\"count\":10327,\"covered_ns\":9654975081,\"gap_ns\":16884159,\"cycle_ns\":9671859240,\"max_gap_ns\":34323,\"max_cycle_ns\":2569695}\nSCOPE_CYCLE {\"phase\":1,\"count\":708,\"covered_ns\":640764814,\"gap_ns\":1169017,\"cycle_ns\":641933831,\"max_gap_ns\":3229,\"max_cycle_ns\":1810318}\nSCOPE_CYCLE {\"phase\":2,\"count\":34082,\"covered_ns\":30003923637,\"gap_ns\":49508075,\"cycle_ns\":30053431712,\"max_gap_ns\":59271,\"max_cycle_ns\":2006568}\nSCOPE_CYCLE_EVENT {\"kind\":\"slow_cycle\",\"phase\":0,\"sequence\":21516,\"covered_ns\":2567351,\"gap_ns\":2344,\"cycle_ns\":2569695,\"has_native\":1,\"epoch\":1,\"node\":0,\"queue\":1,\"peak\":1,\"copy_max_ticks\":38343,\"poll_max_ticks\":175924,\"previous_node_send_ticks\":0}\nSCOPE_CYCLE_EVENT {\"kind\":\"slow_cycle\",\"phase\":2,\"sequence\":56802,\"covered_ns\":2004120,\"gap_ns\":2448,\"cycle_ns\":2006568,\"has_native\":1,\"epoch\":1,\"node\":8444,\"queue\":1,\"peak\":4,\"copy_max_ticks\":40138,\"poll_max_ticks\":228538,\"previous_node_send_ticks\":241824}\nSCOPE_CYCLE_EVENT {\"kind\":\"slow_cycle\",\"phase\":0,\"sequence\":105968,\"covered_ns\":1933287,\"gap_ns\":2344,\"cycle_ns\":1935631,\"has_native\":1,\"epoch\":1,\"node\":20074,\"queue\":1,\"peak\":4,\"copy_max_ticks\":40141,\"poll_max_ticks\":228538,\"previous_node_send_ticks\":241565}\nSCOPE_CYCLE_EVENT {\"kind\":\"slow_cycle\",\"phase\":2,\"sequence\":62044,\"covered_ns\":1903808,\"gap_ns\":2396,\"cycle_ns\":1906204,\"has_native\":1,\"epoch\":1,\"node\":9677,\"queue\":1,\"peak\":4,\"copy_max_ticks\":40138,\"poll_max_ticks\":228538,\"previous_node_send_ticks\":243162}\nSCOPE_CYCLE_EVENT {\"kind\":\"slow_cycle\",\"phase\":0,\"sequence\":26696,\"covered_ns\":1884276,\"gap_ns\":2761,\"cycle_ns\":1887037,\"has_native\":1,\"epoch\":1,\"node\":1293,\"queue\":1,\"peak\":2,\"copy_max_ticks\":38972,\"poll_max_ticks\":210568,\"previous_node_send_ticks\":248559}\nSCOPE_CYCLE_EVENT {\"kind\":\"slow_cycle\",\"phase\":2,\"sequence\":62240,\"covered_ns\":1849329,\"gap_ns\":2395,\"cycle_ns\":1851724,\"has_native\":1,\"epoch\":1,\"node\":9723,\"queue\":1,\"peak\":4,\"copy_max_ticks\":40138,\"poll_max_ticks\":228538,\"previous_node_send_ticks\":243966}\nSCOPE_CYCLE_EVENT {\"kind\":\"slow_cycle\",\"phase\":0,\"sequence\":26228,\"covered_ns\":1833860,\"gap_ns\":2656,\"cycle_ns\":1836516,\"has_native\":1,\"epoch\":1,\"node\":1176,\"queue\":1,\"peak\":2,\"copy_max_ticks\":38972,\"poll_max_ticks\":210568,\"previous_node_send_ticks\":241836}\nSCOPE_CYCLE_EVENT {\"kind\":\"slow_cycle\",\"phase\":2,\"sequence\":70826,\"covered_ns\":1832297,\"gap_ns\":1563,\"cycle_ns\":1833860,\"has_native\":1,\"epoch\":1,\"node\":11743,\"queue\":1,\"peak\":4,\"copy_max_ticks\":40141,\"poll_max_ticks\":228538,\"previous_node_send_ticks\":241134}\nSCOPE_CYCLE_EVENT {\"kind\":\"peak_observed\",\"phase\":0,\"sequence\":21516,\"covered_ns\":2567351,\"gap_ns\":2344,\"cycle_ns\":2569695,\"has_native\":1,\"epoch\":1,\"node\":0,\"queue\":1,\"peak\":1,\"copy_max_ticks\":38343,\"poll_max_ticks\":175924,\"previous_node_send_ticks\":0}\nSCOPE_CYCLE_EVENT {\"kind\":\"peak_observed\",\"phase\":0,\"sequence\":21524,\"covered_ns\":791200,\"gap_ns\":1146,\"cycle_ns\":792346,\"has_native\":1,\"epoch\":1,\"node\":2,\"queue\":1,\"peak\":2,\"copy_max_ticks\":38343,\"poll_max_ticks\":208991,\"previous_node_send_ticks\":243894}\nSCOPE_CYCLE_EVENT {\"kind\":\"peak_observed\",\"phase\":1,\"sequence\":32456,\"covered_ns\":1205785,\"gap_ns\":2292,\"cycle_ns\":1208077,\"has_native\":1,\"epoch\":1,\"node\":2729,\"queue\":2,\"peak\":3,\"copy_max_ticks\":39208,\"poll_max_ticks\":213290,\"previous_node_send_ticks\":612337}\nSCOPE_CYCLE_EVENT {\"kind\":\"peak_observed\",\"phase\":1,\"sequence\":32464,\"covered_ns\":1126097,\"gap_ns\":1718,\"cycle_ns\":1127815,\"has_native\":1,\"epoch\":1,\"node\":2730,\"queue\":3,\"peak\":4,\"copy_max_ticks\":39208,\"poll_max_ticks\":213290,\"previous_node_send_ticks\":577877}\nSCOPE_CYCLE_END {\"peak_events_omitted\":0,\"incomplete_final_cycle\":0}\nSCOPE_LATENCY {\"phase\":0,\"count\":10327,\"tcp_queue_peak\":0,\"stages\":{\"tx_prepare\":{\"sum_ns\":103415062,\"max_ns\":61718,\"hist\":[0,10312,6,9,0,0,0,0,0,0,0]},\"ready_wait\":{\"sum_ns\":3256236205,\"max_ns\":1913808,\"hist\":[218,288,1488,2672,704,2287,21,2425,224,0,0]},\"spi_ioctl\":{\"sum_ns\":5017613654,\"max_ns\":622449,\"hist\":[0,0,0,0,0,0,10321,6,0,0,0]},\"validate\":{\"sum_ns\":81204338,\"max_ns\":60625,\"hist\":[0,10301,20,6,0,0,0,0,0,0,0]},\"policy\":{\"sum_ns\":28635874,\"max_ns\":55000,\"hist\":[10317,3,6,1,0,0,0,0,0,0,0]},\"pc_receive\":{\"sum_ns\":363942687,\"max_ns\":96407,\"hist\":[0,29,10070,228,0,0,0,0,0,0,0]},\"pc_send\":{\"sum_ns\":803927261,\"max_ns\":248803,\"hist\":[1,6,113,9164,1041,2,0,0,0,0,0]}}}\nSCOPE_LATENCY {\"phase\":1,\"count\":708,\"tcp_queue_peak\":0,\"stages\":{\"tx_prepare\":{\"sum_ns\":6860065,\"max_ns\":13177,\"hist\":[0,708,0,0,0,0,0,0,0,0,0]},\"ready_wait\":{\"sum_ns\":203918920,\"max_ns\":1124222,\"hist\":[8,19,91,196,52,180,25,126,11,0,0]},\"spi_ioctl\":{\"sum_ns\":343803961,\"max_ns\":543231,\"hist\":[0,0,0,0,0,0,708,0,0,0,0]},\"validate\":{\"sum_ns\":5597146,\"max_ns\":36406,\"hist\":[0,707,1,0,0,0,0,0,0,0,0]},\"policy\":{\"sum_ns\":1920266,\"max_ns\":4323,\"hist\":[708,0,0,0,0,0,0,0,0,0,0]},\"pc_receive\":{\"sum_ns\":25087685,\"max_ns\":80781,\"hist\":[0,0,691,17,0,0,0,0,0,0,0]},\"pc_send\":{\"sum_ns\":53576771,\"max_ns\":159271,\"hist\":[0,0,13,637,58,0,0,0,0,0,0]}}}\nSCOPE_LATENCY {\"phase\":2,\"count\":34082,\"tcp_queue_peak\":0,\"stages\":{\"tx_prepare\":{\"sum_ns\":332682896,\"max_ns\":77136,\"hist\":[1,33990,50,41,0,0,0,0,0,0,0]},\"ready_wait\":{\"sum_ns\":8862228565,\"max_ns\":1224014,\"hist\":[632,854,4306,7471,3271,11384,2045,3716,403,0,0]},\"spi_ioctl\":{\"sum_ns\":16564950480,\"max_ns\":850107,\"hist\":[0,0,0,0,0,0,34080,2,0,0,0]},\"validate\":{\"sum_ns\":275699725,\"max_ns\":73281,\"hist\":[0,33997,59,26,0,0,0,0,0,0,0]},\"policy\":{\"sum_ns\":95034049,\"max_ns\":63854,\"hist\":[34047,16,11,8,0,0,0,0,0,0,0]},\"pc_receive\":{\"sum_ns\":1253130010,\"max_ns\":144428,\"hist\":[0,113,32234,1701,34,0,0,0,0,0,0]},\"pc_send\":{\"sum_ns\":2620197912,\"max_ns\":684169,\"hist\":[1,8,770,30049,3246,7,0,1,0,0,0]}}}\nV17 CPU runtime: original CPU policy restored\nV16 transport: SPI 32 MHz, normal (policy=0 priority=0), READY poll\nPC closed or rejected; acquisition continues",
+  "restoration": {
+    "ok": true,
+    "attempted": true,
+    "errors": [],
+    "material": {
+      "sources_exact": true,
+      "cache_exact": true,
+      "firmware_exact": true,
+      "relay_exact": true
+    },
+    "recovery": {
+      "snapshot_equal": true,
+      "continuous": true,
+      "integrity_ok": true,
+      "seconds": 10.022163999965414,
+      "detail": {
+        "hardware_restored": true,
+        "errors": [],
+        "recovery": {
+          "seconds": 10.022163999965414,
+          "samples": 313344,
+          "dropped": 0,
+          "fatal": 0,
+          "continuous": true
+        }
+      }
+    },
+    "final": {
+      "identity_equal": true,
+      "sources_exact": true,
+      "relay_configuration_equal": true,
+      "cpu_equal": true
+    }
+  }
+}

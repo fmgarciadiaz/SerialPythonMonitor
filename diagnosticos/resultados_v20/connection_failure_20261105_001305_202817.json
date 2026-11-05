@@ -1,0 +1,852 @@
+{
+  "error": "RuntimeError: El Q cerr\u00f3 el flujo.",
+  "monotonic": 1097644.046758292,
+  "bits": 8,
+  "rate": 2000000,
+  "pending_gui": 0,
+  "pending_gui_peak": 11,
+  "pending_dsp": 0,
+  "pending_dsp_peak": 4,
+  "retained_samples": 0,
+  "retained_seconds": 1.3183898417423734e-16,
+  "retained_bytes": 0,
+  "retained_batches": 0,
+  "delivery_limits": {
+    "samples": 1600000,
+    "seconds": 1.0,
+    "bytes": 67108864,
+    "batches": 256
+  },
+  "delivery_peaks": {
+    "samples": 469136,
+    "seconds": 0.234568,
+    "bytes": 13436224,
+    "batches": 11
+  },
+  "rf_pending_samples": 0,
+  "radio_enabled": true,
+  "receiver_failure_snapshot": {
+    "error": "El Q cerr\u00f3 el flujo.",
+    "monotonic_s": 1097643.769000511,
+    "wall_time_s": 1793848384.9230368,
+    "retained_batches": [
+      {
+        "id": 42672,
+        "duration_s": 0.020056
+      }
+    ],
+    "retained_duration_s": 0.020056,
+    "buffered_samples": 2616,
+    "buffered_chunks": 3,
+    "buffered_duration_s": 0.001308,
+    "pending_duration_s": 0.021364,
+    "actual_rate": 2000000.0,
+    "bits": 8,
+    "last_credit_monotonic_s": 1097643.768412247,
+    "last_credit_age_s": 0.000588263850659132,
+    "decoder": {
+      "sequence": 85895123,
+      "previous_index": 1423163295,
+      "previous_timestamp": 2184547435,
+      "pairs": 1474923376,
+      "buffered_bytes": 0,
+      "status": {
+        "ack": 85895121,
+        "rate": 2000000,
+        "bits": 8,
+        "dropped": 0,
+        "fatal": 0,
+        "epoch": 211,
+        "prepare_us": 369,
+        "check_us": 58,
+        "queue_slots": 16,
+        "node_pairs": 3488,
+        "queue": 16,
+        "queue_peak": 16,
+        "copy_ticks": 40231,
+        "poll_ticks": 228510,
+        "slack_ticks": 45461,
+        "send_ticks": 275992,
+        "produced": 408032
+      }
+    },
+    "pcm_transport": {
+      "pending": null,
+      "pending_age_ms": null,
+      "cached_samples": 0,
+      "roundtrip_max_ms": 19.120289012789726,
+      "stage_max_ms": {
+        "request_to_parent": 17.53546600230038,
+        "executor_wait": 8.802893105894327,
+        "render": 0.6517709698528051,
+        "reply_to_child": 9.256649063900113
+      },
+      "last_reply_timing": {
+        "offset": 15199200,
+        "accepted_at": 1097643.76138324,
+        "request_to_parent": 0.8909120224416256,
+        "executor_wait": 1.1073420755565166,
+        "render": 0.20652683451771736,
+        "reply_to_child": 0.41413516737520695
+      },
+      "delivery_max_ms": {
+        "socket_send": 0.5159580614417791,
+        "send_to_ack": 56.075830943882465,
+        "chunk_generation": 0.1072960440069437,
+        "decode": 25.190193904563785
+      },
+      "slow_delivery": [
+        {
+          "stage": "decode",
+          "ms": 25.190193904563785,
+          "observed_at": 1097338.380779532
+        },
+        {
+          "stage": "send_to_ack",
+          "ms": 28.656364884227514,
+          "observed_at": 1097338.411461288
+        },
+        {
+          "stage": "send_to_ack",
+          "ms": 56.075830943882465,
+          "observed_at": 1097347.716363688
+        },
+        {
+          "stage": "send_to_ack",
+          "ms": 50.1499529927969,
+          "observed_at": 1097347.827696435
+        },
+        {
+          "stage": "send_to_ack",
+          "ms": 30.37059400230646,
+          "observed_at": 1097347.876614538
+        },
+        {
+          "stage": "send_to_ack",
+          "ms": 30.898198019713163,
+          "observed_at": 1097347.877217279
+        },
+        {
+          "stage": "send_to_ack",
+          "ms": 31.15960513241589,
+          "observed_at": 1097347.877560805
+        },
+        {
+          "stage": "send_to_ack",
+          "ms": 31.486519845202565,
+          "observed_at": 1097347.877949434
+        },
+        {
+          "stage": "send_to_ack",
+          "ms": 31.84171114116907,
+          "observed_at": 1097347.87835311
+        },
+        {
+          "stage": "send_to_ack",
+          "ms": 32.12981182150543,
+          "observed_at": 1097347.878685749
+        },
+        {
+          "stage": "send_to_ack",
+          "ms": 32.49368513934314,
+          "observed_at": 1097347.879102416
+        },
+        {
+          "stage": "send_to_ack",
+          "ms": 32.7080839779228,
+          "observed_at": 1097347.87936732
+        },
+        {
+          "stage": "send_to_ack",
+          "ms": 29.167992062866688,
+          "observed_at": 1097513.434908915
+        }
+      ]
+    }
+  },
+  "gui_thread_stack_at_notification": [
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v20/app.py\", line 7221, in <module>\n    main()\n",
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v20/app.py\", line 7217, in main\n    sys.exit(app.exec())\n"
+  ],
+  "gui_thread_stack_at_failure": [
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v20/app.py\", line 7221, in <module>\n    main()\n",
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v20/app.py\", line 7217, in main\n    sys.exit(app.exec())\n"
+  ],
+  "time": "2026-11-05T00:13:05.202739",
+  "radio_playing": true,
+  "us": false,
+  "scan_pending": false,
+  "multiscan_active": false,
+  "scan_status": "RADIO 40 kHz \u00b7 10829083 muestras",
+  "a0_active": true,
+  "analysis_mode": 1,
+  "fft_mode": "Radio",
+  "fft_size": "16384",
+  "heatmap_size": "16384",
+  "filter_source": "OFF",
+  "gui_delay_max_ms": 223.28513418324292,
+  "window_visible": true,
+  "window_minimized": false,
+  "wav_path": "",
+  "wav_rate": 40000,
+  "wav_preparing": false,
+  "wav_active": true,
+  "wav_dialog_open": false,
+  "slow_gui_callbacks": [
+    [
+      "render_frame",
+      1097005.262537869,
+      20.50212398171425
+    ],
+    [
+      "render_frame",
+      1097005.519346817,
+      21.311056800186634
+    ],
+    [
+      "render_frame",
+      1097005.674975098,
+      22.47610385529697
+    ],
+    [
+      "render_frame",
+      1097005.780113563,
+      21.392163122072816
+    ],
+    [
+      "render_frame",
+      1097006.039984618,
+      27.838994981721044
+    ],
+    [
+      "render_frame",
+      1097006.308611615,
+      20.850519882515073
+    ],
+    [
+      "render_frame",
+      1097006.46130515,
+      27.214046102017164
+    ],
+    [
+      "render_frame",
+      1097006.565049968,
+      20.56949306279421
+    ],
+    [
+      "render_frame",
+      1097006.731084155,
+      22.367310943081975
+    ],
+    [
+      "render_frame",
+      1097006.833286138,
+      20.13307111337781
+    ],
+    [
+      "render_frame",
+      1097007.230080303,
+      22.931532002985477
+    ],
+    [
+      "render_frame",
+      1097007.383446976,
+      21.172730019316077
+    ],
+    [
+      "render_frame",
+      1097007.802487739,
+      25.624844944104552
+    ],
+    [
+      "render_frame",
+      1097007.907554966,
+      27.01054187491536
+    ],
+    [
+      "render_frame",
+      1097008.011122721,
+      21.43385400995612
+    ],
+    [
+      "render_frame",
+      1097008.298655561,
+      24.757295148447156
+    ],
+    [
+      "render_frame",
+      1097008.693758862,
+      22.970848949626088
+    ],
+    [
+      "render_frame",
+      1097008.854430782,
+      22.958814864978194
+    ],
+    [
+      "render_frame",
+      1097009.115022416,
+      26.8907870631665
+    ],
+    [
+      "render_frame",
+      1097009.242581779,
+      23.076833924278617
+    ],
+    [
+      "render_frame",
+      1097009.368525608,
+      24.83537094667554
+    ],
+    [
+      "render_frame",
+      1097009.498324851,
+      34.40373297780752
+    ],
+    [
+      "render_frame",
+      1097009.825744277,
+      27.391429990530014
+    ],
+    [
+      "render_frame",
+      1097009.96420867,
+      26.263487990945578
+    ],
+    [
+      "render_frame",
+      1097010.085069649,
+      24.535553995519876
+    ],
+    [
+      "render_frame",
+      1097010.199034489,
+      21.899760933592916
+    ],
+    [
+      "render_frame",
+      1097010.31611943,
+      29.02932302094996
+    ],
+    [
+      "render_frame",
+      1097010.444314277,
+      37.068712990731
+    ],
+    [
+      "render_frame",
+      1097010.585948063,
+      29.453659895807505
+    ],
+    [
+      "render_frame",
+      1097010.707774177,
+      24.61440907791257
+    ],
+    [
+      "render_frame",
+      1097010.976396695,
+      25.557718938216567
+    ],
+    [
+      "render_frame",
+      1097011.0818837,
+      27.461417950689793
+    ],
+    [
+      "render_frame",
+      1097011.297949894,
+      50.32038711942732
+    ],
+    [
+      "render_frame",
+      1097011.46727388,
+      52.11819102987647
+    ],
+    [
+      "render_frame",
+      1097011.679179065,
+      54.80320006608963
+    ],
+    [
+      "render_frame",
+      1097011.896948487,
+      92.50824712216854
+    ],
+    [
+      "render_frame",
+      1097012.272631579,
+      96.95203299634159
+    ],
+    [
+      "render_frame",
+      1097012.666649329,
+      102.1221128758043
+    ],
+    [
+      "render_frame",
+      1097013.071308941,
+      91.58596000634134
+    ],
+    [
+      "render_frame",
+      1097013.437556236,
+      89.44036811590195
+    ],
+    [
+      "render_frame",
+      1097013.801745299,
+      94.88548710942268
+    ],
+    [
+      "render_frame",
+      1097014.18259637,
+      94.7695909999311
+    ],
+    [
+      "render_frame",
+      1097014.557794988,
+      89.72134487703443
+    ],
+    [
+      "render_frame",
+      1097014.922576799,
+      93.12622901052237
+    ],
+    [
+      "render_frame",
+      1097015.291694892,
+      89.496866799891
+    ],
+    [
+      "render_frame",
+      1097015.671825005,
+      100.05662101320922
+    ],
+    [
+      "render_frame",
+      1097016.078548569,
+      102.43275784887373
+    ],
+    [
+      "render_frame",
+      1097016.485455519,
+      99.6654808986932
+    ],
+    [
+      "spectral.render",
+      1097026.387111065,
+      129.55225794576108
+    ],
+    [
+      "spectral.render",
+      1097031.01170787,
+      145.96077683381736
+    ],
+    [
+      "spectral.render",
+      1097032.574470334,
+      137.14005588553846
+    ],
+    [
+      "spectral.render",
+      1097038.957586786,
+      137.93308101594448
+    ],
+    [
+      "spectral.render",
+      1097042.063366483,
+      128.44481808133423
+    ],
+    [
+      "spectral.render",
+      1097046.521017064,
+      152.5428988970816
+    ],
+    [
+      "spectral.render",
+      1097065.648287154,
+      25.836267974227667
+    ],
+    [
+      "spectral.render",
+      1097069.907836056,
+      20.376128144562244
+    ],
+    [
+      "spectral.render",
+      1097075.090440063,
+      20.97715507261455
+    ],
+    [
+      "spectral.render",
+      1097079.335072385,
+      23.634962970390916
+    ],
+    [
+      "spectral.render",
+      1097080.146109786,
+      150.0993319787085
+    ],
+    [
+      "spectral.render",
+      1097081.678453491,
+      134.50231589376926
+    ],
+    [
+      "spectral.render",
+      1097083.979470699,
+      131.6440301015973
+    ],
+    [
+      "spectral.render",
+      1097103.054161087,
+      24.99571698717773
+    ],
+    [
+      "spectral.render",
+      1097106.860950981,
+      22.196703823283315
+    ],
+    [
+      "spectral.render",
+      1097165.43180013,
+      26.538060046732426
+    ],
+    [
+      "spectral.render",
+      1097192.252849966,
+      22.832822054624557
+    ],
+    [
+      "spectral.render",
+      1097214.061045169,
+      21.74646081402898
+    ],
+    [
+      "spectral.render",
+      1097214.152048537,
+      20.771802868694067
+    ],
+    [
+      "spectral.render",
+      1097214.33395687,
+      20.922366064041853
+    ],
+    [
+      "spectral.render",
+      1097214.587434821,
+      26.375964051112533
+    ],
+    [
+      "spectral.render",
+      1097215.766911509,
+      26.50259481742978
+    ],
+    [
+      "spectral.render",
+      1097216.093708087,
+      21.074283169582486
+    ],
+    [
+      "spectral.render",
+      1097216.195550826,
+      21.70416619628668
+    ],
+    [
+      "spectral.render",
+      1097216.710347125,
+      25.186070939525962
+    ],
+    [
+      "spectral.render",
+      1097216.833787947,
+      21.148815052583814
+    ],
+    [
+      "spectral.render",
+      1097217.239750673,
+      20.440926076844335
+    ],
+    [
+      "spectral.render",
+      1097217.562439122,
+      22.83862605690956
+    ],
+    [
+      "spectral.render",
+      1097233.409831048,
+      27.186386054381728
+    ],
+    [
+      "spectral.render",
+      1097233.611193179,
+      27.29324996471405
+    ],
+    [
+      "spectral.render",
+      1097234.274011876,
+      27.65316190198064
+    ],
+    [
+      "spectral.render",
+      1097303.936495932,
+      167.27554611861706
+    ],
+    [
+      "spectral.render",
+      1097313.163873176,
+      137.32362003065646
+    ],
+    [
+      "spectral.render",
+      1097314.532032467,
+      131.57709315419197
+    ],
+    [
+      "spectral.render",
+      1097319.823115265,
+      20.133303944021463
+    ],
+    [
+      "spectral.render",
+      1097356.591234441,
+      20.242464961484075
+    ],
+    [
+      "spectral.render",
+      1097359.511625534,
+      142.60010607540607
+    ],
+    [
+      "spectral.render",
+      1097365.520865796,
+      150.4695399198681
+    ],
+    [
+      "spectral.render",
+      1097370.831314551,
+      131.270342040807
+    ],
+    [
+      "spectral.render",
+      1097371.671238341,
+      130.72790997102857
+    ],
+    [
+      "spectral.render",
+      1097372.159690465,
+      137.1221800800413
+    ],
+    [
+      "spectral.render",
+      1097373.01567015,
+      139.88301693461835
+    ],
+    [
+      "spectral.render",
+      1097424.276422281,
+      148.7370498944074
+    ],
+    [
+      "spectral.render",
+      1097425.500886172,
+      20.039851777255535
+    ],
+    [
+      "spectral.render",
+      1097429.128349212,
+      29.61921296082437
+    ],
+    [
+      "spectral.render",
+      1097429.233374953,
+      24.64742911979556
+    ],
+    [
+      "spectral.render",
+      1097432.636146331,
+      23.04956899024546
+    ],
+    [
+      "spectral.render",
+      1097433.453518264,
+      21.72839012928307
+    ],
+    [
+      "spectral.render",
+      1097436.3818613,
+      25.316138053312898
+    ],
+    [
+      "spectral.render",
+      1097440.1951355,
+      20.73422004468739
+    ],
+    [
+      "spectral.render",
+      1097459.332383331,
+      20.799259888008237
+    ],
+    [
+      "spectral.render",
+      1097459.788947981,
+      21.787218982353806
+    ],
+    [
+      "spectral.render",
+      1097460.649660061,
+      23.505121003836393
+    ],
+    [
+      "spectral.render",
+      1097461.243805854,
+      27.702159946784377
+    ],
+    [
+      "spectral.render",
+      1097466.529337872,
+      20.40130994282663
+    ],
+    [
+      "spectral.render",
+      1097466.62628234,
+      23.160404060035944
+    ],
+    [
+      "spectral.render",
+      1097520.032303803,
+      27.21911109983921
+    ],
+    [
+      "render_frame",
+      1097594.677164487,
+      86.46340784616768
+    ],
+    [
+      "render_frame",
+      1097595.020130004,
+      82.10646198131144
+    ],
+    [
+      "render_frame",
+      1097595.353350847,
+      84.50716407969594
+    ],
+    [
+      "render_frame",
+      1097595.692290836,
+      84.4595730304718
+    ],
+    [
+      "spectral.render",
+      1097596.384321924,
+      144.9752110056579
+    ],
+    [
+      "spectral.render",
+      1097596.581269542,
+      20.61519306153059
+    ],
+    [
+      "spectral.render",
+      1097597.327652574,
+      20.411643898114562
+    ],
+    [
+      "spectral.render",
+      1097598.286565314,
+      20.887563936412334
+    ],
+    [
+      "spectral.render",
+      1097598.821661835,
+      25.800358038395643
+    ],
+    [
+      "spectral.render",
+      1097599.025307485,
+      21.319905063137412
+    ],
+    [
+      "spectral.render",
+      1097600.286119244,
+      20.98352904431522
+    ],
+    [
+      "spectral.render",
+      1097600.392562978,
+      20.020199939608574
+    ],
+    [
+      "spectral.render",
+      1097600.699325047,
+      21.29848813638091
+    ],
+    [
+      "spectral.render",
+      1097601.126594097,
+      21.518552908673882
+    ],
+    [
+      "spectral.render",
+      1097602.110240293,
+      21.872686920687556
+    ],
+    [
+      "spectral.render",
+      1097602.769501945,
+      24.3647878523916
+    ],
+    [
+      "spectral.render",
+      1097603.594502534,
+      20.42574784718454
+    ],
+    [
+      "spectral.render",
+      1097603.770251112,
+      23.54294713586569
+    ],
+    [
+      "spectral.render",
+      1097605.14546441,
+      20.065204007551074
+    ],
+    [
+      "spectral.render",
+      1097605.768094443,
+      21.167015889659524
+    ],
+    [
+      "spectral.render",
+      1097606.427395117,
+      24.21586005948484
+    ],
+    [
+      "spectral.render",
+      1097606.753957538,
+      20.1824891846627
+    ],
+    [
+      "spectral.render",
+      1097607.659419664,
+      127.63889413326979
+    ]
+  ],
+  "selected_columns": {
+    "CH1": true,
+    "CH2": false,
+    "FILTER": false,
+    "RADIO": true
+  },
+  "horizontal_samples": 8000000,
+  "trigger_enabled": false,
+  "trigger_source": "CH1",
+  "detail": 50,
+  "trace_style": "R\u00e1pido",
+  "temporal_paint_ms": 6.3643341267015785,
+  "temporal_paint_max_ms": 39.04495108872652,
+  "temporal_prepare_ms": 84.4649369828403,
+  "render_interval_ms": 16
+}

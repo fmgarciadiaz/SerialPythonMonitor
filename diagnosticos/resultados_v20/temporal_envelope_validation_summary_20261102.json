@@ -1,0 +1,43 @@
+{
+  "private": true,
+  "promoted": false,
+  "feature": "Automatic V(t) display envelope; raw captures retained for cursors",
+  "thresholds": {
+    "enter_min_visible_samples": 100000,
+    "enter_samples_per_physical_pixel": 8,
+    "exit_below_visible_samples": 50000,
+    "exit_below_samples_per_physical_pixel": 4
+  },
+  "local_regression_tests": 140,
+  "post_telemetry_tests": 23,
+  "cases": [
+    {
+      "case": "v20_gui_stall_longwindow_radio_vt_20261102_r1",
+      "ok": true,
+      "hold_seconds": 20.035346478922293,
+      "exposure": 1.0,
+      "worker_median_ms": 3091.9121765182354,
+      "published_hz_between_active_snapshots": 0.26351379197447294,
+      "full_ch1_capture": null,
+      "env_label_observed": false,
+      "identity_unchanged": true,
+      "restore_ok": true,
+      "capture_note": "Raw-frame point-count telemetry was not present in the baseline; not evidence of reduced cursor data."
+    },
+    {
+      "case": "v20_envelope_longwindow_radio_vt_20261102_r1",
+      "ok": true,
+      "hold_seconds": 60.074767907965,
+      "exposure": 1.0,
+      "worker_median_ms": 129.0301689878106,
+      "published_hz_between_active_snapshots": 2.5184683881301866,
+      "full_ch1_capture": true,
+      "env_label_observed": true,
+      "identity_unchanged": true,
+      "restore_ok": true
+    }
+  ],
+  "post_physical_source_edits": "Two docstrings only; executable code unchanged",
+  "temporal_raster_current_sha256": "d350583bd045fdd41ba899792dd361ad81c5be1efa483dd42f43c079f5b11341",
+  "note": "Baseline20s and envelope60s are separate measurements, not a universal FPS guarantee. Acquisition, DSP and Q firmware/relay unchanged."
+}

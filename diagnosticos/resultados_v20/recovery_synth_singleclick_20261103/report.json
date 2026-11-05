@@ -1,0 +1,978 @@
+{
+  "schema": 1,
+  "version": 20,
+  "private": true,
+  "promoted": false,
+  "private_firmware_activated": true,
+  "private_identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v20-20261031-225916-main-1",
+    "firmware_sha256": "52f933bdb9c632544624e5d4188a740a9cdb429596bfe5a4d926900e7538aefe",
+    "relay_sha256": "bf6893f5a0fbab8676120a5decd8c6109698fa852be02333918b1d6e4a2a909d"
+  },
+  "source_report": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v20/storage_lifetime_cycle_20261101/report.json",
+  "source_report_sha256": "298e09f178d140cc003bf03e4ce610e38f56b593f2afaa3440003718c035e9e8",
+  "working_receipt": {
+    "path": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v20/q_support/working_pair.json",
+    "sha256": "0708e10da6755ba09d27dafefd5b742b463c2c88647378de05454b69c22d4835"
+  },
+  "identity_before": {
+    "board_serial": "1060031107",
+    "app": "scope-v20-20261031-225916-main-1",
+    "firmware_sha256": "52f933bdb9c632544624e5d4188a740a9cdb429596bfe5a4d926900e7538aefe",
+    "relay_sha256": "bf6893f5a0fbab8676120a5decd8c6109698fa852be02333918b1d6e4a2a909d"
+  },
+  "requested_tests": {
+    "radio": true,
+    "wav": false,
+    "fm": true,
+    "synth_early_play": true,
+    "voices": 20,
+    "synth_profile": "panel",
+    "hold_seconds": 20,
+    "stall_trace": true,
+    "window_seconds": 0,
+    "detail_percent": null,
+    "analysis_mode": "fft_radio",
+    "radio_adc_bits": 8,
+    "radio_adc_rate": 40000,
+    "radio_a0_rate": 40000,
+    "wav_source": null,
+    "synth_prepare_timeout": 120,
+    "synth_confirmed_hold_seconds": 30,
+    "synth_dac_rate": 40000
+  },
+  "scope": "Installed working V20 audio screen; private, no public/analog acceptance",
+  "ok": true,
+  "host_sources": {
+    "tools/probe_working_v20_gui.py": "ae30b9669bfe3855634263e86b3729413328acb380c12f6b4d80cbdbb61cc521",
+    "tools/gui_private_v20.py": "09b02d3008e3859b77efd8193d7d206cafcf74535fbcc2cba7b2101c699dc917",
+    "tools/private_v20_pair.py": "4f6f89eaa18f976d5ca1fce383da9962a18ac5abc4d4591970eb02f20f97859f",
+    "tools/gui_live_smoke_v20.py": "2937061373c4b138fb7bb3aaf5fd82a082e66add4c6c8b17a050b94957703e1f",
+    "tools/synth_transition_scenario_v20.py": "b362a61da1110fc9e87a9b0a62983715b27e71cf0bee4889559957ea3b1fd6ea",
+    "monitor/v20/receiver/unoq_config_receiver.py": "c18e649ca951749e597778e5322587347531b5072500f3f328d4149e559475e1",
+    "monitor/v20/io/receiver_process.py": "9aba33676723459084894f0b1d65c5acfe5fd01d590b9262f7dc98571ed85d7d",
+    "monitor/v20/fm_source.py": "ec2f46b3984c92bb0c6ae2ec637dce3339d59595e4f5730c9460efdcc2419730",
+    "monitor/v20/fm_panel.py": "f8f9cc1835342ef10f50c3f2ad2a5c95180136b00b0a1a5a06d82d61acf60f92",
+    "monitor/v20/synth_process.py": "26a9b85f8c8fd8dfd2575ea3df2500618786a769e84784000035a9d230bd6d14",
+    "monitor/v20/app.py": "7bb56fc72ba85e2d9d993acfca990ce43b905e0744d175bdf49fc07c96841223",
+    "monitor/v20/temporal_raster.py": "2e54c5ae40bb4537b86f06f6ab7ee5e142ad2099302efad18942d34f6b5bc932",
+    "monitor/v20/scope_cursors.py": "90afa613efab8eac682932ca1006de3c0bd9717f46a36971d773ebd358bb9cb1"
+  },
+  "gui_command": [
+    "/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/bin/python",
+    "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/tools/gui_private_v20.py",
+    "--firmware-binding",
+    "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v20/recovery_synth_singleclick_20261103/report.json",
+    "--serial",
+    "1060031107",
+    "--output",
+    "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v20/recovery_synth_singleclick_20261103/gui.json",
+    "--bits",
+    "8",
+    "--rate",
+    "40000",
+    "--fft-size",
+    "16384",
+    "--no-retune",
+    "--frequency-khz",
+    "10",
+    "--hold-radio-seconds",
+    "20",
+    "--duration",
+    "25",
+    "--stall-trace",
+    "--fm",
+    "--voices",
+    "20",
+    "--synth-hold",
+    "30",
+    "--synth-rate",
+    "40000",
+    "--synth-profile",
+    "panel",
+    "--synth-early-play"
+  ],
+  "child_pid": 58762,
+  "execution_budget_seconds": 250,
+  "child_returncode": 0,
+  "gui": {
+    "errors": [],
+    "assertions": {
+      "radio_playing_40k": true,
+      "radio_stop_confirmed": true,
+      "radio_progress": true,
+      "radio_hold_completed": true,
+      "scan_completed": true,
+      "wav_playing": true,
+      "wav_progress": true,
+      "wav_stop_confirmed": true,
+      "fm_playing": true,
+      "fm_progress": true,
+      "fm_stop_confirmed": true,
+      "fm_hold_completed": true,
+      "fm_configured_voices_rendered": true,
+      "fm_sustained_voices_observed": true,
+      "fm_selected_dac_rate": true,
+      "shutdown_confirmed": true,
+      "worker_released": true
+    },
+    "display": {
+      "platform": "cocoa",
+      "dpr": 2.0,
+      "size": [
+        1320,
+        920
+      ],
+      "screen": "Built-in Retina Display",
+      "exposed": false
+    },
+    "paint_events": 1223,
+    "radio_hold_seconds": 20.098972345003858,
+    "synth_transition": {
+      "phase": "complete",
+      "requested_at": 27.88749275903683,
+      "playing_at": 29.57758748997003,
+      "stop_requested_at": 59.633031098986976,
+      "stopped_at": 59.640518008032814,
+      "session": 3270546931,
+      "played": 1202880,
+      "prepare_timeout": 120.0,
+      "hold_seconds": 30,
+      "stop_timeout": 10.0,
+      "hold_completed": true,
+      "complete": true,
+      "voice_observations": 301,
+      "voice_min": 0,
+      "voice_max": 20
+    },
+    "synth_remote_voice_peak": 20
+  },
+  "audio_phases": [
+    {
+      "stage": "radio_a0_playing_confirmed",
+      "elapsed": 7.659212585072964,
+      "applied_configuration": {
+        "bits": 8,
+        "rate": 40000,
+        "channels": 2
+      },
+      "requested_voices": null,
+      "wav_active": true,
+      "radio_a0": true,
+      "radio_status": "RADIO 40 kHz \u00b7 162628 muestras",
+      "samples": 200704,
+      "exposed": true,
+      "synth_transition": {
+        "phase": "idle",
+        "requested_at": null,
+        "playing_at": null,
+        "stop_requested_at": null,
+        "stopped_at": null,
+        "session": null,
+        "played": 0,
+        "prepare_timeout": 120.0,
+        "hold_seconds": 30,
+        "stop_timeout": 10.0,
+        "hold_completed": false,
+        "complete": false,
+        "voice_observations": 0,
+        "voice_min": null,
+        "voice_max": null
+      },
+      "synth_preparation": {
+        "request_pending": false,
+        "task_present": false,
+        "task_done": null,
+        "active": false,
+        "requested_rate": null,
+        "active_rate": null,
+        "synth_process_created": false
+      },
+      "synth_source": null
+    },
+    {
+      "stage": "before_stop",
+      "elapsed": 27.758242162992246,
+      "applied_configuration": {
+        "bits": 8,
+        "rate": 40000,
+        "channels": 2
+      },
+      "requested_voices": null,
+      "wav_active": true,
+      "radio_a0": true,
+      "radio_status": "RADIO 40 kHz \u00b7 965218 muestras",
+      "samples": 1003298,
+      "exposed": true,
+      "synth_transition": {
+        "phase": "idle",
+        "requested_at": null,
+        "playing_at": null,
+        "stop_requested_at": null,
+        "stopped_at": null,
+        "session": null,
+        "played": 0,
+        "prepare_timeout": 120.0,
+        "hold_seconds": 30,
+        "stop_timeout": 10.0,
+        "hold_completed": false,
+        "complete": false,
+        "voice_observations": 0,
+        "voice_min": null,
+        "voice_max": null
+      },
+      "synth_preparation": {
+        "request_pending": false,
+        "task_present": false,
+        "task_done": null,
+        "active": false,
+        "requested_rate": null,
+        "active_rate": null,
+        "synth_process_created": false
+      },
+      "synth_source": null
+    },
+    {
+      "stage": "fm_configure",
+      "elapsed": 27.94848482706584,
+      "applied_configuration": {
+        "bits": 8,
+        "rate": 40000,
+        "channels": 2
+      },
+      "requested_voices": null,
+      "wav_active": false,
+      "radio_a0": false,
+      "radio_status": "RADIO apagada",
+      "samples": 1009216,
+      "exposed": true,
+      "synth_transition": {
+        "phase": "idle",
+        "requested_at": null,
+        "playing_at": null,
+        "stop_requested_at": null,
+        "stopped_at": null,
+        "session": null,
+        "played": 0,
+        "prepare_timeout": 120.0,
+        "hold_seconds": 30,
+        "stop_timeout": 10.0,
+        "hold_completed": false,
+        "complete": false,
+        "voice_observations": 0,
+        "voice_min": null,
+        "voice_max": null
+      },
+      "synth_preparation": {
+        "request_pending": false,
+        "task_present": false,
+        "task_done": null,
+        "active": false,
+        "requested_rate": null,
+        "active_rate": null,
+        "synth_process_created": false
+      },
+      "synth_source": null
+    },
+    {
+      "stage": "fm_play_requested",
+      "elapsed": 27.94912279001437,
+      "applied_configuration": {
+        "bits": 8,
+        "rate": 40000,
+        "channels": 2
+      },
+      "requested_voices": 20,
+      "wav_active": false,
+      "radio_a0": false,
+      "radio_status": "RADIO apagada",
+      "samples": 1009216,
+      "exposed": true,
+      "synth_transition": {
+        "phase": "wait-play",
+        "requested_at": 27.88749275903683,
+        "playing_at": null,
+        "stop_requested_at": null,
+        "stopped_at": null,
+        "session": null,
+        "played": 0,
+        "prepare_timeout": 120.0,
+        "hold_seconds": 30,
+        "stop_timeout": 10.0,
+        "hold_completed": false,
+        "complete": false,
+        "voice_observations": 0,
+        "voice_min": null,
+        "voice_max": null
+      },
+      "synth_preparation": {
+        "request_pending": false,
+        "task_present": false,
+        "task_done": null,
+        "active": false,
+        "requested_rate": null,
+        "active_rate": null,
+        "synth_process_created": false
+      },
+      "synth_source": null
+    },
+    {
+      "stage": "fm_playing_confirmed",
+      "elapsed": 29.577721790061332,
+      "applied_configuration": {
+        "bits": 8,
+        "rate": 40000,
+        "channels": 2
+      },
+      "requested_voices": null,
+      "wav_active": true,
+      "radio_a0": false,
+      "radio_status": "RADIO apagada",
+      "samples": 1075200,
+      "exposed": true,
+      "synth_transition": {
+        "phase": "playing",
+        "requested_at": 27.88749275903683,
+        "playing_at": 29.57758748997003,
+        "stop_requested_at": null,
+        "stopped_at": null,
+        "session": 3270546931,
+        "played": 0,
+        "prepare_timeout": 120.0,
+        "hold_seconds": 30,
+        "stop_timeout": 10.0,
+        "hold_completed": false,
+        "complete": false,
+        "voice_observations": 0,
+        "voice_min": null,
+        "voice_max": null
+      },
+      "synth_preparation": {
+        "request_pending": false,
+        "task_present": false,
+        "task_done": null,
+        "active": false,
+        "requested_rate": null,
+        "active_rate": null,
+        "synth_process_created": true
+      },
+      "synth_source": {
+        "preset": "DX Piano",
+        "waveform": "fm",
+        "oscillator_levels": [
+          0.555,
+          0.185,
+          0.26
+        ],
+        "rate": 40000,
+        "position": 8160,
+        "configured_notes": 20,
+        "remote_active_voice_count": 20,
+        "max_render_ms": 8.070443058386445,
+        "slow_render_blocks": 0
+      }
+    },
+    {
+      "stage": "fm_before_stop",
+      "elapsed": 59.63319132698234,
+      "applied_configuration": {
+        "bits": 8,
+        "rate": 40000,
+        "channels": 2
+      },
+      "requested_voices": null,
+      "wav_active": true,
+      "radio_a0": false,
+      "radio_status": "RADIO apagada",
+      "samples": 2278054,
+      "exposed": true,
+      "synth_transition": {
+        "phase": "wait-stop",
+        "requested_at": 27.88749275903683,
+        "playing_at": 29.57758748997003,
+        "stop_requested_at": 59.633031098986976,
+        "stopped_at": null,
+        "session": 3270546931,
+        "played": 1202400,
+        "prepare_timeout": 120.0,
+        "hold_seconds": 30,
+        "stop_timeout": 10.0,
+        "hold_completed": true,
+        "complete": false,
+        "voice_observations": 301,
+        "voice_min": 0,
+        "voice_max": 20
+      },
+      "synth_preparation": {
+        "request_pending": false,
+        "task_present": false,
+        "task_done": null,
+        "active": false,
+        "requested_rate": null,
+        "active_rate": null,
+        "synth_process_created": true
+      },
+      "synth_source": {
+        "preset": "DX Piano",
+        "waveform": "fm",
+        "oscillator_levels": [
+          0.555,
+          0.185,
+          0.26
+        ],
+        "rate": 40000,
+        "position": 1210080,
+        "configured_notes": 20,
+        "remote_active_voice_count": 0,
+        "max_render_ms": 8.070443058386445,
+        "slow_render_blocks": 0
+      }
+    },
+    {
+      "stage": "fm_stop_confirmed",
+      "elapsed": 59.64058237802237,
+      "applied_configuration": {
+        "bits": 8,
+        "rate": 40000,
+        "channels": 2
+      },
+      "requested_voices": null,
+      "wav_active": false,
+      "radio_a0": false,
+      "radio_status": "RADIO apagada",
+      "samples": 2278054,
+      "exposed": true,
+      "synth_transition": {
+        "phase": "complete",
+        "requested_at": 27.88749275903683,
+        "playing_at": 29.57758748997003,
+        "stop_requested_at": 59.633031098986976,
+        "stopped_at": 59.640518008032814,
+        "session": 3270546931,
+        "played": 1202880,
+        "prepare_timeout": 120.0,
+        "hold_seconds": 30,
+        "stop_timeout": 10.0,
+        "hold_completed": true,
+        "complete": true,
+        "voice_observations": 301,
+        "voice_min": 0,
+        "voice_max": 20
+      },
+      "synth_preparation": {
+        "request_pending": false,
+        "task_present": false,
+        "task_done": null,
+        "active": false,
+        "requested_rate": null,
+        "active_rate": null,
+        "synth_process_created": true
+      },
+      "synth_source": null
+    },
+    {
+      "stage": "before_close",
+      "elapsed": 61.75695819302928,
+      "applied_configuration": {
+        "bits": 8,
+        "rate": 40000,
+        "channels": 2
+      },
+      "requested_voices": null,
+      "wav_active": false,
+      "radio_a0": false,
+      "radio_status": "RADIO apagada",
+      "samples": 2363170,
+      "exposed": true,
+      "synth_transition": {
+        "phase": "complete",
+        "requested_at": 27.88749275903683,
+        "playing_at": 29.57758748997003,
+        "stop_requested_at": 59.633031098986976,
+        "stopped_at": 59.640518008032814,
+        "session": 3270546931,
+        "played": 1202880,
+        "prepare_timeout": 120.0,
+        "hold_seconds": 30,
+        "stop_timeout": 10.0,
+        "hold_completed": true,
+        "complete": true,
+        "voice_observations": 301,
+        "voice_min": 0,
+        "voice_max": 20
+      },
+      "synth_preparation": {
+        "request_pending": false,
+        "task_present": false,
+        "task_done": null,
+        "active": false,
+        "requested_rate": null,
+        "active_rate": null,
+        "synth_process_created": true
+      },
+      "synth_source": null
+    }
+  ],
+  "exposure": {
+    "periodic_samples": 12,
+    "exposed_fraction": 1.0,
+    "exposure_sufficient": true,
+    "note": "Exposure only; no visible FPS or analog acceptance inferred."
+  },
+  "metrics": {
+    "profile": [
+      8,
+      40000,
+      25,
+      2048,
+      2
+    ],
+    "node_budget_ticks": 51200,
+    "epoch_count": 0,
+    "all": {
+      "frames": 0,
+      "samples": 0,
+      "empty_status_frames": 0,
+      "send_nodes": 0,
+      "mean_send_margin": null,
+      "mcu_queue_peak": 0,
+      "min_slack_ticks": null,
+      "sampled_queue_max": 0,
+      "send_ticks_max": 0,
+      "send_over_budget_nodes": 0,
+      "headroom_pass": false
+    },
+    "radio_playing": {
+      "frames": 0,
+      "samples": 0,
+      "empty_status_frames": 0,
+      "send_nodes": 0,
+      "mean_send_margin": null,
+      "mcu_queue_peak": 0,
+      "min_slack_ticks": null,
+      "sampled_queue_max": 0,
+      "send_ticks_max": 0,
+      "send_over_budget_nodes": 0,
+      "headroom_pass": false
+    },
+    "phases": {},
+    "phase_events": [
+      {
+        "kind": "phase",
+        "phase": "stopped",
+        "previous": "acquisition",
+        "last_observed_rf": null
+      },
+      {
+        "kind": "phase",
+        "phase": "preparing",
+        "previous": "stopped",
+        "last_observed_rf": null
+      },
+      {
+        "kind": "phase",
+        "phase": "starting",
+        "previous": "preparing",
+        "last_observed_rf": null
+      },
+      {
+        "kind": "phase",
+        "phase": "playing",
+        "previous": "starting",
+        "last_observed_rf": null
+      },
+      {
+        "kind": "phase",
+        "phase": "stopping",
+        "previous": "playing",
+        "last_observed_rf": null
+      },
+      {
+        "kind": "phase",
+        "phase": "stopped",
+        "previous": "stopping",
+        "last_observed_rf": null
+      },
+      {
+        "kind": "phase",
+        "phase": "preparing",
+        "previous": "stopped",
+        "last_observed_rf": null
+      },
+      {
+        "kind": "phase",
+        "phase": "starting",
+        "previous": "preparing",
+        "last_observed_rf": null
+      },
+      {
+        "kind": "phase",
+        "phase": "playing",
+        "previous": "starting",
+        "last_observed_rf": null
+      },
+      {
+        "kind": "phase",
+        "phase": "stopping",
+        "previous": "playing",
+        "last_observed_rf": null
+      },
+      {
+        "kind": "phase",
+        "phase": "stopped",
+        "previous": "stopping",
+        "last_observed_rf": null
+      }
+    ],
+    "phase_events_omitted": 0,
+    "slowest_node_observations": [],
+    "node_timing_note": "Eight largest previous-node sends, one observation per epoch/node start. Copy/poll are cumulative MCU maxima; prepare/check refer to previous physical batch. Same observation does not establish simultaneity or causality.",
+    "chunk_timing": {
+      "preparing": {
+        "count": 46,
+        "max_gap_ms": 21772.178519051522,
+        "gaps": {
+          "lt1ms": 7,
+          "1to3ms": 1,
+          "3to6ms": 12,
+          "6to12ms": 22,
+          "ge12ms": 3
+        }
+      },
+      "playing": {
+        "count": 4176,
+        "max_gap_ms": 1852.0484850741923,
+        "gaps": {
+          "lt1ms": 1000,
+          "1to3ms": 160,
+          "3to6ms": 282,
+          "6to12ms": 1261,
+          "ge12ms": 1472
+        }
+      }
+    },
+    "physical_batch_mix": {
+      "acquisition:other+other": 17,
+      "acquisition:wav+other": 1,
+      "stopped:other+other": 11511,
+      "stopped:wav+other": 4,
+      "preparing:other+other": 454,
+      "preparing:wav+other": 48,
+      "starting:other+other": 6,
+      "starting:wav+other": 2,
+      "playing:other+other": 28799,
+      "playing:wav+other": 5916,
+      "stopping:other+other": 6,
+      "stopping:wav+other": 2
+    },
+    "physical_batch_mix_omitted": 0,
+    "final_rf_followed_by_idle": {},
+    "wav_rf_max_consecutive_batches": {},
+    "stop_roundtrips": [
+      {
+        "request_id": 3270546926,
+        "roundtrip_ms": 3.2759960740804672,
+        "state": 0,
+        "reason": 0
+      },
+      {
+        "request_id": 3270550862,
+        "roundtrip_ms": 4.3761529959738255,
+        "state": 0,
+        "reason": 0
+      }
+    ],
+    "stop_pending_count": 0,
+    "stop_observations_omitted": 0,
+    "wav_chunk_timing": null,
+    "ordinary_timing_valid": true,
+    "performance_acceptance_eligible": false,
+    "spi_batch_timing": {
+      "histogram_upper_bounds_exclusive_us": [
+        5,
+        10,
+        20,
+        50,
+        100,
+        200,
+        500,
+        1000,
+        5000
+      ],
+      "groups": [],
+      "omitted_batches": 0,
+      "note": "Fields describe previous physical batch. Dedup by epoch/sequence//2; only batches containing target native RF/status are covered. Phase/mix are host observations, not causal attribution."
+    },
+    "ack_batch_timing": {
+      "groups": [],
+      "matched_replies": 5973,
+      "unmatched_replies": 0,
+      "pending": 0,
+      "evicted": 0,
+      "omitted_groups": 0,
+      "note": "Native half 1 metadata, categorized by same-batch WAV reply id/session. prepare/check describe prior iteration; check includes decode_pair and command processing, not IRQ-lock duration alone. No WAV ACK does not mean no command. Lifecycle reply counters include non-target profiles; timing groups only target RF. ACK-only and RF+ACK pairs lack coverage."
+    },
+    "raw_chunk_ack_latency": {
+      "enabled": true,
+      "matched": 4222,
+      "raw_max_ms": 38.00228901673108,
+      "raw_mean_ms": 5.203180191392094,
+      "decoded": 4222,
+      "decode_max_ms": 0.8120200363919139,
+      "pending_sends": 0,
+      "pending_decode": 0,
+      "omitted": 0,
+      "slow": [
+        {
+          "request_id": 3270546689,
+          "sent_at": 968243.338643553,
+          "received_at": 968243.370290856,
+          "raw_roundtrip_ms": 31.647303025238216,
+          "state": 2,
+          "reason": 0,
+          "accepted": 721440,
+          "played": 708960,
+          "decoded_at": 968243.370742228,
+          "decode_delay_ms": 0.45137200504541397,
+          "decoded_roundtrip_ms": 32.09867503028363
+        },
+        {
+          "request_id": 3270546690,
+          "sent_at": 968243.338798425,
+          "received_at": 968243.370290856,
+          "raw_roundtrip_ms": 31.49243094958365,
+          "state": 2,
+          "reason": 0,
+          "accepted": 721920,
+          "played": 708960,
+          "decoded_at": 968243.370913541,
+          "decode_delay_ms": 0.622684950940311,
+          "decoded_roundtrip_ms": 32.11511590052396
+        },
+        {
+          "request_id": 3270546691,
+          "sent_at": 968243.338920624,
+          "received_at": 968243.370290856,
+          "raw_roundtrip_ms": 31.37023199815303,
+          "state": 2,
+          "reason": 0,
+          "accepted": 722400,
+          "played": 708960,
+          "decoded_at": 968243.371006907,
+          "decode_delay_ms": 0.7160509703680873,
+          "decoded_roundtrip_ms": 32.08628296852112
+        },
+        {
+          "request_id": 3270546692,
+          "sent_at": 968243.339049898,
+          "received_at": 968243.370290856,
+          "raw_roundtrip_ms": 31.240958021953702,
+          "state": 2,
+          "reason": 0,
+          "accepted": 722880,
+          "played": 708960,
+          "decoded_at": 968243.371102876,
+          "decode_delay_ms": 0.8120200363919139,
+          "decoded_roundtrip_ms": 32.052978058345616
+        },
+        {
+          "request_id": 3270547710,
+          "sent_at": 968254.356654217,
+          "received_at": 968254.389491081,
+          "raw_roundtrip_ms": 32.836864003911614,
+          "state": 2,
+          "reason": 0,
+          "accepted": 281280,
+          "played": 274560,
+          "decoded_at": 968254.389584007,
+          "decode_delay_ms": 0.09292596951127052,
+          "decoded_roundtrip_ms": 32.929789973422885
+        },
+        {
+          "request_id": 3270549422,
+          "sent_at": 968266.947002272,
+          "received_at": 968266.985004561,
+          "raw_roundtrip_ms": 38.00228901673108,
+          "state": 2,
+          "reason": 0,
+          "accepted": 784800,
+          "played": 777600,
+          "decoded_at": 968266.985315363,
+          "decode_delay_ms": 0.31080201733857393,
+          "decoded_roundtrip_ms": 38.31309103406966
+        },
+        {
+          "request_id": 3270549781,
+          "sent_at": 968269.758700424,
+          "received_at": 968269.791165733,
+          "raw_roundtrip_ms": 32.46530902106315,
+          "state": 2,
+          "reason": 0,
+          "accepted": 897120,
+          "played": 889920,
+          "decoded_at": 968269.791246917,
+          "decode_delay_ms": 0.0811839709058404,
+          "decoded_roundtrip_ms": 32.54649299196899
+        },
+        {
+          "request_id": 3270549782,
+          "sent_at": 968269.760546896,
+          "received_at": 968269.791864007,
+          "raw_roundtrip_ms": 31.31711098831147,
+          "state": 2,
+          "reason": 0,
+          "accepted": 897600,
+          "played": 890400,
+          "decoded_at": 968269.792010195,
+          "decode_delay_ms": 0.14618795830756426,
+          "decoded_roundtrip_ms": 31.463298946619034
+        },
+        {
+          "request_id": 3270550653,
+          "sent_at": 968276.059343615,
+          "received_at": 968276.091055007,
+          "raw_roundtrip_ms": 31.71139198821038,
+          "state": 2,
+          "reason": 0,
+          "accepted": 1149120,
+          "played": 1141920,
+          "decoded_at": 968276.091435918,
+          "decode_delay_ms": 0.38091104943305254,
+          "decoded_roundtrip_ms": 32.09230303764343
+        }
+      ],
+      "note": "Complete-frame socket read time versus entry to decoder event handling; correlated CHUNK ids/session, normal receiver validation unchanged"
+    },
+    "phase_caveat": "Host observation boundaries, not MCU event timestamps. Sampled queue is a lower bound; cumulative peak remains acceptance gate. Send counters refer to previous node. Retune is not visible on this wire.",
+    "pending_bytes": 0,
+    "tcp_fifo_headroom_measured": false,
+    "frame_kinds": {
+      "15": 12347,
+      "12": 5973,
+      "9": 18,
+      "5": 2,
+      "7": 4,
+      "3": 75188
+    },
+    "radio_playing_frame_kinds": {
+      "12": 5918,
+      "3": 63528
+    },
+    "sent_commands": {
+      "11:0": 1745,
+      "10": 14,
+      "4": 1,
+      "6": 2,
+      "8": 4,
+      "2": 16,
+      "11:1": 2,
+      "13": 4222,
+      "11:2": 2,
+      "11:3": 2
+    },
+    "radio_playing_sent_commands": {
+      "11:0": 1740,
+      "13": 4176,
+      "11:3": 2
+    },
+    "note": "Non-native target: host ACK/service diagnostics only; native MCU counter qualification unavailable.",
+    "native_counters_expected": false
+  },
+  "service_diagnostics": [
+    {
+      "calls": 131527,
+      "priming_calls": 1418,
+      "reasons": {
+        "no_source": 27132,
+        "no_status": 0,
+        "session_mismatch": 0,
+        "pending_timeout": 0,
+        "pending_control_ack": 17439,
+        "pending_chunk_ack": 746,
+        "credits": 33746,
+        "token": 224,
+        "target_full": 20064,
+        "pcm_pending": 29189,
+        "no_chunk": 0,
+        "priming_ack": 24,
+        "source_exhausted": 0,
+        "poll_wait": 0
+      },
+      "sends": {
+        "chunk": 4222,
+        "play": 2,
+        "query": 1745,
+        "begin": 2,
+        "stop": 2
+      },
+      "last_reason": "no_source",
+      "chunk_gaps": 4220,
+      "chunk_gap_last_ms": 7.385033997707069,
+      "chunk_gap_max_ms": 88.04624795448035,
+      "last_chunk_at": 968277.575245734,
+      "chunk_session": 3270546931
+    }
+  ],
+  "v20_snapshot_restore": {
+    "ok": true,
+    "sessions": [
+      {
+        "path": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v20/recovery_synth_singleclick_20261103/private_gui_sessions/session_20261103_033649_740503.json",
+        "ok": true,
+        "detail": {
+          "snapshot": {
+            "schema": 1,
+            "identity": {
+              "board_serial": "1060031107",
+              "app": "scope-v20-20261031-225916-main-1",
+              "firmware_sha256": "52f933bdb9c632544624e5d4188a740a9cdb429596bfe5a4d926900e7538aefe",
+              "relay_sha256": "bf6893f5a0fbab8676120a5decd8c6109698fa852be02333918b1d6e4a2a909d"
+            },
+            "adc_bits": 14,
+            "adc_period": 32,
+            "generator": {
+              "wave": 0,
+              "enabled": 0,
+              "mode": 0,
+              "frequency": 2500,
+              "final_frequency": 2500,
+              "low": 0,
+              "high": 4095,
+              "duration": 1000,
+              "duration_us": 0,
+              "duty": 50
+            }
+          },
+          "state": "closed",
+          "hardware_restored": true,
+          "errors": [],
+          "recovery": {
+            "seconds": 10.023960818070918,
+            "samples": 313344,
+            "dropped": 0,
+            "fatal": 0,
+            "continuous": true
+          },
+          "receiver_activity": {
+            "pid": 58775,
+            "mode": "user",
+            "active": true,
+            "released": true
+          }
+        }
+      }
+    ]
+  },
+  "diagnostics_complete": true,
+  "functional_ok": true,
+  "receipt_unchanged": true,
+  "activation_report_unchanged": true,
+  "identity_after": {
+    "board_serial": "1060031107",
+    "app": "scope-v20-20261031-225916-main-1",
+    "firmware_sha256": "52f933bdb9c632544624e5d4188a740a9cdb429596bfe5a4d926900e7538aefe",
+    "relay_sha256": "bf6893f5a0fbab8676120a5decd8c6109698fa852be02333918b1d6e4a2a909d"
+  },
+  "identity_unchanged": true
+}

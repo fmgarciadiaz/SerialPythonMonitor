@@ -1,0 +1,176 @@
+{
+  "private": true,
+  "promoted": false,
+  "public_rates_changed": false,
+  "physical_cases": [
+    {
+      "case": "burst4",
+      "errors": [],
+      "functional_pass": true,
+      "radio_seconds": 20.030451881000772,
+      "margin": 0.10429709611663007,
+      "peak": 3,
+      "slack": 75773,
+      "headroom_pass": true,
+      "restored": true,
+      "exposed_fraction": 1.0,
+      "irq_restored": null,
+      "private_host": null,
+      "last_observed_playing_seconds": 17.531487865024246,
+      "completed_hold_seconds": 20.030451881000772
+    },
+    {
+      "case": "burst4_60",
+      "errors": [
+        "radio status state=4 reason=2",
+        "Assertion failed: radio_stop_confirmed",
+        "Assertion failed: radio_hold_completed"
+      ],
+      "functional_pass": false,
+      "radio_seconds": 55.205107316956855,
+      "margin": 0.1043522281308239,
+      "peak": 4,
+      "slack": 77995,
+      "headroom_pass": false,
+      "restored": true,
+      "exposed_fraction": 1.0,
+      "irq_restored": null,
+      "private_host": null,
+      "last_observed_playing_seconds": 55.205107316956855,
+      "completed_hold_seconds": 0.0
+    },
+    {
+      "case": "control8",
+      "errors": [],
+      "functional_pass": true,
+      "radio_seconds": 20.017248951946385,
+      "margin": 0.10196296059041843,
+      "peak": 5,
+      "slack": 73969,
+      "headroom_pass": false,
+      "restored": true,
+      "exposed_fraction": 1.0,
+      "irq_restored": null,
+      "private_host": null,
+      "last_observed_playing_seconds": 17.65906171896495,
+      "completed_hold_seconds": 20.017248951946385
+    },
+    {
+      "case": "interval8_20",
+      "errors": [],
+      "functional_pass": true,
+      "radio_seconds": 20.044732729089446,
+      "margin": 0.1029868899945412,
+      "peak": 4,
+      "slack": 70182,
+      "headroom_pass": false,
+      "restored": true,
+      "exposed_fraction": 1.0,
+      "irq_restored": null,
+      "private_host": null,
+      "last_observed_playing_seconds": 17.50372920301743,
+      "completed_hold_seconds": 20.044732729089446
+    },
+    {
+      "case": "o2_burst4_20",
+      "errors": [],
+      "functional_pass": true,
+      "radio_seconds": 20.074543242924847,
+      "margin": 0.1113293667463181,
+      "peak": 4,
+      "slack": 75490,
+      "headroom_pass": false,
+      "restored": true,
+      "exposed_fraction": 1.0,
+      "irq_restored": null,
+      "private_host": "production inline ACK; descriptor chunk_burst=4",
+      "last_observed_playing_seconds": 17.341857596999034,
+      "completed_hold_seconds": 20.074543242924847
+    },
+    {
+      "case": "o2_startup4_interval8_20",
+      "errors": [],
+      "functional_pass": true,
+      "radio_seconds": 20.068763402989134,
+      "margin": 0.11494186701199194,
+      "peak": 4,
+      "slack": 82102,
+      "headroom_pass": false,
+      "restored": true,
+      "exposed_fraction": 1.0,
+      "irq_restored": null,
+      "private_host": "production inline ACK; descriptor chunk_burst=4; interval=8ms; startup only, PLAY restores burst8/6ms",
+      "last_observed_playing_seconds": 17.570372189977206,
+      "completed_hold_seconds": 20.068763402989134
+    },
+    {
+      "case": "spi_irq_cpu2_docker_20",
+      "errors": [],
+      "functional_pass": true,
+      "radio_seconds": 20.04467068403028,
+      "margin": 0.10358323427787486,
+      "peak": 4,
+      "slack": 72150,
+      "headroom_pass": false,
+      "restored": true,
+      "exposed_fraction": 1.0,
+      "irq_restored": true,
+      "private_host": null,
+      "last_observed_playing_seconds": 17.41988860303536,
+      "completed_hold_seconds": 20.04467068403028
+    },
+    {
+      "case": "startup4_interval8_20",
+      "errors": [],
+      "functional_pass": true,
+      "radio_seconds": 20.003751383977942,
+      "margin": 0.1037735907347358,
+      "peak": 4,
+      "slack": 75885,
+      "headroom_pass": false,
+      "restored": true,
+      "exposed_fraction": 1.0,
+      "irq_restored": null,
+      "private_host": null,
+      "last_observed_playing_seconds": 17.47960526298266,
+      "completed_hold_seconds": 20.003751383977942
+    }
+  ],
+  "host_firmware_source_sha256": {
+    "monitor/v19/app.py": "fcf0705615cb8731a83cba5621726b6d9d464f044607cbaebf046d9af6fa61d9",
+    "monitor/v19/radio_output.py": "6b063570beecb298971485626d0453933a89341953d472c67aa4c27cd7b4d310",
+    "monitor/v19/receiver/unoq_config_receiver.py": "d71d97dc38141f67715be0707f8299e87c43e6c67e2157c77d961e0fe1bb8b1e",
+    "arduino/v19/oscilloscope/sketch/sketch.ino": "9e6812548b773a8e3b09c84fdfbaf364d4e76f565229bc2e1a0ccc274ee65375",
+    "arduino/v19/relay/unoq_config_stream.c": "2b2277b13be7b0f51435a3ecbeccd407cb8eca7ca652299a5026516affe66659"
+  },
+  "observer_cost": {
+    "synthetic": true,
+    "physical_proof": false,
+    "results": [
+      {
+        "frames": 40000,
+        "wall_seconds": 0.4434021069901064,
+        "cpu_seconds": 0.44316399999999995,
+        "cpu_us_per_frame": 11.079099999999999,
+        "wall_us_per_frame": 11.08505267475266,
+        "estimated_cpu_fraction_at_5500_frames_per_second": 0.06093504999999999
+      },
+      {
+        "frames": 40000,
+        "wall_seconds": 0.44594042003154755,
+        "cpu_seconds": 0.44583699999999993,
+        "cpu_us_per_frame": 11.145924999999998,
+        "wall_us_per_frame": 11.148510500788689,
+        "estimated_cpu_fraction_at_5500_frames_per_second": 0.061302587499999985
+      },
+      {
+        "frames": 40000,
+        "wall_seconds": 0.43930757499765605,
+        "cpu_seconds": 0.4391800000000001,
+        "cpu_us_per_frame": 10.979500000000003,
+        "wall_us_per_frame": 10.982689374941401,
+        "estimated_cpu_fraction_at_5500_frames_per_second": 0.060387250000000024
+      }
+    ]
+  }
+}

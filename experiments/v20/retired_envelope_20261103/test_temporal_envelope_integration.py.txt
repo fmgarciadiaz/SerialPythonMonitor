@@ -1,0 +1,43 @@
+import os,time,unittest
+os.environ.setdefault('QT_QPA_PLATFORM','offscreen')
+import numpy as np
+from types import SimpleNamespace as NS
+from PySide6 import QtCore,QtWidgets
+import pyqtgraph as pg
+from monitor.v20.temporal_raster import TemporalRaster
+from monitor.v20.scope_cursors import ScopeCursors
+
+class EnvelopeIntegrationTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):cls.qt=QtWidgets.QApplication.instance() or QtWidgets.QApplication([])
+
+    def test_worker_keeps_raw_cursor_capture_and_zoom_restores_points(self):
+        owner=QtWidgets.QWidget();owner.plot_widget=pg.PlotWidget()
+        owner.plot_widget.setXRange(0,200000,padding=0);owner.plot_widget.setYRange(-2,2,padding=0)
+        owner.spectral=NS(mode=0);owner.serial_worker=None;owner.applied_configuration=None
+        owner.current_dt_us=1.;owner.trace_mode='Escalón';owner.trace_style_combo=NS(currentText=lambda:'Rápido')
+        owner.auto_gap_cut=True;owner.x_axis_time_mode=False;owner.h_scale=200000;owner.h_pos=0
+        owner.detail_slider=NS(value=lambda:100);owner.selected_columns={'CH1':True};owner.channel_colors={'CH1':'#ffe080'}
+        owner.radio_offset=NS(value=lambda:1.65);owner.radio_output_panel=NS(volume=NS(value=lambda:60))
+        owner.generator_mode=NS(currentIndex=lambda:0);owner.radio_output_rate=NS(currentData=lambda:40000)
+        owner.trigger_enabled=False;owner.trigger_source='CH1';owner.trigger_level=0.;owner.trigger_edge='Ascendente';owner.trigger_mode='Auto'
+        owner._radio_display_values=lambda name,values:values;owner.is_running=False
+        curve=pg.PlotDataItem();owner.plot_widget.addItem(curve);owner.line_items={'CH1':curve}
+        captured=[];owner.scope_cursors=NS(invalidate=lambda:None,update_frame=lambda *frame:captured.append(frame))
+        owner._set_connection_status=lambda text:None
+        raster=TemporalRaster(owner);x=np.arange(200000,dtype=float);y=np.sin(x*.01)
+        try:
+            self.assertTrue(raster.draw(x,{'CH1':y},['CH1']))
+            deadline=time.monotonic()+20
+            while not raster.published and time.monotonic()<deadline:
+                self.qt.processEvents();raster.poll();time.sleep(.005)
+            self.assertGreater(raster.published,0);self.assertTrue(raster.env_label.isVisible())
+            self.assertEqual(raster.env_label.acceptedMouseButtons(),QtCore.Qt.MouseButton.NoButton)
+            raw=captured[-1];self.assertEqual(len(raw[0]),len(x));np.testing.assert_array_equal(raw[1]['CH1'],y)
+            reader=NS(frame=raw,channels=[NS(currentText=lambda:'CH1')],temporal=lambda:True,owner=owner)
+            xp,yp=ScopeCursors.sample(reader,0,12345.1)
+            self.assertEqual(xp,12345);self.assertEqual(yp,y[12345])
+            owner.plot_widget.setXRange(12300,12400,padding=0)
+            self.assertFalse(raster.draw(x,{'CH1':y},['CH1']))
+            self.assertFalse(raster.envelope_active);self.assertFalse(raster.env_label.isVisible())
+        finally:raster.close();owner.plot_widget.close();owner.close()

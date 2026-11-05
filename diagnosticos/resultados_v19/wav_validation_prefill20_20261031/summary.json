@@ -1,0 +1,293 @@
+{
+  "private": true,
+  "promoted": false,
+  "play_burst": 8,
+  "prefill": "1 block / 8ms",
+  "gui": {
+    "ok": true,
+    "errors": [],
+    "assertions": {
+      "radio_playing_40k": true,
+      "radio_stop_confirmed": true,
+      "radio_progress": true,
+      "radio_hold_completed": true,
+      "scan_completed": true,
+      "wav_playing": true,
+      "wav_progress": true,
+      "wav_stop_confirmed": true,
+      "fm_playing": true,
+      "fm_progress": true,
+      "fm_stop_confirmed": true,
+      "shutdown_confirmed": true,
+      "worker_released": true
+    },
+    "visible_gui_ok": true,
+    "profile_ok": true,
+    "fft_ok": true,
+    "exposed_fraction": 1.0,
+    "paint_events": 578,
+    "radio_hold_seconds": 20.025721044978127,
+    "radio_played_samples": 800640,
+    "headroom_pass": false
+  },
+  "playing": {
+    "frames": 42728,
+    "samples": 37258816,
+    "empty_status_frames": 710,
+    "send_nodes": 10682,
+    "mean_send_margin": 0.10580602697352681,
+    "mcu_queue_peak": 4,
+    "min_slack_ticks": 80627,
+    "sampled_queue_max": 4,
+    "send_ticks_max": 604954,
+    "send_over_budget_nodes": 1047,
+    "headroom_pass": false
+  },
+  "costs": {
+    "phase": "playing",
+    "timing_batches_observed": 22738,
+    "stable_timing_batches": 22736,
+    "stable_fraction_of_timing_observations": 0.9999120415164042,
+    "physical_batches_observed": 22737,
+    "prepare": {
+      "count": 22736,
+      "mean_us": 146.23588142153412,
+      "max_us": 530,
+      "zero_count": 0
+    },
+    "check": {
+      "count": 22736,
+      "mean_us": 68.52155172413794,
+      "max_us": 357,
+      "zero_count": 0
+    },
+    "nominal_wire_us_per_batch_at_40MHz": 396.8,
+    "partial_nominal_us_per_covered_batch": 611.5574331456721,
+    "service_mean_us_per_node": 1676.4348606300318,
+    "service_budget_us_per_node": 1874.8,
+    "caveat": "Partial batch cost is not CPU utilization or total cycle duration. Node service has a different denominator. Phase boundaries are host observations; physical and timing phase counts can differ at boundaries."
+  },
+  "restoration": {
+    "ok": true,
+    "attempted": true,
+    "errors": [],
+    "material": {
+      "sources_exact": true,
+      "cache_exact": true,
+      "firmware_exact": true,
+      "relay_exact": true
+    },
+    "recovery": {
+      "snapshot_equal": true,
+      "continuous": true,
+      "integrity_ok": true,
+      "seconds": 10.0235166689381,
+      "detail": {
+        "hardware_restored": true,
+        "errors": [],
+        "recovery": {
+          "seconds": 10.0235166689381,
+          "samples": 313344,
+          "dropped": 0,
+          "fatal": 0,
+          "continuous": true
+        }
+      }
+    },
+    "final": {
+      "identity_equal": true,
+      "sources_exact": true,
+      "relay_configuration_equal": true,
+      "cpu_equal": true
+    }
+  },
+  "peak_increases": [
+    {
+      "kind": "cumulative_peak",
+      "phase": "stopped",
+      "previous_peak": null,
+      "snapshot": {
+        "epoch": "1",
+        "node": 0,
+        "index": 0,
+        "queue": 0,
+        "queue_peak": 0,
+        "slack_min_ticks": 4294967295,
+        "copy_max_ticks": 0,
+        "poll_max_ticks": 60,
+        "previous_node_send_ticks": 0,
+        "previous_batch_prepare_us": 111,
+        "previous_batch_check_us": 58,
+        "previous_batch_origin": "unknown"
+      },
+      "host_observed_at": 874044.910932259,
+      "recent_chunks": []
+    },
+    {
+      "kind": "cumulative_peak",
+      "phase": "stopped",
+      "previous_peak": 0,
+      "snapshot": {
+        "epoch": "1",
+        "node": 0,
+        "index": 0,
+        "queue": 1,
+        "queue_peak": 1,
+        "slack_min_ticks": 212458,
+        "copy_max_ticks": 38343,
+        "poll_max_ticks": 175873,
+        "previous_node_send_ticks": 0,
+        "previous_batch_prepare_us": 108,
+        "previous_batch_check_us": 59,
+        "previous_batch_origin": "same_epoch_profile"
+      },
+      "host_observed_at": 874044.913383158,
+      "recent_chunks": []
+    },
+    {
+      "kind": "cumulative_peak",
+      "phase": "stopped",
+      "previous_peak": 1,
+      "snapshot": {
+        "epoch": "1",
+        "node": 2,
+        "index": 6976,
+        "queue": 1,
+        "queue_peak": 2,
+        "slack_min_ticks": 129112,
+        "copy_max_ticks": 38343,
+        "poll_max_ticks": 208951,
+        "previous_node_send_ticks": 243519,
+        "previous_batch_prepare_us": 111,
+        "previous_batch_check_us": 59,
+        "previous_batch_origin": "same_epoch_profile"
+      },
+      "host_observed_at": 874044.917187169,
+      "recent_chunks": []
+    },
+    {
+      "kind": "cumulative_peak",
+      "phase": "playing",
+      "previous_peak": 2,
+      "snapshot": {
+        "epoch": "1",
+        "node": 0,
+        "index": 0,
+        "queue": 3,
+        "queue_peak": 3,
+        "slack_min_ticks": 85513,
+        "copy_max_ticks": 39778,
+        "poll_max_ticks": 214175,
+        "previous_node_send_ticks": 391956,
+        "previous_batch_prepare_us": 111,
+        "previous_batch_check_us": 59,
+        "previous_batch_origin": "same_epoch_profile"
+      },
+      "host_observed_at": 874050.407353544,
+      "recent_chunks": [
+        {
+          "sent_at": 874050.320016291,
+          "phase": "preparing",
+          "request_id": 2575612626
+        },
+        {
+          "sent_at": 874050.329109559,
+          "phase": "preparing",
+          "request_id": 2575612627
+        },
+        {
+          "sent_at": 874050.338404821,
+          "phase": "preparing",
+          "request_id": 2575612628
+        },
+        {
+          "sent_at": 874050.347204026,
+          "phase": "preparing",
+          "request_id": 2575612629
+        },
+        {
+          "sent_at": 874050.397136136,
+          "phase": "playing",
+          "request_id": 2575612633
+        },
+        {
+          "sent_at": 874050.397194857,
+          "phase": "playing",
+          "request_id": 2575612634
+        },
+        {
+          "sent_at": 874050.397249007,
+          "phase": "playing",
+          "request_id": 2575612635
+        },
+        {
+          "sent_at": 874050.402641257,
+          "phase": "playing",
+          "request_id": 2575612636
+        }
+      ]
+    },
+    {
+      "kind": "cumulative_peak",
+      "phase": "playing",
+      "previous_peak": 3,
+      "snapshot": {
+        "epoch": "1",
+        "node": 0,
+        "index": 0,
+        "queue": 4,
+        "queue_peak": 4,
+        "slack_min_ticks": 85057,
+        "copy_max_ticks": 40128,
+        "poll_max_ticks": 224200,
+        "previous_node_send_ticks": 308207,
+        "previous_batch_prepare_us": 110,
+        "previous_batch_check_us": 318,
+        "previous_batch_origin": "same_epoch_profile"
+      },
+      "host_observed_at": 874055.955869076,
+      "recent_chunks": [
+        {
+          "sent_at": 874055.889411956,
+          "phase": "playing",
+          "request_id": 2575613193
+        },
+        {
+          "sent_at": 874055.889464173,
+          "phase": "playing",
+          "request_id": 2575613194
+        },
+        {
+          "sent_at": 874055.894825477,
+          "phase": "playing",
+          "request_id": 2575613195
+        },
+        {
+          "sent_at": 874055.942655636,
+          "phase": "playing",
+          "request_id": 2575613197
+        },
+        {
+          "sent_at": 874055.942717019,
+          "phase": "playing",
+          "request_id": 2575613198
+        },
+        {
+          "sent_at": 874055.942772087,
+          "phase": "playing",
+          "request_id": 2575613199
+        },
+        {
+          "sent_at": 874055.942824043,
+          "phase": "playing",
+          "request_id": 2575613200
+        },
+        {
+          "sent_at": 874055.949581025,
+          "phase": "playing",
+          "request_id": 2575613201
+        }
+      ]
+    }
+  ]
+}

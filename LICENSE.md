@@ -46,7 +46,7 @@ Los componentes y materiales de terceros conservan sus derechos y condiciones
 originales. Esta licencia no limita derechos otorgados por esas otras licencias
 ni concede permisos que sus titulares no hayan otorgado. Antes de redistribuir
 el conjunto deben comprobarse todas las condiciones aplicables, incluida la
-licencia de PyQt. Consultar [avisos de terceros](licencias/TERCEROS.md).
+condiciones de Qt for Python. Consultar [avisos de terceros](licencias/TERCEROS.md).
 
 ## 6. Garantía y responsabilidad
 

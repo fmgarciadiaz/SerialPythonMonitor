@@ -1,0 +1,885 @@
+{
+  "error": "FlowLimitExceeded: RF pendiente atrasado: presupuesto excedido (segundos 1.00028/1); adquisici\u00f3n detenida sin descartar datos.",
+  "monotonic": 814464.278184434,
+  "bits": 10,
+  "rate": 1355932,
+  "pending_gui": 0,
+  "pending_gui_peak": 8,
+  "pending_dsp": 0,
+  "pending_dsp_peak": 4,
+  "retained_samples": 0,
+  "retained_seconds": 4.3021142204224816e-16,
+  "retained_bytes": 0,
+  "retained_batches": 0,
+  "delivery_limits": {
+    "samples": 1600000,
+    "seconds": 1.0,
+    "bytes": 67108864,
+    "batches": 256
+  },
+  "delivery_peaks": {
+    "samples": 919773,
+    "seconds": 0.6783325875000005,
+    "bytes": 26621932,
+    "batches": 8
+  },
+  "rf_pending_samples": 0,
+  "radio_enabled": true,
+  "receiver_failure_snapshot": {
+    "error": "RF pendiente atrasado: presupuesto excedido (segundos 1.00028/1); adquisici\u00f3n detenida sin descartar datos.",
+    "monotonic_s": 814463.366973027,
+    "wall_time_s": 1793243654.602346,
+    "retained_batches": [
+      {
+        "id": 11547,
+        "duration_s": 0.558333225
+      },
+      {
+        "id": 11548,
+        "duration_s": 0.0399997875
+      },
+      {
+        "id": 11549,
+        "duration_s": 0.0399997875
+      },
+      {
+        "id": 11550,
+        "duration_s": 0.0399997875
+      }
+    ],
+    "retained_duration_s": 0.6783325875,
+    "buffered_samples": 436545,
+    "buffered_chunks": 628,
+    "buffered_duration_s": 0.3219519375,
+    "pending_duration_s": 1.000284525,
+    "actual_rate": 1355932.2033898304,
+    "bits": 10,
+    "last_credit_monotonic_s": 814463.148577286,
+    "last_credit_age_s": 0.21839574095793068,
+    "limit_details": {
+      "scope": "RF pendiente",
+      "current": {
+        "seconds": 0.999771225
+      },
+      "projected": {
+        "seconds": 1.000284525
+      },
+      "limits": {
+        "seconds": 1.0
+      },
+      "exceeded": [
+        "seconds"
+      ],
+      "peaks": {},
+      "context": {
+        "bits": 10,
+        "channels": 1,
+        "actual_rate": 1355932.2033898304,
+        "generation": 10,
+        "buffered_samples_before": 435849,
+        "buffered_samples": 436545
+      }
+    },
+    "pcm_transport": {
+      "pending": null,
+      "pending_age_ms": null,
+      "cached_samples": 0,
+      "roundtrip_max_ms": 432.7703790040687,
+      "stage_max_ms": {
+        "request_to_parent": 432.10745498072356,
+        "executor_wait": 18.880133982747793,
+        "render": 37.16869396157563,
+        "reply_to_child": 32.12460002396256
+      },
+      "last_reply_timing": {
+        "offset": 4515360,
+        "accepted_at": 814461.882467826,
+        "request_to_parent": 432.10745498072356,
+        "executor_wait": 0.16130495350807905,
+        "render": 0.11790008284151554,
+        "reply_to_child": 0.3837189869955182
+      },
+      "delivery_max_ms": {
+        "socket_send": 0.6897230632603168,
+        "send_to_ack": 94.9527129996568,
+        "chunk_generation": 0.039804959669709206,
+        "decode": 24.95760505553335
+      },
+      "slow_delivery": [
+        {
+          "stage": "send_to_ack",
+          "ms": 29.952651006169617,
+          "observed_at": 814370.10844339
+        },
+        {
+          "stage": "send_to_ack",
+          "ms": 28.025217936374247,
+          "observed_at": 814370.110598544
+        },
+        {
+          "stage": "send_to_ack",
+          "ms": 27.607271098531783,
+          "observed_at": 814370.111002018
+        },
+        {
+          "stage": "decode",
+          "ms": 24.95760505553335,
+          "observed_at": 814375.08663501
+        },
+        {
+          "stage": "send_to_ack",
+          "ms": 24.855324998497963,
+          "observed_at": 814375.115657487
+        },
+        {
+          "stage": "send_to_ack",
+          "ms": 31.36948007158935,
+          "observed_at": 814375.383097852
+        },
+        {
+          "stage": "send_to_ack",
+          "ms": 39.631473016925156,
+          "observed_at": 814375.39642781
+        },
+        {
+          "stage": "send_to_ack",
+          "ms": 26.523474953137338,
+          "observed_at": 814375.422975477
+        },
+        {
+          "stage": "send_to_ack",
+          "ms": 41.45885701291263,
+          "observed_at": 814379.960946095
+        },
+        {
+          "stage": "send_to_ack",
+          "ms": 31.043978058733046,
+          "observed_at": 814380.007993675
+        },
+        {
+          "stage": "send_to_ack",
+          "ms": 25.10697895195335,
+          "observed_at": 814383.915544779
+        },
+        {
+          "stage": "send_to_ack",
+          "ms": 20.449476898647845,
+          "observed_at": 814392.088877593
+        },
+        {
+          "stage": "send_to_ack",
+          "ms": 20.460168016143143,
+          "observed_at": 814392.088986219
+        },
+        {
+          "stage": "send_to_ack",
+          "ms": 20.756722893565893,
+          "observed_at": 814392.089409673
+        },
+        {
+          "stage": "send_to_ack",
+          "ms": 41.14801902323961,
+          "observed_at": 814392.735180388
+        },
+        {
+          "stage": "send_to_ack",
+          "ms": 41.45438899286091,
+          "observed_at": 814392.735622163
+        }
+      ]
+    }
+  },
+  "gui_thread_stack_at_notification": [
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v19/app.py\", line 6995, in <module>\n    main()\n",
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v19/app.py\", line 6991, in main\n    sys.exit(app.exec())\n",
+    "  File \"/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/lib/python3.13/site-packages/pyqtgraph/widgets/GraphicsView.py\", line 138, in paintEvent\n    return super().paintEvent(ev)\n",
+    "  File \"/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/lib/python3.13/site-packages/pyqtgraph/debug.py\", line 117, in w\n    func(*args, **kwds)\n",
+    "  File \"/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/lib/python3.13/site-packages/pyqtgraph/graphicsItems/PlotCurveItem.py\", line 1018, in paint\n    p.drawPath(self.getPath())\n",
+    "  File \"/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/lib/python3.13/site-packages/pyqtgraph/graphicsItems/PlotCurveItem.py\", line 739, in getPath\n    self.path = self.generatePath(*self.getData())\n",
+    "  File \"/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/lib/python3.13/site-packages/pyqtgraph/graphicsItems/PlotCurveItem.py\", line 726, in generatePath\n    return fn.arrayToQPath(\n",
+    "  File \"/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/lib/python3.13/site-packages/pyqtgraph/functions.py\", line 2090, in arrayToQPath\n    isfinite = np.isfinite(x) & np.isfinite(y)\n"
+  ],
+  "gui_thread_stack_at_failure": [
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v19/app.py\", line 6995, in <module>\n    main()\n",
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v19/app.py\", line 6991, in main\n    sys.exit(app.exec())\n",
+    "  File \"/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/lib/python3.13/site-packages/pyqtgraph/widgets/GraphicsView.py\", line 138, in paintEvent\n    return super().paintEvent(ev)\n",
+    "  File \"/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/lib/python3.13/site-packages/pyqtgraph/debug.py\", line 117, in w\n    func(*args, **kwds)\n",
+    "  File \"/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/lib/python3.13/site-packages/pyqtgraph/graphicsItems/PlotCurveItem.py\", line 1018, in paint\n    p.drawPath(self.getPath())\n",
+    "  File \"/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/lib/python3.13/site-packages/pyqtgraph/graphicsItems/PlotCurveItem.py\", line 739, in getPath\n    self.path = self.generatePath(*self.getData())\n",
+    "  File \"/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/lib/python3.13/site-packages/pyqtgraph/graphicsItems/PlotCurveItem.py\", line 726, in generatePath\n    return fn.arrayToQPath(\n",
+    "  File \"/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/lib/python3.13/site-packages/pyqtgraph/functions.py\", line 2090, in arrayToQPath\n    isfinite = np.isfinite(x) & np.isfinite(y)\n"
+  ],
+  "time": "2026-10-29T00:14:16.126180",
+  "radio_playing": true,
+  "us": true,
+  "scan_pending": false,
+  "multiscan_active": false,
+  "scan_status": "US \u00b7 RF 710.44 \u00b7 alias 645.492 kHz \u00b7 RADIO 40 kHz \u00b7 4587117 muestras",
+  "a0_active": false,
+  "analysis_mode": 0,
+  "fft_mode": "Spectre",
+  "fft_size": "16384",
+  "heatmap_size": "16384",
+  "filter_source": "OFF",
+  "gui_delay_max_ms": 801.1072600493208,
+  "window_visible": true,
+  "window_minimized": false,
+  "wav_path": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/audios/vivaldi.wav",
+  "wav_rate": 40000,
+  "wav_preparing": false,
+  "wav_active": false,
+  "wav_dialog_open": false,
+  "slow_gui_callbacks": [
+    [
+      "render_frame",
+      814450.101912843,
+      20.17741894815117
+    ],
+    [
+      "render_frame",
+      814450.161360409,
+      25.520366965793073
+    ],
+    [
+      "render_frame",
+      814450.268923624,
+      22.51792897004634
+    ],
+    [
+      "render_frame",
+      814450.414157439,
+      27.42897195275873
+    ],
+    [
+      "render_frame",
+      814450.527904873,
+      21.27762697637081
+    ],
+    [
+      "render_frame",
+      814450.641284758,
+      23.029169999063015
+    ],
+    [
+      "render_frame",
+      814450.781744862,
+      24.56341707147658
+    ],
+    [
+      "render_frame",
+      814450.890272537,
+      25.01938701607287
+    ],
+    [
+      "render_frame",
+      814451.002540152,
+      27.709878981113434
+    ],
+    [
+      "render_frame",
+      814451.378138489,
+      26.485693990252912
+    ],
+    [
+      "render_frame",
+      814451.434197063,
+      22.961809998378158
+    ],
+    [
+      "render_frame",
+      814451.573479758,
+      26.801353902556002
+    ],
+    [
+      "render_frame",
+      814451.661046625,
+      20.038216025568545
+    ],
+    [
+      "render_frame",
+      814451.754145958,
+      20.691207027994096
+    ],
+    [
+      "render_frame",
+      814451.80654803,
+      20.848030922934413
+    ],
+    [
+      "render_frame",
+      814451.904060072,
+      22.508007008582354
+    ],
+    [
+      "render_frame",
+      814451.95963718,
+      20.59654099866748
+    ],
+    [
+      "render_frame",
+      814452.012051925,
+      28.228821931406856
+    ],
+    [
+      "render_frame",
+      814452.123086032,
+      20.354142994619906
+    ],
+    [
+      "render_frame",
+      814452.243437013,
+      24.211662937887013
+    ],
+    [
+      "render_frame",
+      814452.363040846,
+      20.119216991588473
+    ],
+    [
+      "render_frame",
+      814452.467147361,
+      20.88968502357602
+    ],
+    [
+      "render_frame",
+      814452.575427925,
+      28.060109936632216
+    ],
+    [
+      "render_frame",
+      814452.67413227,
+      20.224206964485347
+    ],
+    [
+      "render_frame",
+      814452.796119813,
+      23.293096921406686
+    ],
+    [
+      "render_frame",
+      814452.902708199,
+      27.64204202685505
+    ],
+    [
+      "render_frame",
+      814453.008744233,
+      21.871989010833204
+    ],
+    [
+      "render_frame",
+      814453.124476779,
+      23.08557601645589
+    ],
+    [
+      "render_frame",
+      814453.270145622,
+      24.03982006944716
+    ],
+    [
+      "render_frame",
+      814453.467312515,
+      30.247163027524948
+    ],
+    [
+      "render_frame",
+      814453.591437154,
+      26.119088986888528
+    ],
+    [
+      "render_frame",
+      814453.724607759,
+      25.00919799786061
+    ],
+    [
+      "render_frame",
+      814453.85006581,
+      26.468637981452048
+    ],
+    [
+      "render_frame",
+      814453.967474233,
+      21.05656499043107
+    ],
+    [
+      "render_frame",
+      814454.106997481,
+      22.083051037043333
+    ],
+    [
+      "render_frame",
+      814454.168846567,
+      21.897010039538145
+    ],
+    [
+      "render_frame",
+      814454.233476854,
+      28.334142989479005
+    ],
+    [
+      "render_frame",
+      814454.342578582,
+      20.999473985284567
+    ],
+    [
+      "render_frame",
+      814454.459236287,
+      24.99842189718038
+    ],
+    [
+      "render_frame",
+      814454.519257864,
+      20.725807989947498
+    ],
+    [
+      "render_frame",
+      814454.585522957,
+      25.33967001363635
+    ],
+    [
+      "render_frame",
+      814454.640405312,
+      22.764254943467677
+    ],
+    [
+      "render_frame",
+      814454.769844919,
+      21.929121925495565
+    ],
+    [
+      "render_frame",
+      814454.82929011,
+      23.424927960149944
+    ],
+    [
+      "render_frame",
+      814454.892283972,
+      23.841558024287224
+    ],
+    [
+      "render_frame",
+      814454.95942343,
+      30.440201982855797
+    ],
+    [
+      "render_frame",
+      814455.015903303,
+      20.418916014023125
+    ],
+    [
+      "render_frame",
+      814455.070859685,
+      22.05761894583702
+    ],
+    [
+      "render_frame",
+      814455.177315495,
+      21.395076997578144
+    ],
+    [
+      "render_frame",
+      814455.343570048,
+      28.405633056536317
+    ],
+    [
+      "render_frame",
+      814455.411716276,
+      21.15239098202437
+    ],
+    [
+      "render_frame",
+      814455.485870787,
+      29.877456021495163
+    ],
+    [
+      "render_frame",
+      814455.583234422,
+      26.350648025982082
+    ],
+    [
+      "render_frame",
+      814455.64875283,
+      23.03564897738397
+    ],
+    [
+      "render_frame",
+      814455.730354675,
+      21.52653003577143
+    ],
+    [
+      "render_frame",
+      814455.805338652,
+      25.173712987452745
+    ],
+    [
+      "render_frame",
+      814455.861318736,
+      25.78438096679747
+    ],
+    [
+      "render_frame",
+      814455.98446498,
+      21.00751001853496
+    ],
+    [
+      "render_frame",
+      814456.10963514,
+      21.40229195356369
+    ],
+    [
+      "render_frame",
+      814456.167662955,
+      20.70879703387618
+    ],
+    [
+      "render_frame",
+      814456.243510435,
+      29.26227997522801
+    ],
+    [
+      "render_frame",
+      814456.304500124,
+      22.38929201848805
+    ],
+    [
+      "render_frame",
+      814456.378540805,
+      28.90651603229344
+    ],
+    [
+      "render_frame",
+      814456.522065894,
+      27.742021018639207
+    ],
+    [
+      "render_frame",
+      814456.647903668,
+      29.594141989946365
+    ],
+    [
+      "render_frame",
+      814456.795351979,
+      28.901329962536693
+    ],
+    [
+      "render_frame",
+      814456.858384869,
+      21.518374094739556
+    ],
+    [
+      "render_frame",
+      814456.926065608,
+      30.918534961529076
+    ],
+    [
+      "render_frame",
+      814456.995801214,
+      21.167074097320437
+    ],
+    [
+      "render_frame",
+      814457.054846683,
+      24.636036017909646
+    ],
+    [
+      "render_frame",
+      814457.121590621,
+      23.276238003745675
+    ],
+    [
+      "render_frame",
+      814457.203401701,
+      24.9260839773342
+    ],
+    [
+      "render_frame",
+      814457.27146231,
+      25.806113029830158
+    ],
+    [
+      "render_frame",
+      814457.335916704,
+      29.05421401374042
+    ],
+    [
+      "render_frame",
+      814457.4862537,
+      26.639205985702574
+    ],
+    [
+      "render_frame",
+      814457.546210833,
+      22.836258984170854
+    ],
+    [
+      "render_frame",
+      814457.619610355,
+      20.288226078264415
+    ],
+    [
+      "render_frame",
+      814457.680731674,
+      25.536656961776316
+    ],
+    [
+      "render_frame",
+      814457.770339725,
+      28.586160973645747
+    ],
+    [
+      "render_frame",
+      814457.830608563,
+      24.930383078753948
+    ],
+    [
+      "render_frame",
+      814457.921251223,
+      27.249868027865887
+    ],
+    [
+      "render_frame",
+      814458.042361081,
+      21.48777397815138
+    ],
+    [
+      "render_frame",
+      814458.168617482,
+      28.070209082216024
+    ],
+    [
+      "render_frame",
+      814458.232637153,
+      23.25904695317149
+    ],
+    [
+      "render_frame",
+      814458.304074111,
+      31.177681987173855
+    ],
+    [
+      "render_frame",
+      814458.434502855,
+      27.103762957267463
+    ],
+    [
+      "render_frame",
+      814458.50545227,
+      21.725660073570907
+    ],
+    [
+      "render_frame",
+      814458.633540421,
+      23.51815695874393
+    ],
+    [
+      "render_frame",
+      814458.695993637,
+      21.74467802979052
+    ],
+    [
+      "render_frame",
+      814458.786033977,
+      25.501071009784937
+    ],
+    [
+      "render_frame",
+      814458.846439118,
+      20.789508009329438
+    ],
+    [
+      "render_frame",
+      814458.91429224,
+      27.702332008630037
+    ],
+    [
+      "render_frame",
+      814458.980135129,
+      25.55098000448197
+    ],
+    [
+      "render_frame",
+      814459.048865562,
+      23.963946965523064
+    ],
+    [
+      "render_frame",
+      814459.115518238,
+      23.665927001275122
+    ],
+    [
+      "render_frame",
+      814459.180053168,
+      26.42900205682963
+    ],
+    [
+      "render_frame",
+      814459.315360109,
+      21.341338055208325
+    ],
+    [
+      "render_frame",
+      814459.385962051,
+      28.75796495936811
+    ],
+    [
+      "render_frame",
+      814459.463406534,
+      29.278284055180848
+    ],
+    [
+      "render_frame",
+      814459.540280927,
+      24.71897192299366
+    ],
+    [
+      "render_frame",
+      814459.631539104,
+      34.285368979908526
+    ],
+    [
+      "render_frame",
+      814459.707516716,
+      28.062138007953763
+    ],
+    [
+      "render_frame",
+      814459.770889222,
+      23.064546985551715
+    ],
+    [
+      "render_frame",
+      814459.837389683,
+      23.280170978978276
+    ],
+    [
+      "render_frame",
+      814459.921718294,
+      23.00282195210457
+    ],
+    [
+      "render_frame",
+      814459.994383612,
+      25.78932698816061
+    ],
+    [
+      "render_frame",
+      814460.06327843,
+      23.45691609662026
+    ],
+    [
+      "render_frame",
+      814460.131577332,
+      23.582410998642445
+    ],
+    [
+      "render_frame",
+      814460.201960309,
+      25.23112006019801
+    ],
+    [
+      "render_frame",
+      814460.271627967,
+      25.23181797005236
+    ],
+    [
+      "render_frame",
+      814460.353762722,
+      23.41763093136251
+    ],
+    [
+      "render_frame",
+      814460.42575476,
+      28.20393699221313
+    ],
+    [
+      "render_frame",
+      814460.491321129,
+      25.480862008407712
+    ],
+    [
+      "render_frame",
+      814460.558301313,
+      24.32833192870021
+    ],
+    [
+      "render_frame",
+      814460.642607523,
+      20.257677068002522
+    ],
+    [
+      "render_frame",
+      814460.798888639,
+      28.72833504807204
+    ],
+    [
+      "render_frame",
+      814460.877345671,
+      25.17676493152976
+    ],
+    [
+      "render_frame",
+      814460.941172284,
+      23.291150922887027
+    ],
+    [
+      "render_frame",
+      814461.006925342,
+      20.84983210079372
+    ],
+    [
+      "render_frame",
+      814461.08064861,
+      24.522942025214434
+    ],
+    [
+      "render_frame",
+      814461.148758533,
+      20.978508051484823
+    ],
+    [
+      "render_frame",
+      814461.21733378,
+      24.697597953490913
+    ],
+    [
+      "render_frame",
+      814461.33984696,
+      25.87340702302754
+    ],
+    [
+      "render_frame",
+      814462.050250334,
+      65.03849802538753
+    ],
+    [
+      "render_frame",
+      814462.595849094,
+      45.90978205669671
+    ],
+    [
+      "render_frame",
+      814463.216561634,
+      81.30688103847206
+    ],
+    [
+      "render_frame",
+      814463.816898672,
+      34.89215101581067
+    ],
+    [
+      "render_frame",
+      814464.372162085,
+      48.15618903376162
+    ]
+  ],
+  "selected_columns": {
+    "CH1": true,
+    "CH2": false,
+    "FILTER": false,
+    "RADIO": true
+  },
+  "horizontal_samples": 723797,
+  "trigger_enabled": false,
+  "trigger_source": "CH1",
+  "detail": 100,
+  "trace_style": "Suave"
+}

@@ -1,0 +1,14 @@
+{
+  "finding": "QThread finished without error left GUI connecting and stale serial_worker; reproduced offline before patch",
+  "before": "1 test FAILED in 3.597s: serial_worker remains non-None after thread exits",
+  "after": "3 retry tests PASS in 1.898s; earlier combined retry/discovery/startup-death 6 PASS in 4.277s",
+  "change": "current QThread.finished triggers asynchronous disconnect cleanup; obsolete sender ignored; missing shutdown confirmation remains false",
+  "hardware_operated": false,
+  "hardware_lock_bug_demonstrated": false,
+  "limitations": "Does not identify cause of original setup failure or fix live child stalled importing; no timeout changes",
+  "backup": "respaldos/host/v20_before_connection_retry_20261104/manifest.json",
+  "sha256": {
+    "monitor/v20/app.py": "66db9245bfcf56ac5b031d639be12338b2e7f6022dd6257910b0eaa3d18d51c2",
+    "tests/v20/test_connection_retry.py": "5a1cc9c6d254e6f8342097ebe7dbdd6e4ae62b3f5efed81e54fb394d16c5d39d"
+  }
+}

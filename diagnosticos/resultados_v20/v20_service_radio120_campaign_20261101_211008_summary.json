@@ -1,0 +1,447 @@
+{
+  "schema": 1,
+  "version": 20,
+  "private": true,
+  "promoted": false,
+  "public_rates_changed": false,
+  "recorded_at": "2026-11-02T00:19:29.754083+00:00",
+  "campaign": "Three independent RADIO/A0 120-second runs on active working V20",
+  "operator": "Sol, sole Q owner for this campaign; root did not operate Q",
+  "requested": {
+    "runs": 3,
+    "hold_seconds": 120,
+    "bits": 8,
+    "rate": 1860465,
+    "a0_rate": 40000,
+    "fft_size": 16384,
+    "frequency_khz": 710,
+    "wav": false,
+    "synth": false,
+    "scan": false
+  },
+  "ok": true,
+  "cases": [
+    {
+      "run": 1,
+      "report": "diagnosticos/resultados_v20/v20_service_radio120_campaign_20261101_211008_r1/report.json",
+      "report_sha256": "fadc077dd9143e41d123442f4cdab143a701c43e389a1bf3fd300a132fff0c71",
+      "ok": true,
+      "functional_ok": true,
+      "diagnostics_complete": true,
+      "hold_seconds": 120.0461985639995,
+      "identity_unchanged": true,
+      "receipt_unchanged": true,
+      "activation_report_unchanged": true,
+      "exposure": {
+        "periodic_samples": 26,
+        "exposed_fraction": 0.0,
+        "exposure_sufficient": false,
+        "note": "Exposure only; no visible FPS or analog acceptance inferred."
+      },
+      "ack": {
+        "matched": 10025,
+        "decoded": 10025,
+        "raw_max_ms": 34.81953602749854,
+        "raw_mean_ms": 5.114635667006516,
+        "decode_max_ms": 12.017225963063538,
+        "pending_sends": 0,
+        "pending_decode": 0,
+        "omitted": 0
+      },
+      "service_diagnostics": [
+        {
+          "calls": 285542,
+          "priming_calls": 654,
+          "reasons": {
+            "no_source": 34651,
+            "no_status": 0,
+            "session_mismatch": 0,
+            "pending_timeout": 0,
+            "pending_control_ack": 16675,
+            "pending_chunk_ack": 0,
+            "credits": 221278,
+            "token": 67,
+            "target_full": 0,
+            "pcm_pending": 9411,
+            "no_chunk": 0,
+            "priming_ack": 7,
+            "source_exhausted": 0,
+            "poll_wait": 0
+          },
+          "sends": {
+            "chunk": 10025,
+            "play": 1,
+            "query": 2177,
+            "begin": 1,
+            "stop": 1
+          },
+          "last_reason": "no_source",
+          "chunk_gaps": 10024,
+          "chunk_gap_last_ms": 0.06479804869741201,
+          "chunk_gap_max_ms": 136.65417197626084,
+          "last_chunk_at": 921396.405054743,
+          "chunk_session": 3483684959
+        }
+      ],
+      "radio_transport": {
+        "frames": 255998,
+        "samples": 223230256,
+        "empty_status_frames": 4176,
+        "send_nodes": 63999,
+        "mean_send_margin": 0.12194515699616582,
+        "mcu_queue_peak": 5,
+        "min_slack_ticks": 73987,
+        "sampled_queue_max": 5,
+        "send_ticks_max": 757152,
+        "send_over_budget_nodes": 6163,
+        "headroom_pass": false
+      },
+      "whole_acquisition_transport": {
+        "frames": 277396,
+        "samples": 241889312,
+        "empty_status_frames": 4211,
+        "send_nodes": 69348,
+        "mean_send_margin": 0.1271263109040912,
+        "mcu_queue_peak": 5,
+        "min_slack_ticks": 73987,
+        "sampled_queue_max": 5,
+        "send_ticks_max": 757152,
+        "send_over_budget_nodes": 6208,
+        "headroom_pass": false
+      },
+      "snapshot_restoration": {
+        "ok": true,
+        "sessions": [
+          {
+            "snapshot": {
+              "schema": 1,
+              "identity": {
+                "board_serial": "1060031107",
+                "app": "scope-v20-20261031-225916-main-1",
+                "firmware_sha256": "52f933bdb9c632544624e5d4188a740a9cdb429596bfe5a4d926900e7538aefe",
+                "relay_sha256": "bf6893f5a0fbab8676120a5decd8c6109698fa852be02333918b1d6e4a2a909d"
+              },
+              "adc_bits": 14,
+              "adc_period": 32,
+              "generator": {
+                "wave": 0,
+                "enabled": 0,
+                "mode": 0,
+                "frequency": 2500,
+                "final_frequency": 2500,
+                "low": 0,
+                "high": 4095,
+                "duration": 1000,
+                "duration_us": 0,
+                "duty": 50
+              }
+            },
+            "recovery": {
+              "seconds": 10.02270365098957,
+              "samples": 313344,
+              "dropped": 0,
+              "fatal": 0,
+              "continuous": true
+            },
+            "hardware_restored": true,
+            "ok": true
+          }
+        ]
+      }
+    },
+    {
+      "run": 2,
+      "report": "diagnosticos/resultados_v20/v20_service_radio120_campaign_20261101_211008_r2/report.json",
+      "report_sha256": "e24fb775082d629152f54836681aa515393c23dc891a06642359509098e8a1fb",
+      "ok": true,
+      "functional_ok": true,
+      "diagnostics_complete": true,
+      "hold_seconds": 120.06018359807786,
+      "identity_unchanged": true,
+      "receipt_unchanged": true,
+      "activation_report_unchanged": true,
+      "exposure": {
+        "periodic_samples": 26,
+        "exposed_fraction": 0.0,
+        "exposure_sufficient": false,
+        "note": "Exposure only; no visible FPS or analog acceptance inferred."
+      },
+      "ack": {
+        "matched": 10028,
+        "decoded": 10028,
+        "raw_max_ms": 47.547815018333495,
+        "raw_mean_ms": 5.0293234513990255,
+        "decode_max_ms": 13.426282908767462,
+        "pending_sends": 0,
+        "pending_decode": 0,
+        "omitted": 0
+      },
+      "service_diagnostics": [
+        {
+          "calls": 289085,
+          "priming_calls": 1034,
+          "reasons": {
+            "no_source": 34854,
+            "no_status": 0,
+            "session_mismatch": 0,
+            "pending_timeout": 0,
+            "pending_control_ack": 16842,
+            "pending_chunk_ack": 0,
+            "credits": 224040,
+            "token": 236,
+            "target_full": 0,
+            "pcm_pending": 9665,
+            "no_chunk": 0,
+            "priming_ack": 7,
+            "source_exhausted": 0,
+            "poll_wait": 0
+          },
+          "sends": {
+            "chunk": 10028,
+            "play": 1,
+            "query": 2194,
+            "begin": 1,
+            "stop": 1
+          },
+          "last_reason": "no_source",
+          "chunk_gaps": 10027,
+          "chunk_gap_last_ms": 7.36259703990072,
+          "chunk_gap_max_ms": 114.80836500413716,
+          "last_chunk_at": 921559.621347974,
+          "chunk_session": 2990797671
+        }
+      ],
+      "radio_transport": {
+        "frames": 256036,
+        "samples": 223263392,
+        "empty_status_frames": 4174,
+        "send_nodes": 64009,
+        "mean_send_margin": 0.12197709047220906,
+        "mcu_queue_peak": 4,
+        "min_slack_ticks": 71304,
+        "sampled_queue_max": 4,
+        "send_ticks_max": 684785,
+        "send_over_budget_nodes": 6033,
+        "headroom_pass": false
+      },
+      "whole_acquisition_transport": {
+        "frames": 277628,
+        "samples": 242091616,
+        "empty_status_frames": 4215,
+        "send_nodes": 69406,
+        "mean_send_margin": 0.12724325885658183,
+        "mcu_queue_peak": 4,
+        "min_slack_ticks": 71304,
+        "sampled_queue_max": 4,
+        "send_ticks_max": 684785,
+        "send_over_budget_nodes": 6074,
+        "headroom_pass": false
+      },
+      "snapshot_restoration": {
+        "ok": true,
+        "sessions": [
+          {
+            "snapshot": {
+              "schema": 1,
+              "identity": {
+                "board_serial": "1060031107",
+                "app": "scope-v20-20261031-225916-main-1",
+                "firmware_sha256": "52f933bdb9c632544624e5d4188a740a9cdb429596bfe5a4d926900e7538aefe",
+                "relay_sha256": "bf6893f5a0fbab8676120a5decd8c6109698fa852be02333918b1d6e4a2a909d"
+              },
+              "adc_bits": 14,
+              "adc_period": 32,
+              "generator": {
+                "wave": 0,
+                "enabled": 0,
+                "mode": 0,
+                "frequency": 2500,
+                "final_frequency": 2500,
+                "low": 0,
+                "high": 4095,
+                "duration": 1000,
+                "duration_us": 0,
+                "duty": 50
+              }
+            },
+            "recovery": {
+              "seconds": 10.023455041926354,
+              "samples": 313344,
+              "dropped": 0,
+              "fatal": 0,
+              "continuous": true
+            },
+            "hardware_restored": true,
+            "ok": true
+          }
+        ]
+      }
+    },
+    {
+      "run": 3,
+      "report": "diagnosticos/resultados_v20/v20_service_radio120_campaign_20261101_211008_r3/report.json",
+      "report_sha256": "98a48eee5cf662def1297c1d9d054a2b41afbdf0e6d5167714a5394ff5e14d60",
+      "ok": true,
+      "functional_ok": true,
+      "diagnostics_complete": true,
+      "hold_seconds": 120.07636486797128,
+      "identity_unchanged": true,
+      "receipt_unchanged": true,
+      "activation_report_unchanged": true,
+      "exposure": {
+        "periodic_samples": 26,
+        "exposed_fraction": 0.9615384615384616,
+        "exposure_sufficient": true,
+        "note": "Exposure only; no visible FPS or analog acceptance inferred."
+      },
+      "ack": {
+        "matched": 10031,
+        "decoded": 10031,
+        "raw_max_ms": 39.66821206267923,
+        "raw_mean_ms": 5.217963005468088,
+        "decode_max_ms": 9.723515016958117,
+        "pending_sends": 0,
+        "pending_decode": 0,
+        "omitted": 0
+      },
+      "service_diagnostics": [
+        {
+          "calls": 271780,
+          "priming_calls": 1002,
+          "reasons": {
+            "no_source": 35616,
+            "no_status": 0,
+            "session_mismatch": 0,
+            "pending_timeout": 0,
+            "pending_control_ack": 15657,
+            "pending_chunk_ack": 0,
+            "credits": 200016,
+            "token": 143,
+            "target_full": 0,
+            "pcm_pending": 16571,
+            "no_chunk": 0,
+            "priming_ack": 4,
+            "source_exhausted": 0,
+            "poll_wait": 0
+          },
+          "sends": {
+            "chunk": 10031,
+            "play": 1,
+            "query": 2048,
+            "begin": 1,
+            "stop": 1
+          },
+          "last_reason": "no_source",
+          "chunk_gaps": 10030,
+          "chunk_gap_last_ms": 5.0310579827055335,
+          "chunk_gap_max_ms": 119.9572270270437,
+          "last_chunk_at": 921718.979020572,
+          "chunk_session": 2451706527
+        }
+      ],
+      "radio_transport": {
+        "frames": 256098,
+        "samples": 223317456,
+        "empty_status_frames": 4377,
+        "send_nodes": 64025,
+        "mean_send_margin": 0.12034565155126375,
+        "mcu_queue_peak": 4,
+        "min_slack_ticks": 68522,
+        "sampled_queue_max": 3,
+        "send_ticks_max": 686599,
+        "send_over_budget_nodes": 6120,
+        "headroom_pass": false
+      },
+      "whole_acquisition_transport": {
+        "frames": 277496,
+        "samples": 241976512,
+        "empty_status_frames": 4416,
+        "send_nodes": 69373,
+        "mean_send_margin": 0.12555638875582864,
+        "mcu_queue_peak": 4,
+        "min_slack_ticks": 68522,
+        "sampled_queue_max": 3,
+        "send_ticks_max": 686599,
+        "send_over_budget_nodes": 6165,
+        "headroom_pass": false
+      },
+      "snapshot_restoration": {
+        "ok": true,
+        "sessions": [
+          {
+            "snapshot": {
+              "schema": 1,
+              "identity": {
+                "board_serial": "1060031107",
+                "app": "scope-v20-20261031-225916-main-1",
+                "firmware_sha256": "52f933bdb9c632544624e5d4188a740a9cdb429596bfe5a4d926900e7538aefe",
+                "relay_sha256": "bf6893f5a0fbab8676120a5decd8c6109698fa852be02333918b1d6e4a2a909d"
+              },
+              "adc_bits": 14,
+              "adc_period": 32,
+              "generator": {
+                "wave": 0,
+                "enabled": 0,
+                "mode": 0,
+                "frequency": 2500,
+                "final_frequency": 2500,
+                "low": 0,
+                "high": 4095,
+                "duration": 1000,
+                "duration_us": 0,
+                "duty": 50
+              }
+            },
+            "recovery": {
+              "seconds": 10.02364614396356,
+              "samples": 313344,
+              "dropped": 0,
+              "fatal": 0,
+              "continuous": true
+            },
+            "hardware_restored": true,
+            "ok": true
+          }
+        ]
+      }
+    }
+  ],
+  "preflight": {
+    "at": "2026-11-02T00:10:08.508880+00:00",
+    "owner_available": true,
+    "identity": {
+      "board_serial": "1060031107",
+      "app": "scope-v20-20261031-225916-main-1",
+      "firmware_sha256": "52f933bdb9c632544624e5d4188a740a9cdb429596bfe5a4d926900e7538aefe",
+      "relay_sha256": "bf6893f5a0fbab8676120a5decd8c6109698fa852be02333918b1d6e4a2a909d"
+    },
+    "receipt_sha256": "0708e10da6755ba09d27dafefd5b742b463c2c88647378de05454b69c22d4835",
+    "activation_report_sha256": "8fe306676e35384a91a52b721423a150ea0fc77f42c30c7cb69c79675040317a",
+    "user_monitor_detected": false
+  },
+  "final": {
+    "at": "2026-11-02T00:18:51.014503+00:00",
+    "owner_available": true,
+    "identity": {
+      "board_serial": "1060031107",
+      "app": "scope-v20-20261031-225916-main-1",
+      "firmware_sha256": "52f933bdb9c632544624e5d4188a740a9cdb429596bfe5a4d926900e7538aefe",
+      "relay_sha256": "bf6893f5a0fbab8676120a5decd8c6109698fa852be02333918b1d6e4a2a909d"
+    },
+    "receipt_sha256": "0708e10da6755ba09d27dafefd5b742b463c2c88647378de05454b69c22d4835",
+    "activation_report_sha256": "8fe306676e35384a91a52b721423a150ea0fc77f42c30c7cb69c79675040317a",
+    "no_test_processes_detected": true,
+    "generator_off_restored": true,
+    "v20_left_running": true,
+    "final_state_report": "diagnosticos/resultados_v20/v20_service_radio120_campaign_20261101_211008_final_state.json"
+  },
+  "receipt_hash_equal_initial_final": true,
+  "activation_report_hash_equal_initial_final": true,
+  "limitations": [
+    "Functional/diagnostic evidence only; no public rate promotion or analog/acoustic acceptance.",
+    "Runs 1 and 2 had 0% exposure; run 3 had 96.15% exposure, which does not prove visible FPS.",
+    "Service counters cover startup, RADIO and snapshot recovery; event counts do not measure blocked duration.",
+    "Host CHUNK gaps and ACK timings do not prove physical DAC acceptance intervals or a causal fix.",
+    "Legacy headroom_pass is false in all runs. No QoS, gate86, buffers, rates, firmware or relay changes."
+  ]
+}

@@ -1,0 +1,184 @@
+{
+  "private": true,
+  "promoted": false,
+  "public_rates_changed": false,
+  "tests_passed": 19,
+  "cases": [
+    {
+      "case": "screen20",
+      "functional_assertions": {
+        "radio_playing_40k": true,
+        "radio_stop_confirmed": true,
+        "radio_progress": true,
+        "radio_hold_completed": true,
+        "scan_completed": true,
+        "wav_playing": true,
+        "wav_progress": true,
+        "wav_stop_confirmed": true,
+        "fm_playing": true,
+        "fm_progress": true,
+        "fm_stop_confirmed": true,
+        "shutdown_confirmed": true,
+        "worker_released": true
+      },
+      "gui": {
+        "ok": false,
+        "errors": [],
+        "assertions": {
+          "radio_playing_40k": true,
+          "radio_stop_confirmed": true,
+          "radio_progress": true,
+          "radio_hold_completed": true,
+          "scan_completed": true,
+          "wav_playing": true,
+          "wav_progress": true,
+          "wav_stop_confirmed": true,
+          "fm_playing": true,
+          "fm_progress": true,
+          "fm_stop_confirmed": true,
+          "shutdown_confirmed": true,
+          "worker_released": true
+        },
+        "visible_gui_ok": false,
+        "profile_ok": true,
+        "fft_ok": true,
+        "exposed_fraction": 0.6666666666666666,
+        "paint_events": 391,
+        "radio_hold_seconds": 20.034674563910812,
+        "radio_played_samples": 802560,
+        "headroom_pass": true
+      },
+      "mcu": {
+        "frames": 42810,
+        "samples": 37330320,
+        "empty_status_frames": 766,
+        "send_nodes": 10703,
+        "mean_send_margin": 0.12597328205338376,
+        "mcu_queue_peak": 3,
+        "min_slack_ticks": 68470,
+        "sampled_queue_max": 3,
+        "send_ticks_max": 605285,
+        "send_over_budget_nodes": 969,
+        "headroom_pass": true
+      },
+      "backoff": {
+        "microseconds": 500,
+        "deferred_polls": 403912,
+        "real_polls": 112700
+      },
+      "restored": true,
+      "recovery": {
+        "snapshot_equal": true,
+        "continuous": true,
+        "integrity_ok": true,
+        "seconds": 10.025755090056919,
+        "detail": {
+          "hardware_restored": true,
+          "errors": [],
+          "recovery": {
+            "seconds": 10.025755090056919,
+            "samples": 313344,
+            "dropped": 0,
+            "fatal": 0,
+            "continuous": true
+          }
+        }
+      },
+      "final": {
+        "identity_equal": true,
+        "sources_exact": true,
+        "relay_configuration_equal": true,
+        "cpu_equal": true
+      },
+      "candidate_active_at_end": false
+    },
+    {
+      "case": "screen20_repeat",
+      "functional_assertions": {
+        "radio_playing_40k": true,
+        "radio_stop_confirmed": true,
+        "radio_progress": true,
+        "radio_hold_completed": true,
+        "scan_completed": true,
+        "wav_playing": true,
+        "wav_progress": true,
+        "wav_stop_confirmed": true,
+        "fm_playing": true,
+        "fm_progress": true,
+        "fm_stop_confirmed": true,
+        "shutdown_confirmed": true,
+        "worker_released": true
+      },
+      "gui": {
+        "ok": false,
+        "errors": [],
+        "assertions": {
+          "radio_playing_40k": true,
+          "radio_stop_confirmed": true,
+          "radio_progress": true,
+          "radio_hold_completed": true,
+          "scan_completed": true,
+          "wav_playing": true,
+          "wav_progress": true,
+          "wav_stop_confirmed": true,
+          "fm_playing": true,
+          "fm_progress": true,
+          "fm_stop_confirmed": true,
+          "shutdown_confirmed": true,
+          "worker_released": true
+        },
+        "visible_gui_ok": false,
+        "profile_ok": true,
+        "fft_ok": false,
+        "exposed_fraction": 0.0,
+        "paint_events": 11,
+        "radio_hold_seconds": 20.069168864982203,
+        "radio_played_samples": 802560,
+        "headroom_pass": false
+      },
+      "mcu": {
+        "frames": 42816,
+        "samples": 37335552,
+        "empty_status_frames": 742,
+        "send_nodes": 10704,
+        "mean_send_margin": 0.12610442927813648,
+        "mcu_queue_peak": 4,
+        "min_slack_ticks": 81088,
+        "sampled_queue_max": 3,
+        "send_ticks_max": 608890,
+        "send_over_budget_nodes": 943,
+        "headroom_pass": false
+      },
+      "backoff": {
+        "microseconds": 500,
+        "deferred_polls": 452398,
+        "real_polls": 114006
+      },
+      "restored": true,
+      "recovery": {
+        "snapshot_equal": true,
+        "continuous": true,
+        "integrity_ok": true,
+        "seconds": 10.024548762012273,
+        "detail": {
+          "hardware_restored": true,
+          "errors": [],
+          "recovery": {
+            "seconds": 10.024548762012273,
+            "samples": 313344,
+            "dropped": 0,
+            "fatal": 0,
+            "continuous": true
+          }
+        }
+      },
+      "final": {
+        "identity_equal": true,
+        "sources_exact": true,
+        "relay_configuration_equal": true,
+        "cpu_equal": true
+      },
+      "candidate_active_at_end": false
+    }
+  ]
+}

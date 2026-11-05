@@ -1,0 +1,51 @@
+{
+  "experiment": "isolated proxy of sample-frame preparation Os vs O2; no product or Q modification",
+  "base_sketch_sha256": "80f5ddfffbedaf1b31982bb492d6a21a4395ad83c1fd5d6e8f6ac1b1b144555f",
+  "host_compiler": "g++ -std=c++17 -O2; macOS host CPU, not MCU timing",
+  "arm_compiler": "arm-none-eabi-g++ 7-2017q4 -O2 -mcpu=cortex-m33 -mthumb -DARM_CHECK",
+  "bytes_and_crc_equal": true,
+  "host_median_os_us": 0.414155,
+  "host_median_o2_us": 0.415874,
+  "arm_symbol_bytes": {
+    "prepare_os": 68,
+    "prepare_o2": 444
+  },
+  "raw": {
+    "equal_frames": 256,
+    "crc_checked": true,
+    "rounds": 20000,
+    "pairs": [
+      {
+        "os_us": 0.413559,
+        "o2_us": 0.416424
+      },
+      {
+        "os_us": 0.414633,
+        "o2_us": 0.412531
+      },
+      {
+        "os_us": 0.414155,
+        "o2_us": 0.418228
+      },
+      {
+        "os_us": 0.419787,
+        "o2_us": 0.414017
+      },
+      {
+        "os_us": 0.412466,
+        "o2_us": 0.417426
+      },
+      {
+        "os_us": 0.415699,
+        "o2_us": 0.412923
+      },
+      {
+        "os_us": 0.413566,
+        "o2_us": 0.415874
+      }
+    ],
+    "sink": 0
+  },
+  "decision": "reject O2 as margin candidate: no meaningful host proxy speedup; ARM wrapper grows substantially; MCU physical margin not inferred",
+  "limitations": "Proxy excludes Zephyr, DMA, queue, SPI wire, and concurrent A0. No candidate deployed."
+}

@@ -1,0 +1,121 @@
+{
+  "error": "Entrega GUI atrasado: presupuesto excedido (muestras 1.60448e+06/1.6e+06); adquisici\u00f3n detenida sin descartar datos.",
+  "monotonic": 949848.525634588,
+  "bits": 8,
+  "rate": 1860465,
+  "pending_gui": 41,
+  "pending_gui_peak": 41,
+  "pending_dsp": 0,
+  "pending_dsp_peak": 3,
+  "retained_samples": 1568728,
+  "retained_seconds": 0.8431913000000001,
+  "retained_bytes": 45004256,
+  "retained_batches": 41,
+  "delivery_limits": {
+    "samples": 1600000,
+    "seconds": 1.0,
+    "bytes": 67108864,
+    "batches": 256
+  },
+  "delivery_peaks": {
+    "samples": 1568728,
+    "seconds": 0.8431913000000001,
+    "bytes": 45004256,
+    "batches": 41
+  },
+  "rf_pending_samples": 0,
+  "radio_enabled": true,
+  "limit_details": {
+    "scope": "Entrega GUI",
+    "current": {
+      "samples": 1568728,
+      "seconds": 0.8431913000000001,
+      "bytes": 45004256,
+      "batches": 41
+    },
+    "projected": {
+      "samples": 1604480,
+      "seconds": 0.8624080000000001,
+      "bytes": 46029920,
+      "batches": 42
+    },
+    "limits": {
+      "samples": 1600000,
+      "seconds": 1.0,
+      "bytes": 67108864,
+      "batches": 256
+    },
+    "exceeded": [
+      "samples"
+    ],
+    "peaks": {
+      "samples": 1568728,
+      "seconds": 0.8431913000000001,
+      "bytes": 45004256,
+      "batches": 41
+    },
+    "context": {
+      "bits": 8,
+      "channels": 1,
+      "actual_rate": 1860465.1162790698
+    }
+  },
+  "gui_thread_stack_at_notification": [
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/tools/gui_private_v20.py\", line 63, in <module>\n    if __name__=='__main__':raise SystemExit(main())\n",
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/tools/gui_private_v20.py\", line 57, in main\n    try:return smoke()\n",
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/tools/gui_live_smoke_v20.py\", line 636, in main\n    app.exec()\n",
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/tools/gui_live_smoke_v20.py\", line 574, in tick\n    window.radio_output_panel.stop(); window.radio_enabled.setChecked(False)\n",
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v20/radio_output_panel.py\", line 178, in stop\n    record_stop(self.owner,self.source,reason,status)\n",
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v20/radio_output_panel.py\", line 25, in record_stop\n    with path.open('a',encoding='utf-8') as stream:stream.write(json.dumps(entry,ensure_ascii=False)+'\\n')\n"
+  ],
+  "gui_thread_stack_at_failure": [
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/tools/gui_private_v20.py\", line 63, in <module>\n    if __name__=='__main__':raise SystemExit(main())\n",
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/tools/gui_private_v20.py\", line 57, in main\n    try:return smoke()\n",
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/tools/gui_live_smoke_v20.py\", line 636, in main\n    app.exec()\n",
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/tools/gui_live_smoke_v20.py\", line 574, in tick\n    window.radio_output_panel.stop(); window.radio_enabled.setChecked(False)\n",
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v20/radio_output_panel.py\", line 178, in stop\n    record_stop(self.owner,self.source,reason,status)\n",
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v20/radio_output_panel.py\", line 25, in record_stop\n    with path.open('a',encoding='utf-8') as stream:stream.write(json.dumps(entry,ensure_ascii=False)+'\\n')\n"
+  ],
+  "time": "2026-11-02T19:30:39.025345",
+  "radio_playing": false,
+  "us": false,
+  "scan_pending": false,
+  "multiscan_active": false,
+  "scan_status": "RADIO apagada",
+  "a0_active": true,
+  "analysis_mode": 1,
+  "fft_mode": "Radio",
+  "fft_size": "16384",
+  "heatmap_size": "16384",
+  "filter_source": "OFF",
+  "gui_delay_max_ms": 2864.569757017307,
+  "window_visible": true,
+  "window_minimized": false,
+  "wav_path": "",
+  "wav_rate": 40000,
+  "wav_preparing": false,
+  "wav_active": true,
+  "wav_dialog_open": false,
+  "slow_gui_callbacks": [
+    [
+      "spectral.render",
+      949825.803332686,
+      24.977669934742153
+    ]
+  ],
+  "selected_columns": {
+    "CH1": true,
+    "CH2": false,
+    "FILTER": false,
+    "RADIO": true
+  },
+  "horizontal_samples": 418605,
+  "trigger_enabled": false,
+  "trigger_source": "CH1",
+  "detail": 50,
+  "trace_style": "R\u00e1pido",
+  "temporal_paint_ms": 0.0,
+  "temporal_paint_max_ms": 0.0,
+  "temporal_prepare_ms": 0.0,
+  "render_interval_ms": 16
+}

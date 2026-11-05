@@ -1,0 +1,125 @@
+{
+  "error": "Entrega GUI atrasado: presupuesto excedido (segundos 1.02/1); adquisici\u00f3n detenida sin descartar datos.",
+  "monotonic": 634431.939998332,
+  "bits": 10,
+  "rate": 40000,
+  "pending_gui": 50,
+  "pending_gui_peak": 50,
+  "pending_dsp": 30,
+  "pending_dsp_peak": 30,
+  "retained_samples": 40000,
+  "retained_seconds": 1.0000000000000004,
+  "retained_bytes": 2400000,
+  "retained_batches": 50,
+  "delivery_limits": {
+    "samples": 1600000,
+    "seconds": 1.0,
+    "bytes": 67108864,
+    "batches": 256
+  },
+  "delivery_peaks": {
+    "samples": 40000,
+    "seconds": 1.0000000000000004,
+    "bytes": 2400000,
+    "batches": 50
+  },
+  "rf_pending_samples": 0,
+  "radio_enabled": true,
+  "limit_details": {
+    "scope": "Entrega GUI",
+    "current": {
+      "samples": 40000,
+      "seconds": 1.0000000000000004,
+      "bytes": 2400000,
+      "batches": 50
+    },
+    "projected": {
+      "samples": 40800,
+      "seconds": 1.0200000000000005,
+      "bytes": 2448000,
+      "batches": 51
+    },
+    "limits": {
+      "samples": 1600000,
+      "seconds": 1.0,
+      "bytes": 67108864,
+      "batches": 256
+    },
+    "exceeded": [
+      "seconds"
+    ],
+    "peaks": {
+      "samples": 40000,
+      "seconds": 1.0000000000000004,
+      "bytes": 2400000,
+      "batches": 50
+    },
+    "context": {
+      "bits": 10,
+      "channels": 2,
+      "actual_rate": 40000.0
+    }
+  },
+  "gui_thread_stack_at_notification": [
+    "  File \"<stdin>\", line 5, in <module>\n",
+    "  File \"/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/lib/python3.13/unittest/runner.py\", line 240, in run\n    test(result)\n",
+    "  File \"/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/lib/python3.13/unittest/suite.py\", line 84, in __call__\n    return self.run(*args, **kwds)\n",
+    "  File \"/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/lib/python3.13/unittest/suite.py\", line 122, in run\n    test(result)\n",
+    "  File \"/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/lib/python3.13/unittest/suite.py\", line 84, in __call__\n    return self.run(*args, **kwds)\n",
+    "  File \"/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/lib/python3.13/unittest/suite.py\", line 122, in run\n    test(result)\n",
+    "  File \"/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/lib/python3.13/unittest/suite.py\", line 84, in __call__\n    return self.run(*args, **kwds)\n",
+    "  File \"/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/lib/python3.13/unittest/suite.py\", line 122, in run\n    test(result)\n",
+    "  File \"/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/lib/python3.13/unittest/case.py\", line 707, in __call__\n    return self.run(*args, **kwds)\n",
+    "  File \"/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/lib/python3.13/unittest/case.py\", line 651, in run\n    self._callTestMethod(testMethod)\n",
+    "  File \"/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/lib/python3.13/unittest/case.py\", line 606, in _callTestMethod\n    if method() is not None:\n",
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/tests/v19Pyside/gui/test_connected_smoke.py\", line 116, in test_connected_dataflow_radio_fm_wav_and_close\n    self.wait_for(lambda: window.radio_stream is not None and window.radio_stream.counter>1000)\n",
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/tests/v19Pyside/gui/test_connected_smoke.py\", line 88, in wait_for\n    self.qt.processEvents()\n"
+  ],
+  "gui_thread_stack_at_failure": [
+    "  File \"<stdin>\", line 5, in <module>\n",
+    "  File \"/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/lib/python3.13/unittest/runner.py\", line 240, in run\n    test(result)\n",
+    "  File \"/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/lib/python3.13/unittest/suite.py\", line 84, in __call__\n    return self.run(*args, **kwds)\n",
+    "  File \"/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/lib/python3.13/unittest/suite.py\", line 122, in run\n    test(result)\n",
+    "  File \"/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/lib/python3.13/unittest/suite.py\", line 84, in __call__\n    return self.run(*args, **kwds)\n",
+    "  File \"/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/lib/python3.13/unittest/suite.py\", line 122, in run\n    test(result)\n",
+    "  File \"/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/lib/python3.13/unittest/suite.py\", line 84, in __call__\n    return self.run(*args, **kwds)\n",
+    "  File \"/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/lib/python3.13/unittest/suite.py\", line 122, in run\n    test(result)\n",
+    "  File \"/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/lib/python3.13/unittest/case.py\", line 707, in __call__\n    return self.run(*args, **kwds)\n",
+    "  File \"/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/lib/python3.13/unittest/case.py\", line 651, in run\n    self._callTestMethod(testMethod)\n",
+    "  File \"/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/lib/python3.13/unittest/case.py\", line 606, in _callTestMethod\n    if method() is not None:\n",
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/tests/v19Pyside/gui/test_connected_smoke.py\", line 116, in test_connected_dataflow_radio_fm_wav_and_close\n    self.wait_for(lambda: window.radio_stream is not None and window.radio_stream.counter>1000)\n",
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/tests/v19Pyside/gui/test_connected_smoke.py\", line 88, in wait_for\n    self.qt.processEvents()\n"
+  ],
+  "time": "2026-10-26T22:13:37.170848",
+  "radio_playing": true,
+  "us": false,
+  "scan_pending": false,
+  "multiscan_active": false,
+  "scan_status": "RADIO esperando muestras de CH1",
+  "a0_active": true,
+  "analysis_mode": 0,
+  "fft_mode": "Spectre",
+  "fft_size": "2048",
+  "heatmap_size": "2048",
+  "filter_source": "OFF",
+  "gui_delay_max_ms": 1.4616489643231034,
+  "window_visible": true,
+  "window_minimized": false,
+  "wav_path": "",
+  "wav_rate": 40000,
+  "wav_preparing": false,
+  "wav_active": true,
+  "wav_dialog_open": false,
+  "slow_gui_callbacks": [],
+  "selected_columns": {
+    "CH1": true,
+    "CH2": true,
+    "FILTER": false,
+    "RADIO": true
+  },
+  "horizontal_samples": 9000,
+  "trigger_enabled": false,
+  "trigger_source": "CH1",
+  "detail": 50,
+  "trace_style": "R\u00e1pido"
+}

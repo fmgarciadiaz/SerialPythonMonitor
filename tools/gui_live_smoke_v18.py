@@ -15,7 +15,7 @@ import signal
 import os
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path: sys.path.insert(0, str(ROOT))
-from PyQt6 import QtCore, QtWidgets
+from PyQt6 import QtCore, QtGui, QtWidgets
 from monitor.v18.app import SerialMonitorWindow
 
 
@@ -62,6 +62,11 @@ def main():
         help='Hold actual confirmed RADIO PLAYING for this many seconds before Stop')
     parser.add_argument('--fft-only',action='store_true',help='Raw RF FFT without RADIO playback or A0; requires --fft-size')
     parser.add_argument('--fft-size',type=int,choices=(16384,32768,65536))
+    parser.add_argument('--analysis-mode',choices=('vt','fft','heatmap','bode'))
+    parser.add_argument('--fft-view',choices=('Spectre','Power','Distort','Transfer','Radio'),default='Spectre')
+    parser.add_argument('--bode-method',type=int,choices=(0,1,2),default=0)
+    parser.add_argument('--window-seconds',type=float,default=0,
+        help='Diagnostic V(t) window in seconds; acquisition rate is unchanged')
     parser.add_argument('--fft-fixed-10',action='store_true',help='Diagnostic A/B only')
     parser.add_argument('--crop-radios',action='store_true')
     parser.add_argument('--scan', action='store_true')
@@ -130,10 +135,20 @@ def main():
                 for widget,enabled in zip(scan.widgets,scan.enabled):widget.setEnabled(enabled)
             self._set_connection_status(str(message)); self.stop_input()
     window = Window()
+    if args.analysis_mode:
+        mode={'vt':0,'fft':1,'heatmap':2,'bode':3}[args.analysis_mode]
+        window.spectral.set_mode(mode)
+        window.spectral.fft_mode.setCurrentText(args.fft_view)
+        if args.analysis_mode=='bode':window.spectral.bode.tabs.setCurrentIndex(args.bode_method)
+        if args.analysis_mode=='heatmap':window.spectral.channels[1].setCurrentText('CH2')
+        if args.analysis_mode=='fft' and args.fft_view=='Transfer':
+            window.spectral.transfer_reference.setCurrentText('CH1')
+            window.spectral.transfer_response.setCurrentText('CH2')
     fft_metrics=dict(completed=0,wall_max_ms=0.,first_completed_at=None)
     if args.fft_size:
         display=window.spectral
-        display.set_mode(1);display.fft_mode.setCurrentText('Radio')
+        if not args.analysis_mode: display.set_mode(1)
+        display.fft_mode.setCurrentText(args.fft_view if args.analysis_mode else 'Radio')
         display.size.setCurrentText(str(args.fft_size));display.channels[0].setCurrentText('CH1');display.channels[1].setCurrentText('Ninguno')
         original_fft=display._render_fft_analysis
         def measured_fft(*values,**options):
@@ -154,8 +169,9 @@ def main():
         window.render_timer.setInterval(args.render_interval_ms)
     evidence['render_interval_ms']=window.render_timer.interval()
     counter = PaintCounter(window)
-    window.plot_widget.viewport().installEventFilter(counter)
-    if args.fft_size:window.spectral.widget.viewport().installEventFilter(counter)
+    fps_target=window.plot_widget.viewport() if not args.analysis_mode or args.analysis_mode=='vt' else window.spectral.widget.viewport()
+    fps_target.installEventFilter(counter)
+    evidence['fps_target']=args.analysis_mode or ('radio_fft' if args.fft_size else 'vt')
     start = time.monotonic()
     state = dict(connected=False, radio=False, a0=False, retuned=False, stopped=False,
                  closing=False, saved=False, scan=False, scan_recorded=False, wav_requested=False,
@@ -165,7 +181,8 @@ def main():
                  wav_progress=False, last_status_at=0., last_status_key=None, periodic_at=0.,
                  periodic_paints=0, stop_at=None, fm_requested=False, fm_play=False,
                  fm_playing=False, fm_session=None, fm_progress=False, fm_stop_confirmed=False,
-                 last_tick=time.monotonic())
+                 last_tick=time.monotonic(),bode_demo_at=0.,bode_demo_updates=0)
+    state['long_window_configured']=False
     def observe_wav(status):
         now = time.monotonic()-start
         value = int(status.state)
@@ -247,7 +264,12 @@ def main():
             fm_stop_confirmed=not args.fm or state['fm_stop_confirmed'],
             shutdown_confirmed=bool(window._shutdown_status and window._shutdown_status[0]),
             worker_released=window.serial_worker is None)
-        if args.fft_only:
+        if args.analysis_mode:
+            evidence['assertions']=dict(
+                a0_remained_off=not state['a0'] and not window._wav_active,
+                shutdown_confirmed=bool(window._shutdown_status and window._shutdown_status[0]),
+                worker_released=window.serial_worker is None)
+        elif args.fft_only:
             evidence['assertions']=dict(
                 fft_live_completed=fft_metrics['first_completed_at'] is not None and time.monotonic()-start-fft_metrics['first_completed_at']>=args.hold_radio_seconds,
                 fft_progress=fft_metrics['completed']>1,
@@ -261,6 +283,7 @@ def main():
         evidence['radio_played_samples'] = state['radio_played']
         evidence['radio_accepted_samples'] = state['radio_accepted']
         evidence['render_metrics']=dict(render_metrics)
+        if args.analysis_mode=='bode':evidence['synthetic_bode_updates']=state['bode_demo_updates']
         if render_profile is not None:
             import io,pstats
             profile_path=args.output.with_suffix('.render.pstats')
@@ -302,6 +325,13 @@ def main():
         hold_start=fft_metrics['first_completed_at'] if args.fft_only else state['radio_playing_at']
         end_at = max(args.duration, (hold_start or 0)+args.hold_radio_seconds+audio_tail)
         try:
+            if args.analysis_mode=='bode' and elapsed>=state['bode_demo_at']:
+                state['bode_demo_at']=elapsed+.1
+                phase=state['bode_demo_updates']*.025
+                bode=window.spectral.bode.panels[window.spectral.bode.tabs.currentIndex()]
+                bode.result=[(20.0*10**(i/48), -3.0-18.0*np.log10(1+(i/160)**2)+.25*np.sin(i*.08+phase),
+                              -90.0*np.arctan(i/160)+1.5*np.sin(i*.03+phase)) for i in range(384)]
+                bode.draw();state['bode_demo_updates']+=1
             if not state['closing'] and args.hide_at_seconds is not None:
                 if elapsed>=args.hide_at_seconds and not state.get('occlusion_hidden'):
                     state['occlusion_hidden']=True;window.hide();record('occlusion_hidden')
@@ -363,6 +393,13 @@ def main():
                 window.radio_frequency.setValue(args.frequency_khz)
                 if not args.fft_only:window.radio_enabled.setChecked(True)
                 record('fft_only' if args.fft_only else 'radio_play')
+            if (args.window_seconds>0 and not state['long_window_configured'] and
+                    window.connection_state=='connected' and window.applied_configuration is not None and
+                    not window.output_pending and not window._auto_apply_timer.isActive()):
+                window.btn_xaxis_toggle.setChecked(True)
+                window.on_h_scale_changed(round(window.applied_configuration.rate*args.window_seconds))
+                state['long_window_configured']=True
+                record('long_time_window_configured')
             if (args.scan and state['radio'] and not state['scan'] and elapsed>=5
                     and scan_capture_ready(window)):
                 state['scan']=True; evidence['scan']['requested']=True
@@ -430,6 +467,11 @@ def main():
     window.show()
     window.raise_()
     window.activateWindow()
+    screen=window.screen()
+    evidence['display'] = dict(platform=QtGui.QGuiApplication.platformName(),
+        dpr=window.devicePixelRatioF(), size=[window.width(),window.height()],
+        screen=(screen.name() if screen else None), exposed=bool(window.windowHandle() and window.windowHandle().isExposed()))
+    if args.analysis_mode=='bode':evidence['synthetic_content']='Bode · 384 puntos actualizados cada 100 ms'
     timer = QtCore.QTimer(); timer.timeout.connect(tick); timer.start(100)
     def interrupted(signum, frame):
         evidence['errors'].append(f'Interrupted by signal {signum}')
@@ -451,7 +493,6 @@ def main():
     wav_directory.cleanup()
     if documentation_path and documentation_frames:
         from PIL import Image
-        from PyQt6 import QtGui
         frames=[]
         for frame in documentation_frames:
             frame=frame.convertToFormat(QtGui.QImage.Format.Format_RGBA8888)

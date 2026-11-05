@@ -1,0 +1,1 @@
+Retirado el 3/11/2026 por pedido del usuario. Copias históricas previas al retiro, no forman parte del monitor ni de los tests activos. No ejecutar como campaña actual. Evidencia histórica: docs/V20_ENVOLVENTE_20261102.md.

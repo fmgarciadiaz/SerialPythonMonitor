@@ -1,0 +1,217 @@
+{
+  "private": true,
+  "promoted": false,
+  "tests_passed": 22,
+  "cases": [
+    {
+      "case": "ipc_user_20261031",
+      "seconds": 60.008990055997856,
+      "errors": [],
+      "queue_calls": 865123,
+      "queue_cpu_seconds": 16.662481665999046,
+      "queue_max_ms": 29.498497024178505,
+      "ack_max_ms": 48.86546800844371,
+      "mcu": {
+        "frames": 128020,
+        "samples": 111633440,
+        "empty_status_frames": 2107,
+        "send_nodes": 32005,
+        "mean_send_margin": 0.10140085660587417,
+        "mcu_queue_peak": 5,
+        "min_slack_ticks": 76855,
+        "sampled_queue_max": 4,
+        "send_ticks_max": 600350,
+        "send_over_budget_nodes": 3264,
+        "headroom_pass": false
+      },
+      "backoff": {},
+      "slow_stages": [],
+      "sessions": [
+        {
+          "snapshot": {
+            "schema": 1,
+            "identity": {
+              "board_serial": "1060031107",
+              "app": "scope-v19-main-1",
+              "firmware_sha256": "37f049fa029ad62a10767c56dc586b2c3697f8d250a0b8a7396570ce8e0c7060",
+              "relay_sha256": "27da0bc4860401df27eef50429f2ec881bfd3b51b1893d1fe3bacb9e922f56ae"
+            },
+            "adc_bits": 14,
+            "adc_period": 32,
+            "generator": {
+              "wave": 0,
+              "enabled": 0,
+              "mode": 0,
+              "frequency": 2500,
+              "final_frequency": 2500,
+              "low": 0,
+              "high": 4095,
+              "duration": 1000,
+              "duration_us": 0,
+              "duty": 50
+            }
+          },
+          "state": "closed",
+          "hardware_restored": true,
+          "errors": [],
+          "recovery": {
+            "seconds": 0.246583568979986,
+            "samples": 8192,
+            "dropped": 0,
+            "fatal": 0,
+            "continuous": true
+          },
+          "receiver_activity": {
+            "pid": 83396,
+            "mode": "user",
+            "active": true,
+            "released": true
+          }
+        }
+      ]
+    },
+    {
+      "case": "ipc_receiver_critical_20261031",
+      "seconds": 60.01544481597375,
+      "errors": [],
+      "queue_calls": 853742,
+      "queue_cpu_seconds": 16.603969564004394,
+      "queue_max_ms": 29.1080359602347,
+      "ack_max_ms": 34.88391009159386,
+      "mcu": {
+        "frames": 128098,
+        "samples": 111701456,
+        "empty_status_frames": 2128,
+        "send_nodes": 32025,
+        "mean_send_margin": 0.10270903858680647,
+        "mcu_queue_peak": 5,
+        "min_slack_ticks": 76620,
+        "sampled_queue_max": 4,
+        "send_ticks_max": 683291,
+        "send_over_budget_nodes": 3238,
+        "headroom_pass": false
+      },
+      "backoff": {},
+      "slow_stages": [],
+      "sessions": [
+        {
+          "snapshot": {
+            "schema": 1,
+            "identity": {
+              "board_serial": "1060031107",
+              "app": "scope-v19-main-1",
+              "firmware_sha256": "37f049fa029ad62a10767c56dc586b2c3697f8d250a0b8a7396570ce8e0c7060",
+              "relay_sha256": "27da0bc4860401df27eef50429f2ec881bfd3b51b1893d1fe3bacb9e922f56ae"
+            },
+            "adc_bits": 14,
+            "adc_period": 32,
+            "generator": {
+              "wave": 0,
+              "enabled": 0,
+              "mode": 0,
+              "frequency": 2500,
+              "final_frequency": 2500,
+              "low": 0,
+              "high": 4095,
+              "duration": 1000,
+              "duration_us": 0,
+              "duty": 50
+            }
+          },
+          "state": "closed",
+          "hardware_restored": true,
+          "errors": [],
+          "recovery": {
+            "seconds": 0.24674775695893914,
+            "samples": 8192,
+            "dropped": 0,
+            "fatal": 0,
+            "continuous": true
+          },
+          "receiver_activity": {
+            "pid": 83483,
+            "mode": "critical",
+            "active": true,
+            "released": true
+          }
+        }
+      ]
+    },
+    {
+      "case": "ipc_backoff500_20261031",
+      "seconds": 60.01219264999963,
+      "errors": [],
+      "queue_calls": 292742,
+      "queue_cpu_seconds": 6.440461521000323,
+      "queue_max_ms": 24.41896009258926,
+      "ack_max_ms": 13.204647926613688,
+      "mcu": {
+        "frames": 128010,
+        "samples": 111624720,
+        "empty_status_frames": 2085,
+        "send_nodes": 32002,
+        "mean_send_margin": 0.10162649959790893,
+        "mcu_queue_peak": 4,
+        "min_slack_ticks": 76710,
+        "sampled_queue_max": 4,
+        "send_ticks_max": 613997,
+        "send_over_budget_nodes": 3203,
+        "headroom_pass": false
+      },
+      "backoff": {
+        "microseconds": 500,
+        "deferred_polls": 964574,
+        "real_polls": 292742
+      },
+      "slow_stages": [],
+      "sessions": [
+        {
+          "snapshot": {
+            "schema": 1,
+            "identity": {
+              "board_serial": "1060031107",
+              "app": "scope-v19-main-1",
+              "firmware_sha256": "37f049fa029ad62a10767c56dc586b2c3697f8d250a0b8a7396570ce8e0c7060",
+              "relay_sha256": "27da0bc4860401df27eef50429f2ec881bfd3b51b1893d1fe3bacb9e922f56ae"
+            },
+            "adc_bits": 14,
+            "adc_period": 32,
+            "generator": {
+              "wave": 0,
+              "enabled": 0,
+              "mode": 0,
+              "frequency": 2500,
+              "final_frequency": 2500,
+              "low": 0,
+              "high": 4095,
+              "duration": 1000,
+              "duration_us": 0,
+              "duty": 50
+            }
+          },
+          "state": "closed",
+          "hardware_restored": true,
+          "errors": [],
+          "recovery": {
+            "seconds": 0.2495374589925632,
+            "samples": 8192,
+            "dropped": 0,
+            "fatal": 0,
+            "continuous": true
+          },
+          "receiver_activity": {
+            "pid": 83560,
+            "mode": "user",
+            "active": true,
+            "released": true
+          }
+        }
+      ]
+    }
+  ],
+  "offline_empty_queue_benchmark": {
+    "calls": 20000,
+    "baseline_us": 21.832364704459906,
+    "instrumented_us": 25.236195098841563
+  }
+}

@@ -1,0 +1,1034 @@
+{
+  "error": "FlowLimitExceeded: RF pendiente atrasado: presupuesto excedido (segundos 1.00105/1); adquisici\u00f3n detenida sin descartar datos.",
+  "monotonic": 950250.064464005,
+  "bits": 8,
+  "rate": 40000,
+  "pending_gui": 0,
+  "pending_gui_peak": 5,
+  "pending_dsp": 0,
+  "pending_dsp_peak": 3,
+  "retained_samples": 0,
+  "retained_seconds": 0.0,
+  "retained_bytes": 0,
+  "retained_batches": 0,
+  "delivery_limits": {
+    "samples": 1600000,
+    "seconds": 1.0,
+    "bytes": 67108864,
+    "batches": 256
+  },
+  "delivery_peaks": {
+    "samples": 9788,
+    "seconds": 0.24469999999999997,
+    "bytes": 587280,
+    "batches": 5
+  },
+  "rf_pending_samples": 0,
+  "radio_enabled": false,
+  "receiver_failure_snapshot": {
+    "error": "RF pendiente atrasado: presupuesto excedido (segundos 1.00105/1); adquisici\u00f3n detenida sin descartar datos.",
+    "monotonic_s": 950239.457271955,
+    "wall_time_s": 1793659027.920059,
+    "retained_batches": [
+      {
+        "id": 1453,
+        "duration_s": 0.0399
+      },
+      {
+        "id": 1454,
+        "duration_s": 0.00565
+      },
+      {
+        "id": 1455,
+        "duration_s": 0.04
+      },
+      {
+        "id": 1456,
+        "duration_s": 0.00555
+      },
+      {
+        "id": 1457,
+        "duration_s": 0.1536
+      }
+    ],
+    "retained_duration_s": 0.24469999999999997,
+    "buffered_samples": 30254,
+    "buffered_chunks": 147,
+    "buffered_duration_s": 0.75635,
+    "pending_duration_s": 1.00105,
+    "actual_rate": 40000.0,
+    "bits": 8,
+    "last_credit_monotonic_s": 950238.482559389,
+    "last_credit_age_s": 0.9747125660069287,
+    "limit_details": {
+      "scope": "RF pendiente",
+      "current": {
+        "seconds": 0.9954000000000001
+      },
+      "projected": {
+        "seconds": 1.00105
+      },
+      "limits": {
+        "seconds": 1.0
+      },
+      "exceeded": [
+        "seconds"
+      ],
+      "peaks": {},
+      "context": {
+        "bits": 8,
+        "channels": 2,
+        "actual_rate": 40000.0,
+        "generation": 1,
+        "buffered_samples_before": 30028,
+        "buffered_samples": 30254
+      }
+    },
+    "child_stages": {
+      "max_ms": {
+        "tick": {
+          "wall": 2.098810044117272,
+          "cpu": 0.2620679999996156
+        },
+        "wav_service": {
+          "wall": 0.725023914128542,
+          "cpu": 0.7224439999999888
+        },
+        "read": {
+          "wall": 19.564067013561726,
+          "cpu": 0.25049400000032307
+        },
+        "decode": {
+          "wall": 5.0657420651987195,
+          "cpu": 0.5043929999999364
+        },
+        "decoder_events": {
+          "wall": 0.5875990027561784,
+          "cpu": 0.48510599999929127
+        },
+        "pump": {
+          "wall": 31.82999393902719,
+          "cpu": 4.262226000000702
+        },
+        "pump_global": {
+          "wall": 31.934321974404156,
+          "cpu": 4.427802000000369
+        },
+        "pump_gap": {
+          "wall": 21.858823020011187,
+          "cpu": 1.1080990000014168
+        },
+        "send": {
+          "wall": 0.1928890123963356,
+          "cpu": 0.08337800000024487
+        },
+        "ack": {
+          "wall": 0.00016496051102876663,
+          "cpu": 0.0
+        },
+        "collect": {
+          "wall": 0.47430896665900946,
+          "cpu": 0.39985200000014487
+        },
+        "flush": {
+          "wall": 0.42190495878458023,
+          "cpu": 0.36136800000008407
+        },
+        "wav_callback": {
+          "wall": 0.08481903932988644,
+          "cpu": 0.0853680000005852
+        },
+        "generate": {
+          "wall": 0.1676669344305992,
+          "cpu": 0.1690370000009267
+        }
+      },
+      "bytes_read": 43802752,
+      "read_bytes_max": 45632,
+      "wav_service": {
+        "calls": 61547,
+        "priming_calls": 1322,
+        "reasons": {
+          "no_source": 11531,
+          "no_status": 0,
+          "session_mismatch": 0,
+          "pending_timeout": 0,
+          "pending_control_ack": 6847,
+          "pending_chunk_ack": 102,
+          "credits": 37107,
+          "token": 216,
+          "target_full": 0,
+          "pcm_pending": 4609,
+          "no_chunk": 0,
+          "priming_ack": 15,
+          "source_exhausted": 126,
+          "poll_wait": 0
+        },
+        "sends": {
+          "chunk": 2032,
+          "play": 2,
+          "query": 887,
+          "begin": 2,
+          "stop": 1
+        },
+        "last_reason": "no_source",
+        "chunk_gaps": 2030,
+        "chunk_gap_last_ms": 11.678867042064667,
+        "chunk_gap_max_ms": 90.69452690891922,
+        "last_chunk_at": 950236.294023884,
+        "chunk_session": 2683152858
+      },
+      "observed_at": 950239.457289082,
+      "events": [
+        {
+          "stage": "ack",
+          "start": 950236.460883687,
+          "end": 950236.460883746,
+          "wall_ms": 5.902256816625595e-05,
+          "cpu_ms": null,
+          "rid": 2683153704,
+          "kind": 11,
+          "send_to_ack_ms": 4.465135047212243
+        },
+        {
+          "stage": "send",
+          "start": 950236.460917604,
+          "end": 950236.460937904,
+          "wall_ms": 0.02029992174357176,
+          "cpu_ms": 0.02104599999874779,
+          "rid": 2683153705,
+          "kind": 11
+        },
+        {
+          "stage": "ack",
+          "start": 950236.465441372,
+          "end": 950236.465441434,
+          "wall_ms": 6.193295121192932e-05,
+          "cpu_ms": null,
+          "rid": 2683153705,
+          "kind": 11,
+          "send_to_ack_ms": 4.526093951426446
+        },
+        {
+          "stage": "send",
+          "start": 950236.465486014,
+          "end": 950236.465510264,
+          "wall_ms": 0.024250010028481483,
+          "cpu_ms": 0.025096999999973946,
+          "rid": 2683153706,
+          "kind": 11
+        },
+        {
+          "stage": "ack",
+          "start": 950236.470058943,
+          "end": 950236.470059017,
+          "wall_ms": 7.392372936010361e-05,
+          "cpu_ms": null,
+          "rid": 2683153706,
+          "kind": 11,
+          "send_to_ack_ms": 4.575398983433843
+        },
+        {
+          "stage": "send",
+          "start": 950236.470098907,
+          "end": 950236.47012309,
+          "wall_ms": 0.02418295480310917,
+          "cpu_ms": 0.02504499999922416,
+          "rid": 2683153707,
+          "kind": 11
+        },
+        {
+          "stage": "ack",
+          "start": 950236.47637472,
+          "end": 950236.47637478,
+          "wall_ms": 5.995389074087143e-05,
+          "cpu_ms": null,
+          "rid": 2683153707,
+          "kind": 11,
+          "send_to_ack_ms": 6.278506945818663
+        },
+        {
+          "stage": "send",
+          "start": 950236.476411629,
+          "end": 950236.476433032,
+          "wall_ms": 0.021402956917881966,
+          "cpu_ms": 0.02215399999982992,
+          "rid": 2683153708,
+          "kind": 11
+        },
+        {
+          "stage": "ack",
+          "start": 950236.481254874,
+          "end": 950236.481254937,
+          "wall_ms": 6.298068910837173e-05,
+          "cpu_ms": null,
+          "rid": 2683153708,
+          "kind": 11,
+          "send_to_ack_ms": 4.845620016567409
+        },
+        {
+          "stage": "send",
+          "start": 950236.481291754,
+          "end": 950236.481311756,
+          "wall_ms": 0.020001898519694805,
+          "cpu_ms": 0.02078199999999697,
+          "rid": 2683153709,
+          "kind": 11
+        },
+        {
+          "stage": "ack",
+          "start": 950236.483872859,
+          "end": 950236.483872923,
+          "wall_ms": 6.391201168298721e-05,
+          "cpu_ms": null,
+          "rid": 2683153709,
+          "kind": 11,
+          "send_to_ack_ms": 2.5834969710558653
+        },
+        {
+          "stage": "send",
+          "start": 950236.485337757,
+          "end": 950236.485358504,
+          "wall_ms": 0.020746956579387188,
+          "cpu_ms": 0.021565999999140217,
+          "rid": 2683153710,
+          "kind": 11
+        },
+        {
+          "stage": "ack",
+          "start": 950236.487965071,
+          "end": 950236.487965135,
+          "wall_ms": 6.402842700481415e-05,
+          "cpu_ms": null,
+          "rid": 2683153710,
+          "kind": 11,
+          "send_to_ack_ms": 2.630004077218473
+        },
+        {
+          "stage": "send",
+          "start": 950236.489487195,
+          "end": 950236.489506536,
+          "wall_ms": 0.019341008737683296,
+          "cpu_ms": 0.020147999999053923,
+          "rid": 2683153711,
+          "kind": 11
+        },
+        {
+          "stage": "ack",
+          "start": 950236.495317727,
+          "end": 950236.495317789,
+          "wall_ms": 6.204936653375626e-05,
+          "cpu_ms": null,
+          "rid": 2683153711,
+          "kind": 11,
+          "send_to_ack_ms": 5.833368049934506
+        },
+        {
+          "stage": "send",
+          "start": 950236.495357313,
+          "end": 950236.495379899,
+          "wall_ms": 0.022586085833609104,
+          "cpu_ms": 0.02340900000064039,
+          "rid": 2683153712,
+          "kind": 11
+        },
+        {
+          "stage": "ack",
+          "start": 950236.499796554,
+          "end": 950236.499796616,
+          "wall_ms": 6.204936653375626e-05,
+          "cpu_ms": null,
+          "rid": 2683153712,
+          "kind": 11,
+          "send_to_ack_ms": 4.441792028956115
+        },
+        {
+          "stage": "send",
+          "start": 950236.499833582,
+          "end": 950236.499854741,
+          "wall_ms": 0.021159066818654537,
+          "cpu_ms": 0.02194300000013527,
+          "rid": 2683153713,
+          "kind": 11
+        },
+        {
+          "stage": "ack",
+          "start": 950236.504375187,
+          "end": 950236.50437525,
+          "wall_ms": 6.298068910837173e-05,
+          "cpu_ms": null,
+          "rid": 2683153713,
+          "kind": 11,
+          "send_to_ack_ms": 4.5440319227054715
+        },
+        {
+          "stage": "send",
+          "start": 950236.504412723,
+          "end": 950236.504433893,
+          "wall_ms": 0.02117000985890627,
+          "cpu_ms": 0.02190500000054385,
+          "rid": 2683153714,
+          "kind": 11
+        },
+        {
+          "stage": "ack",
+          "start": 950236.508841814,
+          "end": 950236.508841879,
+          "wall_ms": 6.495974957942963e-05,
+          "cpu_ms": null,
+          "rid": 2683153714,
+          "kind": 11,
+          "send_to_ack_ms": 4.4314899714663625
+        },
+        {
+          "stage": "send",
+          "start": 950236.508881209,
+          "end": 950236.508904319,
+          "wall_ms": 0.023110071197152138,
+          "cpu_ms": 0.023968999999013363,
+          "rid": 2683153715,
+          "kind": 11
+        },
+        {
+          "stage": "ack",
+          "start": 950236.51345427,
+          "end": 950236.513454375,
+          "wall_ms": 0.0001050066202878952,
+          "cpu_ms": null,
+          "rid": 2683153715,
+          "kind": 11,
+          "send_to_ack_ms": 4.575602011755109
+        },
+        {
+          "stage": "send",
+          "start": 950236.51350842,
+          "end": 950236.513537529,
+          "wall_ms": 0.029109069146215916,
+          "cpu_ms": 0.030415999999533483,
+          "rid": 2683153716,
+          "kind": 11
+        },
+        {
+          "stage": "ack",
+          "start": 950236.518021536,
+          "end": 950236.518021642,
+          "wall_ms": 0.00010605435818433762,
+          "cpu_ms": null,
+          "rid": 2683153716,
+          "kind": 11,
+          "send_to_ack_ms": 4.516815999522805
+        },
+        {
+          "stage": "send",
+          "start": 950236.518071907,
+          "end": 950236.518100923,
+          "wall_ms": 0.029016053304076195,
+          "cpu_ms": 0.030252000000174917,
+          "rid": 2683153717,
+          "kind": 11
+        },
+        {
+          "stage": "ack",
+          "start": 950236.524289585,
+          "end": 950236.524289665,
+          "wall_ms": 8.009374141693115e-05,
+          "cpu_ms": null,
+          "rid": 2683153717,
+          "kind": 11,
+          "send_to_ack_ms": 6.221282063052058
+        },
+        {
+          "stage": "send",
+          "start": 950236.524328888,
+          "end": 950236.524352541,
+          "wall_ms": 0.023652915842831135,
+          "cpu_ms": 0.024576000001275133,
+          "rid": 2683153718,
+          "kind": 11
+        },
+        {
+          "stage": "ack",
+          "start": 950236.528814346,
+          "end": 950236.528814415,
+          "wall_ms": 6.903428584337234e-05,
+          "cpu_ms": null,
+          "rid": 2683153718,
+          "kind": 11,
+          "send_to_ack_ms": 4.488197038881481
+        },
+        {
+          "stage": "send",
+          "start": 950236.528853215,
+          "end": 950236.52887514,
+          "wall_ms": 0.02192496322095394,
+          "cpu_ms": 0.022876000000948693,
+          "rid": 2683153719,
+          "kind": 11
+        },
+        {
+          "stage": "ack",
+          "start": 950236.532368901,
+          "end": 950236.532368969,
+          "wall_ms": 6.810296326875687e-05,
+          "cpu_ms": null,
+          "rid": 2683153719,
+          "kind": 11,
+          "send_to_ack_ms": 3.5184500738978386
+        },
+        {
+          "stage": "send",
+          "start": 950236.533022763,
+          "end": 950236.533044645,
+          "wall_ms": 0.021882005967199802,
+          "cpu_ms": 0.022842999999994618,
+          "rid": 2683153720,
+          "kind": 11
+        },
+        {
+          "stage": "ack",
+          "start": 950236.535668907,
+          "end": 950236.535668978,
+          "wall_ms": 7.101334631443024e-05,
+          "cpu_ms": null,
+          "rid": 2683153720,
+          "kind": 11,
+          "send_to_ack_ms": 2.6489850133657455
+        },
+        {
+          "stage": "send",
+          "start": 950236.537124981,
+          "end": 950236.53714539,
+          "wall_ms": 0.02040888648480177,
+          "cpu_ms": 0.021206000001328107,
+          "rid": 2683153721,
+          "kind": 11
+        },
+        {
+          "stage": "ack",
+          "start": 950236.540688152,
+          "end": 950236.540688213,
+          "wall_ms": 6.100162863731384e-05,
+          "cpu_ms": null,
+          "rid": 2683153721,
+          "kind": 11,
+          "send_to_ack_ms": 3.5658939741551876
+        },
+        {
+          "stage": "send",
+          "start": 950236.541203664,
+          "end": 950236.541230744,
+          "wall_ms": 0.027079950086772442,
+          "cpu_ms": 0.02782900000042332,
+          "rid": 2683153722,
+          "kind": 11
+        },
+        {
+          "stage": "ack",
+          "start": 950236.546562829,
+          "end": 950236.546562897,
+          "wall_ms": 6.798654794692993e-05,
+          "cpu_ms": null,
+          "rid": 2683153722,
+          "kind": 11,
+          "send_to_ack_ms": 5.361860035918653
+        },
+        {
+          "stage": "send",
+          "start": 950236.546601514,
+          "end": 950236.546624,
+          "wall_ms": 0.02248596865683794,
+          "cpu_ms": 0.023223000001237892,
+          "rid": 2683153723,
+          "kind": 11
+        },
+        {
+          "stage": "ack",
+          "start": 950236.551168754,
+          "end": 950236.551168813,
+          "wall_ms": 5.902256816625595e-05,
+          "cpu_ms": null,
+          "rid": 2683153723,
+          "kind": 11,
+          "send_to_ack_ms": 4.569603013806045
+        },
+        {
+          "stage": "send",
+          "start": 950236.551201948,
+          "end": 950236.551220611,
+          "wall_ms": 0.018663005903363228,
+          "cpu_ms": 0.01939400000061653,
+          "rid": 2683153724,
+          "kind": 11
+        },
+        {
+          "stage": "ack",
+          "start": 950236.555671776,
+          "end": 950236.55567184,
+          "wall_ms": 6.402842700481415e-05,
+          "cpu_ms": null,
+          "rid": 2683153724,
+          "kind": 11,
+          "send_to_ack_ms": 4.4721890008077025
+        },
+        {
+          "stage": "send",
+          "start": 950236.555706548,
+          "end": 950236.555726432,
+          "wall_ms": 0.01988396979868412,
+          "cpu_ms": 0.020751999999291115,
+          "rid": 2683153725,
+          "kind": 11
+        },
+        {
+          "stage": "ack",
+          "start": 950236.560253006,
+          "end": 950236.560253077,
+          "wall_ms": 7.08969309926033e-05,
+          "cpu_ms": null,
+          "rid": 2683153725,
+          "kind": 11,
+          "send_to_ack_ms": 4.548803903162479
+        },
+        {
+          "stage": "send",
+          "start": 950236.560287691,
+          "end": 950236.56030925,
+          "wall_ms": 0.021559069864451885,
+          "cpu_ms": 0.02244700000098021,
+          "rid": 2683153726,
+          "kind": 11
+        },
+        {
+          "stage": "ack",
+          "start": 950236.564812955,
+          "end": 950236.564813023,
+          "wall_ms": 6.798654794692993e-05,
+          "cpu_ms": null,
+          "rid": 2683153726,
+          "kind": 11,
+          "send_to_ack_ms": 4.527737968601286
+        },
+        {
+          "stage": "send",
+          "start": 950236.56484633,
+          "end": 950236.564865295,
+          "wall_ms": 0.018964987248182297,
+          "cpu_ms": 0.019767999999587005,
+          "rid": 2683153727,
+          "kind": 11
+        },
+        {
+          "stage": "ack",
+          "start": 950236.56942179,
+          "end": 950236.569421864,
+          "wall_ms": 7.404014468193054e-05,
+          "cpu_ms": null,
+          "rid": 2683153727,
+          "kind": 11,
+          "send_to_ack_ms": 4.577770014293492
+        },
+        {
+          "stage": "send",
+          "start": 950236.569458773,
+          "end": 950236.569480345,
+          "wall_ms": 0.021571991965174675,
+          "cpu_ms": 0.022422000000688058,
+          "rid": 2683153728,
+          "kind": 11
+        },
+        {
+          "stage": "ack",
+          "start": 950236.573819139,
+          "end": 950236.573819204,
+          "wall_ms": 6.495974957942963e-05,
+          "cpu_ms": null,
+          "rid": 2683153728,
+          "kind": 11,
+          "send_to_ack_ms": 4.362915991805494
+        },
+        {
+          "stage": "send",
+          "start": 950236.573855167,
+          "end": 950236.573879421,
+          "wall_ms": 0.0242539681494236,
+          "cpu_ms": 0.025193000000811594,
+          "rid": 2683153729,
+          "kind": 11
+        },
+        {
+          "stage": "ack",
+          "start": 950236.578401826,
+          "end": 950236.578401891,
+          "wall_ms": 6.507616490125656e-05,
+          "cpu_ms": null,
+          "rid": 2683153729,
+          "kind": 11,
+          "send_to_ack_ms": 4.549072007648647
+        },
+        {
+          "stage": "send",
+          "start": 950236.57843617,
+          "end": 950236.578455556,
+          "wall_ms": 0.019385945051908493,
+          "cpu_ms": 0.02022500000009586,
+          "rid": 2683153730,
+          "kind": 11
+        },
+        {
+          "stage": "ack",
+          "start": 950236.582930232,
+          "end": 950236.582930304,
+          "wall_ms": 7.194466888904572e-05,
+          "cpu_ms": null,
+          "rid": 2683153730,
+          "kind": 11,
+          "send_to_ack_ms": 4.496395005844533
+        },
+        {
+          "stage": "send",
+          "start": 950236.582970528,
+          "end": 950236.582993018,
+          "wall_ms": 0.022489926777780056,
+          "cpu_ms": 0.023394999999482025,
+          "rid": 2683153731,
+          "kind": 11
+        },
+        {
+          "stage": "ack",
+          "start": 950236.585698649,
+          "end": 950236.585698719,
+          "wall_ms": 6.996560841798782e-05,
+          "cpu_ms": null,
+          "rid": 2683153731,
+          "kind": 11,
+          "send_to_ack_ms": 2.7309319702908397
+        },
+        {
+          "stage": "send",
+          "start": 950236.587117444,
+          "end": 950236.587136562,
+          "wall_ms": 0.01911795698106289,
+          "cpu_ms": 0.019904000000181554,
+          "rid": 2683153732,
+          "kind": 11
+        },
+        {
+          "stage": "ack",
+          "start": 950236.58987025,
+          "end": 950236.589870309,
+          "wall_ms": 5.902256816625595e-05,
+          "cpu_ms": null,
+          "rid": 2683153732,
+          "kind": 11,
+          "send_to_ack_ms": 2.7554079424589872
+        },
+        {
+          "stage": "send",
+          "start": 950236.591166766,
+          "end": 950236.59118641,
+          "wall_ms": 0.019644037820398808,
+          "cpu_ms": 0.02047299999929919,
+          "rid": 2683153733,
+          "kind": 11
+        },
+        {
+          "stage": "ack",
+          "start": 950236.597163901,
+          "end": 950236.59716398,
+          "wall_ms": 7.904600352048874e-05,
+          "cpu_ms": null,
+          "rid": 2683153733,
+          "kind": 11,
+          "send_to_ack_ms": 6.000095047056675
+        },
+        {
+          "stage": "send",
+          "start": 950236.597231759,
+          "end": 950236.597337312,
+          "wall_ms": 0.10555295739322901,
+          "cpu_ms": 0.045469999999880883,
+          "rid": 2683153734,
+          "kind": 11
+        },
+        {
+          "stage": "ack",
+          "start": 950236.601689187,
+          "end": 950236.601689251,
+          "wall_ms": 6.402842700481415e-05,
+          "cpu_ms": null,
+          "rid": 2683153734,
+          "kind": 11,
+          "send_to_ack_ms": 4.460391006432474
+        },
+        {
+          "stage": "send",
+          "start": 950236.601724206,
+          "end": 950236.601745113,
+          "wall_ms": 0.020907027646899223,
+          "cpu_ms": 0.021714999999034035,
+          "rid": 2683153735,
+          "kind": 11
+        },
+        {
+          "stage": "ack",
+          "start": 950236.6061142,
+          "end": 950236.606114267,
+          "wall_ms": 6.705522537231445e-05,
+          "cpu_ms": null,
+          "rid": 2683153735,
+          "kind": 11,
+          "send_to_ack_ms": 4.392476053908467
+        },
+        {
+          "stage": "send",
+          "start": 950236.606149013,
+          "end": 950236.606173234,
+          "wall_ms": 0.02422090619802475,
+          "cpu_ms": 0.025138999999896328,
+          "rid": 2683153736,
+          "kind": 11
+        },
+        {
+          "stage": "ack",
+          "start": 950236.610704643,
+          "end": 950236.61070471,
+          "wall_ms": 6.705522537231445e-05,
+          "cpu_ms": null,
+          "rid": 2683153736,
+          "kind": 11,
+          "send_to_ack_ms": 4.558027954772115
+        },
+        {
+          "stage": "send",
+          "start": 950236.610739634,
+          "end": 950236.610760026,
+          "wall_ms": 0.020392006263136864,
+          "cpu_ms": 0.02122399999926472,
+          "rid": 2683153737,
+          "kind": 11
+        },
+        {
+          "stage": "ack",
+          "start": 950236.615323549,
+          "end": 950236.615323627,
+          "wall_ms": 7.799826562404633e-05,
+          "cpu_ms": null,
+          "rid": 2683153737,
+          "kind": 11,
+          "send_to_ack_ms": 4.58640803117305
+        },
+        {
+          "stage": "send",
+          "start": 950236.615364148,
+          "end": 950236.61538749,
+          "wall_ms": 0.023341970518231392,
+          "cpu_ms": 0.024334999999098272,
+          "rid": 2683153738,
+          "kind": 11
+        },
+        {
+          "stage": "ack",
+          "start": 950236.619729537,
+          "end": 950236.619729601,
+          "wall_ms": 6.391201168298721e-05,
+          "cpu_ms": null,
+          "rid": 2683153738,
+          "kind": 11,
+          "send_to_ack_ms": 4.36821801122278
+        },
+        {
+          "stage": "send",
+          "start": 950236.619765303,
+          "end": 950236.619785708,
+          "wall_ms": 0.02040504477918148,
+          "cpu_ms": 0.021286999999148293,
+          "rid": 2683153739,
+          "kind": 11
+        },
+        {
+          "stage": "ack",
+          "start": 950236.624354665,
+          "end": 950236.624354733,
+          "wall_ms": 6.798654794692993e-05,
+          "cpu_ms": null,
+          "rid": 2683153739,
+          "kind": 11,
+          "send_to_ack_ms": 4.591896082274616
+        },
+        {
+          "stage": "send",
+          "start": 950236.624391029,
+          "end": 950236.624411887,
+          "wall_ms": 0.020858016796410084,
+          "cpu_ms": 0.021756000000650033,
+          "rid": 2683153740,
+          "kind": 11
+        },
+        {
+          "stage": "ack",
+          "start": 950236.628908942,
+          "end": 950236.628909021,
+          "wall_ms": 7.904600352048874e-05,
+          "cpu_ms": null,
+          "rid": 2683153740,
+          "kind": 11,
+          "send_to_ack_ms": 4.520585993304849
+        },
+        {
+          "stage": "send",
+          "start": 950236.628947829,
+          "end": 950236.628971206,
+          "wall_ms": 0.0233770115301013,
+          "cpu_ms": 0.02423499999970602,
+          "rid": 2683153741,
+          "kind": 11
+        },
+        {
+          "stage": "ack",
+          "start": 950236.634324306,
+          "end": 950236.634324373,
+          "wall_ms": 6.693881005048752e-05,
+          "cpu_ms": null,
+          "rid": 2683153741,
+          "kind": 11,
+          "send_to_ack_ms": 5.379211972467601
+        },
+        {
+          "stage": "send",
+          "start": 950236.63435662,
+          "end": 950236.634375187,
+          "wall_ms": 0.018566963262856007,
+          "cpu_ms": 0.019318999999740072,
+          "rid": 2683153742,
+          "kind": 11
+        },
+        {
+          "stage": "ack",
+          "start": 950236.637145214,
+          "end": 950236.637145281,
+          "wall_ms": 6.693881005048752e-05,
+          "cpu_ms": null,
+          "rid": 2683153742,
+          "kind": 11,
+          "send_to_ack_ms": 2.791035920381546
+        },
+        {
+          "stage": "send",
+          "start": 950236.638626687,
+          "end": 950236.638652719,
+          "wall_ms": 0.026031979359686375,
+          "cpu_ms": 0.026872999999483227,
+          "rid": 2683153743,
+          "kind": 11
+        },
+        {
+          "stage": "ack",
+          "start": 950236.641344375,
+          "end": 950236.641344442,
+          "wall_ms": 6.705522537231445e-05,
+          "cpu_ms": null,
+          "rid": 2683153743,
+          "kind": 11,
+          "send_to_ack_ms": 2.7207760140299797
+        },
+        {
+          "stage": "send",
+          "start": 950236.643691625,
+          "end": 950236.643711795,
+          "wall_ms": 0.0201700022444129,
+          "cpu_ms": 0.02094000000063545,
+          "rid": 2683153744,
+          "kind": 11
+        },
+        {
+          "stage": "ack",
+          "start": 950236.649396169,
+          "end": 950236.649396249,
+          "wall_ms": 7.997732609510422e-05,
+          "cpu_ms": null,
+          "rid": 2683153744,
+          "kind": 11,
+          "send_to_ack_ms": 5.707244970835745
+        }
+      ],
+      "active": [
+        {
+          "stage": "pump_global",
+          "began_at": 950239.456746343,
+          "wall_ms": 0.5427389405667782,
+          "cpu_ms": 0.44369099999919115
+        },
+        {
+          "stage": "pump",
+          "began_at": 950239.45684963,
+          "wall_ms": 0.43945200741291046,
+          "cpu_ms": 0.3740820000004419
+        },
+        {
+          "stage": "decoder_events",
+          "began_at": 950239.457133841,
+          "wall_ms": 0.15524099580943584,
+          "cpu_ms": 0.12279499999934274
+        },
+        {
+          "stage": "collect",
+          "began_at": 950239.457144523,
+          "wall_ms": 0.14455895870923996,
+          "cpu_ms": 0.11210599999955662
+        }
+      ]
+    }
+  },
+  "gui_thread_stack_at_notification": [
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/tools/gui_private_v20.py\", line 63, in <module>\n    if __name__=='__main__':raise SystemExit(main())\n",
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/tools/gui_private_v20.py\", line 57, in main\n    try:return smoke()\n",
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/tools/gui_live_smoke_v20.py\", line 636, in main\n    app.exec()\n"
+  ],
+  "gui_thread_stack_at_failure": [
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/tools/gui_private_v20.py\", line 63, in <module>\n    if __name__=='__main__':raise SystemExit(main())\n",
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/tools/gui_private_v20.py\", line 57, in main\n    try:return smoke()\n",
+    "  File \"/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/tools/gui_live_smoke_v20.py\", line 636, in main\n    app.exec()\n"
+  ],
+  "time": "2026-11-02T19:37:18.527622",
+  "radio_playing": false,
+  "us": false,
+  "scan_pending": false,
+  "multiscan_active": false,
+  "scan_status": "RADIO apagada",
+  "a0_active": true,
+  "analysis_mode": 1,
+  "fft_mode": "Radio",
+  "fft_size": "16384",
+  "heatmap_size": "16384",
+  "filter_source": "OFF",
+  "gui_delay_max_ms": 1887.8084969474003,
+  "window_visible": true,
+  "window_minimized": false,
+  "wav_path": "/var/folders/x1/04l80ddx15qgdp1hzqzwcb300000gn/T/scope-v20-smoke-cwtv0yce/smoke_500hz.wav",
+  "wav_rate": 40000,
+  "wav_preparing": false,
+  "wav_active": true,
+  "wav_dialog_open": false,
+  "slow_gui_callbacks": [
+    [
+      "spectral.render",
+      950207.572153075,
+      20.350005012005568
+    ]
+  ],
+  "selected_columns": {
+    "CH1": true,
+    "CH2": true,
+    "FILTER": false,
+    "RADIO": true
+  },
+  "horizontal_samples": 9000,
+  "trigger_enabled": false,
+  "trigger_source": "CH1",
+  "detail": 50,
+  "trace_style": "R\u00e1pido",
+  "temporal_paint_ms": 0.0,
+  "temporal_paint_max_ms": 0.0,
+  "temporal_prepare_ms": 0.0,
+  "render_interval_ms": 16
+}

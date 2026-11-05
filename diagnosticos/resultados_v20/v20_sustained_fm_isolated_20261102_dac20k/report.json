@@ -1,0 +1,120 @@
+{
+  "schema": 1,
+  "version": 20,
+  "private": true,
+  "promoted": false,
+  "private_firmware_activated": true,
+  "private_identity": {
+    "board_serial": "1060031107",
+    "app": "scope-v20-20261031-225916-main-1",
+    "firmware_sha256": "52f933bdb9c632544624e5d4188a740a9cdb429596bfe5a4d926900e7538aefe",
+    "relay_sha256": "bf6893f5a0fbab8676120a5decd8c6109698fa852be02333918b1d6e4a2a909d"
+  },
+  "source_report": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v20/storage_lifetime_cycle_20261101/report.json",
+  "source_report_sha256": "298e09f178d140cc003bf03e4ce610e38f56b593f2afaa3440003718c035e9e8",
+  "working_receipt": {
+    "path": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/monitor/v20/q_support/working_pair.json",
+    "sha256": "0708e10da6755ba09d27dafefd5b742b463c2c88647378de05454b69c22d4835"
+  },
+  "identity_before": {
+    "board_serial": "1060031107",
+    "app": "scope-v20-20261031-225916-main-1",
+    "firmware_sha256": "52f933bdb9c632544624e5d4188a740a9cdb429596bfe5a4d926900e7538aefe",
+    "relay_sha256": "bf6893f5a0fbab8676120a5decd8c6109698fa852be02333918b1d6e4a2a909d"
+  },
+  "requested_tests": {
+    "radio": true,
+    "wav": true,
+    "fm": true,
+    "voices": 20,
+    "synth_profile": "sustained-fm",
+    "hold_seconds": 20,
+    "radio_adc_bits": 8,
+    "radio_adc_rate": 40000,
+    "radio_a0_rate": 40000,
+    "wav_source": "synthetic 500 Hz temporary WAV",
+    "synth_prepare_timeout": 120,
+    "synth_confirmed_hold_seconds": 60,
+    "synth_dac_rate": 20000
+  },
+  "scope": "Installed working V20 audio screen; private, no public/analog acceptance",
+  "ok": false,
+  "host_sources": {
+    "tools/probe_working_v20_gui.py": "823e06e6b16ce984e0ada644b6f22a00a5051d8821b8d4ac05520698ecee4108",
+    "tools/gui_private_v20.py": "cf7583a47701e7b1e540c0e3e96ca1e1368bf958c65f76ac5c367132b3392845",
+    "tools/private_v20_pair.py": "b787cdde947c3a6df2cafbda3351163e6baa97e798e802432ec9223ea6451fd4",
+    "tools/gui_live_smoke_v20.py": "fb7b12e5df9f4a09b8b0b01295d88568193bbd4a20b129665a05f0905cfc7cf7",
+    "tools/synth_transition_scenario_v20.py": "d75c4beefcf96bb5ff644a8733e562303f916494ae31327cfd2c5de0bd71585d",
+    "monitor/v20/receiver/unoq_config_receiver.py": "c18e649ca951749e597778e5322587347531b5072500f3f328d4149e559475e1",
+    "monitor/v20/io/receiver_process.py": "96917d0aa4b97800c436b2deecbd32aa582a9af7feca5b70386338d97d4405d4"
+  },
+  "gui_command": [
+    "/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/bin/python",
+    "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/tools/gui_private_v20.py",
+    "--firmware-binding",
+    "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v20/v20_sustained_fm_isolated_20261102_dac20k/report.json",
+    "--serial",
+    "1060031107",
+    "--output",
+    "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v20/v20_sustained_fm_isolated_20261102_dac20k/gui.json",
+    "--bits",
+    "8",
+    "--rate",
+    "40000",
+    "--fft-size",
+    "16384",
+    "--no-retune",
+    "--frequency-khz",
+    "10",
+    "--hold-radio-seconds",
+    "20",
+    "--duration",
+    "25",
+    "--wav",
+    "--fm",
+    "--voices",
+    "20",
+    "--synth-hold",
+    "60",
+    "--synth-rate",
+    "20000",
+    "--synth-profile",
+    "sustained-fm"
+  ],
+  "child_pid": 34584,
+  "execution_budget_seconds": 280,
+  "child_returncode": 1,
+  "gui": {
+    "errors": [],
+    "assertions": {},
+    "display": null,
+    "paint_events": null,
+    "radio_hold_seconds": null,
+    "synth_transition": null,
+    "synth_remote_voice_peak": null
+  },
+  "audio_phases": [],
+  "exposure": {
+    "periodic_samples": 0,
+    "exposed_fraction": 0.0,
+    "exposure_sufficient": false,
+    "note": "Exposure only; no visible FPS or analog acceptance inferred."
+  },
+  "metrics": {},
+  "service_diagnostics": [],
+  "v20_snapshot_restore": {
+    "ok": false,
+    "sessions": []
+  },
+  "diagnostics_complete": false,
+  "functional_ok": false,
+  "receipt_unchanged": true,
+  "activation_report_unchanged": true,
+  "identity_after": {
+    "board_serial": "1060031107",
+    "app": "scope-v20-20261031-225916-main-1",
+    "firmware_sha256": "52f933bdb9c632544624e5d4188a740a9cdb429596bfe5a4d926900e7538aefe",
+    "relay_sha256": "bf6893f5a0fbab8676120a5decd8c6109698fa852be02333918b1d6e4a2a909d"
+  },
+  "identity_unchanged": true
+}

@@ -1,8 +1,8 @@
 # Arduino UNO Q · MCU, DMA y circuito
 
-[Arquitectura completa del sistema](ARQUITECTURA_V18.md)
+[Arquitectura completa del sistema](ARQUITECTURA_V19.md)
 
-[Proyecto](../README.md) · [Firmware V18](../arduino/v18/README.md)
+[Proyecto](../README.md) · [Pareja activa V19](../arduino/v19/README.md)
 
 ## MCU y MPU en la pareja actual
 
@@ -12,8 +12,8 @@ genera la salida DAC de A0. El MPU ejecuta Linux y App Lab; aloja el
 relay nativo que intercambia tramas SPI con el MCU y las entrega al PC
 por TCP reenviado mediante USB/ADB. El monitor Python se ejecuta en el PC.
 
-La pareja actual monitor/MCU/relay es V18. Los límites por resolución y
-canales se mantienen en la [Guía V18](GUIA_V18.md); los ensayos V16 de esta
+La pareja actual monitor/MCU/relay es V19. Los límites por resolución y
+canales se mantienen en la [Guía V19](../monitor/v19/README.md); los ensayos V16 de esta
 página describen perfiles históricos y no sustituyen ese catálogo.
 [Todas las frecuencias por resolución y salida](CONFIGURACION_ADQUISICION.md#perfiles-de-adquisición).
 Monitor V15/Q V13 Pulse y Monitor V12/Q V11 P992 son parejas históricas SCP1 V3.
@@ -88,7 +88,7 @@ aplicación por conversión ni una ISR propia de adquisición. Un flag TC aislad
 no demuestra que el bloque siga disponible: se verifica también la posición
 del DMA y se detiene ante sobreescritura, overrun ADC o captura temporal perdida.
 Los nodos publicados se encolan para el transporte sin insertar texto de debug
-en el flujo binario. [Implementación](../arduino/v18/oscilloscope/sketch/acquisition.h).
+en el flujo binario. [Implementación](../arduino/v19/oscilloscope/sketch/acquisition.h).
 
 ### SPI: IRQ de fin/error y semáforo
 
@@ -97,7 +97,7 @@ El callback registra fin/error de cada dirección y libera `transfer_done` cuand
 ambas terminaron o hubo un fallo. El hilo espera ese semáforo y controla plazos;
 DMA mueve los bytes. El sketch evita reemplazar las ISR compartidas del core.
 READY indica al MPU que la siguiente transferencia está preparada; se retira
-al completar la operación. [Servicio SPI](../arduino/v18/oscilloscope/sketch/sketch.ino).
+al completar la operación. [Servicio SPI](../arduino/v19/oscilloscope/sketch/sketch.ino).
 
 ### DAC: tabla periódica y bloques WAV
 
@@ -112,28 +112,29 @@ comprueba dirección fuente y bytes restantes para reconocer el bloque actual
 y liberar créditos; no deduce avance únicamente de TC. Descriptores neutrales
 impiden volver a reproducir datos antiguos si faltan muestras. Al finalizar o
 fallar se detiene el DAC y se informa el estado al PC.
-[Motor de ondas](../arduino/historico/v13_pulse/oscilloscope/sketch/generator_dma.h) ·
-[Motor WAV](../arduino/historico/v13_pulse/oscilloscope/sketch/wav_dma.h) ·
-[Cola y supervisión](../arduino/historico/v13_pulse/oscilloscope/sketch/wav.h).
+[Motor de ondas](../arduino/v19/oscilloscope/sketch/generator_dma.h) ·
+[Motor WAV](../arduino/v19/oscilloscope/sketch/wav_dma.h) ·
+[Cola y supervisión](../arduino/v19/oscilloscope/sketch/wav.h).
 
 ## Fuentes y responsabilidades
 
 | Archivo | Función |
 |---|---|
-| [sketch.ino](../arduino/historico/v13_pulse/oscilloscope/sketch/sketch.ino) | Inicio, servicio de comandos y envío |
-| [scope_config.h](../arduino/historico/v13_pulse/oscilloscope/sketch/scope_config.h) | Pines, relojes, recursos y tamaños |
-| [acquisition.h](../arduino/historico/v13_pulse/oscilloscope/sketch/acquisition.h) | ADC, timers, DMA y continuidad |
-| [generator.h](../arduino/historico/v13_pulse/oscilloscope/sketch/generator.h) | Formas de onda y cambios de generador |
-| [generator_dma.h](../arduino/historico/v13_pulse/oscilloscope/sketch/generator_dma.h) | Motor DAC temporizado |
-| [control_protocol.h](../arduino/historico/v13_pulse/oscilloscope/sketch/control_protocol.h) | Selección SPI/UART |
-| [acquisition_protocol.h](../arduino/historico/v13_pulse/oscilloscope/sketch/acquisition_protocol.h) | Configuración ADC |
-| [generator_protocol.h](../arduino/historico/v13_pulse/oscilloscope/sketch/generator_protocol.h) | Comandos del generador |
+| [sketch.ino](../arduino/v19/oscilloscope/sketch/sketch.ino) | Inicio, servicio de comandos y envío |
+| [scope_config.h](../arduino/v19/oscilloscope/sketch/scope_config.h) | Pines, relojes, recursos y tamaños |
+| [acquisition.h](../arduino/v19/oscilloscope/sketch/acquisition.h) | ADC, timers, DMA y continuidad |
+| [generator.h](../arduino/v19/oscilloscope/sketch/generator.h) | Formas de onda y cambios de generador |
+| [generator_dma.h](../arduino/v19/oscilloscope/sketch/generator_dma.h) | Motor DAC temporizado |
+| [control_protocol.h](../arduino/v19/oscilloscope/sketch/control_protocol.h) | Selección SPI/UART |
+| [acquisition_protocol.h](../arduino/v19/oscilloscope/sketch/acquisition_protocol.h) | Configuración ADC |
+| [generator_protocol.h](../arduino/v19/oscilloscope/sketch/generator_protocol.h) | Comandos del generador |
 
 ## Perfiles y transiciones
 
-8/10/12/14 bits nativos; 16 bits mediante 16 conversiones de 14 bits y
-desplazamiento de dos bits. SPI llega a 125 kHz, o 62,5 kHz con oversampling;
-UART llega a 31,25 kHz. Ventanas más cortas cambian el tiempo de carga del ADC.
+La tabla V19 resume las tasas del selector; 16 bits usa oversampling ×16 de
+conversiones de 14 bits y desplazamiento de dos bits. El selector aplica
+distintos límites a CH1, dual, SPI, UART y Synth; la tasa disponible no garantiza
+estabilidad bajo toda carga concurrente. Ver [frecuencias y aceptación](CONFIGURACION_ADQUISICION.md).
 
 Cambiar bits/tasa reinicia adquisición con una época nueva; el monitor cierra
 el CSV anterior. Cambiar transporte o generador conserva la época. El protocolo

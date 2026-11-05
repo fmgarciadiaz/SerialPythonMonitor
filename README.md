@@ -8,373 +8,183 @@ Para uso comercial, contactar al autor. [Licencia](LICENSE.md) ·
 [![Último commit](https://img.shields.io/github/last-commit/fmgarciadiaz/SerialPythonMonitor?logo=github)](https://github.com/fmgarciadiaz/SerialPythonMonitor/commits)
 [![Stars](https://img.shields.io/github/stars/fmgarciadiaz/SerialPythonMonitor?style=flat&logo=github)](https://github.com/fmgarciadiaz/SerialPythonMonitor/stargazers)
 ![Python](https://img.shields.io/badge/Python-3.13-3776AB?logo=python&logoColor=white)
-![Qt](https://img.shields.io/badge/GUI-PyQt6%20%7C%20pyqtgraph-41CD52?logo=qt&logoColor=white)
+![Qt](https://img.shields.io/badge/GUI-PySide6%20%7C%20pyqtgraph-41CD52?logo=qt&logoColor=white)
 ![Arduino](https://img.shields.io/badge/Arduino-UNO%20Q-00979D?logo=arduino&logoColor=white)
 ![Firmware](https://img.shields.io/badge/Firmware-C%2FC%2B%2B%20%7C%20Zephyr-5965e0)
 
-Un instrumento para generar señales, observar circuitos y analizar su respuesta.
-Combina adquisición y generación por hardware con un monitor Python de dos
-canales, análisis espectral, respuesta en frecuencia, grabación de señales y un
-sintetizador MIDI con FM y modelos físicos de instrumentos.
+Conectá un circuito y mirá cómo cambia su voltaje. Después descubrí qué
+frecuencias lo componen, medí cómo responde y usá el generador para probarlo.
+También podés grabar señales, escuchar audio por la salida del instrumento o
+crear sonidos con el sintetizador.
 
-La tecnología combina Python/PyQt6 y pyqtgraph para la interfaz, NumPy/SciPy
-para el análisis y audio, Numba para los cálculos recurrentes del sinte, C/C++ con Arduino/Zephyr en el STM32 y un relay C
-sobre Linux. Los temporizadores fijan los tiempos de ADC/DAC y DMA mueve los
-bloques; USB/ADB conecta el instrumento con la computadora.
+El monitor de computadora, el instrumento UNO Q y un programa de enlace trabajan
+en conjunto: el monitor muestra y analiza, el microcontrolador toma y genera
+señales, y el enlace transporta los datos entre ambos. La interfaz está hecha en
+Python; el análisis usa herramientas numéricas y el microcontrolador ejecuta
+conversiones sincronizadas por hardware.
 
-**[Arquitectura completa del proyecto](docs/ARQUITECTURA_V18.md)** — recorrido
-ordenado por el monitor, relay Linux, aplicación App Lab y sketch MCU;
-flujos de muestras y órdenes, temporizadores, DMA, IRQ, mutex, colas y carga del Q.
-
-**V18 es la versión de trabajo; V17 queda congelada con su pareja del Q.** [Parejas y respaldo](docs/PAREJAS_V17_V18.md). [Validación y límites V18](docs/VALIDACION_V18.md) · [Plan de trabajo](Plan%20de%20trabajo.md). Las imágenes y animaciones principales muestran V18: todas son demostraciones sintéticas y no acreditan validación física.
+Las capturas y animaciones son demostraciones sintéticas; no acreditan
+validación física. [Arquitectura del sistema](docs/ARQUITECTURA.md) ·
+[Versiones, fuentes y respaldos](docs/VERSIONES.md) ·
+[Plan de trabajo](Plan%20de%20trabajo.md).
 
 ## V(t) · osciloscopio
 
 <picture>
   <source media="(prefers-reduced-motion: reduce)" srcset="assets/monitor_vt.png">
-  <img src="assets/monitor_vt.gif" alt="Arduscopio Q V18 · V(t), señal cuadrada y respuesta RC simulada">
+  <img src="assets/monitor_vt.gif" alt="Arduscopio Q · V(t), señal cuadrada y respuesta RC simulada">
 </picture>
 
 [Ver imagen estática](assets/monitor_vt.png).
 
-Muestra tensión frente al tiempo para comparar entrada y salida de un circuito.
-Permite ajustar escalas y posición, estabilizar la señal con trigger, detener
-la vista o capturar un evento con SINGLE. Incluye mediciones de tensión máxima,
-mínima, pico a pico, RMS, media y frecuencia estimada.
-La imagen muestra una cuadrada y la respuesta de un filtro RC simulado.
+Conectá la entrada de un circuito y observá su voltaje a lo largo del tiempo. Escalas, posición, trigger y captura SINGLE ayudan a detenerte en la forma de onda que querés estudiar.
 
-## Especificaciones y capacidades
-
-| Área | Implementación y alcance |
-|---|---|
-| Entradas | Dos canales: A2/CH1 y A3/CH2, rango nominal 0–3,3 V |
-| Resolución ADC | 8/10/12/14 bits; 16 bits por oversampling ×16, sin implicar 16 bits de precisión efectiva |
-| Muestreo SPI V18 | Dual hasta 632,41 kHz por canal (ADC8) y 76,23 kHz (ADC16 OS); CH1 hasta 1,860 MHz (ADC8) |
-| Salida DAC | A0, 12 bits, rango nominal 0–3,3 V; amplitud y offset ajustables dentro de esos límites |
-| Generador | Seno, cuadrada, triángulo, rampa; modos Sweep, Chirp y Pulso; seno hasta 150 kHz, cuadrada hasta 200 kHz; triángulo/rampa hasta 50 kHz, con frecuencias intermedias |
-| Audio de salida | WAV mono por A0, L/R/Mix, tasas negociadas de 20/40/50 ksps; 40 ksps por defecto |
-| Audio de entrada | WAV estéreo PCM16 de A2/A3; filtro DC continuo opcional a 5 Hz |
-| Registro | CSV o WAV, muestras recibidas completas, hasta 30 s por grabación |
-| Análisis | FFT, evolución espectral en heatmap y Bode de ganancia/fase; comparación de hasta cinco barridos |
-| Transporte | SPI según perfil (32/38/40 MHz solicitados), tramas SCP1 de 992 bytes, CRC y control de continuidad; USB/ADB al PC |
-| Opción UART | Puente UNO R4, hasta 31,25 mil pares/s; el Q conserva el canal de control |
-| Entorno | Python 3.13, PyQt6, pyqtgraph, NumPy, SciPy; Linux en MPU y Arduino/Zephyr en MCU |
-
-Las tasas indicadas son tasas de muestras, no ancho de banda analógico ni
-precisión garantizada. El DAC pierde linealidad cerca de sus extremos: el ajuste
-inicial de 2 Vpp/1,65 V deja margen. WAV50 con ADC125 está bloqueado. La estabilidad concurrente RADIO/WAV sigue
-en evaluación por cortes intermitentes; los ensayos y límites se enlazan en
-la [validación vigente V18](docs/VALIDACION_V18.md).
-[Perfiles ADC](docs/CONFIGURACION_ADQUISICION.md) · [Límites del generador](docs/GUIA_V18.md) ·
-[Ensayos de audio](docs/WAV_TASAS.md).
-
-### Frecuencias de adquisición V18
-
-Las tasas son por canal. En dual se leen A2 y A3; CH1 utiliza sólo A2.
-El selector ofrece tasas bajas, intermedias y máximos según resolución y modo.
-
-| Bits | Máximo CH1 (kHz) | Máximo dual (kHz por canal) |
-|---|---:|---:|
-| 8 | 1860,465 | 632,411 |
-| 10 | 1355,932 | 519,481 |
-| 12 | 1103,448 | 437,158 |
-| 14 | 1000,000 | 363,636 |
-| 16, oversampling | 150,943 | 76,227 |
-
-Son máximos disponibles, no una calificación universal de holgura ni de carga
-simultánea RADIO/WAV. UART conserva hasta 31,25 kHz por canal; Synth tiene
-sus restricciones de adquisición. [Perfiles y evidencia V18](docs/VALIDACION_V18.md).
+[Controles y detalles de V(t)](docs/GUIA_FUNCIONES.md#vt).
 
 ## FFT · espectro de frecuencia
 
 <picture>
   <source media="(prefers-reduced-motion: reduce)" srcset="assets/monitor_fft_spectrum.png">
-  <img src="assets/monitor_fft_spectrum.gif" alt="Arduscopio Q V18 · FFT con dos entradas sintéticas">
+  <img src="assets/monitor_fft_spectrum.gif" alt="Arduscopio Q · FFT con dos entradas sintéticas">
 </picture>
 
 [Ver imagen estática](assets/monitor_fft_spectrum.png).
 
-Descompone cada canal en sus componentes de frecuencia para observar tonos,
-armónicos y atenuación. Permite elegir tamaño de FFT, ventana, solapamiento,
-escala de amplitud, eje de frecuencia lineal/logarítmico y eliminación de DC.
-El selector de análisis ofrece **Spectrum**, **Power**, **Distortion** y
-**Transfer**. [Modos y unidades](docs/FFT_ANALISIS.md).
-La resolución entre bins depende de Fs/N. En SINGLE conserva el bloque próximo
-al trigger de mayor energía; RUN vuelve al espectro en vivo.
+La FFT convierte la forma de onda en una vista de sus frecuencias: así podés reconocer tonos, armónicos y cambios de amplitud. Elegí Spectrum, Power, Distortion o Transfer según qué quieras comparar.
+
+[Controles y detalles de FFT](docs/GUIA_FUNCIONES.md#fft).
 
 ## Heatmap · evolución espectral
 
 <picture>
   <source media="(prefers-reduced-motion: reduce)" srcset="assets/monitor_heatmap.png">
-  <img src="assets/monitor_heatmap.gif" alt="Arduscopio Q V18 · heatmap de dos canales sintéticos">
+  <img src="assets/monitor_heatmap.gif" alt="Arduscopio Q · heatmap de dos canales sintéticos">
 </picture>
 
 [Ver imagen estática](assets/monitor_heatmap.png).
 
-Acumula espectros para mostrar cómo cambian con el tiempo. Un eje representa
-frecuencia, el otro tiempo y el color amplitud. Sirve para seguir un sweep o
-chirp, ver tonos persistentes y ubicar transitorios; permite ajustar la historia
-visible y comparar los dos canales.
+El heatmap apila espectros en el tiempo. Los colores ayudan a distinguir tonos que permanecen, barridos que se desplazan y cambios breves.
+
+[Controles y detalles de Heatmap](docs/GUIA_FUNCIONES.md#heatmap).
 
 ## Bode · respuesta del circuito
 
 <picture>
   <source media="(prefers-reduced-motion: reduce)" srcset="assets/monitor_bode.png">
-  <img src="assets/monitor_bode.gif" alt="Arduscopio Q V18 · Bode de un filtro RC simulado">
+  <img src="assets/monitor_bode.gif" alt="Arduscopio Q · Bode de un filtro RC simulado">
 </picture>
 
 [Ver imagen estática](assets/monitor_bode.png).
 
-Mide la relación entre respuesta Y y referencia X: ganancia en dB y fase
-en grados. Normalmente CH1 (A2) es la referencia y CH2 (A3) la respuesta;
-las fuentes se eligen en el panel.
-Ofrece tres paneles: **Tonos**, con asentamiento y ciclos por frecuencia;
-**Pulso**, con captura de la respuesta transitoria; y **Sweep/Chirp**, con
-barrido lineal o exponencial. Pulso promedia espectros cruzados de varios
-disparos (8 por defecto); Sweep/Chirp calcula FFT(Y)/FFT(X), o FFT(CH2)/FFT(CH1) con esa selección.
-Ambos incluyen la cola de respuesta y descartan
-frecuencias sin señal suficiente. Permite comparar hasta cinco curvas por
-método. Elegir el modo prepara el panel; la medición empieza con Repetir
-o Agregar. Los pulsos de 100 µs requieren el firmware experimental.
+Aplicá una señal conocida y compará la entrada con la salida del circuito. Bode resume cuánto cambia la amplitud y el desfase a distintas frecuencias.
 
-Las demostraciones muestran la interfaz V18 actual y señales sintéticas.
-Bode ilustra un filtro RC calculado. No representan mediciones de hardware. Los GIF tienen PNG
-alternativo y respetan la preferencia de reducir movimiento cuando el lector
-la admite.
-[Controles del monitor](monitor/v18/README.md) · [Análisis y Bode](docs/MONITOR_TECNICO.md).
+[Controles y detalles de Bode](docs/GUIA_FUNCIONES.md#bode).
 
 ## Generador · señales por A0
 
 <picture>
   <source media="(prefers-reduced-motion: reduce)" srcset="assets/monitor_generator.png">
-  <img src="assets/monitor_generator.gif" alt="Arduscopio Q V18 · controles del generador y trazas de demostración">
+  <img src="assets/monitor_generator.gif" alt="Arduscopio Q · controles del generador y trazas de demostración">
 </picture>
 
 [Ver imagen estática](assets/monitor_generator.png).
 
-Genera seno, cuadrada, triángulo y rampa con amplitud y offset ajustables.
-Permite trabajar con una frecuencia fija, recorrer un rango con Sweep/Chirp
-o aplicar un pulso para observar la respuesta de un circuito.
-Seno llega a 150 kHz y cuadrada a 200 kHz; admite frecuencias intermedias.
-La imagen ilustra el panel integrado con el osciloscopio.
-[Límites y mediciones](docs/GUIA_V18.md).
+Elegí una forma de onda y enviála por A0 para probar el circuito: seno, cuadrada, triángulo o rampa. También podés recorrer frecuencias o aplicar un pulso.
 
-## RADIO · recepción AM y sintonía
-
-<picture>
-  <source media="(prefers-reduced-motion: reduce)" srcset="assets/monitor_radio_710.png">
-  <img src="assets/monitor_radio_710.gif" alt="Arduscopio Q V18 · simulación AM a 710 kHz y FFT recortada">
-</picture>
-
-[Ver imagen estática](assets/monitor_radio_710.png).
-
-Toma CH1 como entrada de radio, sintoniza una portadora y demodula AM.
-El panel permite escanear emisoras, ajustar la banda RF y trabajar con gain
-manual o automático hasta ×80. US extiende la sintonía aprovechando alias y
-compara detecciones entre tasas para estimar la frecuencia real.
-La animación simula portadoras AM, con 710 kHz seleccionada y FFT de
-16.384 puntos en «Recortar radios». Se ven el Generador Radio con sus barras
-LED y la solapa Radio. Las portadoras y el audio son sintéticos; no es una
-grabación de recepción ni una prueba de salida A0.
-
-Play de RADIO activa la recepción y el análisis. Generador Radio permite
-llevar el resultado a A0, con entrada RADIO o FILTER, volumen y offset.
-Su panel incorpora diez barras de LED de audio, de verde a naranja y rojo,
-con movimiento suavizado. Funcionan también fuera del modo FFT; visualizan
-el espectro sin modificar el sonido.
-
-<picture>
-  <source media="(prefers-reduced-motion: reduce)" srcset="assets/monitor_radio_equ.png">
-  <img src="assets/monitor_radio_equ.gif" alt="Arduscopio Q V18 · indicadores de audio del Generador Radio, demostración">
-</picture>
-
-[Ver imagen estática](assets/monitor_radio_equ.png).
-
-
-
-La escucha se realiza por esa salida; no hay reproducción por parlantes PC
-implementada. [Recepción, antena y US](docs/GUIA_V18.md) ·
-[Salida a A0](docs/GUIA_V18.md).
-
-## FILTER · procesamiento y comparación
-
-<picture>
-  <source media="(prefers-reduced-motion: reduce)" srcset="assets/monitor_filter.png">
-  <img src="assets/monitor_filter.gif" alt="Arduscopio Q V18 · FILTER con CH1 de demostración">
-</picture>
-
-[Ver imagen estática](assets/monitor_filter.png).
-
-Elige su propia entrada y procesa CH1, CH2 o el audio de RADIO. Permite
-comparar la señal original y la filtrada en temporal o análisis espectral;
-Generador Radio también puede tomar FILTER como entrada de A0.
-Incluye rechazo de banda y presets, como el rechazo de 50 Hz para reducir
-interferencia de red. OFF deja el filtro sin procesamiento.
-La captura muestra el selector de entrada y los controles del filtro.
-[Guía del monitor](monitor/v18/README.md).
+[Controles y detalles de Generador](docs/GUIA_FUNCIONES.md#generador).
 
 ## Wav · grabación y reproducción
 
 <picture>
   <source media="(prefers-reduced-motion: reduce)" srcset="assets/monitor_wav.png">
-  <img src="assets/monitor_wav.gif" alt="Arduscopio Q V18 · panel Wav con trazas de demostración; sin reproducción física">
+  <img src="assets/monitor_wav.gif" alt="Arduscopio Q · panel Wav con trazas de demostración; sin reproducción física">
 </picture>
 
 [Ver imagen estática](assets/monitor_wav.png).
 
-Graba las entradas **A2 como L** y **A3 como R** en WAV estéreo PCM16,
-con el mismo botón de registro que CSV. El selector permite elegir el formato;
-los archivos se guardan junto a las capturas con fecha y hora, hasta 30 s.
-**Eliminar DC** aplica un filtro continuo de 5 Hz, con estado entre bloques:
-una señal centrada en 1 V no necesita estar centrada en 1,65 V para escucharse.
+Guardá las dos entradas como archivo de audio o reproducí un WAV por A0. Elegí canal izquierdo, derecho o mezcla; la salida del instrumento es mono.
 
-En el generador, **Wav** permite elegir un archivo, seleccionar **L, R o Mix**
-y reproducirlo por **A0 en mono**. Python remuestrea con antialias, convierte
-el audio a 12 bits y ajusta amplitud y offset al rango del DAC. La salida usa
-**40 kHz por defecto**, con 20/40/50 kHz según el firmware. Incluye Play/Stop,
-avance y retroceso de 10 s y amplitud ajustable durante reproducción. Al
-terminar queda en silencio. Play activa la adquisición y bloquea cambios ADC.
-
-La ruta es PC → USB/ADB → relay Linux → SPI → MCU → temporizador/DMA → A0.
-Es reproducción de archivos; no crea una salida de audio del sistema operativo.
-[Uso del monitor](monitor/v18/README.md) ·
-[Tasas y ensayos físicos](docs/WAV_TASAS.md).
+[Controles y detalles de WAV](docs/GUIA_FUNCIONES.md#wav).
 
 ## Synth · FM, ondas y modelos físicos
 
 <picture>
   <source media="(prefers-reduced-motion: reduce)" srcset="assets/monitor_synth.png">
-  <img src="assets/monitor_synth.gif" alt="Arduscopio Q V18 · panel Synth con trazas de demostración; sin reproducción física">
+  <img src="assets/monitor_synth.gif" alt="Arduscopio Q · panel Synth con trazas de demostración; sin reproducción física">
 </picture>
 
 [Ver imagen estática](assets/monitor_synth.png).
 
-Mini sintetizador **mono de salida y polifónico de veinte voces**, controlado
-por MIDI o Play. Ofrece **Osc 1, Osc 2 y Osc 3**, FM con feedback, seno,
-cuadrada, triángulo y rampa; ADSR por oscilador, mezcla, detune y filtros
-pasa bajos, pasa altos, pasa banda y notch.
+Tocá desde MIDI o Play con un sintetizador de varias voces. Partí de ondas y presets, ajustá la modulación FM o explorá los modelos de guitarra y piano virtual.
 
-**DX Piano** es el instrumento inicial; **DX Brillo** agrega ataque metálico.
-También incluye flauta, órgano, campana, Bass Punch, Lead, Brass, Warm Pad
-y Pluck. Son presets editables, no emulaciones exactas de instrumentos comerciales.
+[Controles y detalles de Synth](docs/GUIA_FUNCIONES.md#synth).
 
-**Virtual** agrega dos instrumentos físicos: **Guitarra**, con cuerda pulsada,
-dos planos de vibración, puente y caja; y **Piano Virtual**, con martillo no
-lineal, cuerdas rígidas, unísonos acoplados y resonancias simpáticas con pedal.
-Permite ajustar posición, brillo, vibración, caja, puente y rigidez del piano.
-El piano usa parámetros mecánicos publicados por registro; las resonancias
-de caja siguen siendo sintéticas, pendientes de ajuste por escucha.
-Piano Virtual añade un perfil acústico identificado contra grabaciones de un
-Yamaha C5, con ajuste de parciales, pérdidas, batimientos y crecimiento inicial.
-[Método, referencias y comparación A/B](docs/PIANO_IDENTIFICACION.md).
+## RADIO · recepción AM y sintonía
 
-La salida A0 es de 12 bits, **20 kHz por defecto** o 40 kHz. Velocidad MIDI,
-pedal CC64 y volumen CC7 funcionan durante reproducción. Numba compila feedback,
-envolventes y los modelos físicos; la preparación ocurre antes de Play.
-El buffer aporta al menos 120 ms a 20 kHz y 192 ms a 40 kHz y puede crecer.
-40 kHz sigue siendo experimental: las pruebas locales de cálculo no garantizan
-continuidad física con adquisición y transporte activos.
-[Guía y controles](monitor/v18/README.md) ·
-[Motor, modelos físicos y límites](docs/SYNTH.md).
+<picture>
+  <source media="(prefers-reduced-motion: reduce)" srcset="assets/monitor_radio_710.png">
+  <img src="assets/monitor_radio_710.gif" alt="Arduscopio Q · simulación AM a 710 kHz y FFT recortada">
+</picture>
 
-## Qué hace
+[Ver imagen estática](assets/monitor_radio_710.png).
 
-FFT incorpora Spectrum, Power, Distortion y Transfer: espectro, potencia,
-distorsión y respuesta entre entradas. [Definiciones y límites](docs/FFT_ANALISIS.md).
+<picture>
+  <source media="(prefers-reduced-motion: reduce)" srcset="assets/monitor_radio_equ.png">
+  <img src="assets/monitor_radio_equ.gif" alt="Arduscopio Q · indicadores de audio del Generador Radio, demostración">
+</picture>
 
-- Osciloscopio V(t) con trigger, RUN/STOP y captura SINGLE.
-- FFT, heatmap y Bode de ganancia y fase.
-- Generador de seno, cuadrada, triángulo y rampa; modos Sweep, Chirp y Pulso.
-- Grabación CSV o WAV estéreo de A2/A3, con eliminación de DC opcional.
-- Reproducción de archivos WAV por A0: selección L/R/Mix, remuestreo,
-  conversión a 12 bits y ajuste de amplitud/offset entre 0 y 3,3 V.
-- Synth con MIDI, hasta veinte voces, FM, ondas clásicas y guitarra/piano físicos.
-- Adquisición configurable: 8/10/12/14 bits o 16 bits por oversampling.
-  SPI dual hasta632,41kHz por canal (ADC8), ADC16 hasta76,23kHz y
-  CH1 hasta 1,860 MHz (ADC8); ver tabla de frecuencias.
+[Ver imagen estática](assets/monitor_radio_equ.png).
+
+Usá CH1 para recibir una señal AM, explorar la banda y sintonizar una portadora. Generador Radio puede llevar el audio demodulado a A0; las imágenes son simulaciones.
+
+[Controles y detalles de Radio](docs/GUIA_FUNCIONES.md#radio).
+
+## FILTER · procesamiento y comparación
+
+<picture>
+  <source media="(prefers-reduced-motion: reduce)" srcset="assets/monitor_filter.png">
+  <img src="assets/monitor_filter.gif" alt="Arduscopio Q · FILTER con CH1 de demostración">
+</picture>
+
+[Ver imagen estática](assets/monitor_filter.png).
+
+Compará una entrada con su versión filtrada y elegí qué canal o audio procesar. FILTER puede alimentar también Generador Radio; en OFF no aplica procesamiento.
+
+[Controles y detalles de FILTER](docs/GUIA_FUNCIONES.md#filter).
+
+## Cómo trabajan juntas las tres partes
+
+El monitor de la computadora presenta las señales y ofrece los controles de
+análisis, grabación y generación. El microcontrolador del UNO Q mide las
+entradas A2 y A3 y produce la salida A0. Entre ellos, el sistema Linux del Q y
+su programa de enlace llevan las muestras y las órdenes.
+
+Conectá las masas y llevá la señal que querés observar a A2/CH1; A3/CH2 sirve
+como segundo canal. A0 es la salida del generador. Las entradas y la salida
+comparten el rango nominal de 0 a 3,3 V.
+
+[Cómo empezar](#empezar) · [Arquitectura y flujo de datos](docs/ARQUITECTURA.md) ·
+[Detalles del monitor](docs/MONITOR_TECNICO.md) · [Cableado del UNO Q](docs/UNO_Q_TECNICO.md) ·
+[Enlace de datos](docs/TRANSPORTE_TECNICO.md).
 
 ## Empezar
 
-Desde la raíz del repositorio:
+Se requiere Python 3.13 y Conda. Desde la raíz del repositorio:
 
 ```sh
-conda env create -f monitor/v18/environment.yml
+conda env create -f monitor/v20/environment.yml
 conda activate Python_3_13_DataScience
-python -m monitor.v18 --gui
+python -m monitor.v20 --gui
 ```
 
-Si el entorno ya existe, omitir su creación. Demo permite probar la interfaz
-sin placa. V18 requiere su pareja `Scope V18` y el relay V18 ya activos. La conexión verifica esa app y no instala ni reinicia programas automáticamente.
-Preparar Q está habilitado: verifica la pareja aceptada sin reinstalarla si ya
-coincide, actualiza una instalación existente con respaldo y recuperación, o
-instala Scope V18 por primera vez si su destino está vacío. Requiere el sistema
-UNO Q y el entorno Arduino/App CLI compatible; no reinstala el sistema operativo.
-La nueva ruta de primera instalación está probada automáticamente y pendiente
-de validación física en un Q vacío. [Preparación y requisitos](docs/GUIA_V18.md).
-No actúa mientras hay adquisición ni sobrescribe otras aplicaciones activas.
+Demo permite recorrer la interfaz sin conectar una placa. Para usar el UNO Q,
+consultá la [guía de conexión y preparación](monitor/v20/README.md) y la
+[documentación de versiones y respaldos](docs/VERSIONES.md). Las tasas y modos
+dependen de la configuración y de la evidencia disponible; las capturas de esta
+página son sintéticas.
 
-Valores iniciales: ADC 14 bits/40 kHz, amplitud 2 Vpp, offset 1,65 V y salida
-apagada. Sweep y Chirp: 20 Hz→2 kHz en 2 s; se lanzan con Disparar.
-Wav usa 40 mil muestras/s por defecto si el firmware lo admite.
-Durante Play se activa la adquisición y se bloquea el cambio de perfil ADC;
-la amplitud se puede ajustar durante la reproducción. Desconectar solicita y espera el apagado; si falta su confirmación, lo informa.
-
-[Guía del monitor](monitor/v18/README.md) · [Pareja del Q V18](arduino/v18/README.md)
-
-## Cómo se conectan los componentes
-
-| Componente | Función |
-|---|---|
-| PC / Python | Interfaz, análisis, archivos CSV/WAV y preparación del audio |
-| MPU / Linux del UNO Q | App de App Lab y relay nativo USB/ADB ↔ SPI |
-| MCU / STM32 del UNO Q | ADC A2/A3 y DAC A0, temporizadores y DMA |
-| UNO R4 opcional | Puente UART de adquisición; el Q conserva el control |
-
-El MCU adquiere A2/A3 y entrega los bloques por SPI al relay del MPU.
-El relay los lleva por USB/ADB al receptor Python. Los comandos y los códigos
-WAV viajan en sentido inverso: PC→relay→SPI→MCU; TIM6 y DMA alimentan el DAC A0.
-El pequeño Python de App Lab mantiene la app; el relay es un proceso separado.
-
-| Pin | Uso |
-|---|---|
-| A0 / DAC0 | Salida de 12 bits, 0–3,3 V |
-| A2 / CH1 | Primera entrada / canal izquierdo de grabación |
-| A3 / CH2 | Segunda entrada / canal derecho de grabación |
-| GND | Masa común |
-
-[MCU y cableado](docs/UNO_Q_TECNICO.md) · [Relay y protocolos](docs/TRANSPORTE_TECNICO.md)
-
-## Monitor Python · interfaz y procesamiento
-
-El monitor recibe muestras en un worker y actualiza la interfaz Qt desde el
-hilo gráfico. Conserva los datos para análisis y grabación, mientras adapta
-la cantidad de puntos dibujados a la pantalla. Python prepara WAV, remuestrea
-con filtro antialias y ajusta códigos de salida; el hardware mantiene su ritmo.
-
-[Arquitectura, historial, FFT y Bode](docs/MONITOR_TECNICO.md) ·
-[Receptor y comandos del PC](monitor/v18/receiver/README.md).
-
-## Relay C · Linux del MPU
-
-El relay nativo une USB/ADB con SPI: espera READY del MCU, intercambia tramas,
-valida CRC y continuidad y lleva muestras al PC. También transporta órdenes
-ADC/generador y bloques WAV en sentido inverso. Corre en Linux y es distinto
-del pequeño Python que mantiene viva la app de App Lab.
-
-[Detalles: GPIO READY, SPI, tramas, créditos y recuperación](docs/TRANSPORTE_TECNICO.md) ·
-[Fuentes del relay](arduino/v18/relay/unoq_config_stream.c).
-
-## C/C++ Arduino · firmware del MCU
-
-El sketch configura ADC, DAC, temporizadores y GPDMA del STM32. TIM2 dispara
-las conversiones; TIM5 captura timestamps; TIM6 marca los pasos del DAC.
-Los DMA 0/1 alimentan buffers de timestamps/ADC, 2/3 atienden SPI y 4 alimenta
-A0. Las IRQ del DMA SPI notifican fin/error mediante el driver Zephyr; la
-adquisición comprueba flags y buffers sin una ISR por muestra.
-
-[Detalles: relojes, timers, DMA, IRQ y propiedad de buffers](docs/UNO_Q_TECNICO.md) ·
-[Sketch Arduino](arduino/v18/oscilloscope/sketch/sketch.ino) ·
-[Instalación y compilación](arduino/v18/README.md).
+Si el flujo se detiene y ya no permite conectar, consultá
+[cómo restablecer el Q](docs/V20_RESTABLECER_Q_20261105.md).
 
 ## Carpetas
 
@@ -397,34 +207,11 @@ Los entornos locales y cachés no forman parte de las fuentes.
 ## Documentación y validación
 
 [Índice técnico](docs/README.md) · [Plan de trabajo](Plan%20de%20trabajo.md) ·
-[Continuación](%23%20Continuar%20desde%20donde%20quedaste.md)
+[Continuación](%23%20Continuar%20desde%20donde%20quedaste.md) ·
+[Validación y límites](docs/VALIDACION_CIERRE.md) · [Ensayos WAV](docs/WAV_TASAS.md).
 
-WAV a 40/50 ksps pasó ensayos de 120 s; 50 ksps también con ADC14/100 kHz.
-La combinación WAV50/ADC125 está bloqueada por fallos observados.
-[Resultados y límites](docs/WAV_TASAS.md).
-La referencia Bode histórica corresponde al reloj ADC anterior y requiere
-comprobación con el perfil actual. Los ensayos locales y los físicos se
-identifican por separado en los informes.
+## Versiones y documentación
 
-## Versiones y enlaces
-
-| Conjunto | Estado y documentación |
-|---|---|
-| [Arduscopio Q V18 + Scope V18](monitor/v18/README.md) | Actual: ADC8 CH1 hasta 1,860 MS/s, RADIO/FILTER, WAV y Synth20; [catálogo de tasas](docs/CATALOGO_TASAS_V18_PLAN_20261025.md); [validación](docs/VALIDACION_V18.md) |
-| [Pareja V17 congelada](monitor/v17/README.md) | Conservada con sus fuentes y respaldos, sin desarrollo activo |
-| [Monitor V16](monitor/historico/v16/README.md) | Respaldo local anterior, app exportada y retirada del Q |
-| [Monitor V15 · Synth](monitor/historico/v15/README.md) | Synth: tres osciladores, feedback, FM/ondas/Virtual, guitarra y piano físicos, nueve voces y MIDI; estabilidad de cada perfil pendiente de validación física |
-| [Monitor V14 · PyQt6](monitor/historico/v14/README.md) | Archivado: cuatro modos FFT; firmware existente |
-| [Monitor V13 · PyQt6](monitor/historico/v13/README.md) + [Q V12 Audio](arduino/historico/v12_audio/README.md) | Archivado: grabación y reproducción WAV |
-| [Q V13 Pulse experimental](arduino/historico/v13_pulse/README.md) + [Monitor V15](monitor/historico/v15/README.md) | Pareja anterior V15: pulso desde100µs |
-| [Monitor V12 · PyQt5](monitor/historico/v12/README.md) + [Q V11 P992](arduino/historico/v11_p992/README.md) | Archivado: sin reproducción WAV |
-| [Monitores históricos](monitor/historico/README.md) | Versiones anteriores archivadas |
-| [Firmware histórico](arduino/historico/README.md) | Sketches y puentes anteriores |
-| [Historia completa](docs/HISTORIA.md) | Evolución y catálogo del proyecto |
-
-Los accesos activos y Preparar Q utilizan V18. Las versiones anteriores están
-archivadas y sus respaldos pareados se conservan. Scope V18 está activa en el Q;
-Scope V17 queda detenida. [Organización](docs/ORGANIZACION_V18.md).
-
-[Arquitectura](docs/ARQUITECTURA_V18.md) · [Organización](docs/ORGANIZACION.md) ·
-[Estado vigente](docs/VALIDACION_V18.md) · [Documentación](docs/README.md).
+[Versiones, respaldos pareados y fuentes archivadas](docs/VERSIONES.md) ·
+[Documentación técnica](docs/README.md) · [Historia del proyecto](docs/HISTORIA.md) ·
+[Plan de trabajo](Plan%20de%20trabajo.md).

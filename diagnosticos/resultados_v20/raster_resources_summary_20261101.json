@@ -1,0 +1,646 @@
+{
+  "private": true,
+  "incorporated": false,
+  "product_changed": false,
+  "local_tests_passed": 29,
+  "logical_host_cpus": 16,
+  "runs": [
+    {
+      "report": "diagnosticos/resultados_v20/raster_resources_w1_120_20261101/report.json",
+      "report_sha256": "0805c172ce2c3212b51ed2355212bf984b0fe63c6506b180df18b11b80b95d8b",
+      "requested": {
+        "radio": true,
+        "wav": false,
+        "fm": false,
+        "voices": 1,
+        "us": false,
+        "scan_during_a0": false,
+        "analysis_mode": null,
+        "bits": 8,
+        "rate": 1860465,
+        "window_seconds": 2.0,
+        "detail_percent": 100,
+        "raster_workers": 1
+      },
+      "functional_pass": true,
+      "gui": {
+        "ok": true,
+        "errors": [],
+        "assertions": {
+          "radio_playing_40k": true,
+          "radio_stop_confirmed": true,
+          "radio_progress": true,
+          "radio_hold_completed": true,
+          "scan_completed": true,
+          "wav_playing": true,
+          "wav_progress": true,
+          "wav_stop_confirmed": true,
+          "fm_playing": true,
+          "fm_progress": true,
+          "fm_stop_confirmed": true,
+          "shutdown_confirmed": true,
+          "worker_released": true,
+          "requested_time_window_applied": true,
+          "requested_detail_applied": true,
+          "temporal_raster_published": true,
+          "temporal_raster_no_error": true
+        },
+        "exposed_fraction": 1.0,
+        "visible_gui_ok": false,
+        "display": {
+          "platform": "cocoa",
+          "dpr": 2.0,
+          "size": [
+            1320,
+            920
+          ],
+          "screen": "Built-in Retina Display",
+          "exposed": false
+        },
+        "paint_events": 172,
+        "hold": 120.02264686394483,
+        "radio": {
+          "frames": 256028,
+          "samples": 223256416,
+          "empty_status_frames": 4205,
+          "send_nodes": 64007,
+          "mean_send_margin": 0.12146098855395082,
+          "mcu_queue_peak": 4,
+          "min_slack_ticks": 72663,
+          "sampled_queue_max": 3,
+          "send_ticks_max": 686579,
+          "send_over_budget_nodes": 6268,
+          "headroom_pass": false
+        },
+        "scan": {
+          "requested": false,
+          "completed": false,
+          "candidate_count": null
+        },
+        "analysis_mode": null,
+        "analysis_synthetic": false,
+        "acquisition": {
+          "frames": 277516,
+          "samples": 241993952,
+          "empty_status_frames": 4246,
+          "send_nodes": 69378,
+          "mean_send_margin": 0.12670655441756928,
+          "mcu_queue_peak": 4,
+          "min_slack_ticks": 72663,
+          "sampled_queue_max": 3,
+          "send_ticks_max": 686579,
+          "send_over_budget_nodes": 6306,
+          "headroom_pass": false
+        },
+        "reserve_screen": {
+          "publicly_accepted": false,
+          "capacity": 16,
+          "legacy_headroom_pass": false,
+          "free_at_peak": 12,
+          "passes": true,
+          "criterion": "Mean margin >=10%, cumulative peak strictly below half capacity, positive slack; private screen only"
+        },
+        "scope": "Functional V20 private screen; public acceptance remains false"
+      },
+      "steady_resources": {
+        "samples": 104,
+        "cpu_cores_median": 2.7978862109505296,
+        "cpu_cores_peak": 2.9808208209426357,
+        "rss_sum_peak_bytes": 2860883968,
+        "observer_ms_max": 29.407561058178544,
+        "partial_samples": 0,
+        "scope": "GUI and descendants only; one CPU core=1.0. Sampled CPU can miss exited children. Summed RSS double-counts shared pages, not unique physical memory.",
+        "start": 901823.295813621,
+        "end": 901929.661625708
+      },
+      "raster_ms_median": 1397.545148502104,
+      "paint_fps_median": 1.1899471627141325,
+      "gui_delay_max_ms": 139.63592203799635,
+      "worker_priorities": null,
+      "restoration": {
+        "ok": true,
+        "attempted": true,
+        "errors": [],
+        "material": {
+          "sources_exact": true,
+          "cache_exact": true,
+          "firmware_exact": true,
+          "relay_exact": true
+        },
+        "recovery": {
+          "snapshot_equal": true,
+          "continuous": true,
+          "integrity_ok": true,
+          "seconds": 10.021946367924102,
+          "detail": {
+            "hardware_restored": true,
+            "errors": [],
+            "recovery": {
+              "seconds": 10.021946367924102,
+              "samples": 313344,
+              "dropped": 0,
+              "fatal": 0,
+              "continuous": true
+            }
+          }
+        },
+        "final": {
+          "identity_equal": true,
+          "sources_exact": true,
+          "relay_configuration_equal": true,
+          "cpu_equal": true
+        }
+      }
+    },
+    {
+      "report": "diagnosticos/resultados_v20/raster_resources_w2_120_20261101/report.json",
+      "report_sha256": "15609b443bc81e9f8c703b9b53e36a21de57e580b1b9c4ee1c3e53a6ef8002bb",
+      "requested": {
+        "radio": true,
+        "wav": false,
+        "fm": false,
+        "voices": 1,
+        "us": false,
+        "scan_during_a0": false,
+        "analysis_mode": null,
+        "bits": 8,
+        "rate": 1860465,
+        "window_seconds": 2.0,
+        "detail_percent": 100,
+        "raster_workers": 2
+      },
+      "functional_pass": false,
+      "gui": {
+        "ok": false,
+        "errors": [
+          "radio status state=4 reason=2",
+          "RuntimeError: El Q cerr\u00f3 el flujo.",
+          "Assertion failed: radio_stop_confirmed",
+          "Assertion failed: radio_hold_completed",
+          "Assertion failed: shutdown_confirmed"
+        ],
+        "assertions": {
+          "radio_playing_40k": true,
+          "radio_stop_confirmed": false,
+          "radio_progress": true,
+          "radio_hold_completed": false,
+          "scan_completed": true,
+          "wav_playing": true,
+          "wav_progress": true,
+          "wav_stop_confirmed": true,
+          "fm_playing": true,
+          "fm_progress": true,
+          "fm_stop_confirmed": true,
+          "shutdown_confirmed": false,
+          "worker_released": true,
+          "requested_time_window_applied": true,
+          "requested_detail_applied": true,
+          "temporal_raster_published": true,
+          "temporal_raster_no_error": true
+        },
+        "exposed_fraction": 1.0,
+        "visible_gui_ok": false,
+        "display": {
+          "platform": "cocoa",
+          "dpr": 2.0,
+          "size": [
+            1320,
+            920
+          ],
+          "screen": "Built-in Retina Display",
+          "exposed": false
+        },
+        "paint_events": 61,
+        "hold": 0.0,
+        "radio": {
+          "frames": 48808,
+          "samples": 42560576,
+          "empty_status_frames": 859,
+          "send_nodes": 12202,
+          "mean_send_margin": 0.1224980735638409,
+          "mcu_queue_peak": 6,
+          "min_slack_ticks": 71655,
+          "sampled_queue_max": 5,
+          "send_ticks_max": 936784,
+          "send_over_budget_nodes": 1182,
+          "headroom_pass": false
+        },
+        "scan": {
+          "requested": false,
+          "completed": false,
+          "candidate_count": null
+        },
+        "analysis_mode": null,
+        "analysis_synthetic": false,
+        "acquisition": {
+          "frames": 60121,
+          "samples": 52425512,
+          "empty_status_frames": 895,
+          "send_nodes": 15030,
+          "mean_send_margin": 0.1345234010589872,
+          "mcu_queue_peak": 6,
+          "min_slack_ticks": 71655,
+          "sampled_queue_max": 5,
+          "send_ticks_max": 936784,
+          "send_over_budget_nodes": 1218,
+          "headroom_pass": false
+        },
+        "reserve_screen": {
+          "publicly_accepted": false,
+          "capacity": 16,
+          "legacy_headroom_pass": false,
+          "free_at_peak": 10,
+          "passes": true,
+          "criterion": "Mean margin >=10%, cumulative peak strictly below half capacity, positive slack; private screen only"
+        },
+        "scope": "Functional V20 private screen; public acceptance remains false"
+      },
+      "steady_resources": {
+        "samples": 10,
+        "cpu_cores_median": 3.8982179578150635,
+        "cpu_cores_peak": 4.2147009578794385,
+        "rss_sum_peak_bytes": 2892009472,
+        "observer_ms_max": 32.264127978123724,
+        "partial_samples": 0,
+        "scope": "GUI and descendants only; one CPU core=1.0. Sampled CPU can miss exited children. Summed RSS double-counts shared pages, not unique physical memory.",
+        "start": 902036.364519076,
+        "end": 902046.664177878
+      },
+      "raster_ms_median": 874.2720669833943,
+      "paint_fps_median": 1.9610977713387694,
+      "gui_delay_max_ms": 179.1141181020066,
+      "worker_priorities": null,
+      "restoration": {
+        "ok": true,
+        "attempted": true,
+        "errors": [],
+        "material": {
+          "sources_exact": true,
+          "cache_exact": true,
+          "firmware_exact": true,
+          "relay_exact": true
+        },
+        "recovery": {
+          "snapshot_equal": true,
+          "continuous": true,
+          "integrity_ok": true,
+          "seconds": 10.024519696016796,
+          "detail": {
+            "hardware_restored": true,
+            "errors": [],
+            "recovery": {
+              "seconds": 10.024519696016796,
+              "samples": 313344,
+              "dropped": 0,
+              "fatal": 0,
+              "continuous": true
+            }
+          }
+        },
+        "final": {
+          "identity_equal": true,
+          "sources_exact": true,
+          "relay_configuration_equal": true,
+          "cpu_equal": true
+        }
+      },
+      "failure": {
+        "underrun_after_play_seconds": 23.554462917963974,
+        "status": {
+          "elapsed": 31.302658481989056,
+          "phase": "radio",
+          "request_id": 2818495775,
+          "session": 2818493514,
+          "state": 4,
+          "reason": 2,
+          "free_blocks": 29,
+          "accepted": 914400,
+          "played": 913920,
+          "total": 3456000000,
+          "rate": 40000,
+          "rates_mask": 7,
+          "queue_slots": 30
+        },
+        "pcm_render_roundtrip_max_ms": 18.78717099316418,
+        "chunk_send_to_ack_max_ms": 666.4662269176915,
+        "inflight": 9,
+        "relay_tail": "UNO Q stream: 127.0.0.1:8766, SPI16 32 MHz, SCP1 dual ADC/control\nSPI ready: first verified frame\nPC connected at seq=721\nvalid=1216 pairs=311296 dropped=0\nPC closed or rejected; acquisition continues\nPC connected at seq=21101\nV17 CPU runtime: CPU2 performance verified\nvalid=7534 pairs=5258800 dropped=0\nvalid=28858 pairs=23853328 dropped=0\nvalid=50182 pairs=42447856 dropped=0\nPC disconnected or too slow; close session (sent=-1)",
+        "host_scheduling_cause_confirmed": false
+      }
+    },
+    {
+      "report": "diagnosticos/resultados_v20/raster_resources_nice10_w2_120_20261101/report.json",
+      "report_sha256": "5e77b4fc2ce0a75b30694733d7b1a784f96739c6ec6ea575f0e1538212847f34",
+      "requested": {
+        "radio": true,
+        "wav": false,
+        "fm": false,
+        "voices": 1,
+        "us": false,
+        "scan_during_a0": false,
+        "analysis_mode": null,
+        "bits": 8,
+        "rate": 1860465,
+        "window_seconds": 2.0,
+        "detail_percent": 100,
+        "raster_workers": 2,
+        "raster_nice": 10
+      },
+      "functional_pass": true,
+      "gui": {
+        "ok": true,
+        "errors": [],
+        "assertions": {
+          "radio_playing_40k": true,
+          "radio_stop_confirmed": true,
+          "radio_progress": true,
+          "radio_hold_completed": true,
+          "scan_completed": true,
+          "wav_playing": true,
+          "wav_progress": true,
+          "wav_stop_confirmed": true,
+          "fm_playing": true,
+          "fm_progress": true,
+          "fm_stop_confirmed": true,
+          "shutdown_confirmed": true,
+          "worker_released": true,
+          "requested_time_window_applied": true,
+          "requested_detail_applied": true,
+          "temporal_raster_published": true,
+          "temporal_raster_no_error": true
+        },
+        "exposed_fraction": 1.0,
+        "visible_gui_ok": false,
+        "display": {
+          "platform": "cocoa",
+          "dpr": 2.0,
+          "size": [
+            1320,
+            920
+          ],
+          "screen": "Built-in Retina Display",
+          "exposed": false
+        },
+        "paint_events": 188,
+        "hold": 120.24280953407288,
+        "radio": {
+          "frames": 256768,
+          "samples": 223901696,
+          "empty_status_frames": 5021,
+          "send_nodes": 64192,
+          "mean_send_margin": 0.12385524257973024,
+          "mcu_queue_peak": 4,
+          "min_slack_ticks": 73746,
+          "sampled_queue_max": 3,
+          "send_ticks_max": 681151,
+          "send_over_budget_nodes": 6217,
+          "headroom_pass": false
+        },
+        "scan": {
+          "requested": false,
+          "completed": false,
+          "candidate_count": null
+        },
+        "analysis_mode": null,
+        "analysis_synthetic": false,
+        "acquisition": {
+          "frames": 278464,
+          "samples": 242820608,
+          "empty_status_frames": 5057,
+          "send_nodes": 69615,
+          "mean_send_margin": 0.1289572859090078,
+          "mcu_queue_peak": 4,
+          "min_slack_ticks": 73746,
+          "sampled_queue_max": 3,
+          "send_ticks_max": 681151,
+          "send_over_budget_nodes": 6253,
+          "headroom_pass": false
+        },
+        "reserve_screen": {
+          "publicly_accepted": false,
+          "capacity": 16,
+          "legacy_headroom_pass": false,
+          "free_at_peak": 12,
+          "passes": true,
+          "criterion": "Mean margin >=10%, cumulative peak strictly below half capacity, positive slack; private screen only"
+        },
+        "scope": "Functional V20 private screen; public acceptance remains false"
+      },
+      "steady_resources": {
+        "samples": 105,
+        "cpu_cores_median": 3.9305584665039985,
+        "cpu_cores_peak": 4.7534182736409685,
+        "rss_sum_peak_bytes": 2768879616,
+        "observer_ms_max": 44.422721955925226,
+        "partial_samples": 0,
+        "scope": "GUI and descendants only; one CPU core=1.0. Sampled CPU can miss exited children. Summed RSS double-counts shared pages, not unique physical memory.",
+        "start": 902274.795451606,
+        "end": 902382.096922066
+      },
+      "raster_ms_median": 1035.2503550238907,
+      "paint_fps_median": 1.388271683603263,
+      "gui_delay_max_ms": 299.54130901023746,
+      "worker_priorities": [
+        10,
+        10
+      ],
+      "restoration": {
+        "ok": true,
+        "attempted": true,
+        "errors": [],
+        "material": {
+          "sources_exact": true,
+          "cache_exact": true,
+          "firmware_exact": true,
+          "relay_exact": true
+        },
+        "recovery": {
+          "snapshot_equal": true,
+          "continuous": true,
+          "integrity_ok": true,
+          "seconds": 10.02350877202116,
+          "detail": {
+            "hardware_restored": true,
+            "errors": [],
+            "recovery": {
+              "seconds": 10.02350877202116,
+              "samples": 313344,
+              "dropped": 0,
+              "fatal": 0,
+              "continuous": true
+            }
+          }
+        },
+        "final": {
+          "identity_equal": true,
+          "sources_exact": true,
+          "relay_configuration_equal": true,
+          "cpu_equal": true
+        }
+      }
+    },
+    {
+      "report": "diagnosticos/resultados_v20/raster_resources_nice10_w4_120_20261101/report.json",
+      "report_sha256": "693db1e16dc5371838502d1b1aecf5f980123a53f338f7de7fb1cf077b3fae76",
+      "requested": {
+        "radio": true,
+        "wav": false,
+        "fm": false,
+        "voices": 1,
+        "us": false,
+        "scan_during_a0": false,
+        "analysis_mode": null,
+        "bits": 8,
+        "rate": 1860465,
+        "window_seconds": 2.0,
+        "detail_percent": 100,
+        "raster_workers": 4,
+        "raster_nice": 10
+      },
+      "functional_pass": true,
+      "gui": {
+        "ok": true,
+        "errors": [],
+        "assertions": {
+          "radio_playing_40k": true,
+          "radio_stop_confirmed": true,
+          "radio_progress": true,
+          "radio_hold_completed": true,
+          "scan_completed": true,
+          "wav_playing": true,
+          "wav_progress": true,
+          "wav_stop_confirmed": true,
+          "fm_playing": true,
+          "fm_progress": true,
+          "fm_stop_confirmed": true,
+          "shutdown_confirmed": true,
+          "worker_released": true,
+          "requested_time_window_applied": true,
+          "requested_detail_applied": true,
+          "temporal_raster_published": true,
+          "temporal_raster_no_error": true
+        },
+        "exposed_fraction": 1.0,
+        "visible_gui_ok": false,
+        "display": {
+          "platform": "cocoa",
+          "dpr": 2.0,
+          "size": [
+            1320,
+            920
+          ],
+          "screen": "Built-in Retina Display",
+          "exposed": false
+        },
+        "paint_events": 240,
+        "hold": 120.30270921310876,
+        "radio": {
+          "frames": 257036,
+          "samples": 224135392,
+          "empty_status_frames": 4489,
+          "send_nodes": 64259,
+          "mean_send_margin": 0.12750692089571658,
+          "mcu_queue_peak": 4,
+          "min_slack_ticks": 71716,
+          "sampled_queue_max": 4,
+          "send_ticks_max": 686805,
+          "send_over_budget_nodes": 5760,
+          "headroom_pass": false
+        },
+        "scan": {
+          "requested": false,
+          "completed": false,
+          "candidate_count": null
+        },
+        "analysis_mode": null,
+        "analysis_synthetic": false,
+        "acquisition": {
+          "frames": 278264,
+          "samples": 242646208,
+          "empty_status_frames": 4527,
+          "send_nodes": 69565,
+          "mean_send_margin": 0.1322158901338657,
+          "mcu_queue_peak": 4,
+          "min_slack_ticks": 71716,
+          "sampled_queue_max": 4,
+          "send_ticks_max": 686805,
+          "send_over_budget_nodes": 5794,
+          "headroom_pass": false
+        },
+        "reserve_screen": {
+          "publicly_accepted": false,
+          "capacity": 16,
+          "legacy_headroom_pass": false,
+          "free_at_peak": 12,
+          "passes": true,
+          "criterion": "Mean margin >=10%, cumulative peak strictly below half capacity, positive slack; private screen only"
+        },
+        "scope": "Functional V20 private screen; public acceptance remains false"
+      },
+      "steady_resources": {
+        "samples": 100,
+        "cpu_cores_median": 5.476073643822089,
+        "cpu_cores_peak": 6.086489604833189,
+        "rss_sum_peak_bytes": 3855925248,
+        "observer_ms_max": 54.76295400876552,
+        "partial_samples": 0,
+        "scope": "GUI and descendants only; one CPU core=1.0. Sampled CPU can miss exited children. Summed RSS double-counts shared pages, not unique physical memory.",
+        "start": 902489.882419795,
+        "end": 902593.341889914
+      },
+      "raster_ms_median": 696.0335270268843,
+      "paint_fps_median": 1.8657535741515714,
+      "gui_delay_max_ms": 420.9081609733403,
+      "worker_priorities": [
+        10,
+        10,
+        10,
+        10
+      ],
+      "restoration": {
+        "ok": true,
+        "attempted": true,
+        "errors": [],
+        "material": {
+          "sources_exact": true,
+          "cache_exact": true,
+          "firmware_exact": true,
+          "relay_exact": true
+        },
+        "recovery": {
+          "snapshot_equal": true,
+          "continuous": true,
+          "integrity_ok": true,
+          "seconds": 10.02554493502248,
+          "detail": {
+            "hardware_restored": true,
+            "errors": [],
+            "recovery": {
+              "seconds": 10.02554493502248,
+              "samples": 313344,
+              "dropped": 0,
+              "fatal": 0,
+              "continuous": true
+            }
+          }
+        },
+        "final": {
+          "identity_equal": true,
+          "sources_exact": true,
+          "relay_configuration_equal": true,
+          "cpu_equal": true
+        }
+      }
+    }
+  ],
+  "four_normal_priority_run_skipped_after_failure": true,
+  "all_restored": true,
+  "decision": "Keep original single raster worker as normal path; private parallel experiment not accepted as default",
+  "final_state": "Q free; V19 exact active; V20 stopped",
+  "limits": [
+    "Sequential single runs, no randomized repetitions or causal proof for priority mitigation",
+    "RSS sums include shared pages more than once",
+    "Whole GUI tree CPU, excluding observer/coordinator",
+    "Not complete interactions/analog qualification or 8FPS acceptance"
+  ]
+}

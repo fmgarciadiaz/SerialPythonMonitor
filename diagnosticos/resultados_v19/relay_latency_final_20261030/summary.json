@@ -1,0 +1,1884 @@
+{
+  "private": true,
+  "promoted": false,
+  "public_rates_changed": false,
+  "relay_cases": [
+    {
+      "case": "relay_latency_gui_20261030",
+      "functional_pass": true,
+      "errors": [],
+      "headroom": {
+        "frames": 64134,
+        "samples": 55924848,
+        "empty_status_frames": 1205,
+        "send_nodes": 16033,
+        "mean_send_margin": 0.10441286069245836,
+        "mcu_queue_peak": 4,
+        "min_slack_ticks": 78520,
+        "sampled_queue_max": 3,
+        "send_ticks_max": 600818,
+        "send_over_budget_nodes": 1635,
+        "headroom_pass": false
+      },
+      "restored": true,
+      "cpu_cost": null,
+      "latency": {
+        "phases": {
+          "0": {
+            "count": 10221,
+            "tcp_queue_peak": 0,
+            "stages": {
+              "tx_prepare": {
+                "sum_ns": 108592281,
+                "max_ns": 65730,
+                "hist": [
+                  1,
+                  10194,
+                  16,
+                  10,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 10.624428235984736,
+                "max_us": 65.73,
+                "covered_fraction": 0.011359466298707275
+              },
+              "ready_wait": {
+                "sum_ns": 3308689642,
+                "max_ns": 1871622,
+                "hist": [
+                  177,
+                  196,
+                  1096,
+                  3044,
+                  706,
+                  2367,
+                  14,
+                  2404,
+                  217,
+                  0,
+                  0
+                ],
+                "mean_us": 323.71486566872125,
+                "max_us": 1871.622,
+                "covered_fraction": 0.34611068240827203
+              },
+              "spi_ioctl": {
+                "sum_ns": 4943141380,
+                "max_ns": 676930,
+                "hist": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  10215,
+                  6,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 483.6260033264847,
+                "max_us": 676.93,
+                "covered_fraction": 0.5170850763863719
+              },
+              "validate": {
+                "sum_ns": 77707805,
+                "max_ns": 58647,
+                "hist": [
+                  0,
+                  10196,
+                  22,
+                  3,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 7.602759514724586,
+                "max_us": 58.647,
+                "covered_fraction": 0.00812874712562688
+              },
+              "policy": {
+                "sum_ns": 21218851,
+                "max_ns": 51563,
+                "hist": [
+                  10213,
+                  3,
+                  4,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 2.0760053810781725,
+                "max_us": 51.563,
+                "covered_fraction": 0.0022196312722429245
+              },
+              "pc_receive": {
+                "sum_ns": 339607149,
+                "max_ns": 164531,
+                "hist": [
+                  0,
+                  6,
+                  9997,
+                  213,
+                  5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 33.22641121221016,
+                "max_us": 164.531,
+                "covered_fraction": 0.03552513980128624
+              },
+              "pc_send": {
+                "sum_ns": 760671676,
+                "max_ns": 305574,
+                "hist": [
+                  0,
+                  0,
+                  654,
+                  8679,
+                  881,
+                  7,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 74.42243185598278,
+                "max_us": 305.574,
+                "covered_fraction": 0.07957125670749267
+              }
+            },
+            "covered_mean_us": 935.2929051951863
+          },
+          "1": {
+            "count": 723,
+            "tcp_queue_peak": 0,
+            "stages": {
+              "tx_prepare": {
+                "sum_ns": 7489084,
+                "max_ns": 14011,
+                "hist": [
+                  0,
+                  723,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 10.358345781466115,
+                "max_us": 14.011,
+                "covered_fraction": 0.011428219789617425
+              },
+              "ready_wait": {
+                "sum_ns": 212823619,
+                "max_ns": 1173077,
+                "hist": [
+                  6,
+                  14,
+                  77,
+                  217,
+                  46,
+                  208,
+                  15,
+                  128,
+                  12,
+                  0,
+                  0
+                ],
+                "mean_us": 294.36185200553246,
+                "max_us": 1173.077,
+                "covered_fraction": 0.32476536440955917
+              },
+              "spi_ioctl": {
+                "sum_ns": 349521936,
+                "max_ns": 531982,
+                "hist": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  723,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 483.4328298755187,
+                "max_us": 531.982,
+                "covered_fraction": 0.5333647620858032
+              },
+              "validate": {
+                "sum_ns": 5559621,
+                "max_ns": 52292,
+                "hist": [
+                  0,
+                  722,
+                  0,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 7.6896556016597515,
+                "max_us": 52.292,
+                "covered_fraction": 0.008483890784904084
+              },
+              "policy": {
+                "sum_ns": 1498517,
+                "max_ns": 3698,
+                "hist": [
+                  723,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 2.072637621023513,
+                "max_us": 3.698,
+                "covered_fraction": 0.00228671245168009
+              },
+              "pc_receive": {
+                "sum_ns": 24102662,
+                "max_ns": 87396,
+                "hist": [
+                  0,
+                  0,
+                  709,
+                  14,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 33.337015214384515,
+                "max_us": 87.396,
+                "covered_fraction": 0.0367802683012849
+              },
+              "pc_send": {
+                "sum_ns": 54319574,
+                "max_ns": 147032,
+                "hist": [
+                  0,
+                  0,
+                  42,
+                  620,
+                  61,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 75.13080774550485,
+                "max_us": 147.032,
+                "covered_fraction": 0.08289078217715119
+              }
+            },
+            "covered_mean_us": 906.38314384509
+          },
+          "2": {
+            "count": 34153,
+            "tcp_queue_peak": 0,
+            "stages": {
+              "tx_prepare": {
+                "sum_ns": 353272771,
+                "max_ns": 83958,
+                "hist": [
+                  0,
+                  34049,
+                  68,
+                  36,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 10.343828389892542,
+                "max_us": 83.958,
+                "covered_fraction": 0.011767939548177174
+              },
+              "ready_wait": {
+                "sum_ns": 9126822279,
+                "max_ns": 1190525,
+                "hist": [
+                  397,
+                  586,
+                  3297,
+                  8891,
+                  3219,
+                  11527,
+                  2037,
+                  3763,
+                  436,
+                  0,
+                  0
+                ],
+                "mean_us": 267.23339908646386,
+                "max_us": 1190.525,
+                "covered_fraction": 0.3040253924529854
+              },
+              "spi_ioctl": {
+                "sum_ns": 16516913422,
+                "max_ns": 608284,
+                "hist": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  34151,
+                  2,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 483.6153023746084,
+                "max_us": 608.284,
+                "covered_fraction": 0.5501981885622659
+              },
+              "validate": {
+                "sum_ns": 268377903,
+                "max_ns": 81094,
+                "hist": [
+                  2,
+                  34076,
+                  44,
+                  31,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 7.858106257137001,
+                "max_us": 81.094,
+                "covered_fraction": 0.008939989712851539
+              },
+              "policy": {
+                "sum_ns": 72273498,
+                "max_ns": 56823,
+                "hist": [
+                  34130,
+                  4,
+                  14,
+                  5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 2.1161683600269376,
+                "max_us": 56.823,
+                "covered_fraction": 0.0024075168685992613
+              },
+              "pc_receive": {
+                "sum_ns": 1160092329,
+                "max_ns": 171511,
+                "hist": [
+                  0,
+                  14,
+                  33175,
+                  953,
+                  11,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 33.967508827921414,
+                "max_us": 171.511,
+                "covered_fraction": 0.03864406633812167
+              },
+              "pc_send": {
+                "sum_ns": 2522182006,
+                "max_ns": 221302,
+                "hist": [
+                  0,
+                  2,
+                  1927,
+                  29645,
+                  2576,
+                  3,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 73.84950095160016,
+                "max_us": 221.302,
+                "covered_fraction": 0.08401690651699913
+              }
+            },
+            "covered_mean_us": 878.9838142476503
+          }
+        },
+        "histogram_upper_bounds_exclusive_us": [
+          5,
+          20,
+          50,
+          100,
+          200,
+          400,
+          600,
+          1000,
+          2000,
+          10000
+        ],
+        "caveat": "Sequential wall times, not CPU utilization. Reply-observed phases. Excludes aggregation/logging and epoch-transition batches; READY includes MCU preparation and scheduling. Instrumented relay is diagnostic only."
+      }
+    },
+    {
+      "case": "relay_spin250_gui_20261030",
+      "functional_pass": true,
+      "errors": [],
+      "headroom": {
+        "frames": 64092,
+        "samples": 55888224,
+        "empty_status_frames": 1182,
+        "send_nodes": 16023,
+        "mean_send_margin": 0.11704669725922434,
+        "mcu_queue_peak": 4,
+        "min_slack_ticks": 74223,
+        "sampled_queue_max": 3,
+        "send_ticks_max": 684400,
+        "send_over_budget_nodes": 1588,
+        "headroom_pass": false
+      },
+      "restored": true,
+      "cpu_cost": {
+        "wall_seconds": 48.381151097943075,
+        "cpu_seconds": 15.05,
+        "fraction_of_one_core": 0.31107155696921507,
+        "caveat": "Whole GUI lifetime including startup/restoration, not PLAY-only utilization"
+      },
+      "latency": {
+        "phases": {
+          "0": {
+            "count": 10267,
+            "tcp_queue_peak": 0,
+            "stages": {
+              "tx_prepare": {
+                "sum_ns": 109047995,
+                "max_ns": 64375,
+                "hist": [
+                  0,
+                  10241,
+                  18,
+                  8,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 10.621213109963962,
+                "max_us": 64.375,
+                "covered_fraction": 0.011353249404636627
+              },
+              "ready_wait": {
+                "sum_ns": 3365731055,
+                "max_ns": 1868965,
+                "hist": [
+                  134,
+                  185,
+                  1033,
+                  3408,
+                  566,
+                  2282,
+                  8,
+                  2434,
+                  217,
+                  0,
+                  0
+                ],
+                "mean_us": 327.8203033992403,
+                "max_us": 1868.965,
+                "covered_fraction": 0.3504143665946885
+              },
+              "spi_ioctl": {
+                "sum_ns": 4967392409,
+                "max_ns": 653648,
+                "hist": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  10262,
+                  5,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 483.82121447355604,
+                "max_us": 653.648,
+                "covered_fraction": 0.5171671878063944
+              },
+              "validate": {
+                "sum_ns": 79104655,
+                "max_ns": 56979,
+                "hist": [
+                  0,
+                  10243,
+                  17,
+                  7,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 7.704748709457485,
+                "max_us": 56.979,
+                "covered_fraction": 0.008235776157853574
+              },
+              "policy": {
+                "sum_ns": 20258303,
+                "max_ns": 59271,
+                "hist": [
+                  10259,
+                  3,
+                  3,
+                  2,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 1.973147267945846,
+                "max_us": 59.271,
+                "covered_fraction": 0.0021091407180269424
+              },
+              "pc_receive": {
+                "sum_ns": 339235341,
+                "max_ns": 116146,
+                "hist": [
+                  0,
+                  3,
+                  10086,
+                  177,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 33.04133057368267,
+                "max_us": 116.146,
+                "covered_fraction": 0.03531860840944351
+              },
+              "pc_send": {
+                "sum_ns": 724233278,
+                "max_ns": 221563,
+                "hist": [
+                  0,
+                  0,
+                  1002,
+                  8620,
+                  643,
+                  2,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 70.53991214570956,
+                "max_us": 221.563,
+                "covered_fraction": 0.0754016709089565
+              }
+            },
+            "covered_mean_us": 935.5218696795558
+          },
+          "1": {
+            "count": 716,
+            "tcp_queue_peak": 0,
+            "stages": {
+              "tx_prepare": {
+                "sum_ns": 7574194,
+                "max_ns": 68021,
+                "hist": [
+                  0,
+                  713,
+                  1,
+                  2,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 10.578483240223465,
+                "max_us": 68.021,
+                "covered_fraction": 0.011686707192312693
+              },
+              "ready_wait": {
+                "sum_ns": 213415432,
+                "max_ns": 1163442,
+                "hist": [
+                  3,
+                  9,
+                  66,
+                  232,
+                  50,
+                  206,
+                  11,
+                  128,
+                  11,
+                  0,
+                  0
+                ],
+                "mean_us": 298.0662458100559,
+                "max_us": 1163.442,
+                "covered_fraction": 0.3292922869555388
+              },
+              "spi_ioctl": {
+                "sum_ns": 346626552,
+                "max_ns": 545002,
+                "hist": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  716,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 484.1152960893855,
+                "max_us": 545.002,
+                "covered_fraction": 0.5348322235085277
+              },
+              "validate": {
+                "sum_ns": 5566266,
+                "max_ns": 57813,
+                "hist": [
+                  0,
+                  714,
+                  0,
+                  2,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 7.774114525139665,
+                "max_us": 57.813,
+                "covered_fraction": 0.00858854696572673
+              },
+              "policy": {
+                "sum_ns": 1421304,
+                "max_ns": 3802,
+                "hist": [
+                  716,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 1.9850614525139665,
+                "max_us": 3.802,
+                "covered_fraction": 0.002193020627576056
+              },
+              "pc_receive": {
+                "sum_ns": 23676652,
+                "max_ns": 89167,
+                "hist": [
+                  0,
+                  0,
+                  707,
+                  9,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 33.06794972067039,
+                "max_us": 89.167,
+                "covered_fraction": 0.036532217054155824
+              },
+              "pc_send": {
+                "sum_ns": 49822943,
+                "max_ns": 140052,
+                "hist": [
+                  0,
+                  0,
+                  74,
+                  610,
+                  32,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 69.58511592178772,
+                "max_us": 140.052,
+                "covered_fraction": 0.07687499769616217
+              }
+            },
+            "covered_mean_us": 905.1722667597766
+          },
+          "2": {
+            "count": 34134,
+            "tcp_queue_peak": 0,
+            "stages": {
+              "tx_prepare": {
+                "sum_ns": 355171832,
+                "max_ns": 76615,
+                "hist": [
+                  0,
+                  34045,
+                  58,
+                  31,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 10.405221538641824,
+                "max_us": 76.615,
+                "covered_fraction": 0.01183671983410924
+              },
+              "ready_wait": {
+                "sum_ns": 9152060034,
+                "max_ns": 1200265,
+                "hist": [
+                  433,
+                  596,
+                  3259,
+                  9845,
+                  3014,
+                  10697,
+                  1586,
+                  4275,
+                  429,
+                  0,
+                  0
+                ],
+                "mean_us": 268.121522060116,
+                "max_us": 1200.265,
+                "covered_fraction": 0.3050083389704347
+              },
+              "spi_ioctl": {
+                "sum_ns": 16539186713,
+                "max_ns": 682711,
+                "hist": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  34129,
+                  5,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 484.53702211870865,
+                "max_us": 682.711,
+                "covered_fraction": 0.5511972002492673
+              },
+              "validate": {
+                "sum_ns": 275282789,
+                "max_ns": 111928,
+                "hist": [
+                  6,
+                  34059,
+                  52,
+                  16,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 8.06476794398547,
+                "max_us": 111.928,
+                "covered_fraction": 0.009174278349149067
+              },
+              "policy": {
+                "sum_ns": 70498213,
+                "max_ns": 57083,
+                "hist": [
+                  34108,
+                  11,
+                  12,
+                  3,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 2.065336995371184,
+                "max_us": 57.083,
+                "covered_fraction": 0.0023494757210542473
+              },
+              "pc_receive": {
+                "sum_ns": 1188129176,
+                "max_ns": 335418,
+                "hist": [
+                  0,
+                  22,
+                  32822,
+                  1269,
+                  20,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 34.80779211343529,
+                "max_us": 335.418,
+                "covered_fraction": 0.03959647392038418
+              },
+              "pc_send": {
+                "sum_ns": 2425605064,
+                "max_ns": 310626,
+                "hist": [
+                  0,
+                  1,
+                  2800,
+                  29125,
+                  2194,
+                  14,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 71.06126044413196,
+                "max_us": 310.626,
+                "covered_fraction": 0.08083751295560121
+              }
+            },
+            "covered_mean_us": 879.0629232143903
+          }
+        },
+        "histogram_upper_bounds_exclusive_us": [
+          5,
+          20,
+          50,
+          100,
+          200,
+          400,
+          600,
+          1000,
+          2000,
+          10000
+        ],
+        "caveat": "Sequential wall times, not CPU utilization. Reply-observed phases. Excludes aggregation/logging and epoch-transition batches; READY includes MCU preparation and scheduling. Instrumented relay is diagnostic only."
+      }
+    },
+    {
+      "case": "relay_pair_send_gui_20261030",
+      "functional_pass": false,
+      "errors": [
+        "radio status state=4 reason=2",
+        "Assertion failed: radio_stop_confirmed",
+        "Assertion failed: radio_hold_completed"
+      ],
+      "headroom": {
+        "frames": 61994,
+        "samples": 54058768,
+        "empty_status_frames": 1191,
+        "send_nodes": 15499,
+        "mean_send_margin": 0.11433635571621215,
+        "mcu_queue_peak": 5,
+        "min_slack_ticks": 72708,
+        "sampled_queue_max": 5,
+        "send_ticks_max": 617089,
+        "send_over_budget_nodes": 1503,
+        "headroom_pass": false
+      },
+      "restored": true,
+      "cpu_cost": {
+        "wall_seconds": 42.996744084055535,
+        "cpu_seconds": 8.52,
+        "fraction_of_one_core": 0.19815453894239093,
+        "caveat": "Whole GUI lifetime including startup/restoration, not PLAY-only utilization"
+      },
+      "latency": {
+        "phases": {
+          "0": {
+            "count": 4995,
+            "tcp_queue_peak": 0,
+            "stages": {
+              "tx_prepare": {
+                "sum_ns": 47145873,
+                "max_ns": 61719,
+                "hist": [
+                  0,
+                  4980,
+                  12,
+                  3,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 9.438613213213213,
+                "max_us": 61.719,
+                "covered_fraction": 0.010095186918647163
+              },
+              "ready_wait": {
+                "sum_ns": 1702413566,
+                "max_ns": 1951264,
+                "hist": [
+                  51,
+                  53,
+                  273,
+                  1579,
+                  564,
+                  1192,
+                  16,
+                  1160,
+                  107,
+                  0,
+                  0
+                ],
+                "mean_us": 340.82353673673674,
+                "max_us": 1951.264,
+                "covered_fraction": 0.36453208028644773
+              },
+              "spi_ioctl": {
+                "sum_ns": 2411838016,
+                "max_ns": 746672,
+                "hist": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  4991,
+                  4,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 482.8504536536537,
+                "max_us": 746.672,
+                "covered_fraction": 0.5164387472264884
+              },
+              "validate": {
+                "sum_ns": 36301217,
+                "max_ns": 58021,
+                "hist": [
+                  0,
+                  4983,
+                  7,
+                  5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 7.267510910910911,
+                "max_us": 58.021,
+                "covered_fraction": 0.0077730572724652265
+              },
+              "policy": {
+                "sum_ns": 10336036,
+                "max_ns": 63073,
+                "hist": [
+                  4987,
+                  3,
+                  2,
+                  3,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 2.0692764764764764,
+                "max_us": 63.073,
+                "covered_fraction": 0.0022132205594722182
+              },
+              "pc_receive": {
+                "sum_ns": 151460177,
+                "max_ns": 94272,
+                "hist": [
+                  0,
+                  10,
+                  4854,
+                  131,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 30.322357757757757,
+                "max_us": 94.272,
+                "covered_fraction": 0.032431657327596494
+              },
+              "pc_send": {
+                "sum_ns": 310638851,
+                "max_ns": 219169,
+                "hist": [
+                  0,
+                  0,
+                  1579,
+                  3226,
+                  189,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 62.18996016016016,
+                "max_us": 219.169,
+                "covered_fraction": 0.06651605040888277
+              }
+            },
+            "covered_mean_us": 934.9617089089089
+          },
+          "1": {
+            "count": 698,
+            "tcp_queue_peak": 0,
+            "stages": {
+              "tx_prepare": {
+                "sum_ns": 6443901,
+                "max_ns": 43646,
+                "hist": [
+                  0,
+                  696,
+                  2,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 9.231949856733525,
+                "max_us": 43.646,
+                "covered_fraction": 0.01017781439292053
+              },
+              "ready_wait": {
+                "sum_ns": 219780164,
+                "max_ns": 1138654,
+                "hist": [
+                  2,
+                  4,
+                  8,
+                  173,
+                  156,
+                  203,
+                  15,
+                  126,
+                  11,
+                  0,
+                  0
+                ],
+                "mean_us": 314.87129512893983,
+                "max_us": 1138.654,
+                "covered_fraction": 0.34713160807989357
+              },
+              "spi_ioctl": {
+                "sum_ns": 336827263,
+                "max_ns": 555629,
+                "hist": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  698,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 482.5605487106017,
+                "max_us": 555.629,
+                "covered_fraction": 0.5320015570210387
+              },
+              "validate": {
+                "sum_ns": 5112326,
+                "max_ns": 13230,
+                "hist": [
+                  0,
+                  698,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 7.324249283667622,
+                "max_us": 13.23,
+                "covered_fraction": 0.008074659300957888
+              },
+              "policy": {
+                "sum_ns": 1428134,
+                "max_ns": 4114,
+                "hist": [
+                  698,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 2.0460372492836676,
+                "max_us": 4.114,
+                "covered_fraction": 0.0022556651289675567
+              },
+              "pc_receive": {
+                "sum_ns": 21418040,
+                "max_ns": 75834,
+                "hist": [
+                  0,
+                  1,
+                  682,
+                  15,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 30.684871060171922,
+                "max_us": 75.834,
+                "covered_fraction": 0.03382870652111937
+              },
+              "pc_send": {
+                "sum_ns": 42122272,
+                "max_ns": 132293,
+                "hist": [
+                  0,
+                  0,
+                  217,
+                  477,
+                  4,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 60.34709455587392,
+                "max_us": 132.293,
+                "covered_fraction": 0.06652998955510232
+              }
+            },
+            "covered_mean_us": 907.0660458452722
+          },
+          "2": {
+            "count": 33007,
+            "tcp_queue_peak": 0,
+            "stages": {
+              "tx_prepare": {
+                "sum_ns": 297902589,
+                "max_ns": 67032,
+                "hist": [
+                  1,
+                  32951,
+                  38,
+                  17,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 9.025436695246462,
+                "max_us": 67.032,
+                "covered_fraction": 0.010263442588203133
+              },
+              "ready_wait": {
+                "sum_ns": 9601281479,
+                "max_ns": 1207561,
+                "hist": [
+                  92,
+                  142,
+                  1235,
+                  8249,
+                  6025,
+                  11039,
+                  1665,
+                  4129,
+                  431,
+                  0,
+                  0
+                ],
+                "mean_us": 290.8862204683855,
+                "max_us": 1207.561,
+                "covered_fraction": 0.3307866560128975
+              },
+              "spi_ioctl": {
+                "sum_ns": 15898135829,
+                "max_ns": 616723,
+                "hist": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  33005,
+                  2,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 481.6595215863302,
+                "max_us": 616.723,
+                "covered_fraction": 0.5477280505957494
+              },
+              "validate": {
+                "sum_ns": 244869399,
+                "max_ns": 75000,
+                "hist": [
+                  25,
+                  32900,
+                  62,
+                  20,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 7.41871115217984,
+                "max_us": 75.0,
+                "covered_fraction": 0.008436324862703043
+              },
+              "policy": {
+                "sum_ns": 66522484,
+                "max_ns": 58438,
+                "hist": [
+                  32975,
+                  11,
+                  15,
+                  6,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 2.015405338261581,
+                "max_us": 58.438,
+                "covered_fraction": 0.0022918555278439072
+              },
+              "pc_receive": {
+                "sum_ns": 993049037,
+                "max_ns": 144637,
+                "hist": [
+                  0,
+                  442,
+                  31657,
+                  893,
+                  15,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 30.086013179022633,
+                "max_us": 144.637,
+                "covered_fraction": 0.034212867409889845
+              },
+              "pc_send": {
+                "sum_ns": 1923840139,
+                "max_ns": 219377,
+                "hist": [
+                  0,
+                  37,
+                  12035,
+                  20423,
+                  507,
+                  5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 58.28582237101221,
+                "max_us": 219.377,
+                "covered_fraction": 0.0662808030027132
+              }
+            },
+            "covered_mean_us": 879.3771307904384
+          },
+          "3": {
+            "count": 294,
+            "tcp_queue_peak": 0,
+            "stages": {
+              "tx_prepare": {
+                "sum_ns": 2712933,
+                "max_ns": 14219,
+                "hist": [
+                  0,
+                  294,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 9.227663265306122,
+                "max_us": 14.219,
+                "covered_fraction": 0.010200922604301726
+              },
+              "ready_wait": {
+                "sum_ns": 91883001,
+                "max_ns": 1173341,
+                "hist": [
+                  1,
+                  1,
+                  17,
+                  94,
+                  34,
+                  82,
+                  5,
+                  54,
+                  6,
+                  0,
+                  0
+                ],
+                "mean_us": 312.52721428571425,
+                "max_us": 1173.341,
+                "covered_fraction": 0.3454900588595362
+              },
+              "spi_ioctl": {
+                "sum_ns": 141948209,
+                "max_ns": 537087,
+                "hist": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  294,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 482.81703741496597,
+                "max_us": 537.087,
+                "covered_fraction": 0.5337406761715995
+              },
+              "validate": {
+                "sum_ns": 2118824,
+                "max_ns": 14479,
+                "hist": [
+                  0,
+                  294,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 7.206884353741497,
+                "max_us": 14.479,
+                "covered_fraction": 0.007967008266012099
+              },
+              "policy": {
+                "sum_ns": 601093,
+                "max_ns": 4219,
+                "hist": [
+                  294,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 2.044534013605442,
+                "max_us": 4.219,
+                "covered_fraction": 0.0022601749364940223
+              },
+              "pc_receive": {
+                "sum_ns": 8892976,
+                "max_ns": 80990,
+                "hist": [
+                  0,
+                  1,
+                  289,
+                  4,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 30.24821768707483,
+                "max_us": 80.99,
+                "covered_fraction": 0.03343855520866632
+              },
+              "pc_send": {
+                "sum_ns": 17792732,
+                "max_ns": 174220,
+                "hist": [
+                  0,
+                  0,
+                  100,
+                  189,
+                  5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 60.51949659863945,
+                "max_us": 174.22,
+                "covered_fraction": 0.06690260395339018
+              }
+            },
+            "covered_mean_us": 904.5910476190476
+          }
+        },
+        "histogram_upper_bounds_exclusive_us": [
+          5,
+          20,
+          50,
+          100,
+          200,
+          400,
+          600,
+          1000,
+          2000,
+          10000
+        ],
+        "caveat": "Sequential wall times, not CPU utilization. Reply-observed phases. Excludes aggregation/logging and epoch-transition batches; READY includes MCU preparation and scheduling. Instrumented relay is diagnostic only."
+      }
+    }
+  ],
+  "raw_ack": {
+    "errors": [
+      "RuntimeError: El Q cerr\u00f3 el flujo.",
+      "RuntimeError: El Q cerr\u00f3 el flujo.",
+      "Assertion failed: radio_stop_confirmed",
+      "Assertion failed: radio_hold_completed",
+      "Assertion failed: shutdown_confirmed"
+    ],
+    "metrics": {
+      "enabled": true,
+      "matched": 401,
+      "raw_max_ms": 477.9066960327327,
+      "raw_mean_ms": 12.155644852839911,
+      "decoded": 401,
+      "decode_max_ms": 10.079264990054071,
+      "pending_sends": 13,
+      "pending_decode": 0,
+      "omitted": 0,
+      "slow": [
+        {
+          "request_id": 3296101321,
+          "sent_at": 851633.805286765,
+          "received_at": 851633.828329199,
+          "raw_roundtrip_ms": 23.04243401158601,
+          "state": 2,
+          "reason": 0,
+          "accepted": 163200,
+          "played": 152640,
+          "decoded_at": 851633.833660101,
+          "decode_delay_ms": 5.330902058631182,
+          "decoded_roundtrip_ms": 28.373336070217192
+        },
+        {
+          "request_id": 3296101322,
+          "sent_at": 851633.805451326,
+          "received_at": 851633.828329199,
+          "raw_roundtrip_ms": 22.877873037941754,
+          "state": 2,
+          "reason": 0,
+          "accepted": 163680,
+          "played": 152640,
+          "decoded_at": 851633.833865974,
+          "decode_delay_ms": 5.536774988286197,
+          "decoded_roundtrip_ms": 28.41464802622795
+        },
+        {
+          "request_id": 3296101323,
+          "sent_at": 851633.805539098,
+          "received_at": 851633.828329199,
+          "raw_roundtrip_ms": 22.790101007558405,
+          "state": 2,
+          "reason": 0,
+          "accepted": 164160,
+          "played": 152640,
+          "decoded_at": 851633.834419287,
+          "decode_delay_ms": 6.090088048949838,
+          "decoded_roundtrip_ms": 28.880189056508243
+        },
+        {
+          "request_id": 3296101324,
+          "sent_at": 851633.805623109,
+          "received_at": 851633.828329199,
+          "raw_roundtrip_ms": 22.70609000697732,
+          "state": 2,
+          "reason": 0,
+          "accepted": 164640,
+          "played": 153120,
+          "decoded_at": 851633.834687406,
+          "decode_delay_ms": 6.358206970617175,
+          "decoded_roundtrip_ms": 29.064296977594495
+        },
+        {
+          "request_id": 3296101325,
+          "sent_at": 851633.805707857,
+          "received_at": 851633.828329199,
+          "raw_roundtrip_ms": 22.621341980993748,
+          "state": 2,
+          "reason": 0,
+          "accepted": 165120,
+          "played": 153120,
+          "decoded_at": 851633.835043026,
+          "decode_delay_ms": 6.71382702421397,
+          "decoded_roundtrip_ms": 29.335169005207717
+        },
+        {
+          "request_id": 3296101330,
+          "sent_at": 851633.857767724,
+          "received_at": 851633.877795645,
+          "raw_roundtrip_ms": 20.027921069413424,
+          "state": 2,
+          "reason": 0,
+          "accepted": 167520,
+          "played": 155040,
+          "decoded_at": 851633.881823928,
+          "decode_delay_ms": 4.0282829431816936,
+          "decoded_roundtrip_ms": 24.056204012595117
+        },
+        {
+          "request_id": 3296101382,
+          "sent_at": 851634.593527358,
+          "received_at": 851635.071434054,
+          "raw_roundtrip_ms": 477.9066960327327,
+          "state": 2,
+          "reason": 0,
+          "accepted": 190560,
+          "played": 184320,
+          "decoded_at": 851635.079135845,
+          "decode_delay_ms": 7.701790891587734,
+          "decoded_roundtrip_ms": 485.60848692432046
+        },
+        {
+          "request_id": 3296101383,
+          "sent_at": 851634.593643776,
+          "received_at": 851635.071434054,
+          "raw_roundtrip_ms": 477.7902780333534,
+          "state": 2,
+          "reason": 0,
+          "accepted": 191040,
+          "played": 184320,
+          "decoded_at": 851635.079903715,
+          "decode_delay_ms": 8.469660999253392,
+          "decoded_roundtrip_ms": 486.2599390326068
+        },
+        {
+          "request_id": 3296101384,
+          "sent_at": 851634.593726505,
+          "received_at": 851635.071434054,
+          "raw_roundtrip_ms": 477.7075491147116,
+          "state": 2,
+          "reason": 0,
+          "accepted": 191520,
+          "played": 184320,
+          "decoded_at": 851635.080274013,
+          "decode_delay_ms": 8.83995892945677,
+          "decoded_roundtrip_ms": 486.54750804416835
+        },
+        {
+          "request_id": 3296101385,
+          "sent_at": 851634.593808526,
+          "received_at": 851635.071434054,
+          "raw_roundtrip_ms": 477.6255280012265,
+          "state": 2,
+          "reason": 0,
+          "accepted": 192000,
+          "played": 184320,
+          "decoded_at": 851635.081015494,
+          "decode_delay_ms": 9.581439895555377,
+          "decoded_roundtrip_ms": 487.20696789678186
+        },
+        {
+          "request_id": 3296101386,
+          "sent_at": 851634.593892486,
+          "received_at": 851635.071434054,
+          "raw_roundtrip_ms": 477.5415681069717,
+          "state": 2,
+          "reason": 0,
+          "accepted": 192480,
+          "played": 184320,
+          "decoded_at": 851635.081513319,
+          "decode_delay_ms": 10.079264990054071,
+          "decoded_roundtrip_ms": 487.62083309702575
+        }
+      ],
+      "note": "Complete-frame socket read time versus entry to decoder event handling; correlated CHUNK ids/session, normal receiver validation unchanged"
+    },
+    "external_recovery": {
+      "identity_before": {
+        "board_serial": "1060031107",
+        "app": "scope-v19-main-1",
+        "firmware_sha256": "37f049fa029ad62a10767c56dc586b2c3697f8d250a0b8a7396570ce8e0c7060",
+        "relay_sha256": "27da0bc4860401df27eef50429f2ec881bfd3b51b1893d1fe3bacb9e922f56ae"
+      },
+      "restoration": {
+        "hardware_restored": true,
+        "errors": [],
+        "recovery": {
+          "seconds": 10.021955327945761,
+          "samples": 313344,
+          "dropped": 0,
+          "fatal": 0,
+          "continuous": true
+        }
+      },
+      "identity_after": {
+        "board_serial": "1060031107",
+        "app": "scope-v19-main-1",
+        "firmware_sha256": "37f049fa029ad62a10767c56dc586b2c3697f8d250a0b8a7396570ce8e0c7060",
+        "relay_sha256": "27da0bc4860401df27eef50429f2ec881bfd3b51b1893d1fe3bacb9e922f56ae"
+      },
+      "ok": true
+    },
+    "source_hashes_unchanged": true
+  },
+  "reader_stages": {
+    "errors": [],
+    "audio_seconds": 62.311075472971424,
+    "metrics": {
+      "enabled": true,
+      "matched": 5218,
+      "raw_max_ms": 16.096247010864317,
+      "raw_mean_ms": 5.7733594154128385,
+      "decoded": 5218,
+      "decode_max_ms": 8.105369983240962,
+      "pending_sends": 0,
+      "pending_decode": 0,
+      "omitted": 0,
+      "slow": [],
+      "note": "Complete-frame socket read time versus entry to decoder event handling; correlated CHUNK ids/session, normal receiver validation unchanged"
+    },
+    "headroom": {
+      "frames": 132900,
+      "samples": 115888800,
+      "empty_status_frames": 2650,
+      "send_nodes": 33225,
+      "mean_send_margin": 0.10397973516472814,
+      "mcu_queue_peak": 5,
+      "min_slack_ticks": 72831,
+      "sampled_queue_max": 4,
+      "send_ticks_max": 1013346,
+      "send_over_budget_nodes": 3434,
+      "headroom_pass": false
+    },
+    "slow": []
+  },
+  "final_restoration": {
+    "identity_before": {
+      "board_serial": "1060031107",
+      "app": "scope-v19-main-1",
+      "firmware_sha256": "37f049fa029ad62a10767c56dc586b2c3697f8d250a0b8a7396570ce8e0c7060",
+      "relay_sha256": "27da0bc4860401df27eef50429f2ec881bfd3b51b1893d1fe3bacb9e922f56ae"
+    },
+    "snapshot": {
+      "schema": 1,
+      "identity": {
+        "board_serial": "1060031107",
+        "app": "scope-v19-main-1",
+        "firmware_sha256": "37f049fa029ad62a10767c56dc586b2c3697f8d250a0b8a7396570ce8e0c7060",
+        "relay_sha256": "27da0bc4860401df27eef50429f2ec881bfd3b51b1893d1fe3bacb9e922f56ae"
+      },
+      "adc_bits": 14,
+      "adc_period": 32,
+      "generator": {
+        "wave": 0,
+        "enabled": 0,
+        "mode": 0,
+        "frequency": 2500,
+        "final_frequency": 2500,
+        "low": 0,
+        "high": 4095,
+        "duration": 1000,
+        "duration_us": 0,
+        "duty": 50
+      }
+    },
+    "restoration": {
+      "hardware_restored": true,
+      "errors": [],
+      "recovery": {
+        "seconds": 10.023525457945652,
+        "samples": 313344,
+        "dropped": 0,
+        "fatal": 0,
+        "continuous": true
+      }
+    },
+    "identity_after": {
+      "board_serial": "1060031107",
+      "app": "scope-v19-main-1",
+      "firmware_sha256": "37f049fa029ad62a10767c56dc586b2c3697f8d250a0b8a7396570ce8e0c7060",
+      "relay_sha256": "27da0bc4860401df27eef50429f2ec881bfd3b51b1893d1fe3bacb9e922f56ae"
+    },
+    "active_containers": "serialmonitor-usb-stream-v19\nscope-v19-main-1",
+    "irq_affinity": "0-3\n0",
+    "ok": true
+  },
+  "runtime_sha256": {
+    "monitor/v19/app.py": "fcf0705615cb8731a83cba5621726b6d9d464f044607cbaebf046d9af6fa61d9",
+    "monitor/v19/io/receiver_process.py": "814f3598088f65d39147adb974d6fbfc6c7ae848c57c417b0112d3c7060f324e",
+    "monitor/v19/receiver/unoq_config_receiver.py": "d71d97dc38141f67715be0707f8299e87c43e6c67e2157c77d961e0fe1bb8b1e",
+    "arduino/v19/oscilloscope/sketch/sketch.ino": "9e6812548b773a8e3b09c84fdfbaf364d4e76f565229bc2e1a0ccc274ee65375",
+    "arduino/v19/relay/unoq_config_stream.c": "2b2277b13be7b0f51435a3ecbeccd407cb8eca7ca652299a5026516affe66659"
+  }
+}

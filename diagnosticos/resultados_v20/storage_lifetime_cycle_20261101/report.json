@@ -1,0 +1,3884 @@
+{
+  "private": true,
+  "promoted": false,
+  "version": 20,
+  "cases": [
+    {
+      "rate": 1860465,
+      "state": "complete",
+      "metrics": {
+        "profile": [
+          8,
+          1860465,
+          86,
+          3488,
+          1
+        ],
+        "node_budget_ticks": 299968,
+        "epoch_count": 1,
+        "all": {
+          "frames": 21322,
+          "samples": 18592784,
+          "empty_status_frames": 0,
+          "send_nodes": 5330,
+          "mean_send_margin": 0.17947398254062674,
+          "mcu_queue_peak": 2,
+          "min_slack_ticks": 85429,
+          "sampled_queue_max": 1,
+          "send_ticks_max": 322132,
+          "send_over_budget_nodes": 53,
+          "headroom_pass": true
+        },
+        "radio_playing": {
+          "frames": 0,
+          "samples": 0,
+          "empty_status_frames": 0,
+          "send_nodes": 0,
+          "mean_send_margin": null,
+          "mcu_queue_peak": 0,
+          "min_slack_ticks": null,
+          "sampled_queue_max": 0,
+          "send_ticks_max": 0,
+          "send_over_budget_nodes": 0,
+          "headroom_pass": false
+        },
+        "phases": {
+          "acquisition": {
+            "frames": 21322,
+            "samples": 18592784,
+            "empty_status_frames": 0,
+            "send_nodes": 5330,
+            "mean_send_margin": 0.17947398254062674,
+            "mcu_queue_peak": 2,
+            "min_slack_ticks": 85429,
+            "sampled_queue_max": 1,
+            "send_ticks_max": 322132,
+            "send_over_budget_nodes": 53,
+            "headroom_pass": true
+          }
+        },
+        "phase_events": [
+          {
+            "kind": "first_rf_in_phase",
+            "phase": "acquisition",
+            "snapshot": {
+              "epoch": "1",
+              "node": 0,
+              "index": 0,
+              "queue": 1,
+              "queue_peak": 1,
+              "slack_min_ticks": 219342
+            }
+          },
+          {
+            "kind": "cumulative_peak",
+            "phase": "acquisition",
+            "previous_peak": null,
+            "snapshot": {
+              "epoch": "1",
+              "node": 0,
+              "index": 0,
+              "queue": 1,
+              "queue_peak": 1,
+              "slack_min_ticks": 219342,
+              "copy_max_ticks": 37389,
+              "poll_max_ticks": 174920,
+              "previous_node_send_ticks": 0,
+              "previous_batch_prepare_us": 111,
+              "previous_batch_check_us": 59,
+              "previous_batch_origin": "unknown"
+            },
+            "host_observed_at": 906538.875214121,
+            "recent_chunks": []
+          },
+          {
+            "kind": "cumulative_peak",
+            "phase": "acquisition",
+            "previous_peak": 1,
+            "snapshot": {
+              "epoch": "1",
+              "node": 2,
+              "index": 6976,
+              "queue": 1,
+              "queue_peak": 2,
+              "slack_min_ticks": 134060,
+              "copy_max_ticks": 38328,
+              "poll_max_ticks": 208075,
+              "previous_node_send_ticks": 281739,
+              "previous_batch_prepare_us": 111,
+              "previous_batch_check_us": 64,
+              "previous_batch_origin": "same_epoch_profile"
+            },
+            "host_observed_at": 906538.879248605,
+            "recent_chunks": []
+          }
+        ],
+        "phase_events_omitted": 0,
+        "slowest_node_observations": [
+          {
+            "epoch": "1",
+            "node": 162,
+            "index": 565056,
+            "queue": 1,
+            "queue_peak": 2,
+            "slack_min_ticks": 86982,
+            "copy_max_ticks": 39549,
+            "poll_max_ticks": 209528,
+            "previous_node_send_ticks": 322132,
+            "previous_batch_prepare_us": 111,
+            "previous_batch_check_us": 309,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          },
+          {
+            "epoch": "1",
+            "node": 179,
+            "index": 624352,
+            "queue": 1,
+            "queue_peak": 2,
+            "slack_min_ticks": 86982,
+            "copy_max_ticks": 39549,
+            "poll_max_ticks": 209883,
+            "previous_node_send_ticks": 320905,
+            "previous_batch_prepare_us": 110,
+            "previous_batch_check_us": 309,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          },
+          {
+            "epoch": "1",
+            "node": 557,
+            "index": 1942816,
+            "queue": 1,
+            "queue_peak": 2,
+            "slack_min_ticks": 86005,
+            "copy_max_ticks": 39563,
+            "poll_max_ticks": 209980,
+            "previous_node_send_ticks": 319185,
+            "previous_batch_prepare_us": 117,
+            "previous_batch_check_us": 314,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          },
+          {
+            "epoch": "1",
+            "node": 207,
+            "index": 722016,
+            "queue": 1,
+            "queue_peak": 2,
+            "slack_min_ticks": 86982,
+            "copy_max_ticks": 39549,
+            "poll_max_ticks": 209883,
+            "previous_node_send_ticks": 313671,
+            "previous_batch_prepare_us": 368,
+            "previous_batch_check_us": 58,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          },
+          {
+            "epoch": "1",
+            "node": 362,
+            "index": 1262656,
+            "queue": 1,
+            "queue_peak": 2,
+            "slack_min_ticks": 86980,
+            "copy_max_ticks": 39549,
+            "poll_max_ticks": 209980,
+            "previous_node_send_ticks": 309768,
+            "previous_batch_prepare_us": 117,
+            "previous_batch_check_us": 58,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          },
+          {
+            "epoch": "1",
+            "node": 342,
+            "index": 1192896,
+            "queue": 1,
+            "queue_peak": 2,
+            "slack_min_ticks": 86980,
+            "copy_max_ticks": 39549,
+            "poll_max_ticks": 209883,
+            "previous_node_send_ticks": 308524,
+            "previous_batch_prepare_us": 111,
+            "previous_batch_check_us": 58,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          },
+          {
+            "epoch": "1",
+            "node": 5,
+            "index": 17440,
+            "queue": 1,
+            "queue_peak": 2,
+            "slack_min_ticks": 134060,
+            "copy_max_ticks": 38328,
+            "poll_max_ticks": 209528,
+            "previous_node_send_ticks": 308457,
+            "previous_batch_prepare_us": 111,
+            "previous_batch_check_us": 58,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          },
+          {
+            "epoch": "1",
+            "node": 20,
+            "index": 69760,
+            "queue": 1,
+            "queue_peak": 2,
+            "slack_min_ticks": 87746,
+            "copy_max_ticks": 39268,
+            "poll_max_ticks": 209528,
+            "previous_node_send_ticks": 308235,
+            "previous_batch_prepare_us": 117,
+            "previous_batch_check_us": 309,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          }
+        ],
+        "node_timing_note": "Eight largest previous-node sends, one observation per epoch/node start. Copy/poll are cumulative MCU maxima; prepare/check refer to previous physical batch. Same observation does not establish simultaneity or causality.",
+        "chunk_timing": {},
+        "physical_batch_mix": {
+          "acquisition:rf+rf": 10661
+        },
+        "physical_batch_mix_omitted": 0,
+        "final_rf_followed_by_idle": {},
+        "wav_rf_max_consecutive_batches": {},
+        "stop_roundtrips": [],
+        "stop_pending_count": 0,
+        "stop_observations_omitted": 0,
+        "wav_chunk_timing": null,
+        "ordinary_timing_valid": true,
+        "performance_acceptance_eligible": true,
+        "spi_batch_timing": {
+          "histogram_upper_bounds_exclusive_us": [
+            5,
+            10,
+            20,
+            50,
+            100,
+            200,
+            500,
+            1000,
+            5000
+          ],
+          "groups": [
+            {
+              "observed_phase": "acquisition",
+              "previous_batch": "acquisition:rf+rf",
+              "previous_origin": "same_epoch_profile",
+              "prepare": {
+                "count": 10660,
+                "total_us": 1478619,
+                "min_us": 110,
+                "max_us": 368,
+                "zero_count": 0,
+                "histogram": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  10574,
+                  86,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 138.70722326454035
+              },
+              "check": {
+                "count": 10660,
+                "total_us": 637182,
+                "min_us": 58,
+                "max_us": 314,
+                "zero_count": 0,
+                "histogram": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  10653,
+                  0,
+                  7,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 59.77317073170732
+              }
+            },
+            {
+              "observed_phase": "acquisition",
+              "previous_batch": "unknown",
+              "previous_origin": "unknown",
+              "prepare": {
+                "count": 1,
+                "total_us": 111,
+                "min_us": 111,
+                "max_us": 111,
+                "zero_count": 0,
+                "histogram": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 111.0
+              },
+              "check": {
+                "count": 1,
+                "total_us": 59,
+                "min_us": 59,
+                "max_us": 59,
+                "zero_count": 0,
+                "histogram": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 59.0
+              }
+            }
+          ],
+          "omitted_batches": 0,
+          "note": "Fields describe previous physical batch. Dedup by epoch/sequence//2; only batches containing target native RF/status are covered. Phase/mix are host observations, not causal attribution."
+        },
+        "ack_batch_timing": {
+          "groups": [
+            {
+              "phase": "acquisition",
+              "ack_command": "no_wav_ack",
+              "reason": 0,
+              "prepare": {
+                "count": 10661,
+                "total_us": 1478730,
+                "min_us": 110,
+                "max_us": 368,
+                "zero_count": 0,
+                "histogram": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  10575,
+                  86,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 138.7046243316762
+              },
+              "check": {
+                "count": 10661,
+                "total_us": 637241,
+                "min_us": 58,
+                "max_us": 314,
+                "zero_count": 0,
+                "histogram": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  10654,
+                  0,
+                  7,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 59.77309820842323
+              }
+            }
+          ],
+          "matched_replies": 0,
+          "unmatched_replies": 0,
+          "pending": 0,
+          "evicted": 0,
+          "omitted_groups": 0,
+          "note": "Native half 1 metadata, categorized by same-batch WAV reply id/session. prepare/check describe prior iteration; check includes decode_pair and command processing, not IRQ-lock duration alone. No WAV ACK does not mean no command. Lifecycle reply counters include non-target profiles; timing groups only target RF. ACK-only and RF+ACK pairs lack coverage."
+        },
+        "raw_chunk_ack_latency": {
+          "enabled": false,
+          "matched": 0,
+          "raw_max_ms": 0.0,
+          "raw_mean_ms": null,
+          "decoded": 0,
+          "decode_max_ms": 0.0,
+          "pending_sends": 0,
+          "pending_decode": 0,
+          "omitted": 0,
+          "slow": [],
+          "note": "Complete-frame socket read time versus entry to decoder event handling; correlated CHUNK ids/session, normal receiver validation unchanged"
+        },
+        "phase_caveat": "Host observation boundaries, not MCU event timestamps. Sampled queue is a lower bound; cumulative peak remains acceptance gate. Send counters refer to previous node. Retune is not visible on this wire.",
+        "pending_bytes": 0,
+        "tcp_fifo_headroom_measured": false,
+        "frame_kinds": {
+          "20": 21322
+        },
+        "radio_playing_frame_kinds": {},
+        "sent_commands": {},
+        "radio_playing_sent_commands": {},
+        "note": "MCU queue/slack/send counters; send weighted once per complete node start. Cumulative MCU peak includes startup.",
+        "elapsed_seconds": 10.000136998016387,
+        "validated_samples": 18592784,
+        "integrity_pass": true,
+        "scope": "ADC transport only; not GUI/audio or analog qualification",
+        "queue_capacity": 16,
+        "publicly_accepted": false,
+        "applied_request_id": 3988036586,
+        "applied_epoch": 1
+      }
+    },
+    {
+      "rate": 2000000,
+      "state": "complete",
+      "metrics": {
+        "profile": [
+          8,
+          2000000,
+          80,
+          3488,
+          1
+        ],
+        "node_budget_ticks": 279040,
+        "epoch_count": 1,
+        "all": {
+          "frames": 22919,
+          "samples": 19985368,
+          "empty_status_frames": 0,
+          "send_nodes": 5729,
+          "mean_send_margin": 0.07066688186892378,
+          "mcu_queue_peak": 8,
+          "min_slack_ticks": 63436,
+          "sampled_queue_max": 7,
+          "send_ticks_max": 366094,
+          "send_over_budget_nodes": 2157,
+          "headroom_pass": false
+        },
+        "radio_playing": {
+          "frames": 0,
+          "samples": 0,
+          "empty_status_frames": 0,
+          "send_nodes": 0,
+          "mean_send_margin": null,
+          "mcu_queue_peak": 0,
+          "min_slack_ticks": null,
+          "sampled_queue_max": 0,
+          "send_ticks_max": 0,
+          "send_over_budget_nodes": 0,
+          "headroom_pass": false
+        },
+        "phases": {
+          "acquisition": {
+            "frames": 22919,
+            "samples": 19985368,
+            "empty_status_frames": 0,
+            "send_nodes": 5729,
+            "mean_send_margin": 0.07066688186892378,
+            "mcu_queue_peak": 8,
+            "min_slack_ticks": 63436,
+            "sampled_queue_max": 7,
+            "send_ticks_max": 366094,
+            "send_over_budget_nodes": 2157,
+            "headroom_pass": false
+          }
+        },
+        "phase_events": [
+          {
+            "kind": "first_rf_in_phase",
+            "phase": "acquisition",
+            "snapshot": {
+              "epoch": "2",
+              "node": 0,
+              "index": 0,
+              "queue": 1,
+              "queue_peak": 1,
+              "slack_min_ticks": 166545
+            }
+          },
+          {
+            "kind": "cumulative_peak",
+            "phase": "acquisition",
+            "previous_peak": null,
+            "snapshot": {
+              "epoch": "2",
+              "node": 0,
+              "index": 0,
+              "queue": 1,
+              "queue_peak": 1,
+              "slack_min_ticks": 166545,
+              "copy_max_ticks": 37427,
+              "poll_max_ticks": 175936,
+              "previous_node_send_ticks": 0,
+              "previous_batch_prepare_us": 108,
+              "previous_batch_check_us": 58,
+              "previous_batch_origin": "unknown"
+            },
+            "host_observed_at": 906548.887701455,
+            "recent_chunks": []
+          },
+          {
+            "kind": "cumulative_peak",
+            "phase": "acquisition",
+            "previous_peak": 1,
+            "snapshot": {
+              "epoch": "2",
+              "node": 1,
+              "index": 3488,
+              "queue": 1,
+              "queue_peak": 2,
+              "slack_min_ticks": 166545,
+              "copy_max_ticks": 38008,
+              "poll_max_ticks": 208964,
+              "previous_node_send_ticks": 242062,
+              "previous_batch_prepare_us": 111,
+              "previous_batch_check_us": 58,
+              "previous_batch_origin": "same_epoch_profile"
+            },
+            "host_observed_at": 906548.889241724,
+            "recent_chunks": []
+          },
+          {
+            "kind": "cumulative_peak",
+            "phase": "acquisition",
+            "previous_peak": 2,
+            "snapshot": {
+              "epoch": "2",
+              "node": 12,
+              "index": 41856,
+              "queue": 2,
+              "queue_peak": 3,
+              "slack_min_ticks": 65082,
+              "copy_max_ticks": 38806,
+              "poll_max_ticks": 209022,
+              "previous_node_send_ticks": 318223,
+              "previous_batch_prepare_us": 112,
+              "previous_batch_check_us": 58,
+              "previous_batch_origin": "same_epoch_profile"
+            },
+            "host_observed_at": 906548.91056587,
+            "recent_chunks": []
+          },
+          {
+            "kind": "cumulative_peak",
+            "phase": "acquisition",
+            "previous_peak": 3,
+            "snapshot": {
+              "epoch": "2",
+              "node": 19,
+              "index": 66272,
+              "queue": 3,
+              "queue_peak": 4,
+              "slack_min_ticks": 65082,
+              "copy_max_ticks": 39435,
+              "poll_max_ticks": 213210,
+              "previous_node_send_ticks": 339859,
+              "previous_batch_prepare_us": 111,
+              "previous_batch_check_us": 64,
+              "previous_batch_origin": "same_epoch_profile"
+            },
+            "host_observed_at": 906548.925215185,
+            "recent_chunks": []
+          },
+          {
+            "kind": "cumulative_peak",
+            "phase": "acquisition",
+            "previous_peak": 4,
+            "snapshot": {
+              "epoch": "2",
+              "node": 27,
+              "index": 94176,
+              "queue": 4,
+              "queue_peak": 5,
+              "slack_min_ticks": 65082,
+              "copy_max_ticks": 39435,
+              "poll_max_ticks": 213210,
+              "previous_node_send_ticks": 311877,
+              "previous_batch_prepare_us": 112,
+              "previous_batch_check_us": 58,
+              "previous_batch_origin": "same_epoch_profile"
+            },
+            "host_observed_at": 906548.940766641,
+            "recent_chunks": []
+          },
+          {
+            "kind": "cumulative_peak",
+            "phase": "acquisition",
+            "previous_peak": 5,
+            "snapshot": {
+              "epoch": "2",
+              "node": 36,
+              "index": 125568,
+              "queue": 5,
+              "queue_peak": 6,
+              "slack_min_ticks": 65082,
+              "copy_max_ticks": 39648,
+              "poll_max_ticks": 220041,
+              "previous_node_send_ticks": 346557,
+              "previous_batch_prepare_us": 112,
+              "previous_batch_check_us": 315,
+              "previous_batch_origin": "same_epoch_profile"
+            },
+            "host_observed_at": 906548.957968963,
+            "recent_chunks": []
+          },
+          {
+            "kind": "cumulative_peak",
+            "phase": "acquisition",
+            "previous_peak": 6,
+            "snapshot": {
+              "epoch": "2",
+              "node": 43,
+              "index": 149984,
+              "queue": 6,
+              "queue_peak": 7,
+              "slack_min_ticks": 65082,
+              "copy_max_ticks": 39648,
+              "poll_max_ticks": 220041,
+              "previous_node_send_ticks": 323107,
+              "previous_batch_prepare_us": 117,
+              "previous_batch_check_us": 309,
+              "previous_batch_origin": "same_epoch_profile"
+            },
+            "host_observed_at": 906548.971863062,
+            "recent_chunks": []
+          },
+          {
+            "kind": "cumulative_peak",
+            "phase": "acquisition",
+            "previous_peak": 7,
+            "snapshot": {
+              "epoch": "2",
+              "node": 55,
+              "index": 191840,
+              "queue": 7,
+              "queue_peak": 8,
+              "slack_min_ticks": 65082,
+              "copy_max_ticks": 39648,
+              "poll_max_ticks": 220041,
+              "previous_node_send_ticks": 314113,
+              "previous_batch_prepare_us": 111,
+              "previous_batch_check_us": 58,
+              "previous_batch_origin": "same_epoch_profile"
+            },
+            "host_observed_at": 906548.994365705,
+            "recent_chunks": []
+          }
+        ],
+        "phase_events_omitted": 0,
+        "slowest_node_observations": [
+          {
+            "epoch": "2",
+            "node": 26,
+            "index": 90688,
+            "queue": 3,
+            "queue_peak": 4,
+            "slack_min_ticks": 65082,
+            "copy_max_ticks": 39435,
+            "poll_max_ticks": 213210,
+            "previous_node_send_ticks": 366094,
+            "previous_batch_prepare_us": 111,
+            "previous_batch_check_us": 58,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          },
+          {
+            "epoch": "2",
+            "node": 21,
+            "index": 73248,
+            "queue": 3,
+            "queue_peak": 4,
+            "slack_min_ticks": 65082,
+            "copy_max_ticks": 39435,
+            "poll_max_ticks": 213210,
+            "previous_node_send_ticks": 352103,
+            "previous_batch_prepare_us": 118,
+            "previous_batch_check_us": 58,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          },
+          {
+            "epoch": "2",
+            "node": 36,
+            "index": 125568,
+            "queue": 5,
+            "queue_peak": 6,
+            "slack_min_ticks": 65082,
+            "copy_max_ticks": 39648,
+            "poll_max_ticks": 220041,
+            "previous_node_send_ticks": 346557,
+            "previous_batch_prepare_us": 112,
+            "previous_batch_check_us": 315,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          },
+          {
+            "epoch": "2",
+            "node": 5396,
+            "index": 18821248,
+            "queue": 3,
+            "queue_peak": 8,
+            "slack_min_ticks": 63436,
+            "copy_max_ticks": 39715,
+            "poll_max_ticks": 221314,
+            "previous_node_send_ticks": 341646,
+            "previous_batch_prepare_us": 111,
+            "previous_batch_check_us": 58,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          },
+          {
+            "epoch": "2",
+            "node": 42,
+            "index": 146496,
+            "queue": 5,
+            "queue_peak": 6,
+            "slack_min_ticks": 65082,
+            "copy_max_ticks": 39648,
+            "poll_max_ticks": 220041,
+            "previous_node_send_ticks": 340914,
+            "previous_batch_prepare_us": 118,
+            "previous_batch_check_us": 58,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          },
+          {
+            "epoch": "2",
+            "node": 19,
+            "index": 66272,
+            "queue": 3,
+            "queue_peak": 4,
+            "slack_min_ticks": 65082,
+            "copy_max_ticks": 39435,
+            "poll_max_ticks": 213210,
+            "previous_node_send_ticks": 339859,
+            "previous_batch_prepare_us": 111,
+            "previous_batch_check_us": 64,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          },
+          {
+            "epoch": "2",
+            "node": 45,
+            "index": 156960,
+            "queue": 6,
+            "queue_peak": 7,
+            "slack_min_ticks": 65082,
+            "copy_max_ticks": 39648,
+            "poll_max_ticks": 220041,
+            "previous_node_send_ticks": 337638,
+            "previous_batch_prepare_us": 112,
+            "previous_batch_check_us": 58,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          },
+          {
+            "epoch": "2",
+            "node": 18,
+            "index": 62784,
+            "queue": 2,
+            "queue_peak": 3,
+            "slack_min_ticks": 65082,
+            "copy_max_ticks": 39435,
+            "poll_max_ticks": 213210,
+            "previous_node_send_ticks": 337588,
+            "previous_batch_prepare_us": 368,
+            "previous_batch_check_us": 58,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          }
+        ],
+        "node_timing_note": "Eight largest previous-node sends, one observation per epoch/node start. Copy/poll are cumulative MCU maxima; prepare/check refer to previous physical batch. Same observation does not establish simultaneity or causality.",
+        "chunk_timing": {},
+        "physical_batch_mix": {
+          "acquisition:rf+rf": 11459
+        },
+        "physical_batch_mix_omitted": 0,
+        "final_rf_followed_by_idle": {},
+        "wav_rf_max_consecutive_batches": {},
+        "stop_roundtrips": [],
+        "stop_pending_count": 0,
+        "stop_observations_omitted": 0,
+        "wav_chunk_timing": null,
+        "ordinary_timing_valid": true,
+        "performance_acceptance_eligible": true,
+        "spi_batch_timing": {
+          "histogram_upper_bounds_exclusive_us": [
+            5,
+            10,
+            20,
+            50,
+            100,
+            200,
+            500,
+            1000,
+            5000
+          ],
+          "groups": [
+            {
+              "observed_phase": "acquisition",
+              "previous_batch": "acquisition:rf+rf",
+              "previous_origin": "same_epoch_profile",
+              "prepare": {
+                "count": 11459,
+                "total_us": 1702966,
+                "min_us": 110,
+                "max_us": 415,
+                "zero_count": 0,
+                "histogram": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  10852,
+                  607,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 148.6138406492713
+              },
+              "check": {
+                "count": 11459,
+                "total_us": 1010565,
+                "min_us": 58,
+                "max_us": 317,
+                "zero_count": 0,
+                "histogram": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  10175,
+                  0,
+                  1284,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 88.189632603194
+              }
+            },
+            {
+              "observed_phase": "acquisition",
+              "previous_batch": "unknown",
+              "previous_origin": "unknown",
+              "prepare": {
+                "count": 1,
+                "total_us": 108,
+                "min_us": 108,
+                "max_us": 108,
+                "zero_count": 0,
+                "histogram": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 108.0
+              },
+              "check": {
+                "count": 1,
+                "total_us": 58,
+                "min_us": 58,
+                "max_us": 58,
+                "zero_count": 0,
+                "histogram": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 58.0
+              }
+            }
+          ],
+          "omitted_batches": 0,
+          "note": "Fields describe previous physical batch. Dedup by epoch/sequence//2; only batches containing target native RF/status are covered. Phase/mix are host observations, not causal attribution."
+        },
+        "ack_batch_timing": {
+          "groups": [
+            {
+              "phase": "acquisition",
+              "ack_command": "no_wav_ack",
+              "reason": 0,
+              "prepare": {
+                "count": 11459,
+                "total_us": 1702919,
+                "min_us": 108,
+                "max_us": 415,
+                "zero_count": 0,
+                "histogram": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  10852,
+                  607,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 148.60973906972686
+              },
+              "check": {
+                "count": 11459,
+                "total_us": 1010550,
+                "min_us": 58,
+                "max_us": 317,
+                "zero_count": 0,
+                "histogram": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  10175,
+                  0,
+                  1284,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 88.18832358844577
+              }
+            }
+          ],
+          "matched_replies": 0,
+          "unmatched_replies": 0,
+          "pending": 0,
+          "evicted": 0,
+          "omitted_groups": 0,
+          "note": "Native half 1 metadata, categorized by same-batch WAV reply id/session. prepare/check describe prior iteration; check includes decode_pair and command processing, not IRQ-lock duration alone. No WAV ACK does not mean no command. Lifecycle reply counters include non-target profiles; timing groups only target RF. ACK-only and RF+ACK pairs lack coverage."
+        },
+        "raw_chunk_ack_latency": {
+          "enabled": false,
+          "matched": 0,
+          "raw_max_ms": 0.0,
+          "raw_mean_ms": null,
+          "decoded": 0,
+          "decode_max_ms": 0.0,
+          "pending_sends": 0,
+          "pending_decode": 0,
+          "omitted": 0,
+          "slow": [],
+          "note": "Complete-frame socket read time versus entry to decoder event handling; correlated CHUNK ids/session, normal receiver validation unchanged"
+        },
+        "phase_caveat": "Host observation boundaries, not MCU event timestamps. Sampled queue is a lower bound; cumulative peak remains acceptance gate. Send counters refer to previous node. Retune is not visible on this wire.",
+        "pending_bytes": 0,
+        "tcp_fifo_headroom_measured": false,
+        "frame_kinds": {
+          "20": 22919
+        },
+        "radio_playing_frame_kinds": {},
+        "sent_commands": {},
+        "radio_playing_sent_commands": {},
+        "note": "MCU queue/slack/send counters; send weighted once per complete node start. Cumulative MCU peak includes startup.",
+        "elapsed_seconds": 10.000216095941141,
+        "validated_samples": 19985368,
+        "integrity_pass": true,
+        "scope": "ADC transport only; not GUI/audio or analog qualification",
+        "queue_capacity": 16,
+        "publicly_accepted": false,
+        "applied_request_id": 3988036596,
+        "applied_epoch": 2
+      }
+    }
+  ],
+  "ready_no_yield": false,
+  "ok": true,
+  "candidate_installed": false,
+  "state_uncertain": false,
+  "journal": [
+    {
+      "phase": "preflight",
+      "state": "completed"
+    },
+    {
+      "phase": "capture",
+      "state": "completed"
+    },
+    {
+      "phase": "backup",
+      "state": "completed"
+    },
+    {
+      "phase": "quiesce",
+      "state": "completed"
+    },
+    {
+      "phase": "stop_old_relay",
+      "state": "completed"
+    },
+    {
+      "phase": "rename_old_relay",
+      "state": "completed"
+    },
+    {
+      "phase": "stop_app",
+      "state": "completed"
+    },
+    {
+      "phase": "v20_sram3_ADC_screen",
+      "state": "completed"
+    },
+    {
+      "phase": "rollback_stop_new_relay",
+      "state": "completed"
+    },
+    {
+      "phase": "rollback_stop_app",
+      "state": "completed"
+    },
+    {
+      "phase": "rollback_restore_sources",
+      "state": "completed"
+    },
+    {
+      "phase": "rollback_restore_cache",
+      "state": "completed"
+    },
+    {
+      "phase": "rollback_verify_original_material",
+      "state": "completed"
+    },
+    {
+      "phase": "rollback_start_original_app",
+      "state": "completed"
+    },
+    {
+      "phase": "rollback_restore_old_relay",
+      "state": "completed"
+    },
+    {
+      "phase": "rollback_restore_cpu",
+      "state": "completed"
+    },
+    {
+      "phase": "rollback_restore_snapshot",
+      "state": "completed"
+    },
+    {
+      "phase": "rollback_verify_original",
+      "state": "completed"
+    }
+  ],
+  "baseline": {
+    "generator_off": true,
+    "wav_idle": true,
+    "receiver_closed": true,
+    "identity_verified": true,
+    "source_manifest_verified": true,
+    "identity": {
+      "board_serial": "1060031107",
+      "app": "scope-v19-main-1",
+      "firmware_sha256": "37f049fa029ad62a10767c56dc586b2c3697f8d250a0b8a7396570ce8e0c7060",
+      "relay_sha256": "27da0bc4860401df27eef50429f2ec881bfd3b51b1893d1fe3bacb9e922f56ae"
+    },
+    "snapshot": {
+      "schema": 1,
+      "identity": {
+        "board_serial": "1060031107",
+        "app": "scope-v19-main-1",
+        "firmware_sha256": "37f049fa029ad62a10767c56dc586b2c3697f8d250a0b8a7396570ce8e0c7060",
+        "relay_sha256": "27da0bc4860401df27eef50429f2ec881bfd3b51b1893d1fe3bacb9e922f56ae"
+      },
+      "adc_bits": 14,
+      "adc_period": 32,
+      "generator": {
+        "wave": 0,
+        "enabled": 0,
+        "mode": 0,
+        "frequency": 2500,
+        "final_frequency": 2500,
+        "low": 0,
+        "high": 4095,
+        "duration": 1000,
+        "duration_us": 0,
+        "duty": 50
+      }
+    },
+    "relay_inspect": {
+      "Id": "c94b825bcfdf3ead09f892c5ec58ba8b1e6fde0a421259ca5c13d2b9811c486f",
+      "Created": "2026-10-27T22:40:18.098010369Z",
+      "Path": "/work/unoq_stream",
+      "Args": [],
+      "State": {
+        "Status": "running",
+        "Running": true,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 827061,
+        "ExitCode": 0,
+        "Error": "",
+        "StartedAt": "2026-11-01T18:19:41.102443615Z",
+        "FinishedAt": "2026-11-01T18:17:48.726283858Z"
+      },
+      "Image": "sha256:22b878f2712b7b2fe0fddaa677393886045746819e127615cafca4c63b306015",
+      "ResolvConfPath": "/var/lib/docker/containers/c94b825bcfdf3ead09f892c5ec58ba8b1e6fde0a421259ca5c13d2b9811c486f/resolv.conf",
+      "HostnamePath": "/var/lib/docker/containers/c94b825bcfdf3ead09f892c5ec58ba8b1e6fde0a421259ca5c13d2b9811c486f/hostname",
+      "HostsPath": "/var/lib/docker/containers/c94b825bcfdf3ead09f892c5ec58ba8b1e6fde0a421259ca5c13d2b9811c486f/hosts",
+      "LogPath": "/var/lib/docker/containers/c94b825bcfdf3ead09f892c5ec58ba8b1e6fde0a421259ca5c13d2b9811c486f/c94b825bcfdf3ead09f892c5ec58ba8b1e6fde0a421259ca5c13d2b9811c486f-json.log",
+      "Name": "/serialmonitor-usb-stream-v19",
+      "RestartCount": 0,
+      "Driver": "overlay2",
+      "Platform": "linux",
+      "MountLabel": "",
+      "ProcessLabel": "",
+      "AppArmorProfile": "",
+      "ExecIDs": null,
+      "HostConfig": {
+        "Binds": null,
+        "ContainerIDFile": "",
+        "LogConfig": {
+          "Type": "json-file",
+          "Config": {
+            "max-file": "2",
+            "max-size": "10m"
+          }
+        },
+        "NetworkMode": "host",
+        "PortBindings": {},
+        "RestartPolicy": {
+          "Name": "no",
+          "MaximumRetryCount": 0
+        },
+        "AutoRemove": false,
+        "VolumeDriver": "",
+        "VolumesFrom": null,
+        "ConsoleSize": [
+          0,
+          0
+        ],
+        "CapAdd": [
+          "SYS_NICE"
+        ],
+        "CapDrop": [
+          "ALL"
+        ],
+        "CgroupnsMode": "private",
+        "Dns": [],
+        "DnsOptions": [],
+        "DnsSearch": [],
+        "ExtraHosts": null,
+        "GroupAdd": null,
+        "IpcMode": "private",
+        "Cgroup": "",
+        "Links": null,
+        "OomScoreAdj": 0,
+        "PidMode": "",
+        "Privileged": false,
+        "PublishAllPorts": false,
+        "ReadonlyRootfs": true,
+        "SecurityOpt": [
+          "no-new-privileges"
+        ],
+        "UTSMode": "",
+        "UsernsMode": "",
+        "ShmSize": 67108864,
+        "Runtime": "runc",
+        "Isolation": "",
+        "CpuShares": 0,
+        "Memory": 0,
+        "NanoCpus": 0,
+        "CgroupParent": "",
+        "BlkioWeight": 0,
+        "BlkioWeightDevice": [],
+        "BlkioDeviceReadBps": [],
+        "BlkioDeviceWriteBps": [],
+        "BlkioDeviceReadIOps": [],
+        "BlkioDeviceWriteIOps": [],
+        "CpuPeriod": 0,
+        "CpuQuota": 0,
+        "CpuRealtimePeriod": 0,
+        "CpuRealtimeRuntime": 0,
+        "CpusetCpus": "",
+        "CpusetMems": "",
+        "Devices": [
+          {
+            "PathOnHost": "/dev/spidev0.0",
+            "PathInContainer": "/dev/spidev0.0",
+            "CgroupPermissions": "rw"
+          },
+          {
+            "PathOnHost": "/dev/gpiochip1",
+            "PathInContainer": "/dev/gpiochip1",
+            "CgroupPermissions": "rw"
+          }
+        ],
+        "DeviceCgroupRules": null,
+        "DeviceRequests": null,
+        "MemoryReservation": 0,
+        "MemorySwap": 0,
+        "MemorySwappiness": null,
+        "OomKillDisable": null,
+        "PidsLimit": null,
+        "Ulimits": [],
+        "CpuCount": 0,
+        "CpuPercent": 0,
+        "IOMaximumIOps": 0,
+        "IOMaximumBandwidth": 0,
+        "Mounts": [
+          {
+            "Type": "bind",
+            "Source": "/home/arduino/.cache/serialmonitor/v19-relay-1a298491ebcc475285c862fc946ac2a1/unoq_stream",
+            "Target": "/work/unoq_stream",
+            "ReadOnly": true
+          },
+          {
+            "Type": "bind",
+            "Source": "/sys/devices/system/cpu/cpufreq/policy0/scaling_governor",
+            "Target": "/scope_cpu_governor"
+          }
+        ],
+        "MaskedPaths": [
+          "/proc/asound",
+          "/proc/acpi",
+          "/proc/kcore",
+          "/proc/keys",
+          "/proc/latency_stats",
+          "/proc/timer_list",
+          "/proc/timer_stats",
+          "/proc/sched_debug",
+          "/proc/scsi",
+          "/sys/firmware",
+          "/sys/devices/virtual/powercap"
+        ],
+        "ReadonlyPaths": [
+          "/proc/bus",
+          "/proc/fs",
+          "/proc/irq",
+          "/proc/sys",
+          "/proc/sysrq-trigger"
+        ]
+      },
+      "GraphDriver": {
+        "Data": {
+          "LowerDir": "/var/lib/docker/overlay2/b24e88a5fe41aaa894d54e433cb803392c41d4e5dfeaa122a2ad801ef6130da3-init/diff:/var/lib/docker/overlay2/d44c10d7f3ead90724c72f7b59db1512e64f2a7df254c38b0a86c7f767485af4/diff:/var/lib/docker/overlay2/fbc34bc221e04b5ec300aa2af7d1113138d9331a8c9e1d89e685345da8483f02/diff:/var/lib/docker/overlay2/22dae50a59d69cfcd7a9bf5471d26697b5e9eb5b5249260e017c0ebdbfa7022c/diff:/var/lib/docker/overlay2/3f556d3c5834855fe06f7d17e3771bc8b5733571ea3af4a763c9841c305517ce/diff:/var/lib/docker/overlay2/8b8ffc0ae644f215db80b120ae6a4dd2b451db561ad5ce3c1b3a63d78f1290a5/diff:/var/lib/docker/overlay2/d9250ffc65e0357bd8b627e189f80c1c86bda6054bd80ae5fac68dd67af5eda3/diff:/var/lib/docker/overlay2/0e975bc62dd242a25184e28a0c0c07c93eb61c837b0f2bed2349c9ba90459f98/diff:/var/lib/docker/overlay2/5840fe07acfc47093da5a207f61653bc8855698a5c64e3f43b55559d33a38e75/diff:/var/lib/docker/overlay2/d4eca522e87bb424e991078151b8d69b4c1ec82d8207f52723cdb0fa50b4499f/diff:/var/lib/docker/overlay2/9706038d1c56e15bfa24105999266de812a9e90d6fdb7fef6db36947e2f4ea8c/diff:/var/lib/docker/overlay2/8555706bd8a2795730097a13efd59e65d120d6f43fa6b1c3a84cb44857086794/diff:/var/lib/docker/overlay2/6f8d80193936dd5de18ad8ce45040037c8ee4a55f7161b1774571cb99d2a566b/diff:/var/lib/docker/overlay2/86881765be623495a3f84360b63ba1a9de5abf07d18e1645acacfb204baba2a7/diff:/var/lib/docker/overlay2/147ce11877e3feec47dc6a0eb9a33bba66f8a88234962b356f0417fa518aff26/diff:/var/lib/docker/overlay2/0f5fd448972f343b2ab00355bb731e47423e8b17bedb44f0957f135561a9d2d3/diff:/var/lib/docker/overlay2/21349ef42547f51c781667f043eb6c1f96e1ba5bf8d9f2229304945c6e85c0a4/diff:/var/lib/docker/overlay2/7f1de31fbf51e091b5491c782d1a15a21ee544e8a75e6bf05168799b14fe2fba/diff:/var/lib/docker/overlay2/e7083cf187ea0246e4ef20e4078298ba380f6ad9b359cd5de26cf77d3413c9d6/diff:/var/lib/docker/overlay2/1d76b401a8120586fc6361b49dbd20cd1502169bf00d4b97606ada324a4d918f/diff:/var/lib/docker/overlay2/31b156ca310f21dcd7c24962137e251580cb1cc2e25baa2da0b2db319c98eaf3/diff",
+          "MergedDir": "/var/lib/docker/overlay2/b24e88a5fe41aaa894d54e433cb803392c41d4e5dfeaa122a2ad801ef6130da3/merged",
+          "UpperDir": "/var/lib/docker/overlay2/b24e88a5fe41aaa894d54e433cb803392c41d4e5dfeaa122a2ad801ef6130da3/diff",
+          "WorkDir": "/var/lib/docker/overlay2/b24e88a5fe41aaa894d54e433cb803392c41d4e5dfeaa122a2ad801ef6130da3/work"
+        },
+        "Name": "overlay2"
+      },
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "/home/arduino/.cache/serialmonitor/v19-relay-1a298491ebcc475285c862fc946ac2a1/unoq_stream",
+          "Destination": "/work/unoq_stream",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/sys/devices/system/cpu/cpufreq/policy0/scaling_governor",
+          "Destination": "/scope_cpu_governor",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        }
+      ],
+      "Config": {
+        "Hostname": "arturino",
+        "Domainname": "",
+        "User": "0:0",
+        "AttachStdin": false,
+        "AttachStdout": false,
+        "AttachStderr": false,
+        "Tty": false,
+        "OpenStdin": false,
+        "StdinOnce": false,
+        "Env": [
+          "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+          "GPG_KEY=7169605F62C751356D054A26A821E680E5FA6305",
+          "PYTHON_VERSION=3.13.14",
+          "PYTHON_SHA256=639e43243c620a308f968213df9e00f2f8f62332f7adbaa7a7eeb9783057c690",
+          "UV_CONSTRAINT=/etc/uv-constraints.txt",
+          "PIP_CONSTRAINT=/etc/uv-constraints.txt",
+          "HOME=/home/app",
+          "USER=arduino",
+          "PIPEWIRE_REMOTE=/run/user/1000/pipewire-0"
+        ],
+        "Cmd": null,
+        "Image": "ghcr.io/arduino/app-bricks/python-apps-base:0.12.0",
+        "Volumes": null,
+        "WorkingDir": "/app",
+        "Entrypoint": [
+          "/work/unoq_stream"
+        ],
+        "OnBuild": null,
+        "Labels": {
+          "org.opencontainers.image.created": "2026-08-05T14:13:47.899Z",
+          "org.opencontainers.image.description": "The code of the Arduino App Lab Bricks",
+          "org.opencontainers.image.licenses": "MPL-2.0",
+          "org.opencontainers.image.revision": "7b1504fa79d6d05169aa286d53fe97c318499b2a",
+          "org.opencontainers.image.source": "https://github.com/arduino/app-bricks-py",
+          "org.opencontainers.image.title": "app-bricks-py",
+          "org.opencontainers.image.url": "https://github.com/arduino/app-bricks-py",
+          "org.opencontainers.image.version": "0.12.0"
+        }
+      },
+      "NetworkSettings": {
+        "Bridge": "",
+        "SandboxID": "a514175df7ba03005caf701d186b6e36d5048de8162d7725bbc8d44422b3b2e4",
+        "SandboxKey": "/var/run/docker/netns/default",
+        "Ports": {},
+        "HairpinMode": false,
+        "LinkLocalIPv6Address": "",
+        "LinkLocalIPv6PrefixLen": 0,
+        "SecondaryIPAddresses": null,
+        "SecondaryIPv6Addresses": null,
+        "EndpointID": "",
+        "Gateway": "",
+        "GlobalIPv6Address": "",
+        "GlobalIPv6PrefixLen": 0,
+        "IPAddress": "",
+        "IPPrefixLen": 0,
+        "IPv6Gateway": "",
+        "MacAddress": "",
+        "Networks": {
+          "host": {
+            "IPAMConfig": null,
+            "Links": null,
+            "Aliases": null,
+            "MacAddress": "",
+            "NetworkID": "f9da40f64b25bdd9167bd84f1c507b1245c4bef5d9a11bcfa3b83fa32c85aa64",
+            "EndpointID": "87ce51782f5fc6bac5e81b423f2ff3e7cb5154d7e733eb333d8cb72ca65fa785",
+            "Gateway": "",
+            "IPAddress": "",
+            "IPPrefixLen": 0,
+            "IPv6Gateway": "",
+            "GlobalIPv6Address": "",
+            "GlobalIPv6PrefixLen": 0,
+            "DriverOpts": null,
+            "DNSNames": null
+          }
+        }
+      }
+    },
+    "cpu_state": {
+      "policy": 0,
+      "priority": 0,
+      "cpus": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    "governor": "performance",
+    "app_sources": {
+      "app.yaml": "24481f17d220e1f8d85978dc18a1b713481df220c49179ae8cddc57ca5e2eefd",
+      "python/main.py": "46e0aafd839f40c6ce4dc8580d9c3422d6ed5339465259a2e567ea06346f7aa3",
+      "sketch/acquisition.h": "6d3413c11ffae37bdc56680a2216faf6c7624f761686f561e1023626b3b36f13",
+      "sketch/acquisition_protocol.h": "83838fb7388aa6b837757b83b963f5951b174dd58b49d6b3be93c8c3aa51c376",
+      "sketch/acquisition_storage.h": "1953242fddb28b6b2315572bf65f1cec207988a1a8be5183f0641379c92176f2",
+      "sketch/additional_profiles.h": "b8d94095548a562807ba48fd08b6f9cb6c4148e9926ee80cf0e46bc6142e5591",
+      "sketch/batch2_ownership.h": "c7857c0738dc3114ae248045429a64e569d8dc1e5fdf81f56f09fbdc976363a7",
+      "sketch/batch_command.h": "e4755d4b1c21645937c1f46030ce432893d9b95ad9709feb8a050e3765daf9f6",
+      "sketch/benchmark_protocol.h": "85461155f16b7ee1ca8f46df84377d2c57ced212d40f788bbfccc14822e5367f",
+      "sketch/control_protocol.h": "1c9ea38fa73b7e6fcfb88bde462077b319b7ebada3eab787c33fdcbbaa84ee3a",
+      "sketch/crc32_fast.h": "5d80da2df5d483bb028cf98abdaa2aed0a12da1be7f2ceb8591269debee81959",
+      "sketch/frame_buffer.h": "ac0d1d25cbfd5db0ea629d6990a919bb72de07c116fa23f9689f7db1e32c37f5",
+      "sketch/generator.h": "e853fca473f9c13df50912a54fc621cee9f2fcb125ffe6f810670e93a17ebc77",
+      "sketch/generator_dma.h": "faec31f7ebb7cb64ec04d3c9c8e94225cd66a7513535f7eca9b4be6d282e697c",
+      "sketch/generator_protocol.h": "c241267801e21c326fbd854a324e6c82c01dc6e1ded51a7fbe2442c84299de75",
+      "sketch/generator_timing.h": "a2774f18e899e328a988150e46e017b512fd724075e7f24cc6247923093aac9c",
+      "sketch/high_rate_profile.h": "78faa85feb5c17625df5bed00844d7a14c3572aaefcaac836a02186626d315f0",
+      "sketch/native_profiles.h": "cb090dbe2bfa9349c7f69136cd766f0757e1294f97aeb1a62816bcb8844cc74c",
+      "sketch/node_validation.h": "f0c38dae55f9fbfb2d4aece35643df6264fbc0c7b054c14ef301a2dd750cfa38",
+      "sketch/node_validation_fast.h": "5e582042ee500b79946b0e4ca5e238abfee3bdc08752b5d16b639a0e193c046a",
+      "sketch/radio_test.h": "fb56e0ccac1a0bd0c1e4dab23a9f236bb6fe5aae40e6a66890319d4e7e1c725e",
+      "sketch/sample_packing.h": "84823758ded381d3168e452893d86eeed6a05c73f96196514f5ec0d9115c3e76",
+      "sketch/scope_config.h": "736ba175f81c1da18858a20cee497cfb94e733cc3b96b9cd2303c1759d416d13",
+      "sketch/scope_protocol.h": "c2bf92aed1aac5efc4f6283cd302297d3c8be3ce40e7b838fa8d5bcacef9d612",
+      "sketch/sketch.ino": "9e6812548b773a8e3b09c84fdfbaf364d4e76f565229bc2e1a0ccc274ee65375",
+      "sketch/sketch.yaml": "6cf6e038e5082ad98b26d3cef370966c1d89a98afe5cee3dd0c36cf58031daaf",
+      "sketch/spi16_geometry.h": "278b0d594820539a5a3a3863c5623eb433607401512d770242c0bf49bac35093",
+      "sketch/wav.h": "0dc2b88b7d25de037fc0598c85b70b3903caaa3c2d6a92ea84b23ab680ddb1f2",
+      "sketch/wav_dma.h": "82bf749b289b5dfc4907e751ac1c1dd146d2ab1b0fe92c046d7492b3cc15cc10",
+      "sketch/wav_protocol.h": "78e788ab24dac52eff1d79cc15d08ac730451316e28050f461d5f4febf2cd223",
+      "sketch/wav_queue.h": "002553b2c58ff1343a218959f58632a394656aeb0f28fc74bb17a97f2793dd83",
+      "sketch/wav_storage.h": "a06e48b8192d2674dfa3ce1f57e601f523244c1016b5ecc899607d48fb1cce69"
+    }
+  },
+  "backup": {
+    "export_verified": true,
+    "source_archive_verified": true,
+    "full_cache_verified": true,
+    "firmware_elf_bin_verified": true,
+    "relay_verified": true,
+    "paired_manifest_persisted": true,
+    "folder": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/respaldos/parejas/v19_production_a8c45332a1bd4a4fbaa3461ac0adfdbc",
+    "archive_manifest_sha256": "09b9bc1b8fdbb5ab091623f1167dc777cb62493364854816e631d298cacc720e"
+  },
+  "memory_contract": {
+    "schema": 1,
+    "begin": 537264128,
+    "end": 537657344,
+    "kernel_image_end": 537213072,
+    "bsp_files": {
+      "/home/arduino/.arduino15/internal/arduino_zephyr_1.0.0_280fc2760e675f10/firmwares/zephyr-arduino_uno_q_stm32u585xx.config": "a1c866dac9f190630713405d831918bc294753fc82f76e7f6d4135daae7e2bba",
+      "/home/arduino/.arduino15/internal/arduino_zephyr_1.0.0_280fc2760e675f10/firmwares/zephyr-arduino_uno_q_stm32u585xx.dts": "64fcdc0926f42048b3d0e199f8053334bc650597238e42d589565f95447769e5",
+      "/home/arduino/.arduino15/internal/arduino_zephyr_1.0.0_280fc2760e675f10/firmwares/zephyr-arduino_uno_q_stm32u585xx.elf": "39d4a4fd47241663323f6e04f94dd8f5a9f9ad6582cf1df37f9709b74026adcd",
+      "/home/arduino/.arduino15/internal/arduino_zephyr_1.0.0_280fc2760e675f10/variants/_ldscripts/memory-static.ld": "cbe17b74e93d2a05f4e101366d036e6a9b3d89d400855349734d5419984d6341",
+      "/home/arduino/.arduino15/internal/arduino_zephyr_1.0.0_280fc2760e675f10/variants/_ldscripts/memory-check.ld": "ac38a058c316733e3405b4472eb6cf15c7d34400a4096983d4e27fa0f7e886e8",
+      "/home/arduino/.arduino15/internal/arduino_zephyr_1.0.0_280fc2760e675f10/variants/_ldscripts/build-dynamic.ld": "2aba77a8dbb9edf4aeeb96cbd460844fe3fcff81c5ff330ca557ed1218dbf02c",
+      "/home/arduino/.arduino15/internal/arduino_zephyr_1.0.0_280fc2760e675f10/variants/arduino_uno_q_stm32u585xx/syms-dynamic.ld": "946c78583eed20806317836e543dd6155970f70990a98c3e11b9c76c4dd8ebfd",
+      "/home/arduino/.arduino15/internal/arduino_zephyr_1.0.0_280fc2760e675f10/variants/_ldscripts/build-static.ld": "04be061156ebb88fa43537c811e0a8fdc2b721d1bcc0a1a9ac5990018536123e",
+      "/home/arduino/.arduino15/internal/arduino_zephyr_1.0.0_280fc2760e675f10/variants/arduino_uno_q_stm32u585xx/syms-static.ld": "f4f05a8a411196fad575360a1b6cc9f5f10a337864548e7387fb8580c4092d62"
+    }
+  },
+  "memory_fix_backup": {
+    "kind": "storage_lifetime",
+    "remote_archive": "/tmp/v20-sram3-a8c45332a1bd4a4fbaa3461ac0adfdbc/v20_original.tar",
+    "sha256": "6092f0539f733ca44836c7e8558cca1870d584b087f446bd9ef90560535ce766",
+    "previous_firmware": "52f933bdb9c632544624e5d4188a740a9cdb429596bfe5a4d926900e7538aefe",
+    "old_sources": {
+      "app.yaml": "bfd5ec689ef05954ea009e2fc1218e26ed137e26d8d7dd998a386d2e43207db9",
+      "python/main.py": "46e0aafd839f40c6ce4dc8580d9c3422d6ed5339465259a2e567ea06346f7aa3",
+      "sketch/acquisition.h": "e8c2c8e11e3eb51d036407348d30b3a4cdc3a197d739a5b0d484888cdd6f46d9",
+      "sketch/acquisition_memory.h": "0f86f9b8eceb0ec0851978c015a260d1f7e43214e6402f304811ca97d2b84161",
+      "sketch/acquisition_protocol.h": "83838fb7388aa6b837757b83b963f5951b174dd58b49d6b3be93c8c3aa51c376",
+      "sketch/acquisition_storage.h": "1973e48beb3833d00af94e4c6fa326ddbb41f41bf8d03bfa2ea8da0723e9938a",
+      "sketch/additional_profiles.h": "b8d94095548a562807ba48fd08b6f9cb6c4148e9926ee80cf0e46bc6142e5591",
+      "sketch/batch2_ownership.h": "c7857c0738dc3114ae248045429a64e569d8dc1e5fdf81f56f09fbdc976363a7",
+      "sketch/batch_command.h": "e4755d4b1c21645937c1f46030ce432893d9b95ad9709feb8a050e3765daf9f6",
+      "sketch/benchmark_protocol.h": "85461155f16b7ee1ca8f46df84377d2c57ced212d40f788bbfccc14822e5367f",
+      "sketch/control_protocol.h": "1c9ea38fa73b7e6fcfb88bde462077b319b7ebada3eab787c33fdcbbaa84ee3a",
+      "sketch/crc32_fast.h": "5d80da2df5d483bb028cf98abdaa2aed0a12da1be7f2ceb8591269debee81959",
+      "sketch/frame_buffer.h": "ac0d1d25cbfd5db0ea629d6990a919bb72de07c116fa23f9689f7db1e32c37f5",
+      "sketch/generator.h": "e853fca473f9c13df50912a54fc621cee9f2fcb125ffe6f810670e93a17ebc77",
+      "sketch/generator_dma.h": "faec31f7ebb7cb64ec04d3c9c8e94225cd66a7513535f7eca9b4be6d282e697c",
+      "sketch/generator_protocol.h": "c241267801e21c326fbd854a324e6c82c01dc6e1ded51a7fbe2442c84299de75",
+      "sketch/generator_timing.h": "a2774f18e899e328a988150e46e017b512fd724075e7f24cc6247923093aac9c",
+      "sketch/high_rate_profile.h": "2a4b3a5dad0611385b97ad815a7d0ee85e4c954359cf262858a27be27405aeed",
+      "sketch/native_profiles.h": "27d2382483812e4fdc544f857de293d50a09c5837a9a1e25c17e20904ec0bcdc",
+      "sketch/node_validation.h": "f0c38dae55f9fbfb2d4aece35643df6264fbc0c7b054c14ef301a2dd750cfa38",
+      "sketch/node_validation_fast.h": "5e582042ee500b79946b0e4ca5e238abfee3bdc08752b5d16b639a0e193c046a",
+      "sketch/radio_test.h": "fb56e0ccac1a0bd0c1e4dab23a9f236bb6fe5aae40e6a66890319d4e7e1c725e",
+      "sketch/sample_packing.h": "84823758ded381d3168e452893d86eeed6a05c73f96196514f5ec0d9115c3e76",
+      "sketch/scope_config.h": "736ba175f81c1da18858a20cee497cfb94e733cc3b96b9cd2303c1759d416d13",
+      "sketch/scope_protocol.h": "c2bf92aed1aac5efc4f6283cd302297d3c8be3ce40e7b838fa8d5bcacef9d612",
+      "sketch/sketch.ino": "80f5ddfffbedaf1b31982bb492d6a21a4395ad83c1fd5d6e8f6ac1b1b144555f",
+      "sketch/sketch.yaml": "6cf6e038e5082ad98b26d3cef370966c1d89a98afe5cee3dd0c36cf58031daaf",
+      "sketch/spi16_geometry.h": "278b0d594820539a5a3a3863c5623eb433607401512d770242c0bf49bac35093",
+      "sketch/wav.h": "0dc2b88b7d25de037fc0598c85b70b3903caaa3c2d6a92ea84b23ab680ddb1f2",
+      "sketch/wav_dma.h": "82bf749b289b5dfc4907e751ac1c1dd146d2ab1b0fe92c046d7492b3cc15cc10",
+      "sketch/wav_protocol.h": "78e788ab24dac52eff1d79cc15d08ac730451316e28050f461d5f4febf2cd223",
+      "sketch/wav_queue.h": "002553b2c58ff1343a218959f58632a394656aeb0f28fc74bb17a97f2793dd83",
+      "sketch/wav_storage.h": "a06e48b8192d2674dfa3ce1f57e601f523244c1016b5ecc899607d48fb1cce69"
+    },
+    "new_sources": {
+      "app.yaml": "bfd5ec689ef05954ea009e2fc1218e26ed137e26d8d7dd998a386d2e43207db9",
+      "python/main.py": "46e0aafd839f40c6ce4dc8580d9c3422d6ed5339465259a2e567ea06346f7aa3",
+      "sketch/acquisition.h": "e8c2c8e11e3eb51d036407348d30b3a4cdc3a197d739a5b0d484888cdd6f46d9",
+      "sketch/acquisition_memory.h": "0f86f9b8eceb0ec0851978c015a260d1f7e43214e6402f304811ca97d2b84161",
+      "sketch/acquisition_protocol.h": "83838fb7388aa6b837757b83b963f5951b174dd58b49d6b3be93c8c3aa51c376",
+      "sketch/acquisition_storage.h": "e4b37e8d2e21fce13dca7081219d08233851f9cb170d237f54fd03535349a742",
+      "sketch/additional_profiles.h": "b8d94095548a562807ba48fd08b6f9cb6c4148e9926ee80cf0e46bc6142e5591",
+      "sketch/batch2_ownership.h": "c7857c0738dc3114ae248045429a64e569d8dc1e5fdf81f56f09fbdc976363a7",
+      "sketch/batch_command.h": "e4755d4b1c21645937c1f46030ce432893d9b95ad9709feb8a050e3765daf9f6",
+      "sketch/benchmark_protocol.h": "85461155f16b7ee1ca8f46df84377d2c57ced212d40f788bbfccc14822e5367f",
+      "sketch/control_protocol.h": "1c9ea38fa73b7e6fcfb88bde462077b319b7ebada3eab787c33fdcbbaa84ee3a",
+      "sketch/crc32_fast.h": "5d80da2df5d483bb028cf98abdaa2aed0a12da1be7f2ceb8591269debee81959",
+      "sketch/frame_buffer.h": "ac0d1d25cbfd5db0ea629d6990a919bb72de07c116fa23f9689f7db1e32c37f5",
+      "sketch/generator.h": "e853fca473f9c13df50912a54fc621cee9f2fcb125ffe6f810670e93a17ebc77",
+      "sketch/generator_dma.h": "faec31f7ebb7cb64ec04d3c9c8e94225cd66a7513535f7eca9b4be6d282e697c",
+      "sketch/generator_protocol.h": "c241267801e21c326fbd854a324e6c82c01dc6e1ded51a7fbe2442c84299de75",
+      "sketch/generator_timing.h": "a2774f18e899e328a988150e46e017b512fd724075e7f24cc6247923093aac9c",
+      "sketch/high_rate_profile.h": "2a4b3a5dad0611385b97ad815a7d0ee85e4c954359cf262858a27be27405aeed",
+      "sketch/native_profiles.h": "27d2382483812e4fdc544f857de293d50a09c5837a9a1e25c17e20904ec0bcdc",
+      "sketch/node_validation.h": "f0c38dae55f9fbfb2d4aece35643df6264fbc0c7b054c14ef301a2dd750cfa38",
+      "sketch/node_validation_fast.h": "5e582042ee500b79946b0e4ca5e238abfee3bdc08752b5d16b639a0e193c046a",
+      "sketch/radio_test.h": "fb56e0ccac1a0bd0c1e4dab23a9f236bb6fe5aae40e6a66890319d4e7e1c725e",
+      "sketch/sample_packing.h": "84823758ded381d3168e452893d86eeed6a05c73f96196514f5ec0d9115c3e76",
+      "sketch/scope_config.h": "736ba175f81c1da18858a20cee497cfb94e733cc3b96b9cd2303c1759d416d13",
+      "sketch/scope_protocol.h": "c2bf92aed1aac5efc4f6283cd302297d3c8be3ce40e7b838fa8d5bcacef9d612",
+      "sketch/sketch.ino": "80f5ddfffbedaf1b31982bb492d6a21a4395ad83c1fd5d6e8f6ac1b1b144555f",
+      "sketch/sketch.yaml": "6cf6e038e5082ad98b26d3cef370966c1d89a98afe5cee3dd0c36cf58031daaf",
+      "sketch/spi16_geometry.h": "278b0d594820539a5a3a3863c5623eb433607401512d770242c0bf49bac35093",
+      "sketch/wav.h": "0dc2b88b7d25de037fc0598c85b70b3903caaa3c2d6a92ea84b23ab680ddb1f2",
+      "sketch/wav_dma.h": "82bf749b289b5dfc4907e751ac1c1dd146d2ab1b0fe92c046d7492b3cc15cc10",
+      "sketch/wav_protocol.h": "78e788ab24dac52eff1d79cc15d08ac730451316e28050f461d5f4febf2cd223",
+      "sketch/wav_queue.h": "002553b2c58ff1343a218959f58632a394656aeb0f28fc74bb17a97f2793dd83",
+      "sketch/wav_storage.h": "a06e48b8192d2674dfa3ce1f57e601f523244c1016b5ecc899607d48fb1cce69"
+    },
+    "memory_contract": {
+      "schema": 1,
+      "begin": 537264128,
+      "end": 537657344,
+      "kernel_image_end": 537213072,
+      "bsp_files": {
+        "/home/arduino/.arduino15/internal/arduino_zephyr_1.0.0_280fc2760e675f10/firmwares/zephyr-arduino_uno_q_stm32u585xx.config": "a1c866dac9f190630713405d831918bc294753fc82f76e7f6d4135daae7e2bba",
+        "/home/arduino/.arduino15/internal/arduino_zephyr_1.0.0_280fc2760e675f10/firmwares/zephyr-arduino_uno_q_stm32u585xx.dts": "64fcdc0926f42048b3d0e199f8053334bc650597238e42d589565f95447769e5",
+        "/home/arduino/.arduino15/internal/arduino_zephyr_1.0.0_280fc2760e675f10/firmwares/zephyr-arduino_uno_q_stm32u585xx.elf": "39d4a4fd47241663323f6e04f94dd8f5a9f9ad6582cf1df37f9709b74026adcd",
+        "/home/arduino/.arduino15/internal/arduino_zephyr_1.0.0_280fc2760e675f10/variants/_ldscripts/memory-static.ld": "cbe17b74e93d2a05f4e101366d036e6a9b3d89d400855349734d5419984d6341",
+        "/home/arduino/.arduino15/internal/arduino_zephyr_1.0.0_280fc2760e675f10/variants/_ldscripts/memory-check.ld": "ac38a058c316733e3405b4472eb6cf15c7d34400a4096983d4e27fa0f7e886e8",
+        "/home/arduino/.arduino15/internal/arduino_zephyr_1.0.0_280fc2760e675f10/variants/_ldscripts/build-dynamic.ld": "2aba77a8dbb9edf4aeeb96cbd460844fe3fcff81c5ff330ca557ed1218dbf02c",
+        "/home/arduino/.arduino15/internal/arduino_zephyr_1.0.0_280fc2760e675f10/variants/arduino_uno_q_stm32u585xx/syms-dynamic.ld": "946c78583eed20806317836e543dd6155970f70990a98c3e11b9c76c4dd8ebfd",
+        "/home/arduino/.arduino15/internal/arduino_zephyr_1.0.0_280fc2760e675f10/variants/_ldscripts/build-static.ld": "04be061156ebb88fa43537c811e0a8fdc2b721d1bcc0a1a9ac5990018536123e",
+        "/home/arduino/.arduino15/internal/arduino_zephyr_1.0.0_280fc2760e675f10/variants/arduino_uno_q_stm32u585xx/syms-static.ld": "f4f05a8a411196fad575360a1b6cc9f5f10a337864548e7387fb8580c4092d62"
+      }
+    },
+    "baseline_report": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v20/storage_lifetime_screen_20261101/report.json",
+    "baseline_report_sha256": "57bba334a8061d2e6cab4a6ade974e278ada56f66be0de74f45d1b9ff2094637",
+    "old_cache_manifest": {
+      ".cache/sketch": [
+        "directory"
+      ],
+      ".cache/sketch/build.options.json": [
+        "file",
+        "7aa1bc497bc29f8a7e412813660b2f3f71008bef1019bf9973754d42b76ed0ae"
+      ],
+      ".cache/sketch/compile_commands.json": [
+        "file",
+        "1f4f0e0ff33e886c1d56e107891d39de98a78048bade2a017ec01a11f3841c10"
+      ],
+      ".cache/sketch/core": [
+        "directory"
+      ],
+      ".cache/sketch/core/Tone.cpp.d": [
+        "file",
+        "6b956f4ab10b9f52c46d5b5c6b002389c767e6447fd14859abc8d782fb6512dd"
+      ],
+      ".cache/sketch/core/Tone.cpp.o": [
+        "file",
+        "7e90573a7cf68fcb5f707939e84c468aa143834d4b2ca151d90ee35b526f7f93"
+      ],
+      ".cache/sketch/core/USB.cpp.d": [
+        "file",
+        "dfd8bf148a25a7495c55cd93b8d18499b23172123de90ee6ce07dd2ef8f866c2"
+      ],
+      ".cache/sketch/core/USB.cpp.o": [
+        "file",
+        "3d55c5c266fbb1e95ba3a630cf7735d05578a7e958aefd87d79a85f9d6541418"
+      ],
+      ".cache/sketch/core/WInterrupts.cpp.d": [
+        "file",
+        "6dbd79bf967d6a5ac7aa588503dcf78de5ac7f45ab278466a47a3ac7dc895aaf"
+      ],
+      ".cache/sketch/core/WInterrupts.cpp.o": [
+        "file",
+        "7e5020c46db563aadc0610ed07ee5f6849c8ccdab526458165d89ea15ff898b7"
+      ],
+      ".cache/sketch/core/WMath.cpp.d": [
+        "file",
+        "6bcd75606fcf47d45f2bebc70607e73b56a8536b5f019fba508d6a37d8da112f"
+      ],
+      ".cache/sketch/core/WMath.cpp.o": [
+        "file",
+        "8513333685e51d4d01bccf2b84a8e4dabf8fcec8086f97c1b8149a8f36825348"
+      ],
+      ".cache/sketch/core/abi.cpp.d": [
+        "file",
+        "9685c40055d5de54b2c766047315967407c15855aa8828d7cb076aa6bc784606"
+      ],
+      ".cache/sketch/core/abi.cpp.o": [
+        "file",
+        "d387517478f0af111be046f6735b198627f92639d73184e60da0a4f6a0ba9f02"
+      ],
+      ".cache/sketch/core/analogReference.cpp.d": [
+        "file",
+        "1428c05f19c6ec1d456b8f5b7a3c8be83a984ed25c798db5c27d82560d27230e"
+      ],
+      ".cache/sketch/core/analogReference.cpp.o": [
+        "file",
+        "54c4253b7371c61b827316f5097c59d97da4d0ea5fb7eb88c575ed6bad0ff170"
+      ],
+      ".cache/sketch/core/api": [
+        "directory"
+      ],
+      ".cache/sketch/core/api/CanMsg.cpp.d": [
+        "file",
+        "1995143cd0516a931cd9dc888ca98b4fc561bb6d26fcb45a3744c5419699081b"
+      ],
+      ".cache/sketch/core/api/CanMsg.cpp.o": [
+        "file",
+        "e4a665aacf530de56a94b62e2936267fe66db4475b8321af784c9b02d3064249"
+      ],
+      ".cache/sketch/core/api/CanMsgRingbuffer.cpp.d": [
+        "file",
+        "b7709f780a53d84c71033b661d785798a7eeae3a34fef430e55c044e5e0eefec"
+      ],
+      ".cache/sketch/core/api/CanMsgRingbuffer.cpp.o": [
+        "file",
+        "b3b836439aab8969418505167fe3b15c6cda8459b0632c7aae258b50e77b53db"
+      ],
+      ".cache/sketch/core/api/Common.cpp.d": [
+        "file",
+        "2fbe28f309f8ed3d9adb142d5e7a0cdce44d0b1eb7c96b798e2f9a05b94dd1c4"
+      ],
+      ".cache/sketch/core/api/Common.cpp.o": [
+        "file",
+        "06e04ebf68357981e2dcd8dcda83020417971a2773ef7c3d1915b53db03c71fd"
+      ],
+      ".cache/sketch/core/api/IPAddress.cpp.d": [
+        "file",
+        "e161a004bb1b040544d1613a4d197793102737dfd8e6029d099804fd06aa6125"
+      ],
+      ".cache/sketch/core/api/IPAddress.cpp.o": [
+        "file",
+        "b460414788a5b8ace3c0cf62ea56e4be681beb1decd1b97cd83acf0f23d1ded4"
+      ],
+      ".cache/sketch/core/api/PluggableUSB.cpp.d": [
+        "file",
+        "36aa458a8b21032facbc6f03ba5acb028b1020cc0a2b30fed1ce926dd11fedc8"
+      ],
+      ".cache/sketch/core/api/PluggableUSB.cpp.o": [
+        "file",
+        "ce3c3a4d0bd255977b219c71cf1011ed4a593a60514c27410f6ca95014b896a6"
+      ],
+      ".cache/sketch/core/api/Print.cpp.d": [
+        "file",
+        "cc04dc741719b89bc0377e8cf1b02ae48bdd4692b24f60c0ea2f1e4b35ca7161"
+      ],
+      ".cache/sketch/core/api/Print.cpp.o": [
+        "file",
+        "2e6a59a8049f11b3ee3c03b504e583632acb04e6dfecf24746b58a46b86649c9"
+      ],
+      ".cache/sketch/core/api/Stream.cpp.d": [
+        "file",
+        "7448b201cd7bea4c0f73f79fd00d9f19e3773350df05023f2c8713c918f529c7"
+      ],
+      ".cache/sketch/core/api/Stream.cpp.o": [
+        "file",
+        "16ec3e57547c4b3ab19b9ca1fc7e4cec6e4f5936ba8f5879d2bb45a574610134"
+      ],
+      ".cache/sketch/core/api/String.cpp.d": [
+        "file",
+        "463069ac47f339db042a2a5fab256f03788109307047f8dec89997a77b191ad5"
+      ],
+      ".cache/sketch/core/api/String.cpp.o": [
+        "file",
+        "593b66c933ab3a135b83c5b6def5940ca5f5612259aaea5dac65cb1f8420af4a"
+      ],
+      ".cache/sketch/core/core.a": [
+        "file",
+        "0dd966785a262d9707733a13d7a63fd3e1c50f9dce531b3373e5f3bb582ccbdb"
+      ],
+      ".cache/sketch/core/itoa.cpp.d": [
+        "file",
+        "0cfe584e1ce67a54c02435235f5819e15623767e110864423530349353bd3c6e"
+      ],
+      ".cache/sketch/core/itoa.cpp.o": [
+        "file",
+        "87cdc9f30d0c49715690c0d0d8bae72b7e24ef68b2518381218f2510b3a38477"
+      ],
+      ".cache/sketch/core/llext_wrappers.c.d": [
+        "file",
+        "d66aeec8f9f374ee95630bff53030c36bdbfa6ee3a70489214b49b5aaf95e79c"
+      ],
+      ".cache/sketch/core/llext_wrappers.c.o": [
+        "file",
+        "d743106576f68133a6b5fbce1391fed1ab9a30958487fdf011fc2902afc3727c"
+      ],
+      ".cache/sketch/core/main.cpp.d": [
+        "file",
+        "7499066bc2858fa1a436a9ce53096b51de54359e9ece98369cf01a660a2f6457"
+      ],
+      ".cache/sketch/core/main.cpp.o": [
+        "file",
+        "ab05a1597beae6697085cf66a70c1b3bd063d9403ff8100ee19d7a7dd4d31960"
+      ],
+      ".cache/sketch/core/new.cpp.d": [
+        "file",
+        "5ff89eb3433df64673a93c04a3da7642d1f0ac964facc80167d9b1113d4c939d"
+      ],
+      ".cache/sketch/core/new.cpp.o": [
+        "file",
+        "3d8b8c70490bb54a1994ae92830c6ce22a23705bf68f5ded36a886928e00154a"
+      ],
+      ".cache/sketch/core/threads.cpp.d": [
+        "file",
+        "0163928ae27b89c942a9bf2bb6d227fec89f1c0074b783b0a793a1d1b1aff566"
+      ],
+      ".cache/sketch/core/threads.cpp.o": [
+        "file",
+        "7cef93481f96c2e3a743ace6b06dab0f4350bb4e6ce14f5d0b7087f9808addd7"
+      ],
+      ".cache/sketch/core/tls-syms.S.o": [
+        "file",
+        "bf3b5c57a3646cdde3f38085fd30c1f3345ae025f973e06dfa9db69f48bc63c7"
+      ],
+      ".cache/sketch/core/usb_device_descriptor.c.d": [
+        "file",
+        "cee190e23d9ea46e5d05dae580a277b1bc9998fdff57d58b4892eff0a7e7322f"
+      ],
+      ".cache/sketch/core/usb_device_descriptor.c.o": [
+        "file",
+        "9bef1fb8b453501f80c76239fb4c160aeea3bcdb8fe86826ac9d6ec595f69d88"
+      ],
+      ".cache/sketch/core/wiring_analog.cpp.d": [
+        "file",
+        "cd5c5c13c9b8f89e527a6f04bdd2798c575e3bacfe42de2d22ef4a9b53f6f122"
+      ],
+      ".cache/sketch/core/wiring_analog.cpp.o": [
+        "file",
+        "183cb8e3fb5be8a037cbc8c534136b8385475fa14a5ad93e4934c9552044eb33"
+      ],
+      ".cache/sketch/core/wiring_digital.cpp.d": [
+        "file",
+        "17a68dd69c700d3b1d2f2b0b948d670a00abf92fbade1007cd6e9c40e6c0480c"
+      ],
+      ".cache/sketch/core/wiring_digital.cpp.o": [
+        "file",
+        "e0d9ad87cf221229fc500bb6439f634ccb80bcb075950dc2f5118cca0a939d0a"
+      ],
+      ".cache/sketch/core/wiring_pulse.cpp.d": [
+        "file",
+        "43969f44d895fef484e68498e61c300ed4f5dd59ed14f88ceab93909d01ac71a"
+      ],
+      ".cache/sketch/core/wiring_pulse.cpp.o": [
+        "file",
+        "2af6bf2a35b8b719e3dc11aa3c9522c2bd6fa940b48468b6a66dc8bdbbb7c9be"
+      ],
+      ".cache/sketch/core/wiring_shift.cpp.d": [
+        "file",
+        "19810f0c3a613371b617d602db363a7dc18597c88b3245d3e019f878619f275d"
+      ],
+      ".cache/sketch/core/wiring_shift.cpp.o": [
+        "file",
+        "8931549ba62616eb40a3979ac24b03e66c6ebe3b9b48648817657bf6e9a8754f"
+      ],
+      ".cache/sketch/core/zephyrCommon.cpp.d": [
+        "file",
+        "bec40e18696606b27fe0ba51a9cdf9f67b73dcfb29a749b27312cd25bdfb003c"
+      ],
+      ".cache/sketch/core/zephyrCommon.cpp.o": [
+        "file",
+        "c49680caa486c5e503aa77e70ada561e5bedb679d4ea5bfc0ab845e89221a586"
+      ],
+      ".cache/sketch/core/zephyrPinctrl.cpp.d": [
+        "file",
+        "262a44ca2a3deb372af9e0ed2606d977cb23c9397aeeaa53b014d2b4e6b108b5"
+      ],
+      ".cache/sketch/core/zephyrPinctrl.cpp.o": [
+        "file",
+        "d03ce23a411f6a01b754d27e91f4540600bd486aa9200ad2460686d1cc62616b"
+      ],
+      ".cache/sketch/core/zephyrSerial.cpp.d": [
+        "file",
+        "5e558cb893b01234a065844c947696e9f4c373b6c5824c253ffc4cb9fe147d48"
+      ],
+      ".cache/sketch/core/zephyrSerial.cpp.o": [
+        "file",
+        "40782c26a7c01bbe2446bdeb2ffdea65de4f4d2a11e0dc1f5fe242765b38c9f5"
+      ],
+      ".cache/sketch/includes.cache": [
+        "file",
+        "309e35c26e1bb1a95f5ba29088812326227f29749d1a2bd9c9b65db694afe306"
+      ],
+      ".cache/sketch/libraries": [
+        "directory"
+      ],
+      ".cache/sketch/libraries.cache": [
+        "file",
+        "18c2b4ce1fcc640595c67673eb124988e9c2c2e737ae571ff6a308e62c6707c1"
+      ],
+      ".cache/sketch/libraries/Arduino_RPClite": [
+        "directory"
+      ],
+      ".cache/sketch/libraries/Arduino_RouterBridge": [
+        "directory"
+      ],
+      ".cache/sketch/libraries/Arduino_RouterBridge/singletons.cpp.d": [
+        "file",
+        "a8a02c7e9d0aa40fe65d251b569d44a0d05cddf167db096d6bde8272accd9c9c"
+      ],
+      ".cache/sketch/libraries/Arduino_RouterBridge/singletons.cpp.libsdetect.d": [
+        "file",
+        "65450b56ccf41c8acd12e66a8d004a14c32427687e6d58da675239e102d853df"
+      ],
+      ".cache/sketch/libraries/Arduino_RouterBridge/singletons.cpp.o": [
+        "file",
+        "950476ff8866f2f5659fe36d63e650d03414ef12fae6e01bfcc8f66b68c318bb"
+      ],
+      ".cache/sketch/libraries/ArxContainer": [
+        "directory"
+      ],
+      ".cache/sketch/libraries/ArxTypeTraits": [
+        "directory"
+      ],
+      ".cache/sketch/libraries/DebugLog": [
+        "directory"
+      ],
+      ".cache/sketch/libraries/MsgPack": [
+        "directory"
+      ],
+      ".cache/sketch/rodata_split.ld": [
+        "file",
+        "7a4b3600bcb524b5d8e1616bbd3b61d0c6c19ab398923cc1d6d466a5b5419f45"
+      ],
+      ".cache/sketch/sketch": [
+        "directory"
+      ],
+      ".cache/sketch/sketch.ino.bin": [
+        "file",
+        "52f933bdb9c632544624e5d4188a740a9cdb429596bfe5a4d926900e7538aefe"
+      ],
+      ".cache/sketch/sketch.ino.bin-zsk.bin": [
+        "file",
+        "9273fc901c09ea6fc53e5502c0bd397c68c5a216f47d967dff4dce752e63c9c1"
+      ],
+      ".cache/sketch/sketch.ino.elf": [
+        "file",
+        "0b33e783fefb5b297705d6ecf8e21c91890f44578d83ae3efb919c1369c02867"
+      ],
+      ".cache/sketch/sketch.ino.elf-zsk.bin": [
+        "file",
+        "a701ab8e5372b51ac4b6ddeaacfd803ed2eb6a384e9a32c6498d7dfd19d79feb"
+      ],
+      ".cache/sketch/sketch.ino.hex": [
+        "file",
+        "5baab642fd606d8864b46a16053fee6cbe797feaaf0fcd857aa9bea5cd2b6992"
+      ],
+      ".cache/sketch/sketch.ino.map": [
+        "file",
+        "210d0e1da9fac88e763bedcebcc14221f73a2b4b642f7787762a1e489d328957"
+      ],
+      ".cache/sketch/sketch.ino_check.tmp": [
+        "file",
+        "a64ae226aa5220c30d13301d5e61bf5bfa98e4b8241f78bfb0bc06c216aa3644"
+      ],
+      ".cache/sketch/sketch.ino_debug.elf": [
+        "file",
+        "9af5f896f75127520151de7b7644447b6aa213305420f5904d7d1751465872a6"
+      ],
+      ".cache/sketch/sketch.ino_temp.elf": [
+        "file",
+        "917d1fa26a5093a3d8d4fce173c2eaa1b80a4f0e787873e72438947fcbf514a7"
+      ],
+      ".cache/sketch/sketch.ino_temp.map": [
+        "file",
+        "02e84c2223925342724b8d8172f06cbbc86d95d4f94a10644f0d85fc62a9d505"
+      ],
+      ".cache/sketch/sketch/acquisition.h": [
+        "file",
+        "e63ab460f67b9a92413e14c968ad44dc86e2ab8402d0f5ebb015e14c0576fba2"
+      ],
+      ".cache/sketch/sketch/acquisition_memory.h": [
+        "file",
+        "e2780f3e12a4acc524444673842bb14e303735ae28b64827bb1be849e1343335"
+      ],
+      ".cache/sketch/sketch/acquisition_protocol.h": [
+        "file",
+        "bd89a182fefe1cf29fbdc91309d5434081a273f9d6c60fff014c421ac7ba01b1"
+      ],
+      ".cache/sketch/sketch/acquisition_storage.h": [
+        "file",
+        "13f178ba6401d7c029bcf15c1dc6171fc14400c35276d72cf6288b9aaa6f772a"
+      ],
+      ".cache/sketch/sketch/additional_profiles.h": [
+        "file",
+        "4d40447a7764a95dbed76681aa652aa5bf52220bd0984d8b78e832dececa2afc"
+      ],
+      ".cache/sketch/sketch/batch2_ownership.h": [
+        "file",
+        "63698cbce8a713327210b55e40e3c7a850e6e14454a09e7e883fd866217f2961"
+      ],
+      ".cache/sketch/sketch/batch_command.h": [
+        "file",
+        "538a8e61daae0eb20e3f9f3acf6916e6a8de34dd14c4c0374c115d02ef592247"
+      ],
+      ".cache/sketch/sketch/benchmark_protocol.h": [
+        "file",
+        "091bbfa5b4ee961ea1fdced72740bf9c7a95b21dd441861a9197d7bdbe036b9b"
+      ],
+      ".cache/sketch/sketch/control_protocol.h": [
+        "file",
+        "56398c0170512d338889f7e0b73364816e18a9ae3b9e7d4bc140ccb52d921413"
+      ],
+      ".cache/sketch/sketch/crc32_fast.h": [
+        "file",
+        "7303357e7f1b389e26a3f38665ea4b4fe694b2bfac4a3fcc39718086f693450b"
+      ],
+      ".cache/sketch/sketch/frame_buffer.h": [
+        "file",
+        "a50f278d3d5c3187b12f74ad0080b9821b7337162d32f24f672226589baaae65"
+      ],
+      ".cache/sketch/sketch/generator.h": [
+        "file",
+        "2fc4ff2602362fa015dd65411c521f500bfbf7eac745bfea045cdc05c81702b3"
+      ],
+      ".cache/sketch/sketch/generator_dma.h": [
+        "file",
+        "b1b9d298946fe6eb844132f65ffd19e5bebddf00b88098f3a58461cc18e103bf"
+      ],
+      ".cache/sketch/sketch/generator_protocol.h": [
+        "file",
+        "a451917fe156aa169be361a3242192104dbd6daafbbfa9160702e5503d35fef2"
+      ],
+      ".cache/sketch/sketch/generator_timing.h": [
+        "file",
+        "d5064e10216401f5e5d66a85459dc66df9dc10c6102ca50283dec8964e76403e"
+      ],
+      ".cache/sketch/sketch/high_rate_profile.h": [
+        "file",
+        "b8276a8fb7098feb3bca1eb4aae16a052b3806665e1ed5042b5655582bab85bc"
+      ],
+      ".cache/sketch/sketch/native_profiles.h": [
+        "file",
+        "f6436c3a8eec10418f0082feb90ce85cc7db90a452d6cab4dd5238205cadafa7"
+      ],
+      ".cache/sketch/sketch/node_validation.h": [
+        "file",
+        "e75e8aeab3dee757e82e866f4f446cbe1bf07efc41e7f46fdd2a03d56e75064b"
+      ],
+      ".cache/sketch/sketch/node_validation_fast.h": [
+        "file",
+        "273f4a800bf8730a9560f044a4899f24bf8860b30b83fda47379a9b8c0a81cf6"
+      ],
+      ".cache/sketch/sketch/radio_test.h": [
+        "file",
+        "f7891497bd35a69ed3381784b4f024cf2ce4044f1ef36b6333494492a89098bc"
+      ],
+      ".cache/sketch/sketch/sample_packing.h": [
+        "file",
+        "0a4de95d8fe04ace7c83464b2383749eb7fde3b8737509378245fef1598c71aa"
+      ],
+      ".cache/sketch/sketch/scope_config.h": [
+        "file",
+        "b61f9410fafedabdb5b9adee885dc297b7594391934e55a36e54129553fd03d3"
+      ],
+      ".cache/sketch/sketch/scope_protocol.h": [
+        "file",
+        "d2d5b212961a9cd392bfb50e5b0275f8609f5f90703cf03bd85cc81ac226dbda"
+      ],
+      ".cache/sketch/sketch/sketch.ino.cpp": [
+        "file",
+        "57cf7c7e2f80d9a40e45f2ca7e1c734b2ca04c97033119d6e69932456932b13b"
+      ],
+      ".cache/sketch/sketch/sketch.ino.cpp.d": [
+        "file",
+        "7af21b43915872b09a27fe0d76dafa8ab8443ab79ea3fb5a008918f1d263f59a"
+      ],
+      ".cache/sketch/sketch/sketch.ino.cpp.merged": [
+        "file",
+        "b8c7bf50371ae4ed941166a54a1b1c82f9e66eccbacbecae21810b5425e16e22"
+      ],
+      ".cache/sketch/sketch/sketch.ino.cpp.merged.libsdetect.d": [
+        "file",
+        "6a0223590513e6b6c3a93ae9fb5a007f953f2378163aac19b058e8813e5b2b1e"
+      ],
+      ".cache/sketch/sketch/sketch.ino.cpp.o": [
+        "file",
+        "92d114575334acafcfab5de8fcc0cebacd909d0f80f48bc4a75a74153d477b5f"
+      ],
+      ".cache/sketch/sketch/spi16_geometry.h": [
+        "file",
+        "2371ad2467fef2836d5a3a38e7e99a11d9e67886800d6e30821c38c630de1cc4"
+      ],
+      ".cache/sketch/sketch/wav.h": [
+        "file",
+        "0cbb932482022a0cf7f546aa34c20eada317e978c5f1961076abf12e0741aa49"
+      ],
+      ".cache/sketch/sketch/wav_dma.h": [
+        "file",
+        "7ee74c63bb2351abd3c7474562e7dbc1cf085d127f584f85554aeaca645d3008"
+      ],
+      ".cache/sketch/sketch/wav_protocol.h": [
+        "file",
+        "cdb190b1d7afea6b4dfcf5749110de75c75db4ed5655f2caa9694a5525c308f0"
+      ],
+      ".cache/sketch/sketch/wav_queue.h": [
+        "file",
+        "45ddc2526fd9bb4250ee324b4e47148848d1657999fa08f2512475652fb1ff24"
+      ],
+      ".cache/sketch/sketch/wav_storage.h": [
+        "file",
+        "b1a5dda2426026b64e6ead3d822a2f2b8c3aeba9c0b06b68a5e53d447843eb63"
+      ]
+    }
+  },
+  "v20_sources": {
+    "app.yaml": "bfd5ec689ef05954ea009e2fc1218e26ed137e26d8d7dd998a386d2e43207db9",
+    "python/main.py": "46e0aafd839f40c6ce4dc8580d9c3422d6ed5339465259a2e567ea06346f7aa3",
+    "sketch/acquisition.h": "e8c2c8e11e3eb51d036407348d30b3a4cdc3a197d739a5b0d484888cdd6f46d9",
+    "sketch/acquisition_memory.h": "0f86f9b8eceb0ec0851978c015a260d1f7e43214e6402f304811ca97d2b84161",
+    "sketch/acquisition_protocol.h": "83838fb7388aa6b837757b83b963f5951b174dd58b49d6b3be93c8c3aa51c376",
+    "sketch/acquisition_storage.h": "e4b37e8d2e21fce13dca7081219d08233851f9cb170d237f54fd03535349a742",
+    "sketch/additional_profiles.h": "b8d94095548a562807ba48fd08b6f9cb6c4148e9926ee80cf0e46bc6142e5591",
+    "sketch/batch2_ownership.h": "c7857c0738dc3114ae248045429a64e569d8dc1e5fdf81f56f09fbdc976363a7",
+    "sketch/batch_command.h": "e4755d4b1c21645937c1f46030ce432893d9b95ad9709feb8a050e3765daf9f6",
+    "sketch/benchmark_protocol.h": "85461155f16b7ee1ca8f46df84377d2c57ced212d40f788bbfccc14822e5367f",
+    "sketch/control_protocol.h": "1c9ea38fa73b7e6fcfb88bde462077b319b7ebada3eab787c33fdcbbaa84ee3a",
+    "sketch/crc32_fast.h": "5d80da2df5d483bb028cf98abdaa2aed0a12da1be7f2ceb8591269debee81959",
+    "sketch/frame_buffer.h": "ac0d1d25cbfd5db0ea629d6990a919bb72de07c116fa23f9689f7db1e32c37f5",
+    "sketch/generator.h": "e853fca473f9c13df50912a54fc621cee9f2fcb125ffe6f810670e93a17ebc77",
+    "sketch/generator_dma.h": "faec31f7ebb7cb64ec04d3c9c8e94225cd66a7513535f7eca9b4be6d282e697c",
+    "sketch/generator_protocol.h": "c241267801e21c326fbd854a324e6c82c01dc6e1ded51a7fbe2442c84299de75",
+    "sketch/generator_timing.h": "a2774f18e899e328a988150e46e017b512fd724075e7f24cc6247923093aac9c",
+    "sketch/high_rate_profile.h": "2a4b3a5dad0611385b97ad815a7d0ee85e4c954359cf262858a27be27405aeed",
+    "sketch/native_profiles.h": "27d2382483812e4fdc544f857de293d50a09c5837a9a1e25c17e20904ec0bcdc",
+    "sketch/node_validation.h": "f0c38dae55f9fbfb2d4aece35643df6264fbc0c7b054c14ef301a2dd750cfa38",
+    "sketch/node_validation_fast.h": "5e582042ee500b79946b0e4ca5e238abfee3bdc08752b5d16b639a0e193c046a",
+    "sketch/radio_test.h": "fb56e0ccac1a0bd0c1e4dab23a9f236bb6fe5aae40e6a66890319d4e7e1c725e",
+    "sketch/sample_packing.h": "84823758ded381d3168e452893d86eeed6a05c73f96196514f5ec0d9115c3e76",
+    "sketch/scope_config.h": "736ba175f81c1da18858a20cee497cfb94e733cc3b96b9cd2303c1759d416d13",
+    "sketch/scope_protocol.h": "c2bf92aed1aac5efc4f6283cd302297d3c8be3ce40e7b838fa8d5bcacef9d612",
+    "sketch/sketch.ino": "80f5ddfffbedaf1b31982bb492d6a21a4395ad83c1fd5d6e8f6ac1b1b144555f",
+    "sketch/sketch.yaml": "6cf6e038e5082ad98b26d3cef370966c1d89a98afe5cee3dd0c36cf58031daaf",
+    "sketch/spi16_geometry.h": "278b0d594820539a5a3a3863c5623eb433607401512d770242c0bf49bac35093",
+    "sketch/wav.h": "0dc2b88b7d25de037fc0598c85b70b3903caaa3c2d6a92ea84b23ab680ddb1f2",
+    "sketch/wav_dma.h": "82bf749b289b5dfc4907e751ac1c1dd146d2ab1b0fe92c046d7492b3cc15cc10",
+    "sketch/wav_protocol.h": "78e788ab24dac52eff1d79cc15d08ac730451316e28050f461d5f4febf2cd223",
+    "sketch/wav_queue.h": "002553b2c58ff1343a218959f58632a394656aeb0f28fc74bb17a97f2793dd83",
+    "sketch/wav_storage.h": "a06e48b8192d2674dfa3ce1f57e601f523244c1016b5ecc899607d48fb1cce69"
+  },
+  "compiler_image": "sha256:267a90ee8568ea8c229b800ea3b00b7fee89cc852b1316610cee6085da6e0dcb",
+  "firmware_before": "52f933bdb9c632544624e5d4188a740a9cdb429596bfe5a4d926900e7538aefe",
+  "relay_sources": {
+    "frame_send_queue.h": "e1a158fac306a098ade76464ca813a33d27e785bd7874c7fc7e21673bec388ca",
+    "unoq_config_stream.c": "2b2277b13be7b0f51435a3ecbeccd407cb8eca7ca652299a5026516affe66659",
+    "base_verifier.c": "c1b47ee3730fac22fd8bd88f34908381dc6d0514f5e577be3c93ef09df12820e",
+    "additional_profiles.h": "b8d94095548a562807ba48fd08b6f9cb6c4148e9926ee80cf0e46bc6142e5591",
+    "native_profiles.h": "27d2382483812e4fdc544f857de293d50a09c5837a9a1e25c17e20904ec0bcdc",
+    "spi16_contract.h": "7d4e1b55fd20c03805902c1664b40059a5747ecb205e30cddad6d0a740b0270b",
+    "cpu_runtime.h": "bd5afdb012a41a8decdfd015352ae391e05786f2075115d13087925819e735ea",
+    "config_relay_protocol.h": "d8cd4803cc005677e3e41188c3e276aba81789ca74fde96ad3d1245d089e89b1",
+    "transport_policy.h": "7da1fd18188fc13925a6ceea12a1bd107299c155c2d1322425f92a24425527b2",
+    "high_rate_profile.h": "2a4b3a5dad0611385b97ad815a7d0ee85e4c954359cf262858a27be27405aeed",
+    "batch2_relay.h": "28d7b911fdc4154412516877810e9a1047485b967c70cdc0887a2b45bd0d6d4a",
+    "spi40_runtime.h": "9d23aa411d533b8dd4e890393616a19d1b1e903943b17c582192d880c01c296c",
+    "cpu_profile.h": "1e28681d03d78695f0021a0dfd225bd3e5a4a904e067b2fff795e6446558c61b"
+  },
+  "relay_sha256": "bf6893f5a0fbab8676120a5decd8c6109698fa852be02333918b1d6e4a2a909d",
+  "previous_firmware": "52f933bdb9c632544624e5d4188a740a9cdb429596bfe5a4d926900e7538aefe",
+  "storage_cycle": [
+    {
+      "bits": 8,
+      "rate": 1860465,
+      "channels": 1,
+      "state": "complete",
+      "metrics": {
+        "profile": [
+          8,
+          1860465,
+          86,
+          3488,
+          1
+        ],
+        "node_budget_ticks": 299968,
+        "epoch_count": 1,
+        "all": {
+          "frames": 10658,
+          "samples": 9293776,
+          "empty_status_frames": 0,
+          "send_nodes": 2664,
+          "mean_send_margin": 0.19167210168083593,
+          "mcu_queue_peak": 2,
+          "min_slack_ticks": 85474,
+          "sampled_queue_max": 1,
+          "send_ticks_max": 317270,
+          "send_over_budget_nodes": 1,
+          "headroom_pass": true
+        },
+        "radio_playing": {
+          "frames": 0,
+          "samples": 0,
+          "empty_status_frames": 0,
+          "send_nodes": 0,
+          "mean_send_margin": null,
+          "mcu_queue_peak": 0,
+          "min_slack_ticks": null,
+          "sampled_queue_max": 0,
+          "send_ticks_max": 0,
+          "send_over_budget_nodes": 0,
+          "headroom_pass": false
+        },
+        "phases": {
+          "acquisition": {
+            "frames": 10658,
+            "samples": 9293776,
+            "empty_status_frames": 0,
+            "send_nodes": 2664,
+            "mean_send_margin": 0.19167210168083593,
+            "mcu_queue_peak": 2,
+            "min_slack_ticks": 85474,
+            "sampled_queue_max": 1,
+            "send_ticks_max": 317270,
+            "send_over_budget_nodes": 1,
+            "headroom_pass": true
+          }
+        },
+        "phase_events": [
+          {
+            "kind": "first_rf_in_phase",
+            "phase": "acquisition",
+            "snapshot": {
+              "epoch": "3",
+              "node": 0,
+              "index": 0,
+              "queue": 1,
+              "queue_peak": 1,
+              "slack_min_ticks": 217005
+            }
+          },
+          {
+            "kind": "cumulative_peak",
+            "phase": "acquisition",
+            "previous_peak": null,
+            "snapshot": {
+              "epoch": "3",
+              "node": 0,
+              "index": 0,
+              "queue": 1,
+              "queue_peak": 1,
+              "slack_min_ticks": 217005,
+              "copy_max_ticks": 38305,
+              "poll_max_ticks": 175957,
+              "previous_node_send_ticks": 0,
+              "previous_batch_prepare_us": 108,
+              "previous_batch_check_us": 58,
+              "previous_batch_origin": "unknown"
+            },
+            "host_observed_at": 906558.900069309,
+            "recent_chunks": []
+          },
+          {
+            "kind": "cumulative_peak",
+            "phase": "acquisition",
+            "previous_peak": 1,
+            "snapshot": {
+              "epoch": "3",
+              "node": 2,
+              "index": 6976,
+              "queue": 1,
+              "queue_peak": 2,
+              "slack_min_ticks": 133718,
+              "copy_max_ticks": 38305,
+              "poll_max_ticks": 208959,
+              "previous_node_send_ticks": 240906,
+              "previous_batch_prepare_us": 111,
+              "previous_batch_check_us": 58,
+              "previous_batch_origin": "same_epoch_profile"
+            },
+            "host_observed_at": 906558.903905253,
+            "recent_chunks": []
+          }
+        ],
+        "phase_events_omitted": 0,
+        "slowest_node_observations": [
+          {
+            "epoch": "3",
+            "node": 1282,
+            "index": 4471616,
+            "queue": 1,
+            "queue_peak": 2,
+            "slack_min_ticks": 85587,
+            "copy_max_ticks": 38936,
+            "poll_max_ticks": 209749,
+            "previous_node_send_ticks": 317270,
+            "previous_batch_prepare_us": 111,
+            "previous_batch_check_us": 58,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          },
+          {
+            "epoch": "3",
+            "node": 1292,
+            "index": 4506496,
+            "queue": 1,
+            "queue_peak": 2,
+            "slack_min_ticks": 85587,
+            "copy_max_ticks": 39443,
+            "poll_max_ticks": 209749,
+            "previous_node_send_ticks": 299856,
+            "previous_batch_prepare_us": 111,
+            "previous_batch_check_us": 58,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          },
+          {
+            "epoch": "3",
+            "node": 1287,
+            "index": 4489056,
+            "queue": 1,
+            "queue_peak": 2,
+            "slack_min_ticks": 85587,
+            "copy_max_ticks": 38936,
+            "poll_max_ticks": 209749,
+            "previous_node_send_ticks": 297950,
+            "previous_batch_prepare_us": 367,
+            "previous_batch_check_us": 58,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          },
+          {
+            "epoch": "3",
+            "node": 1293,
+            "index": 4509984,
+            "queue": 1,
+            "queue_peak": 2,
+            "slack_min_ticks": 85587,
+            "copy_max_ticks": 39443,
+            "poll_max_ticks": 209749,
+            "previous_node_send_ticks": 297396,
+            "previous_batch_prepare_us": 117,
+            "previous_batch_check_us": 309,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          },
+          {
+            "epoch": "3",
+            "node": 1284,
+            "index": 4478592,
+            "queue": 1,
+            "queue_peak": 2,
+            "slack_min_ticks": 85587,
+            "copy_max_ticks": 38936,
+            "poll_max_ticks": 209749,
+            "previous_node_send_ticks": 297342,
+            "previous_batch_prepare_us": 110,
+            "previous_batch_check_us": 58,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          },
+          {
+            "epoch": "3",
+            "node": 1285,
+            "index": 4482080,
+            "queue": 1,
+            "queue_peak": 2,
+            "slack_min_ticks": 85587,
+            "copy_max_ticks": 38936,
+            "poll_max_ticks": 209749,
+            "previous_node_send_ticks": 296493,
+            "previous_batch_prepare_us": 367,
+            "previous_batch_check_us": 58,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          },
+          {
+            "epoch": "3",
+            "node": 1290,
+            "index": 4499520,
+            "queue": 1,
+            "queue_peak": 2,
+            "slack_min_ticks": 85587,
+            "copy_max_ticks": 39443,
+            "poll_max_ticks": 209749,
+            "previous_node_send_ticks": 295301,
+            "previous_batch_prepare_us": 117,
+            "previous_batch_check_us": 58,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          },
+          {
+            "epoch": "3",
+            "node": 1289,
+            "index": 4496032,
+            "queue": 1,
+            "queue_peak": 2,
+            "slack_min_ticks": 85587,
+            "copy_max_ticks": 39443,
+            "poll_max_ticks": 209749,
+            "previous_node_send_ticks": 295079,
+            "previous_batch_prepare_us": 362,
+            "previous_batch_check_us": 58,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          }
+        ],
+        "node_timing_note": "Eight largest previous-node sends, one observation per epoch/node start. Copy/poll are cumulative MCU maxima; prepare/check refer to previous physical batch. Same observation does not establish simultaneity or causality.",
+        "chunk_timing": {},
+        "physical_batch_mix": {
+          "acquisition:rf+rf": 5329
+        },
+        "physical_batch_mix_omitted": 0,
+        "final_rf_followed_by_idle": {},
+        "wav_rf_max_consecutive_batches": {},
+        "stop_roundtrips": [],
+        "stop_pending_count": 0,
+        "stop_observations_omitted": 0,
+        "wav_chunk_timing": null,
+        "ordinary_timing_valid": true,
+        "performance_acceptance_eligible": true,
+        "spi_batch_timing": {
+          "histogram_upper_bounds_exclusive_us": [
+            5,
+            10,
+            20,
+            50,
+            100,
+            200,
+            500,
+            1000,
+            5000
+          ],
+          "groups": [
+            {
+              "observed_phase": "acquisition",
+              "previous_batch": "acquisition:rf+rf",
+              "previous_origin": "same_epoch_profile",
+              "prepare": {
+                "count": 5328,
+                "total_us": 731361,
+                "min_us": 110,
+                "max_us": 367,
+                "zero_count": 0,
+                "histogram": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  5324,
+                  4,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 137.26745495495496
+              },
+              "check": {
+                "count": 5328,
+                "total_us": 317383,
+                "min_us": 58,
+                "max_us": 309,
+                "zero_count": 0,
+                "histogram": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  5327,
+                  0,
+                  1,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 59.56888138138138
+              }
+            },
+            {
+              "observed_phase": "acquisition",
+              "previous_batch": "unknown",
+              "previous_origin": "unknown",
+              "prepare": {
+                "count": 1,
+                "total_us": 108,
+                "min_us": 108,
+                "max_us": 108,
+                "zero_count": 0,
+                "histogram": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 108.0
+              },
+              "check": {
+                "count": 1,
+                "total_us": 58,
+                "min_us": 58,
+                "max_us": 58,
+                "zero_count": 0,
+                "histogram": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 58.0
+              }
+            }
+          ],
+          "omitted_batches": 0,
+          "note": "Fields describe previous physical batch. Dedup by epoch/sequence//2; only batches containing target native RF/status are covered. Phase/mix are host observations, not causal attribution."
+        },
+        "ack_batch_timing": {
+          "groups": [
+            {
+              "phase": "acquisition",
+              "ack_command": "no_wav_ack",
+              "reason": 0,
+              "prepare": {
+                "count": 5329,
+                "total_us": 731469,
+                "min_us": 108,
+                "max_us": 367,
+                "zero_count": 0,
+                "histogram": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  5325,
+                  4,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 137.26196284481142
+              },
+              "check": {
+                "count": 5329,
+                "total_us": 317441,
+                "min_us": 58,
+                "max_us": 309,
+                "zero_count": 0,
+                "histogram": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  5328,
+                  0,
+                  1,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 59.568586976918745
+              }
+            }
+          ],
+          "matched_replies": 0,
+          "unmatched_replies": 0,
+          "pending": 0,
+          "evicted": 0,
+          "omitted_groups": 0,
+          "note": "Native half 1 metadata, categorized by same-batch WAV reply id/session. prepare/check describe prior iteration; check includes decode_pair and command processing, not IRQ-lock duration alone. No WAV ACK does not mean no command. Lifecycle reply counters include non-target profiles; timing groups only target RF. ACK-only and RF+ACK pairs lack coverage."
+        },
+        "raw_chunk_ack_latency": {
+          "enabled": false,
+          "matched": 0,
+          "raw_max_ms": 0.0,
+          "raw_mean_ms": null,
+          "decoded": 0,
+          "decode_max_ms": 0.0,
+          "pending_sends": 0,
+          "pending_decode": 0,
+          "omitted": 0,
+          "slow": [],
+          "note": "Complete-frame socket read time versus entry to decoder event handling; correlated CHUNK ids/session, normal receiver validation unchanged"
+        },
+        "phase_caveat": "Host observation boundaries, not MCU event timestamps. Sampled queue is a lower bound; cumulative peak remains acceptance gate. Send counters refer to previous node. Retune is not visible on this wire.",
+        "pending_bytes": 0,
+        "tcp_fifo_headroom_measured": false,
+        "frame_kinds": {
+          "20": 10658
+        },
+        "radio_playing_frame_kinds": {},
+        "sent_commands": {},
+        "radio_playing_sent_commands": {},
+        "note": "MCU queue/slack/send counters; send weighted once per complete node start. Cumulative MCU peak includes startup.",
+        "elapsed_seconds": 5.00058200804051,
+        "validated_samples": 9293776,
+        "integrity_pass": true,
+        "scope": "ADC transport only; not GUI/audio or analog qualification",
+        "queue_capacity": 16,
+        "publicly_accepted": false,
+        "applied_request_id": 3988036606,
+        "applied_epoch": 3
+      }
+    },
+    {
+      "bits": 14,
+      "rate": 1000000,
+      "channels": 1,
+      "state": "complete",
+      "metrics": {
+        "profile": [
+          14,
+          1000000,
+          160,
+          5952,
+          1
+        ],
+        "node_budget_ticks": 952320,
+        "epoch_count": 1,
+        "all": {
+          "frames": 10072,
+          "samples": 4995712,
+          "empty_status_frames": 0,
+          "send_nodes": 839,
+          "mean_send_margin": 0.17012125134769052,
+          "mcu_queue_peak": 2,
+          "min_slack_ticks": 712757,
+          "sampled_queue_max": 1,
+          "send_ticks_max": 958451,
+          "send_over_budget_nodes": 1,
+          "headroom_pass": true
+        },
+        "radio_playing": {
+          "frames": 0,
+          "samples": 0,
+          "empty_status_frames": 0,
+          "send_nodes": 0,
+          "mean_send_margin": null,
+          "mcu_queue_peak": 0,
+          "min_slack_ticks": null,
+          "sampled_queue_max": 0,
+          "send_ticks_max": 0,
+          "send_over_budget_nodes": 0,
+          "headroom_pass": false
+        },
+        "phases": {
+          "acquisition": {
+            "frames": 10072,
+            "samples": 4995712,
+            "empty_status_frames": 0,
+            "send_nodes": 839,
+            "mean_send_margin": 0.17012125134769052,
+            "mcu_queue_peak": 2,
+            "min_slack_ticks": 712757,
+            "sampled_queue_max": 1,
+            "send_ticks_max": 958451,
+            "send_over_budget_nodes": 1,
+            "headroom_pass": true
+          }
+        },
+        "phase_events": [
+          {
+            "kind": "first_rf_in_phase",
+            "phase": "acquisition",
+            "snapshot": {
+              "epoch": "4",
+              "node": 0,
+              "index": 0,
+              "queue": 1,
+              "queue_peak": 1,
+              "slack_min_ticks": 783318
+            }
+          },
+          {
+            "kind": "cumulative_peak",
+            "phase": "acquisition",
+            "previous_peak": null,
+            "snapshot": {
+              "epoch": "4",
+              "node": 0,
+              "index": 0,
+              "queue": 1,
+              "queue_peak": 1,
+              "slack_min_ticks": 783318,
+              "copy_max_ticks": 63496,
+              "poll_max_ticks": 176960,
+              "previous_node_send_ticks": 0,
+              "previous_batch_prepare_us": 108,
+              "previous_batch_check_us": 59,
+              "previous_batch_origin": "unknown"
+            },
+            "host_observed_at": 906563.919440608,
+            "recent_chunks": []
+          },
+          {
+            "kind": "cumulative_peak",
+            "phase": "acquisition",
+            "previous_peak": 1,
+            "snapshot": {
+              "epoch": "4",
+              "node": 1,
+              "index": 5952,
+              "queue": 1,
+              "queue_peak": 2,
+              "slack_min_ticks": 783318,
+              "copy_max_ticks": 65877,
+              "poll_max_ticks": 239928,
+              "previous_node_send_ticks": 958451,
+              "previous_batch_prepare_us": 116,
+              "previous_batch_check_us": 58,
+              "previous_batch_origin": "same_epoch_profile"
+            },
+            "host_observed_at": 906563.92411468,
+            "recent_chunks": []
+          }
+        ],
+        "phase_events_omitted": 0,
+        "slowest_node_observations": [
+          {
+            "epoch": "4",
+            "node": 1,
+            "index": 5952,
+            "queue": 1,
+            "queue_peak": 2,
+            "slack_min_ticks": 783318,
+            "copy_max_ticks": 65877,
+            "poll_max_ticks": 239928,
+            "previous_node_send_ticks": 958451,
+            "previous_batch_prepare_us": 116,
+            "previous_batch_check_us": 58,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          },
+          {
+            "epoch": "4",
+            "node": 762,
+            "index": 4535424,
+            "queue": 1,
+            "queue_peak": 2,
+            "slack_min_ticks": 712757,
+            "copy_max_ticks": 65877,
+            "poll_max_ticks": 240583,
+            "previous_node_send_ticks": 823928,
+            "previous_batch_prepare_us": 109,
+            "previous_batch_check_us": 64,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          },
+          {
+            "epoch": "4",
+            "node": 576,
+            "index": 3428352,
+            "queue": 1,
+            "queue_peak": 2,
+            "slack_min_ticks": 712757,
+            "copy_max_ticks": 65877,
+            "poll_max_ticks": 240583,
+            "previous_node_send_ticks": 823104,
+            "previous_batch_prepare_us": 116,
+            "previous_batch_check_us": 58,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          },
+          {
+            "epoch": "4",
+            "node": 763,
+            "index": 4541376,
+            "queue": 1,
+            "queue_peak": 2,
+            "slack_min_ticks": 712757,
+            "copy_max_ticks": 65877,
+            "poll_max_ticks": 240583,
+            "previous_node_send_ticks": 821812,
+            "previous_batch_prepare_us": 124,
+            "previous_batch_check_us": 58,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          },
+          {
+            "epoch": "4",
+            "node": 577,
+            "index": 3434304,
+            "queue": 1,
+            "queue_peak": 2,
+            "slack_min_ticks": 712757,
+            "copy_max_ticks": 65877,
+            "poll_max_ticks": 240583,
+            "previous_node_send_ticks": 819933,
+            "previous_batch_prepare_us": 130,
+            "previous_batch_check_us": 58,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          },
+          {
+            "epoch": "4",
+            "node": 154,
+            "index": 916608,
+            "queue": 1,
+            "queue_peak": 2,
+            "slack_min_ticks": 713793,
+            "copy_max_ticks": 65877,
+            "poll_max_ticks": 240583,
+            "previous_node_send_ticks": 807776,
+            "previous_batch_prepare_us": 130,
+            "previous_batch_check_us": 58,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          },
+          {
+            "epoch": "4",
+            "node": 659,
+            "index": 3922368,
+            "queue": 1,
+            "queue_peak": 2,
+            "slack_min_ticks": 712757,
+            "copy_max_ticks": 65877,
+            "poll_max_ticks": 240583,
+            "previous_node_send_ticks": 801655,
+            "previous_batch_prepare_us": 109,
+            "previous_batch_check_us": 58,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          },
+          {
+            "epoch": "4",
+            "node": 297,
+            "index": 1767744,
+            "queue": 1,
+            "queue_peak": 2,
+            "slack_min_ticks": 712757,
+            "copy_max_ticks": 65877,
+            "poll_max_ticks": 240583,
+            "previous_node_send_ticks": 800485,
+            "previous_batch_prepare_us": 109,
+            "previous_batch_check_us": 58,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          }
+        ],
+        "node_timing_note": "Eight largest previous-node sends, one observation per epoch/node start. Copy/poll are cumulative MCU maxima; prepare/check refer to previous physical batch. Same observation does not establish simultaneity or causality.",
+        "chunk_timing": {},
+        "physical_batch_mix": {
+          "acquisition:rf+rf": 5036
+        },
+        "physical_batch_mix_omitted": 0,
+        "final_rf_followed_by_idle": {},
+        "wav_rf_max_consecutive_batches": {},
+        "stop_roundtrips": [],
+        "stop_pending_count": 0,
+        "stop_observations_omitted": 0,
+        "wav_chunk_timing": null,
+        "ordinary_timing_valid": true,
+        "performance_acceptance_eligible": true,
+        "spi_batch_timing": {
+          "histogram_upper_bounds_exclusive_us": [
+            5,
+            10,
+            20,
+            50,
+            100,
+            200,
+            500,
+            1000,
+            5000
+          ],
+          "groups": [
+            {
+              "observed_phase": "acquisition",
+              "previous_batch": "acquisition:rf+rf",
+              "previous_origin": "same_epoch_profile",
+              "prepare": {
+                "count": 5035,
+                "total_us": 556510,
+                "min_us": 109,
+                "max_us": 130,
+                "zero_count": 0,
+                "histogram": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  5035,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 110.52830188679245
+              },
+              "check": {
+                "count": 5035,
+                "total_us": 305902,
+                "min_us": 58,
+                "max_us": 79,
+                "zero_count": 0,
+                "histogram": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  5035,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 60.75511420059583
+              }
+            },
+            {
+              "observed_phase": "acquisition",
+              "previous_batch": "unknown",
+              "previous_origin": "unknown",
+              "prepare": {
+                "count": 1,
+                "total_us": 108,
+                "min_us": 108,
+                "max_us": 108,
+                "zero_count": 0,
+                "histogram": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 108.0
+              },
+              "check": {
+                "count": 1,
+                "total_us": 59,
+                "min_us": 59,
+                "max_us": 59,
+                "zero_count": 0,
+                "histogram": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 59.0
+              }
+            }
+          ],
+          "omitted_batches": 0,
+          "note": "Fields describe previous physical batch. Dedup by epoch/sequence//2; only batches containing target native RF/status are covered. Phase/mix are host observations, not causal attribution."
+        },
+        "ack_batch_timing": {
+          "groups": [
+            {
+              "phase": "acquisition",
+              "ack_command": "no_wav_ack",
+              "reason": 0,
+              "prepare": {
+                "count": 5036,
+                "total_us": 556618,
+                "min_us": 108,
+                "max_us": 130,
+                "zero_count": 0,
+                "histogram": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  5036,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 110.52779984114376
+              },
+              "check": {
+                "count": 5036,
+                "total_us": 305961,
+                "min_us": 58,
+                "max_us": 79,
+                "zero_count": 0,
+                "histogram": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  5036,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 60.754765687053215
+              }
+            }
+          ],
+          "matched_replies": 0,
+          "unmatched_replies": 0,
+          "pending": 0,
+          "evicted": 0,
+          "omitted_groups": 0,
+          "note": "Native half 1 metadata, categorized by same-batch WAV reply id/session. prepare/check describe prior iteration; check includes decode_pair and command processing, not IRQ-lock duration alone. No WAV ACK does not mean no command. Lifecycle reply counters include non-target profiles; timing groups only target RF. ACK-only and RF+ACK pairs lack coverage."
+        },
+        "raw_chunk_ack_latency": {
+          "enabled": false,
+          "matched": 0,
+          "raw_max_ms": 0.0,
+          "raw_mean_ms": null,
+          "decoded": 0,
+          "decode_max_ms": 0.0,
+          "pending_sends": 0,
+          "pending_decode": 0,
+          "omitted": 0,
+          "slow": [],
+          "note": "Complete-frame socket read time versus entry to decoder event handling; correlated CHUNK ids/session, normal receiver validation unchanged"
+        },
+        "phase_caveat": "Host observation boundaries, not MCU event timestamps. Sampled queue is a lower bound; cumulative peak remains acceptance gate. Send counters refer to previous node. Retune is not visible on this wire.",
+        "pending_bytes": 0,
+        "tcp_fifo_headroom_measured": false,
+        "frame_kinds": {
+          "20": 10072
+        },
+        "radio_playing_frame_kinds": {},
+        "sent_commands": {},
+        "radio_playing_sent_commands": {},
+        "note": "MCU queue/slack/send counters; send weighted once per complete node start. Cumulative MCU peak includes startup.",
+        "elapsed_seconds": 5.000260077998973,
+        "validated_samples": 4995712,
+        "integrity_pass": true,
+        "scope": "ADC transport only; not GUI/audio or analog qualification",
+        "queue_capacity": 4,
+        "publicly_accepted": false,
+        "applied_request_id": 3988036611,
+        "applied_epoch": 4
+      }
+    },
+    {
+      "bits": 14,
+      "rate": 363636,
+      "channels": 2,
+      "state": "complete",
+      "metrics": {
+        "profile": [
+          14,
+          363636,
+          440,
+          3968,
+          2
+        ],
+        "node_budget_ticks": 1745920,
+        "epoch_count": 1,
+        "all": {
+          "frames": 7318,
+          "samples": 1814864,
+          "empty_status_frames": 0,
+          "send_nodes": 457,
+          "mean_send_margin": 0.3617788739195441,
+          "mcu_queue_peak": 1,
+          "min_slack_ticks": 1472430,
+          "sampled_queue_max": 1,
+          "send_ticks_max": 1279282,
+          "send_over_budget_nodes": 0,
+          "headroom_pass": true
+        },
+        "radio_playing": {
+          "frames": 0,
+          "samples": 0,
+          "empty_status_frames": 0,
+          "send_nodes": 0,
+          "mean_send_margin": null,
+          "mcu_queue_peak": 0,
+          "min_slack_ticks": null,
+          "sampled_queue_max": 0,
+          "send_ticks_max": 0,
+          "send_over_budget_nodes": 0,
+          "headroom_pass": false
+        },
+        "phases": {
+          "acquisition": {
+            "frames": 7318,
+            "samples": 1814864,
+            "empty_status_frames": 0,
+            "send_nodes": 457,
+            "mean_send_margin": 0.3617788739195441,
+            "mcu_queue_peak": 1,
+            "min_slack_ticks": 1472430,
+            "sampled_queue_max": 1,
+            "send_ticks_max": 1279282,
+            "send_over_budget_nodes": 0,
+            "headroom_pass": true
+          }
+        },
+        "phase_events": [
+          {
+            "kind": "first_rf_in_phase",
+            "phase": "acquisition",
+            "snapshot": {
+              "epoch": "5",
+              "node": 0,
+              "index": 0,
+              "queue": 1,
+              "queue_peak": 1,
+              "slack_min_ticks": 1641479
+            }
+          },
+          {
+            "kind": "cumulative_peak",
+            "phase": "acquisition",
+            "previous_peak": null,
+            "snapshot": {
+              "epoch": "5",
+              "node": 0,
+              "index": 0,
+              "queue": 1,
+              "queue_peak": 1,
+              "slack_min_ticks": 1641479,
+              "copy_max_ticks": 97574,
+              "poll_max_ticks": 176964,
+              "previous_node_send_ticks": 0,
+              "previous_batch_prepare_us": 105,
+              "previous_batch_check_us": 59,
+              "previous_batch_origin": "unknown"
+            },
+            "host_observed_at": 906568.948459626,
+            "recent_chunks": []
+          }
+        ],
+        "phase_events_omitted": 0,
+        "slowest_node_observations": [
+          {
+            "epoch": "5",
+            "node": 1,
+            "index": 3968,
+            "queue": 1,
+            "queue_peak": 1,
+            "slack_min_ticks": 1531297,
+            "copy_max_ticks": 97574,
+            "poll_max_ticks": 270983,
+            "previous_node_send_ticks": 1279282,
+            "previous_batch_prepare_us": 109,
+            "previous_batch_check_us": 58,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          },
+          {
+            "epoch": "5",
+            "node": 71,
+            "index": 281728,
+            "queue": 1,
+            "queue_peak": 1,
+            "slack_min_ticks": 1475278,
+            "copy_max_ticks": 98466,
+            "poll_max_ticks": 273878,
+            "previous_node_send_ticks": 1178088,
+            "previous_batch_prepare_us": 124,
+            "previous_batch_check_us": 58,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          },
+          {
+            "epoch": "5",
+            "node": 438,
+            "index": 1737984,
+            "queue": 1,
+            "queue_peak": 1,
+            "slack_min_ticks": 1472430,
+            "copy_max_ticks": 98466,
+            "poll_max_ticks": 274184,
+            "previous_node_send_ticks": 1155161,
+            "previous_batch_prepare_us": 109,
+            "previous_batch_check_us": 64,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          },
+          {
+            "epoch": "5",
+            "node": 11,
+            "index": 43648,
+            "queue": 1,
+            "queue_peak": 1,
+            "slack_min_ticks": 1475278,
+            "copy_max_ticks": 98466,
+            "poll_max_ticks": 273571,
+            "previous_node_send_ticks": 1152744,
+            "previous_batch_prepare_us": 115,
+            "previous_batch_check_us": 58,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          },
+          {
+            "epoch": "5",
+            "node": 238,
+            "index": 944384,
+            "queue": 1,
+            "queue_peak": 1,
+            "slack_min_ticks": 1472777,
+            "copy_max_ticks": 98466,
+            "poll_max_ticks": 274056,
+            "previous_node_send_ticks": 1151547,
+            "previous_batch_prepare_us": 109,
+            "previous_batch_check_us": 58,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          },
+          {
+            "epoch": "5",
+            "node": 360,
+            "index": 1428480,
+            "queue": 1,
+            "queue_peak": 1,
+            "slack_min_ticks": 1472430,
+            "copy_max_ticks": 98466,
+            "poll_max_ticks": 274184,
+            "previous_node_send_ticks": 1149662,
+            "previous_batch_prepare_us": 109,
+            "previous_batch_check_us": 58,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          },
+          {
+            "epoch": "5",
+            "node": 287,
+            "index": 1138816,
+            "queue": 1,
+            "queue_peak": 1,
+            "slack_min_ticks": 1472430,
+            "copy_max_ticks": 98466,
+            "poll_max_ticks": 274184,
+            "previous_node_send_ticks": 1149340,
+            "previous_batch_prepare_us": 109,
+            "previous_batch_check_us": 58,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          },
+          {
+            "epoch": "5",
+            "node": 268,
+            "index": 1063424,
+            "queue": 1,
+            "queue_peak": 1,
+            "slack_min_ticks": 1472777,
+            "copy_max_ticks": 98466,
+            "poll_max_ticks": 274184,
+            "previous_node_send_ticks": 1148160,
+            "previous_batch_prepare_us": 109,
+            "previous_batch_check_us": 58,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          }
+        ],
+        "node_timing_note": "Eight largest previous-node sends, one observation per epoch/node start. Copy/poll are cumulative MCU maxima; prepare/check refer to previous physical batch. Same observation does not establish simultaneity or causality.",
+        "chunk_timing": {},
+        "physical_batch_mix": {
+          "acquisition:rf+rf": 3659
+        },
+        "physical_batch_mix_omitted": 0,
+        "final_rf_followed_by_idle": {},
+        "wav_rf_max_consecutive_batches": {},
+        "stop_roundtrips": [],
+        "stop_pending_count": 0,
+        "stop_observations_omitted": 0,
+        "wav_chunk_timing": null,
+        "ordinary_timing_valid": true,
+        "performance_acceptance_eligible": true,
+        "spi_batch_timing": {
+          "histogram_upper_bounds_exclusive_us": [
+            5,
+            10,
+            20,
+            50,
+            100,
+            200,
+            500,
+            1000,
+            5000
+          ],
+          "groups": [
+            {
+              "observed_phase": "acquisition",
+              "previous_batch": "acquisition:rf+rf",
+              "previous_origin": "same_epoch_profile",
+              "prepare": {
+                "count": 3658,
+                "total_us": 407571,
+                "min_us": 109,
+                "max_us": 130,
+                "zero_count": 0,
+                "histogram": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  3658,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 111.41908146528158
+              },
+              "check": {
+                "count": 3658,
+                "total_us": 215815,
+                "min_us": 58,
+                "max_us": 79,
+                "zero_count": 0,
+                "histogram": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  3658,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 58.99808638600328
+              }
+            },
+            {
+              "observed_phase": "acquisition",
+              "previous_batch": "unknown",
+              "previous_origin": "unknown",
+              "prepare": {
+                "count": 1,
+                "total_us": 105,
+                "min_us": 105,
+                "max_us": 105,
+                "zero_count": 0,
+                "histogram": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 105.0
+              },
+              "check": {
+                "count": 1,
+                "total_us": 59,
+                "min_us": 59,
+                "max_us": 59,
+                "zero_count": 0,
+                "histogram": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 59.0
+              }
+            }
+          ],
+          "omitted_batches": 0,
+          "note": "Fields describe previous physical batch. Dedup by epoch/sequence//2; only batches containing target native RF/status are covered. Phase/mix are host observations, not causal attribution."
+        },
+        "ack_batch_timing": {
+          "groups": [
+            {
+              "phase": "acquisition",
+              "ack_command": "no_wav_ack",
+              "reason": 0,
+              "prepare": {
+                "count": 3659,
+                "total_us": 407676,
+                "min_us": 105,
+                "max_us": 130,
+                "zero_count": 0,
+                "histogram": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  3659,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 111.41732713856244
+              },
+              "check": {
+                "count": 3659,
+                "total_us": 215874,
+                "min_us": 58,
+                "max_us": 79,
+                "zero_count": 0,
+                "histogram": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  3659,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 58.998086908991525
+              }
+            }
+          ],
+          "matched_replies": 0,
+          "unmatched_replies": 0,
+          "pending": 0,
+          "evicted": 0,
+          "omitted_groups": 0,
+          "note": "Native half 1 metadata, categorized by same-batch WAV reply id/session. prepare/check describe prior iteration; check includes decode_pair and command processing, not IRQ-lock duration alone. No WAV ACK does not mean no command. Lifecycle reply counters include non-target profiles; timing groups only target RF. ACK-only and RF+ACK pairs lack coverage."
+        },
+        "raw_chunk_ack_latency": {
+          "enabled": false,
+          "matched": 0,
+          "raw_max_ms": 0.0,
+          "raw_mean_ms": null,
+          "decoded": 0,
+          "decode_max_ms": 0.0,
+          "pending_sends": 0,
+          "pending_decode": 0,
+          "omitted": 0,
+          "slow": [],
+          "note": "Complete-frame socket read time versus entry to decoder event handling; correlated CHUNK ids/session, normal receiver validation unchanged"
+        },
+        "phase_caveat": "Host observation boundaries, not MCU event timestamps. Sampled queue is a lower bound; cumulative peak remains acceptance gate. Send counters refer to previous node. Retune is not visible on this wire.",
+        "pending_bytes": 0,
+        "tcp_fifo_headroom_measured": false,
+        "frame_kinds": {
+          "20": 7318
+        },
+        "radio_playing_frame_kinds": {},
+        "sent_commands": {},
+        "radio_playing_sent_commands": {},
+        "note": "MCU queue/slack/send counters; send weighted once per complete node start. Cumulative MCU peak includes startup.",
+        "elapsed_seconds": 5.000127293984406,
+        "validated_samples": 1814864,
+        "integrity_pass": true,
+        "scope": "ADC transport only; not GUI/audio or analog qualification",
+        "queue_capacity": 4,
+        "publicly_accepted": false,
+        "applied_request_id": 3988036616,
+        "applied_epoch": 5
+      }
+    },
+    {
+      "bits": 8,
+      "rate": 1860465,
+      "channels": 1,
+      "state": "complete",
+      "metrics": {
+        "profile": [
+          8,
+          1860465,
+          86,
+          3488,
+          1
+        ],
+        "node_budget_ticks": 299968,
+        "epoch_count": 1,
+        "all": {
+          "frames": 10658,
+          "samples": 9293776,
+          "empty_status_frames": 0,
+          "send_nodes": 2664,
+          "mean_send_margin": 0.19280665963728827,
+          "mcu_queue_peak": 2,
+          "min_slack_ticks": 85527,
+          "sampled_queue_max": 1,
+          "send_ticks_max": 265298,
+          "send_over_budget_nodes": 0,
+          "headroom_pass": true
+        },
+        "radio_playing": {
+          "frames": 0,
+          "samples": 0,
+          "empty_status_frames": 0,
+          "send_nodes": 0,
+          "mean_send_margin": null,
+          "mcu_queue_peak": 0,
+          "min_slack_ticks": null,
+          "sampled_queue_max": 0,
+          "send_ticks_max": 0,
+          "send_over_budget_nodes": 0,
+          "headroom_pass": false
+        },
+        "phases": {
+          "acquisition": {
+            "frames": 10658,
+            "samples": 9293776,
+            "empty_status_frames": 0,
+            "send_nodes": 2664,
+            "mean_send_margin": 0.19280665963728827,
+            "mcu_queue_peak": 2,
+            "min_slack_ticks": 85527,
+            "sampled_queue_max": 1,
+            "send_ticks_max": 265298,
+            "send_over_budget_nodes": 0,
+            "headroom_pass": true
+          }
+        },
+        "phase_events": [
+          {
+            "kind": "first_rf_in_phase",
+            "phase": "acquisition",
+            "snapshot": {
+              "epoch": "6",
+              "node": 0,
+              "index": 0,
+              "queue": 1,
+              "queue_peak": 1,
+              "slack_min_ticks": 217394
+            }
+          },
+          {
+            "kind": "cumulative_peak",
+            "phase": "acquisition",
+            "previous_peak": null,
+            "snapshot": {
+              "epoch": "6",
+              "node": 0,
+              "index": 0,
+              "queue": 1,
+              "queue_peak": 1,
+              "slack_min_ticks": 217394,
+              "copy_max_ticks": 37389,
+              "poll_max_ticks": 175899,
+              "previous_node_send_ticks": 0,
+              "previous_batch_prepare_us": 105,
+              "previous_batch_check_us": 59,
+              "previous_batch_origin": "unknown"
+            },
+            "host_observed_at": 906573.962675744,
+            "recent_chunks": []
+          },
+          {
+            "kind": "cumulative_peak",
+            "phase": "acquisition",
+            "previous_peak": 1,
+            "snapshot": {
+              "epoch": "6",
+              "node": 2,
+              "index": 6976,
+              "queue": 1,
+              "queue_peak": 2,
+              "slack_min_ticks": 133046,
+              "copy_max_ticks": 38931,
+              "poll_max_ticks": 208987,
+              "previous_node_send_ticks": 241617,
+              "previous_batch_prepare_us": 111,
+              "previous_batch_check_us": 58,
+              "previous_batch_origin": "same_epoch_profile"
+            },
+            "host_observed_at": 906573.966504318,
+            "recent_chunks": []
+          }
+        ],
+        "phase_events_omitted": 0,
+        "slowest_node_observations": [
+          {
+            "epoch": "6",
+            "node": 1230,
+            "index": 4290240,
+            "queue": 1,
+            "queue_peak": 2,
+            "slack_min_ticks": 85671,
+            "copy_max_ticks": 38936,
+            "poll_max_ticks": 210380,
+            "previous_node_send_ticks": 265298,
+            "previous_batch_prepare_us": 127,
+            "previous_batch_check_us": 58,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          },
+          {
+            "epoch": "6",
+            "node": 1517,
+            "index": 5291296,
+            "queue": 1,
+            "queue_peak": 2,
+            "slack_min_ticks": 85527,
+            "copy_max_ticks": 38936,
+            "poll_max_ticks": 210380,
+            "previous_node_send_ticks": 259174,
+            "previous_batch_prepare_us": 111,
+            "previous_batch_check_us": 58,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          },
+          {
+            "epoch": "6",
+            "node": 1176,
+            "index": 4101888,
+            "queue": 1,
+            "queue_peak": 2,
+            "slack_min_ticks": 85671,
+            "copy_max_ticks": 38936,
+            "poll_max_ticks": 210380,
+            "previous_node_send_ticks": 255596,
+            "previous_batch_prepare_us": 111,
+            "previous_batch_check_us": 64,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          },
+          {
+            "epoch": "6",
+            "node": 2524,
+            "index": 8803712,
+            "queue": 1,
+            "queue_peak": 2,
+            "slack_min_ticks": 85527,
+            "copy_max_ticks": 38936,
+            "poll_max_ticks": 210380,
+            "previous_node_send_ticks": 255445,
+            "previous_batch_prepare_us": 111,
+            "previous_batch_check_us": 58,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          },
+          {
+            "epoch": "6",
+            "node": 1831,
+            "index": 6386528,
+            "queue": 1,
+            "queue_peak": 2,
+            "slack_min_ticks": 85527,
+            "copy_max_ticks": 38936,
+            "poll_max_ticks": 210380,
+            "previous_node_send_ticks": 255269,
+            "previous_batch_prepare_us": 111,
+            "previous_batch_check_us": 64,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          },
+          {
+            "epoch": "6",
+            "node": 2508,
+            "index": 8747904,
+            "queue": 1,
+            "queue_peak": 2,
+            "slack_min_ticks": 85527,
+            "copy_max_ticks": 38936,
+            "poll_max_ticks": 210380,
+            "previous_node_send_ticks": 255163,
+            "previous_batch_prepare_us": 111,
+            "previous_batch_check_us": 58,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          },
+          {
+            "epoch": "6",
+            "node": 2320,
+            "index": 8092160,
+            "queue": 1,
+            "queue_peak": 2,
+            "slack_min_ticks": 85527,
+            "copy_max_ticks": 38936,
+            "poll_max_ticks": 210380,
+            "previous_node_send_ticks": 253721,
+            "previous_batch_prepare_us": 111,
+            "previous_batch_check_us": 58,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          },
+          {
+            "epoch": "6",
+            "node": 1727,
+            "index": 6023776,
+            "queue": 1,
+            "queue_peak": 2,
+            "slack_min_ticks": 85527,
+            "copy_max_ticks": 38936,
+            "poll_max_ticks": 210380,
+            "previous_node_send_ticks": 253531,
+            "previous_batch_prepare_us": 111,
+            "previous_batch_check_us": 64,
+            "previous_batch_origin": "same_epoch_profile",
+            "phase": "acquisition"
+          }
+        ],
+        "node_timing_note": "Eight largest previous-node sends, one observation per epoch/node start. Copy/poll are cumulative MCU maxima; prepare/check refer to previous physical batch. Same observation does not establish simultaneity or causality.",
+        "chunk_timing": {},
+        "physical_batch_mix": {
+          "acquisition:rf+rf": 5329
+        },
+        "physical_batch_mix_omitted": 0,
+        "final_rf_followed_by_idle": {},
+        "wav_rf_max_consecutive_batches": {},
+        "stop_roundtrips": [],
+        "stop_pending_count": 0,
+        "stop_observations_omitted": 0,
+        "wav_chunk_timing": null,
+        "ordinary_timing_valid": true,
+        "performance_acceptance_eligible": true,
+        "spi_batch_timing": {
+          "histogram_upper_bounds_exclusive_us": [
+            5,
+            10,
+            20,
+            50,
+            100,
+            200,
+            500,
+            1000,
+            5000
+          ],
+          "groups": [
+            {
+              "observed_phase": "acquisition",
+              "previous_batch": "acquisition:rf+rf",
+              "previous_origin": "same_epoch_profile",
+              "prepare": {
+                "count": 5328,
+                "total_us": 730813,
+                "min_us": 110,
+                "max_us": 164,
+                "zero_count": 0,
+                "histogram": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  5328,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 137.1646021021021
+              },
+              "check": {
+                "count": 5328,
+                "total_us": 316809,
+                "min_us": 58,
+                "max_us": 81,
+                "zero_count": 0,
+                "histogram": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  5328,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 59.461148648648646
+              }
+            },
+            {
+              "observed_phase": "acquisition",
+              "previous_batch": "unknown",
+              "previous_origin": "unknown",
+              "prepare": {
+                "count": 1,
+                "total_us": 105,
+                "min_us": 105,
+                "max_us": 105,
+                "zero_count": 0,
+                "histogram": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 105.0
+              },
+              "check": {
+                "count": 1,
+                "total_us": 59,
+                "min_us": 59,
+                "max_us": 59,
+                "zero_count": 0,
+                "histogram": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 59.0
+              }
+            }
+          ],
+          "omitted_batches": 0,
+          "note": "Fields describe previous physical batch. Dedup by epoch/sequence//2; only batches containing target native RF/status are covered. Phase/mix are host observations, not causal attribution."
+        },
+        "ack_batch_timing": {
+          "groups": [
+            {
+              "phase": "acquisition",
+              "ack_command": "no_wav_ack",
+              "reason": 0,
+              "prepare": {
+                "count": 5329,
+                "total_us": 730918,
+                "min_us": 105,
+                "max_us": 164,
+                "zero_count": 0,
+                "histogram": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  5329,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 137.1585663351473
+              },
+              "check": {
+                "count": 5329,
+                "total_us": 316868,
+                "min_us": 58,
+                "max_us": 81,
+                "zero_count": 0,
+                "histogram": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  5329,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 59.461062112966786
+              }
+            }
+          ],
+          "matched_replies": 0,
+          "unmatched_replies": 0,
+          "pending": 0,
+          "evicted": 0,
+          "omitted_groups": 0,
+          "note": "Native half 1 metadata, categorized by same-batch WAV reply id/session. prepare/check describe prior iteration; check includes decode_pair and command processing, not IRQ-lock duration alone. No WAV ACK does not mean no command. Lifecycle reply counters include non-target profiles; timing groups only target RF. ACK-only and RF+ACK pairs lack coverage."
+        },
+        "raw_chunk_ack_latency": {
+          "enabled": false,
+          "matched": 0,
+          "raw_max_ms": 0.0,
+          "raw_mean_ms": null,
+          "decoded": 0,
+          "decode_max_ms": 0.0,
+          "pending_sends": 0,
+          "pending_decode": 0,
+          "omitted": 0,
+          "slow": [],
+          "note": "Complete-frame socket read time versus entry to decoder event handling; correlated CHUNK ids/session, normal receiver validation unchanged"
+        },
+        "phase_caveat": "Host observation boundaries, not MCU event timestamps. Sampled queue is a lower bound; cumulative peak remains acceptance gate. Send counters refer to previous node. Retune is not visible on this wire.",
+        "pending_bytes": 0,
+        "tcp_fifo_headroom_measured": false,
+        "frame_kinds": {
+          "20": 10658
+        },
+        "radio_playing_frame_kinds": {},
+        "sent_commands": {},
+        "radio_playing_sent_commands": {},
+        "note": "MCU queue/slack/send counters; send weighted once per complete node start. Cumulative MCU peak includes startup.",
+        "elapsed_seconds": 5.000700397999026,
+        "validated_samples": 9293776,
+        "integrity_pass": true,
+        "scope": "ADC transport only; not GUI/audio or analog qualification",
+        "queue_capacity": 16,
+        "publicly_accepted": false,
+        "applied_request_id": 3988036621,
+        "applied_epoch": 6
+      }
+    }
+  ],
+  "trial_cleanup_active": false,
+  "trial_quiescence": {
+    "app": true,
+    "relay": true,
+    "compiler": true
+  },
+  "trial_cleanup_errors": [],
+  "artifact": {
+    "firmware_sha256": "52f933bdb9c632544624e5d4188a740a9cdb429596bfe5a4d926900e7538aefe",
+    "relay_sha256": "bf6893f5a0fbab8676120a5decd8c6109698fa852be02333918b1d6e4a2a909d",
+    "adc_only": true
+  },
+  "restoring": false,
+  "restoration": {
+    "ok": true,
+    "attempted": true,
+    "errors": [],
+    "material": {
+      "sources_exact": true,
+      "cache_exact": true,
+      "firmware_exact": true,
+      "relay_exact": true
+    },
+    "recovery": {
+      "snapshot_equal": true,
+      "continuous": true,
+      "integrity_ok": true,
+      "seconds": 10.023155014961958,
+      "detail": {
+        "hardware_restored": true,
+        "errors": [],
+        "recovery": {
+          "seconds": 10.023155014961958,
+          "samples": 313344,
+          "dropped": 0,
+          "fatal": 0,
+          "continuous": true
+        }
+      }
+    },
+    "final": {
+      "identity_equal": true,
+      "sources_exact": true,
+      "relay_configuration_equal": true,
+      "cpu_equal": true
+    }
+  }
+}

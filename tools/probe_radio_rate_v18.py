@@ -29,6 +29,10 @@ def run(args):
    '--output',str(folder/'gui.json'),'--bits',str(args.bits),'--rate',str(160000000//args.ticks),
    '--frequency-khz',str(args.frequency_khz),'--duration',str(args.hold+5),'--hold-radio-seconds',str(args.hold),
    '--voices','20']
+  if getattr(args,'analysis_mode',None):
+   command += ['--analysis-mode',args.analysis_mode,'--fft-size',str(args.fft_size or 16384),
+               '--fft-view',args.fft_view,'--bode-method',str(args.bode_method),'--fft-only']
+  if args.window_seconds:command += ['--window-seconds',str(args.window_seconds)]
   if args.us:command+=['--us']
   fft_size=getattr(args,'fft_size',None)
   if fft_size:command+=['--fft-size',str(fft_size)]
@@ -49,9 +53,13 @@ def run(args):
    periodic=[stage for stage in evidence['stages'] if stage['stage']=='periodic']
    report['exposed_fraction']=sum(bool(stage.get('exposed')) for stage in periodic)/max(1,len(periodic))
    report['paint_events']=evidence['paint_events']
-   minimum_hz=8 if fft_size else 20
+   report['analysis_mode']=evidence.get('fps_target')
+   report['display']=evidence.get('display')
+   report['paint_fps']=[stage['paint_fps_interval'] for stage in periodic if 'paint_fps_interval' in stage]
+   report['synthetic_bode_updates']=evidence.get('synthetic_bode_updates')
+   minimum_hz=(10 if args.window_seconds>=4 else 20) if getattr(args,'analysis_mode',None)=='vt' or not fft_size else 8
    report['minimum_paint_hz']=minimum_hz
-   report['visible_gui_ok']=bool(periodic) and report['exposed_fraction']>=.9 and evidence['paint_events']>=args.hold*minimum_hz
+   report['visible_gui_ok']=bool(periodic) and bool(report['display']) and report['display'].get('platform')=='cocoa' and report['exposed_fraction']>=.9 and evidence['paint_events']>=args.hold*minimum_hz
    report['gui_ok']=child.returncode==0 and not evidence['errors'] and all(evidence['assertions'].values()) and report['visible_gui_ok']
  except BaseException as exc:report['error']=repr(exc)
  finally:
@@ -92,6 +100,10 @@ if __name__=='__main__':
  parser.add_argument('--bits',type=int,choices=(8,10,12,14,16),required=True);parser.add_argument('--ticks',type=int,required=True)
  parser.add_argument('--hold',type=float,default=120);parser.add_argument('--frequency-khz',type=float,default=400)
  parser.add_argument('--fft-only',action='store_true')
+ parser.add_argument('--analysis-mode',choices=('vt','fft','heatmap','bode'))
+ parser.add_argument('--fft-view',choices=('Spectre','Power','Distort','Transfer','Radio'),default='Spectre')
+ parser.add_argument('--bode-method',type=int,choices=(0,1,2),default=0)
+ parser.add_argument('--window-seconds',type=float,default=0)
  parser.add_argument('--fft-size',type=int,choices=(16384,32768,65536))
  parser.add_argument('--fft-fixed-10',action='store_true');parser.add_argument('--crop-radios',action='store_true')
  parser.add_argument('--us',action='store_true');parser.add_argument('--keep-display-awake',action='store_true');args=parser.parse_args()

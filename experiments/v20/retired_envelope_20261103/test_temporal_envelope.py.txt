@@ -1,0 +1,42 @@
+import unittest
+import numpy as np
+from monitor.v20.temporal_envelope import envelope_geometry,envelope_mode
+
+class EnvelopeTests(unittest.TestCase):
+    def test_extrema_include_single_sample_spikes_and_do_not_mutate_input(self):
+        x=np.arange(10000,dtype=float);y=np.zeros(10000);y[42]=19;y[43]=-13
+        old=y.copy();cx,low,high,lx,ly=envelope_geometry(x,y,0,10000,100)
+        self.assertEqual(len(cx),100);self.assertEqual(high[0],19);self.assertEqual(low[0],-13)
+        np.testing.assert_array_equal(y,old);self.assertTrue(np.all(np.diff(cx)>0))
+
+    def test_nan_runs_in_one_column_are_not_joined(self):
+        x=np.arange(6,dtype=float);y=np.array([1.,1.,np.nan,9.,9.,9.])
+        cx,low,high,lx,ly=envelope_geometry(x,y,0,6,1)
+        np.testing.assert_array_equal(low,[1,9]);np.testing.assert_array_equal(high,[1,9]);self.assertEqual(len(lx),0)
+
+    def test_timestamp_gaps_respected_and_optional_connection_preserved(self):
+        x=np.array([0.,1.,10.,11.]);y=np.array([0.,1.,8.,9.])
+        cut=envelope_geometry(x,y,0,12,12,time_mode=False,gap_cut=True)
+        continuous=envelope_geometry(x,y,0,12,12,time_mode=False,gap_cut=False)
+        self.assertEqual(len(cut[3]),4);self.assertEqual(len(continuous[3]),6)
+        self.assertNotIn(10.,cut[3][1::2][:-1])
+
+    def test_zoom_uses_visible_extrema_and_falls_back_for_bad_x(self):
+        x=np.arange(100,dtype=float);y=x.copy();y[0]=10000
+        result=envelope_geometry(x,y,20,29,10)
+        self.assertLessEqual(max(result[2]),29)
+        self.assertIsNone(envelope_geometry(x[::-1],y,0,100,10))
+        self.assertIsNone(envelope_geometry([0,np.nan,2],[1,2,3],0,3,10))
+
+    def test_step_links_use_last_raw_value_and_no_cross_bin_diagonal(self):
+        x=np.arange(6,dtype=float);y=np.array([0,2,1,4,3,5.])
+        result=envelope_geometry(x,y,0,6,2,step=True)
+        np.testing.assert_array_equal(result[3],[2,3,3,3]);np.testing.assert_array_equal(result[4],[1,1,1,4])
+
+    def test_policy_has_hysteresis_and_returns_to_points_when_zoomed_in(self):
+        self.assertTrue(envelope_mode(200000,2000))
+        self.assertTrue(envelope_mode(60000,2000,True))
+        self.assertFalse(envelope_mode(60000,2000,False))
+        self.assertFalse(envelope_mode(10000,2000,True))
+
+if __name__=='__main__':unittest.main()

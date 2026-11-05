@@ -1,0 +1,49 @@
+{
+  "ok": false,
+  "firmware_deployment": false,
+  "profile": {
+    "bits": 8,
+    "ticks": 86
+  },
+  "hold_seconds": 15,
+  "cases": [
+    {
+      "name": "v18_vt_spectre",
+      "version": "v18",
+      "mode": "vt",
+      "fft_view": "Spectre",
+      "command": [
+        "/Users/fmgarciadiaz/opt/anaconda3/envs/Python_3_13_DataScience/bin/python",
+        "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/tools/probe_radio_rate_v18.py",
+        "--serial",
+        "1060031107",
+        "--bits",
+        "8",
+        "--ticks",
+        "86",
+        "--hold",
+        "15",
+        "--frequency-khz",
+        "400",
+        "--analysis-mode",
+        "vt",
+        "--fft-view",
+        "Spectre",
+        "--fft-size",
+        "16384",
+        "--keep-display-awake"
+      ],
+      "log": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v19Pyside/fps_compare_20261027_095112/v18_vt_spectre.log",
+      "evidence": "/Users/fmgarciadiaz/Documents/Development/Electronica/0Fergd/SerialPythonMonitor/diagnosticos/resultados_v18/radio_rate_check_20261027_095112",
+      "exit_code": 1,
+      "ok": false,
+      "fps_samples": [],
+      "mean_paint_fps": null,
+      "median_paint_fps": null,
+      "p95_paint_fps": null,
+      "synthetic_bode_updates": null,
+      "exposed_fraction": null,
+      "restored": true
+    }
+  ]
+}

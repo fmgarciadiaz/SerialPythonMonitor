@@ -1,0 +1,562 @@
+{
+  "schema": 1,
+  "version": 20,
+  "private": true,
+  "promoted": false,
+  "public_rates_changed": false,
+  "recorded_at": "2026-11-02T11:37:15.629094+00:00",
+  "scope": "Two independent functional RADIO60->synthetic WAV->Synth20 transitions, with active V20 snapshot recovery; no analog acceptance",
+  "functional_campaign_pass": true,
+  "ack_correlation_complete": false,
+  "requested_runs": 2,
+  "executed_runs": 2,
+  "operator": "Sol sole Q owner during both runs; root did not operate Q",
+  "preflight": {
+    "at": "2026-11-02T11:31:32.706888+00:00",
+    "campaign_prefix": "v20_audio_transition_confirmed_campaign_20261102_083132",
+    "owner_available": true,
+    "no_user_monitor_detected": true,
+    "identity": {
+      "board_serial": "1060031107",
+      "app": "scope-v20-20261031-225916-main-1",
+      "firmware_sha256": "52f933bdb9c632544624e5d4188a740a9cdb429596bfe5a4d926900e7538aefe",
+      "relay_sha256": "bf6893f5a0fbab8676120a5decd8c6109698fa852be02333918b1d6e4a2a909d"
+    },
+    "receipt_sha256": "0708e10da6755ba09d27dafefd5b742b463c2c88647378de05454b69c22d4835",
+    "activation_report_sha256": "8fe306676e35384a91a52b721423a150ea0fc77f42c30c7cb69c79675040317a"
+  },
+  "final": {
+    "at": "2026-11-02T11:35:46.281884+00:00",
+    "owner_available": true,
+    "identity": {
+      "board_serial": "1060031107",
+      "app": "scope-v20-20261031-225916-main-1",
+      "firmware_sha256": "52f933bdb9c632544624e5d4188a740a9cdb429596bfe5a4d926900e7538aefe",
+      "relay_sha256": "bf6893f5a0fbab8676120a5decd8c6109698fa852be02333918b1d6e4a2a909d"
+    },
+    "receipt_sha256": "0708e10da6755ba09d27dafefd5b742b463c2c88647378de05454b69c22d4835",
+    "activation_report_sha256": "8fe306676e35384a91a52b721423a150ea0fc77f42c30c7cb69c79675040317a",
+    "no_test_processes_detected": true,
+    "v20_left_running": true
+  },
+  "cases": [
+    {
+      "run": 1,
+      "report": "diagnosticos/resultados_v20/v20_audio_transition_confirmed_campaign_20261102_083132_r1/report.json",
+      "report_sha256": "00d3acf3357849e317c16d6e58a053e597a12a6bbf6ee24ed4ad7b60e0a396f3",
+      "functional_pass": true,
+      "report_ok": true,
+      "radio_hold_seconds": 60.00113561504986,
+      "synth": {
+        "phase": "complete",
+        "requested_at": 72.47099034604616,
+        "playing_at": 75.06679659895599,
+        "stop_requested_at": 80.1307953359792,
+        "stopped_at": 80.13764140405692,
+        "session": 2528584233,
+        "played": 101760,
+        "prepare_timeout": 120.0,
+        "hold_seconds": 5.0,
+        "stop_timeout": 10.0,
+        "hold_completed": true,
+        "complete": true,
+        "request_to_play_seconds": 2.5958062529098243,
+        "confirmed_hold_seconds": 5.063998737023212,
+        "stop_confirmation_seconds": 0.006846068077720702,
+        "observed_remote_voice_peak": 20,
+        "source_observations": [
+          {
+            "stage": "fm_play_requested",
+            "rate": 20000,
+            "position": 0,
+            "configured_notes": 20,
+            "remote_active_voice_count": null,
+            "max_render_ms": 0.0,
+            "slow_render_blocks": 0
+          },
+          {
+            "stage": "fm_playing_confirmed",
+            "rate": 20000,
+            "position": 2400,
+            "configured_notes": 20,
+            "remote_active_voice_count": 20,
+            "max_render_ms": 12.670060037635267,
+            "slow_render_blocks": 0
+          },
+          {
+            "stage": "fm_before_stop",
+            "rate": 20000,
+            "position": 104640,
+            "configured_notes": 20,
+            "remote_active_voice_count": 0,
+            "max_render_ms": 22.535149939358234,
+            "slow_render_blocks": 0
+          }
+        ]
+      },
+      "phase_statuses": {
+        "radio": {
+          "sessions": [
+            2528577584
+          ],
+          "dac_rates": [
+            40000
+          ],
+          "states": [
+            0,
+            2
+          ],
+          "reasons": [
+            0
+          ],
+          "played_max": 2400960,
+          "accepted_max": 2414400,
+          "first_status_elapsed": 7.73230745899491,
+          "last_status_elapsed": 67.79239498497918
+        },
+        "wav": {
+          "sessions": [
+            2528583433
+          ],
+          "dac_rates": [
+            40000
+          ],
+          "states": [
+            2,
+            3
+          ],
+          "reasons": [
+            0
+          ],
+          "played_max": 160000,
+          "accepted_max": 160000,
+          "first_status_elapsed": 68.23902072198689,
+          "last_status_elapsed": 72.27291617996525
+        },
+        "fm": {
+          "sessions": [
+            2528584233
+          ],
+          "dac_rates": [
+            20000
+          ],
+          "states": [
+            0,
+            2
+          ],
+          "reasons": [
+            0
+          ],
+          "played_max": 101760,
+          "accepted_max": 104640,
+          "first_status_elapsed": 75.06679659895599,
+          "last_status_elapsed": 80.13764140405692
+        }
+      },
+      "phase_adc_configuration": {
+        "radio": {
+          "bits": 8,
+          "rate": 1860465,
+          "channels": 1
+        },
+        "wav": {
+          "bits": 8,
+          "rate": 40000,
+          "channels": 2
+        },
+        "fm": {
+          "bits": 8,
+          "rate": 40000,
+          "channels": 2
+        }
+      },
+      "exposure": {
+        "periodic_samples": 16,
+        "exposed_fraction": 1.0,
+        "exposure_sufficient": true,
+        "note": "Exposure only; no visible FPS or analog acceptance inferred."
+      },
+      "ack": {
+        "matched": 5582,
+        "decoded": 5582,
+        "raw_max_ms": 17.289316980168223,
+        "decode_max_ms": 9.762065019458532,
+        "pending_sends": 0,
+        "pending_decode": 0,
+        "omitted": 0
+      },
+      "ack_correlation_complete": true,
+      "service_diagnostics": [
+        {
+          "calls": 130246,
+          "priming_calls": 1151,
+          "reasons": {
+            "no_source": 30262,
+            "no_status": 0,
+            "session_mismatch": 0,
+            "pending_timeout": 0,
+            "pending_control_ack": 10235,
+            "pending_chunk_ack": 100,
+            "credits": 68836,
+            "token": 141,
+            "target_full": 1852,
+            "pcm_pending": 15810,
+            "no_chunk": 0,
+            "priming_ack": 21,
+            "source_exhausted": 93,
+            "poll_wait": 0
+          },
+          "sends": {
+            "chunk": 5582,
+            "play": 3,
+            "query": 1488,
+            "begin": 3,
+            "stop": 3
+          },
+          "last_reason": "no_source",
+          "chunk_gaps": 5579,
+          "chunk_gap_last_ms": 34.69909797422588,
+          "chunk_gap_max_ms": 77.0987489959225,
+          "last_chunk_at": 937069.309988886,
+          "chunk_session": 2528584233
+        }
+      ],
+      "radio_transport": {
+        "frames": 128084,
+        "samples": 111689248,
+        "empty_status_frames": 2645,
+        "send_nodes": 32021,
+        "mean_send_margin": 0.12144070816998453,
+        "mcu_queue_peak": 4,
+        "min_slack_ticks": 77600,
+        "sampled_queue_max": 4,
+        "send_ticks_max": 681110,
+        "send_over_budget_nodes": 3269,
+        "headroom_pass": false
+      },
+      "snapshot_restoration": {
+        "ok": true,
+        "snapshot": {
+          "schema": 1,
+          "identity": {
+            "board_serial": "1060031107",
+            "app": "scope-v20-20261031-225916-main-1",
+            "firmware_sha256": "52f933bdb9c632544624e5d4188a740a9cdb429596bfe5a4d926900e7538aefe",
+            "relay_sha256": "bf6893f5a0fbab8676120a5decd8c6109698fa852be02333918b1d6e4a2a909d"
+          },
+          "adc_bits": 14,
+          "adc_period": 32,
+          "generator": {
+            "wave": 0,
+            "enabled": 0,
+            "mode": 0,
+            "frequency": 2500,
+            "final_frequency": 2500,
+            "low": 0,
+            "high": 4095,
+            "duration": 1000,
+            "duration_us": 0,
+            "duty": 50
+          }
+        },
+        "recovery": {
+          "seconds": 10.021134676993825,
+          "samples": 313344,
+          "dropped": 0,
+          "fatal": 0,
+          "continuous": true
+        },
+        "hardware_restored": true
+      },
+      "identity_unchanged": true,
+      "receipt_unchanged": true,
+      "activation_report_unchanged": true,
+      "host_sources": {
+        "tools/probe_working_v20_gui.py": "bb069d6f9ff85239698633187b78af49f0eb660be2f41fb0739e5670dfd124c0",
+        "tools/gui_private_v20.py": "cf7583a47701e7b1e540c0e3e96ca1e1368bf958c65f76ac5c367132b3392845",
+        "tools/private_v20_pair.py": "b787cdde947c3a6df2cafbda3351163e6baa97e798e802432ec9223ea6451fd4",
+        "tools/gui_live_smoke_v20.py": "acf69c0ed8389b593770221dbcc367d5eeff5974b00da8bf051c1b3c0a29fb6d",
+        "tools/synth_transition_scenario_v20.py": "fc8008d21bab1111166148d0e9224ef5344496ccd3870cb97dda293a870d70f7",
+        "monitor/v20/receiver/unoq_config_receiver.py": "c18e649ca951749e597778e5322587347531b5072500f3f328d4149e559475e1",
+        "monitor/v20/io/receiver_process.py": "96917d0aa4b97800c436b2deecbd32aa582a9af7feca5b70386338d97d4405d4"
+      },
+      "host_sources_match_after_campaign": true
+    },
+    {
+      "run": 2,
+      "report": "diagnosticos/resultados_v20/v20_audio_transition_confirmed_campaign_20261102_083132_r2/report.json",
+      "report_sha256": "8852591dc39eb9900e1869b446ae50744eedd80278c5365f58aff18e35f85ef4",
+      "functional_pass": true,
+      "report_ok": true,
+      "radio_hold_seconds": 60.01408563798759,
+      "synth": {
+        "phase": "complete",
+        "requested_at": 72.41170820896514,
+        "playing_at": 74.30083740700502,
+        "stop_requested_at": 79.30707371199969,
+        "stopped_at": 79.32385012297891,
+        "session": 2151831036,
+        "played": 100320,
+        "prepare_timeout": 120.0,
+        "hold_seconds": 5.0,
+        "stop_timeout": 10.0,
+        "hold_completed": true,
+        "complete": true,
+        "request_to_play_seconds": 1.8891291980398819,
+        "confirmed_hold_seconds": 5.0062363049946725,
+        "stop_confirmation_seconds": 0.01677641097921878,
+        "observed_remote_voice_peak": 20,
+        "source_observations": [
+          {
+            "stage": "fm_play_requested",
+            "rate": 20000,
+            "position": 0,
+            "configured_notes": 20,
+            "remote_active_voice_count": null,
+            "max_render_ms": 0.0,
+            "slow_render_blocks": 0
+          },
+          {
+            "stage": "fm_playing_confirmed",
+            "rate": 20000,
+            "position": 2400,
+            "configured_notes": 20,
+            "remote_active_voice_count": 20,
+            "max_render_ms": 10.460701072588563,
+            "slow_render_blocks": 0
+          },
+          {
+            "stage": "fm_before_stop",
+            "rate": 20000,
+            "position": 102240,
+            "configured_notes": 20,
+            "remote_active_voice_count": 0,
+            "max_render_ms": 20.670728059485555,
+            "slow_render_blocks": 0
+          }
+        ]
+      },
+      "phase_statuses": {
+        "radio": {
+          "sessions": [
+            2151824512
+          ],
+          "dac_rates": [
+            40000
+          ],
+          "states": [
+            0,
+            2
+          ],
+          "reasons": [
+            0
+          ],
+          "played_max": 2402880,
+          "accepted_max": 2414400,
+          "first_status_elapsed": 7.758300204062834,
+          "last_status_elapsed": 67.82912593299989
+        },
+        "wav": {
+          "sessions": [
+            2151830243
+          ],
+          "dac_rates": [
+            40000
+          ],
+          "states": [
+            2,
+            3
+          ],
+          "reasons": [
+            0
+          ],
+          "played_max": 160000,
+          "accepted_max": 160000,
+          "first_status_elapsed": 68.26966955303214,
+          "last_status_elapsed": 72.28355851501692
+        },
+        "fm": {
+          "sessions": [
+            2151831036
+          ],
+          "dac_rates": [
+            20000
+          ],
+          "states": [
+            0,
+            2
+          ],
+          "reasons": [
+            0
+          ],
+          "played_max": 100320,
+          "accepted_max": 102720,
+          "first_status_elapsed": 74.30083740700502,
+          "last_status_elapsed": 79.32385012297891
+        }
+      },
+      "phase_adc_configuration": {
+        "radio": {
+          "bits": 8,
+          "rate": 1860465,
+          "channels": 1
+        },
+        "wav": {
+          "bits": 8,
+          "rate": 40000,
+          "channels": 2
+        },
+        "fm": {
+          "bits": 8,
+          "rate": 40000,
+          "channels": 2
+        }
+      },
+      "exposure": {
+        "periodic_samples": 16,
+        "exposed_fraction": 1.0,
+        "exposure_sufficient": true,
+        "note": "Exposure only; no visible FPS or analog acceptance inferred."
+      },
+      "ack": {
+        "matched": 5578,
+        "decoded": 5577,
+        "raw_max_ms": 18.755119061097503,
+        "decode_max_ms": 8.337012026458979,
+        "pending_sends": 0,
+        "pending_decode": 1,
+        "omitted": 0
+      },
+      "ack_correlation_complete": false,
+      "service_diagnostics": [
+        {
+          "calls": 115422,
+          "priming_calls": 651,
+          "reasons": {
+            "no_source": 30198,
+            "no_status": 0,
+            "session_mismatch": 0,
+            "pending_timeout": 0,
+            "pending_control_ack": 9957,
+            "pending_chunk_ack": 112,
+            "credits": 53437,
+            "token": 35,
+            "target_full": 2012,
+            "pcm_pending": 16471,
+            "no_chunk": 0,
+            "priming_ack": 25,
+            "source_exhausted": 97,
+            "poll_wait": 0
+          },
+          "sends": {
+            "chunk": 5578,
+            "play": 3,
+            "query": 1421,
+            "begin": 3,
+            "stop": 2
+          },
+          "last_reason": "no_source",
+          "chunk_gaps": 5575,
+          "chunk_gap_last_ms": 14.532078988850117,
+          "chunk_gap_max_ms": 78.44810502137989,
+          "last_chunk_at": 937182.956230444,
+          "chunk_session": 2151831036
+        }
+      ],
+      "radio_transport": {
+        "frames": 128172,
+        "samples": 111765984,
+        "empty_status_frames": 2739,
+        "send_nodes": 32043,
+        "mean_send_margin": 0.12222625678726284,
+        "mcu_queue_peak": 4,
+        "min_slack_ticks": 77057,
+        "sampled_queue_max": 3,
+        "send_ticks_max": 696641,
+        "send_over_budget_nodes": 3227,
+        "headroom_pass": false
+      },
+      "snapshot_restoration": {
+        "ok": true,
+        "snapshot": {
+          "schema": 1,
+          "identity": {
+            "board_serial": "1060031107",
+            "app": "scope-v20-20261031-225916-main-1",
+            "firmware_sha256": "52f933bdb9c632544624e5d4188a740a9cdb429596bfe5a4d926900e7538aefe",
+            "relay_sha256": "bf6893f5a0fbab8676120a5decd8c6109698fa852be02333918b1d6e4a2a909d"
+          },
+          "adc_bits": 14,
+          "adc_period": 32,
+          "generator": {
+            "wave": 0,
+            "enabled": 0,
+            "mode": 0,
+            "frequency": 2500,
+            "final_frequency": 2500,
+            "low": 0,
+            "high": 4095,
+            "duration": 1000,
+            "duration_us": 0,
+            "duty": 50
+          }
+        },
+        "recovery": {
+          "seconds": 10.021035400917754,
+          "samples": 313344,
+          "dropped": 0,
+          "fatal": 0,
+          "continuous": true
+        },
+        "hardware_restored": true
+      },
+      "identity_unchanged": true,
+      "receipt_unchanged": true,
+      "activation_report_unchanged": true,
+      "host_sources": {
+        "tools/probe_working_v20_gui.py": "bb069d6f9ff85239698633187b78af49f0eb660be2f41fb0739e5670dfd124c0",
+        "tools/gui_private_v20.py": "cf7583a47701e7b1e540c0e3e96ca1e1368bf958c65f76ac5c367132b3392845",
+        "tools/private_v20_pair.py": "b787cdde947c3a6df2cafbda3351163e6baa97e798e802432ec9223ea6451fd4",
+        "tools/gui_live_smoke_v20.py": "acf69c0ed8389b593770221dbcc367d5eeff5974b00da8bf051c1b3c0a29fb6d",
+        "tools/synth_transition_scenario_v20.py": "fc8008d21bab1111166148d0e9224ef5344496ccd3870cb97dda293a870d70f7",
+        "monitor/v20/receiver/unoq_config_receiver.py": "c18e649ca951749e597778e5322587347531b5072500f3f328d4149e559475e1",
+        "monitor/v20/io/receiver_process.py": "96917d0aa4b97800c436b2deecbd32aa582a9af7feca5b70386338d97d4405d4"
+      },
+      "host_sources_match_after_campaign": true
+    }
+  ],
+  "scenario_sources_same_between_runs": true,
+  "receipt_hash_unchanged": true,
+  "activation_report_hash_unchanged": true,
+  "wav_input": {
+    "kind": "temporary generated sine WAV, no user music file",
+    "frequency_hz": 500,
+    "rate": 20000,
+    "channels": 1,
+    "bits": 16,
+    "frames": 80000,
+    "duration_seconds": 4
+  },
+  "prior_failed_test": "diagnosticos/resultados_v20/v20_audio_transition_campaign_20261101_213154_r1/report.json",
+  "offline_prepare_evidence": "diagnosticos/resultados_v20/v20_transition_synth_analysis_20261102/offline_prepare.json",
+  "offline_prepare_seconds": 14.735603017034009,
+  "prior_smoke_synth_request_to_stop_seconds": 10.39320518192835,
+  "local_tests": {
+    "modules": [
+      "tests.v20.test_synth_transition_scenario",
+      "tests.v20.test_working_gui_probe"
+    ],
+    "passed": 14
+  },
+  "changes": "Tools only: Synth wait-new-PLAY deadline120s, confirmed hold5s, one STOP plus confirmation, no close while pending, scalar preparation/render metadata.",
+  "limitations": [
+    "Offline preparation measurement is a new host process, not the measured preparation time of the prior failed run.",
+    "Prior failure had no Synth BEGIN/PLAY; a short test deadline can cancel legitimate preparation, consistent with but not proving the exact prior process cause.",
+    "Run2 rawACK correlation has 5578 raw versus 5577 decoded and one pending_decode; no transport loss inferred and no hardware repetition for this counter.",
+    "20 rendered voices were observed as a peak, not verified acoustically or continuously throughout the whole Synth hold.",
+    "WAV and Synth run briefly with ADC8/40000 dual, not simultaneously with ADC1.86MS/s; DAC RADIO/WAV40000, Synth20000.",
+    "Periodic exposure100% in both does not demonstrate visible FPS or analog/acoustic acceptance.",
+    "Service counters cover startup, all audio phases and recovery, not blocked duration or causal attribution.",
+    "No product audio, QoS, gate86, buffers, public rates, firmware, relay or accepted receipt changes. V19 not started."
+  ]
+}

@@ -1,0 +1,2496 @@
+{
+  "private": true,
+  "promoted": false,
+  "public_rates_changed": false,
+  "tests_passed": 22,
+  "cases": [
+    {
+      "case": "relay_cycle_gui_20261031",
+      "epoch_context_valid": false,
+      "gui": {
+        "ok": false,
+        "errors": [],
+        "assertions": {
+          "radio_playing_40k": true,
+          "radio_stop_confirmed": true,
+          "radio_progress": true,
+          "radio_hold_completed": true,
+          "scan_completed": true,
+          "wav_playing": true,
+          "wav_progress": true,
+          "wav_stop_confirmed": true,
+          "fm_playing": true,
+          "fm_progress": true,
+          "fm_stop_confirmed": true,
+          "shutdown_confirmed": true,
+          "worker_released": true
+        },
+        "visible_gui_ok": false,
+        "fft_data_ok": true,
+        "radio_profile_ok": true,
+        "exposed_fraction": 0.625,
+        "paint_events": 515,
+        "radio_hold_seconds": 30.024348650942557,
+        "radio_played_samples": 1201920,
+        "audio_source_min_samples": 9631,
+        "pending_gui_peak": 4,
+        "pending_dsp_peak": 3
+      },
+      "mcu": {
+        "frames": 64118,
+        "samples": 55910896,
+        "empty_status_frames": 1001,
+        "send_nodes": 16029,
+        "mean_send_margin": 0.10184802975985363,
+        "mcu_queue_peak": 4,
+        "min_slack_ticks": 72346,
+        "sampled_queue_max": 3,
+        "send_ticks_max": 596881,
+        "send_over_budget_nodes": 1580,
+        "headroom_pass": false
+      },
+      "cycles": {
+        "phases": {
+          "0": {
+            "count": 10172,
+            "covered_ns": 9509582377,
+            "gap_ns": 17545093,
+            "cycle_ns": 9527127470,
+            "max_gap_ns": 43646,
+            "max_cycle_ns": 2468078,
+            "covered_mean_us": 934.8783304168305,
+            "gap_mean_us": 1.7248420173023988,
+            "cycle_mean_us": 936.603172434133,
+            "gap_fraction": 0.001841593182756061
+          },
+          "1": {
+            "count": 708,
+            "covered_ns": 640353061,
+            "gap_ns": 1354325,
+            "cycle_ns": 641707386,
+            "max_gap_ns": 25104,
+            "max_cycle_ns": 1749014,
+            "covered_mean_us": 904.4534759887006,
+            "gap_mean_us": 1.912888418079096,
+            "cycle_mean_us": 906.3663644067797,
+            "gap_fraction": 0.002110502433892821
+          },
+          "2": {
+            "count": 34093,
+            "covered_ns": 30016076906,
+            "gap_ns": 54822975,
+            "cycle_ns": 30070899881,
+            "max_gap_ns": 54167,
+            "max_cycle_ns": 1922400,
+            "covered_mean_us": 880.4175902971284,
+            "gap_mean_us": 1.60804197342563,
+            "cycle_mean_us": 882.0256322705541,
+            "gap_fraction": 0.001823123857847678
+          }
+        },
+        "events": [
+          {
+            "kind": "slow_cycle",
+            "phase": 0,
+            "sequence": 22548,
+            "covered_ns": 2465630,
+            "gap_ns": 2448,
+            "cycle_ns": 2468078,
+            "has_native": 1,
+            "epoch": 316306,
+            "node": 0,
+            "queue": 1,
+            "peak": 1,
+            "copy_max_ticks": 37410,
+            "poll_max_ticks": 176790,
+            "previous_node_send_ticks": 0
+          },
+          {
+            "kind": "slow_cycle",
+            "phase": 2,
+            "sequence": 99254,
+            "covered_ns": 1919848,
+            "gap_ns": 2552,
+            "cycle_ns": 1922400,
+            "has_native": 1,
+            "epoch": 579691762,
+            "node": 18181,
+            "queue": 1,
+            "peak": 4,
+            "copy_max_ticks": 40217,
+            "poll_max_ticks": 227190,
+            "previous_node_send_ticks": 243959
+          },
+          {
+            "kind": "slow_cycle",
+            "phase": 0,
+            "sequence": 102722,
+            "covered_ns": 1852816,
+            "gap_ns": 2292,
+            "cycle_ns": 1855108,
+            "has_native": 1,
+            "epoch": 703878514,
+            "node": 19009,
+            "queue": 1,
+            "peak": 4,
+            "copy_max_ticks": 40217,
+            "poll_max_ticks": 227190,
+            "previous_node_send_ticks": 242412
+          },
+          {
+            "kind": "slow_cycle",
+            "phase": 0,
+            "sequence": 103934,
+            "covered_ns": 1844588,
+            "gap_ns": 2656,
+            "cycle_ns": 1847244,
+            "has_native": 1,
+            "epoch": 749323666,
+            "node": 19312,
+            "queue": 1,
+            "peak": 4,
+            "copy_max_ticks": 40217,
+            "poll_max_ticks": 227190,
+            "previous_node_send_ticks": 243682
+          },
+          {
+            "kind": "slow_cycle",
+            "phase": 0,
+            "sequence": 107750,
+            "covered_ns": 1839171,
+            "gap_ns": 2292,
+            "cycle_ns": 1841463,
+            "has_native": 1,
+            "epoch": 892258418,
+            "node": 20265,
+            "queue": 1,
+            "peak": 4,
+            "copy_max_ticks": 40217,
+            "poll_max_ticks": 227190,
+            "previous_node_send_ticks": 242727
+          },
+          {
+            "kind": "slow_cycle",
+            "phase": 2,
+            "sequence": 41148,
+            "covered_ns": 1838233,
+            "gap_ns": 2031,
+            "cycle_ns": 1840264,
+            "has_native": 1,
+            "epoch": 678243986,
+            "node": 4520,
+            "queue": 1,
+            "peak": 4,
+            "copy_max_ticks": 40095,
+            "poll_max_ticks": 224089,
+            "previous_node_send_ticks": 243317
+          },
+          {
+            "kind": "slow_cycle",
+            "phase": 2,
+            "sequence": 56726,
+            "covered_ns": 1836775,
+            "gap_ns": 1615,
+            "cycle_ns": 1838390,
+            "has_native": 1,
+            "epoch": 1227635378,
+            "node": 8183,
+            "queue": 1,
+            "peak": 4,
+            "copy_max_ticks": 40128,
+            "poll_max_ticks": 227190,
+            "previous_node_send_ticks": 240717
+          },
+          {
+            "kind": "slow_cycle",
+            "phase": 2,
+            "sequence": 63218,
+            "covered_ns": 1829483,
+            "gap_ns": 2500,
+            "cycle_ns": 1831983,
+            "has_native": 1,
+            "epoch": 1456660946,
+            "node": 9710,
+            "queue": 1,
+            "peak": 4,
+            "copy_max_ticks": 40146,
+            "poll_max_ticks": 227190,
+            "previous_node_send_ticks": 242796
+          },
+          {
+            "kind": "peak_observed",
+            "phase": 0,
+            "sequence": 22548,
+            "covered_ns": 2465630,
+            "gap_ns": 2448,
+            "cycle_ns": 2468078,
+            "has_native": 1,
+            "epoch": 316306,
+            "node": 0,
+            "queue": 1,
+            "peak": 1,
+            "copy_max_ticks": 37410,
+            "poll_max_ticks": 176790,
+            "previous_node_send_ticks": 0
+          },
+          {
+            "kind": "peak_observed",
+            "phase": 0,
+            "sequence": 22550,
+            "covered_ns": 611980,
+            "gap_ns": 1615,
+            "cycle_ns": 613595,
+            "has_native": 1,
+            "epoch": 391298,
+            "node": 0,
+            "queue": 1,
+            "peak": 1,
+            "copy_max_ticks": 37410,
+            "poll_max_ticks": 176790,
+            "previous_node_send_ticks": 0
+          },
+          {
+            "kind": "peak_observed",
+            "phase": 0,
+            "sequence": 22552,
+            "covered_ns": 1741201,
+            "gap_ns": 1563,
+            "cycle_ns": 1742764,
+            "has_native": 1,
+            "epoch": 466290,
+            "node": 1,
+            "queue": 1,
+            "peak": 1,
+            "copy_max_ticks": 38341,
+            "poll_max_ticks": 207056,
+            "previous_node_send_ticks": 243212
+          },
+          {
+            "kind": "peak_observed",
+            "phase": 0,
+            "sequence": 22554,
+            "covered_ns": 666928,
+            "gap_ns": 2605,
+            "cycle_ns": 669533,
+            "has_native": 1,
+            "epoch": 541282,
+            "node": 1,
+            "queue": 1,
+            "peak": 1,
+            "copy_max_ticks": 38341,
+            "poll_max_ticks": 207056,
+            "previous_node_send_ticks": 243212
+          },
+          {
+            "kind": "peak_observed",
+            "phase": 0,
+            "sequence": 22556,
+            "covered_ns": 900470,
+            "gap_ns": 1927,
+            "cycle_ns": 902397,
+            "has_native": 1,
+            "epoch": 616274,
+            "node": 2,
+            "queue": 1,
+            "peak": 2,
+            "copy_max_ticks": 38341,
+            "poll_max_ticks": 207988,
+            "previous_node_send_ticks": 242048
+          },
+          {
+            "kind": "peak_observed",
+            "phase": 0,
+            "sequence": 22558,
+            "covered_ns": 627449,
+            "gap_ns": 1563,
+            "cycle_ns": 629012,
+            "has_native": 1,
+            "epoch": 691266,
+            "node": 2,
+            "queue": 1,
+            "peak": 2,
+            "copy_max_ticks": 38341,
+            "poll_max_ticks": 207988,
+            "previous_node_send_ticks": 242048
+          },
+          {
+            "kind": "peak_observed",
+            "phase": 0,
+            "sequence": 22560,
+            "covered_ns": 1490888,
+            "gap_ns": 1511,
+            "cycle_ns": 1492399,
+            "has_native": 1,
+            "epoch": 766258,
+            "node": 3,
+            "queue": 1,
+            "peak": 2,
+            "copy_max_ticks": 38341,
+            "poll_max_ticks": 209032,
+            "previous_node_send_ticks": 245306
+          },
+          {
+            "kind": "peak_observed",
+            "phase": 0,
+            "sequence": 22562,
+            "covered_ns": 674324,
+            "gap_ns": 1459,
+            "cycle_ns": 675783,
+            "has_native": 1,
+            "epoch": 841250,
+            "node": 3,
+            "queue": 1,
+            "peak": 2,
+            "copy_max_ticks": 38341,
+            "poll_max_ticks": 209032,
+            "previous_node_send_ticks": 245306
+          },
+          {
+            "kind": "peak_observed",
+            "phase": 0,
+            "sequence": 22564,
+            "covered_ns": 930887,
+            "gap_ns": 1667,
+            "cycle_ns": 932554,
+            "has_native": 1,
+            "epoch": 916242,
+            "node": 4,
+            "queue": 1,
+            "peak": 2,
+            "copy_max_ticks": 38953,
+            "poll_max_ticks": 209032,
+            "previous_node_send_ticks": 244980
+          },
+          {
+            "kind": "peak_observed",
+            "phase": 0,
+            "sequence": 22566,
+            "covered_ns": 621095,
+            "gap_ns": 2031,
+            "cycle_ns": 623126,
+            "has_native": 1,
+            "epoch": 991234,
+            "node": 4,
+            "queue": 1,
+            "peak": 2,
+            "copy_max_ticks": 38953,
+            "poll_max_ticks": 209032,
+            "previous_node_send_ticks": 244980
+          },
+          {
+            "kind": "peak_observed",
+            "phase": 0,
+            "sequence": 22568,
+            "covered_ns": 1477659,
+            "gap_ns": 1354,
+            "cycle_ns": 1479013,
+            "has_native": 1,
+            "epoch": 1066226,
+            "node": 5,
+            "queue": 1,
+            "peak": 2,
+            "copy_max_ticks": 38953,
+            "poll_max_ticks": 209032,
+            "previous_node_send_ticks": 245313
+          },
+          {
+            "kind": "peak_observed",
+            "phase": 0,
+            "sequence": 22570,
+            "covered_ns": 689637,
+            "gap_ns": 1875,
+            "cycle_ns": 691512,
+            "has_native": 1,
+            "epoch": 1141218,
+            "node": 5,
+            "queue": 1,
+            "peak": 2,
+            "copy_max_ticks": 38953,
+            "poll_max_ticks": 209032,
+            "previous_node_send_ticks": 245313
+          },
+          {
+            "kind": "peak_observed",
+            "phase": 0,
+            "sequence": 22572,
+            "covered_ns": 854950,
+            "gap_ns": 1615,
+            "cycle_ns": 856565,
+            "has_native": 1,
+            "epoch": 1216210,
+            "node": 6,
+            "queue": 1,
+            "peak": 2,
+            "copy_max_ticks": 38953,
+            "poll_max_ticks": 209032,
+            "previous_node_send_ticks": 245337
+          },
+          {
+            "kind": "peak_observed",
+            "phase": 0,
+            "sequence": 22574,
+            "covered_ns": 689636,
+            "gap_ns": 1980,
+            "cycle_ns": 691616,
+            "has_native": 1,
+            "epoch": 1291202,
+            "node": 6,
+            "queue": 1,
+            "peak": 2,
+            "copy_max_ticks": 38953,
+            "poll_max_ticks": 209032,
+            "previous_node_send_ticks": 245337
+          },
+          {
+            "kind": "peak_observed",
+            "phase": 0,
+            "sequence": 22576,
+            "covered_ns": 1474221,
+            "gap_ns": 1459,
+            "cycle_ns": 1475680,
+            "has_native": 1,
+            "epoch": 1366194,
+            "node": 7,
+            "queue": 1,
+            "peak": 2,
+            "copy_max_ticks": 38953,
+            "poll_max_ticks": 209032,
+            "previous_node_send_ticks": 245542
+          },
+          {
+            "kind": "peak_observed",
+            "phase": 0,
+            "sequence": 22578,
+            "covered_ns": 679949,
+            "gap_ns": 1094,
+            "cycle_ns": 681043,
+            "has_native": 1,
+            "epoch": 1441186,
+            "node": 7,
+            "queue": 1,
+            "peak": 2,
+            "copy_max_ticks": 38953,
+            "poll_max_ticks": 209032,
+            "previous_node_send_ticks": 245542
+          }
+        ],
+        "ends": [
+          {
+            "peak_events_omitted": 44957,
+            "incomplete_final_cycle": 0
+          }
+        ],
+        "note": "Relay monotonic wall time, not CPU. Cycle=covered stages+gap to next iteration; gap includes diagnostics/progress logging. MCU fields are reply-observed cumulative maxima/previous-node send, not simultaneous causal timestamps. Final incomplete cycles explicitly excluded.",
+        "epoch_context_valid": false,
+        "peak_events_valid": false,
+        "instrumentation_error": "Epoch extracted at timestamp offset80 instead of flags76. Timing totals valid; epoch/peak event correlation invalid. Raw log preserved."
+      },
+      "stages": {
+        "phases": {
+          "0": {
+            "count": 10172,
+            "tcp_queue_peak": 0,
+            "stages": {
+              "tx_prepare": {
+                "sum_ns": 98773895,
+                "max_ns": 55938,
+                "hist": [
+                  0,
+                  10147,
+                  20,
+                  5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 9.710371116791192,
+                "max_us": 55.938,
+                "covered_fraction": 0.010386775263537948
+              },
+              "ready_wait": {
+                "sum_ns": 3294706384,
+                "max_ns": 1807295,
+                "hist": [
+                  134,
+                  162,
+                  1136,
+                  2936,
+                  852,
+                  2323,
+                  18,
+                  2387,
+                  224,
+                  0,
+                  0
+                ],
+                "mean_us": 323.8995658670861,
+                "max_us": 1807.295,
+                "covered_fraction": 0.34646173232261174
+              },
+              "spi_ioctl": {
+                "sum_ns": 4931566949,
+                "max_ns": 670365,
+                "hist": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  10168,
+                  4,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 484.81782825403064,
+                "max_us": 670.365,
+                "covered_fraction": 0.5185892243730442
+              },
+              "validate": {
+                "sum_ns": 77108564,
+                "max_ns": 69636,
+                "hist": [
+                  0,
+                  10146,
+                  17,
+                  9,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 7.58047227683838,
+                "max_us": 69.636,
+                "covered_fraction": 0.008108512124201772
+              },
+              "policy": {
+                "sum_ns": 28383306,
+                "max_ns": 37031,
+                "hist": [
+                  10164,
+                  4,
+                  4,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 2.7903368069209598,
+                "max_us": 37.031,
+                "covered_fraction": 0.0029847058340488467
+              },
+              "pc_receive": {
+                "sum_ns": 358534009,
+                "max_ns": 102604,
+                "hist": [
+                  0,
+                  34,
+                  9946,
+                  191,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 35.24714992135274,
+                "max_us": 102.604,
+                "covered_fraction": 0.03770239267995144
+              },
+              "pc_send": {
+                "sum_ns": 720509270,
+                "max_ns": 218282,
+                "hist": [
+                  0,
+                  14,
+                  85,
+                  9490,
+                  580,
+                  3,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 70.83260617381046,
+                "max_us": 218.282,
+                "covered_fraction": 0.07576665740260405
+              }
+            },
+            "covered_mean_us": 934.8783304168305
+          },
+          "1": {
+            "count": 708,
+            "tcp_queue_peak": 0,
+            "stages": {
+              "tx_prepare": {
+                "sum_ns": 7007628,
+                "max_ns": 70469,
+                "hist": [
+                  0,
+                  705,
+                  2,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 9.89777966101695,
+                "max_us": 70.469,
+                "covered_fraction": 0.010943381747963566
+              },
+              "ready_wait": {
+                "sum_ns": 203199060,
+                "max_ns": 1150419,
+                "hist": [
+                  21,
+                  8,
+                  91,
+                  187,
+                  66,
+                  173,
+                  25,
+                  126,
+                  11,
+                  0,
+                  0
+                ],
+                "mean_us": 287.00432203389835,
+                "max_us": 1150.419,
+                "covered_fraction": 0.31732347727467175
+              },
+              "spi_ioctl": {
+                "sum_ns": 343215773,
+                "max_ns": 545470,
+                "hist": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  708,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 484.76804096045197,
+                "max_us": 545.47,
+                "covered_fraction": 0.5359789683272865
+              },
+              "validate": {
+                "sum_ns": 5329080,
+                "max_ns": 41042,
+                "hist": [
+                  0,
+                  707,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 7.526949152542373,
+                "max_us": 41.042,
+                "covered_fraction": 0.008322096550421581
+              },
+              "policy": {
+                "sum_ns": 2068281,
+                "max_ns": 55313,
+                "hist": [
+                  707,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 2.921300847457627,
+                "max_us": 55.313,
+                "covered_fraction": 0.0032299072589269625
+              },
+              "pc_receive": {
+                "sum_ns": 25137708,
+                "max_ns": 92657,
+                "hist": [
+                  0,
+                  0,
+                  687,
+                  21,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 35.50523728813559,
+                "max_us": 92.657,
+                "covered_fraction": 0.039256012863816074
+              },
+              "pc_send": {
+                "sum_ns": 54395531,
+                "max_ns": 165469,
+                "hist": [
+                  0,
+                  0,
+                  9,
+                  631,
+                  68,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 76.82984604519774,
+                "max_us": 165.469,
+                "covered_fraction": 0.08494615597691349
+              }
+            },
+            "covered_mean_us": 904.4534759887006
+          },
+          "2": {
+            "count": 34093,
+            "tcp_queue_peak": 0,
+            "stages": {
+              "tx_prepare": {
+                "sum_ns": 323545244,
+                "max_ns": 87709,
+                "hist": [
+                  11,
+                  34003,
+                  45,
+                  34,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 9.490078432522806,
+                "max_us": 87.709,
+                "covered_fraction": 0.010779064999507834
+              },
+              "ready_wait": {
+                "sum_ns": 9008424920,
+                "max_ns": 1208805,
+                "hist": [
+                  463,
+                  745,
+                  3878,
+                  8058,
+                  3226,
+                  11520,
+                  2038,
+                  3718,
+                  447,
+                  0,
+                  0
+                ],
+                "mean_us": 264.2309248232775,
+                "max_us": 1208.805,
+                "covered_fraction": 0.3001199973004893
+              },
+              "spi_ioctl": {
+                "sum_ns": 16546272956,
+                "max_ns": 596564,
+                "hist": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  34093,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 485.32757328483854,
+                "max_us": 596.564,
+                "covered_fraction": 0.5512470203157201
+              },
+              "validate": {
+                "sum_ns": 264733916,
+                "max_ns": 77813,
+                "hist": [
+                  0,
+                  34034,
+                  47,
+                  12,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 7.765051946147303,
+                "max_us": 77.813,
+                "covered_fraction": 0.008819737397030776
+              },
+              "policy": {
+                "sum_ns": 99002510,
+                "max_ns": 61406,
+                "hist": [
+                  34063,
+                  9,
+                  15,
+                  6,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 2.9038955210747077,
+                "max_us": 61.406,
+                "covered_fraction": 0.003298316109398364
+              },
+              "pc_receive": {
+                "sum_ns": 1241749785,
+                "max_ns": 170261,
+                "hist": [
+                  0,
+                  123,
+                  32639,
+                  1313,
+                  18,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 36.422426451177664,
+                "max_us": 170.261,
+                "covered_fraction": 0.041369489720083405
+              },
+              "pc_send": {
+                "sum_ns": 2532347575,
+                "max_ns": 249115,
+                "hist": [
+                  2,
+                  30,
+                  535,
+                  30899,
+                  2624,
+                  3,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 74.27763983808994,
+                "max_us": 249.115,
+                "covered_fraction": 0.08436637415777015
+              }
+            },
+            "covered_mean_us": 880.4175902971284
+          }
+        },
+        "histogram_upper_bounds_exclusive_us": [
+          5,
+          20,
+          50,
+          100,
+          200,
+          400,
+          600,
+          1000,
+          2000,
+          10000
+        ],
+        "caveat": "Sequential wall times, not CPU utilization. Reply-observed phases. Excludes aggregation/logging and epoch-transition batches; READY includes MCU preparation and scheduling. Instrumented relay is diagnostic only."
+      },
+      "restored": true,
+      "recovery": {
+        "snapshot_equal": true,
+        "continuous": true,
+        "integrity_ok": true,
+        "seconds": 10.022980625974014,
+        "detail": {
+          "hardware_restored": true,
+          "errors": [],
+          "recovery": {
+            "seconds": 10.022980625974014,
+            "samples": 313344,
+            "dropped": 0,
+            "fatal": 0,
+            "continuous": true
+          }
+        }
+      },
+      "final": {
+        "identity_equal": true,
+        "sources_exact": true,
+        "relay_configuration_equal": true,
+        "cpu_equal": true
+      }
+    },
+    {
+      "case": "relay_cycle_epochfix_gui_20261031",
+      "epoch_context_valid": true,
+      "gui": {
+        "ok": true,
+        "errors": [],
+        "assertions": {
+          "radio_playing_40k": true,
+          "radio_stop_confirmed": true,
+          "radio_progress": true,
+          "radio_hold_completed": true,
+          "scan_completed": true,
+          "wav_playing": true,
+          "wav_progress": true,
+          "wav_stop_confirmed": true,
+          "fm_playing": true,
+          "fm_progress": true,
+          "fm_stop_confirmed": true,
+          "shutdown_confirmed": true,
+          "worker_released": true
+        },
+        "visible_gui_ok": true,
+        "fft_data_ok": true,
+        "radio_profile_ok": true,
+        "exposed_fraction": 1.0,
+        "paint_events": 780,
+        "radio_hold_seconds": 30.039402795024216,
+        "radio_played_samples": 1200960,
+        "audio_source_min_samples": 9151,
+        "pending_gui_peak": 3,
+        "pending_dsp_peak": 3
+      },
+      "mcu": {
+        "frames": 64086,
+        "samples": 55882992,
+        "empty_status_frames": 1013,
+        "send_nodes": 16022,
+        "mean_send_margin": 0.10097900227570067,
+        "mcu_queue_peak": 4,
+        "min_slack_ticks": 70440,
+        "sampled_queue_max": 4,
+        "send_ticks_max": 605508,
+        "send_over_budget_nodes": 1576,
+        "headroom_pass": false
+      },
+      "cycles": {
+        "phases": {
+          "0": {
+            "count": 10327,
+            "covered_ns": 9654975081,
+            "gap_ns": 16884159,
+            "cycle_ns": 9671859240,
+            "max_gap_ns": 34323,
+            "max_cycle_ns": 2569695,
+            "covered_mean_us": 934.9254460152996,
+            "gap_mean_us": 1.6349529388980344,
+            "cycle_mean_us": 936.5603989541978,
+            "gap_fraction": 0.0017456994132185075
+          },
+          "1": {
+            "count": 708,
+            "covered_ns": 640764814,
+            "gap_ns": 1169017,
+            "cycle_ns": 641933831,
+            "max_gap_ns": 3229,
+            "max_cycle_ns": 1810318,
+            "covered_mean_us": 905.0350480225989,
+            "gap_mean_us": 1.65115395480226,
+            "cycle_mean_us": 906.6862019774012,
+            "gap_fraction": 0.0018210864477712812
+          },
+          "2": {
+            "count": 34082,
+            "covered_ns": 30003923637,
+            "gap_ns": 49508075,
+            "cycle_ns": 30053431712,
+            "max_gap_ns": 59271,
+            "max_cycle_ns": 2006568,
+            "covered_mean_us": 880.345156886333,
+            "gap_mean_us": 1.4526164837744264,
+            "cycle_mean_us": 881.7977733701074,
+            "gap_fraction": 0.0016473351687232437
+          }
+        },
+        "events": [
+          {
+            "kind": "slow_cycle",
+            "phase": 0,
+            "sequence": 21516,
+            "covered_ns": 2567351,
+            "gap_ns": 2344,
+            "cycle_ns": 2569695,
+            "has_native": 1,
+            "epoch": 1,
+            "node": 0,
+            "queue": 1,
+            "peak": 1,
+            "copy_max_ticks": 38343,
+            "poll_max_ticks": 175924,
+            "previous_node_send_ticks": 0
+          },
+          {
+            "kind": "slow_cycle",
+            "phase": 2,
+            "sequence": 56802,
+            "covered_ns": 2004120,
+            "gap_ns": 2448,
+            "cycle_ns": 2006568,
+            "has_native": 1,
+            "epoch": 1,
+            "node": 8444,
+            "queue": 1,
+            "peak": 4,
+            "copy_max_ticks": 40138,
+            "poll_max_ticks": 228538,
+            "previous_node_send_ticks": 241824
+          },
+          {
+            "kind": "slow_cycle",
+            "phase": 0,
+            "sequence": 105968,
+            "covered_ns": 1933287,
+            "gap_ns": 2344,
+            "cycle_ns": 1935631,
+            "has_native": 1,
+            "epoch": 1,
+            "node": 20074,
+            "queue": 1,
+            "peak": 4,
+            "copy_max_ticks": 40141,
+            "poll_max_ticks": 228538,
+            "previous_node_send_ticks": 241565
+          },
+          {
+            "kind": "slow_cycle",
+            "phase": 2,
+            "sequence": 62044,
+            "covered_ns": 1903808,
+            "gap_ns": 2396,
+            "cycle_ns": 1906204,
+            "has_native": 1,
+            "epoch": 1,
+            "node": 9677,
+            "queue": 1,
+            "peak": 4,
+            "copy_max_ticks": 40138,
+            "poll_max_ticks": 228538,
+            "previous_node_send_ticks": 243162
+          },
+          {
+            "kind": "slow_cycle",
+            "phase": 0,
+            "sequence": 26696,
+            "covered_ns": 1884276,
+            "gap_ns": 2761,
+            "cycle_ns": 1887037,
+            "has_native": 1,
+            "epoch": 1,
+            "node": 1293,
+            "queue": 1,
+            "peak": 2,
+            "copy_max_ticks": 38972,
+            "poll_max_ticks": 210568,
+            "previous_node_send_ticks": 248559
+          },
+          {
+            "kind": "slow_cycle",
+            "phase": 2,
+            "sequence": 62240,
+            "covered_ns": 1849329,
+            "gap_ns": 2395,
+            "cycle_ns": 1851724,
+            "has_native": 1,
+            "epoch": 1,
+            "node": 9723,
+            "queue": 1,
+            "peak": 4,
+            "copy_max_ticks": 40138,
+            "poll_max_ticks": 228538,
+            "previous_node_send_ticks": 243966
+          },
+          {
+            "kind": "slow_cycle",
+            "phase": 0,
+            "sequence": 26228,
+            "covered_ns": 1833860,
+            "gap_ns": 2656,
+            "cycle_ns": 1836516,
+            "has_native": 1,
+            "epoch": 1,
+            "node": 1176,
+            "queue": 1,
+            "peak": 2,
+            "copy_max_ticks": 38972,
+            "poll_max_ticks": 210568,
+            "previous_node_send_ticks": 241836
+          },
+          {
+            "kind": "slow_cycle",
+            "phase": 2,
+            "sequence": 70826,
+            "covered_ns": 1832297,
+            "gap_ns": 1563,
+            "cycle_ns": 1833860,
+            "has_native": 1,
+            "epoch": 1,
+            "node": 11743,
+            "queue": 1,
+            "peak": 4,
+            "copy_max_ticks": 40141,
+            "poll_max_ticks": 228538,
+            "previous_node_send_ticks": 241134
+          },
+          {
+            "kind": "peak_observed",
+            "phase": 0,
+            "sequence": 21516,
+            "covered_ns": 2567351,
+            "gap_ns": 2344,
+            "cycle_ns": 2569695,
+            "has_native": 1,
+            "epoch": 1,
+            "node": 0,
+            "queue": 1,
+            "peak": 1,
+            "copy_max_ticks": 38343,
+            "poll_max_ticks": 175924,
+            "previous_node_send_ticks": 0
+          },
+          {
+            "kind": "peak_observed",
+            "phase": 0,
+            "sequence": 21524,
+            "covered_ns": 791200,
+            "gap_ns": 1146,
+            "cycle_ns": 792346,
+            "has_native": 1,
+            "epoch": 1,
+            "node": 2,
+            "queue": 1,
+            "peak": 2,
+            "copy_max_ticks": 38343,
+            "poll_max_ticks": 208991,
+            "previous_node_send_ticks": 243894
+          },
+          {
+            "kind": "peak_observed",
+            "phase": 1,
+            "sequence": 32456,
+            "covered_ns": 1205785,
+            "gap_ns": 2292,
+            "cycle_ns": 1208077,
+            "has_native": 1,
+            "epoch": 1,
+            "node": 2729,
+            "queue": 2,
+            "peak": 3,
+            "copy_max_ticks": 39208,
+            "poll_max_ticks": 213290,
+            "previous_node_send_ticks": 612337
+          },
+          {
+            "kind": "peak_observed",
+            "phase": 1,
+            "sequence": 32464,
+            "covered_ns": 1126097,
+            "gap_ns": 1718,
+            "cycle_ns": 1127815,
+            "has_native": 1,
+            "epoch": 1,
+            "node": 2730,
+            "queue": 3,
+            "peak": 4,
+            "copy_max_ticks": 39208,
+            "poll_max_ticks": 213290,
+            "previous_node_send_ticks": 577877
+          }
+        ],
+        "ends": [
+          {
+            "peak_events_omitted": 0,
+            "incomplete_final_cycle": 0
+          }
+        ],
+        "note": "Relay monotonic wall time, not CPU. Cycle=covered stages+gap to next iteration; gap includes diagnostics/progress logging. MCU fields are reply-observed cumulative maxima/previous-node send, not simultaneous causal timestamps. Final incomplete cycles explicitly excluded.",
+        "epoch_context_valid": true
+      },
+      "stages": {
+        "phases": {
+          "0": {
+            "count": 10327,
+            "tcp_queue_peak": 0,
+            "stages": {
+              "tx_prepare": {
+                "sum_ns": 103415062,
+                "max_ns": 61718,
+                "hist": [
+                  0,
+                  10312,
+                  6,
+                  9,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 10.01404686743488,
+                "max_us": 61.718,
+                "covered_fraction": 0.010711064620302359
+              },
+              "ready_wait": {
+                "sum_ns": 3256236205,
+                "max_ns": 1913808,
+                "hist": [
+                  218,
+                  288,
+                  1488,
+                  2672,
+                  704,
+                  2287,
+                  21,
+                  2425,
+                  224,
+                  0,
+                  0
+                ],
+                "mean_us": 315.31288902875957,
+                "max_us": 1913.808,
+                "covered_fraction": 0.3372599284495243
+              },
+              "spi_ioctl": {
+                "sum_ns": 5017613654,
+                "max_ns": 622449,
+                "hist": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  10321,
+                  6,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 485.8733082211678,
+                "max_us": 622.449,
+                "covered_fraction": 0.5196920356505268
+              },
+              "validate": {
+                "sum_ns": 81204338,
+                "max_ns": 60625,
+                "hist": [
+                  0,
+                  10301,
+                  20,
+                  6,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 7.863303766824828,
+                "max_us": 60.625,
+                "covered_fraction": 0.008410621189463431
+              },
+              "policy": {
+                "sum_ns": 28635874,
+                "max_ns": 55000,
+                "hist": [
+                  10317,
+                  3,
+                  6,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 2.772913140311804,
+                "max_us": 55.0,
+                "covered_fraction": 0.00296591899614039
+              },
+              "pc_receive": {
+                "sum_ns": 363942687,
+                "max_ns": 96407,
+                "hist": [
+                  0,
+                  29,
+                  10070,
+                  228,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 35.24185988186308,
+                "max_us": 96.407,
+                "covered_fraction": 0.037694834419221016
+              },
+              "pc_send": {
+                "sum_ns": 803927261,
+                "max_ns": 248803,
+                "hist": [
+                  1,
+                  6,
+                  113,
+                  9164,
+                  1041,
+                  2,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 77.84712510893773,
+                "max_us": 248.803,
+                "covered_fraction": 0.0832655966748217
+              }
+            },
+            "covered_mean_us": 934.9254460152996
+          },
+          "1": {
+            "count": 708,
+            "tcp_queue_peak": 0,
+            "stages": {
+              "tx_prepare": {
+                "sum_ns": 6860065,
+                "max_ns": 13177,
+                "hist": [
+                  0,
+                  708,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 9.689357344632768,
+                "max_us": 13.177,
+                "covered_fraction": 0.010706057589485556
+              },
+              "ready_wait": {
+                "sum_ns": 203918920,
+                "max_ns": 1124222,
+                "hist": [
+                  8,
+                  19,
+                  91,
+                  196,
+                  52,
+                  180,
+                  25,
+                  126,
+                  11,
+                  0,
+                  0
+                ],
+                "mean_us": 288.0210734463277,
+                "max_us": 1124.222,
+                "covered_fraction": 0.31824300514728326
+              },
+              "spi_ioctl": {
+                "sum_ns": 343803961,
+                "max_ns": 543231,
+                "hist": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  708,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 485.59881497175144,
+                "max_us": 543.231,
+                "covered_fraction": 0.53655249709139
+              },
+              "validate": {
+                "sum_ns": 5597146,
+                "max_ns": 36406,
+                "hist": [
+                  0,
+                  707,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 7.905573446327684,
+                "max_us": 36.406,
+                "covered_fraction": 0.008735101987045125
+              },
+              "policy": {
+                "sum_ns": 1920266,
+                "max_ns": 4323,
+                "hist": [
+                  708,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 2.71224011299435,
+                "max_us": 4.323,
+                "covered_fraction": 0.0029968343424050746
+              },
+              "pc_receive": {
+                "sum_ns": 25087685,
+                "max_ns": 80781,
+                "hist": [
+                  0,
+                  0,
+                  691,
+                  17,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 35.434583333333336,
+                "max_us": 80.781,
+                "covered_fraction": 0.039152719456284
+              },
+              "pc_send": {
+                "sum_ns": 53576771,
+                "max_ns": 159271,
+                "hist": [
+                  0,
+                  0,
+                  13,
+                  637,
+                  58,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 75.67340536723164,
+                "max_us": 159.271,
+                "covered_fraction": 0.08361378438610707
+              }
+            },
+            "covered_mean_us": 905.0350480225989
+          },
+          "2": {
+            "count": 34082,
+            "tcp_queue_peak": 0,
+            "stages": {
+              "tx_prepare": {
+                "sum_ns": 332682896,
+                "max_ns": 77136,
+                "hist": [
+                  1,
+                  33990,
+                  50,
+                  41,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 9.76124922246347,
+                "max_us": 77.136,
+                "covered_fraction": 0.011087979693087365
+              },
+              "ready_wait": {
+                "sum_ns": 8862228565,
+                "max_ns": 1224014,
+                "hist": [
+                  632,
+                  854,
+                  4306,
+                  7471,
+                  3271,
+                  11384,
+                  2045,
+                  3716,
+                  403,
+                  0,
+                  0
+                ],
+                "mean_us": 260.026658206678,
+                "max_us": 1224.014,
+                "covered_fraction": 0.2953689881436489
+              },
+              "spi_ioctl": {
+                "sum_ns": 16564950480,
+                "max_ns": 850107,
+                "hist": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  34080,
+                  2,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 486.0322305029047,
+                "max_us": 850.107,
+                "covered_fraction": 0.5520928089409135
+              },
+              "validate": {
+                "sum_ns": 275699725,
+                "max_ns": 73281,
+                "hist": [
+                  0,
+                  33997,
+                  59,
+                  26,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 8.089305938618626,
+                "max_us": 73.281,
+                "covered_fraction": 0.009188789050909823
+              },
+              "policy": {
+                "sum_ns": 95034049,
+                "max_ns": 63854,
+                "hist": [
+                  34047,
+                  16,
+                  11,
+                  8,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 2.7883941376679773,
+                "max_us": 63.854,
+                "covered_fraction": 0.003167387377389758
+              },
+              "pc_receive": {
+                "sum_ns": 1253130010,
+                "max_ns": 144428,
+                "hist": [
+                  0,
+                  113,
+                  32234,
+                  1701,
+                  34,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 36.76808902059739,
+                "max_us": 144.428,
+                "covered_fraction": 0.04176553790633819
+              },
+              "pc_send": {
+                "sum_ns": 2620197912,
+                "max_ns": 684169,
+                "hist": [
+                  1,
+                  8,
+                  770,
+                  30049,
+                  3246,
+                  7,
+                  0,
+                  1,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 76.87922985740273,
+                "max_us": 684.169,
+                "covered_fraction": 0.08732850888771244
+              }
+            },
+            "covered_mean_us": 880.345156886333
+          }
+        },
+        "histogram_upper_bounds_exclusive_us": [
+          5,
+          20,
+          50,
+          100,
+          200,
+          400,
+          600,
+          1000,
+          2000,
+          10000
+        ],
+        "caveat": "Sequential wall times, not CPU utilization. Reply-observed phases. Excludes aggregation/logging and epoch-transition batches; READY includes MCU preparation and scheduling. Instrumented relay is diagnostic only."
+      },
+      "restored": true,
+      "recovery": {
+        "snapshot_equal": true,
+        "continuous": true,
+        "integrity_ok": true,
+        "seconds": 10.022163999965414,
+        "detail": {
+          "hardware_restored": true,
+          "errors": [],
+          "recovery": {
+            "seconds": 10.022163999965414,
+            "samples": 313344,
+            "dropped": 0,
+            "fatal": 0,
+            "continuous": true
+          }
+        }
+      },
+      "final": {
+        "identity_equal": true,
+        "sources_exact": true,
+        "relay_configuration_equal": true,
+        "cpu_equal": true
+      }
+    },
+    {
+      "case": "relay_cycle_prefill4_gui_20261031",
+      "epoch_context_valid": true,
+      "gui": {
+        "ok": true,
+        "errors": [],
+        "assertions": {
+          "radio_playing_40k": true,
+          "radio_stop_confirmed": true,
+          "radio_progress": true,
+          "radio_hold_completed": true,
+          "scan_completed": true,
+          "wav_playing": true,
+          "wav_progress": true,
+          "wav_stop_confirmed": true,
+          "fm_playing": true,
+          "fm_progress": true,
+          "fm_stop_confirmed": true,
+          "shutdown_confirmed": true,
+          "worker_released": true
+        },
+        "visible_gui_ok": true,
+        "fft_data_ok": true,
+        "radio_profile_ok": true,
+        "exposed_fraction": 1.0,
+        "paint_events": 764,
+        "radio_hold_seconds": 30.080377073958516,
+        "radio_played_samples": 1202880,
+        "audio_source_min_samples": 12666,
+        "pending_gui_peak": 4,
+        "pending_dsp_peak": 2
+      },
+      "mcu": {
+        "frames": 64178,
+        "samples": 55963216,
+        "empty_status_frames": 1010,
+        "send_nodes": 16045,
+        "mean_send_margin": 0.10016981077960874,
+        "mcu_queue_peak": 3,
+        "min_slack_ticks": 69525,
+        "sampled_queue_max": 3,
+        "send_ticks_max": 605272,
+        "send_over_budget_nodes": 1635,
+        "headroom_pass": true
+      },
+      "cycles": {
+        "phases": {
+          "0": {
+            "count": 10356,
+            "covered_ns": 9680367624,
+            "gap_ns": 20643473,
+            "cycle_ns": 9701011097,
+            "max_gap_ns": 46980,
+            "max_cycle_ns": 2579123,
+            "covered_mean_us": 934.7593302433372,
+            "gap_mean_us": 1.9933828698339127,
+            "cycle_mean_us": 936.7527131131711,
+            "gap_fraction": 0.002127971279858026
+          },
+          "1": {
+            "count": 780,
+            "covered_ns": 703576005,
+            "gap_ns": 1545873,
+            "cycle_ns": 705121878,
+            "max_gap_ns": 3802,
+            "max_cycle_ns": 1791985,
+            "covered_mean_us": 902.0205192307692,
+            "gap_mean_us": 1.9818884615384615,
+            "cycle_mean_us": 904.0024076923078,
+            "gap_fraction": 0.002192348653802513
+          },
+          "2": {
+            "count": 34127,
+            "covered_ns": 30042776072,
+            "gap_ns": 55664175,
+            "cycle_ns": 30098440247,
+            "max_gap_ns": 64114,
+            "max_cycle_ns": 1853912,
+            "covered_mean_us": 880.3227963782343,
+            "gap_mean_us": 1.6310890204237114,
+            "cycle_mean_us": 881.953885398658,
+            "gap_fraction": 0.0018494039738669917
+          }
+        },
+        "events": [
+          {
+            "kind": "slow_cycle",
+            "phase": 0,
+            "sequence": 21490,
+            "covered_ns": 2576883,
+            "gap_ns": 2240,
+            "cycle_ns": 2579123,
+            "has_native": 1,
+            "epoch": 1,
+            "node": 0,
+            "queue": 1,
+            "peak": 1,
+            "copy_max_ticks": 37406,
+            "poll_max_ticks": 176891,
+            "previous_node_send_ticks": 0
+          },
+          {
+            "kind": "slow_cycle",
+            "phase": 2,
+            "sequence": 72874,
+            "covered_ns": 1851360,
+            "gap_ns": 2552,
+            "cycle_ns": 1853912,
+            "has_native": 1,
+            "epoch": 1,
+            "node": 12233,
+            "queue": 1,
+            "peak": 3,
+            "copy_max_ticks": 40126,
+            "poll_max_ticks": 228360,
+            "previous_node_send_ticks": 243702
+          },
+          {
+            "kind": "slow_cycle",
+            "phase": 0,
+            "sequence": 27230,
+            "covered_ns": 1851516,
+            "gap_ns": 2240,
+            "cycle_ns": 1853756,
+            "has_native": 1,
+            "epoch": 1,
+            "node": 1433,
+            "queue": 1,
+            "peak": 2,
+            "copy_max_ticks": 39715,
+            "poll_max_ticks": 210685,
+            "previous_node_send_ticks": 245804
+          },
+          {
+            "kind": "slow_cycle",
+            "phase": 2,
+            "sequence": 78470,
+            "covered_ns": 1850422,
+            "gap_ns": 2396,
+            "cycle_ns": 1852818,
+            "has_native": 1,
+            "epoch": 1,
+            "node": 13549,
+            "queue": 1,
+            "peak": 3,
+            "copy_max_ticks": 40131,
+            "poll_max_ticks": 228360,
+            "previous_node_send_ticks": 242236
+          },
+          {
+            "kind": "slow_cycle",
+            "phase": 2,
+            "sequence": 82658,
+            "covered_ns": 1844901,
+            "gap_ns": 2448,
+            "cycle_ns": 1847349,
+            "has_native": 1,
+            "epoch": 1,
+            "node": 14533,
+            "queue": 1,
+            "peak": 3,
+            "copy_max_ticks": 40131,
+            "poll_max_ticks": 228360,
+            "previous_node_send_ticks": 243829
+          },
+          {
+            "kind": "slow_cycle",
+            "phase": 2,
+            "sequence": 49914,
+            "covered_ns": 1834016,
+            "gap_ns": 2344,
+            "cycle_ns": 1836360,
+            "has_native": 1,
+            "epoch": 1,
+            "node": 6837,
+            "queue": 1,
+            "peak": 3,
+            "copy_max_ticks": 40126,
+            "poll_max_ticks": 228360,
+            "previous_node_send_ticks": 241035
+          },
+          {
+            "kind": "slow_cycle",
+            "phase": 0,
+            "sequence": 28720,
+            "covered_ns": 1823287,
+            "gap_ns": 2344,
+            "cycle_ns": 1825631,
+            "has_native": 1,
+            "epoch": 1,
+            "node": 1805,
+            "queue": 1,
+            "peak": 2,
+            "copy_max_ticks": 39715,
+            "poll_max_ticks": 210685,
+            "previous_node_send_ticks": 243144
+          },
+          {
+            "kind": "slow_cycle",
+            "phase": 0,
+            "sequence": 26670,
+            "covered_ns": 1819954,
+            "gap_ns": 2500,
+            "cycle_ns": 1822454,
+            "has_native": 1,
+            "epoch": 1,
+            "node": 1293,
+            "queue": 1,
+            "peak": 2,
+            "copy_max_ticks": 39715,
+            "poll_max_ticks": 210685,
+            "previous_node_send_ticks": 241294
+          },
+          {
+            "kind": "peak_observed",
+            "phase": 0,
+            "sequence": 21490,
+            "covered_ns": 2576883,
+            "gap_ns": 2240,
+            "cycle_ns": 2579123,
+            "has_native": 1,
+            "epoch": 1,
+            "node": 0,
+            "queue": 1,
+            "peak": 1,
+            "copy_max_ticks": 37406,
+            "poll_max_ticks": 176891,
+            "previous_node_send_ticks": 0
+          },
+          {
+            "kind": "peak_observed",
+            "phase": 0,
+            "sequence": 21498,
+            "covered_ns": 808961,
+            "gap_ns": 2240,
+            "cycle_ns": 811201,
+            "has_native": 1,
+            "epoch": 1,
+            "node": 2,
+            "queue": 1,
+            "peak": 2,
+            "copy_max_ticks": 38345,
+            "poll_max_ticks": 207992,
+            "previous_node_send_ticks": 243926
+          },
+          {
+            "kind": "peak_observed",
+            "phase": 1,
+            "sequence": 32516,
+            "covered_ns": 808961,
+            "gap_ns": 2135,
+            "cycle_ns": 811096,
+            "has_native": 1,
+            "epoch": 1,
+            "node": 2751,
+            "queue": 2,
+            "peak": 3,
+            "copy_max_ticks": 39715,
+            "poll_max_ticks": 211623,
+            "previous_node_send_ticks": 401728
+          }
+        ],
+        "ends": [
+          {
+            "peak_events_omitted": 0,
+            "incomplete_final_cycle": 0
+          }
+        ],
+        "note": "Relay monotonic wall time, not CPU. Cycle=covered stages+gap to next iteration; gap includes diagnostics/progress logging. MCU fields are reply-observed cumulative maxima/previous-node send, not simultaneous causal timestamps. Final incomplete cycles explicitly excluded.",
+        "epoch_context_valid": true
+      },
+      "stages": {
+        "phases": {
+          "0": {
+            "count": 10356,
+            "tcp_queue_peak": 0,
+            "stages": {
+              "tx_prepare": {
+                "sum_ns": 117861622,
+                "max_ns": 102604,
+                "hist": [
+                  0,
+                  10320,
+                  23,
+                  12,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 11.38099864812669,
+                "max_us": 102.604,
+                "covered_fraction": 0.012175325006024793
+              },
+              "ready_wait": {
+                "sum_ns": 3186440735,
+                "max_ns": 1914850,
+                "hist": [
+                  366,
+                  390,
+                  1872,
+                  2332,
+                  533,
+                  2194,
+                  26,
+                  2416,
+                  227,
+                  0,
+                  0
+                ],
+                "mean_us": 307.69029886056387,
+                "max_us": 1914.85,
+                "covered_fraction": 0.32916526094525933
+              },
+              "spi_ioctl": {
+                "sum_ns": 5043208530,
+                "max_ns": 748596,
+                "hist": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  10351,
+                  5,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 486.98421494785634,
+                "max_us": 748.596,
+                "covered_fraction": 0.5209728313929578
+              },
+              "validate": {
+                "sum_ns": 85843344,
+                "max_ns": 101928,
+                "hist": [
+                  0,
+                  10311,
+                  37,
+                  7,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 8.289237543453071,
+                "max_us": 101.928,
+                "covered_fraction": 0.008867777271926466
+              },
+              "policy": {
+                "sum_ns": 28451695,
+                "max_ns": 45105,
+                "hist": [
+                  10337,
+                  10,
+                  9,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 2.7473633642332946,
+                "max_us": 45.105,
+                "covered_fraction": 0.0029391130693695233
+              },
+              "pc_receive": {
+                "sum_ns": 367221944,
+                "max_ns": 281875,
+                "hist": [
+                  0,
+                  54,
+                  10047,
+                  251,
+                  3,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 35.4598246427192,
+                "max_us": 281.875,
+                "covered_fraction": 0.03793471056714488
+              },
+              "pc_send": {
+                "sum_ns": 851339754,
+                "max_ns": 285365,
+                "hist": [
+                  1,
+                  11,
+                  74,
+                  8815,
+                  1447,
+                  8,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 82.2073922363847,
+                "max_us": 285.365,
+                "covered_fraction": 0.08794498174731716
+              }
+            },
+            "covered_mean_us": 934.7593302433372
+          },
+          "1": {
+            "count": 780,
+            "tcp_queue_peak": 0,
+            "stages": {
+              "tx_prepare": {
+                "sum_ns": 8755187,
+                "max_ns": 59166,
+                "hist": [
+                  0,
+                  779,
+                  0,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 11.224598717948718,
+                "max_us": 59.166,
+                "covered_fraction": 0.01244383966732919
+              },
+              "ready_wait": {
+                "sum_ns": 207970137,
+                "max_ns": 1119743,
+                "hist": [
+                  43,
+                  50,
+                  154,
+                  112,
+                  43,
+                  216,
+                  19,
+                  131,
+                  12,
+                  0,
+                  0
+                ],
+                "mean_us": 266.6283807692308,
+                "max_us": 1119.743,
+                "covered_fraction": 0.2955901502070128
+              },
+              "spi_ioctl": {
+                "sum_ns": 380566593,
+                "max_ns": 546929,
+                "hist": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  780,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 487.9058884615385,
+                "max_us": 546.929,
+                "covered_fraction": 0.5409033143476801
+              },
+              "validate": {
+                "sum_ns": 6753111,
+                "max_ns": 16510,
+                "hist": [
+                  0,
+                  780,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 8.657834615384616,
+                "max_us": 16.51,
+                "covered_fraction": 0.009598267922738497
+              },
+              "policy": {
+                "sum_ns": 2190520,
+                "max_ns": 4584,
+                "hist": [
+                  780,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 2.808358974358974,
+                "max_us": 4.584,
+                "covered_fraction": 0.003113409190240932
+              },
+              "pc_receive": {
+                "sum_ns": 28619682,
+                "max_ns": 97605,
+                "hist": [
+                  0,
+                  0,
+                  759,
+                  21,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 36.691900000000004,
+                "max_us": 97.605,
+                "covered_fraction": 0.040677456019836834
+              },
+              "pc_send": {
+                "sum_ns": 68720775,
+                "max_ns": 161094,
+                "hist": [
+                  0,
+                  0,
+                  2,
+                  611,
+                  167,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 88.10355769230769,
+                "max_us": 161.094,
+                "covered_fraction": 0.09767356264516155
+              }
+            },
+            "covered_mean_us": 902.0205192307692
+          },
+          "2": {
+            "count": 34127,
+            "tcp_queue_peak": 0,
+            "stages": {
+              "tx_prepare": {
+                "sum_ns": 365545953,
+                "max_ns": 77396,
+                "hist": [
+                  0,
+                  34042,
+                  48,
+                  37,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 10.711341547748118,
+                "max_us": 77.396,
+                "covered_fraction": 0.012167515815580386
+              },
+              "ready_wait": {
+                "sum_ns": 8661024510,
+                "max_ns": 1157973,
+                "hist": [
+                  910,
+                  1066,
+                  5458,
+                  6548,
+                  2772,
+                  11206,
+                  2047,
+                  3724,
+                  396,
+                  0,
+                  0
+                ],
+                "mean_us": 253.78804201951533,
+                "max_us": 1157.973,
+                "covered_fraction": 0.28828975355816444
+              },
+              "spi_ioctl": {
+                "sum_ns": 16630352273,
+                "max_ns": 658856,
+                "hist": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  34124,
+                  3,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 487.3077701819673,
+                "max_us": 658.856,
+                "covered_fraction": 0.5535557777065603
+              },
+              "validate": {
+                "sum_ns": 289964779,
+                "max_ns": 72552,
+                "hist": [
+                  0,
+                  34069,
+                  35,
+                  23,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 8.496638409470508,
+                "max_us": 72.552,
+                "covered_fraction": 0.009651730529331756
+              },
+              "policy": {
+                "sum_ns": 95695648,
+                "max_ns": 60313,
+                "hist": [
+                  34092,
+                  15,
+                  17,
+                  3,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 2.8041037301843117,
+                "max_us": 60.313,
+                "covered_fraction": 0.0031853130939250573
+              },
+              "pc_receive": {
+                "sum_ns": 1252917847,
+                "max_ns": 146094,
+                "hist": [
+                  0,
+                  38,
+                  32561,
+                  1507,
+                  21,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 36.71338960353972,
+                "max_us": 146.094,
+                "covered_fraction": 0.041704463129415156
+              },
+              "pc_send": {
+                "sum_ns": 2747275062,
+                "max_ns": 211980,
+                "hist": [
+                  0,
+                  6,
+                  341,
+                  29745,
+                  4031,
+                  4,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "mean_us": 80.5015108858089,
+                "max_us": 211.98,
+                "covered_fraction": 0.09144544616702291
+              }
+            },
+            "covered_mean_us": 880.3227963782343
+          }
+        },
+        "histogram_upper_bounds_exclusive_us": [
+          5,
+          20,
+          50,
+          100,
+          200,
+          400,
+          600,
+          1000,
+          2000,
+          10000
+        ],
+        "caveat": "Sequential wall times, not CPU utilization. Reply-observed phases. Excludes aggregation/logging and epoch-transition batches; READY includes MCU preparation and scheduling. Instrumented relay is diagnostic only."
+      },
+      "restored": true,
+      "recovery": {
+        "snapshot_equal": true,
+        "continuous": true,
+        "integrity_ok": true,
+        "seconds": 10.02340235200245,
+        "detail": {
+          "hardware_restored": true,
+          "errors": [],
+          "recovery": {
+            "seconds": 10.02340235200245,
+            "samples": 313344,
+            "dropped": 0,
+            "fatal": 0,
+            "continuous": true
+          }
+        }
+      },
+      "final": {
+        "identity_equal": true,
+        "sources_exact": true,
+        "relay_configuration_equal": true,
+        "cpu_equal": true
+      }
+    }
+  ]
+}

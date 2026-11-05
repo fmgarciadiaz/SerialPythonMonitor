@@ -1,0 +1,368 @@
+{
+  "private": true,
+  "publicly_accepted": false,
+  "version": 20,
+  "profile": {
+    "bits": 8,
+    "rate": 1860465,
+    "channels": 1,
+    "fft": 16384,
+    "radio_a0_rate": 40000
+  },
+  "firmware_sha256": "8d3ec5db606b79a3fd1a4630666ddd47b87d19a709c6df73929a665d14b906a0",
+  "relay_sha256": "bf6893f5a0fbab8676120a5decd8c6109698fa852be02333918b1d6e4a2a909d",
+  "local_tests_passed": 15,
+  "runs": [
+    {
+      "run": "60s",
+      "report": "diagnosticos/resultados_v20/sram3_tail_fix_gui60_20261101/report.json",
+      "report_sha256": "2925c486b20e60c50b6a5eeb8a04cfbd4a23d483a37e24766beb1adf90d9c82c",
+      "requested_tests": {
+        "radio": true,
+        "wav": true,
+        "fm": true,
+        "voices": 20
+      },
+      "hold_seconds": 60.057412469992414,
+      "exposed_fraction": 1.0,
+      "paint_events": 1572,
+      "radio": {
+        "frames": 128154,
+        "samples": 111750288,
+        "empty_status_frames": 2317,
+        "send_nodes": 32039,
+        "mean_send_margin": 0.1229676097148189,
+        "mcu_queue_peak": 4,
+        "min_slack_ticks": 74851,
+        "sampled_queue_max": 4,
+        "send_ticks_max": 680093,
+        "send_over_budget_nodes": 3082,
+        "headroom_pass": false
+      },
+      "reserve_screen": {
+        "publicly_accepted": false,
+        "capacity": 16,
+        "legacy_headroom_pass": false,
+        "free_at_peak": 12,
+        "passes": true,
+        "criterion": "Mean margin >=10%, cumulative peak strictly below half capacity, positive slack; private screen only"
+      },
+      "assertions": {
+        "radio_playing_40k": true,
+        "radio_stop_confirmed": true,
+        "radio_progress": true,
+        "radio_hold_completed": true,
+        "scan_completed": true,
+        "wav_playing": true,
+        "wav_progress": true,
+        "wav_stop_confirmed": true,
+        "fm_playing": true,
+        "fm_progress": true,
+        "fm_stop_confirmed": true,
+        "shutdown_confirmed": true,
+        "worker_released": true
+      },
+      "restoration": {
+        "ok": true,
+        "attempted": true,
+        "errors": [],
+        "material": {
+          "sources_exact": true,
+          "cache_exact": true,
+          "firmware_exact": true,
+          "relay_exact": true
+        },
+        "recovery": {
+          "snapshot_equal": true,
+          "continuous": true,
+          "integrity_ok": true,
+          "seconds": 10.024094667984173,
+          "detail": {
+            "hardware_restored": true,
+            "errors": [],
+            "recovery": {
+              "seconds": 10.024094667984173,
+              "samples": 313344,
+              "dropped": 0,
+              "fatal": 0,
+              "continuous": true
+            }
+          }
+        },
+        "final": {
+          "identity_equal": true,
+          "sources_exact": true,
+          "relay_configuration_equal": true,
+          "cpu_equal": true
+        }
+      },
+      "scan_executed": false
+    },
+    {
+      "run": "120s-1",
+      "report": "diagnosticos/resultados_v20/sram3_tail_fix_gui120_r1_20261101/report.json",
+      "report_sha256": "24e72baa33922c55ead64b42d0519657c49c743e81479a65cef8ce04dd9b05c6",
+      "requested_tests": {
+        "radio": true,
+        "wav": true,
+        "fm": true,
+        "voices": 20
+      },
+      "hold_seconds": 120.03562541899737,
+      "exposed_fraction": 1.0,
+      "paint_events": 2766,
+      "radio": {
+        "frames": 256068,
+        "samples": 223291296,
+        "empty_status_frames": 4317,
+        "send_nodes": 64017,
+        "mean_send_margin": 0.12047572175187538,
+        "mcu_queue_peak": 5,
+        "min_slack_ticks": 69204,
+        "sampled_queue_max": 4,
+        "send_ticks_max": 704090,
+        "send_over_budget_nodes": 6176,
+        "headroom_pass": false
+      },
+      "reserve_screen": {
+        "publicly_accepted": false,
+        "capacity": 16,
+        "legacy_headroom_pass": false,
+        "free_at_peak": 11,
+        "passes": true,
+        "criterion": "Mean margin >=10%, cumulative peak strictly below half capacity, positive slack; private screen only"
+      },
+      "assertions": {
+        "radio_playing_40k": true,
+        "radio_stop_confirmed": true,
+        "radio_progress": true,
+        "radio_hold_completed": true,
+        "scan_completed": true,
+        "wav_playing": true,
+        "wav_progress": true,
+        "wav_stop_confirmed": true,
+        "fm_playing": true,
+        "fm_progress": true,
+        "fm_stop_confirmed": true,
+        "shutdown_confirmed": true,
+        "worker_released": true
+      },
+      "restoration": {
+        "ok": true,
+        "attempted": true,
+        "errors": [],
+        "material": {
+          "sources_exact": true,
+          "cache_exact": true,
+          "firmware_exact": true,
+          "relay_exact": true
+        },
+        "recovery": {
+          "snapshot_equal": true,
+          "continuous": true,
+          "integrity_ok": true,
+          "seconds": 10.02392697299365,
+          "detail": {
+            "hardware_restored": true,
+            "errors": [],
+            "recovery": {
+              "seconds": 10.02392697299365,
+              "samples": 313344,
+              "dropped": 0,
+              "fatal": 0,
+              "continuous": true
+            }
+          }
+        },
+        "final": {
+          "identity_equal": true,
+          "sources_exact": true,
+          "relay_configuration_equal": true,
+          "cpu_equal": true
+        }
+      },
+      "scan_executed": false
+    },
+    {
+      "run": "120s-2",
+      "report": "diagnosticos/resultados_v20/sram3_tail_fix_gui120_r2_20261101/report.json",
+      "report_sha256": "75a60dfc40eb29927e681387ae4a8839148c89a10fc703dfe04a90aa43de7658",
+      "requested_tests": {
+        "radio": true,
+        "wav": true,
+        "fm": true,
+        "voices": 20
+      },
+      "hold_seconds": 120.01552336197346,
+      "exposed_fraction": 1.0,
+      "paint_events": 2682,
+      "radio": {
+        "frames": 256078,
+        "samples": 223300016,
+        "empty_status_frames": 5013,
+        "send_nodes": 64019,
+        "mean_send_margin": 0.12125869499849751,
+        "mcu_queue_peak": 4,
+        "min_slack_ticks": 70585,
+        "sampled_queue_max": 4,
+        "send_ticks_max": 688161,
+        "send_over_budget_nodes": 6365,
+        "headroom_pass": false
+      },
+      "reserve_screen": {
+        "publicly_accepted": false,
+        "capacity": 16,
+        "legacy_headroom_pass": false,
+        "free_at_peak": 12,
+        "passes": true,
+        "criterion": "Mean margin >=10%, cumulative peak strictly below half capacity, positive slack; private screen only"
+      },
+      "assertions": {
+        "radio_playing_40k": true,
+        "radio_stop_confirmed": true,
+        "radio_progress": true,
+        "radio_hold_completed": true,
+        "scan_completed": true,
+        "wav_playing": true,
+        "wav_progress": true,
+        "wav_stop_confirmed": true,
+        "fm_playing": true,
+        "fm_progress": true,
+        "fm_stop_confirmed": true,
+        "shutdown_confirmed": true,
+        "worker_released": true
+      },
+      "restoration": {
+        "ok": true,
+        "attempted": true,
+        "errors": [],
+        "material": {
+          "sources_exact": true,
+          "cache_exact": true,
+          "firmware_exact": true,
+          "relay_exact": true
+        },
+        "recovery": {
+          "snapshot_equal": true,
+          "continuous": true,
+          "integrity_ok": true,
+          "seconds": 10.02039788896218,
+          "detail": {
+            "hardware_restored": true,
+            "errors": [],
+            "recovery": {
+              "seconds": 10.02039788896218,
+              "samples": 313344,
+              "dropped": 0,
+              "fatal": 0,
+              "continuous": true
+            }
+          }
+        },
+        "final": {
+          "identity_equal": true,
+          "sources_exact": true,
+          "relay_configuration_equal": true,
+          "cpu_equal": true
+        }
+      },
+      "scan_executed": false
+    },
+    {
+      "run": "120s-3",
+      "report": "diagnosticos/resultados_v20/sram3_tail_fix_gui120_r3_20261101/report.json",
+      "report_sha256": "80b7355b74856a89357c13d67ad5442c7a93311ee72968a40bee692a5b42369f",
+      "requested_tests": {
+        "radio": true,
+        "wav": true,
+        "fm": true,
+        "voices": 20
+      },
+      "hold_seconds": 120.08905931201298,
+      "exposed_fraction": 1.0,
+      "paint_events": 2664,
+      "radio": {
+        "frames": 256142,
+        "samples": 223355824,
+        "empty_status_frames": 4907,
+        "send_nodes": 64036,
+        "mean_send_margin": 0.12022413030779933,
+        "mcu_queue_peak": 4,
+        "min_slack_ticks": 67387,
+        "sampled_queue_max": 3,
+        "send_ticks_max": 693389,
+        "send_over_budget_nodes": 6342,
+        "headroom_pass": false
+      },
+      "reserve_screen": {
+        "publicly_accepted": false,
+        "capacity": 16,
+        "legacy_headroom_pass": false,
+        "free_at_peak": 12,
+        "passes": true,
+        "criterion": "Mean margin >=10%, cumulative peak strictly below half capacity, positive slack; private screen only"
+      },
+      "assertions": {
+        "radio_playing_40k": true,
+        "radio_stop_confirmed": true,
+        "radio_progress": true,
+        "radio_hold_completed": true,
+        "scan_completed": true,
+        "wav_playing": true,
+        "wav_progress": true,
+        "wav_stop_confirmed": true,
+        "fm_playing": true,
+        "fm_progress": true,
+        "fm_stop_confirmed": true,
+        "shutdown_confirmed": true,
+        "worker_released": true
+      },
+      "restoration": {
+        "ok": true,
+        "attempted": true,
+        "errors": [],
+        "material": {
+          "sources_exact": true,
+          "cache_exact": true,
+          "firmware_exact": true,
+          "relay_exact": true
+        },
+        "recovery": {
+          "snapshot_equal": true,
+          "continuous": true,
+          "integrity_ok": true,
+          "seconds": 10.023528186022304,
+          "detail": {
+            "hardware_restored": true,
+            "errors": [],
+            "recovery": {
+              "seconds": 10.023528186022304,
+              "samples": 313344,
+              "dropped": 0,
+              "fatal": 0,
+              "continuous": true
+            }
+          }
+        },
+        "final": {
+          "identity_equal": true,
+          "sources_exact": true,
+          "relay_configuration_equal": true,
+          "cpu_equal": true
+        }
+      },
+      "scan_executed": false
+    }
+  ],
+  "all_functional_pass": true,
+  "all_private_reserve_pass": true,
+  "final_state": "V19 exact restored; V20 stopped",
+  "limitations": [
+    "Private memory/BSP contract, not new Zephyr linker reservation",
+    "Legacy absolute queue threshold remains failed",
+    "Not analog or acoustic acceptance",
+    "Scan US and complete analysis/bits/audio-rate matrix pending",
+    "2 MS/s margin target not met"
+  ],
+  "scope_correction": "Prior Scan assertion was vacuous: normal Scan and US were not requested in these four audio runs."
+}

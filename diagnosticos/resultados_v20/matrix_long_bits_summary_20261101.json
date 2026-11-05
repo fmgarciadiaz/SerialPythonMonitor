@@ -1,0 +1,988 @@
+{
+  "private": true,
+  "publicly_accepted": false,
+  "version": 20,
+  "local_tests_passed": 22,
+  "runs": [
+    {
+      "report": "diagnosticos/resultados_v20/matrix_long_bits_vt8_2s_full_20261101/report.json",
+      "report_sha256": "d0cd3123650762b108e4568997b70fae161b7aba0aad66325df58389c278bf84",
+      "requested": {
+        "radio": false,
+        "wav": false,
+        "fm": false,
+        "voices": 1,
+        "us": false,
+        "scan_during_a0": false,
+        "analysis_mode": "vt",
+        "bits": 8,
+        "rate": 1860465,
+        "window_seconds": 2.0,
+        "detail_percent": 100
+      },
+      "functional_pass": true,
+      "exposed_fraction": 1.0,
+      "paint_rate_floor_pass": false,
+      "periodic_fps": [
+        1.9983316385096206,
+        1.3724415105952077,
+        1.5907954725637778,
+        1.1833463810809046
+      ],
+      "last_stage": {
+        "stage": "periodic",
+        "elapsed": 20.21167451189831,
+        "fft_metrics": {
+          "completed": 0,
+          "wall_max_ms": 0.0,
+          "first_completed_at": null
+        },
+        "fft_live_seconds": null,
+        "fft_costs_ms": [],
+        "fft_deferred": 0,
+        "fft_crop_active": false,
+        "render_metrics": {
+          "frames": 158,
+          "wall_seconds": 0.9466059830738232,
+          "cpu_seconds": 0.9395916810000049,
+          "max_wall_ms": 145.06250398699194,
+          "heartbeat_gap_max_ms": 726.9366319524124
+        },
+        "process_cpu_seconds": 16.553662,
+        "samples": 31952696,
+        "paint_events": 31,
+        "applied_configuration": {
+          "bits": 8,
+          "rate": 1860465,
+          "channels": 1
+        },
+        "exposed": true,
+        "radio_samples": 0,
+        "batch_processing_count": 828,
+        "pending_gui": 1,
+        "rf_ipc_kind": "CompactAdc8RfBatch",
+        "pending_dsp": 0,
+        "pending_gui_peak": 4,
+        "pending_dsp_peak": 0,
+        "gui_delay_max_ms": 142.6646379986778,
+        "retained_seconds": 0.02109150000000001,
+        "radio_playing_seconds": null,
+        "wav_active": false,
+        "radio_a0": false,
+        "radio_a0_diagnostics": null,
+        "radio_status": "RADIO apagada",
+        "rf_history_samples": 7701861,
+        "display_curve_points": {
+          "CH1": 0,
+          "CH2": 0,
+          "FILTER": 0,
+          "RADIO": 0
+        },
+        "finite_curve_points": {
+          "CH1": 3720930,
+          "CH2": 0,
+          "FILTER": 0,
+          "RADIO": 0
+        },
+        "spectral_last_end": null,
+        "fft_finite_points": [],
+        "heatmap_finite_pixels": [
+          0,
+          0
+        ],
+        "heatmap_nonempty": [
+          false,
+          false
+        ],
+        "raster_published": 11,
+        "raster_visible": true,
+        "raster_worker_ms": 1255.844239029102,
+        "raster_error": null,
+        "raster_busy": true,
+        "raster_rejected": 0,
+        "raster_last_rejection": [],
+        "temporal_paint_ms": 20.072063896805048,
+        "temporal_paint_max_ms": 30.4294879315421,
+        "render_interval_ms": 80,
+        "detail": 100,
+        "trigger_enabled": false,
+        "scan_not_before_sample": 15696,
+        "status": "Activo \u00b7 SPI \u00b7 8 bits \u00b7 1.860,46 kHz",
+        "paint_fps_interval": 1.1833463810809046
+      },
+      "assertions": {
+        "acquisition_configuration_applied": true,
+        "samples_advanced_between_observations": true,
+        "useful_sample_volume": true,
+        "effective_acquisition_duration": true,
+        "analysis_has_data": true,
+        "a0_remained_off": true,
+        "shutdown_confirmed": true,
+        "worker_released": true,
+        "temporal_raster_published": true,
+        "temporal_raster_no_error": true
+      },
+      "restoration": {
+        "ok": true,
+        "attempted": true,
+        "errors": [],
+        "material": {
+          "sources_exact": true,
+          "cache_exact": true,
+          "firmware_exact": true,
+          "relay_exact": true
+        },
+        "recovery": {
+          "snapshot_equal": true,
+          "continuous": true,
+          "integrity_ok": true,
+          "seconds": 10.01936926099006,
+          "detail": {
+            "hardware_restored": true,
+            "errors": [],
+            "recovery": {
+              "seconds": 10.01936926099006,
+              "samples": 313344,
+              "dropped": 0,
+              "fatal": 0,
+              "continuous": true
+            }
+          }
+        },
+        "final": {
+          "identity_equal": true,
+          "sources_exact": true,
+          "relay_configuration_equal": true,
+          "cpu_equal": true
+        }
+      }
+    },
+    {
+      "report": "diagnosticos/resultados_v20/matrix_long_bits_fft12_max_20261101/report.json",
+      "report_sha256": "948376a3620c49e03a19470dcba9e43209d9dff5351f9bdf1393ef79bcfaefba",
+      "requested": {
+        "radio": false,
+        "wav": false,
+        "fm": false,
+        "voices": 1,
+        "us": false,
+        "scan_during_a0": false,
+        "analysis_mode": "fft",
+        "bits": 12,
+        "rate": 1103448,
+        "window_seconds": 0,
+        "detail_percent": null
+      },
+      "functional_pass": true,
+      "exposed_fraction": 1.0,
+      "paint_rate_floor_pass": true,
+      "periodic_fps": [
+        14.657093975773007,
+        29.55146216088736,
+        29.957586358569717,
+        29.999073778703696
+      ],
+      "last_stage": {
+        "stage": "periodic",
+        "elapsed": 20.131050279014744,
+        "fft_metrics": {
+          "completed": 259,
+          "wall_max_ms": 15.413366025313735,
+          "first_completed_at": 2.6863019090378657
+        },
+        "fft_live_seconds": 17.444749420974404,
+        "fft_costs_ms": [
+          5.92803000472486,
+          5.575461080297828,
+          4.886395065113902,
+          5.3154019406065345,
+          6.443127989768982,
+          5.491006071679294,
+          5.598651943728328,
+          6.658029975369573
+        ],
+        "fft_deferred": 0,
+        "fft_crop_active": false,
+        "render_metrics": {
+          "frames": 851,
+          "wall_seconds": 1.8191767581738532,
+          "cpu_seconds": 1.776822569000001,
+          "max_wall_ms": 15.958872041665018,
+          "heartbeat_gap_max_ms": 539.1143970191479
+        },
+        "process_cpu_seconds": 21.338922,
+        "samples": 19329984,
+        "paint_events": 524,
+        "applied_configuration": {
+          "bits": 12,
+          "rate": 1103448,
+          "channels": 1
+        },
+        "exposed": true,
+        "radio_samples": 0,
+        "batch_processing_count": 858,
+        "pending_gui": 0,
+        "rf_ipc_kind": "RawRfBatch",
+        "pending_dsp": 0,
+        "pending_gui_peak": 2,
+        "pending_dsp_peak": 0,
+        "gui_delay_max_ms": 38.251886959187686,
+        "retained_seconds": 3.469446951953614e-18,
+        "radio_playing_seconds": null,
+        "wav_active": false,
+        "radio_a0": false,
+        "radio_a0_diagnostics": null,
+        "radio_status": "RADIO apagada",
+        "rf_history_samples": 4673794,
+        "display_curve_points": {
+          "CH1": 0,
+          "CH2": 0,
+          "FILTER": 0,
+          "RADIO": 0
+        },
+        "finite_curve_points": {
+          "CH1": 0,
+          "CH2": 0,
+          "FILTER": 0,
+          "RADIO": 0
+        },
+        "spectral_last_end": 19286208,
+        "fft_finite_points": [
+          8193
+        ],
+        "heatmap_finite_pixels": [
+          0,
+          0
+        ],
+        "heatmap_nonempty": [
+          false,
+          false
+        ],
+        "raster_published": 0,
+        "raster_visible": false,
+        "raster_worker_ms": 0,
+        "raster_error": null,
+        "raster_busy": false,
+        "raster_rejected": 0,
+        "raster_last_rejection": [],
+        "temporal_paint_ms": 0,
+        "temporal_paint_max_ms": 0,
+        "render_interval_ms": 16,
+        "detail": 50,
+        "trigger_enabled": false,
+        "scan_not_before_sample": 6912,
+        "status": "Activo \u00b7 SPI \u00b7 12 bits \u00b7 1.103,45 kHz",
+        "paint_fps_interval": 29.999073778703696
+      },
+      "assertions": {
+        "acquisition_configuration_applied": true,
+        "samples_advanced_between_observations": true,
+        "useful_sample_volume": true,
+        "effective_acquisition_duration": true,
+        "analysis_has_data": true,
+        "a0_remained_off": true,
+        "shutdown_confirmed": true,
+        "worker_released": true
+      },
+      "restoration": {
+        "ok": true,
+        "attempted": true,
+        "errors": [],
+        "material": {
+          "sources_exact": true,
+          "cache_exact": true,
+          "firmware_exact": true,
+          "relay_exact": true
+        },
+        "recovery": {
+          "snapshot_equal": true,
+          "continuous": true,
+          "integrity_ok": true,
+          "seconds": 10.022819914040156,
+          "detail": {
+            "hardware_restored": true,
+            "errors": [],
+            "recovery": {
+              "seconds": 10.022819914040156,
+              "samples": 313344,
+              "dropped": 0,
+              "fatal": 0,
+              "continuous": true
+            }
+          }
+        },
+        "final": {
+          "identity_equal": true,
+          "sources_exact": true,
+          "relay_configuration_equal": true,
+          "cpu_equal": true
+        }
+      }
+    },
+    {
+      "report": "diagnosticos/resultados_v20/matrix_long_bits_vt16_single_20261101/report.json",
+      "report_sha256": "27a9b2906687634d6a57c7681fafaf291b739dc47f4d0ddda0a742b31921c475",
+      "requested": {
+        "radio": false,
+        "wav": false,
+        "fm": false,
+        "voices": 1,
+        "us": false,
+        "scan_during_a0": false,
+        "analysis_mode": "vt",
+        "bits": 16,
+        "rate": 150943,
+        "window_seconds": 0,
+        "detail_percent": null
+      },
+      "functional_pass": true,
+      "exposed_fraction": 1.0,
+      "paint_rate_floor_pass": true,
+      "periodic_fps": [
+        8.398114117647882,
+        12.99864443383648,
+        14.59891230239097,
+        15.100058590723549
+      ],
+      "last_stage": {
+        "stage": "periodic",
+        "elapsed": 20.101396325044334,
+        "fft_metrics": {
+          "completed": 0,
+          "wall_max_ms": 0.0,
+          "first_completed_at": null
+        },
+        "fft_live_seconds": null,
+        "fft_costs_ms": [],
+        "fft_deferred": 0,
+        "fft_crop_active": false,
+        "render_metrics": {
+          "frames": 279,
+          "wall_seconds": 0.5814077062532306,
+          "cpu_seconds": 0.5701256440000089,
+          "max_wall_ms": 3.606050042435527,
+          "heartbeat_gap_max_ms": 672.5298379315063
+        },
+        "process_cpu_seconds": 28.826498,
+        "samples": 2629080,
+        "paint_events": 257,
+        "applied_configuration": {
+          "bits": 16,
+          "rate": 150943,
+          "channels": 1
+        },
+        "exposed": true,
+        "radio_samples": 0,
+        "batch_processing_count": 771,
+        "pending_gui": 0,
+        "rf_ipc_kind": "RawRfBatch",
+        "pending_dsp": 0,
+        "pending_gui_peak": 2,
+        "pending_dsp_peak": 0,
+        "gui_delay_max_ms": 54.223967948928475,
+        "retained_seconds": 3.469446951953614e-18,
+        "radio_playing_seconds": null,
+        "wav_active": false,
+        "radio_a0": false,
+        "radio_a0_diagnostics": null,
+        "radio_status": "RADIO apagada",
+        "rf_history_samples": 863774,
+        "display_curve_points": {
+          "CH1": 7245,
+          "CH2": 0,
+          "FILTER": 0,
+          "RADIO": 0
+        },
+        "finite_curve_points": {
+          "CH1": 7245,
+          "CH2": 0,
+          "FILTER": 0,
+          "RADIO": 0
+        },
+        "spectral_last_end": null,
+        "fft_finite_points": [],
+        "heatmap_finite_pixels": [
+          0,
+          0
+        ],
+        "heatmap_nonempty": [
+          false,
+          false
+        ],
+        "raster_published": 0,
+        "raster_visible": false,
+        "raster_worker_ms": 0.0,
+        "raster_error": null,
+        "raster_busy": false,
+        "raster_rejected": 0,
+        "raster_last_rejection": [],
+        "temporal_paint_ms": 12.546816025860608,
+        "temporal_paint_max_ms": 45.41934106964618,
+        "render_interval_ms": 50,
+        "detail": 50,
+        "trigger_enabled": false,
+        "scan_not_before_sample": 3052,
+        "status": "Activo \u00b7 SPI \u00b7 16 bits (OS) \u00b7 150,943 kHz",
+        "paint_fps_interval": 15.100058590723549
+      },
+      "assertions": {
+        "acquisition_configuration_applied": true,
+        "samples_advanced_between_observations": true,
+        "useful_sample_volume": true,
+        "effective_acquisition_duration": true,
+        "analysis_has_data": true,
+        "a0_remained_off": true,
+        "shutdown_confirmed": true,
+        "worker_released": true
+      },
+      "restoration": {
+        "ok": true,
+        "attempted": true,
+        "errors": [],
+        "material": {
+          "sources_exact": true,
+          "cache_exact": true,
+          "firmware_exact": true,
+          "relay_exact": true
+        },
+        "recovery": {
+          "snapshot_equal": true,
+          "continuous": true,
+          "integrity_ok": true,
+          "seconds": 10.03189898293931,
+          "detail": {
+            "hardware_restored": true,
+            "errors": [],
+            "recovery": {
+              "seconds": 10.03189898293931,
+              "samples": 313344,
+              "dropped": 0,
+              "fatal": 0,
+              "continuous": true
+            }
+          }
+        },
+        "final": {
+          "identity_equal": true,
+          "sources_exact": true,
+          "relay_configuration_equal": true,
+          "cpu_equal": true
+        }
+      }
+    },
+    {
+      "report": "diagnosticos/resultados_v20/matrix_long_bits_radio10_max_20261101/report.json",
+      "report_sha256": "bb6c0e1ec6445dc9e8068f910ac6ffd4265c08a09e41766ed5308aca2b7b1acc",
+      "requested": {
+        "radio": true,
+        "wav": false,
+        "fm": false,
+        "voices": 1,
+        "us": false,
+        "scan_during_a0": false,
+        "analysis_mode": null,
+        "bits": 10,
+        "rate": 1355932,
+        "window_seconds": 0,
+        "detail_percent": null
+      },
+      "functional_pass": true,
+      "exposed_fraction": 1.0,
+      "paint_rate_floor_pass": true,
+      "periodic_fps": [
+        13.51981964339779,
+        23.501856197519267,
+        19.593932121867798,
+        19.65076775413155,
+        19.679332654040287,
+        24.032828106982496
+      ],
+      "last_stage": {
+        "stage": "periodic",
+        "elapsed": 30.601627280004323,
+        "fft_metrics": {
+          "completed": 302,
+          "wall_max_ms": 21.33322600275278,
+          "first_completed_at": 2.757618297007866
+        },
+        "fft_live_seconds": 27.844009940046817,
+        "fft_costs_ms": [
+          6.06896192766726,
+          6.780192023143172,
+          5.688005010597408,
+          5.939363036304712,
+          8.028917945921421,
+          8.219904964789748,
+          6.499418988823891,
+          10.966029018163681
+        ],
+        "fft_deferred": 28,
+        "fft_crop_active": false,
+        "render_metrics": {
+          "frames": 1286,
+          "wall_seconds": 2.595899107051082,
+          "cpu_seconds": 2.4171368509999716,
+          "max_wall_ms": 22.77429006062448,
+          "heartbeat_gap_max_ms": 567.9583679884672
+        },
+        "process_cpu_seconds": 30.94858,
+        "samples": 37799064,
+        "paint_events": 612,
+        "applied_configuration": {
+          "bits": 10,
+          "rate": 1355932,
+          "channels": 1
+        },
+        "exposed": true,
+        "radio_samples": 0,
+        "batch_processing_count": 1358,
+        "pending_gui": 1,
+        "rf_ipc_kind": "RawRfBatch",
+        "pending_dsp": 0,
+        "pending_gui_peak": 4,
+        "pending_dsp_peak": 3,
+        "gui_delay_max_ms": 92.71654102485627,
+        "retained_seconds": 0.022071900000000026,
+        "radio_playing_seconds": null,
+        "wav_active": false,
+        "radio_a0": false,
+        "radio_a0_diagnostics": null,
+        "radio_status": "RADIO apagada",
+        "rf_history_samples": 5683729,
+        "display_curve_points": {
+          "CH1": 0,
+          "CH2": 0,
+          "FILTER": 0,
+          "RADIO": 0
+        },
+        "finite_curve_points": {
+          "CH1": 0,
+          "CH2": 0,
+          "FILTER": 0,
+          "RADIO": 0
+        },
+        "spectral_last_end": 37742688,
+        "fft_finite_points": [
+          8193
+        ],
+        "heatmap_finite_pixels": [
+          0,
+          0
+        ],
+        "heatmap_nonempty": [
+          false,
+          false
+        ],
+        "raster_published": 0,
+        "raster_visible": false,
+        "raster_worker_ms": 0,
+        "raster_error": null,
+        "raster_busy": false,
+        "raster_rejected": 0,
+        "raster_last_rejection": [],
+        "temporal_paint_ms": 0,
+        "temporal_paint_max_ms": 0,
+        "render_interval_ms": 16,
+        "detail": 50,
+        "trigger_enabled": false,
+        "scan_not_before_sample": 10440,
+        "status": "Activo \u00b7 SPI \u00b7 10 bits \u00b7 1.355,93 kHz",
+        "paint_fps_interval": 24.032828106982496
+      },
+      "assertions": {
+        "radio_playing_40k": true,
+        "radio_stop_confirmed": true,
+        "radio_progress": true,
+        "radio_hold_completed": true,
+        "scan_completed": true,
+        "wav_playing": true,
+        "wav_progress": true,
+        "wav_stop_confirmed": true,
+        "fm_playing": true,
+        "fm_progress": true,
+        "fm_stop_confirmed": true,
+        "shutdown_confirmed": true,
+        "worker_released": true
+      },
+      "restoration": {
+        "ok": true,
+        "attempted": true,
+        "errors": [],
+        "material": {
+          "sources_exact": true,
+          "cache_exact": true,
+          "firmware_exact": true,
+          "relay_exact": true
+        },
+        "recovery": {
+          "snapshot_equal": true,
+          "continuous": true,
+          "integrity_ok": true,
+          "seconds": 10.02431660098955,
+          "detail": {
+            "hardware_restored": true,
+            "errors": [],
+            "recovery": {
+              "seconds": 10.02431660098955,
+              "samples": 313344,
+              "dropped": 0,
+              "fatal": 0,
+              "continuous": true
+            }
+          }
+        },
+        "final": {
+          "identity_equal": true,
+          "sources_exact": true,
+          "relay_configuration_equal": true,
+          "cpu_equal": true
+        }
+      },
+      "radio": {
+        "frames": 39120,
+        "samples": 27227520,
+        "empty_status_frames": 685,
+        "send_nodes": 4890,
+        "mean_send_margin": 0.07110293219781227,
+        "mcu_queue_peak": 3,
+        "min_slack_ticks": 411270,
+        "sampled_queue_max": 3,
+        "send_ticks_max": 1582152,
+        "send_over_budget_nodes": 968,
+        "headroom_pass": false
+      },
+      "corrected_reserve_screen": {
+        "publicly_accepted": false,
+        "capacity": 4,
+        "legacy_headroom_pass": false,
+        "free_at_peak": 1,
+        "passes": false,
+        "criterion": "Mean margin >=10%, cumulative peak strictly below half capacity, positive slack; private screen only"
+      },
+      "raw_report_capacity": 16
+    },
+    {
+      "report": "diagnosticos/resultados_v20/window2s_compare_detail50_20261101/report.json",
+      "report_sha256": "dcb411a70df3a0c1e3012780a179df75c9a0541b401f844f5311c0bcacf6d0fd",
+      "requested": {
+        "radio": false,
+        "wav": false,
+        "fm": false,
+        "voices": 1,
+        "us": false,
+        "scan_during_a0": false,
+        "analysis_mode": "vt",
+        "bits": 8,
+        "rate": 1860465,
+        "window_seconds": 2.0,
+        "detail_percent": 50
+      },
+      "functional_pass": true,
+      "exposed_fraction": 1.0,
+      "paint_rate_floor_pass": true,
+      "periodic_fps": [
+        9.76193729684446,
+        10.066182189181164,
+        10.783331081486637,
+        10.802304054317219
+      ],
+      "last_stage": {
+        "stage": "periodic",
+        "elapsed": 20.185302626923658,
+        "fft_metrics": {
+          "completed": 0,
+          "wall_max_ms": 0.0,
+          "first_completed_at": null
+        },
+        "fft_live_seconds": null,
+        "fft_costs_ms": [],
+        "fft_deferred": 0,
+        "fft_crop_active": false,
+        "render_metrics": {
+          "frames": 220,
+          "wall_seconds": 2.7003960034344345,
+          "cpu_seconds": 2.6765337250000054,
+          "max_wall_ms": 38.689812063239515,
+          "heartbeat_gap_max_ms": 623.8271159818396
+        },
+        "process_cpu_seconds": 31.656444,
+        "samples": 32771504,
+        "paint_events": 209,
+        "time_window_samples": 3720930,
+        "time_axis": true,
+        "applied_configuration": {
+          "bits": 8,
+          "rate": 1860465,
+          "channels": 1
+        },
+        "exposed": true,
+        "radio_samples": 0,
+        "batch_processing_count": 861,
+        "pending_gui": 0,
+        "rf_ipc_kind": "CompactAdc8RfBatch",
+        "pending_dsp": 0,
+        "pending_gui_peak": 2,
+        "pending_dsp_peak": 0,
+        "gui_delay_max_ms": 43.89391199219972,
+        "retained_seconds": 1.734723475976807e-17,
+        "radio_playing_seconds": null,
+        "wav_active": false,
+        "radio_a0": false,
+        "radio_a0_diagnostics": null,
+        "radio_status": "RADIO apagada",
+        "rf_history_samples": 7701861,
+        "display_curve_points": {
+          "CH1": 4217,
+          "CH2": 0,
+          "FILTER": 0,
+          "RADIO": 0
+        },
+        "finite_curve_points": {
+          "CH1": 3397,
+          "CH2": 0,
+          "FILTER": 0,
+          "RADIO": 0
+        },
+        "spectral_last_end": null,
+        "fft_finite_points": [],
+        "heatmap_finite_pixels": [
+          0,
+          0
+        ],
+        "heatmap_nonempty": [
+          false,
+          false
+        ],
+        "raster_published": 0,
+        "raster_visible": false,
+        "raster_worker_ms": 0.0,
+        "raster_error": null,
+        "raster_busy": false,
+        "raster_rejected": 0,
+        "raster_last_rejection": [],
+        "temporal_paint_ms": 15.246640075929463,
+        "temporal_paint_max_ms": 45.534568023867905,
+        "render_interval_ms": 84,
+        "detail": 50,
+        "trigger_enabled": false,
+        "scan_not_before_sample": 13080,
+        "status": "Activo \u00b7 SPI \u00b7 8 bits \u00b7 1.860,46 kHz",
+        "paint_fps_interval": 10.802304054317219
+      },
+      "assertions": {
+        "acquisition_configuration_applied": true,
+        "samples_advanced_between_observations": true,
+        "useful_sample_volume": true,
+        "effective_acquisition_duration": true,
+        "analysis_has_data": true,
+        "a0_remained_off": true,
+        "shutdown_confirmed": true,
+        "worker_released": true,
+        "requested_time_window_applied": true,
+        "requested_detail_applied": true
+      },
+      "restoration": {
+        "ok": true,
+        "attempted": true,
+        "errors": [],
+        "material": {
+          "sources_exact": true,
+          "cache_exact": true,
+          "firmware_exact": true,
+          "relay_exact": true
+        },
+        "recovery": {
+          "snapshot_equal": true,
+          "continuous": true,
+          "integrity_ok": true,
+          "seconds": 10.021072932053357,
+          "detail": {
+            "hardware_restored": true,
+            "errors": [],
+            "recovery": {
+              "seconds": 10.021072932053357,
+              "samples": 313344,
+              "dropped": 0,
+              "fatal": 0,
+              "continuous": true
+            }
+          }
+        },
+        "final": {
+          "identity_equal": true,
+          "sources_exact": true,
+          "relay_configuration_equal": true,
+          "cpu_equal": true
+        }
+      }
+    },
+    {
+      "report": "diagnosticos/resultados_v20/window2s_compare_detail100_20261101/report.json",
+      "report_sha256": "0487a04b57f32b29b8f85796716ced59b80795599ee3095e30203ae698881fd7",
+      "requested": {
+        "radio": false,
+        "wav": false,
+        "fm": false,
+        "voices": 1,
+        "us": false,
+        "scan_during_a0": false,
+        "analysis_mode": "vt",
+        "bits": 8,
+        "rate": 1860465,
+        "window_seconds": 2.0,
+        "detail_percent": 100
+      },
+      "functional_pass": true,
+      "exposed_fraction": 1.0,
+      "paint_rate_floor_pass": false,
+      "periodic_fps": [
+        2.7793087445096134,
+        1.1766124034921812,
+        1.568489500481795,
+        1.1999546258638274
+      ],
+      "last_stage": {
+        "stage": "periodic",
+        "elapsed": 20.24568433710374,
+        "fft_metrics": {
+          "completed": 0,
+          "wall_max_ms": 0.0,
+          "first_completed_at": null
+        },
+        "fft_live_seconds": null,
+        "fft_costs_ms": [],
+        "fft_deferred": 0,
+        "fft_crop_active": false,
+        "render_metrics": {
+          "frames": 181,
+          "wall_seconds": 0.8900106800720096,
+          "cpu_seconds": 0.8876578130000068,
+          "max_wall_ms": 89.988362044096,
+          "heartbeat_gap_max_ms": 590.2242640731856
+        },
+        "process_cpu_seconds": 16.07352,
+        "samples": 32691280,
+        "paint_events": 34,
+        "time_window_samples": 3720930,
+        "time_axis": true,
+        "applied_configuration": {
+          "bits": 8,
+          "rate": 1860465,
+          "channels": 1
+        },
+        "exposed": true,
+        "radio_samples": 0,
+        "batch_processing_count": 858,
+        "pending_gui": 0,
+        "rf_ipc_kind": "CompactAdc8RfBatch",
+        "pending_dsp": 0,
+        "pending_gui_peak": 4,
+        "pending_dsp_peak": 0,
+        "gui_delay_max_ms": 97.15444105677307,
+        "retained_seconds": 0.0,
+        "radio_playing_seconds": null,
+        "wav_active": false,
+        "radio_a0": false,
+        "radio_a0_diagnostics": null,
+        "radio_status": "RADIO apagada",
+        "rf_history_samples": 7701861,
+        "display_curve_points": {
+          "CH1": 0,
+          "CH2": 0,
+          "FILTER": 0,
+          "RADIO": 0
+        },
+        "finite_curve_points": {
+          "CH1": 3720930,
+          "CH2": 0,
+          "FILTER": 0,
+          "RADIO": 0
+        },
+        "spectral_last_end": null,
+        "fft_finite_points": [],
+        "heatmap_finite_pixels": [
+          0,
+          0
+        ],
+        "heatmap_nonempty": [
+          false,
+          false
+        ],
+        "raster_published": 12,
+        "raster_visible": true,
+        "raster_worker_ms": 1329.395966953598,
+        "raster_error": null,
+        "raster_busy": true,
+        "raster_rejected": 0,
+        "raster_last_rejection": [],
+        "temporal_paint_ms": 19.339281017892063,
+        "temporal_paint_max_ms": 37.91049402207136,
+        "render_interval_ms": 77,
+        "detail": 100,
+        "trigger_enabled": false,
+        "scan_not_before_sample": 13080,
+        "status": "Activo \u00b7 SPI \u00b7 8 bits \u00b7 1.860,46 kHz",
+        "paint_fps_interval": 1.1999546258638274
+      },
+      "assertions": {
+        "acquisition_configuration_applied": true,
+        "samples_advanced_between_observations": true,
+        "useful_sample_volume": true,
+        "effective_acquisition_duration": true,
+        "analysis_has_data": true,
+        "a0_remained_off": true,
+        "shutdown_confirmed": true,
+        "worker_released": true,
+        "requested_time_window_applied": true,
+        "requested_detail_applied": true,
+        "temporal_raster_published": true,
+        "temporal_raster_no_error": true
+      },
+      "restoration": {
+        "ok": true,
+        "attempted": true,
+        "errors": [],
+        "material": {
+          "sources_exact": true,
+          "cache_exact": true,
+          "firmware_exact": true,
+          "relay_exact": true
+        },
+        "recovery": {
+          "snapshot_equal": true,
+          "continuous": true,
+          "integrity_ok": true,
+          "seconds": 10.023610606906004,
+          "detail": {
+            "hardware_restored": true,
+            "errors": [],
+            "recovery": {
+              "seconds": 10.023610606906004,
+              "samples": 313344,
+              "dropped": 0,
+              "fatal": 0,
+              "continuous": true
+            }
+          }
+        },
+        "final": {
+          "identity_equal": true,
+          "sources_exact": true,
+          "relay_configuration_equal": true,
+          "cpu_equal": true
+        }
+      }
+    }
+  ],
+  "all_functional_pass": true,
+  "all_restored": true,
+  "full_detail_performance_pass": false,
+  "queue_capacity_correction": "Original radio10 report used capacity16; native actual capacity4. Source report preserved; corrected reserve attached. Launcher now derives capacity from Configuration.",
+  "final_state": "Q free; V19 exact restored; V20 stopped",
+  "limitations": [
+    "Short functional cases, not sustained qualification at all bits",
+    "Full-detail 2s view does not meet diagnostic paint floor",
+    "ADC10 maximum RADIO/A0 does not meet margin target",
+    "Original native close crash remains mitigated, root cause unconfirmed"
+  ]
+}

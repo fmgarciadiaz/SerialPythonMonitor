@@ -1,0 +1,22 @@
+{
+  "reproduced_before": [
+    "Trigger overlay z=0 below cursor z=200",
+    "CH2 zero-pretrigger raised IndexError: History window out of range"
+  ],
+  "configuration": {
+    "signal_hz": 2000,
+    "sample_rate": 40000,
+    "samples": 10000,
+    "window": 9000,
+    "horizontal_position": 1000
+  },
+  "fix": [
+    "Trigger line z400 and T z399",
+    "Clamp real trigger search bounds before copying history"
+  ],
+  "tests": 10,
+  "tests_passed": true,
+  "physical_q_operated": false,
+  "remaining": "No physical reproduction of the user session; other conditions may prevent a crossing",
+  "source_sha256": "f567c84888ff52152005f4bc78164177f08cc470a526039109a18c4227120d39"
+}

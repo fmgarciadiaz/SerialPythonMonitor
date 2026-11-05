@@ -1,0 +1,784 @@
+{
+  "version": 20,
+  "action": "restart_same_working_pair",
+  "ok": true,
+  "recompiles_uploads_existing_sources": true,
+  "restores_failed_profile": false,
+  "baseline": {
+    "identity": {
+      "board_serial": "1060031107",
+      "app": "scope-v20-20261031-225916-main-1",
+      "firmware_sha256": "52f933bdb9c632544624e5d4188a740a9cdb429596bfe5a4d926900e7538aefe",
+      "relay_sha256": "bf6893f5a0fbab8676120a5decd8c6109698fa852be02333918b1d6e4a2a909d"
+    },
+    "app_root": "/home/arduino/ArduinoApps/scope-v20-20261031-225916",
+    "firmware": "/home/arduino/ArduinoApps/scope-v20-20261031-225916/.cache/sketch/sketch.ino.bin",
+    "relay_binary": "/home/arduino/.cache/serialmonitor/v20-gui-4d89d08e74c742eca9ce4fd9504ddada/unoq_stream",
+    "app": {
+      "Id": "1c2d85389828b4b1ecbc705cd2afee11d9e6ebdffd2011126b3f7f29531be4bb",
+      "Created": "2026-10-31T23:23:56.534342254Z",
+      "Path": "/run.sh",
+      "Args": [],
+      "State": {
+        "Status": "running",
+        "Running": true,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 855283,
+        "ExitCode": 0,
+        "Error": "",
+        "StartedAt": "2026-11-04T12:30:17.863295914Z",
+        "FinishedAt": "2026-11-04T12:30:09.314191116Z"
+      },
+      "Image": "sha256:cb4b25a861ca0773d60ea7768beb057e747c2bdf349501619ca6437bcf7fce5a",
+      "ResolvConfPath": "/var/lib/docker/containers/1c2d85389828b4b1ecbc705cd2afee11d9e6ebdffd2011126b3f7f29531be4bb/resolv.conf",
+      "HostnamePath": "/var/lib/docker/containers/1c2d85389828b4b1ecbc705cd2afee11d9e6ebdffd2011126b3f7f29531be4bb/hostname",
+      "HostsPath": "/var/lib/docker/containers/1c2d85389828b4b1ecbc705cd2afee11d9e6ebdffd2011126b3f7f29531be4bb/hosts",
+      "LogPath": "/var/lib/docker/containers/1c2d85389828b4b1ecbc705cd2afee11d9e6ebdffd2011126b3f7f29531be4bb/1c2d85389828b4b1ecbc705cd2afee11d9e6ebdffd2011126b3f7f29531be4bb-json.log",
+      "Name": "/scope-v20-20261031-225916-main-1",
+      "RestartCount": 0,
+      "Driver": "overlay2",
+      "Platform": "linux",
+      "MountLabel": "",
+      "ProcessLabel": "",
+      "AppArmorProfile": "",
+      "ExecIDs": null,
+      "HostConfig": {
+        "Binds": [
+          "/dev:/dev:rw",
+          "/home/arduino/ArduinoApps/scope-v20-20261031-225916:/app:rw"
+        ],
+        "ContainerIDFile": "",
+        "LogConfig": {
+          "Type": "json-file",
+          "Config": {
+            "max-file": "2",
+            "max-size": "5m"
+          }
+        },
+        "NetworkMode": "scope-v20-20261031-225916_default",
+        "PortBindings": {},
+        "RestartPolicy": {
+          "Name": "no",
+          "MaximumRetryCount": 0
+        },
+        "AutoRemove": false,
+        "VolumeDriver": "",
+        "VolumesFrom": null,
+        "ConsoleSize": [
+          0,
+          0
+        ],
+        "CapAdd": null,
+        "CapDrop": null,
+        "CgroupnsMode": "private",
+        "Dns": null,
+        "DnsOptions": null,
+        "DnsSearch": null,
+        "ExtraHosts": [
+          "msgpack-rpc-router:host-gateway"
+        ],
+        "GroupAdd": [
+          "44",
+          "29",
+          "991",
+          "20",
+          "110",
+          "1001"
+        ],
+        "IpcMode": "private",
+        "Cgroup": "",
+        "Links": null,
+        "OomScoreAdj": 0,
+        "PidMode": "",
+        "Privileged": false,
+        "PublishAllPorts": false,
+        "ReadonlyRootfs": false,
+        "SecurityOpt": null,
+        "UTSMode": "",
+        "UsernsMode": "",
+        "ShmSize": 67108864,
+        "Runtime": "runc",
+        "Isolation": "",
+        "CpuShares": 0,
+        "Memory": 0,
+        "NanoCpus": 0,
+        "CgroupParent": "",
+        "BlkioWeight": 0,
+        "BlkioWeightDevice": null,
+        "BlkioDeviceReadBps": null,
+        "BlkioDeviceWriteBps": null,
+        "BlkioDeviceReadIOps": null,
+        "BlkioDeviceWriteIOps": null,
+        "CpuPeriod": 0,
+        "CpuQuota": 0,
+        "CpuRealtimePeriod": 0,
+        "CpuRealtimeRuntime": 0,
+        "CpusetCpus": "",
+        "CpusetMems": "",
+        "Devices": null,
+        "DeviceCgroupRules": [
+          "c 226:* rmw",
+          "c 250:* rmw",
+          "c 504:* rmw",
+          "c 81:* rmw",
+          "c 116:* rmw",
+          "c 10:261 rmw"
+        ],
+        "DeviceRequests": null,
+        "MemoryReservation": 0,
+        "MemorySwap": 0,
+        "MemorySwappiness": null,
+        "OomKillDisable": null,
+        "PidsLimit": null,
+        "Ulimits": null,
+        "CpuCount": 0,
+        "CpuPercent": 0,
+        "IOMaximumIOps": 0,
+        "IOMaximumBandwidth": 0,
+        "Mounts": [
+          {
+            "Type": "bind",
+            "Source": "/var/run/arduino-router.sock",
+            "Target": "/var/run/arduino-router.sock",
+            "BindOptions": {}
+          },
+          {
+            "Type": "bind",
+            "Source": "/run/arduino-cloud-connector",
+            "Target": "/run/arduino-cloud-connector",
+            "BindOptions": {}
+          },
+          {
+            "Type": "bind",
+            "Source": "/run/arduino-router.sock",
+            "Target": "/run/arduino-router.sock",
+            "BindOptions": {}
+          },
+          {
+            "Type": "bind",
+            "Source": "/sys/firmware/devicetree/base/model",
+            "Target": "/sys/firmware/devicetree/base/model",
+            "ReadOnly": true,
+            "BindOptions": {}
+          },
+          {
+            "Type": "bind",
+            "Source": "/dev/leds/builtin/led1_g",
+            "Target": "/dev/leds/builtin/led1_g",
+            "BindOptions": {}
+          },
+          {
+            "Type": "bind",
+            "Source": "/dev/leds/builtin/led1_r",
+            "Target": "/dev/leds/builtin/led1_r",
+            "BindOptions": {}
+          },
+          {
+            "Type": "bind",
+            "Source": "/dev/leds/builtin/led2_b",
+            "Target": "/dev/leds/builtin/led2_b",
+            "BindOptions": {}
+          },
+          {
+            "Type": "bind",
+            "Source": "/dev/leds/builtin/led2_r",
+            "Target": "/dev/leds/builtin/led2_r",
+            "BindOptions": {}
+          },
+          {
+            "Type": "bind",
+            "Source": "/run/udev",
+            "Target": "/run/udev",
+            "ReadOnly": true,
+            "BindOptions": {}
+          },
+          {
+            "Type": "bind",
+            "Source": "/dev/leds/builtin/led1_b",
+            "Target": "/dev/leds/builtin/led1_b",
+            "BindOptions": {}
+          },
+          {
+            "Type": "bind",
+            "Source": "/var/run/arduino-cloud-connector",
+            "Target": "/var/run/arduino-cloud-connector",
+            "BindOptions": {}
+          },
+          {
+            "Type": "bind",
+            "Source": "/run/user/1000/pipewire-0",
+            "Target": "/run/user/1000/pipewire-0",
+            "BindOptions": {}
+          },
+          {
+            "Type": "bind",
+            "Source": "/dev/leds/builtin/led2_g",
+            "Target": "/dev/leds/builtin/led2_g",
+            "BindOptions": {}
+          }
+        ],
+        "MaskedPaths": [
+          "/proc/asound",
+          "/proc/acpi",
+          "/proc/kcore",
+          "/proc/keys",
+          "/proc/latency_stats",
+          "/proc/timer_list",
+          "/proc/timer_stats",
+          "/proc/sched_debug",
+          "/proc/scsi",
+          "/sys/firmware",
+          "/sys/devices/virtual/powercap"
+        ],
+        "ReadonlyPaths": [
+          "/proc/bus",
+          "/proc/fs",
+          "/proc/irq",
+          "/proc/sys",
+          "/proc/sysrq-trigger"
+        ]
+      },
+      "GraphDriver": {
+        "Data": {
+          "LowerDir": "/var/lib/docker/overlay2/689bebd08dac3b719d3e223a4d3a6d3f288ad234975e4aa9d11f76764d810981-init/diff:/var/lib/docker/overlay2/54dc7dc6075ba52f47075239415c325339d4d27ec04282598926fc64615c270f/diff:/var/lib/docker/overlay2/200af58df11641383662d5109d08403fa83619b0f65bb219519b7328e649b85a/diff:/var/lib/docker/overlay2/cb0e962099cb50a5e576a1337cfff8b3f7afbce9d2efe15e6b73027778f23ec3/diff:/var/lib/docker/overlay2/8b71a72d075fae588c0bfeaad56a8f25f71092339a57b6ac239f8a1b373f044c/diff:/var/lib/docker/overlay2/e74d8062e1dda90e0f6c7434d48873a32365ce9cb77cf7763c06aa02b637afc8/diff:/var/lib/docker/overlay2/979b57b01c829bb6153ed06f8743cbac1b714667d18fb5ab036207310ade5398/diff:/var/lib/docker/overlay2/5eb501f55698ba7627d0d6329d44aaf64cbfe60789ef8115b5e8b812562bbce7/diff:/var/lib/docker/overlay2/94213380e80843c57580845fdc4f258bf02ba7ab0201bba43daf5aa8f44229cd/diff:/var/lib/docker/overlay2/f8183e9fd363ac7bab793f32819bed79a563312256c01ed3a31ea4b2c1414a2a/diff:/var/lib/docker/overlay2/cab61d92de4921337e8bee430aac7dec6a281898e00b3c327f5f146b1d991664/diff:/var/lib/docker/overlay2/515462cf4f4c1d97ee16f1eca7ddb57ca36aaf3c051cf3ff445e73bf8083a470/diff:/var/lib/docker/overlay2/b8290e9f20037d42e96309bca96d2a600cab99c450bf9314aac332907626aaeb/diff:/var/lib/docker/overlay2/96f45e4a54d4766174eb0151dd8bbdd90235a1ca668aa81107d8b359a45dc77c/diff:/var/lib/docker/overlay2/d00db401cd597bee078dd7509312875c11a4099d4c250f1757a479ae99ad187a/diff:/var/lib/docker/overlay2/a38b4e0ba9ff538da86b9a72f0ad4c034ff59ef8441d58d4d69dd131ba31086a/diff:/var/lib/docker/overlay2/63c587ac49c453e013c36739d30c18bb5e3377fbd26a0e70526a3ebd3f489eb8/diff:/var/lib/docker/overlay2/39dc47f7a574b03a0443345084924e566d5e3a2db7ba08a14f59f1ee57c2d13b/diff:/var/lib/docker/overlay2/700788c83ea60b12e7aa712fc743f41c431c59cf15adaeef1aa1aa2dcbf3212a/diff:/var/lib/docker/overlay2/d2f171e603bcf1d818c77341e80a0bea0e23d71acdbbfe8fff294abbf01574b6/diff:/var/lib/docker/overlay2/09ef472a92a0705889be4aed58bb65fb48af654dc115ada00cd146e532b7ba2f/diff:/var/lib/docker/overlay2/d9d41335ddd1188035501cad761d124a3047227bcc397845402cbc9812e9e5ca/diff:/var/lib/docker/overlay2/3c79a76cc1f669fbf7603aa3054f7082c8ffcce0b5b8c30f2d1d647cde48d927/diff:/var/lib/docker/overlay2/7c967511f30e5f9871e84be2659c06ebaebf8add2c549606f1b4e53457e330bc/diff:/var/lib/docker/overlay2/1157bdfbb1ca40fbc53c9955191dbbc1a6ce8f9c818e78da04e89708c8f55092/diff:/var/lib/docker/overlay2/29211ad29f89b3050a0e3cee4f5ce55a1a54f52a830e33e551450403a4f21428/diff",
+          "MergedDir": "/var/lib/docker/overlay2/689bebd08dac3b719d3e223a4d3a6d3f288ad234975e4aa9d11f76764d810981/merged",
+          "UpperDir": "/var/lib/docker/overlay2/689bebd08dac3b719d3e223a4d3a6d3f288ad234975e4aa9d11f76764d810981/diff",
+          "WorkDir": "/var/lib/docker/overlay2/689bebd08dac3b719d3e223a4d3a6d3f288ad234975e4aa9d11f76764d810981/work"
+        },
+        "Name": "overlay2"
+      },
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "/home/arduino/ArduinoApps/scope-v20-20261031-225916",
+          "Destination": "/app",
+          "Mode": "rw",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/run/arduino-router.sock",
+          "Destination": "/run/arduino-router.sock",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/dev/leds/builtin/led2_r",
+          "Destination": "/dev/leds/builtin/led2_r",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/var/run/arduino-cloud-connector",
+          "Destination": "/var/run/arduino-cloud-connector",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/run/user/1000/pipewire-0",
+          "Destination": "/run/user/1000/pipewire-0",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/var/run/arduino-router.sock",
+          "Destination": "/var/run/arduino-router.sock",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/sys/firmware/devicetree/base/model",
+          "Destination": "/sys/firmware/devicetree/base/model",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/dev/leds/builtin/led2_b",
+          "Destination": "/dev/leds/builtin/led2_b",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/dev",
+          "Destination": "/dev",
+          "Mode": "rw",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/dev/leds/builtin/led1_g",
+          "Destination": "/dev/leds/builtin/led1_g",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/run/udev",
+          "Destination": "/run/udev",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/dev/leds/builtin/led2_g",
+          "Destination": "/dev/leds/builtin/led2_g",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/run/arduino-cloud-connector",
+          "Destination": "/run/arduino-cloud-connector",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/dev/leds/builtin/led1_r",
+          "Destination": "/dev/leds/builtin/led1_r",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/dev/leds/builtin/led1_b",
+          "Destination": "/dev/leds/builtin/led1_b",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        }
+      ],
+      "Config": {
+        "Hostname": "1c2d85389828",
+        "Domainname": "",
+        "User": "1000:1000",
+        "AttachStdin": false,
+        "AttachStdout": true,
+        "AttachStderr": true,
+        "Tty": false,
+        "OpenStdin": false,
+        "StdinOnce": false,
+        "Env": [
+          "XDG_RUNTIME_DIR=/run/user/1000",
+          "MODELS_PATH=/var/lib/arduino-app-cli/models",
+          "VIDEO_DEVICE=",
+          "BOARD_NAME=unoq",
+          "HOST_IP=192.168.1.33",
+          "CONFIGURED_CARRIERS=",
+          "APP_HOME=/home/arduino/ArduinoApps/scope-v20-20261031-225916",
+          "HOST_DSP_INSTALLATION_PATH=",
+          "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+          "GPG_KEY=7169605F62C751356D054A26A821E680E5FA6305",
+          "PYTHON_VERSION=3.13.15",
+          "PYTHON_SHA256=1e66a7945a48390ee4c2a4268a0e4185884059a13c4aab6d148aa208deea4a76",
+          "UV_CONSTRAINT=/etc/uv-constraints.txt",
+          "PIP_CONSTRAINT=/etc/uv-constraints.txt",
+          "HOME=/home/app",
+          "USER=arduino",
+          "PIPEWIRE_REMOTE=/run/user/1000/pipewire-0"
+        ],
+        "Cmd": null,
+        "Image": "ghcr.io/arduino/app-bricks/python-apps-base:0.13.1",
+        "Volumes": null,
+        "WorkingDir": "/app",
+        "Entrypoint": [
+          "/run.sh"
+        ],
+        "OnBuild": null,
+        "Labels": {
+          "cc.arduino.app": "true",
+          "cc.arduino.app.main": "true",
+          "cc.arduino.app.path": "/home/arduino/ArduinoApps/scope-v20-20261031-225916",
+          "com.docker.compose.config-hash": "186b5a6cb557de1c49050be6453f79c7e674ae8d98a971d9f0d1c151b2d21d58",
+          "com.docker.compose.container-number": "1",
+          "com.docker.compose.depends_on": "",
+          "com.docker.compose.image": "sha256:cb4b25a861ca0773d60ea7768beb057e747c2bdf349501619ca6437bcf7fce5a",
+          "com.docker.compose.oneoff": "False",
+          "com.docker.compose.project": "scope-v20-20261031-225916",
+          "com.docker.compose.project.config_files": "/home/arduino/ArduinoApps/scope-v20-20261031-225916/.cache/app-compose.yaml",
+          "com.docker.compose.project.working_dir": "/home/arduino/ArduinoApps/scope-v20-20261031-225916/.cache",
+          "com.docker.compose.service": "main",
+          "com.docker.compose.version": "",
+          "org.opencontainers.image.created": "2026-09-29T13:20:54.761Z",
+          "org.opencontainers.image.description": "The code of the Arduino App Lab Bricks",
+          "org.opencontainers.image.licenses": "MPL-2.0",
+          "org.opencontainers.image.revision": "c261ddea2206fc35617db8725f9f96112ec4e3ed",
+          "org.opencontainers.image.source": "https://github.com/arduino/app-bricks-py",
+          "org.opencontainers.image.title": "app-bricks-py",
+          "org.opencontainers.image.url": "https://github.com/arduino/app-bricks-py",
+          "org.opencontainers.image.version": "0.13.1"
+        }
+      },
+      "NetworkSettings": {
+        "Bridge": "",
+        "SandboxID": "c472f9d58e3eb41e0da3c570886ebc083ef3861f63445aa54b07824a180db3e5",
+        "SandboxKey": "/var/run/docker/netns/c472f9d58e3e",
+        "Ports": {},
+        "HairpinMode": false,
+        "LinkLocalIPv6Address": "",
+        "LinkLocalIPv6PrefixLen": 0,
+        "SecondaryIPAddresses": null,
+        "SecondaryIPv6Addresses": null,
+        "EndpointID": "",
+        "Gateway": "",
+        "GlobalIPv6Address": "",
+        "GlobalIPv6PrefixLen": 0,
+        "IPAddress": "",
+        "IPPrefixLen": 0,
+        "IPv6Gateway": "",
+        "MacAddress": "",
+        "Networks": {
+          "scope-v20-20261031-225916_default": {
+            "IPAMConfig": null,
+            "Links": null,
+            "Aliases": [
+              "scope-v20-20261031-225916-main-1",
+              "main"
+            ],
+            "MacAddress": "02:42:ac:18:00:02",
+            "NetworkID": "2a5df1a2655903eab1311b22d126da8383f930f642b568593ba6a7bdb90aa370",
+            "EndpointID": "b555f21e7f683e74fc8656556371a4b41c16427d87f94c32e521587eb43a7f4a",
+            "Gateway": "172.24.0.1",
+            "IPAddress": "172.24.0.2",
+            "IPPrefixLen": 16,
+            "IPv6Gateway": "",
+            "GlobalIPv6Address": "",
+            "GlobalIPv6PrefixLen": 0,
+            "DriverOpts": null,
+            "DNSNames": [
+              "scope-v20-20261031-225916-main-1",
+              "main",
+              "1c2d85389828"
+            ]
+          }
+        }
+      }
+    },
+    "relay": {
+      "Id": "b3d0af6c8c6742cb968436e38b955f25cddfc23b581926a1202182070142d36e",
+      "Created": "2026-11-01T23:41:35.971920597Z",
+      "Path": "/work/unoq_stream",
+      "Args": [],
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 1,
+        "Error": "",
+        "StartedAt": "2026-11-04T12:30:18.441247551Z",
+        "FinishedAt": "2026-11-05T03:13:05.143256029Z"
+      },
+      "Image": "sha256:22b878f2712b7b2fe0fddaa677393886045746819e127615cafca4c63b306015",
+      "ResolvConfPath": "/var/lib/docker/containers/b3d0af6c8c6742cb968436e38b955f25cddfc23b581926a1202182070142d36e/resolv.conf",
+      "HostnamePath": "/var/lib/docker/containers/b3d0af6c8c6742cb968436e38b955f25cddfc23b581926a1202182070142d36e/hostname",
+      "HostsPath": "/var/lib/docker/containers/b3d0af6c8c6742cb968436e38b955f25cddfc23b581926a1202182070142d36e/hosts",
+      "LogPath": "/var/lib/docker/containers/b3d0af6c8c6742cb968436e38b955f25cddfc23b581926a1202182070142d36e/b3d0af6c8c6742cb968436e38b955f25cddfc23b581926a1202182070142d36e-json.log",
+      "Name": "/serialmonitor-usb-stream-v20",
+      "RestartCount": 0,
+      "Driver": "overlay2",
+      "Platform": "linux",
+      "MountLabel": "",
+      "ProcessLabel": "",
+      "AppArmorProfile": "",
+      "ExecIDs": null,
+      "HostConfig": {
+        "Binds": null,
+        "ContainerIDFile": "",
+        "LogConfig": {
+          "Type": "json-file",
+          "Config": {
+            "max-file": "2",
+            "max-size": "10m"
+          }
+        },
+        "NetworkMode": "host",
+        "PortBindings": {},
+        "RestartPolicy": {
+          "Name": "no",
+          "MaximumRetryCount": 0
+        },
+        "AutoRemove": false,
+        "VolumeDriver": "",
+        "VolumesFrom": null,
+        "ConsoleSize": [
+          0,
+          0
+        ],
+        "CapAdd": [
+          "SYS_NICE"
+        ],
+        "CapDrop": [
+          "ALL"
+        ],
+        "CgroupnsMode": "private",
+        "Dns": [],
+        "DnsOptions": [],
+        "DnsSearch": [],
+        "ExtraHosts": null,
+        "GroupAdd": null,
+        "IpcMode": "private",
+        "Cgroup": "",
+        "Links": null,
+        "OomScoreAdj": 0,
+        "PidMode": "",
+        "Privileged": false,
+        "PublishAllPorts": false,
+        "ReadonlyRootfs": true,
+        "SecurityOpt": [
+          "no-new-privileges"
+        ],
+        "UTSMode": "",
+        "UsernsMode": "",
+        "ShmSize": 67108864,
+        "Runtime": "runc",
+        "Isolation": "",
+        "CpuShares": 0,
+        "Memory": 0,
+        "NanoCpus": 0,
+        "CgroupParent": "",
+        "BlkioWeight": 0,
+        "BlkioWeightDevice": [],
+        "BlkioDeviceReadBps": [],
+        "BlkioDeviceWriteBps": [],
+        "BlkioDeviceReadIOps": [],
+        "BlkioDeviceWriteIOps": [],
+        "CpuPeriod": 0,
+        "CpuQuota": 0,
+        "CpuRealtimePeriod": 0,
+        "CpuRealtimeRuntime": 0,
+        "CpusetCpus": "",
+        "CpusetMems": "",
+        "Devices": [
+          {
+            "PathOnHost": "/dev/spidev0.0",
+            "PathInContainer": "/dev/spidev0.0",
+            "CgroupPermissions": "rw"
+          },
+          {
+            "PathOnHost": "/dev/gpiochip1",
+            "PathInContainer": "/dev/gpiochip1",
+            "CgroupPermissions": "rw"
+          }
+        ],
+        "DeviceCgroupRules": null,
+        "DeviceRequests": null,
+        "MemoryReservation": 0,
+        "MemorySwap": 0,
+        "MemorySwappiness": null,
+        "OomKillDisable": null,
+        "PidsLimit": null,
+        "Ulimits": [],
+        "CpuCount": 0,
+        "CpuPercent": 0,
+        "IOMaximumIOps": 0,
+        "IOMaximumBandwidth": 0,
+        "Mounts": [
+          {
+            "Type": "bind",
+            "Source": "/home/arduino/.cache/serialmonitor/v20-gui-4d89d08e74c742eca9ce4fd9504ddada/unoq_stream",
+            "Target": "/work/unoq_stream",
+            "ReadOnly": true
+          },
+          {
+            "Type": "bind",
+            "Source": "/sys/devices/system/cpu/cpufreq/policy0/scaling_governor",
+            "Target": "/scope_cpu_governor"
+          }
+        ],
+        "MaskedPaths": [
+          "/proc/asound",
+          "/proc/acpi",
+          "/proc/kcore",
+          "/proc/keys",
+          "/proc/latency_stats",
+          "/proc/timer_list",
+          "/proc/timer_stats",
+          "/proc/sched_debug",
+          "/proc/scsi",
+          "/sys/firmware",
+          "/sys/devices/virtual/powercap"
+        ],
+        "ReadonlyPaths": [
+          "/proc/bus",
+          "/proc/fs",
+          "/proc/irq",
+          "/proc/sys",
+          "/proc/sysrq-trigger"
+        ]
+      },
+      "GraphDriver": {
+        "Data": {
+          "LowerDir": "/var/lib/docker/overlay2/2878b2318f6c8e59b1a546c51b8ec82ddf4c8e450199484db24ed2cfd97b028c-init/diff:/var/lib/docker/overlay2/d44c10d7f3ead90724c72f7b59db1512e64f2a7df254c38b0a86c7f767485af4/diff:/var/lib/docker/overlay2/fbc34bc221e04b5ec300aa2af7d1113138d9331a8c9e1d89e685345da8483f02/diff:/var/lib/docker/overlay2/22dae50a59d69cfcd7a9bf5471d26697b5e9eb5b5249260e017c0ebdbfa7022c/diff:/var/lib/docker/overlay2/3f556d3c5834855fe06f7d17e3771bc8b5733571ea3af4a763c9841c305517ce/diff:/var/lib/docker/overlay2/8b8ffc0ae644f215db80b120ae6a4dd2b451db561ad5ce3c1b3a63d78f1290a5/diff:/var/lib/docker/overlay2/d9250ffc65e0357bd8b627e189f80c1c86bda6054bd80ae5fac68dd67af5eda3/diff:/var/lib/docker/overlay2/0e975bc62dd242a25184e28a0c0c07c93eb61c837b0f2bed2349c9ba90459f98/diff:/var/lib/docker/overlay2/5840fe07acfc47093da5a207f61653bc8855698a5c64e3f43b55559d33a38e75/diff:/var/lib/docker/overlay2/d4eca522e87bb424e991078151b8d69b4c1ec82d8207f52723cdb0fa50b4499f/diff:/var/lib/docker/overlay2/9706038d1c56e15bfa24105999266de812a9e90d6fdb7fef6db36947e2f4ea8c/diff:/var/lib/docker/overlay2/8555706bd8a2795730097a13efd59e65d120d6f43fa6b1c3a84cb44857086794/diff:/var/lib/docker/overlay2/6f8d80193936dd5de18ad8ce45040037c8ee4a55f7161b1774571cb99d2a566b/diff:/var/lib/docker/overlay2/86881765be623495a3f84360b63ba1a9de5abf07d18e1645acacfb204baba2a7/diff:/var/lib/docker/overlay2/147ce11877e3feec47dc6a0eb9a33bba66f8a88234962b356f0417fa518aff26/diff:/var/lib/docker/overlay2/0f5fd448972f343b2ab00355bb731e47423e8b17bedb44f0957f135561a9d2d3/diff:/var/lib/docker/overlay2/21349ef42547f51c781667f043eb6c1f96e1ba5bf8d9f2229304945c6e85c0a4/diff:/var/lib/docker/overlay2/7f1de31fbf51e091b5491c782d1a15a21ee544e8a75e6bf05168799b14fe2fba/diff:/var/lib/docker/overlay2/e7083cf187ea0246e4ef20e4078298ba380f6ad9b359cd5de26cf77d3413c9d6/diff:/var/lib/docker/overlay2/1d76b401a8120586fc6361b49dbd20cd1502169bf00d4b97606ada324a4d918f/diff:/var/lib/docker/overlay2/31b156ca310f21dcd7c24962137e251580cb1cc2e25baa2da0b2db319c98eaf3/diff",
+          "MergedDir": "/var/lib/docker/overlay2/2878b2318f6c8e59b1a546c51b8ec82ddf4c8e450199484db24ed2cfd97b028c/merged",
+          "UpperDir": "/var/lib/docker/overlay2/2878b2318f6c8e59b1a546c51b8ec82ddf4c8e450199484db24ed2cfd97b028c/diff",
+          "WorkDir": "/var/lib/docker/overlay2/2878b2318f6c8e59b1a546c51b8ec82ddf4c8e450199484db24ed2cfd97b028c/work"
+        },
+        "Name": "overlay2"
+      },
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "/home/arduino/.cache/serialmonitor/v20-gui-4d89d08e74c742eca9ce4fd9504ddada/unoq_stream",
+          "Destination": "/work/unoq_stream",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/sys/devices/system/cpu/cpufreq/policy0/scaling_governor",
+          "Destination": "/scope_cpu_governor",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        }
+      ],
+      "Config": {
+        "Hostname": "arturino",
+        "Domainname": "",
+        "User": "0:0",
+        "AttachStdin": false,
+        "AttachStdout": false,
+        "AttachStderr": false,
+        "Tty": false,
+        "OpenStdin": false,
+        "StdinOnce": false,
+        "Env": [
+          "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+          "GPG_KEY=7169605F62C751356D054A26A821E680E5FA6305",
+          "PYTHON_VERSION=3.13.14",
+          "PYTHON_SHA256=639e43243c620a308f968213df9e00f2f8f62332f7adbaa7a7eeb9783057c690",
+          "UV_CONSTRAINT=/etc/uv-constraints.txt",
+          "PIP_CONSTRAINT=/etc/uv-constraints.txt",
+          "HOME=/home/app",
+          "USER=arduino",
+          "PIPEWIRE_REMOTE=/run/user/1000/pipewire-0"
+        ],
+        "Cmd": null,
+        "Image": "ghcr.io/arduino/app-bricks/python-apps-base:0.12.0",
+        "Volumes": null,
+        "WorkingDir": "/app",
+        "Entrypoint": [
+          "/work/unoq_stream"
+        ],
+        "OnBuild": null,
+        "Labels": {
+          "org.opencontainers.image.created": "2026-08-05T14:13:47.899Z",
+          "org.opencontainers.image.description": "The code of the Arduino App Lab Bricks",
+          "org.opencontainers.image.licenses": "MPL-2.0",
+          "org.opencontainers.image.revision": "7b1504fa79d6d05169aa286d53fe97c318499b2a",
+          "org.opencontainers.image.source": "https://github.com/arduino/app-bricks-py",
+          "org.opencontainers.image.title": "app-bricks-py",
+          "org.opencontainers.image.url": "https://github.com/arduino/app-bricks-py",
+          "org.opencontainers.image.version": "0.12.0"
+        }
+      },
+      "NetworkSettings": {
+        "Bridge": "",
+        "SandboxID": "26693fb7a6f2746e49124e393d72428f93f19d30cb47becc6b83d24ead28de0f",
+        "SandboxKey": "/var/run/docker/netns/default",
+        "Ports": {},
+        "HairpinMode": false,
+        "LinkLocalIPv6Address": "",
+        "LinkLocalIPv6PrefixLen": 0,
+        "SecondaryIPAddresses": null,
+        "SecondaryIPv6Addresses": null,
+        "EndpointID": "",
+        "Gateway": "",
+        "GlobalIPv6Address": "",
+        "GlobalIPv6PrefixLen": 0,
+        "IPAddress": "",
+        "IPPrefixLen": 0,
+        "IPv6Gateway": "",
+        "MacAddress": "",
+        "Networks": {
+          "host": {
+            "IPAMConfig": null,
+            "Links": null,
+            "Aliases": null,
+            "MacAddress": "",
+            "NetworkID": "f9da40f64b25bdd9167bd84f1c507b1245c4bef5d9a11bcfa3b83fa32c85aa64",
+            "EndpointID": "",
+            "Gateway": "",
+            "IPAddress": "",
+            "IPPrefixLen": 0,
+            "IPv6Gateway": "",
+            "GlobalIPv6Address": "",
+            "GlobalIPv6PrefixLen": 0,
+            "DriverOpts": null,
+            "DNSNames": null
+          }
+        }
+      }
+    }
+  },
+  "before_logs": {
+    "app": "2026-11-01 03:34:12.433 INFO - [MainThread] App:  App is shutting down\n======== App shutdown completed =====================\n======== App is starting ============================\nScope V19: 2 x SCP1 V4/992, app experimental privada.\n2026-11-01 03:35:22.679 INFO - [MainThread] App:  App started\n2026-11-01 03:37:07.969 INFO - [MainThread] App:  App is shutting down\n======== App shutdown completed =====================\n======== App is starting ============================\nScope V19: 2 x SCP1 V4/992, app experimental privada.\n2026-11-01 12:48:14.752 INFO - [MainThread] App:  App started\n2026-11-01 12:50:57.374 INFO - [MainThread] App:  App is shutting down\n======== App shutdown completed =====================\n======== App is starting ============================\nScope V19: 2 x SCP1 V4/992, app experimental privada.\n2026-11-01 12:52:15.437 INFO - [MainThread] App:  App started\n2026-11-01 12:54:58.377 INFO - [MainThread] App:  App is shutting down\n======== App shutdown completed =====================\n======== App is starting ============================\nScope V19: 2 x SCP1 V4/992, app experimental privada.\n2026-11-01 12:56:02.679 INFO - [MainThread] App:  App started\n2026-11-01 12:58:45.094 INFO - [MainThread] App:  App is shutting down\n======== App shutdown completed =====================\n======== App is starting ============================\nScope V19: 2 x SCP1 V4/992, app experimental privada.\n2026-11-01 13:13:20.819 INFO - [MainThread] App:  App started\n2026-11-01 13:14:11.322 INFO - [MainThread] App:  App is shutting down\n======== App shutdown completed =====================\n======== App is starting ============================\nScope V19: 2 x SCP1 V4/992, app experimental privada.\n2026-11-01 13:15:14.669 INFO - [MainThread] App:  App started\n2026-11-01 13:16:12.364 INFO - [MainThread] App:  App is shutting down\n======== App shutdown completed =====================\n======== App is starting ============================\nScope V19: 2 x SCP1 V4/992, app experimental privada.\n2026-11-01 13:17:25.059 INFO - [MainThread] App:  App started\n2026-11-01 13:18:06.019 INFO - [MainThread] App:  App is shutting down\n======== App shutdown completed =====================\n======== App is starting ============================\nScope V19: 2 x SCP1 V4/992, app experimental privada.\n2026-11-01 13:20:04.659 INFO - [MainThread] App:  App started\n2026-11-01 13:20:46.330 INFO - [MainThread] App:  App is shutting down\n======== App shutdown completed =====================\n======== App is starting ============================\nScope V19: 2 x SCP1 V4/992, app experimental privada.\n2026-11-01 13:22:26.209 INFO - [MainThread] App:  App started\n======== App shutdown completed =====================\n2026-11-01 13:23:07.906 INFO - [MainThread] App:  App is shutting down\n======== App is starting ============================\nScope V19: 2 x SCP1 V4/992, app experimental privada.\n2026-11-01 13:24:12.313 INFO - [MainThread] App:  App started\n2026-11-01 13:24:54.203 INFO - [MainThread] App:  App is shutting down\n======== App shutdown completed =====================\n======== App is starting ============================\nScope V19: 2 x SCP1 V4/992, app experimental privada.\n2026-11-01 13:25:58.803 INFO - [MainThread] App:  App started\n2026-11-01 13:26:40.487 INFO - [MainThread] App:  App is shutting down\n======== App shutdown completed =====================\n======== App is starting ============================\nScope V19: 2 x SCP1 V4/992, app experimental privada.\n2026-11-01 13:52:48.110 INFO - [MainThread] App:  App started\n2026-11-01 13:53:29.859 INFO - [MainThread] App:  App is shutting down\n======== App shutdown completed =====================\n======== App is starting ============================\nScope V19: 2 x SCP1 V4/992, app experimental privada.\n2026-11-01 13:54:33.710 INFO - [MainThread] App:  App started\n2026-11-01 13:55:14.849 INFO - [MainThread] App:  App is shutting down\n======== App shutdown completed =====================\n======== App is starting ============================\nScope V19: 2 x SCP1 V4/992, app experimental privada.\n2026-11-01 13:56:18.781 INFO - [MainThread] App:  App started\n2026-11-01 13:57:01.508 INFO - [MainThread] App:  App is shutting down\n======== App shutdown completed =====================\n======== App is starting ============================\nScope V19: 2 x SCP1 V4/992, app experimental privada.\n2026-11-01 13:59:27.231 INFO - [MainThread] App:  App started\n2026-11-01 14:00:08.774 INFO - [MainThread] App:  App is shutting down\n======== App shutdown completed =====================\n======== App is starting ============================\nScope V19: 2 x SCP1 V4/992, app experimental privada.\n2026-11-01 14:01:12.898 INFO - [MainThread] App:  App started\n2026-11-01 14:02:02.395 INFO - [MainThread] App:  App is shutting down\n======== App shutdown completed =====================\n======== App is starting ============================\nScope V19: 2 x SCP1 V4/992, app experimental privada.\n2026-11-01 14:06:01.583 INFO - [MainThread] App:  App started\n2026-11-01 14:06:42.953 INFO - [MainThread] App:  App is shutting down\n======== App shutdown completed =====================\n======== App is starting ============================\nScope V19: 2 x SCP1 V4/992, app experimental privada.\n2026-11-01 14:07:46.638 INFO - [MainThread] App:  App started\n2026-11-01 14:08:27.916 INFO - [MainThread] App:  App is shutting down\n======== App shutdown completed =====================\n======== App is starting ============================\nScope V19: 2 x SCP1 V4/992, app experimental privada.\n2026-11-01 14:09:31.611 INFO - [MainThread] App:  App started\n2026-11-01 14:10:12.301 INFO - [MainThread] App:  App is shutting down\n======== App shutdown completed =====================\n======== App is starting ============================\nScope V19: 2 x SCP1 V4/992, app experimental privada.\n2026-11-01 14:11:16.187 INFO - [MainThread] App:  App started\n2026-11-01 14:12:04.767 INFO - [MainThread] App:  App is shutting down\n======== App shutdown completed =====================\n======== App is starting ============================\nScope V19: 2 x SCP1 V4/992, app experimental privada.\n2026-11-01 14:15:18.016 INFO - [MainThread] App:  App started\n2026-11-01 14:15:58.612 INFO - [MainThread] App:  App is shutting down\n======== App shutdown completed =====================\n======== App is starting ============================\nScope V19: 2 x SCP1 V4/992, app experimental privada.\n2026-11-01 14:17:02.155 INFO - [MainThread] App:  App started\n2026-11-01 14:17:42.921 INFO - [MainThread] App:  App is shutting down\n======== App shutdown completed =====================\n======== App is starting ============================\nScope V19: 2 x SCP1 V4/992, app experimental privada.\n2026-11-01 14:34:12.688 INFO - [MainThread] App:  App started\n2026-11-01 14:34:55.055 INFO - [MainThread] App:  App is shutting down\n======== App shutdown completed =====================\n======== App is starting ============================\nScope V19: 2 x SCP1 V4/992, app experimental privada.\n2026-11-01 14:36:30.599 INFO - [MainThread] App:  App started\n2026-11-01 14:37:12.957 INFO - [MainThread] App:  App is shutting down\n======== App shutdown completed =====================\n======== App is starting ============================\nScope V19: 2 x SCP1 V4/992, app experimental privada.\n2026-11-01 14:38:55.469 INFO - [MainThread] App:  App started\n2026-11-01 14:40:25.009 INFO - [MainThread] App:  App is shutting down\n======== App shutdown completed =====================\n======== App is starting ============================\nScope V19: 2 x SCP1 V4/992, app experimental privada.\n2026-11-01 14:53:26.749 INFO - [MainThread] App:  App started\n2026-11-01 14:55:55.726 INFO - [MainThread] App:  App is shutting down\n======== App shutdown completed =====================\n======== App is starting ============================\nScope V19: 2 x SCP1 V4/992, app experimental privada.\n2026-11-01 14:56:59.713 INFO - [MainThread] App:  App started\n2026-11-01 14:57:47.214 INFO - [MainThread] App:  App is shutting down\n======== App shutdown completed =====================\n======== App is starting ============================\nScope V19: 2 x SCP1 V4/992, app experimental privada.\n2026-11-01 15:00:57.679 INFO - [MainThread] App:  App started\n2026-11-01 15:03:27.646 INFO - [MainThread] App:  App is shutting down\n======== App shutdown completed =====================\n======== App is starting ============================\nScope V19: 2 x SCP1 V4/992, app experimental privada.\n2026-11-01 15:04:32.238 INFO - [MainThread] App:  App started\n2026-11-01 15:07:02.849 INFO - [MainThread] App:  App is shutting down\n======== App shutdown completed =====================\n======== App is starting ============================\nScope V19: 2 x SCP1 V4/992, app experimental privada.\n2026-11-01 18:18:57.619 INFO - [MainThread] App:  App started\n2026-11-01 18:19:17.178 INFO - [MainThread] App:  App is shutting down\n======== App shutdown completed =====================\n======== App is starting ============================\nScope V19: 2 x SCP1 V4/992, app experimental privada.\n2026-11-01 18:34:45.997 INFO - [MainThread] App:  App started\n2026-11-01 18:35:26.453 INFO - [MainThread] App:  App is shutting down\n======== App shutdown completed =====================\n======== App is starting ============================\nScope V19: 2 x SCP1 V4/992, app experimental privada.\n2026-11-01 18:37:42.233 INFO - [MainThread] App:  App started\n2026-11-01 18:39:25.282 INFO - [MainThread] App:  App is shutting down\n======== App shutdown completed =====================\n======== App is starting ============================\nScope V19: 2 x SCP1 V4/992, app experimental privada.\n2026-11-01 18:40:28.688 INFO - [MainThread] App:  App started\n2026-11-01 18:41:23.489 INFO - [MainThread] App:  App is shutting down\n======== App shutdown completed =====================\n======== App is starting ============================\nScope V19: 2 x SCP1 V4/992, app experimental privada.\n2026-11-01 20:51:35.084 INFO - [MainThread] App:  App started\n======== App shutdown completed =====================\n2026-11-01 20:53:35.576 INFO - [MainThread] App:  App is shutting down\n======== App is starting ============================\nScope V19: 2 x SCP1 V4/992, app experimental privada.\n2026-11-01 23:20:19.974 INFO - [MainThread] App:  App started\n======== App shutdown completed =====================\n2026-11-01 23:21:42.484 INFO - [MainThread] App:  App is shutting down\n======== App is starting ============================\nScope V19: 2 x SCP1 V4/992, app experimental privada.\n2026-11-01 23:22:58.639 INFO - [MainThread] App:  App started\n======== App shutdown completed =====================\n2026-11-01 23:24:39.849 INFO - [MainThread] App:  App is shutting down\n======== App is starting ============================\nScope V19: 2 x SCP1 V4/992, app experimental privada.\n2026-11-01 23:27:08.772 INFO - [MainThread] App:  App started\n2026-11-01 23:29:53.739 INFO - [MainThread] App:  App is shutting down\n======== App shutdown completed =====================\n======== App is starting ============================\nScope V19: 2 x SCP1 V4/992, app experimental privada.\n2026-11-01 23:34:26.800 INFO - [MainThread] App:  App started\n2026-11-01 23:35:30.406 INFO - [MainThread] App:  App is shutting down\n======== App shutdown completed =====================\n======== App is starting ============================\nScope V19: 2 x SCP1 V4/992, app experimental privada.\n2026-11-01 23:41:37.554 INFO - [MainThread] App:  App started\n2026-11-04 12:30:08.939 INFO - [MainThread] App:  App is shutting down\n======== App shutdown completed =====================\n======== App is starting ============================\nScope V19: 2 x SCP1 V4/992, app experimental privada.\n2026-11-04 12:30:20.089 INFO - [MainThread] App:  App started",
+    "relay": "valid=43677732 pairs=34710084016 dropped=0\nvalid=43700656 pairs=34730073744 dropped=0\nvalid=43723578 pairs=34750061728 dropped=0\nvalid=43746500 pairs=34770049712 dropped=0\nvalid=43769424 pairs=34790039440 dropped=0\nvalid=43792346 pairs=34810027424 dropped=0\nvalid=43815268 pairs=34830015408 dropped=0\nvalid=43838192 pairs=34850005136 dropped=0\nvalid=43861114 pairs=34869993120 dropped=0\nvalid=43884036 pairs=34889981104 dropped=0\nvalid=43906960 pairs=34909970832 dropped=0\nvalid=43929884 pairs=34929960560 dropped=0\nvalid=43952806 pairs=34949948544 dropped=0\nvalid=43975728 pairs=34969936528 dropped=0\nvalid=43998652 pairs=34989926256 dropped=0\nvalid=44021574 pairs=35009914240 dropped=0\nvalid=44044496 pairs=35029902224 dropped=0\nvalid=44067420 pairs=35049891952 dropped=0\nvalid=44090342 pairs=35069879936 dropped=0\nvalid=44113264 pairs=35089867920 dropped=0\nvalid=44136188 pairs=35109857648 dropped=0\nvalid=44159110 pairs=35129845632 dropped=0\nvalid=44182032 pairs=35149833616 dropped=0\nvalid=44204956 pairs=35169823344 dropped=0\nvalid=44227880 pairs=35189813072 dropped=0\nvalid=44250802 pairs=35209801056 dropped=0\nvalid=44273724 pairs=35229789040 dropped=0\nvalid=44296648 pairs=35249778768 dropped=0\nvalid=44319570 pairs=35269766752 dropped=0\nvalid=44342492 pairs=35289754736 dropped=0\nvalid=44365416 pairs=35309744464 dropped=0\nvalid=44388338 pairs=35329732448 dropped=0\nvalid=44411260 pairs=35349720432 dropped=0\nvalid=44434184 pairs=35369710160 dropped=0\nvalid=44457106 pairs=35389698144 dropped=0\nvalid=44480028 pairs=35409686128 dropped=0\nvalid=44502952 pairs=35429675856 dropped=0\nvalid=44525876 pairs=35449665584 dropped=0\nvalid=44548798 pairs=35469653568 dropped=0\nvalid=44571720 pairs=35489641552 dropped=0\nvalid=44594644 pairs=35509631280 dropped=0\nvalid=44617566 pairs=35529619264 dropped=0\nvalid=44640488 pairs=35549607248 dropped=0\nvalid=44663412 pairs=35569596976 dropped=0\nvalid=44686334 pairs=35589584960 dropped=0\nvalid=44709256 pairs=35609572944 dropped=0\nvalid=44732180 pairs=35629562672 dropped=0\nvalid=44755102 pairs=35649550656 dropped=0\nvalid=44778024 pairs=35669538640 dropped=0\nvalid=44800948 pairs=35689528368 dropped=0\nvalid=44823872 pairs=35709518096 dropped=0\nvalid=44846794 pairs=35729506080 dropped=0\nvalid=44869716 pairs=35749494064 dropped=0\nvalid=44892638 pairs=35769482048 dropped=0\nvalid=44915560 pairs=35789470032 dropped=0\nPC connected at seq=83074193\nV17 CPU runtime: original CPU policy restored\nV16 transport: SPI 32 MHz, normal (policy=0 priority=0), READY poll\nvalid=44920574 pairs=35793038976 dropped=0\nV17 CPU runtime: CPU2 performance verified\nvalid=44939370 pairs=35809241824 dropped=0\nPC closed or rejected; acquisition continues\nPC connected at seq=83118349\nvalid=44962292 pairs=35829229808 dropped=0\nvalid=44985216 pairs=35849219536 dropped=0\nPC closed or rejected; acquisition continues\nvalid=45008140 pairs=35869209264 dropped=0\nvalid=45031064 pairs=35889198992 dropped=0\nvalid=45053986 pairs=35909186976 dropped=0\nvalid=45076908 pairs=35929174960 dropped=0\nvalid=45099832 pairs=35949164688 dropped=0\nvalid=45122754 pairs=35969152672 dropped=0\nvalid=45145676 pairs=35989140656 dropped=0\nvalid=45168600 pairs=36009130384 dropped=0\nvalid=45191522 pairs=36029118368 dropped=0\nvalid=45214444 pairs=36049106352 dropped=0\nvalid=45237368 pairs=36069096080 dropped=0\nvalid=45260290 pairs=36089084064 dropped=0\nvalid=45283212 pairs=36109072048 dropped=0\nvalid=45306136 pairs=36129061776 dropped=0\nvalid=45329060 pairs=36149051504 dropped=0\nvalid=45351984 pairs=36169041232 dropped=0\nvalid=45374908 pairs=36189030960 dropped=0\nvalid=45397832 pairs=36209020688 dropped=0\nvalid=45420756 pairs=36229010416 dropped=0\nvalid=45443680 pairs=36249000144 dropped=0\nvalid=45466604 pairs=36268989872 dropped=0\nvalid=45489528 pairs=36288979600 dropped=0\nvalid=45512452 pairs=36308969328 dropped=0\nvalid=45535376 pairs=36328959056 dropped=0\nvalid=45558300 pairs=36348948784 dropped=0\nvalid=45581222 pairs=36368936768 dropped=0\nvalid=45604144 pairs=36388924752 dropped=0\nvalid=45627066 pairs=36408912736 dropped=0\nvalid=45649988 pairs=36428900720 dropped=0\nvalid=45672912 pairs=36448890448 dropped=0\nvalid=45695836 pairs=36468880176 dropped=0\nvalid=45718758 pairs=36488868160 dropped=0\nvalid=45741680 pairs=36508856144 dropped=0\nvalid=45764604 pairs=36528845872 dropped=0\nPC connected at seq=83942229\nV17 CPU runtime: original CPU policy restored\nV16 transport: SPI 32 MHz, normal (policy=0 priority=0), READY poll\nvalid=45776706 pairs=36538915872 dropped=0\nvalid=45778266 pairs=36539315232 dropped=0\nvalid=45779834 pairs=36539716640 dropped=0\nvalid=45781394 pairs=36540116000 dropped=0\nvalid=45782954 pairs=36540515360 dropped=0\nvalid=45784514 pairs=36540914720 dropped=0\nvalid=45787386 pairs=36541632416 dropped=0\nvalid=45791244 pairs=36542589200 dropped=0\nvalid=45795116 pairs=36543549456 dropped=0\nvalid=45798988 pairs=36544509712 dropped=0\nvalid=45802802 pairs=36545455904 dropped=0\nvalid=45804362 pairs=36545855264 dropped=0\nvalid=45805922 pairs=36546254624 dropped=0\nvalid=45807482 pairs=36546653984 dropped=0\nvalid=45809590 pairs=36547155616 dropped=0\nV17 CPU runtime: CPU2 performance verified\nV16 transport: SPI 38 MHz, FIFO10 (policy=1 priority=10), READY spin50us\nvalid=45828645 pairs=36558123808 dropped=0\nvalid=45847790 pairs=36569151328 dropped=0\nvalid=45866935 pairs=36580178848 dropped=0\nV17 CPU runtime: original CPU policy restored\nV16 transport: SPI 32 MHz, normal (policy=0 priority=0), READY poll\nvalid=45884497 pairs=36590231456 dropped=0\nV17 CPU runtime: CPU2 performance verified\nvalid=45905753 pairs=36608659936 dropped=0\nvalid=45928691 pairs=36628661872 dropped=0\nvalid=45951613 pairs=36648649856 dropped=0\nvalid=45974531 pairs=36668634352 dropped=0\nvalid=45997455 pairs=36688624080 dropped=0\nvalid=46020375 pairs=36708610320 dropped=0\nvalid=46043289 pairs=36728591328 dropped=0\nvalid=46066223 pairs=36748589776 dropped=0\nvalid=46089143 pairs=36768576016 dropped=0\nvalid=46112063 pairs=36788562256 dropped=0\nvalid=46134987 pairs=36808551984 dropped=0\nvalid=46157909 pairs=36828539968 dropped=0\nvalid=46180832 pairs=36848528824 dropped=0\nvalid=46203751 pairs=36868514192 dropped=0\nvalid=46226683 pairs=36888510896 dropped=0\nvalid=46249599 pairs=36908493648 dropped=0\nvalid=46272529 pairs=36928488608 dropped=0\nvalid=46295436 pairs=36948463512 dropped=0\nvalid=46318367 pairs=36968459344 dropped=0\nvalid=46341287 pairs=36988445584 dropped=0\nvalid=46364215 pairs=37008438800 dropped=0\nvalid=46387133 pairs=37028423296 dropped=0\nvalid=46410059 pairs=37048414768 dropped=0\nvalid=46432985 pairs=37068406240 dropped=0\nvalid=46455907 pairs=37088394224 dropped=0\nvalid=46478829 pairs=37108382208 dropped=0\nvalid=46501755 pairs=37128373680 dropped=0\nvalid=46524677 pairs=37148361664 dropped=0\nvalid=46547599 pairs=37168349648 dropped=0\nvalid=46570517 pairs=37188334144 dropped=0\nvalid=46593440 pairs=37208323000 dropped=0\nvalid=46616361 pairs=37228310112 dropped=0\nvalid=46639283 pairs=37248298096 dropped=0\nvalid=46662203 pairs=37268284336 dropped=0\nvalid=46685131 pairs=37288277552 dropped=0\nvalid=46708053 pairs=37308265536 dropped=0\nvalid=46730973 pairs=37328251776 dropped=0\nvalid=46753895 pairs=37348239760 dropped=0\nvalid=46776819 pairs=37368229488 dropped=0\nvalid=46799741 pairs=37388217472 dropped=0\nvalid=46822653 pairs=37408196736 dropped=0\nvalid=46845568 pairs=37428178616 dropped=0\nvalid=46868507 pairs=37448181424 dropped=0\nvalid=46891429 pairs=37468169408 dropped=0\nvalid=46914353 pairs=37488159136 dropped=0\nvalid=46937271 pairs=37508143632 dropped=0\nvalid=46960197 pairs=37528135104 dropped=0\nvalid=46983117 pairs=37548121344 dropped=0\nvalid=47006043 pairs=37568112816 dropped=0\nvalid=47028965 pairs=37588100800 dropped=0\nvalid=47051881 pairs=37608083552 dropped=0\nvalid=47074807 pairs=37628075024 dropped=0\nvalid=47097705 pairs=37648042080 dropped=0\nvalid=47120649 pairs=37668049248 dropped=0\nvalid=47143573 pairs=37688038976 dropped=0\nvalid=47166495 pairs=37708026960 dropped=0\nvalid=47189413 pairs=37728011456 dropped=0\nvalid=47212341 pairs=37748004672 dropped=0\nvalid=47235259 pairs=37767989168 dropped=0\nvalid=47258183 pairs=37787978896 dropped=0\nvalid=47281107 pairs=37807968624 dropped=0\nvalid=47304027 pairs=37827954864 dropped=0\nvalid=47326951 pairs=37847944592 dropped=0\nvalid=47349873 pairs=37867932576 dropped=0\nvalid=47372791 pairs=37887917072 dropped=0\nvalid=47395713 pairs=37907905056 dropped=0\nvalid=47418635 pairs=37927893040 dropped=0\nvalid=47441565 pairs=37947888000 dropped=0\nvalid=47464486 pairs=37967875112 dropped=0\nvalid=47487407 pairs=37987862224 dropped=0\nvalid=47510329 pairs=38007850208 dropped=0\nBatch2 integrity failure half=1 seq=85895124 kind=20 crc_received=9fd6f0de crc_calculated=9fd6f0de previous_seq=85895123\nBatch2 rejected frame (hex): 5343503104001400d4a71e05cc030000d3a71e05000000000000000000000000e003000000000000730000003a00000080841e00a0bfd35401000000000000006803080150000000d1390600a6010000bb8c3582a00d00000f00000010000000279d00009e7c030095b10000278a0600e139060091746d946584846c897a797e8276877a798a698685678a876493836698797392787f827a85807b878271937a7297727e956f82916a898f6d977f788b788283817e8f758a8969987d73977c6f9578729b7187886f8a7a7f7f84748a757794688988698588658a86639671738c6c808078798770857e6a8f6f7390717594687b93638885678c787986787c85737a8f6a8b88688f7f6a927a7097727793688a83738a7f7b878472937777966a868f6c8a8d6a8e866797767a927087837c7d8f6f8d8667987572937475956f7a935f94816b967576857c6e90717b92678d83668a7f62957a679c6a7992698c84748a826a8b7c669b7374986b7b91648a8c64977e699e717e917181896c7d8c6592846799746d9873789c6f81946191816a967978897c6d946a7e95639189669285699a7f6aa0647f90648d877184896592806fa173829a72839a698e94629c816b9d7581937c82946e88956a9c896c9b7d6b9c7574a0698290619480718f7e748d7670966880925f8b875c9284609977629765778c68837e6e7b82628f74639966729363759461808f55937763926f778878748d678388619b7c68977767a07870a3667f91678e80798a81749477789f6f8a986b8b9161968a62a07c6e9c72818c77858a758a846c9979729b6a729862799964868f628f7a6d8c767e847775896587885d957c5f967a679a776a9b647f8a688a81787f816b8c75759764838e63878f628e8c5f9d7d6f937281867b81896a8885659a7e719976729c717c9c67888b6a8f7d7b8a7e7a8a757d926e8e8d69948364967e689a7873976f83897187807984856f90777497687c8d627e8c6789896195737091727f8579758a6982856294756b8f716c926e7697648a856b8e797e877e748e6f749266848a6a86856892826e9a727a906f868579868773857f6c8f7a78927379916d83916e8a826c8e777b8c777e8275778a6f838a6e907e6c8f7a758e757a8f6989806d897d7a828272887979917085856c83836d8d836d9472798a7287818083877287846d937d788c79798a74818e6c8e80718b7780847d7b8376778871868572897e708c7c7391737b866c837c7a857f7b7e7e7187757b8d7083876e8289728b826d8e6e79857782827f7a8775898575957b7c8e787992757e926c8b83798c7b8680817d8b77818e6d8b8371897f6e8d7e6f95707c8772857c7f7f807781797389727f8a6cdef0d69f"
+  },
+  "job": "/tmp/serialmonitor-v20-recovery-a2c94ef98616415eafef783c6fc3454c",
+  "verification": {
+    "profile": {
+      "schema": 1,
+      "identity": {
+        "board_serial": "1060031107",
+        "app": "scope-v20-20261031-225916-main-1",
+        "firmware_sha256": "52f933bdb9c632544624e5d4188a740a9cdb429596bfe5a4d926900e7538aefe",
+        "relay_sha256": "bf6893f5a0fbab8676120a5decd8c6109698fa852be02333918b1d6e4a2a909d"
+      },
+      "adc_bits": 14,
+      "adc_period": 25,
+      "generator": {
+        "wave": 0,
+        "enabled": 0,
+        "mode": 0,
+        "frequency": 2500,
+        "final_frequency": 2500,
+        "low": 0,
+        "high": 4095,
+        "duration": 1000,
+        "duration_us": 0,
+        "duty": 50
+      }
+    },
+    "wav": "IDLE",
+    "crc_errors": 0,
+    "hardware_restored": true,
+    "errors": [],
+    "recovery": {
+      "seconds": 10.02773050381802,
+      "samples": 401408,
+      "dropped": 0,
+      "fatal": 0,
+      "continuous": true
+    }
+  }
+}
